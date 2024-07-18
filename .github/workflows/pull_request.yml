@@ -2,28 +2,29 @@ name: Muse CI/CD
 
 on: [ push ]
 
-# 0. Прогнать линтер
-# 1. Прогнать статический анализатор: не должно быть warning
-# 1. Сбилдить JAR
-# 2. Прогнать юнит-тесты
-# 3. Проверить зависимости при помощи OWASP Dependency Check
+# + Прогнать линтер
+# + Прогнать статический анализатор: не должно быть warning
+# + Сбилдить JAR
+# + Прогнать юнит-тесты
+# [ ] Проверить зависимости при помощи OWASP Dependency Check
 # 4. Собрать docker образ
 # 5. Подключиться по SSH до dev.muse.kiryuxa.com
 # 6. Поднять докер контейнер на порту + поменять реверс проксю чтобы перекидывало с dev.muse.kiryuxa.com -> localhost:59195
+# 7. добавить codecov
 # Готово!
 
 jobs:
-  build:
+  code-quality:
     runs-on: ubuntu-22.04
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '21'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Run linter
         run: ./tools/scripts/runLinter.sh
@@ -31,8 +32,17 @@ jobs:
       - name: Run static analyzer
         run: ./tools/scripts/runStaticAnalyzer.sh
 
-      - name: Build JAR
-        run: ./tools/scripts/buildJar.sh
+  unit-tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Run Unit Tests
         run: ./tools/scripts/runUnitTests.sh
@@ -50,3 +60,5 @@ jobs:
         with:
           name: reports
           path: ./**/**/build/reports
+
+
