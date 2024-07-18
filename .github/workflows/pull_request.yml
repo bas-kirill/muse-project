@@ -1,6 +1,13 @@
-name: Muse CI/CD
+name: CI
 
 on: [ push ]
+
+# https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file
+permissions:
+  contents: read
+  issues: read
+  checks: write
+  pull-requests: write
 
 # + Прогнать линтер
 # + Прогнать статический анализатор: не должно быть warning
@@ -14,7 +21,7 @@ on: [ push ]
 # Готово!
 
 jobs:
-  code-quality:
+  linter:
     runs-on: ubuntu-22.04
     steps:
       - name: Set up JDK 21 (Temurin)
@@ -28,6 +35,18 @@ jobs:
 
       - name: Run linter
         run: ./tools/scripts/runLinter.sh
+
+  static-analyzer:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Run static analyzer
         run: ./tools/scripts/runStaticAnalyzer.sh
