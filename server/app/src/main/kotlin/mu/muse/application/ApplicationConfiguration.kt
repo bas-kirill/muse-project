@@ -8,4 +8,4 @@ import org.springframework.context.annotation.Import
 @Import(
     RestConfiguration::class,
 )
-class ContextConfiguration
+class ApplicationConfiguration
