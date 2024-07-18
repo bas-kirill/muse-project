@@ -3,7 +3,8 @@ plugins {
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "2.0.0"
-    kotlin("plugin.spring") version "2.0.0"  // make all classes as `open` for Spring proxies
+    kotlin("plugin.spring") version "2.0.0" // make all classes as `open` for Spring proxies
+    id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
 }
 
 group = "mu.muse"
@@ -18,7 +19,6 @@ configurations {
         extendsFrom(configurations.annotationProcessor.get())
     }
 }
-
 
 repositories {
     mavenCentral()
