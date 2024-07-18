@@ -1,10 +1,15 @@
+import io.gitlab.arturbosch.detekt.Detekt
+
+val rootProjectDir = "$projectDir/../.."
+
 plugins {
     java
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.4"
-    kotlin("jvm") version "2.0.0"
-    kotlin("plugin.spring") version "2.0.0" // make all classes as `open` for Spring proxies
+    kotlin("jvm") version "1.9.23"
+    kotlin("plugin.spring") version "1.9.23" // make all classes as `open` for Spring proxies
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
 group = "mu.muse"
@@ -12,6 +17,10 @@ version = "0.0.1-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 configurations {
@@ -27,16 +36,11 @@ repositories {
 dependencies {
     compileOnly("org.springframework.boot:spring-boot-devtools")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-security")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 
-    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
-    implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
-    implementation("io.vavr:vavr:0.9.0")
     compileOnly("org.projectlombok:lombok")
-    runtimeOnly("org.postgresql:postgresql")
     annotationProcessor("org.projectlombok:lombok")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation(kotlin("stdlib-jdk8"))
@@ -45,6 +49,25 @@ dependencies {
 tasks.named<Test>("test") {
     useJUnitPlatform()
 }
-kotlin {
-    jvmToolchain(21)
+
+configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
+    debug.set(true)
+    verbose.set(true)
+    ignoreFailures.set(false)
+
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+    }
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    config.setFrom("$rootProjectDir/tools/detekt/detekt-config.yml")
+}
+
+tasks.withType<Detekt>().configureEach {
+    reports {
+        html.required.set(true)
+    }
 }
