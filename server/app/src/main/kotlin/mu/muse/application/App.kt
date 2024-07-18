@@ -1,8 +1,7 @@
-package mu.muse
+package mu.muse.application
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-
 
 @SpringBootApplication
 class App

@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Import
 
 @Configuration
 @Import(
-    RestConfiguration::class
+    RestConfiguration::class,
 )
-class ContextConfiguration {
-}
+class ContextConfiguration
