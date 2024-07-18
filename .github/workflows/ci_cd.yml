@@ -1,0 +1,52 @@
+name: Muse CI/CD
+
+on: [ push ]
+
+# 0. Прогнать линтер
+# 1. Прогнать статический анализатор: не должно быть warning
+# 1. Сбилдить JAR
+# 2. Прогнать юнит-тесты
+# 3. Проверить зависимости при помощи OWASP Dependency Check
+# 4. Собрать docker образ
+# 5. Подключиться по SSH до dev.muse.kiryuxa.com
+# 6. Поднять докер контейнер на порту + поменять реверс проксю чтобы перекидывало с dev.muse.kiryuxa.com -> localhost:59195
+# Готово!
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Run linter
+        run: ./tools/scripts/runLinter.sh
+
+      - name: Run static analyzer
+        run: ./tools/scripts/runStaticAnalyzer.sh
+
+      - name: Build JAR
+        run: ./tools/scripts/buildJar.sh
+
+      - name: Run Unit Tests
+        run: ./tools/scripts/runUnitTests.sh
+
+      - name: Publish Unit Test Results
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v1.9
+        with:
+          files: ./**/**/build/test-results/**/*.xml
+          report_individual_runs: true
+
+      - name: Gather reports
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: reports
+          path: ./**/**/build/reports
