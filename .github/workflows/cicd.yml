@@ -12,6 +12,7 @@ env:
 
 jobs:
   check-changes:
+    name: Check source files was changed
     runs-on: ubuntu-22.04
     outputs:
       changed: ${{ steps.check_changes.outputs.changed }}
