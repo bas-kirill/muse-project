@@ -5,16 +5,6 @@ on:
     branches:
       - "**"
 
-# [ ] Проверить зависимости при помощи OWASP Dependency Check
-# 4. Собрать docker образ
-# 5. Подключиться по SSH до dev.muse.kiryuxa.com
-# 6. Поднять докер контейнер на порту + поменять реверс проксю чтобы перекидывало с dev.muse.kiryuxa.com -> localhost:59195
-# Готово!
-
-# TODO(speed-up): не прогонять линтеры и статанализаторы если исходный код не менялся
-# TODO(speed-up): не включать каждый раз gradle daemon
-# TODO(staging): if: github.event.ref == "refs/heads/main"
-
 jobs:
   linter:
     name: Linter
