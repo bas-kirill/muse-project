@@ -105,20 +105,24 @@ jobs:
       - name: Build Server Docker Image
         run: |
           ./tools/scripts/buildJar.sh
-          docker build . -t myshx/muse-server:dev
+          docker build . -t "myshx/muse-server:dev-${{ github.sha }}"
 
       - name: Push Server Docker Image
-        run: docker push myshx/muse-server:dev
+        run: docker push "myshx/muse-server:dev-${{ github.sha }}"
 
       - name: Run server at home lab
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          GIT_COMMIT_SHA: ${{ github.sha }}
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
+          envs: GIT_COMMIT_SHA
           script: |
-            docker stop muse-server:dev
-            docker rm muse-server:dev
-            docker rmi muse-server:dev
-            docker run -d -p 50505:8080 "myshx/muse-server:dev"
+            export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+            docker stop "muse-server:dev-$GIT_COMMIT_SHA"
+            docker rm "muse-server:dev-$GIT_COMMIT_SHA"
+            docker rmi "muse-server:dev-$GIT_COMMIT_SHA"
+            docker run -d -p 50505:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
