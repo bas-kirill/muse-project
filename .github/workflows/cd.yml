@@ -53,4 +53,4 @@ jobs:
             for container_id in $(docker ps --filter "name=muse-server" -q); do docker stop "$container_id"; done
             for container_id in $(docker ps --filter "name=muse-server" -q); do docker rm "$container_id"; done
             for container_id in $(docker ps --filter "name=muse-server" -q); do docker rmi "$container_id"; done
-            docker run -d -p 50505:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
+            docker run --name "muse-server:dev-$GIT_COMMIT_SHA" -d -p 50505:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
