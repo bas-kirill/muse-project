@@ -50,7 +50,9 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           envs: GIT_COMMIT_SHA
           script: |
-            for container_id in $(docker ps --filter "name=muse-server" -q); do docker stop "$container_id"; done
-            for container_id in $(docker ps --filter "name=muse-server" -q); do docker rm "$container_id"; done
-            for container_id in $(docker ps --filter "name=muse-server" -q); do docker rmi "$container_id"; done
-            docker run --name "muse-server:dev-$GIT_COMMIT_SHA" -d -p 50505:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
+            # `awk '{print $1}'` is used to get the container ids
+            for container_id in $(docker ps | grep muse-server:dev | awk '{print $1}'); do docker stop "$container_id"; done
+            for container_id in $(docker ps | grep muse-server:dev | awk '{print $1}'); do docker rm "$container_id"; done
+            # `\b[0-9a-f]{40}\b` is a regexp for git commit sha, `awk '{print $3}'` shows the image ids
+            for image_id in $(docker images | grep -E 'dev-\b[0-9a-f]{40}\b' | awk '{print $3}'); do docker rmi -f "$image_id"; done
+            docker run -d -p 50505:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
