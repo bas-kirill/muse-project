@@ -63,6 +63,8 @@ jobs:
               docker rm "$container_id"
             done
             
+            # 
+            
             for image_id in $dev_image_ids; do 
               docker rmi -f "$image_id"; 
             done
