@@ -2,22 +2,10 @@ name: CI
 
 on: [ push ]
 
-# https://github.com/EnricoMi/publish-unit-test-result-action?tab=readme-ov-file
-permissions:
-  contents: read
-  issues: read
-  checks: write
-  pull-requests: write
-
-# + Прогнать линтер
-# + Прогнать статический анализатор: не должно быть warning
-# + Сбилдить JAR
-# + Прогнать юнит-тесты
 # [ ] Проверить зависимости при помощи OWASP Dependency Check
 # 4. Собрать docker образ
 # 5. Подключиться по SSH до dev.muse.kiryuxa.com
 # 6. Поднять докер контейнер на порту + поменять реверс проксю чтобы перекидывало с dev.muse.kiryuxa.com -> localhost:59195
-# 7. добавить codecov
 # Готово!
 
 jobs:
@@ -53,6 +41,13 @@ jobs:
 
   unit-tests:
     runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -80,4 +75,36 @@ jobs:
           name: reports
           path: ./**/**/build/reports
 
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: [ "linter", "static-analyzer", "unit-tests" ]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
 
+      - name: Log in to Docker Hub via token
+        run: sudo docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build Docker Image
+        run: |
+          ./tools/scripts/buildJar.sh
+          sudo docker build . -t myshx/muse-server:${{ github.sha }}
+
+      - name: Push Docker Image
+        run: sudo docker push myshx/muse-server:${{ github.sha }}
+
+      - name: Run docker image at server
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          COMMIT_SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          envs: COMMIT_SHA
+          script: |
+            sudo docker stop $(sudo docker ps --filter ancestor=muse-server -q)
+            sudo docker rm $(sudo docker ps --filter ancestor=muse-server -q)
+            sudo docker rmi $(sudo docker ps --filter ancestor=muse-server -q)
+            sudo docker run "myshx/muse-server:COMMIT_SHA" -p 50505:80
