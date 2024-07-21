@@ -12,11 +12,11 @@ jobs:
   linter:
     runs-on: ubuntu-22.04
     steps:
-      - name: Set up JDK 11 (Temurin)
+      - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '11.0'
+          java-version: '21.0'
 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -27,11 +27,11 @@ jobs:
   static-analyzer:
     runs-on: ubuntu-22.04
     steps:
-      - name: Set up JDK 11 (Temurin)
+      - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '11.0'
+          java-version: '21.0'
 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -49,11 +49,11 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Set up JDK 11 (Temurin)
+      - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '11.0'
+          java-version: '21.0'
 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -79,6 +79,12 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [ "linter", "static-analyzer", "unit-tests" ]
     steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
       - name: Check out the repo
         uses: actions/checkout@v4
 
