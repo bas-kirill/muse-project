@@ -84,7 +84,6 @@ jobs:
 
   deploy-dev:
     name: Deploy to Dev
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-22.04
     needs: [ "linter", "static-analyzer", "unit-tests" ]
     environment:
