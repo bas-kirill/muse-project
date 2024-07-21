@@ -12,11 +12,11 @@ jobs:
   linter:
     runs-on: ubuntu-22.04
     steps:
-      - name: Set up JDK 21 (Temurin)
+      - name: Set up JDK 17 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17.0'
 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -27,11 +27,11 @@ jobs:
   static-analyzer:
     runs-on: ubuntu-22.04
     steps:
-      - name: Set up JDK 21 (Temurin)
+      - name: Set up JDK 17 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17.0'
 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -49,11 +49,11 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: Set up JDK 21 (Temurin)
+      - name: Set up JDK 17 (Temurin)
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '17.0'
 
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -85,15 +85,15 @@ jobs:
       - name: Log in to Docker Hub via token
         run: sudo docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
 
-      - name: Build Docker Image
+      - name: Build Server Docker Image
         run: |
           ./tools/scripts/buildJar.sh
           sudo docker build . -t myshx/muse-server:${{ github.sha }}
 
-      - name: Push Docker Image
+      - name: Push Server Docker Image
         run: sudo docker push myshx/muse-server:${{ github.sha }}
 
-      - name: Run docker image at server
+      - name: Run Server docker image at home lab
         uses: appleboy/ssh-action@v1.0.3
         env:
           COMMIT_SHA: ${{ github.sha }}
