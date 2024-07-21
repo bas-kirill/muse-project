@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  linter:
+    name: Linter
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run linter
+        run: ./tools/scripts/runLinter.sh
+
+  static-analyzer:
+    name: Static Analyzer
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run static analyzer
+        run: ./tools/scripts/runStaticAnalyzer.sh
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Unit Tests
+        run: ./tools/scripts/runUnitTests.sh
+
+      - name: Publish Unit Test Results
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v1.9
+        with:
+          files: ./**/**/build/test-results/**/*.xml
+          report_individual_runs: true
+
+      - name: Gather reports
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: reports
+          path: ./**/**/build/reports
