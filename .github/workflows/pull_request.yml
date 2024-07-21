@@ -83,7 +83,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Log in to Docker Hub via token
-        run: sudo docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
+        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | sudo docker login -u myshx --password-stdin
 
       - name: Build Docker Image
         run: |
