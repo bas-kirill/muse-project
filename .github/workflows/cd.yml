@@ -28,7 +28,7 @@ jobs:
       - name: Check out the repo
         uses: actions/checkout@v4
 
-      - name: Log in to Docker Hub via token
+      - name: Log in to Docker Hub
         run: docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build Server Docker Image
@@ -50,8 +50,7 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           envs: GIT_COMMIT_SHA
           script: |
-            export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
-            docker stop "muse-server:dev-$GIT_COMMIT_SHA"
-            docker rm "muse-server:dev-$GIT_COMMIT_SHA"
-            docker rmi "muse-server:dev-$GIT_COMMIT_SHA"
+            for container_id in $(docker ps --filter "name=muse-server" -q); do docker stop "$container_id"; done
+            for container_id in $(docker ps --filter "name=muse-server" -q); do docker rm "$container_id"; done
+            for container_id in $(docker ps --filter "name=muse-server" -q); do docker rmi "$container_id"; done
             docker run -d -p 50505:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
