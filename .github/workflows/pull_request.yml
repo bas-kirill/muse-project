@@ -113,4 +113,4 @@ jobs:
             docker stop muse-server
             docker rm muse-server
             docker rmi muse-server
-            docker run "myshx/muse-server:$COMMIT_SHA"
+            docker run "myshx/muse-server:$COMMIT_SHA" -p 50505:8080 -d
