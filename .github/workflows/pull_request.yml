@@ -8,8 +8,13 @@ on: [ push ]
 # 6. Поднять докер контейнер на порту + поменять реверс проксю чтобы перекидывало с dev.muse.kiryuxa.com -> localhost:59195
 # Готово!
 
+# TODO(speed-up): не прогонять линтеры и статанализаторы если исходный код не менялся
+# TODO(speed-up): не включать каждый раз gradle daemon
+# TODO(staging): if: github.event.ref == "refs/heads/main"
+
 jobs:
   linter:
+    name: Linter
     runs-on: ubuntu-22.04
     steps:
       - name: Set up JDK 21 (Temurin)
@@ -25,6 +30,7 @@ jobs:
         run: ./tools/scripts/runLinter.sh
 
   static-analyzer:
+    name: Static Analyzer
     runs-on: ubuntu-22.04
     steps:
       - name: Set up JDK 21 (Temurin)
@@ -40,6 +46,7 @@ jobs:
         run: ./tools/scripts/runStaticAnalyzer.sh
 
   unit-tests:
+    name: Unit Tests
     runs-on: ubuntu-22.04
 
     permissions:
@@ -75,9 +82,14 @@ jobs:
           name: reports
           path: ./**/**/build/reports
 
-  deploy:
+  deploy-dev:
+    name: Deploy to Dev
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-22.04
     needs: [ "linter", "static-analyzer", "unit-tests" ]
+    environment:
+      name: dev
+      url: http://dev.muse.kiryuxa.com
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -94,24 +106,20 @@ jobs:
       - name: Build Server Docker Image
         run: |
           ./tools/scripts/buildJar.sh
-          docker build . -t myshx/muse-server:${{ github.sha }}
+          docker build . -t myshx/muse-server:dev
 
       - name: Push Server Docker Image
-        run: docker push myshx/muse-server:${{ github.sha }}
+        run: docker push myshx/muse-server:dev
 
-      - name: Run Server docker image at home lab
+      - name: Run server at home lab
         uses: appleboy/ssh-action@v1.0.3
-        env:
-          COMMIT_SHA: ${{ github.sha }}
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          envs: COMMIT_SHA
           script: |
-            export COMMIT_SHA=$COMMIT_SHA
-            docker stop muse-server
-            docker rm muse-server
-            docker rmi muse-server
-            docker run -d -p 50505:8080 "myshx/muse-server:$COMMIT_SHA"
+            docker stop muse-server:dev
+            docker rm muse-server:dev
+            docker rmi muse-server:dev
+            docker run -d -p 50505:8080 "myshx/muse-server:dev"
