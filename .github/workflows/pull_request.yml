@@ -89,15 +89,15 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Log in to Docker Hub via token
-        run: sudo docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
+        run: docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
 
       - name: Build Server Docker Image
         run: |
           ./tools/scripts/buildJar.sh
-          sudo docker build . -t myshx/muse-server:${{ github.sha }}
+          docker build . -t myshx/muse-server:${{ github.sha }}
 
       - name: Push Server Docker Image
-        run: sudo docker push myshx/muse-server:${{ github.sha }}
+        run: docker push myshx/muse-server:${{ github.sha }}
 
       - name: Run Server docker image at home lab
         uses: appleboy/ssh-action@v1.0.3
@@ -110,7 +110,7 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           envs: COMMIT_SHA
           script: |
-            sudo docker stop $(sudo docker ps --filter ancestor=muse-server -q)
-            sudo docker rm $(sudo docker ps --filter ancestor=muse-server -q)
-            sudo docker rmi $(sudo docker ps --filter ancestor=muse-server -q)
-            sudo docker run "myshx/muse-server:COMMIT_SHA" -p 50505:80
+            docker stop $(docker ps --filter ancestor=muse-server -q)
+            docker rm $(docker ps --filter ancestor=muse-server -q)
+            docker rmi $(docker ps --filter ancestor=muse-server -q)
+            docker run "myshx/muse-server:COMMIT_SHA" -p 50505:80
