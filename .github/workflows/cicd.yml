@@ -112,6 +112,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}
+          DEV_PORT: $DEV_PORT
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
@@ -120,6 +121,7 @@ jobs:
           envs: GIT_COMMIT_SHA
           script: |
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+            export DEV_PORT=$DEV_PORT
             
             dev_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
             dev_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
@@ -171,6 +173,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}
+          STAGING_PORT: $STAGING_PORT
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
@@ -179,6 +182,7 @@ jobs:
           envs: GIT_COMMIT_SHA
           script: |
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+            export STAGING_PORT=$STAGING_PORT
             
             staging_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:staging-\b[0-9a-f]{40}\b' | awk '{print $2}')
             staging_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:staging-\b[0-9a-f]{40}\b' | awk '{print $2}')
@@ -229,6 +233,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}
+          PROD_PORT: $PROD_PORT
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
@@ -237,6 +242,7 @@ jobs:
           envs: GIT_COMMIT_SHA
           script: |
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+            export PROD_PORT=$PROD_PORT
             
             prod_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:prod-\b[0-9a-f]{40}\b' | awk '{print $2}')
             prod_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:prod-\b[0-9a-f]{40}\b' | awk '{print $2}')
