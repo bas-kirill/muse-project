@@ -1,0 +1,256 @@
+name: CI + CD
+
+on:
+  push:
+    branches:
+      - "**"
+
+env:
+  DEV_PORT: 50505
+  STAGING_PORT: 50506
+  PROD_PORT: 50507
+
+jobs:
+  linter:
+    name: Linter
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run linter
+        run: ./tools/scripts/runLinter.sh
+
+  static-analyzer:
+    name: Static Analyzer
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run static analyzer
+        run: ./tools/scripts/runStaticAnalyzer.sh
+
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-22.04
+
+    permissions:
+      contents: read
+      issues: read
+      checks: write
+      pull-requests: write
+
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Unit Tests
+        run: ./tools/scripts/runUnitTests.sh
+
+      - name: Publish Unit Test Results
+        if: always()
+        uses: EnricoMi/publish-unit-test-result-action@v1.9
+        with:
+          files: ./**/**/build/test-results/**/*.xml
+          report_individual_runs: true
+
+      - name: Gather reports
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: reports
+          path: ./**/**/build/reports
+
+  deploy-dev:
+    name: Deploy to Dev
+    needs: [linter, static-analyzer, unit-tests]
+    runs-on: ubuntu-22.04
+    environment:
+      name: dev
+      url: http://dev.muse.kiryuxa.com
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        run: docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build Server Docker Image
+        run: |
+          ./tools/scripts/buildJar.sh
+          docker build . -t "myshx/muse-server:dev-${{ github.sha }}"
+
+      - name: Push Server Docker Image
+        run: docker push "myshx/muse-server:dev-${{ github.sha }}"
+
+      - name: Run server at home lab
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          GIT_COMMIT_SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          envs: GIT_COMMIT_SHA
+          script: |
+            export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+            
+            dev_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
+            dev_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
+            for container_id in $dev_container_ids; do
+              docker stop "$container_id"
+            done
+            
+            for container_id in $dev_container_ids; do 
+              docker rm "$container_id"
+            done
+
+            for image_id in $dev_image_ids; do 
+              docker rmi -f "$image_id"; 
+            done
+            
+            docker run -d -p $DEV_PORT:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
+
+  deploy-staging:
+    name: Deploy to Staging
+    if: github.event.ref == 'refs/heads/main'
+    needs: [linter, static-analyzer, unit-tests]
+    runs-on: ubuntu-22.04
+    environment:
+      name: staging
+      url: http://staging.muse.kiryuxa.com
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        run: docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build Server Docker Image
+        run: |
+          ./tools/scripts/buildJar.sh
+          docker build . -t "myshx/muse-server:staging-${{ github.sha }}"
+
+      - name: Push Server Docker Image
+        run: docker push "myshx/muse-server:staging-${{ github.sha }}"
+
+      - name: Run server at home lab
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          GIT_COMMIT_SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          envs: GIT_COMMIT_SHA
+          script: |
+            export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+            
+            staging_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:staging-\b[0-9a-f]{40}\b' | awk '{print $2}')
+            staging_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:staging-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
+            for container_id in $staging_container_ids; do
+              docker stop "$container_id"
+            done
+            
+            for container_id in $staging_container_ids; do 
+              docker rm "$container_id"
+            done
+
+            for image_id in $staging_image_ids; do 
+              docker rmi -f "$image_id"; 
+            done
+            
+            docker run -d -p $STAGING_PORT:8080 "myshx/muse-server:staging-$GIT_COMMIT_SHA"
+
+  deploy-prod:
+    name: Deploy to Prod
+    needs: [deploy-staging]
+    runs-on: ubuntu-22.04
+    environment:
+      name: prod
+      url: http://prod.muse.kiryuxa.com
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        run: docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build Server Docker Image
+        run: |
+          ./tools/scripts/buildJar.sh
+          docker build . -t "myshx/muse-server:prod-${{ github.sha }}"
+
+      - name: Push Server Docker Image
+        run: docker push "myshx/muse-server:prod-${{ github.sha }}"
+
+      - name: Run server at home lab
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          GIT_COMMIT_SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          envs: GIT_COMMIT_SHA
+          script: |
+            export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+            
+            prod_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:prod-\b[0-9a-f]{40}\b' | awk '{print $2}')
+            prod_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:prod-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
+            for container_id in $prod_container_ids; do
+              docker stop "$container_id"
+            done
+            
+            for container_id in $prod_container_ids; do 
+              docker rm "$container_id"
+            done
+
+            for image_id in $prod_image_ids; do 
+              docker rmi -f "$image_id"; 
+            done
+            
+            docker run -d -p $PROD_PORT:8080 "myshx/muse-server:prod-$GIT_COMMIT_SHA"
