@@ -1,6 +1,9 @@
 name: CI
 
-on: [ push ]
+on:
+  push:
+    branches:
+      - "**"
 
 # [ ] Проверить зависимости при помощи OWASP Dependency Check
 # 4. Собрать docker образ
