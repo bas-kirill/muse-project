@@ -13,6 +13,8 @@ env:
 jobs:
   check-changes:
     runs-on: ubuntu-22.04
+    outputs:
+      changed: ${{ steps.check_changes.outputs.changed }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -31,7 +33,7 @@ jobs:
   linter:
     name: Linter
     runs-on: ubuntu-22.04
-    if: env.changed == 'true'
+    if: needs.check-changes.outputs.changed == 'true'
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -48,7 +50,7 @@ jobs:
   static-analyzer:
     name: Static Analyzer
     runs-on: ubuntu-22.04
-    if: env.changed == 'true'
+    if: needs.check-changes.outputs.changed == 'true'
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -65,7 +67,7 @@ jobs:
   unit-tests:
     name: Unit Tests
     runs-on: ubuntu-22.04
-    if: env.changed == 'true'
+    if: needs.check-changes.outputs.changed == 'true'
     permissions:
       contents: read
       issues: read
