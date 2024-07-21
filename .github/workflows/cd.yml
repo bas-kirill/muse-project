@@ -1,0 +1,65 @@
+name: CD
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+
+jobs:
+  deploy-dev:
+    name: Deploy to Dev
+    runs-on: ubuntu-22.04
+    environment:
+      name: dev
+      url: http://dev.muse.kiryuxa.com
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21.0'
+
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        run: docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build Server Docker Image
+        run: |
+          ./tools/scripts/buildJar.sh
+          docker build . -t "myshx/muse-server:dev-${{ github.sha }}"
+
+      - name: Push Server Docker Image
+        run: docker push "myshx/muse-server:dev-${{ github.sha }}"
+
+      - name: Run server at home lab
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          GIT_COMMIT_SHA: ${{ github.sha }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: ${{ secrets.SERVER_PORT }}
+          envs: GIT_COMMIT_SHA
+          script: |
+            export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+            
+            dev_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
+            dev_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
+            for container_id in $dev_container_ids; do
+              docker stop "$container_id"
+            done
+            
+            for container_id in $dev_container_ids; do 
+              docker rm "$container_id"
+            done
+
+            for image_id in $dev_image_ids; do 
+              docker rmi -f "$image_id"; 
+            done
+            
+            docker run -d -p 50505:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
