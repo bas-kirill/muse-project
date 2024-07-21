@@ -110,7 +110,7 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           envs: COMMIT_SHA
           script: |
-            docker stop $(docker ps --filter ancestor=muse-server -q)
-            docker rm $(docker ps --filter ancestor=muse-server -q)
-            docker rmi $(docker ps --filter ancestor=muse-server -q)
-            docker run "myshx/muse-server:COMMIT_SHA" -p 50505:80
+            docker stop muse-server
+            docker rm muse-server
+            docker rmi muse-server
+            docker run "myshx/muse-server:$COMMIT_SHA"
