@@ -18,7 +18,10 @@ jobs:
       changed: ${{ steps.check-changes.outputs.changed }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
 
       - name: Check for changes in source files
         id: check_changes
