@@ -17,6 +17,8 @@ jobs:
 
     steps:
       - name: Check if issue or pull request has an assignee
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "Github event path: `$GITHUB_EVENT_PATH`"
           
