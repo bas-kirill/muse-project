@@ -16,27 +16,54 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Check if issue or pull request has an assignee
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          echo "Github event path: `$GITHUB_EVENT_PATH`"
-          
-          
-          if [[ "${{ github.event_name }}" == "issues" ]]; then
-            ASSIGNEE_COUNT=$(jq '.issue.assignees | length' "$GITHUB_EVENT_PATH")
-          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            ASSIGNEE_COUNT=$(jq '.pull_request.assignees | length' "$GITHUB_EVENT_PATH")
-          fi
-          
-          echo "Assignee count: `$ASSIGNEE_COUNT`"
-          
-          if [ "$ASSIGNEE_COUNT" -eq 0 ]; then
-            echo "Error: No assignee found. Please assign someone to this issue or pull request."
-            exit 1
-          else
-            echo "Assignee found. Proceeding with workflow."
-          fi
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { issue, pull_request } = github.context.payload;
+            
+            let assignees = [];
+            if (issue) {
+              assignees = issue.assignees;
+            } else if (pull_request) {
+              assignees = pull_request.assignees;
+            }
+            
+            if (assignees.length === 0) {
+              core.setFailed('Error: No assignee found. Please assign someone to this issue or pull request.');
+            } else {
+              console.log('Assignee found. Proceeding with workflow.');
+            }
+
+#  check-assignee:
+#    name: Check Assignee not empty
+#    runs-on: ubuntu-22.04
+#
+#    steps:
+#      - name: Check if issue or pull request has an assignee
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#        run: |
+#          echo "Github event path: `$GITHUB_EVENT_PATH`"
+#
+#
+#          if [[ "${{ github.event_name }}" == "issues" ]]; then
+#            ASSIGNEE_COUNT=$(jq '.issue.assignees | length' "$GITHUB_EVENT_PATH")
+#          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+#            ASSIGNEE_COUNT=$(jq '.pull_request.assignees | length' "$GITHUB_EVENT_PATH")
+#          fi
+#
+#          echo "Assignee count: `$ASSIGNEE_COUNT`"
+#
+#          if [ "$ASSIGNEE_COUNT" -eq 0 ]; then
+#            echo "Error: No assignee found. Please assign someone to this issue or pull request."
+#            exit 1
+#          else
+#            echo "Assignee found. Proceeding with workflow."
+#          fi
 
   linter:
     name: Linter
