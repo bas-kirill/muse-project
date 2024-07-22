@@ -25,6 +25,8 @@ jobs:
           script: |
             const { issue, pull_request } = context.payload;
             
+            console.log(context.payload);
+            
             let assignees = [];
             if (issue) {
               assignees = issue.assignees;
