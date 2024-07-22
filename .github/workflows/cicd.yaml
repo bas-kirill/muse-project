@@ -109,7 +109,7 @@ jobs:
         run: docker push "myshx/muse-server:dev-${{ github.sha }}"
 
       - name: Run server at home lab
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v2
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}
           DEV_PORT: ${{ env.DEV_PORT }}
