@@ -11,26 +11,9 @@ env:
   PROD_PORT: 50507
 
 jobs:
-  check-changes:
-    name: Check source files was changed
-    runs-on: ubuntu-22.04
-    outputs:
-      changed: ${{ steps.check-changes.outputs.changed }}
-    steps:
-      - name: Checkout the pull request
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: refs/pull/${{ github.event.pull_request.number }}/head
-
-      - name: Display commit history for the PR branch
-        run: |
-          git log --oneline --no-merges $(git merge-base HEAD ${GITHUB_BASE_REF})..HEAD
-
   linter:
     name: Linter
     runs-on: ubuntu-22.04
-    if: contains(needs.check-changes.outputs.changed, 'true')
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -47,7 +30,6 @@ jobs:
   static-analyzer:
     name: Static Analyzer
     runs-on: ubuntu-22.04
-    if: contains(needs.check-changes.outputs.changed, 'true')
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -64,7 +46,6 @@ jobs:
   unit-tests:
     name: Unit Tests
     runs-on: ubuntu-22.04
-    if: contains(needs.check-changes.outputs.changed, 'true')
     permissions:
       contents: read
       issues: read
