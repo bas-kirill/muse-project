@@ -17,19 +17,15 @@ jobs:
     outputs:
       changed: ${{ steps.check-changes.outputs.changed }}
     steps:
-      - name: Checkout the repository
+      - name: Checkout the pull request
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Fetch pull request branch
-        run: |
-          git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-branch
-          git checkout pr-branch
+          ref: refs/pull/${{ github.event.pull_request.number }}/head
 
       - name: Display commit history for the PR branch
-        run: git log --oneline --no-merges $(git merge-base pr-branch ${GITHUB_REF})..pr-branch
-
+        run: |
+          git log --oneline --no-merges $(git merge-base HEAD ${GITHUB_BASE_REF})..HEAD
 
   linter:
     name: Linter
