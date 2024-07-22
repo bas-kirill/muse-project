@@ -6,7 +6,7 @@ import mu.muse.usecase.access.UserExtractor
 import mu.muse.usecase.access.UserPersister
 
 class InMemoryUserRepository(
-    private val storage: MutableMap<Username, User>
+    private val storage: MutableMap<Username, User>,
 ) : UserExtractor, UserPersister {
 
     override fun findByUsername(username: Username): User? {

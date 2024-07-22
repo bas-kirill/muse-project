@@ -39,7 +39,11 @@ class UseCaseConfiguration {
     }
 
     @Bean
-    fun login(userRepository: UserExtractor, authenticationManager: AuthenticationManager, jwtGenerator: JwtGenerator): BasicLogin {
+    fun login(
+        userRepository: UserExtractor,
+        authenticationManager: AuthenticationManager,
+        jwtGenerator: JwtGenerator
+    ): BasicLogin {
         return BasicLoginUseCase(userRepository, authenticationManager, jwtGenerator)
     }
 }

@@ -44,25 +44,30 @@ class SecurityConfiguration {
         userDetailsService: UserDetailsService,
         jwtTokenFilter: JwtTokenFilter,
         corsConfigurationSource: CorsConfigurationSource,
-        sessionRegistry:SessionRegistry
+        sessionRegistry:SessionRegistry,
     ): SecurityFilterChain { // @formatter:off
         var http = http
             .csrf { cors -> cors.disable() }
-            .cors{ cors -> cors.configurationSource(corsConfigurationSource) }
+            .cors { cors -> cors.configurationSource(corsConfigurationSource) }
 
-        http = http.sessionManagement{session:SessionManagementConfigurer<HttpSecurity?> -> session
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .maximumSessions(1)
-            .sessionRegistry(sessionRegistry)}
+        http = http.sessionManagement { session ->
+            session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .maximumSessions(1)
+                .sessionRegistry(sessionRegistry)
+        }
 
         http = http.userDetailsService(userDetailsService)
 
-        http = http.authorizeHttpRequests{request -> request.requestMatchers(AntPathRequestMatcher("/api/auth/**")).permitAll()
-            .anyRequest().authenticated()}
+        http = http.authorizeHttpRequests { request ->
+            request
+                .requestMatchers(AntPathRequestMatcher("/api/auth/**")).permitAll()
+                .anyRequest().authenticated()
+        }
 
         http.addFilterBefore(
             jwtTokenFilter,
-            UsernamePasswordAuthenticationFilter::class.java
+            UsernamePasswordAuthenticationFilter::class.java,
         )
 
         return http.build()

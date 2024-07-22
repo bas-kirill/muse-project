@@ -19,6 +19,7 @@ class PersistenceConfiguration {
             "Anonymous",
             Version.new(),
         )
+
         val editor = User.create(
             Username.from("editor"),
             "{noop}321",
