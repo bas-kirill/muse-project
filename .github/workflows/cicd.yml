@@ -23,12 +23,33 @@ jobs:
       - name: Check for changes in source files
         id: check_changes
         run: |
-          if git diff --quiet HEAD^ HEAD -- '**/*.kt'; then
-            echo "No changes in Kotlin files."
-            echo "changed=false" >> $GITHUB_ENV
+          git log
+          
+          # Check if there's at least one commit in the repository
+          if git rev-parse --verify HEAD >/dev/null 2>&1; then
+            # Check if there's more than one commit
+            if [ $(git rev-list --count HEAD) -gt 1 ]; then
+            # Perform the diff check for Kotlin files
+              if git diff --quiet HEAD^ HEAD -- '**/*.kt'; then
+                echo "No changes in Kotlin files."
+                echo "changed=false" >> $GITHUB_ENV
+              else
+                echo "Changes detected in Kotlin files."
+                echo "changed=true" >> $GITHUB_ENV
+              fi
+            else
+              # Only one commit exists, perform diff check from an empty tree
+              if git diff --quiet $(git hash-object -t tree /dev/null) HEAD -- '**/*.kt'; then
+                echo "No changes in Kotlin files."
+                echo "changed=false" >> $GITHUB_ENV
+              else
+                echo "Changes detected in Kotlin files."
+                echo "changed=true" >> $GITHUB_ENV
+              fi
+            fi
           else
-            echo "Changes detected in Kotlin files."
-            echo "changed=true" >> $GITHUB_ENV
+            echo "No commits in the repository."
+            echo "changed=false" >> $GITHUB_ENV
           fi
 
   linter:
