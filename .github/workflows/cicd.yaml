@@ -109,7 +109,7 @@ jobs:
         run: docker push "myshx/muse-server:dev-${{ github.sha }}"
 
       - name: Run server at home lab
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@master
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}
           DEV_PORT: ${{ env.DEV_PORT }}
@@ -183,7 +183,7 @@ jobs:
         run: docker push "myshx/muse-server:staging-${{ github.sha }}"
 
       - name: Run server at home lab
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@master
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}
           STAGING_PORT: ${{ env.STAGING_PORT }}
@@ -243,7 +243,7 @@ jobs:
         run: docker push "myshx/muse-server:prod-${{ github.sha }}"
 
       - name: Run server at home lab
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@master
         env:
           GIT_COMMIT_SHA: ${{ github.sha }}
           PROD_PORT: ${{ env.PROD_PORT }}
