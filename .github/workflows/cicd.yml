@@ -23,13 +23,12 @@ jobs:
           fetch-depth: 0
 
       - name: Fetch pull request branch
-        run: git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-branch
-
-      - name: Checkout pull request branch
-        run: git checkout pr-branch
+        run: |
+          git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-branch
+          git checkout pr-branch
 
       - name: Display commit history for the PR branch
-        run: git log --oneline --no-merges ${{ github.sha }}..pr-branch
+        run: git log --oneline --no-merges $(git merge-base pr-branch ${GITHUB_REF})..pr-branch
 
 
   linter:
