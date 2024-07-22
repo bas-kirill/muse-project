@@ -1,0 +1,19 @@
+package mu.muse.application.muse
+
+import mu.muse.application.jwt.JwtGenerator
+import mu.muse.usecase.access.UserExtractor
+import mu.muse.usecase.scenario.BasicLoginUseCase
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.security.authentication.AuthenticationManager
+
+@Configuration
+class UseCaseConfiguration {
+
+    @Bean
+    fun login(
+        authenticationManager: AuthenticationManager,
+        userRepository: UserExtractor,
+        jwtGenerator: JwtGenerator,
+    ) = BasicLoginUseCase(authenticationManager, userRepository, jwtGenerator)
+}
