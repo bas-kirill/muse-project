@@ -16,29 +16,11 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Check if issue or pull request has an assignee
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const { issue, pull_request } = context.payload;
-            
-            console.log(context.payload);
-            
-            let assignees = [];
-            if (issue) {
-              assignees = issue.assignees;
-            } else if (pull_request) {
-              assignees = pull_request.assignees;
-            }
-            
-            if (assignees.length === 0) {
-              core.setFailed('Error: No assignee found. Please assign someone to this issue or pull request.');
-            } else {
-              console.log('Assignee found. Proceeding with workflow.');
-            }
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
 
 #  check-assignee:
 #    name: Check Assignee not empty
