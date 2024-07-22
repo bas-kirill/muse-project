@@ -19,5 +19,5 @@ fi
 imageFullName=muse-server:$imageTag
 dockerHubImageFullName=$repository/muse-server:$imageTag
 
-(docker tag $imageFullName $dockerHubImageFullName)
-(docker push $dockerHubImageFullName)
+(docker tag "$imageFullName" "$dockerHubImageFullName")
+(docker push "$dockerHubImageFullName")
