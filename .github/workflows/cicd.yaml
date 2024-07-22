@@ -13,7 +13,7 @@ env:
 jobs:
   linter:
     name: Server Linter
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -29,7 +29,7 @@ jobs:
 
   static-analyzer:
     name: Server Static Analyzer
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -45,7 +45,7 @@ jobs:
 
   unit-tests:
     name: Server Unit Tests
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
 
     permissions:
       contents: read
@@ -83,7 +83,7 @@ jobs:
   deploy-dev:
     name: Server Deploy to Dev
     needs: [linter, static-analyzer, unit-tests]
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     environment:
       name: dev
       url: http://dev.muse.kiryuxa.com
@@ -157,7 +157,7 @@ jobs:
     name: Server Deploy to Staging
     if: github.event.ref == 'refs/heads/main'
     needs: [linter, static-analyzer, unit-tests]
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     environment:
       name: staging
       url: http://staging.muse.kiryuxa.com
@@ -217,7 +217,7 @@ jobs:
   deploy-prod:
     name: Server Deploy to Prod
     needs: [deploy-staging]
-    runs-on: ubuntu-22.04
+    runs-on: self-hosted
     environment:
       name: prod
       url: http://prod.muse.kiryuxa.com
