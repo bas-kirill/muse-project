@@ -11,16 +11,6 @@ env:
   PROD_PORT: 50507
 
 jobs:
-  assign-pr-author-as-assignee:
-    name: Assign PR Author as Assignee
-    runs-on: ubuntu-22.04
-
-    steps:
-      - name: "Assign PR Author as Assignee"
-        uses: itsOliverBott/assign-pr-author-as-assignee@latest
-        with:
-          token: ${{ secrets.GH_TOKEN }}
-
   linter:
     name: Linter
     runs-on: ubuntu-22.04
