@@ -137,8 +137,6 @@ jobs:
               docker rmi -f "$image_id"; 
             done
             
-            echo "Dev port: $DEV_PORT"
-            
             docker run -d -p $DEV_PORT:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
 
   deploy-staging:
