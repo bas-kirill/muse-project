@@ -4,8 +4,13 @@ currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../"
 
 (cd "$rootDir" && exec ./tools/scripts/clean.sh)
-(cd "$rootDir" && exec ./tools/scripts/buildJar.sh)
-(cd "$rootDir" && exec ./tools/scripts/buildImage.sh)
+
+(cd "$rootDir" && exec ./tools/scripts/server/buildJar.sh)
+(cd "$rootDir" && exec ./tools/scripts/server/buildImage.sh)
+
+(cd "$rootDir" && exec ./tools/scripts/client/build.sh)
+(cd "$rootDir" && exec ./tools/scripts/client/buildImage.sh)
+
 (cd "$rootDir" && exec docker compose \
   -f ./tools/docker/docker-compose.yaml \
   --env-file ./tools/docker/env/local.env \

@@ -10,3 +10,11 @@ services:
       - ${SERVER_PORT}:8080
     networks:
       - muse
+
+  client:
+    image: muse-client:latest
+    container_name: muse-client
+    ports:
+      - ${CLIENT_PORT}:80
+    networks:
+      - muse
