@@ -23,6 +23,8 @@ jobs:
       - name: Check for changes in source files
         id: check_changes
         run: |
+          git log --oneline
+          
           # Check for changes in Kotlin files in the last commit
           changed_files=$(git diff --name-only HEAD~1 HEAD | grep '\.kt$')
           
