@@ -40,9 +40,13 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-security")
 
-    compileOnly("org.projectlombok:lombok")
-    annotationProcessor("org.projectlombok:lombok")
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation(kotlin("stdlib-jdk8"))
 }
