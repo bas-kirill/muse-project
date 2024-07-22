@@ -17,28 +17,20 @@ jobs:
     outputs:
       changed: ${{ steps.check-changes.outputs.changed }}
     steps:
-      - name: Checkout repository
+      - name: Checkout the repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
-      - name: Check for changes in source files
-        id: check_changes
-        run: |
-          git log --oneline
-          
-#          # Check for changes in Kotlin files in the last commit
-#          changed_files=$(git diff --name-only HEAD~1 HEAD | grep '\.kt$')
-#
-#          if [ -n "$changed_files" ]; then
-#            echo "Changes detected in Kotlin files."
-#            echo "changed=true" >> $GITHUB_OUTPUT
-#          else
-#            echo "No changes in Kotlin files."
-#            echo "changed=false" >> $GITHUB_OUTPUT
-#          fi
+      - name: Fetch pull request branch
+        run: git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-branch
+
+      - name: Checkout pull request branch
+        run: git checkout pr-branch
+
+      - name: Display commit history for the PR branch
+        run: git log --oneline --no-merges ${{ github.sha }}..pr-branch
+
 
   linter:
     name: Linter
