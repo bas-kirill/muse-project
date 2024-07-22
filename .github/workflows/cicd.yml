@@ -11,43 +11,15 @@ env:
   PROD_PORT: 50507
 
 jobs:
-  check-assignee:
-    name: Check Assignee not empty
+  assign-pr-author-as-assignee:
+    name: Assign PR Author as Assignee
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "$GITHUB_CONTEXT"
-
-#  check-assignee:
-#    name: Check Assignee not empty
-#    runs-on: ubuntu-22.04
-#
-#    steps:
-#      - name: Check if issue or pull request has an assignee
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-#        run: |
-#          echo "Github event path: `$GITHUB_EVENT_PATH`"
-#
-#
-#          if [[ "${{ github.event_name }}" == "issues" ]]; then
-#            ASSIGNEE_COUNT=$(jq '.issue.assignees | length' "$GITHUB_EVENT_PATH")
-#          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
-#            ASSIGNEE_COUNT=$(jq '.pull_request.assignees | length' "$GITHUB_EVENT_PATH")
-#          fi
-#
-#          echo "Assignee count: `$ASSIGNEE_COUNT`"
-#
-#          if [ "$ASSIGNEE_COUNT" -eq 0 ]; then
-#            echo "Error: No assignee found. Please assign someone to this issue or pull request."
-#            exit 1
-#          else
-#            echo "Assignee found. Proceeding with workflow."
-#          fi
+      - name: "Assign PR Author as Assignee"
+        uses: itsOliverBott/assign-pr-author-as-assignee@latest
+        with:
+          token: ${{ secrets.GH_TOKEN }}
 
   linter:
     name: Linter
