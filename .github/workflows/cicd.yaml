@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run linter
-        run: ./tools/scripts/runLinter.sh
+        run: ./tools/scripts/server/runLinter.sh
 
   static-analyzer:
     name: Server Static Analyzer
@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run static analyzer
-        run: ./tools/scripts/runStaticAnalyzer.sh
+        run: ./tools/scripts/server/runStaticAnalyzer.sh
 
   unit-tests:
     name: Server Unit Tests
@@ -64,7 +64,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Unit Tests
-        run: ./tools/scripts/runUnitTests.sh
+        run: ./tools/scripts/server/runUnitTests.sh
 
       - name: Publish Unit Test Results
         if: always()
@@ -102,8 +102,8 @@ jobs:
 
       - name: Build Server Docker Image
         run: |
-          ./tools/scripts/buildJar.sh
-          docker build . -t "myshx/muse-server:dev-${{ github.sha }}"
+          ./tools/scripts/server/buildJar.sh
+          docker build . -t "myshx/muse-server:dev-${{ github.sha }}" -f ./server/Dockerfile
 
       - name: Push Server Docker Image
         run: docker push "myshx/muse-server:dev-${{ github.sha }}"
@@ -163,8 +163,8 @@ jobs:
 
       - name: Build Server Docker Image
         run: |
-          ./tools/scripts/buildJar.sh
-          docker build . -t "myshx/muse-server:staging-${{ github.sha }}"
+          ./tools/scripts/server/buildJar.sh
+          docker build . -t "myshx/muse-server:staging-${{ github.sha }}" -f ./server/Dockerfile
 
       - name: Push Server Docker Image
         run: docker push "myshx/muse-server:staging-${{ github.sha }}"
@@ -223,8 +223,8 @@ jobs:
 
       - name: Build Server Docker Image
         run: |
-          ./tools/scripts/buildJar.sh
-          docker build . -t "myshx/muse-server:prod-${{ github.sha }}"
+          ./tools/scripts/server/buildJar.sh
+          docker build . -t "myshx/muse-server:prod-${{ github.sha }}" -f ./server/Dockerfile
 
       - name: Push Server Docker Image
         run: docker push "myshx/muse-server:prod-${{ github.sha }}"
