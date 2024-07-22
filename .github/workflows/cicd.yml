@@ -15,7 +15,7 @@ jobs:
     name: Check source files was changed
     runs-on: ubuntu-22.04
     outputs:
-      changed: ${{ steps.check_changes.outputs.changed }}
+      changed: ${{ steps.check-changes.outputs.changed }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -25,16 +25,16 @@ jobs:
         run: |
           if git diff --quiet HEAD^ HEAD -- '**/*.kt'; then
             echo "No changes in Kotlin files."
-            echo "changed=false" >> $GITHUB_ENV
+            echo "changed=false" >> $GITHUB_OUTPUT
           else
             echo "Changes detected in Kotlin files."
-            echo "changed=true" >> $GITHUB_ENV
+            echo "changed=true" >> $GITHUB_OUTPUT
           fi
 
   linter:
     name: Linter
     runs-on: ubuntu-22.04
-    if: needs.check-changes.outputs.changed == 'true'
+    if: contains(needs.check-changes.outputs.changed, 'true')
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -51,7 +51,7 @@ jobs:
   static-analyzer:
     name: Static Analyzer
     runs-on: ubuntu-22.04
-    if: needs.check-changes.outputs.changed == 'true'
+    if: contains(needs.check-changes.outputs.changed, 'true')
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -68,7 +68,7 @@ jobs:
   unit-tests:
     name: Unit Tests
     runs-on: ubuntu-22.04
-    if: needs.check-changes.outputs.changed == 'true'
+    if: contains(needs.check-changes.outputs.changed, 'true')
     permissions:
       contents: read
       issues: read
