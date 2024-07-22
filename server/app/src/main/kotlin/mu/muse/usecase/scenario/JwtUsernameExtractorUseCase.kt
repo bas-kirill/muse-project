@@ -12,7 +12,7 @@ class JwtUsernameExtractorUseCase(private val jwtSecretKey: String) : JwtUsernam
                 .setSigningKey(jwtSecretKey)
                 .parseClaimsJws(jwtRaw)
                 .body
-                .subject
+                .subject,
         )
     }
 }

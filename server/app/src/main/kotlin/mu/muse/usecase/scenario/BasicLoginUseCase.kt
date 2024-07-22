@@ -17,8 +17,8 @@ class BasicLoginUseCase(
         authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
                 username.value,
-                password.value
-            )
+                password.value,
+            ),
         )
 
         val user = userRepository.findByUsername(username) ?: throw IllegalArgumentException("User not found")

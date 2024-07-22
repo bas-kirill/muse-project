@@ -1,7 +1,7 @@
 package mu.muse.common.types
 
 import java.time.OffsetDateTime
-import java.util.*
+import java.util.UUID
 
 open class DomainEvent protected constructor() {
     val id = EventId.generate()

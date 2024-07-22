@@ -16,7 +16,11 @@ class User private constructor(
 
     companion object {
         fun create(
-            id: Username, password: String, authority: String, fullName: String, version: Version
+            id: Username,
+            password: String,
+            authority: String,
+            fullName: String,
+            version: Version,
         ): User {
             return User(id, password, authority, fullName, version)
         }
