@@ -121,25 +121,37 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           envs: GIT_COMMIT_SHA, DEV_PORT
           script: |
+            echo "one"
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+            echo "two"
             export DEV_PORT=$DEV_PORT
+
+            echo "three"
             
             dev_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
+            echo "four"
             dev_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
-
+            echo "five"
             for container_id in $dev_container_ids; do
               docker stop "$container_id"
             done
+            echo "seven"
             
             for container_id in $dev_container_ids; do 
               docker rm "$container_id"
             done
 
+            echo "eight"
+
             for image_id in $dev_image_ids; do 
               docker rmi -f "$image_id"; 
             done
+
+            echo "nine"
             
             docker run -d -p $DEV_PORT:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
+
+            echo "ten"
 
   deploy-staging:
     name: Server Deploy to Staging
