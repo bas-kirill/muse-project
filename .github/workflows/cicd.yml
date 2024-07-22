@@ -117,7 +117,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          envs: GIT_COMMIT_SHA
+          envs: GIT_COMMIT_SHA, DEV_PORT
           script: |
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
             export DEV_PORT=$DEV_PORT
@@ -180,7 +180,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          envs: GIT_COMMIT_SHA
+          envs: GIT_COMMIT_SHA, STAGING_PORT
           script: |
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
             export STAGING_PORT=$STAGING_PORT
@@ -240,7 +240,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          envs: GIT_COMMIT_SHA
+          envs: GIT_COMMIT_SHA, PROD_PORT
           script: |
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
             export PROD_PORT=$PROD_PORT
