@@ -1,27 +1,29 @@
 package mu.muse.usecase.scenario
 
+import mu.muse.application.jwt.JwtGenerator
+import mu.muse.domain.Jwt
 import mu.muse.domain.Password
 import mu.muse.domain.Username
-import mu.muse.usecase.JwtGenerator
 import mu.muse.usecase.BasicLogin
+import mu.muse.usecase.BasicLoginError
 import mu.muse.usecase.access.UserExtractor
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 
 class BasicLoginUseCase(
-    private val userRepository: UserExtractor,
     private val authenticationManager: AuthenticationManager,
+    private val userRepository: UserExtractor,
     private val jwtGenerator: JwtGenerator,
 ) : BasicLogin {
-    override fun execute(username: Username, password: Password): String {
+    override fun execute(username: Username, password: Password): Jwt {
         authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
-                username.value,
-                password.value,
+                username.toStringValue(),
+                password.toPlainStringValue(),
             ),
         )
 
-        val user = userRepository.findByUsername(username) ?: throw IllegalArgumentException("User not found")
+        val user = userRepository.findByUsername(username) ?: throw BasicLoginError.UserNotFound(username)
         return jwtGenerator.execute(user)
     }
 }

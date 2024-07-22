@@ -2,7 +2,7 @@ package mu.muse.domain
 
 import mu.muse.common.types.ValueObject
 
-data class Password private constructor(val value: String) : ValueObject {
+data class Password internal constructor(private val value: String) : ValueObject {
 
     companion object {
         fun from(value: String?): Password {
@@ -10,4 +10,6 @@ data class Password private constructor(val value: String) : ValueObject {
             return Password(value)
         }
     }
+
+    fun toPlainStringValue() = value
 }

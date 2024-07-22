@@ -1,13 +1,11 @@
-package mu.muse.application.muse
+package mu.muse.application.jwt
 
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import mu.muse.usecase.JwtUsernameExtractor
-import mu.muse.usecase.JwtValidator
+import mu.muse.domain.Jwt
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.web.filter.OncePerRequestFilter
@@ -25,13 +23,13 @@ class JwtTokenFilter(
             return
         }
 
-        val token = authHeader.substring("Bearer ".length)
-        val username = jwtUsernameExtractor.execute(token)
+        val jwt = Jwt.from(authHeader.substring("Bearer ".length))
+        val username = jwtUsernameExtractor.execute(jwt)
 
-        if (username != null && SecurityContextHolder.getContext().authentication == null) {
-            val userDetails: UserDetails = userDetailsService.loadUserByUsername(username.toStringValue())
+        if (SecurityContextHolder.getContext().authentication == null) {
+            val userDetails = userDetailsService.loadUserByUsername(username.toStringValue())
 
-            if (jwtValidator.execute(token)) {
+            if (jwtValidator.execute(jwt)) {
                 val authToken = UsernamePasswordAuthenticationToken(
                     userDetails,
                     null,
@@ -39,7 +37,6 @@ class JwtTokenFilter(
                 )
 
                 authToken.details = WebAuthenticationDetailsSource().buildDetails(request)
-
                 SecurityContextHolder.getContext().authentication = authToken
             }
         }

@@ -2,7 +2,7 @@ package mu.muse.domain
 
 import mu.muse.common.types.ValueObject
 
-data class Username internal constructor(internal val value: String) : ValueObject {
+data class Username internal constructor(private val value: String) : ValueObject {
 
     fun toStringValue() = value
 

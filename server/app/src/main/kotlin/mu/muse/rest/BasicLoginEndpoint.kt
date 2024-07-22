@@ -16,8 +16,8 @@ class BasicLoginEndpoint(private val basicLogin: BasicLogin) {
     fun login(@RequestBody request: Request): Response {
         val id = Username.from(request.username)
         val password = Password.from(request.password)
-        val jwtToken = basicLogin.execute(id, password)
-        return Response(jwtToken)
+        val jwt = basicLogin.execute(id, password)
+        return Response(jwt.toStringValue())
     }
 
     data class Request(val username: String, val password: String)
