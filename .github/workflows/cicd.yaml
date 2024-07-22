@@ -12,7 +12,7 @@ env:
 
 jobs:
   linter:
-    name: Linter
+    name: Server Linter
     runs-on: ubuntu-22.04
     steps:
       - name: Set up JDK 21 (Temurin)
@@ -28,7 +28,7 @@ jobs:
         run: ./tools/scripts/runLinter.sh
 
   static-analyzer:
-    name: Static Analyzer
+    name: Server Static Analyzer
     runs-on: ubuntu-22.04
     steps:
       - name: Set up JDK 21 (Temurin)
@@ -44,7 +44,7 @@ jobs:
         run: ./tools/scripts/runStaticAnalyzer.sh
 
   unit-tests:
-    name: Unit Tests
+    name: Server Unit Tests
     runs-on: ubuntu-22.04
 
     permissions:
@@ -81,7 +81,7 @@ jobs:
           path: ./**/**/build/reports
 
   deploy-dev:
-    name: Deploy to Dev
+    name: Server Deploy to Dev
     needs: [linter, static-analyzer, unit-tests]
     runs-on: ubuntu-22.04
     environment:
@@ -141,7 +141,7 @@ jobs:
             docker run -d -p $DEV_PORT:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
 
   deploy-staging:
-    name: Deploy to Staging
+    name: Server Deploy to Staging
     if: github.event.ref == 'refs/heads/main'
     needs: [linter, static-analyzer, unit-tests]
     runs-on: ubuntu-22.04
@@ -202,7 +202,7 @@ jobs:
             docker run -d -p $STAGING_PORT:8080 "myshx/muse-server:staging-$GIT_COMMIT_SHA"
 
   deploy-prod:
-    name: Deploy to Prod
+    name: Server Deploy to Prod
     needs: [deploy-staging]
     runs-on: ubuntu-22.04
     environment:
