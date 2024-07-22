@@ -11,6 +11,25 @@ env:
   PROD_PORT: 50507
 
 jobs:
+  check-assignee:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if issue or pull request has an assignee
+        run: |
+          if [[ "${{ github.event_name }}" == "issues" ]]; then
+            ASSIGNEE_COUNT=$(jq '.issue.assignees | length' "$GITHUB_EVENT_PATH")
+          elif [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            ASSIGNEE_COUNT=$(jq '.pull_request.assignees | length' "$GITHUB_EVENT_PATH")
+          fi
+          
+          if [ "$ASSIGNEE_COUNT" -eq 0 ]; then
+            echo "Error: No assignee found. Please assign someone to this issue or pull request."
+            exit 1
+          else
+            echo "Assignee found. Proceeding with workflow."
+          fi
+
   linter:
     name: Linter
     runs-on: ubuntu-22.04
