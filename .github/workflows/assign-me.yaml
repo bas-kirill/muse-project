@@ -5,7 +5,7 @@ on: [pull_request]
 jobs:
   assign_me:
     runs-on: ubuntu-22.04
-    name: Assign me
+    name: "[PR] Assign me"
     steps:
       - uses: AlbertHernandez/assign-me@v1.0.0
     env:
