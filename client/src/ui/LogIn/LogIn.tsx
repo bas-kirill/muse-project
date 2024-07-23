@@ -4,7 +4,7 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import axios from 'axios';
 import Jwt from "../../domain/Jwt";
-import {SERVER_PORT, SERVER_URL} from "../../settings";
+import {SERVER_PORT, SERVER_URL} from "../../env";
 
 interface BasicLoginRequestBody {
     username: string,
