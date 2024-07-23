@@ -2,7 +2,7 @@ package mu.muse.application.muse
 
 import jakarta.servlet.http.HttpServletResponse
 import mu.muse.application.jwt.JwtGenerator
-import mu.muse.application.jwt.JwtTokenFilter
+import mu.muse.application.jwt.JwtFilter
 import mu.muse.application.jwt.JwtValidator
 import mu.muse.usecase.access.UserExtractor
 import mu.muse.application.jwt.JwtUsernameExtractor
@@ -20,6 +20,7 @@ import org.springframework.security.core.session.SessionRegistryImpl
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
@@ -63,7 +64,7 @@ class SecurityConfiguration {
     fun securityFilter(
         http: HttpSecurity,
         userDetailsService: UserDetailsService,
-        jwtTokenFilter: JwtTokenFilter,
+        jwtFilter: JwtFilter,
         corsConfigurationSource: CorsConfigurationSource,
         sessionRegistry:SessionRegistry,
     ): SecurityFilterChain { // @formatter:off
@@ -94,7 +95,7 @@ class SecurityConfiguration {
         }
 
         http.addFilterBefore(
-            jwtTokenFilter,
+            jwtFilter,
             UsernamePasswordAuthenticationFilter::class.java,
         )
 
@@ -116,12 +117,20 @@ class SecurityConfiguration {
         jwtValidator: JwtValidator,
         userDetailsService: UserDetailsService,
         jwtUsernameExtractor: JwtUsernameExtractor
-    ): JwtTokenFilter {
-        return JwtTokenFilter(jwtValidator, userDetailsService, jwtUsernameExtractor)
+    ): JwtFilter {
+        return JwtFilter(jwtValidator, userDetailsService, jwtUsernameExtractor)
     }
 
     @Bean
     fun sessionRegistry() : SessionRegistry {
         return SessionRegistryImpl()
     }
+
+    @Bean
+    fun securityContextHolderAwareRequestFilter() = SecurityContextHolderAwareRequestFilter()
+//
+//    @Bean
+//    public SecurityContextHolderAwareRequestFilter () {
+//        return new
+//    }
 }
