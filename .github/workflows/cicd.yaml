@@ -13,7 +13,7 @@ env:
 jobs:
   linter:
     name: Server Linter
-    runs-on: ubuntu-22.04
+    runs-on: kiryuxa-1
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -29,7 +29,7 @@ jobs:
 
   static-analyzer:
     name: Server Static Analyzer
-    runs-on: ubuntu-22.04
+    runs-on: kiryuxa-2
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -45,7 +45,7 @@ jobs:
 
   unit-tests:
     name: Server Unit Tests
-    runs-on: ubuntu-22.04
+    runs-on: kiryuxa-3
 
     permissions:
       contents: read
