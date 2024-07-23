@@ -45,7 +45,7 @@ jobs:
 
   unit-tests:
     name: Server Unit Tests
-    runs-on: ubuntu-22.04
+    runs-on: kiryuxa-3
 
     permissions:
       contents: read
