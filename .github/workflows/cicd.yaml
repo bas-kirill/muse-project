@@ -12,7 +12,7 @@ env:
 
 jobs:
   linter:
-    name: Server Linter
+    name: [SERVER] Linter
     runs-on: kiryuxa-1
     steps:
       - name: Set up JDK 21 (Temurin)
@@ -28,7 +28,7 @@ jobs:
         run: ./tools/scripts/server/runLinter.sh
 
   static-analyzer:
-    name: Server Static Analyzer
+    name: [SERVER] Static Analyzer
     runs-on: kiryuxa-2
     steps:
       - name: Set up JDK 21 (Temurin)
@@ -44,7 +44,7 @@ jobs:
         run: ./tools/scripts/server/runStaticAnalyzer.sh
 
   unit-tests:
-    name: Server Unit Tests
+    name: [SERVER] Unit Tests
     runs-on: kiryuxa-3
 
     permissions:
@@ -81,7 +81,7 @@ jobs:
           path: ./**/**/build/reports
 
   deploy-dev:
-    name: Server Deploy to Dev
+    name: [SERVER] Deploy to Dev
     needs: [linter, static-analyzer, unit-tests]
     runs-on: ubuntu-22.04
     environment:
@@ -154,7 +154,7 @@ jobs:
             echo "ten"
 
   deploy-staging:
-    name: Server Deploy to Staging
+    name: [SERVER] Deploy to Staging
     if: github.event.ref == 'refs/heads/main'
     needs: [linter, static-analyzer, unit-tests]
     runs-on: ubuntu-22.04
@@ -215,7 +215,7 @@ jobs:
             docker run -d -p $STAGING_PORT:8080 "myshx/muse-server:staging-$GIT_COMMIT_SHA"
 
   deploy-prod:
-    name: Server Deploy to Prod
+    name: [SERVER] Deploy to Prod
     needs: [deploy-staging]
     runs-on: ubuntu-22.04
     environment:
