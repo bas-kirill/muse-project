@@ -5,11 +5,13 @@ import mu.muse.common.types.Version
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
+typealias FullName = String
+
 class User internal constructor(
     id: Username,
     val password: Password,
     val role: Role,
-    val fullName: String,
+    val fullName: FullName,
     version: Version,
 ) : AggregateRoot<Username>(id, version), UserDetails {
 
@@ -18,7 +20,7 @@ class User internal constructor(
             id: Username,
             password: Password,
             role: Role,
-            fullName: String,
+            fullName: FullName,
             version: Version,
         ): User {
             return User(id, password, role, fullName, version)
