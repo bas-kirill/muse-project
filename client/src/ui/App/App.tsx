@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
-import Home from "./ui/Home/Home";
-import NotFound from "./ui/NotFound/NotFound";
-import LogIn from "./ui/LogIn/LogIn";
+import LogIn from "../LogIn/LogIn";
+import Home from "../Home/Home";
+import NotFound from "../NotFound/NotFound";
 
 const App = () => (
     <div id="app">
