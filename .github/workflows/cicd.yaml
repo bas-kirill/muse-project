@@ -1,88 +1,76 @@
+---
 name: CI + CD
-
 on:
   push:
     branches:
       - "**"
-
 env:
   DEV_PORT: 50505
   STAGING_PORT: 50506
   PROD_PORT: 50507
-
 jobs:
   linter:
-    name: [SERVER] Linter
+    name: "[SERVER] Linter"
     runs-on: kiryuxa-1
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21.0'
-
+          distribution: temurin
+          java-version: "21.0"
       - name: Checkout Code
         uses: actions/checkout@v4
-
       - name: Run linter
         run: ./tools/scripts/server/runLinter.sh
-
   static-analyzer:
-    name: [SERVER] Static Analyzer
+    name: "[SERVER] Static Analyzer"
     runs-on: kiryuxa-2
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21.0'
-
+          distribution: temurin
+          java-version: "21.0"
       - name: Checkout Code
         uses: actions/checkout@v4
-
       - name: Run static analyzer
         run: ./tools/scripts/server/runStaticAnalyzer.sh
-
   unit-tests:
-    name: [SERVER] Unit Tests
+    name: "[SERVER] Unit Tests"
     runs-on: kiryuxa-3
-
     permissions:
       contents: read
       issues: read
       checks: write
       pull-requests: write
-
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21.0'
-
+          distribution: temurin
+          java-version: "21.0"
       - name: Checkout Code
         uses: actions/checkout@v4
-
       - name: Run Unit Tests
         run: ./tools/scripts/server/runUnitTests.sh
-
       - name: Publish Unit Test Results
         if: always()
         uses: EnricoMi/publish-unit-test-result-action@v1.9
         with:
           files: ./**/**/build/test-results/**/*.xml
           report_individual_runs: true
-
       - name: Gather reports
         uses: actions/upload-artifact@v2
         if: always()
         with:
           name: reports
           path: ./**/**/build/reports
-
   deploy-dev:
-    name: [SERVER] Deploy to Dev
-    needs: [linter, static-analyzer, unit-tests]
+    name: "[SERVER] Deploy to Dev"
+    needs:
+      - linter
+      - static-analyzer
+      - unit-tests
     runs-on: ubuntu-22.04
     environment:
       name: dev
@@ -91,23 +79,19 @@ jobs:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21.0'
-
+          distribution: temurin
+          java-version: "21.0"
       - name: Check out the repo
         uses: actions/checkout@v4
-
       - name: Log in to Docker Hub
         run: docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
-
       - name: Build Server Docker Image
-        run: |
+        run: >
           ./tools/scripts/server/buildJar.sh
-          docker build . -t "myshx/muse-server:dev-${{ github.sha }}" -f ./server/Dockerfile
 
+          docker build . -t "myshx/muse-server:dev-${{ github.sha }}" -f ./server/Dockerfile
       - name: Push Server Docker Image
         run: docker push "myshx/muse-server:dev-${{ github.sha }}"
-
       - name: Run server at home lab
         uses: appleboy/ssh-action@master
         env:
@@ -120,43 +104,61 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           envs: GIT_COMMIT_SHA, DEV_PORT
-          script: |
+          script: >
             echo "one"
+
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+
             echo "two"
+
             export DEV_PORT=$DEV_PORT
 
+
             echo "three"
-            
+
+
             dev_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
             echo "four"
+
             dev_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:dev-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
             echo "five"
+
             for container_id in $dev_container_ids; do
               docker stop "$container_id"
             done
+
             echo "seven"
-            
-            for container_id in $dev_container_ids; do 
+
+
+            for container_id in $dev_container_ids; do
               docker rm "$container_id"
             done
 
+
             echo "eight"
 
-            for image_id in $dev_image_ids; do 
-              docker rmi -f "$image_id"; 
+
+            for image_id in $dev_image_ids; do
+              docker rmi -f "$image_id";
             done
 
+
             echo "nine"
-            
+
+
             docker run -d -p $DEV_PORT:8080 "myshx/muse-server:dev-$GIT_COMMIT_SHA"
 
-            echo "ten"
 
+            echo "ten"
   deploy-staging:
-    name: [SERVER] Deploy to Staging
+    name: "[SERVER] Deploy to Staging"
     if: github.event.ref == 'refs/heads/main'
-    needs: [linter, static-analyzer, unit-tests]
+    needs:
+      - linter
+      - static-analyzer
+      - unit-tests
     runs-on: ubuntu-22.04
     environment:
       name: staging
@@ -165,23 +167,19 @@ jobs:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21.0'
-
+          distribution: temurin
+          java-version: "21.0"
       - name: Check out the repo
         uses: actions/checkout@v4
-
       - name: Log in to Docker Hub
         run: docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
-
       - name: Build Server Docker Image
-        run: |
+        run: >
           ./tools/scripts/server/buildJar.sh
-          docker build . -t "myshx/muse-server:staging-${{ github.sha }}" -f ./server/Dockerfile
 
+          docker build . -t "myshx/muse-server:staging-${{ github.sha }}" -f ./server/Dockerfile
       - name: Push Server Docker Image
         run: docker push "myshx/muse-server:staging-${{ github.sha }}"
-
       - name: Run server at home lab
         uses: appleboy/ssh-action@master
         env:
@@ -193,30 +191,37 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           envs: GIT_COMMIT_SHA, STAGING_PORT
-          script: |
+          script: >
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+
             export STAGING_PORT=$STAGING_PORT
-            
+
+
             staging_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:staging-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
             staging_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:staging-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
 
             for container_id in $staging_container_ids; do
               docker stop "$container_id"
             done
-            
-            for container_id in $staging_container_ids; do 
+
+
+            for container_id in $staging_container_ids; do
               docker rm "$container_id"
             done
 
-            for image_id in $staging_image_ids; do 
-              docker rmi -f "$image_id"; 
-            done
-            
-            docker run -d -p $STAGING_PORT:8080 "myshx/muse-server:staging-$GIT_COMMIT_SHA"
 
+            for image_id in $staging_image_ids; do
+              docker rmi -f "$image_id";
+            done
+
+
+            docker run -d -p $STAGING_PORT:8080 "myshx/muse-server:staging-$GIT_COMMIT_SHA"
   deploy-prod:
-    name: [SERVER] Deploy to Prod
-    needs: [deploy-staging]
+    name: "[SERVER] Deploy to Prod"
+    needs:
+      - deploy-staging
     runs-on: ubuntu-22.04
     environment:
       name: prod
@@ -225,23 +230,19 @@ jobs:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
-          java-version: '21.0'
-
+          distribution: temurin
+          java-version: "21.0"
       - name: Check out the repo
         uses: actions/checkout@v4
-
       - name: Log in to Docker Hub
         run: docker login -u myshx -p ${{ secrets.DOCKER_HUB_TOKEN }}
-
       - name: Build Server Docker Image
-        run: |
+        run: >
           ./tools/scripts/server/buildJar.sh
-          docker build . -t "myshx/muse-server:prod-${{ github.sha }}" -f ./server/Dockerfile
 
+          docker build . -t "myshx/muse-server:prod-${{ github.sha }}" -f ./server/Dockerfile
       - name: Push Server Docker Image
         run: docker push "myshx/muse-server:prod-${{ github.sha }}"
-
       - name: Run server at home lab
         uses: appleboy/ssh-action@master
         env:
@@ -253,23 +254,30 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           envs: GIT_COMMIT_SHA, PROD_PORT
-          script: |
+          script: >
             export GIT_COMMIT_SHA=$GIT_COMMIT_SHA
+
             export PROD_PORT=$PROD_PORT
-            
+
+
             prod_container_ids=$(docker inspect --format='{{.Config.Image}} {{.Id}}' $(docker ps -aq) | grep -E 'myshx/muse-server:prod-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
             prod_image_ids=$(docker inspect --format='{{.Config.Image}} {{.Image}}' $(docker ps -aq) | grep -E 'myshx/muse-server:prod-\b[0-9a-f]{40}\b' | awk '{print $2}')
+
 
             for container_id in $prod_container_ids; do
               docker stop "$container_id"
             done
-            
-            for container_id in $prod_container_ids; do 
+
+
+            for container_id in $prod_container_ids; do
               docker rm "$container_id"
             done
 
-            for image_id in $prod_image_ids; do 
-              docker rmi -f "$image_id"; 
+
+            for image_id in $prod_image_ids; do
+              docker rmi -f "$image_id";
             done
-            
+
+
             docker run -d -p $PROD_PORT:8080 "myshx/muse-server:prod-$GIT_COMMIT_SHA"
