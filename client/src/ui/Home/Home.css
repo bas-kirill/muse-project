@@ -45,6 +45,7 @@
 #trending-instruments {
     display: flex;
     justify-content: center;
+    margin-bottom: 50px;
 
     div {
         flex-basis: 30%;
