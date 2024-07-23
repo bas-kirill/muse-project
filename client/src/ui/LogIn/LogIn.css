@@ -1,0 +1,28 @@
+#log-in {
+    background-color: olive;
+
+    form {
+        max-width: 640px;
+        display: flex;
+        flex-direction: column;
+
+        margin: 50px auto;
+
+        input {
+            font-size: 32px;
+        }
+    }
+
+    .successfull-login {
+        background-color: green;
+        font-size: 32px;
+        padding: 0 10px;
+        max-width: 640px;
+        margin: 0 auto;
+    }
+
+    .erroneous-login {
+        background-color: red;
+        padding: 20px 10px;
+    }
+}
