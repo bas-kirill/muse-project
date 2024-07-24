@@ -6,6 +6,8 @@ import mu.muse.application.jwt.JwtFilter
 import mu.muse.application.jwt.JwtValidator
 import mu.muse.usecase.access.UserExtractor
 import mu.muse.application.jwt.JwtUsernameExtractor
+import mu.muse.rest.API_INSTRUMENTS
+import mu.muse.rest.AUTH_BASIC_LOGIN
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -83,7 +85,8 @@ class SecurityConfiguration {
 
         http = http.authorizeHttpRequests { request ->
             request
-                .requestMatchers(AntPathRequestMatcher("/api/auth/**")).permitAll()
+                .requestMatchers(AntPathRequestMatcher(AUTH_BASIC_LOGIN)).permitAll()
+                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENTS)).permitAll()
                 .anyRequest().authenticated()
         }
 
@@ -128,9 +131,4 @@ class SecurityConfiguration {
 
     @Bean
     fun securityContextHolderAwareRequestFilter() = SecurityContextHolderAwareRequestFilter()
-//
-//    @Bean
-//    public SecurityContextHolderAwareRequestFilter () {
-//        return new
-//    }
 }

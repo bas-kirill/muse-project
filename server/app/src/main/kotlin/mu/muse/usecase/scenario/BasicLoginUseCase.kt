@@ -2,8 +2,8 @@ package mu.muse.usecase.scenario
 
 import mu.muse.application.jwt.JwtGenerator
 import mu.muse.domain.Jwt
-import mu.muse.domain.Password
-import mu.muse.domain.Username
+import mu.muse.domain.user.Password
+import mu.muse.domain.user.Username
 import mu.muse.usecase.BasicLogin
 import mu.muse.usecase.BasicLoginError
 import mu.muse.usecase.access.UserExtractor

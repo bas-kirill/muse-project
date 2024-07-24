@@ -1,6 +1,6 @@
 package mu.muse.rest.profile
 
-import mu.muse.domain.Username
+import mu.muse.domain.user.Username
 import mu.muse.rest.API_PROFILE
 import mu.muse.usecase.GetProfile
 import mu.muse.usecase.dto.ProfileDetails

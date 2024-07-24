@@ -1,4 +1,4 @@
-package mu.muse.domain
+package mu.muse.domain.user
 
 import mu.muse.common.types.ValueObject
 

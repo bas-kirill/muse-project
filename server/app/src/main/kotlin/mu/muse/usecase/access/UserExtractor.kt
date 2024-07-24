@@ -1,7 +1,7 @@
 package mu.muse.usecase.access
 
-import mu.muse.domain.User
-import mu.muse.domain.Username
+import mu.muse.domain.user.User
+import mu.muse.domain.user.Username
 
 interface UserExtractor {
 

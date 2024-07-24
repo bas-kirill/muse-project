@@ -1,7 +1,7 @@
-package mu.muse.persistence
+package mu.muse.persistence.user
 
-import mu.muse.domain.User
-import mu.muse.domain.Username
+import mu.muse.domain.user.User
+import mu.muse.domain.user.Username
 import mu.muse.usecase.access.UserExtractor
 import mu.muse.usecase.access.UserPersister
 
@@ -18,6 +18,6 @@ class InMemoryUserRepository(
     }
 
     override fun save(user: User) {
-        storage[user.id] = user
+        storage[user.username] = user
     }
 }
