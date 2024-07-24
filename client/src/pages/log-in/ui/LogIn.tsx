@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import "./LogIn.css";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import axios from 'axios';
-import Jwt from "../../domain/Jwt";
-import {SERVER_PORT, SERVER_URL} from "../../env";
+import {Jwt} from "domain/";
+import axios from "axios";
+import {SERVER_PORT, SERVER_URL} from "shared/config";
+import {Header} from "widgets/header";
+import {Footer} from "widgets/footer";
 
 interface BasicLoginRequestBody {
     username: string,
@@ -52,7 +52,7 @@ export function LogIn() {
             <Header/>
             {jwt && (
                 <div className="successfull-login">
-                    ✅ Welcome, your role: {jwt.role}
+                    ✅ Welcome, your role: {jwt.toRole()}
                 </div>
             )}
 

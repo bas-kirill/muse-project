@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Catalogue.css";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import {Header} from "widgets/header";
+import {Footer} from "widgets/footer"
 import guitarImg from "./electric-guitar-gray.jpg";
 
 export function Catalogue() {

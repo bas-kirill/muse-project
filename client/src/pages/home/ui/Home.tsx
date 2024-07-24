@@ -1,7 +1,7 @@
 import React from 'react';
 import "./Home.css";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import {Header} from "widgets/header";
+import {Footer} from "widgets/footer";
 
 export function Home() {
     return (
@@ -12,7 +12,7 @@ export function Home() {
 
             <form id="home-search-bar-form">
                 <input type="text" placeholder="What instrument?" size={50}/>
-                <input type="submit">Search</input>
+                <input type="submit" value="Search"/>
             </form>
 
             <h1>Why Choose Us for Your Musical Needs</h1>

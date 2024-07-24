@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
 import {Route, Routes} from "react-router-dom";
-import LogIn from "../LogIn/LogIn";
-import Home from "../Home/Home";
-import NotFound from "../NotFound/NotFound";
-import UserProfile from "../Profile/UserProfile";
-import Catalogue from "../Catalogue/Catalogue";
+import {Home} from "pages/home";
+import {UserProfile} from "pages/profile";
+import {Catalogue} from "pages/catalogue";
+import {LogIn} from "pages/log-in";
+import {NotFound} from "pages/not-found";
 
 const App = () => (
     <div id="app">
