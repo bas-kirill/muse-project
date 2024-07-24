@@ -1,19 +1,28 @@
-import Role from "./Role";
+import {jwtDecode} from "jwt-decode";
+import {Role} from "./role";
 
-interface Jwt {
+interface JwtPayload {
     sub: string;
     role: Role;
     iat: number;
     exp: number;
 }
 
-class Jwt {
+export class Jwt {
     static WINDOW_LOCAL_STORAGE_JWT_KEY = "jwt";
 
     value: string;
 
     private constructor(value: string) {
         this.value = value;
+    }
+
+    public toStringValue(): string {
+        return this.value;
+    }
+
+    public toRole(): string {
+        return jwtDecode<JwtPayload>(this.value).role
     }
 
     public static from(jwtRaw: string): Jwt {
@@ -30,10 +39,6 @@ class Jwt {
 
     public static putToLocalStorage(jwtRaw: string) {
         window.localStorage.setItem(Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY, jwtRaw);
-    }
-
-    public toStringValue(): string {
-        return this.value;
     }
 }
 

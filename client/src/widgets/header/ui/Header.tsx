@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import "./Header.css";
 import {Link} from "react-router-dom";
-import Jwt from "../../domain/Jwt";
+import {Jwt} from "domain/";
 
 export function Header() {
     const [authenticated, setAuthenticated] = useState(false);

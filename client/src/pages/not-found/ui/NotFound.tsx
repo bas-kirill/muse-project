@@ -1,6 +1,6 @@
 import React from 'react';
 import "./NotFound.css";
-import Header from "../Header/Header";
+import {Header} from "widgets/header";
 
 export function NotFound() {
     return (
