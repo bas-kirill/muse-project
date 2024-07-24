@@ -2,11 +2,16 @@ package mu.muse
 
 import mu.muse.application.muse.SecurityConfiguration
 import mu.muse.common.types.Version
-import mu.muse.domain.Password
-import mu.muse.domain.Role
-import mu.muse.domain.User
-import mu.muse.domain.Username
-import mu.muse.persistence.InMemoryUserRepository
+import mu.muse.domain.IdGenerator
+import mu.muse.domain.instrument.InstrumentId
+import mu.muse.domain.user.Password
+import mu.muse.domain.user.Role
+import mu.muse.domain.user.User
+import mu.muse.domain.user.Username
+import mu.muse.domain.user.UsernameId
+import mu.muse.persistence.instrument.InMemoryInstrumentIdGenerator
+import mu.muse.persistence.user.InMemoryUserRepository
+import mu.muse.persistence.user.InMemoryUsernameIdGenerator
 import mu.muse.rest.HelloEndpoint
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -70,29 +75,34 @@ internal class HelloEndpointTest {
         fun helloEndpoint() = HelloEndpoint()
 
         @Bean
-        fun users(): Set<User> {
+        fun usernameIdGenerator() = InMemoryUsernameIdGenerator()
+
+        @Bean
+        fun users(usernameIdGenerator: IdGenerator<UsernameId>): Set<User> {
             val passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
+
             val testUser = User.create(
-                Username.from("user"),
-                Password.from(passwordEncoder.encode("123")),
-                Role.user(),
-                "Anonymous",
-                Version.new(),
+                idGenerator = usernameIdGenerator,
+                username = Username.from("user"),
+                password = Password.from(passwordEncoder.encode("123")),
+                role = Role.user(),
+                fullName = "Anonymous",
             )
 
             val testEditor = User.create(
-                Username.from("editor"),
-                Password.from(passwordEncoder.encode("321")),
-                Role.editor(),
-                "Editor",
-                Version.new(),
+                idGenerator = usernameIdGenerator,
+                username = Username.from("editor"),
+                password = Password.from(passwordEncoder.encode("321")),
+                role = Role.editor(),
+                fullName = "Editor",
             )
+
             return setOf(testUser, testEditor)
         }
 
         @Bean
         fun userRepository(users: Set<User>): InMemoryUserRepository {
-            return InMemoryUserRepository(users.associateBy { it.id }.toMutableMap())
+            return InMemoryUserRepository(users.associateBy { it.username }.toMutableMap())
         }
     }
 }

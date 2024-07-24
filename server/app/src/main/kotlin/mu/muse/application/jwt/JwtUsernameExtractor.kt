@@ -2,7 +2,7 @@ package mu.muse.application.jwt
 
 import io.jsonwebtoken.Jwts
 import mu.muse.domain.Jwt
-import mu.muse.domain.Username
+import mu.muse.domain.user.Username
 
 class JwtUsernameExtractor(private val jwtSecretKey: String) {
 

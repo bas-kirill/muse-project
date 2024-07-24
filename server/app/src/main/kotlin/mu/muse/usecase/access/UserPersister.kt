@@ -1,6 +1,6 @@
 package mu.muse.usecase.access
 
-import mu.muse.domain.User
+import mu.muse.domain.user.User
 
 fun interface UserPersister {
 

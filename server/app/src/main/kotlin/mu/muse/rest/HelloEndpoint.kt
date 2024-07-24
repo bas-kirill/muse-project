@@ -1,7 +1,7 @@
 package mu.muse.rest
 
 import jakarta.annotation.security.RolesAllowed
-import mu.muse.domain.Role
+import mu.muse.domain.user.Role
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
