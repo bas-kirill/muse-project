@@ -1,5 +1,12 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@pages/*": ["pages/*"],
+      "@widgets/*": ["widgets/*"],
+      "@domain/*": ["domain/*"],
+      "@shared/*": ["shared/*"]
+    },
     "target": "es5",
     "lib": [
       "dom",
