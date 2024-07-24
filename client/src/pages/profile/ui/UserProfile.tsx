@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
-import Profile from "../../domain/Profile";
 import axios from "axios";
-import Jwt from "../../domain/Jwt";
-import {SERVER_PORT, SERVER_URL} from "../../env";
 import "./Profile.css";
+import {Jwt} from "domain/";
+import {SERVER_PORT, SERVER_URL} from "shared/config";
+import {Profile} from "domain/";
+import {Header} from "widgets/header";
+import {Footer} from "widgets/footer";
 
 export function UserProfile() {
     const [profile, setProfile] = useState<Profile>()
