@@ -12,7 +12,7 @@ export function Home() {
 
             <form id="home-search-bar-form">
                 <input type="text" placeholder="What instrument?" size={50}/>
-                <button type="submit">Search</button>
+                <input type="submit">Search</input>
             </form>
 
             <h1>Why Choose Us for Your Musical Needs</h1>
