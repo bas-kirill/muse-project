@@ -31,7 +31,7 @@ class User internal constructor(
                 password = password,
                 role = role,
                 fullName = fullName,
-                version = Version.new()
+                version = Version.new(),
             )
         }
     }

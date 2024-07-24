@@ -88,7 +88,7 @@ class PersistenceConfiguration {
             manufactureDate = Instant.parse("2007-01-01T00:00:00Z"),
             releaseDate = Instant.parse("2008-07-01T00:00:00Z"),
             country = Country.USA,
-            materials = listOf(Material.METALL)
+            materials = listOf(Material.METALL),
         )
 
         return setOf(notYetReleasedGuitar, releasedGuitar, saxophone)
