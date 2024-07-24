@@ -5,6 +5,7 @@ import mu.muse.common.types.Version
 import mu.muse.domain.IdGenerator
 import java.time.Instant
 
+@Suppress("LongParameterList")
 class Instrument internal constructor(
     id: InstrumentId,
     val name: InstrumentName,
@@ -18,6 +19,8 @@ class Instrument internal constructor(
 ) : AggregateRoot<InstrumentId>(id, version) {
 
     companion object {
+
+        @Suppress("LongParameterList")
         fun create(
             idGenerator: IdGenerator<InstrumentId>,
             name: InstrumentName,
