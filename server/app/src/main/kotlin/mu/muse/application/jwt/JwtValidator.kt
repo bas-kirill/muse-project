@@ -2,7 +2,7 @@ package mu.muse.application.jwt
 
 import io.jsonwebtoken.Jwts
 import mu.muse.domain.Jwt
-import mu.muse.domain.Username
+import mu.muse.domain.user.Username
 import mu.muse.usecase.access.UserExtractor
 import org.springframework.security.core.userdetails.UserDetails
 import java.util.Date
