@@ -21,7 +21,7 @@
         text-align: center;
     }
 
-    button[type="submit"] {
+    input[type="submit"] {
         background-color: lemonchiffon;
         padding: 20px 5%;
         font-size: 24px;

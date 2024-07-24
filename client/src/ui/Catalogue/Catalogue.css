@@ -1,0 +1,46 @@
+#catalogue {
+    #catalogue-search-bar-form {
+        width: 100%;
+        background-color: darkslateblue;
+
+        input[type="text"] {
+            background-color: white;
+            font-size: 24px;
+            text-align: center;
+            width: 90%;
+        }
+
+        input[type="submit"] {
+            background-color: lemonchiffon;
+            font-size: 24px;
+            width: 10%;
+        }
+    }
+
+    #catalogue-filter-serp-wrapper {
+        display: flex;
+        background-color: darkorchid;
+
+        #catalogue-filters {
+            background-color: darkslateblue;
+            flex: 1;
+        }
+
+        #catalogue-serp {
+            background-color: darkkhaki;
+            flex: 2;
+
+            .instrument-card {
+                padding: 5px;
+                background-color: paleturquoise;
+                margin: 30px 20px 0 20px;
+                display: flex;
+
+                .instrument-card-description {
+                    margin-left: 20px;
+                }
+            }
+        }
+
+    }
+}
