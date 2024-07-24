@@ -37,7 +37,7 @@ class Instrument internal constructor(
                 releaseDate = releaseDate,
                 country = country,
                 materials = materials,
-                version = Version.new()
+                version = Version.new(),
             )
         }
     }
