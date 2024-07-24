@@ -1,6 +1,6 @@
 package mu.muse.usecase.scenario
 
-import mu.muse.domain.Username
+import mu.muse.domain.user.Username
 import mu.muse.usecase.GetProfile
 import mu.muse.usecase.ShowProfileError
 import mu.muse.usecase.access.UserExtractor

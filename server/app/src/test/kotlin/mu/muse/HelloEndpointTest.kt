@@ -2,11 +2,11 @@ package mu.muse
 
 import mu.muse.application.muse.SecurityConfiguration
 import mu.muse.common.types.Version
-import mu.muse.domain.Password
-import mu.muse.domain.Role
-import mu.muse.domain.User
-import mu.muse.domain.Username
-import mu.muse.persistence.InMemoryUserRepository
+import mu.muse.domain.user.Password
+import mu.muse.domain.user.Role
+import mu.muse.domain.user.User
+import mu.muse.domain.user.Username
+import mu.muse.persistence.user.InMemoryUserRepository
 import mu.muse.rest.HelloEndpoint
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -72,7 +72,7 @@ internal class HelloEndpointTest {
         @Bean
         fun users(): Set<User> {
             val passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
-            val testUser = User.create(
+            val testUser = User.from(
                 Username.from("user"),
                 Password.from(passwordEncoder.encode("123")),
                 Role.user(),
@@ -80,7 +80,7 @@ internal class HelloEndpointTest {
                 Version.new(),
             )
 
-            val testEditor = User.create(
+            val testEditor = User.from(
                 Username.from("editor"),
                 Password.from(passwordEncoder.encode("321")),
                 Role.editor(),

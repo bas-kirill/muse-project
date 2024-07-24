@@ -1,7 +1,7 @@
 package mu.muse.rest.login
 
-import mu.muse.domain.Password
-import mu.muse.domain.Username
+import mu.muse.domain.user.Password
+import mu.muse.domain.user.Username
 import mu.muse.rest.AUTH_BASIC_LOGIN
 import mu.muse.usecase.BasicLogin
 import org.springframework.web.bind.annotation.PostMapping

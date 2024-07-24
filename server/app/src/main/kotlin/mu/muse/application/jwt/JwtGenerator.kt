@@ -3,7 +3,7 @@ package mu.muse.application.jwt
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import mu.muse.domain.Jwt
-import mu.muse.domain.User
+import mu.muse.domain.user.User
 import java.util.Date
 
 class JwtGenerator(
@@ -12,7 +12,7 @@ class JwtGenerator(
 ) {
 
     fun execute(user: User): Jwt {
-        val claims = Jwts.claims().setSubject(user.id.toStringValue())
+        val claims = Jwts.claims().setSubject(user.username.toStringValue())
         claims["role"] = user.role.toStringValue()
 
         return Jwt.from(

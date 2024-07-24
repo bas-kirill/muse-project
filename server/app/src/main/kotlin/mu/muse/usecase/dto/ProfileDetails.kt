@@ -1,6 +1,6 @@
 package mu.muse.usecase.dto
 
-import mu.muse.domain.User
+import mu.muse.domain.user.User
 
 data class ProfileDetails(
     val username: String,
@@ -10,9 +10,9 @@ data class ProfileDetails(
     companion object {
         fun from(user: User): ProfileDetails {
             return ProfileDetails(
-                user.id.toStringValue(),
-                user.role.toStringValue(),
-                user.fullName,
+                username = user.username.toStringValue(),
+                role = user.role.toStringValue(),
+                fullName = user.fullName,
             )
         }
     }
