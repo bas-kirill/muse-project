@@ -3,6 +3,7 @@ package mu.muse.usecase.dto
 import mu.muse.domain.instrument.Instrument
 
 data class InstrumentDetails(
+    val id: Long,
     val name: String,
     val type: String,
     val manufacturer: String,
@@ -14,6 +15,7 @@ data class InstrumentDetails(
     companion object {
         fun from(instrument: Instrument): InstrumentDetails {
             return InstrumentDetails(
+                id = instrument.id.toLongValue(),
                 name = instrument.name.toStringValue(),
                 type = instrument.type.name,
                 manufacturer = instrument.manufacturer,
