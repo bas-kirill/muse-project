@@ -1,13 +1,14 @@
 package mu.muse.application.muse
 
 import jakarta.servlet.http.HttpServletResponse
-import mu.muse.application.jwt.JwtGenerator
 import mu.muse.application.jwt.JwtFilter
-import mu.muse.application.jwt.JwtValidator
-import mu.muse.usecase.access.UserExtractor
+import mu.muse.application.jwt.JwtGenerator
 import mu.muse.application.jwt.JwtUsernameExtractor
+import mu.muse.application.jwt.JwtValidator
 import mu.muse.rest.API_INSTRUMENTS
+import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.AUTH_BASIC_LOGIN
+import mu.muse.usecase.access.UserExtractor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -87,6 +88,7 @@ class SecurityConfiguration {
             request
                 .requestMatchers(AntPathRequestMatcher(AUTH_BASIC_LOGIN)).permitAll()
                 .requestMatchers(AntPathRequestMatcher(API_INSTRUMENTS)).permitAll()
+                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENT_BY_ID)).permitAll()
                 .anyRequest().authenticated()
         }
 
