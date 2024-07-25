@@ -3,7 +3,7 @@ import "./Catalogue.css";
 import {Header} from "widgets/header";
 import {Footer} from "widgets/footer"
 import guitarImg from "./electric-guitar-gray.jpg";
-import {useLoaderData} from "react-router-dom";
+import {Link, useLoaderData} from "react-router-dom";
 import {GetInstrumentsResponse} from "@pages/catalogue/api/loader";
 
 export function Catalogue() {
@@ -88,15 +88,23 @@ export function Catalogue() {
                 <div id="catalogue-serp">
                     {instruments.map(instrument => (
                         <div className="instrument-card">
-                            <img src={guitarImg} width={100} height={200} alt={"Guitar Gray"}/>
-                            <div className="instrument-card-description">
-                                <h2>{instrument.name}</h2>
-                                <b>Тип</b>: {instrument.type}<br/>
-                                <b>Производитель</b>: {instrument.manufacturer}<br/>
-                                <b>Дата изготовления</b>: {instrument.manufacturerDate}<br/>
-                                <b>Дата выпуска</b>: {instrument.releaseDate}<br/>
-                                <b>Страна</b>: {instrument.country}<br/>
-                                <b>Основные материалы</b>: {instrument.basicMaterials}<br/>
+                            <div className="instrument-details">
+                                <img src={guitarImg} width={100} height={200} alt={"Guitar Gray"}/>
+                                <div className="instrument-details-description">
+                                    <h2>{instrument.name}</h2>
+                                    <b>Тип</b>: {instrument.type}<br/>
+                                    <b>Производитель</b>: {instrument.manufacturer}<br/>
+                                    <b>Дата изготовления</b>: {instrument.manufacturerDate}<br/>
+                                    <b>Дата выпуска</b>: {instrument.releaseDate}<br/>
+                                    <b>Страна</b>: {instrument.country}<br/>
+                                    <b>Основные материалы</b>: {instrument.basicMaterials}<br/>
+                                </div>
+                            </div>
+                            <div className="instrument-actions">
+                                <div className="go-to-instrument-details-button">
+                                    <Link to={"/instrument/" + instrument.id.toString()}>Go</Link>
+                                </div>
+
                             </div>
                         </div>
                     ))}
