@@ -17,6 +17,7 @@ class GetInstrumentsByCriteriaEndpoint(
     private val getInstrumentsByCriteria: GetInstrumentsByCriteria,
 ) {
 
+    @Suppress("LongParameterList")
     @GetMapping(API_INSTRUMENTS)
     // used interface instead of data class, because to access API fields without `criteria.` prefix
     fun getInstruments(
@@ -34,18 +35,17 @@ class GetInstrumentsByCriteriaEndpoint(
         val instrumentType = type?.let { Instrument.Type.valueOf(it) }
         val manufacturerName = manufacturer?.let { ManufacturerName.from(it) }
         val country = country?.let { Country.valueOf(it) }
-        return getInstrumentsByCriteria.execute(
-            GetInstrumentsByCriteria.Criteria(
-                name = instrumentName,
-                type = instrumentType,
-                manufacturerName = manufacturerName,
-                manufacturerDateFrom = manufacturerDateFrom,
-                manufacturerDateTo = manufacturerDateTo,
-                releaseDateFrom = releaseDateFrom,
-                releaseDateTo = releaseDateTo,
-                country = country,
-                basicMaterials = basicMaterials,
-            ),
+        val criteria = GetInstrumentsByCriteria.Criteria(
+            name = instrumentName,
+            type = instrumentType,
+            manufacturerName = manufacturerName,
+            manufacturerDateFrom = manufacturerDateFrom,
+            manufacturerDateTo = manufacturerDateTo,
+            releaseDateFrom = releaseDateFrom,
+            releaseDateTo = releaseDateTo,
+            country = country,
+            basicMaterials = basicMaterials,
         )
+        return getInstrumentsByCriteria.execute(criteria)
     }
 }
