@@ -3,8 +3,12 @@ import "./Catalogue.css";
 import {Header} from "widgets/header";
 import {Footer} from "widgets/footer"
 import guitarImg from "./electric-guitar-gray.jpg";
+import {useLoaderData} from "react-router-dom";
+import {GetInstrumentsResponse} from "@pages/catalogue/api/loader";
 
 export function Catalogue() {
+    const instruments = useLoaderData() as GetInstrumentsResponse;  // https://github.com/remix-run/react-router/discussions/9792
+
     return (
         <div id="catalogue">
             <Header/>
@@ -82,18 +86,22 @@ export function Catalogue() {
                     </div>
                 </div>
                 <div id="catalogue-serp">
-                    <div className="instrument-card">
-                        <img src={guitarImg} width={100} height={200}  alt={"Guitar Gray"}/>
-                        <div className="instrument-card-description">
-                            <h2>Инструмент №1</h2>
-                            <b>Тип</b>: клавишный<br/>
-                            <b>Производитель</b>: audio.com<br/>
-                            <b>Дата изготовления</b>: 2024/08/20<br/>
-                            <b>Дата выпуска</b>: 2024/08/21<br/>
-                            <b>Страна</b>: Кипр<br/>
-                            <b>Основные материалы</b>: дуб<br/>
+                    {instruments.map(instrument => (
+                        <div className="instrument-card">
+                            <img src={guitarImg} width={100} height={200} alt={"Guitar Gray"}/>
+                            <div className="instrument-card-description">
+                                <h2>{instrument.name}</h2>
+                                <b>Тип</b>: {instrument.type}<br/>
+                                <b>Производитель</b>: {instrument.manufacturer}<br/>
+                                <b>Дата изготовления</b>: {instrument.manufacturerDate}<br/>
+                                <b>Дата выпуска</b>: {instrument.releaseDate}<br/>
+                                <b>Страна</b>: {instrument.country}<br/>
+                                <b>Основные материалы</b>: {instrument.basicMaterials}<br/>
+                            </div>
                         </div>
-                    </div>
+                    ))}
+
+
                 </div>
             </div>
 
