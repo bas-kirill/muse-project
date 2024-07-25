@@ -13,8 +13,8 @@ data class ManufacturerDate internal constructor(private val value: Instant) : V
     }
 
     companion object {
-        fun from(value: Instant) {
-            return from(value)
+        fun from(value: Instant): ManufacturerDate {
+            return ManufacturerDate(value)
         }
     }
 }

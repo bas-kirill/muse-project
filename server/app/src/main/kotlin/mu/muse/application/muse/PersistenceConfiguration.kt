@@ -5,8 +5,10 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
+import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.ManufacturerName
 import mu.muse.domain.instrument.Material
+import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.domain.user.Password
 import mu.muse.domain.user.Role
 import mu.muse.domain.user.User
@@ -64,8 +66,8 @@ class PersistenceConfiguration {
             name = InstrumentName.from("Fender Stratocaster"),
             type = Instrument.Type.STRINGED,
             manufacturerName = ManufacturerName.from("audio.com"),
-            manufactureDate = Instant.parse("2024-07-01T00:00:00Z"),
-            releaseDate = Instant.parse("2024-08-01T00:00:00Z"),
+            manufactureDate = ManufacturerDate.from(Instant.parse("2024-07-01T00:00:00Z")),
+            releaseDate = ReleaseDate.from(Instant.parse("2024-08-01T00:00:00Z")),
             country = Country.CYPRUS,
             materials = listOf(Material.WOOD),
         )
@@ -75,8 +77,8 @@ class PersistenceConfiguration {
             name = InstrumentName.from("Fidel Telecastro"),
             type = Instrument.Type.STRINGED,
             manufacturerName = ManufacturerName.from("audio.com"),
-            manufactureDate = Instant.parse("2024-07-01T00:00:00Z"),
-            releaseDate = Instant.parse("2100-01-01T00:00:00Z"),
+            manufactureDate = ManufacturerDate.from(Instant.parse("2024-07-01T00:00:00Z")),
+            releaseDate = ReleaseDate.from(Instant.parse("2100-01-01T00:00:00Z")),
             country = Country.CYPRUS,
             materials = listOf(Material.WOOD),
         )
@@ -86,8 +88,8 @@ class PersistenceConfiguration {
             name = InstrumentName.from("SaxoStar"),
             type = Instrument.Type.WIND,
             manufacturerName = ManufacturerName.from("Yamaha"),
-            manufactureDate = Instant.parse("2007-01-01T00:00:00Z"),
-            releaseDate = Instant.parse("2008-07-01T00:00:00Z"),
+            manufactureDate = ManufacturerDate.from(Instant.parse("2007-01-01T00:00:00Z")),
+            releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
             country = Country.USA,
             materials = listOf(Material.METALL),
         )

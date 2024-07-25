@@ -3,7 +3,6 @@ package mu.muse.domain.instrument
 import mu.muse.common.types.AggregateRoot
 import mu.muse.common.types.Version
 import mu.muse.domain.IdGenerator
-import java.time.Instant
 
 @Suppress("LongParameterList")
 class Instrument internal constructor(
@@ -27,8 +26,8 @@ class Instrument internal constructor(
             name: InstrumentName,
             type: Type,
             manufacturerName: ManufacturerName,
-            manufactureDate: Instant,
-            releaseDate: Instant,
+            manufactureDate: ManufacturerDate,
+            releaseDate: ReleaseDate,
             country: Country,
             materials: List<Material>
         ): Instrument {
