@@ -1,6 +1,6 @@
 package mu.muse.domain.instrument
 
-class InstrumentName internal constructor(private val value: String) {
+data class InstrumentName internal constructor(private val value: String) {
 
     fun toStringValue() = value
 

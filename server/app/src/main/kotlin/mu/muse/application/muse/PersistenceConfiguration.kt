@@ -5,6 +5,7 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
+import mu.muse.domain.instrument.ManufacturerName
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.user.Password
 import mu.muse.domain.user.Role
@@ -62,7 +63,7 @@ class PersistenceConfiguration {
             idGenerator = idGenerator,
             name = InstrumentName.from("Fender Stratocaster"),
             type = Instrument.Type.STRINGED,
-            manufacturer = "audio.com",
+            manufacturerName = ManufacturerName.from("audio.com"),
             manufactureDate = Instant.parse("2024-07-01T00:00:00Z"),
             releaseDate = Instant.parse("2024-08-01T00:00:00Z"),
             country = Country.CYPRUS,
@@ -73,9 +74,9 @@ class PersistenceConfiguration {
             idGenerator = idGenerator,
             name = InstrumentName.from("Fidel Telecastro"),
             type = Instrument.Type.STRINGED,
-            manufacturer = "audio.com",
+            manufacturerName = ManufacturerName.from("audio.com"),
             manufactureDate = Instant.parse("2024-07-01T00:00:00Z"),
-            releaseDate = Instant.parse("2100-01-01T00:00:00Z"), // yes yes future
+            releaseDate = Instant.parse("2100-01-01T00:00:00Z"),
             country = Country.CYPRUS,
             materials = listOf(Material.WOOD),
         )
@@ -84,7 +85,7 @@ class PersistenceConfiguration {
             idGenerator = idGenerator,
             name = InstrumentName.from("SaxoStar"),
             type = Instrument.Type.WIND,
-            manufacturer = "Yamaha",
+            manufacturerName = ManufacturerName.from("Yamaha"),
             manufactureDate = Instant.parse("2007-01-01T00:00:00Z"),
             releaseDate = Instant.parse("2008-07-01T00:00:00Z"),
             country = Country.USA,

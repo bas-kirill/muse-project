@@ -1,20 +1,16 @@
-package mu.muse.usecase.access
+package mu.muse.usecase
 
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
-import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.ManufacturerName
+import mu.muse.usecase.dto.InstrumentDetails
 import java.time.Instant
 
-interface InstrumentExtractor {
-    fun findAll(): Collection<Instrument>
-
-    fun findById(id: InstrumentId): Instrument?
-
+fun interface GetInstrumentsByCriteria {
 
     @SuppressWarnings("kotlin:S107")
-    fun findByCriteria(
+    fun execute(
         name: InstrumentName?,
         type: Instrument.Type?,
         manufacturerName: ManufacturerName?,
@@ -23,6 +19,6 @@ interface InstrumentExtractor {
         releaseDateFrom: Instant?,
         releaseDateTo: Instant?,
         country: Country?,
-        basicMaterials: List<String>?,
-    ): Collection<Instrument>
+        basicMaterials: List<String>?
+    ): Collection<InstrumentDetails>
 }
