@@ -12,4 +12,8 @@ class InMemoryInstrumentRepository(
         return storage.values
     }
 
+    override fun findById(id: InstrumentId): Instrument? {
+        return storage[id]
+    }
+
 }

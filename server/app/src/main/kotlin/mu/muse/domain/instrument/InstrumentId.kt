@@ -4,7 +4,7 @@ import mu.muse.common.types.ValueObject
 
 class InstrumentId internal constructor(private val value: Long) : ValueObject {
 
-    fun toStringValue() = value
+    fun toLongValue() = value
 
     companion object {
         fun from(value: Long): InstrumentId {
