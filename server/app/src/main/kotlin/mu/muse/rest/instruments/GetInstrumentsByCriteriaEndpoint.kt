@@ -18,30 +18,35 @@ class GetInstrumentsByCriteriaEndpoint(
 ) {
 
     @GetMapping(API_INSTRUMENTS)
-    fun getInstruments(
-        @RequestParam(required = false) name: String?,  // without `required = false` null-safety does not work
-        @RequestParam(required = false) type: String?,
-        @RequestParam(required = false) manufacturer: String?,
-        @RequestParam(required = false) manufacturerDateFrom: Instant?,
-        @RequestParam(required = false) manufacturerDateTo: Instant?,
-        @RequestParam(required = false) releaseDateFrom: Instant?,
-        @RequestParam(required = false) releaseDateTo: Instant?,
-        @RequestParam(required = false) country: String?,
-        @RequestParam(required = false) basicMaterials: List<String>?,
-    ): Collection<InstrumentDetails> {
-        val instrumentName = name?.let { InstrumentName.from(it) }
-        val instrumentType = type?.let { Instrument.Type.valueOf(it) }
-        val manufacturerName = manufacturer?.let { ManufacturerName.from(it) }
-        val country = country?.let { Country.valueOf(it) }
+    fun getInstruments(@RequestParam(required = false) criteria: Criteria): Collection<InstrumentDetails> {
+        val instrumentName = criteria.name?.let { InstrumentName.from(it) }
+        val instrumentType = criteria.type?.let { Instrument.Type.valueOf(it) }
+        val manufacturerName = criteria.manufacturer?.let { ManufacturerName.from(it) }
+        val country = criteria.country?.let { Country.valueOf(it) }
         return getInstrumentsByCriteria.execute(
-            name = instrumentName,
-            type = instrumentType,
-            manufacturerName = manufacturerName,
-            manufacturerDateFrom = manufacturerDateFrom,
-            manufacturerDateTo = manufacturerDateTo,
-            releaseDateFrom = releaseDateFrom,
-            releaseDateTo = releaseDateTo,
-            country = country,
-            basicMaterials = basicMaterials)
+            GetInstrumentsByCriteria.Criteria(
+                name = instrumentName,
+                type = instrumentType,
+                manufacturerName = manufacturerName,
+                manufacturerDateFrom = criteria.manufacturerDateFrom,
+                manufacturerDateTo = criteria.manufacturerDateTo,
+                releaseDateFrom = criteria.releaseDateFrom,
+                releaseDateTo = criteria.releaseDateTo,
+                country = country,
+                basicMaterials = criteria.basicMaterials,
+            ),
+        )
     }
+
+    data class Criteria(
+        val name: String?,
+        val type: String?,
+        val manufacturer: String?,
+        val manufacturerDateFrom: Instant?,
+        val manufacturerDateTo: Instant?,
+        val releaseDateFrom: Instant?,
+        val releaseDateTo: Instant?,
+        val country: String?,
+        val basicMaterials: List<String>?,
+    )
 }

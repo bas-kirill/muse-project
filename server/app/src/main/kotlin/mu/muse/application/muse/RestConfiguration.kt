@@ -25,7 +25,8 @@ class RestConfiguration {
     fun getProfileEndpoint(getProfile: GetProfile) = GetProfileEndpoint(getProfile)
 
     @Bean
-    fun getAllInstrumentsEndpoint(getInstrumentsByCriteria: GetInstrumentsByCriteria) = GetInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria)
+    fun getAllInstrumentsEndpoint(getInstrumentsByCriteria: GetInstrumentsByCriteria) =
+        GetInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria)
 
     @Bean
     fun getInstrumentByIdEndpoint(getInstrumentById: GetInstrumentById) = GetInstrumentByIdEndpoint(getInstrumentById)

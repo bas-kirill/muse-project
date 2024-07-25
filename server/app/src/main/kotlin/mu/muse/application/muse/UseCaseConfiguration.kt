@@ -25,7 +25,8 @@ class UseCaseConfiguration {
     fun getProfile(userExtractor: UserExtractor) = GetProfileUseCase(userExtractor)
 
     @Bean
-    fun getAllInstruments(instrumentExtractor: InstrumentExtractor) = GetInstrumentsByCriteriaUseCase(instrumentExtractor)
+    fun getAllInstruments(instrumentExtractor: InstrumentExtractor) =
+        GetInstrumentsByCriteriaUseCase(instrumentExtractor)
 
     @Bean
     fun getInstrumentById(instrumentExtractor: InstrumentExtractor) = GetInstrumentByIdUseCase(instrumentExtractor)

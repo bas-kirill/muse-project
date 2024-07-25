@@ -9,16 +9,17 @@ import java.time.Instant
 
 fun interface GetInstrumentsByCriteria {
 
-    @SuppressWarnings("kotlin:S107")
-    fun execute(
-        name: InstrumentName?,
-        type: Instrument.Type?,
-        manufacturerName: ManufacturerName?,
-        manufacturerDateFrom: Instant?,
-        manufacturerDateTo: Instant?,
-        releaseDateFrom: Instant?,
-        releaseDateTo: Instant?,
-        country: Country?,
-        basicMaterials: List<String>?
-    ): Collection<InstrumentDetails>
+    fun execute(criteria: Criteria): Collection<InstrumentDetails>
+
+    data class Criteria(
+        val name: InstrumentName?,
+        val type: Instrument.Type?,
+        val manufacturerName: ManufacturerName?,
+        val manufacturerDateFrom: Instant?,
+        val manufacturerDateTo: Instant?,
+        val releaseDateFrom: Instant?,
+        val releaseDateTo: Instant?,
+        val country: Country?,
+        val basicMaterials: List<String>?,
+    )
 }

@@ -12,17 +12,17 @@ interface InstrumentExtractor {
 
     fun findById(id: InstrumentId): Instrument?
 
+    fun findByCriteria(criteria: Criteria): Collection<Instrument>
 
-    @SuppressWarnings("kotlin:S107")
-    fun findByCriteria(
-        name: InstrumentName?,
-        type: Instrument.Type?,
-        manufacturerName: ManufacturerName?,
-        manufacturerDateFrom: Instant?,
-        manufacturerDateTo: Instant?,
-        releaseDateFrom: Instant?,
-        releaseDateTo: Instant?,
-        country: Country?,
-        basicMaterials: List<String>?,
-    ): Collection<Instrument>
+    data class Criteria(
+        val name: InstrumentName?,
+        val type: Instrument.Type?,
+        val manufacturerName: ManufacturerName?,
+        val manufacturerDateFrom: Instant?,
+        val manufacturerDateTo: Instant?,
+        val releaseDateFrom: Instant?,
+        val releaseDateTo: Instant?,
+        val country: Country?,
+        val basicMaterials: List<String>?,
+    )
 }
