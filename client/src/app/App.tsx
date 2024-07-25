@@ -11,7 +11,7 @@ import {
 import {Home} from "pages/home";
 import {UserProfile} from "pages/profile";
 import {Catalogue} from "pages/catalogue";
-import {LogIn} from "pages/log-in";
+import {action, LogIn} from "pages/log-in";
 import {NotFound} from "pages/not-found";
 import {loader} from "pages/catalogue";
 
@@ -20,7 +20,7 @@ const routes = createRoutesFromElements(
         <Route path="/" element={<Home/>} />
         <Route path="/profile" element={<UserProfile/>}/>
         <Route path="/catalogue" element={<Catalogue/>} loader={loader}/>
-        <Route path="/login" element={<LogIn/>}/>
+        <Route path="/login" element={<LogIn/>} action={action}/>
         <Route path="*" element={<NotFound/>}/>
     </Route>
 );

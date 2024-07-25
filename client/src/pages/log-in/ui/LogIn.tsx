@@ -1,72 +1,36 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import "./LogIn.css";
-import {Jwt} from "domain/";
-import axios from "axios";
-import {SERVER_URL} from "shared/config";
 import {Header} from "widgets/header";
 import {Footer} from "widgets/footer";
+import {Form, useActionData} from "react-router-dom";
+import {LogInAction} from "../api/action";
 
-interface BasicLoginRequestBody {
-    username: string,
-    password: string,
-}
 
 export function LogIn() {
-    const [login, setLogin] = useState<string>("");
-    const [password, setPassword] = useState<string>("");
-    const [jwt, setJwt] = useState<Jwt | null>(null);
-    const [erroneous, setErroneous] = useState<boolean>(false);
-
-    useEffect(() => {
-        const jwt = Jwt.extractFromLocalStorage();
-        if (jwt == null) {
-            setJwt(null);
-            return;
-        }
-        setJwt(jwt);
-    });
-
-    const handleLoginFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
-        const basicLoginRequestBody: BasicLoginRequestBody = {
-            username: login,
-            password: password,
-        }
-
-        axios.post(`${SERVER_URL}/api/auth/login`, basicLoginRequestBody)
-            .then(response => {
-                if (response.status === 200) {
-                    const jwtRaw = response.data.jwtToken;
-                    Jwt.putToLocalStorage(jwtRaw)
-                    setJwt(Jwt.from(jwtRaw))
-                }
-            })
-            .catch(() => {
-                setErroneous(true);
-            });
-    }
+    const actionData = useActionData() as LogInAction;
 
     return (
         <div id="log-in">
             <Header/>
-            {jwt && (
+            {actionData?.jwt && (
                 <div className="successfull-login">
-                    ✅ Welcome, your role: {jwt.toRole()}
+                    ✅ Welcome, your role: {actionData?.jwt.toRole()}
                 </div>
             )}
 
-            {!jwt && (
-                <form onSubmit={handleLoginFormSubmit}>
-                    <input type="text" placeholder={"Login"} onChange={e => setLogin(e.target.value)}/>
-                    <input type="text" placeholder={"Password"} onChange={e => setPassword(e.target.value)}/>
+            {!actionData?.jwt && (
+                <Form method="post">
+                    <input type="text" name="login" placeholder={"Login"}/>
+                    <input type="text" name="password" placeholder={"Password"}/>
                     <input type="submit" value="Log In"/>
-                    {erroneous && (
+                    {actionData?.errors && (
                         <div className="erroneous-login">
-                            Incorrect username or password
+                            {actionData?.errors.map(error => (
+                                <div>{error}</div>
+                            ))}
                         </div>
                     )}
-                </form>
+                </Form>
             )}
             <Footer/>
         </div>
