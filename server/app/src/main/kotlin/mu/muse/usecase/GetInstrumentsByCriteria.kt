@@ -1,18 +1,15 @@
-package mu.muse.usecase.access
+package mu.muse.usecase
 
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
-import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.ManufacturerName
+import mu.muse.usecase.dto.InstrumentDetails
 import java.time.Instant
 
-interface InstrumentExtractor {
-    fun findAll(): Collection<Instrument>
+fun interface GetInstrumentsByCriteria {
 
-    fun findById(id: InstrumentId): Instrument?
-
-    fun findByCriteria(criteria: Criteria): Collection<Instrument>
+    fun execute(criteria: Criteria): Collection<InstrumentDetails>
 
     data class Criteria(
         val name: InstrumentName?,

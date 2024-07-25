@@ -4,7 +4,7 @@ import mu.muse.application.jwt.JwtGenerator
 import mu.muse.usecase.access.InstrumentExtractor
 import mu.muse.usecase.access.UserExtractor
 import mu.muse.usecase.scenario.BasicLoginUseCase
-import mu.muse.usecase.scenario.GetAllInstrumentsUseCase
+import mu.muse.usecase.scenario.GetInstrumentsByCriteriaUseCase
 import mu.muse.usecase.scenario.GetInstrumentByIdUseCase
 import mu.muse.usecase.scenario.GetProfileUseCase
 import org.springframework.context.annotation.Bean
@@ -25,7 +25,8 @@ class UseCaseConfiguration {
     fun getProfile(userExtractor: UserExtractor) = GetProfileUseCase(userExtractor)
 
     @Bean
-    fun getAllInstruments(instrumentExtractor: InstrumentExtractor) = GetAllInstrumentsUseCase(instrumentExtractor)
+    fun getAllInstruments(instrumentExtractor: InstrumentExtractor) =
+        GetInstrumentsByCriteriaUseCase(instrumentExtractor)
 
     @Bean
     fun getInstrumentById(instrumentExtractor: InstrumentExtractor) = GetInstrumentByIdUseCase(instrumentExtractor)

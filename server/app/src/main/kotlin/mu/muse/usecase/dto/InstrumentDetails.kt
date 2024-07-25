@@ -18,7 +18,7 @@ data class InstrumentDetails(
                 id = instrument.id.toLongValue(),
                 name = instrument.name.toStringValue(),
                 type = instrument.type.name,
-                manufacturer = instrument.manufacturer,
+                manufacturer = instrument.manufacturerName.toStringValue(),
                 manufacturerDate = instrument.manufactureDate.toString(),
                 releaseDate = instrument.releaseDate.toString(),
                 country = instrument.country.name,
