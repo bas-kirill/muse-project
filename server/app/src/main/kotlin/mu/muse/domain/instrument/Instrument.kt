@@ -10,7 +10,7 @@ class Instrument internal constructor(
     id: InstrumentId,
     val name: InstrumentName,
     val type: Type,
-    val manufacturer: String,
+    val manufacturerName: ManufacturerName,
     val manufactureDate: Instant,
     val releaseDate: Instant,
     val country: Country,
@@ -20,12 +20,13 @@ class Instrument internal constructor(
 
     companion object {
 
+        @SuppressWarnings("kotlin:S107")
         @Suppress("LongParameterList")
         fun create(
             idGenerator: IdGenerator<InstrumentId>,
             name: InstrumentName,
             type: Type,
-            manufacturer: String,
+            manufacturerName: ManufacturerName,
             manufactureDate: Instant,
             releaseDate: Instant,
             country: Country,
@@ -35,7 +36,7 @@ class Instrument internal constructor(
                 id = idGenerator.generate(),
                 name = name,
                 type = type,
-                manufacturer = manufacturer,
+                manufacturerName = manufacturerName,
                 manufactureDate = manufactureDate,
                 releaseDate = releaseDate,
                 country = country,
