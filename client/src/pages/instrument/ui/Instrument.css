@@ -1,0 +1,8 @@
+#instrument {
+    display: flex;
+    flex-direction: row;
+
+    #instrument-details {
+        margin: 0 20px;
+    }
+}
