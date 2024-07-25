@@ -2,6 +2,7 @@ import axios from "axios";
 import {API_INSTRUMENTS, SERVER_URL} from "shared/config";
 
 interface Instrument {
+    id: number
     name: string
     type: string
     manufacturer: string
