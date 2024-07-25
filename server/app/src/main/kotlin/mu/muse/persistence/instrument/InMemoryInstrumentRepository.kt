@@ -1,12 +1,8 @@
 package mu.muse.persistence.instrument
 
-import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
-import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.ManufacturerName
 import mu.muse.usecase.access.InstrumentExtractor
-import java.time.Instant
 
 class InMemoryInstrumentRepository(
     private val storage: Map<InstrumentId, Instrument>,
@@ -20,28 +16,15 @@ class InMemoryInstrumentRepository(
         return storage[id]
     }
 
-    override fun findByCriteria(
-        name: InstrumentName?,
-        type: Instrument.Type?,
-        manufacturerName: ManufacturerName?,
-        manufacturerDateFrom: Instant?,
-        manufacturerDateTo: Instant?,
-        releaseDateFrom: Instant?,
-        releaseDateTo: Instant?,
-        country: Country?,
-        basicMaterials: List<String>?
-    ): Collection<Instrument> {
+    override fun findByCriteria(criteria: InstrumentExtractor.Criteria): Collection<Instrument> {
         return storage.values.sortedBy { it.id.toLongValue() }.filter { instrument ->  // @formatter:off
-            (name == null || instrument.name == name) &&
-            (type == null || instrument.type == type) &&
-            (manufacturerName == null || instrument.manufacturerName == manufacturerName) &&
-            (manufacturerDateFrom == null || manufacturerDateFrom.isBefore(instrument.manufactureDate)) &&
-            (manufacturerDateTo == null || instrument.manufactureDate.isBefore(manufacturerDateTo)) &&
-            (releaseDateFrom == null || releaseDateFrom.isBefore(instrument.releaseDate)) &&
-            (releaseDateTo == null || instrument.releaseDate.isBefore(releaseDateTo)) &&
-            (country == null || instrument.country == country) &&
-            (basicMaterials == null || instrument.materials == basicMaterials)
+            (criteria.name == null || instrument.name == criteria.name) &&
+            (criteria.type == null || instrument.type == criteria.type) &&
+            (criteria.manufacturerName == null || instrument.manufacturerName == criteria.manufacturerName) &&
+            instrument.manufactureDate.inRange(criteria.manufacturerDateFrom, criteria.manufacturerDateTo) &&
+            instrument.releaseDate.inRange(criteria.releaseDateFrom, criteria.releaseDateTo) &&
+            (criteria.country == null || instrument.country == criteria.country) &&
+            (criteria.basicMaterials == null || instrument.materials == criteria.basicMaterials)
         } // @formatter:on
     }
-
 }
