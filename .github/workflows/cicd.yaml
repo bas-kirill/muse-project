@@ -53,12 +53,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Run Unit Tests
         run: ./tools/scripts/server/runUnitTests.sh
-      - name: Publish Unit Test Results
-        if: always()
-        uses: EnricoMi/publish-unit-test-result-action@v1.9
-        with:
-          files: ./**/**/build/test-results/**/*.xml
-          report_individual_runs: true
+#      - name: Publish Unit Test Results
+#        if: always()
+#        uses: EnricoMi/publish-unit-test-result-action@v1.9
+#        with:
+#          files: ./**/**/build/test-results/**/*.xml
+#          report_individual_runs: true
       - name: Gather reports
         uses: actions/upload-artifact@v2
         if: always()
