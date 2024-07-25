@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./LogIn.css";
 import {Jwt} from "domain/";
 import axios from "axios";
-import {SERVER_PORT, SERVER_URL} from "shared/config";
+import {SERVER_URL} from "shared/config";
 import {Header} from "widgets/header";
 import {Footer} from "widgets/footer";
 
@@ -34,7 +34,7 @@ export function LogIn() {
             password: password,
         }
 
-        axios.post(`${SERVER_URL}:${SERVER_PORT}/api/auth/login`, basicLoginRequestBody)
+        axios.post(`${SERVER_URL}/api/auth/login`, basicLoginRequestBody)
             .then(response => {
                 if (response.status === 200) {
                     const jwtRaw = response.data.jwtToken;

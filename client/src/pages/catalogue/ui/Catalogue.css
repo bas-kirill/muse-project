@@ -40,6 +40,10 @@
                     margin-left: 20px;
                 }
             }
+
+            .instrument-card:last-child {
+                margin-bottom: 30px;
+            }
         }
 
     }

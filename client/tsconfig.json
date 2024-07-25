@@ -5,7 +5,8 @@
       "@pages/*": ["pages/*"],
       "@widgets/*": ["widgets/*"],
       "@domain/*": ["domain/*"],
-      "@shared/*": ["shared/*"]
+      "@shared/*": ["shared/*"],
+      "@app/*": ["app/*"]
     },
     "target": "es5",
     "lib": [

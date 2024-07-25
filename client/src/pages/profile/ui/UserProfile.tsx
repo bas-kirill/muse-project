@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import axios from "axios";
 import "./Profile.css";
 import {Jwt} from "domain/";
-import {SERVER_PORT, SERVER_URL} from "shared/config";
+import {SERVER_URL} from "shared/config";
 import {Profile} from "domain/";
 import {Header} from "widgets/header";
 import {Footer} from "widgets/footer";
@@ -15,7 +15,7 @@ export function UserProfile() {
         if (jwt == null) {
             return;
         }
-        axios.get<Profile>(`${SERVER_URL}:${SERVER_PORT}/api/profile`, {
+        axios.get<Profile>(`${SERVER_URL}/api/profile`, {
             headers: {
                 Authorization: `Bearer ${jwt.toStringValue()}`
             }
