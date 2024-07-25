@@ -2,10 +2,12 @@ package mu.muse.application.muse
 
 import mu.muse.rest.HelloEndpoint
 import mu.muse.rest.instruments.GetAllInstrumentsEndpoint
+import mu.muse.rest.instruments.GetInstrumentByIdEndpoint
 import mu.muse.rest.login.BasicLoginEndpoint
 import mu.muse.rest.profile.GetProfileEndpoint
 import mu.muse.usecase.BasicLogin
 import mu.muse.usecase.GetAllInstruments
+import mu.muse.usecase.GetInstrumentById
 import mu.muse.usecase.GetProfile
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -24,4 +26,7 @@ class RestConfiguration {
 
     @Bean
     fun getAllInstrumentsEndpoint(getAllInstruments: GetAllInstruments) = GetAllInstrumentsEndpoint(getAllInstruments)
+
+    @Bean
+    fun getInstrumentByIdEndpoint(getInstrumentById: GetInstrumentById) = GetInstrumentByIdEndpoint(getInstrumentById)
 }
