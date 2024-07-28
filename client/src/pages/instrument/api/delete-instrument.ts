@@ -1,5 +1,5 @@
 import axios from "axios";
-import {API_INSTRUMENT_BY_ID, SERVER_URL} from "shared/config/backend";
+import { API_INSTRUMENT_BY_ID, SERVER_URL } from "shared/config/backend";
 import Jwt from "domain/model/jwt";
 import { InstrumentId } from "@domain/model/instrument-id";
 
@@ -14,12 +14,16 @@ export const deleteInstrument = async (
 
   const headers = {
     "Content-Type": "application/json",
-    "Authorization": `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
+    Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
   };
 
-  const { status } = await axios.post(url, {}, {
-    headers: headers,
-  });
+  const { status } = await axios.post(
+    url,
+    {},
+    {
+      headers: headers,
+    },
+  );
 
   return {
     status: status,
