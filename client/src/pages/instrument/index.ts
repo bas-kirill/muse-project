@@ -1,5 +1,5 @@
-import {Instrument} from "./ui/Instrument";
-import {loader, InstrumentDetails} from "./api/loader";
+import { Instrument } from "./ui/Instrument";
+import { loader, InstrumentDetails } from "./api/loader";
 
-export {Instrument, loader};
-export type {InstrumentDetails};
+export { Instrument, loader };
+export type { InstrumentDetails };
