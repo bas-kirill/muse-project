@@ -3,16 +3,18 @@ import "./Instrument.css";
 import { Footer } from "widgets/footer";
 import { Header } from "widgets/header";
 import electricGuitar from "./electric-guitar-gray.jpg";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { deleteInstrument } from "pages/instrument/api/delete-instrument";
 import { InstrumentId } from "domain/model/instrument-id";
 import { InstrumentDetails } from "pages/instrument";
 import { Modal } from "widgets/modal";
+import Jwt from "domain/model/jwt";
 
 export function Instrument() {
   const data = useLoaderData() as InstrumentDetails;
   const [successModal, setSuccessModal] = useState<boolean>(false);
   const [errorModal, setErrorModal] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleOnDeleteInstrument = () => {
     const id = InstrumentId.from(data.id);
@@ -20,7 +22,11 @@ export function Instrument() {
       .then(() => {
         setSuccessModal(true);
       })
-      .catch(() => {
+      .catch((r) => {
+        if (r.status === 401) {
+          Jwt.eraseFromLocalStorage();
+          navigate("/login");
+        }
         setErrorModal(true);
       });
   };

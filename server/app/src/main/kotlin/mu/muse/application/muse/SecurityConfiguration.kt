@@ -8,7 +8,7 @@ import mu.muse.application.jwt.JwtValidator
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.AUTH_BASIC_LOGIN
-import mu.muse.usecase.access.UserExtractor
+import mu.muse.usecase.access.user.UserExtractor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
