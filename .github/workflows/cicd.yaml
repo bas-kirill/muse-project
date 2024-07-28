@@ -9,20 +9,15 @@ env:
   STAGING_PORT: 50506
   PROD_PORT: 50507
 jobs:
-  linter:
-    name: "[SERVER] Linter"
+  client-linter:
+    name: "[CLIENT] Linter"
     runs-on: kiryuxa-1
     steps:
-      - name: Set up JDK 21 (Temurin)
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: "21.0"
       - name: Checkout Code
         uses: actions/checkout@v4
       - name: Run linter
-        run: ./tools/scripts/server/runLinter.sh
-  static-analyzer:
+      run: ./tools/scripts/client/runLint.sh
+  server-static-analyzer:
     name: "[SERVER] Static Analyzer"
     runs-on: kiryuxa-2
     steps:
@@ -35,7 +30,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Run static analyzer
         run: ./tools/scripts/server/runStaticAnalyzer.sh
-  unit-tests:
+  server-unit-tests:
     name: "[SERVER] Unit Tests"
     runs-on: kiryuxa-3
     permissions:
@@ -68,9 +63,9 @@ jobs:
   deploy-dev:
     name: "[SERVER] Deploy to Dev"
     needs:
-      - linter
-      - static-analyzer
-      - unit-tests
+      - server-linter
+      - server-static-analyzer
+      - server-unit-tests
     runs-on: ubuntu-22.04
     environment:
       name: dev
