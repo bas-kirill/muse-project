@@ -18,6 +18,15 @@ jobs:
       - name: Run linter
         run: ./tools/scripts/client/runLinter.sh
 
+  client-static-analyzer:
+    name: "[CLIENT] Static Analyzer"
+    runs-on: kiryuxa-2
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Run linter
+        run: ./tools/scripts/client/runStaticAnalyzer.sh
+
   server-linter:
     name: "[SERVER] Linter"
     runs-on: kiryuxa-1
@@ -79,6 +88,7 @@ jobs:
     name: "[SERVER] Deploy to Dev"
     needs:
       - client-linter
+      - client-static-analyzer
       - server-linter
       - server-static-analyzer
       - server-unit-tests
@@ -168,6 +178,7 @@ jobs:
     if: github.event.ref == 'refs/heads/main'
     needs:
       - client-linter
+      - client-static-analyzer
       - server-linter
       - server-static-analyzer
       - server-unit-tests
