@@ -15,12 +15,26 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
       - name: Run linter
         run: ./tools/scripts/client/runLinter.sh
 
+  client-static-analyzer:
+    name: "[CLIENT] Static Analyzer"
+    runs-on: kiryuxa-2
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: cd ./client && npm install
+
+      - name: Run Static Analyzer
+        run: ./tools/scripts/client/runStaticAnalyzer.sh
+
   server-linter:
     name: "[SERVER] Linter"
-    runs-on: kiryuxa-1
+    runs-on: kiryuxa-2
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
@@ -41,8 +55,10 @@ jobs:
         with:
           distribution: temurin
           java-version: "21.0"
+
       - name: Checkout Code
         uses: actions/checkout@v4
+
       - name: Run static analyzer
         run: ./tools/scripts/server/runStaticAnalyzer.sh
   server-unit-tests:
@@ -79,6 +95,7 @@ jobs:
     name: "[SERVER] Deploy to Dev"
     needs:
       - client-linter
+      - client-static-analyzer
       - server-linter
       - server-static-analyzer
       - server-unit-tests
@@ -168,6 +185,7 @@ jobs:
     if: github.event.ref == 'refs/heads/main'
     needs:
       - client-linter
+      - client-static-analyzer
       - server-linter
       - server-static-analyzer
       - server-unit-tests

@@ -14,10 +14,6 @@ interface GetInstrumentByIdResponse {
   basicMaterials: string[];
 }
 
-interface Params {
-  instrumentId: string;
-}
-
 export const loader: LoaderFunction = async ({
   params,
 }): Promise<GetInstrumentByIdResponse> => {
