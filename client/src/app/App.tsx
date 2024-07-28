@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { Home } from "pages/home";
 import { UserProfile } from "pages/profile";
-import { Catalogue, loader as catalogueLoader  } from "pages/catalogue";
+import { Catalogue, loader as catalogueLoader } from "pages/catalogue";
 import { action, LogIn } from "pages/log-in";
 import { NotFound } from "pages/not-found";
 import { Instrument, loader as instrumentLoader } from "pages/instrument";
