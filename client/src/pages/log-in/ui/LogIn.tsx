@@ -24,7 +24,9 @@ export function LogIn() {
           <input type="submit" value="Log In" />
           {actionData?.errors && (
             <div className="erroneous-login">
-              {actionData?.errors.map((error) => <div key={error}>{error}</div>)}
+              {actionData?.errors.map((error) => (
+                <div key={error}>{error}</div>
+              ))}
             </div>
           )}
         </Form>
