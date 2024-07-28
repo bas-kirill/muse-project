@@ -15,7 +15,7 @@ rootDir="$currentDir/../../"
 (cd "$rootDir" && exec docker compose \
   -f ./tools/docker/docker-compose.yml \
   --env-file ./tools/docker/env/local.env \
-  --project-name=muse \
+  --project-name=muse-project \
   up -d \
   --remove-orphans)
 
