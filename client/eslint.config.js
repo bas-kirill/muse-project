@@ -1,9 +1,9 @@
 // eslint.config.js
 
-import { tsConfigs } from "typescript-eslint";
+import { configs as tsConfigs } from "typescript-eslint";
 import pluginReact from "eslint-plugin-react";
 import { browser } from "globals";
-import { jsConfigs } from "@eslint/js";
+import { configs as jsConfigs } from "@eslint/js";
 
 export default [
   {
@@ -15,6 +15,6 @@ export default [
     },
   },
   jsConfigs.recommended,
-  ...tsConfigs.configs.recommended,
+  ...tsConfigs.recommended,
   pluginReact.configs.recommended,
 ];
