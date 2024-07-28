@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Run linter
+      - name: Run Static Analyzer
         run: ./tools/scripts/client/runStaticAnalyzer.sh
 
   server-linter:
