@@ -1,8 +1,16 @@
 #instrument {
-  display: flex;
-  flex-direction: row;
+    display: flex;
+    flex-direction: column;
 
-  #instrument-details {
-    margin: 0 20px;
-  }
+    #instrument-details {
+        display: flex;
+        flex-direction: row;
+    }
+
+    #delete-instrument {
+        background-color: red;
+        width: 50%;
+        text-align: center;
+        padding: 30px;
+    }
 }

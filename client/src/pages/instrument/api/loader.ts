@@ -3,7 +3,7 @@ import { SERVER_URL } from "shared/config";
 import { API_INSTRUMENT_BY_ID } from "shared/config/backend";
 import { LoaderFunction } from "react-router-dom";
 
-interface GetInstrumentByIdResponse {
+export interface InstrumentDetails {
   id: number;
   name: string;
   type: string;
@@ -16,9 +16,9 @@ interface GetInstrumentByIdResponse {
 
 export const loader: LoaderFunction = async ({
   params,
-}): Promise<GetInstrumentByIdResponse> => {
+}): Promise<InstrumentDetails> => {
   const url = `${SERVER_URL}${API_INSTRUMENT_BY_ID}` + params.instrumentId;
-  const { data, status } = await axios.get<GetInstrumentByIdResponse>(url);
+  const { data, status } = await axios.get<InstrumentDetails>(url);
 
   if (status !== 200) {
     throw new Error(
