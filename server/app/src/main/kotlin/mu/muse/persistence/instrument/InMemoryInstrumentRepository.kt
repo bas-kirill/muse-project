@@ -20,10 +20,13 @@ class InMemoryInstrumentRepository(
         return storage.values
             .sortedBy { it.id.toLongValue() }
             .filter { instrument ->
-                (criteria.name == null || instrument.name.toStringValue().lowercase().contains(criteria.name.toStringValue().lowercase())) &&
+                (criteria.name == null || instrument.name.matches(criteria.name)) &&
                     (criteria.types == null || instrument.type in criteria.types) &&
                     (criteria.manufacturerNames == null || instrument.manufacturerName in criteria.manufacturerNames) &&
-                    instrument.manufactureDate.inRangeInclusive(criteria.manufacturerDateFrom, criteria.manufacturerDateTo) &&
+                    instrument.manufactureDate.inRangeInclusive(
+                        criteria.manufacturerDateFrom,
+                        criteria.manufacturerDateTo,
+                    ) &&
                     instrument.releaseDate.inRangeInclusive(criteria.releaseDateFrom, criteria.releaseDateTo) &&
                     (criteria.countries == null || instrument.country in criteria.countries) &&
                     (criteria.materials == null || criteria.materials.containsAll(instrument.materials))
