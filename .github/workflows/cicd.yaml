@@ -15,6 +15,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
       - name: Run linter
         run: ./tools/scripts/client/runLinter.sh
 
@@ -54,8 +55,10 @@ jobs:
         with:
           distribution: temurin
           java-version: "21.0"
+
       - name: Checkout Code
         uses: actions/checkout@v4
+
       - name: Run static analyzer
         run: ./tools/scripts/server/runStaticAnalyzer.sh
   server-unit-tests:
