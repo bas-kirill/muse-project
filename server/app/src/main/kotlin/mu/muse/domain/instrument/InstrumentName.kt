@@ -6,7 +6,6 @@ data class InstrumentName internal constructor(private val value: String) {
 
     companion object {
         fun from(value: String): InstrumentName {
-            require(value.isNotBlank())
             return InstrumentName(value)
         }
     }
