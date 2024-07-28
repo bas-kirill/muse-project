@@ -1,5 +1,5 @@
 export interface Profile {
-    username: string
-    role: string
-    fullName: string
+  username: string;
+  role: string;
+  fullName: string;
 }
