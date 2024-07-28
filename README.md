@@ -18,5 +18,5 @@ Branching: https://www.conventionalcommits.org/en/v1.0.0,
 
 ## Client
 
-🛠Tech Stack: TypeScript, React, WebPack
-🏛️Arch: Feature Sliced Design
+🛠Tech Stack: TypeScript, React, ESLint, Prettier
+🏛️Arch: FSD
