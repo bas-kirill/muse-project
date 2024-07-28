@@ -42,6 +42,10 @@ export class Jwt {
   public static putToLocalStorage(jwtRaw: string) {
     window.localStorage.setItem(Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY, jwtRaw);
   }
+
+  public static eraseFromLocalStorage() {
+    window.localStorage.removeItem(Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY);
+  }
 }
 
 export default Jwt;

@@ -2,7 +2,7 @@ package mu.muse.usecase.scenario
 
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.usecase.GetInstrumentById
-import mu.muse.usecase.access.InstrumentExtractor
+import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.dto.InstrumentDetails
 
 class GetInstrumentByIdUseCase(

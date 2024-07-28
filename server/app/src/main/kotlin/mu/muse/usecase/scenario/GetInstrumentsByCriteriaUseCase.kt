@@ -1,7 +1,7 @@
 package mu.muse.usecase.scenario
 
 import mu.muse.usecase.GetInstrumentsByCriteria
-import mu.muse.usecase.access.InstrumentExtractor
+import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.dto.InstrumentDetails
 import org.slf4j.LoggerFactory
 

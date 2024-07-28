@@ -1,9 +1,11 @@
 package mu.muse.application.muse
 
 import mu.muse.application.jwt.JwtGenerator
-import mu.muse.usecase.access.InstrumentExtractor
-import mu.muse.usecase.access.UserExtractor
+import mu.muse.usecase.access.instrument.InstrumentExtractor
+import mu.muse.usecase.access.instrument.InstrumentRemover
+import mu.muse.usecase.access.user.UserExtractor
 import mu.muse.usecase.scenario.BasicLoginUseCase
+import mu.muse.usecase.scenario.DeleteInstrumentByIdUseCase
 import mu.muse.usecase.scenario.GetInstrumentsByCriteriaUseCase
 import mu.muse.usecase.scenario.GetInstrumentByIdUseCase
 import mu.muse.usecase.scenario.GetProfileUseCase
@@ -30,4 +32,7 @@ class UseCaseConfiguration {
 
     @Bean
     fun getInstrumentById(instrumentExtractor: InstrumentExtractor) = GetInstrumentByIdUseCase(instrumentExtractor)
+
+    @Bean
+    fun deleteInstrumentById(instrumentRemover: InstrumentRemover) = DeleteInstrumentByIdUseCase(instrumentRemover)
 }
