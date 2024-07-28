@@ -1,4 +1,4 @@
-package mu.muse.usecase.access
+package mu.muse.usecase.access.user
 
 import mu.muse.domain.user.User
 import mu.muse.domain.user.Username

@@ -2,11 +2,12 @@ package mu.muse.persistence.instrument
 
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
-import mu.muse.usecase.access.InstrumentExtractor
+import mu.muse.usecase.access.instrument.InstrumentRemover
+import mu.muse.usecase.access.instrument.InstrumentExtractor
 
 class InMemoryInstrumentRepository(
-    private val storage: Map<InstrumentId, Instrument>,
-) : InstrumentExtractor {
+    private val storage: MutableMap<InstrumentId, Instrument>,
+) : InstrumentExtractor, InstrumentRemover {
 
     override fun findAll(): Collection<Instrument> {
         return storage.values
@@ -31,5 +32,9 @@ class InMemoryInstrumentRepository(
                     (criteria.countries == null || instrument.country in criteria.countries) &&
                     (criteria.materials == null || criteria.materials.containsAll(instrument.materials))
             }
+    }
+
+    override fun removeInstrument(id: InstrumentId) {
+        storage.remove(id)
     }
 }

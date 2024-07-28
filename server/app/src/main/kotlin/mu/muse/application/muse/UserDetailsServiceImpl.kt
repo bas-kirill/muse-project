@@ -1,7 +1,7 @@
 package mu.muse.application.muse
 
 import mu.muse.domain.user.Username
-import mu.muse.usecase.access.UserExtractor
+import mu.muse.usecase.access.user.UserExtractor
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 

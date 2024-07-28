@@ -6,7 +6,7 @@ import mu.muse.domain.user.Password
 import mu.muse.domain.user.Username
 import mu.muse.usecase.BasicLogin
 import mu.muse.usecase.BasicLoginError
-import mu.muse.usecase.access.UserExtractor
+import mu.muse.usecase.access.user.UserExtractor
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 

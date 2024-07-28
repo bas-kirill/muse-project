@@ -2,8 +2,8 @@ package mu.muse.persistence.user
 
 import mu.muse.domain.user.User
 import mu.muse.domain.user.Username
-import mu.muse.usecase.access.UserExtractor
-import mu.muse.usecase.access.UserPersister
+import mu.muse.usecase.access.user.UserExtractor
+import mu.muse.usecase.access.user.UserPersister
 
 class InMemoryUserRepository(
     private val storage: MutableMap<Username, User>,
