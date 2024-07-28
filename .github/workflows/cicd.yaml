@@ -29,7 +29,7 @@ jobs:
         run: cd ./client && npm install
 
       - name: Run Static Analyzer
-        run: cd ./client && npx eslint .
+        run: ./tools/scripts/client/runStaticAnalyzer.sh
 
   server-linter:
     name: "[SERVER] Linter"
