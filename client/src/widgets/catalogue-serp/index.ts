@@ -1,1 +1,1 @@
-export {CatalogueSerpWidget} from "./ui/CatalogueSerpWidget";
+export { CatalogueSerpWidget } from "./ui/CatalogueSerpWidget";
