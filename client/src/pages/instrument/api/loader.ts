@@ -19,8 +19,6 @@ interface Params {
 }
 
 export const loader: LoaderFunction = async ({ params }): Promise<GetInstrumentByIdResponse> => {
-    console.log(`params: ${JSON.stringify(params, null, 2)}`);
-    console.log(`Instrument ID: '${params.instrumentId}'`);
     const url = `${SERVER_URL}${API_INSTRUMENT_BY_ID}` + params.instrumentId;
     const { data, status } = await axios.get<GetInstrumentByIdResponse>(url);
 
