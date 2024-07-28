@@ -1,6 +1,6 @@
 // eslint.config.js
 
-import pluginJs from "eslint";
+import pluginJs from "eslint/lib/api.js";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import pluginReact from "eslint-plugin-react";
 import { browser } from "globals";
