@@ -1,4 +1,4 @@
-package mu.muse.usecase.access
+package mu.muse.usecase.access.instrument
 
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
