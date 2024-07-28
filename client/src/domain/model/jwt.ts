@@ -44,7 +44,7 @@ export class Jwt {
   }
 
   public static eraseFromLocalStorage() {
-      window.localStorage.removeItem(Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY);
+    window.localStorage.removeItem(Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY);
   }
 }
 
