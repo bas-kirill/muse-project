@@ -2,18 +2,18 @@ import React from "react";
 import "./CatalogueSerpWidget.css";
 import guitarImg from "./electric-guitar-gray.jpg";
 import {Link} from "react-router-dom";
-import {GetInstrumentsResponse} from "pages/catalogue";
+import {Instruments} from "pages/catalogue";
 
 
 interface Props {
-    instruments: GetInstrumentsResponse;
+    instruments: Instruments;
 }
 
 export const CatalogueSerpWidget: React.FC<Props> = ({ instruments }) => {
     return (
         <div id="catalogue-serp">
             {instruments.map(instrument => (
-                <div className="instrument-card">
+                <div key={instrument.id.toString()} className="instrument-card">
                     <div className="instrument-details">
                         <img src={guitarImg} width={100} height={200} alt={"Guitar Gray"}/>
                         <div className="instrument-details-description">

@@ -1,21 +1,11 @@
 import axios from "axios";
 import {API_INSTRUMENTS, SERVER_URL} from "shared/config";
+import {Instruments} from "@pages/catalogue";
 
-interface Instrument {
-    id: number
-    name: string
-    type: string
-    manufacturer: string
-    manufacturerDate: string
-    releaseDate: string
-    country: string
-    basicMaterials: string[]
-}
-
-export type GetInstrumentsResponse = Instrument[];
-
-export const loader = async (): Promise<GetInstrumentsResponse> => {
-    const { data, status } = await axios.get<GetInstrumentsResponse>(`${SERVER_URL}${API_INSTRUMENTS}`);
+export const loader = async (): Promise<Instruments> => {
+    const { data, status } = await axios.post<Instruments>(`${SERVER_URL}${API_INSTRUMENTS}`, {
+        body: {},
+    });
     if (status !== 200) {
         throw new Error(`Failed to extract instruments`);
     }

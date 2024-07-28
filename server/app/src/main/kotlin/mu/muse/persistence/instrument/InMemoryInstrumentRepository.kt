@@ -17,14 +17,19 @@ class InMemoryInstrumentRepository(
     }
 
     override fun findByCriteria(criteria: InstrumentExtractor.Criteria): Collection<Instrument> {
-        return storage.values.sortedBy { it.id.toLongValue() }.filter { instrument ->  // @formatter:off
-            (criteria.name == null || instrument.name == criteria.name) &&
-            (criteria.type == null || instrument.type == criteria.type) &&
-            (criteria.manufacturerName == null || instrument.manufacturerName == criteria.manufacturerName) &&
-            instrument.manufactureDate.inRange(criteria.manufacturerDateFrom, criteria.manufacturerDateTo) &&
-            instrument.releaseDate.inRange(criteria.releaseDateFrom, criteria.releaseDateTo) &&
-            (criteria.country == null || instrument.country == criteria.country) &&
-            (criteria.basicMaterials == null || instrument.materials == criteria.basicMaterials)
-        } // @formatter:on
+        return storage.values
+            .sortedBy { it.id.toLongValue() }
+            .filter { instrument ->
+                (criteria.name == null || instrument.name.matches(criteria.name)) &&
+                    (criteria.types == null || instrument.type in criteria.types) &&
+                    (criteria.manufacturerNames == null || instrument.manufacturerName in criteria.manufacturerNames) &&
+                    instrument.manufactureDate.inRangeInclusive(
+                        criteria.manufacturerDateFrom,
+                        criteria.manufacturerDateTo,
+                    ) &&
+                    instrument.releaseDate.inRangeInclusive(criteria.releaseDateFrom, criteria.releaseDateTo) &&
+                    (criteria.countries == null || instrument.country in criteria.countries) &&
+                    (criteria.materials == null || criteria.materials.containsAll(instrument.materials))
+            }
     }
 }

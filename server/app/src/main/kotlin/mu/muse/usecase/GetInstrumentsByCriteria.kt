@@ -3,23 +3,25 @@ package mu.muse.usecase
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentName
+import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.ManufacturerName
+import mu.muse.domain.instrument.Material
+import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.usecase.dto.InstrumentDetails
-import java.time.Instant
 
 fun interface GetInstrumentsByCriteria {
 
     fun execute(criteria: Criteria): Collection<InstrumentDetails>
 
     data class Criteria(
-        val name: InstrumentName?,
-        val type: Instrument.Type?,
-        val manufacturerName: ManufacturerName?,
-        val manufacturerDateFrom: Instant?,
-        val manufacturerDateTo: Instant?,
-        val releaseDateFrom: Instant?,
-        val releaseDateTo: Instant?,
-        val country: Country?,
-        val basicMaterials: List<String>?,
+        val instrumentName: InstrumentName?,
+        val instrumentTypes: List<Instrument.Type>?,
+        val manufacturerNames: List<ManufacturerName>?,
+        val manufacturerDateFrom: ManufacturerDate?,
+        val manufacturerDateTo: ManufacturerDate?,
+        val releaseDateFrom: ReleaseDate?,
+        val releaseDateTo: ReleaseDate?,
+        val countries: List<Country>?,
+        val materials: List<Material>?,
     )
 }

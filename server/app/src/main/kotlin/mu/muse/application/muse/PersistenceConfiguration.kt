@@ -94,7 +94,18 @@ class PersistenceConfiguration {
             materials = listOf(Material.METALL),
         )
 
-        return setOf(notYetReleasedGuitar, releasedGuitar, saxophone)
+        val piano = Instrument.create(
+            idGenerator = idGenerator,
+            name = InstrumentName.from("Yamaha CLP-745B"),
+            type = Instrument.Type.KEYBOARD,
+            manufacturerName = ManufacturerName.from("Yamaha"),
+            manufactureDate = ManufacturerDate.from(Instant.parse("2007-01-01T00:00:00Z")),
+            releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
+            country = Country.USA,
+            materials = listOf(Material.WOOD),
+        )
+
+        return setOf(notYetReleasedGuitar, releasedGuitar, saxophone, piano)
     }
 
     @Bean
