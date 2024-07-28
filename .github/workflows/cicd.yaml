@@ -28,6 +28,9 @@ jobs:
       - name: Install ESLint
         run: npm install eslint --save-dev
 
+      - name: kek
+        run: npm install typescript-eslint --save-dev
+
       - name: Run Static Analyzer
         run: ./tools/scripts/client/runStaticAnalyzer.sh
 
