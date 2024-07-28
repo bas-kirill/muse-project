@@ -1,5 +1,5 @@
 import kek from "@eslint/js";
-import tseslint from 'typescript-eslint';
+import tseslint from "typescript-eslint";
 
 const { configs } = kek;
 
