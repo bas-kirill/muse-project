@@ -1,58 +1,57 @@
 #catalogue {
-    #catalogue-search-bar-form {
-        width: 100%;
-        background-color: darkslateblue;
+  #catalogue-search-bar-form {
+    width: 100%;
+    background-color: darkslateblue;
 
-        input[type="text"] {
-            background-color: white;
-            font-size: 24px;
-            text-align: center;
-            width: 100%;
-        }
+    input[type="text"] {
+      background-color: white;
+      font-size: 24px;
+      text-align: center;
+      width: 100%;
+    }
+  }
+
+  #catalogue-filter-serp-wrapper {
+    display: flex;
+    background-color: darkorchid;
+
+    #catalogue-filters {
+      background-color: darkslateblue;
+      flex: 1;
     }
 
-    #catalogue-filter-serp-wrapper {
+    #catalogue-serp {
+      background-color: darkkhaki;
+      flex: 2;
+
+      .instrument-card {
         display: flex;
-        background-color: darkorchid;
+        flex-direction: column;
+        margin: 30px 20px 0 20px;
+        background-color: darkslateblue;
+      }
 
-        #catalogue-filters {
-            background-color: darkslateblue;
-            flex: 1;
+      .instrument-card:last-child {
+        margin-bottom: 30px;
+      }
+
+      .instrument-details {
+        padding: 5px;
+        background-color: paleturquoise;
+        display: flex;
+
+        .instrument-details-description {
+          margin-left: 20px;
         }
+      }
 
-        #catalogue-serp {
-            background-color: darkkhaki;
-            flex: 2;
-
-            .instrument-card {
-                display: flex;
-                flex-direction: column;
-                margin: 30px 20px 0 20px;
-                background-color: darkslateblue;
-            }
-
-            .instrument-card:last-child {
-                margin-bottom: 30px;
-            }
-
-            .instrument-details {
-                padding: 5px;
-                background-color: paleturquoise;
-                display: flex;
-
-                .instrument-details-description {
-                    margin-left: 20px;
-                }
-            }
-
-            .instrument-actions {
-                .go-to-instrument-details-button {
-                    background-color: saddlebrown;
-                    padding: 10px 40px;
-                    float: right;
-                }
-            }
+      .instrument-actions {
+        .go-to-instrument-details-button {
+          background-color: saddlebrown;
+          padding: 10px 40px;
+          float: right;
         }
-
+      }
     }
+  }
 }
