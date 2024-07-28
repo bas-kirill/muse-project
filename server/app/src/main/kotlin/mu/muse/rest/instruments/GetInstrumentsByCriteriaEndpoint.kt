@@ -48,7 +48,7 @@ class GetInstrumentsByCriteriaEndpoint(
                 releaseDateTo = releaseDateTo,
                 countries = countries,
                 materials = materials,
-            )
+            ),
         )
         logger.info("Found by criteria `{}` instruments", instrumentDetails.size)
         return instrumentDetails
