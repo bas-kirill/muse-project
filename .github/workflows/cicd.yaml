@@ -16,7 +16,22 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       - name: Run linter
-      run: ./tools/scripts/client/runLint.sh
+        run: ./tools/scripts/client/runLinter.sh
+
+  server-linter:
+    name: "[SERVER] Linter"
+    runs-on: kiryuxa-1
+    steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21.0"
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      - name: Run linter
+        run: ./tools/scripts/server/runLinter.sh
+
   server-static-analyzer:
     name: "[SERVER] Static Analyzer"
     runs-on: kiryuxa-2
