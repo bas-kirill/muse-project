@@ -14,6 +14,10 @@ interface GetInstrumentByIdResponse {
   basicMaterials: string[];
 }
 
+interface Params {
+
+}
+
 export const loader: LoaderFunction = async ({
   params,
 }): Promise<GetInstrumentByIdResponse> => {
