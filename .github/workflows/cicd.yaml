@@ -26,10 +26,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: (cd ./client && exec npm install)
+        run: cd ./client && npm install
 
       - name: Run Static Analyzer
-        run: (cd ./client && exec npx eslint .)
+        run: cd ./client && npx eslint .
 
   server-linter:
     name: "[SERVER] Linter"
