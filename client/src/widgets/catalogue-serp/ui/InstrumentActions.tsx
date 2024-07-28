@@ -14,4 +14,4 @@ export const InstrumentActions = ({ instrument }: Props) => {
       </div>
     </div>
   );
-}
+};
