@@ -19,11 +19,13 @@ export function Instrument() {
   const handleOnDeleteInstrument = () => {
     const id = InstrumentId.from(data.id);
     deleteInstrument(id)
-      .then(() => {
+      .then((r) => {
+        console.log(`loool: ${r.status}`);
         setSuccessModal(true);
       })
       .catch((r) => {
-        if (r.status === 401) {
+        const status = r.toJSON()["status"];
+        if (status === 401) {
           Jwt.eraseFromLocalStorage();
           navigate("/login");
         }
