@@ -28,7 +28,7 @@ jobs:
       - name: Install ESLint
         run: npm install eslint --save-dev
 
-      - name: Run linter
+      - name: Run Static Analyzer
         run: ./tools/scripts/client/runStaticAnalyzer.sh
 
   server-linter:
