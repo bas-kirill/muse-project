@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_INSTRUMENTS, SERVER_URL } from "shared/config";
-import { Instruments } from "@pages/catalogue";
+import { Instruments } from "domain/model/instrument";
 
 export const loader = async (): Promise<Instruments> => {
   const { data, status } = await axios.post<Instruments>(

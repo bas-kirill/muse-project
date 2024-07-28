@@ -6,8 +6,8 @@ import { useLoaderData } from "react-router-dom";
 import { CatalogueFilterWidget, Filters } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import axios from "axios";
-import { Instruments } from "pages/catalogue";
 import { API_INSTRUMENTS, SERVER_URL } from "shared/config";
+import { Instruments } from "domain/model/instrument";
 
 export function Catalogue() {
   const initialInstruments = useLoaderData() as Instruments; // https://github.com/remix-run/react-router/discussions/9792
@@ -18,10 +18,6 @@ export function Catalogue() {
 
   useEffect(() => {
     const fetchInstruments = async () => {
-      console.log(
-        `instrumentName: '${instrumentName}', typof: '${typeof instrumentName}'`,
-      );
-
       if (instrumentName === "") {
         filters.instrumentName = null;
       }
@@ -64,7 +60,6 @@ export function Catalogue() {
             setInstrumentName(e.target.value);
           }}
         />
-        {/*<input type={"submit"} value={"Find"}/>*/}
       </div>
 
       <div id="catalogue-filter-serp-wrapper">
