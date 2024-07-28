@@ -25,14 +25,11 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Install ESLint
-        run: npm install eslint --save-dev
-
-      - name: kek
-        run: npm install typescript-eslint --save-dev
+      - name: Install dependencies
+        run: cd ./client && npm install
 
       - name: Run Static Analyzer
-        run: ./tools/scripts/client/runStaticAnalyzer.sh
+        run: npx eslint .
 
   server-linter:
     name: "[SERVER] Linter"
