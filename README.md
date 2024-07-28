@@ -11,7 +11,9 @@ https://www.figma.com/design/Kskaw5xH0D8rsljazkXmFL/Muse-Project?node-id=0-1&t=v
 ## Server
 
 🛠Tech Stack: Kotlin, Spring Boot, Gradle, PostgreSQL
+
 🔄DevOps: Docker, Docker Compose, Testcontainers, GitHub CI/CD
+
 🏛️Arch: Clean Architecture, DDD, Feature Slicing, REST, TDD, Service Based, ArchUnit, Monorepository
 
 Branching: https://www.conventionalcommits.org/en/v1.0.0, 
@@ -19,4 +21,5 @@ Branching: https://www.conventionalcommits.org/en/v1.0.0,
 ## Client
 
 🛠Tech Stack: TypeScript, React, ESLint, Prettier
+
 🏛️Arch: FSD
