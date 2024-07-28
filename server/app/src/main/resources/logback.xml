@@ -11,5 +11,5 @@
     </root>
 
     <!-- Configure logging for org.springframework package -->
-    <logger name="org.springframework" level="DEBUG" />
+    <logger name="org.springframework" level="TRACE" />
 </configuration>
