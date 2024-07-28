@@ -1,3 +1,5 @@
-export { Catalogue } from "./ui/Catalogue";
-export { loader } from "./api/loader";
-export type { Instruments } from "./model/instrument";
+import { Catalogue } from "./ui/Catalogue";
+import { loader } from "./api/loader";
+
+export { Catalogue };
+export { loader };
