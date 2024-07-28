@@ -2,19 +2,25 @@ package mu.muse.domain.instrument
 
 import mu.muse.common.types.ValueObject
 import java.time.Instant
+import java.time.LocalDate
+import java.time.ZoneId
 
 data class ReleaseDate internal constructor(private val value: Instant) : ValueObject {
 
     fun toInstantValue() = value
 
-    fun inRange(from: Instant?, to: Instant?): Boolean {
-        return (from == null || from.isBefore(value)) &&
-            (to == null || value.isBefore(to))
+    fun inRangeInclusive(from: ReleaseDate?, to: ReleaseDate?): Boolean {
+        return (from == null || from.toInstantValue().isBefore(value) || from.toInstantValue() == value) &&
+            (to == null || value.isBefore(to.toInstantValue()) || value == to.toInstantValue())
     }
 
     companion object {
         fun from(value: Instant): ReleaseDate {
             return ReleaseDate(value)
+        }
+
+        fun from(value: LocalDate): ReleaseDate {
+            return ReleaseDate(value.atStartOfDay(ZoneId.systemDefault()).toInstant())
         }
     }
 }
