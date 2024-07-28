@@ -63,6 +63,7 @@ jobs:
   deploy-dev:
     name: "[SERVER] Deploy to Dev"
     needs:
+      - client-linter
       - server-linter
       - server-static-analyzer
       - server-unit-tests
@@ -151,9 +152,10 @@ jobs:
     name: "[SERVER] Deploy to Staging"
     if: github.event.ref == 'refs/heads/main'
     needs:
-      - linter
-      - static-analyzer
-      - unit-tests
+      - client-linter
+      - server-linter
+      - server-static-analyzer
+      - server-unit-tests
     runs-on: ubuntu-22.04
     environment:
       name: staging
