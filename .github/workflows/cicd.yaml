@@ -20,7 +20,7 @@ jobs:
 
   server-linter:
     name: "[SERVER] Linter"
-    runs-on: kiryuxa-1
+    runs-on: kiryuxa-2
     steps:
       - name: Set up JDK 21 (Temurin)
         uses: actions/setup-java@v4
