@@ -18,7 +18,7 @@ export const InstrumentActions = ({ instrument }: Props) => {
   const handleOnDeleteInstrument = () => {
     const instrumentId = InstrumentId.from(instrument.id);
     deleteInstrument(instrumentId)
-      .then((r) => {
+      .then(() => {
         setSuccessModal(true);
       })
       .catch((r) => {
