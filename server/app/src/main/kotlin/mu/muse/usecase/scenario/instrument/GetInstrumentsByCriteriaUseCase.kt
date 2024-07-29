@@ -1,4 +1,4 @@
-package mu.muse.usecase.scenario
+package mu.muse.usecase.scenario.instrument
 
 import mu.muse.usecase.GetInstrumentsByCriteria
 import mu.muse.usecase.access.instrument.InstrumentExtractor
