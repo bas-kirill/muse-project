@@ -44,9 +44,7 @@ export const CatalogueFilterWidget = ({ onFilterChange, role }: Props) => {
       <ReleaseDate checkboxes={checkboxes} handleChange={handleChange} />
       <Country checkboxes={checkboxes} handleChange={handleChange} />
       <BasicMaterials checkboxes={checkboxes} handleChange={handleChange} />
-      {(role === Role.Editor) && (
-        <CreateInstrumentCardButton />
-      )}
+      {role === Role.Editor && <CreateInstrumentCardButton />}
     </div>
   );
 };

@@ -7,7 +7,7 @@ export const CreateInstrumentCardButton = () => {
 
   const handleOnAddInstrumentButtonClick = () => {
     navigate(CREATE_INSTRUMENT);
-  }
+  };
 
   return (
     <button id="add-instrument-card" onClick={handleOnAddInstrumentButtonClick}>

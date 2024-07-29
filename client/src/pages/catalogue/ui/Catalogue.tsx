@@ -29,16 +29,16 @@ export function Catalogue() {
       const getInstrumentsByCriteriaRequestBody = JSON.stringify(
         filters,
         null,
-        2
+        2,
       );
       const { data } = await axios.post<Instruments>(
         `${SERVER_URL}${API_INSTRUMENTS}`,
         getInstrumentsByCriteriaRequestBody,
         {
           headers: {
-            "Content-Type": "application/json"
-          }
-        }
+            "Content-Type": "application/json",
+          },
+        },
       );
 
       return data;
