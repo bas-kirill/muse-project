@@ -5,7 +5,7 @@ interface JwtPayload {
   sub: string;
   role: Role;
   iat: number;
-  exp: number;  // UNIX seconds
+  exp: number; // UNIX seconds
 }
 
 export class Jwt {
@@ -26,7 +26,7 @@ export class Jwt {
   }
 
   public expired(): boolean {
-    const nowSeconds  = Math.floor(Date.now() / 1000);
+    const nowSeconds = Math.floor(Date.now() / 1000);
     return jwtDecode<JwtPayload>(this.value).exp < nowSeconds;
   }
 
@@ -36,7 +36,7 @@ export class Jwt {
 
   public static extractFromLocalStorage(): Jwt | null {
     const jwtRaw = window.localStorage.getItem(
-      Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY
+      Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY,
     );
     if (jwtRaw == null) {
       return null;
