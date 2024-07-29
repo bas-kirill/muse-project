@@ -1,4 +1,4 @@
-package mu.muse.usecase.scenario
+package mu.muse.usecase.scenario.instrument
 
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.usecase.DeleteInstrumentById
