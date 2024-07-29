@@ -1,0 +1,9 @@
+.instrument-details {
+    padding: 5px;
+    background-color: paleturquoise;
+    display: flex;
+
+    .instrument-details-description {
+        margin-left: 20px;
+    }
+}
