@@ -1,14 +1,14 @@
 package mu.muse.application.muse
 
+import io.jsonwebtoken.JwtParser
+import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletResponse
-import mu.muse.application.jwt.JwtFilter
-import mu.muse.application.jwt.JwtGenerator
-import mu.muse.application.jwt.JwtUsernameExtractor
-import mu.muse.application.jwt.JwtValidator
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.AUTH_BASIC_LOGIN
 import mu.muse.usecase.access.user.UserExtractor
+import mu.muse.usecase.scenario.BasicLoginUseCase
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -28,6 +28,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import java.security.Key
 
 
 @Configuration
@@ -36,21 +37,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 class SecurityConfiguration {
 
     @Bean
-    fun jwtValidator(
-        @Value("\${security.jwt.secret-key}") jwtSecretKey: String,
-        userExtractor: UserExtractor,
-    ) = JwtValidator(jwtSecretKey, userExtractor)
+    fun jwtSecretKey(@Value("\${security.jwt.secret-key}") jwtSecretKey: String): Key =
+        Keys.hmacShaKeyFor(jwtSecretKey.toByteArray())
 
     @Bean
-    fun jwtUsernameExtractor(@Value("\${security.jwt.secret-key}") jwtSecretKey: String): JwtUsernameExtractor {
-        return JwtUsernameExtractor(jwtSecretKey)
-    }
-
-    @Bean
-    fun jwtGenerator(
-        @Value("\${security.jwt.secret-key}") jwtSecretKey: String,
-        @Value("\${security.jwt.expiration-time}") expiration: Long,
-    ) = JwtGenerator(jwtSecretKey, expiration)
+    fun jwtParser(jwtSecretKey: Key): JwtParser = Jwts.parserBuilder().setSigningKey(jwtSecretKey).build()
 
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
@@ -69,7 +60,7 @@ class SecurityConfiguration {
         userDetailsService: UserDetailsService,
         jwtFilter: JwtFilter,
         corsConfigurationSource: CorsConfigurationSource,
-        sessionRegistry:SessionRegistry,
+        sessionRegistry: SessionRegistry,
     ): SecurityFilterChain { // @formatter:off
         var http = http
             .csrf { cors -> cors.disable() }
@@ -113,21 +104,24 @@ class SecurityConfiguration {
     }
 
     @Bean
+    fun login(
+        authenticationManager: AuthenticationManager,
+        userRepository: UserExtractor,
+        jwtSecretKey: Key,
+        @Value("\${security.jwt.expiration-time}") expirationMillis: Long,
+    ) = BasicLoginUseCase(authenticationManager, userRepository, jwtSecretKey, expirationMillis)
+
+    @Bean
     fun userDetailsService(userExtractor: UserExtractor): UserDetailsService {
         return UserDetailsServiceImpl(userExtractor)
     }
 
     @Bean
-    fun jwtTokenFilter(
-        jwtValidator: JwtValidator,
-        userDetailsService: UserDetailsService,
-        jwtUsernameExtractor: JwtUsernameExtractor
-    ): JwtFilter {
-        return JwtFilter(jwtValidator, userDetailsService, jwtUsernameExtractor)
-    }
+    fun jwtTokenFilter(userDetailsService: UserDetailsService, jwtParser: JwtParser) =
+        JwtFilter(userDetailsService, jwtParser)
 
     @Bean
-    fun sessionRegistry() : SessionRegistry {
+    fun sessionRegistry(): SessionRegistry {
         return SessionRegistryImpl()
     }
 
