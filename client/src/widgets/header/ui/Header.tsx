@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { Jwt } from "domain/";
+import { CATALOGUE, FAVORITE, HOME, LOGIN, PROFILE } from "shared/config/paths";
 
 export function Header() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -23,22 +24,22 @@ export function Header() {
       <nav>
         {!authenticated && (
           <div>
-            <Link to={"/login"}>Log in</Link>
+            <Link to={LOGIN}>Log in</Link>
           </div>
         )}
         {authenticated && (
           <div>
-            <Link to={"/profile"}>Profile</Link>
+            <Link to={PROFILE}>Profile</Link>
           </div>
         )}
         <div>
-          <Link to={"/favorite"}>Favorite</Link>
+          <Link to={FAVORITE}>Favorite</Link>
         </div>
         <div>
-          <Link to={"/catalogue"}>Catalogue</Link>
+          <Link to={CATALOGUE}>Catalogue</Link>
         </div>
         <div>
-          <Link to={"/"}>Home</Link>
+          <Link to={HOME}>Home</Link>
         </div>
       </nav>
     </header>

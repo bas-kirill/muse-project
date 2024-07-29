@@ -4,16 +4,17 @@ import { Profile } from "domain/model/profile";
 import Jwt from "domain/model/jwt";
 import { API_PROFILE } from "shared/config/backend";
 import { redirect } from "react-router-dom";
+import { LOGIN } from "shared/config/paths";
 
 export const loader = async (): Promise<Profile> => {
   const jwt = Jwt.extractFromLocalStorage();
 
   if (jwt === null) {
-    throw redirect("/login");
+    throw redirect(LOGIN);
   }
 
   if (jwt?.expired()) {
-    throw redirect("/login");
+    throw redirect(LOGIN);
   }
 
   return axios
@@ -26,6 +27,6 @@ export const loader = async (): Promise<Profile> => {
       return response.data;
     })
     .catch(() => {
-      throw redirect("/login");
+      throw redirect(LOGIN);
     });
 };
