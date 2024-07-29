@@ -1,8 +1,9 @@
 package mu.muse.domain.user
 
-import mu.muse.common.types.ValueObject
+import mu.muse.common.annotations.ValueObject
 
-data class Password internal constructor(private val value: String) : ValueObject {
+@ValueObject
+data class Password internal constructor(private val value: String) {
 
     companion object {
         fun from(value: String?): Password {

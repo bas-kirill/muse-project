@@ -1,11 +1,12 @@
 package mu.muse.domain.instrument
 
-import mu.muse.common.types.ValueObject
+import mu.muse.common.annotations.ValueObject
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 
-data class ManufacturerDate internal constructor(private val value: Instant) : ValueObject {
+@ValueObject
+data class ManufacturerDate internal constructor(private val value: Instant) {
 
     fun toInstantValue() = value
 

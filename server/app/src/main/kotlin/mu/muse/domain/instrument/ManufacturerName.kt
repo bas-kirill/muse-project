@@ -1,8 +1,9 @@
 package mu.muse.domain.instrument
 
-import mu.muse.common.types.ValueObject
+import mu.muse.common.annotations.ValueObject
 
-data class ManufacturerName internal constructor(private val value: String) : ValueObject {
+@ValueObject
+data class ManufacturerName internal constructor(private val value: String) {
 
     fun toStringValue() = value
 

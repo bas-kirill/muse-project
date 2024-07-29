@@ -1,8 +1,9 @@
 package mu.muse.domain.instrument
 
-import mu.muse.common.types.ValueObject
+import mu.muse.common.annotations.ValueObject
 
-data class InstrumentId internal constructor(private val value: Long) : ValueObject {
+@ValueObject
+data class InstrumentId internal constructor(private val value: Long) {
 
     fun toLongValue() = value
 
