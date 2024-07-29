@@ -1,6 +1,7 @@
 import React from "react";
-import { Instrument } from "@domain/model/instrument";
+import { Instrument } from "domain/model/instrument";
 import guitarImg from "./electric-guitar-gray.jpg";
+import "./InstrumentDetails.css";
 
 interface Props {
   instrument: Instrument;
