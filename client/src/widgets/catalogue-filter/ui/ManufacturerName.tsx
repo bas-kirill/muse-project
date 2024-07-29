@@ -33,4 +33,4 @@ export const ManufacturerName = ({ checkboxes, handleChange }: Props) => {
       </div>
     </div>
   );
-}
+};

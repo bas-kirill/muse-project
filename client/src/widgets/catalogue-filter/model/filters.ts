@@ -28,7 +28,7 @@ export const DEFAULT_CHECKBOX: Checkboxes = {
   cyprus: true,
   wood: true,
   metall: true,
-}
+};
 
 export type Filters = {
   instrumentName: string | null;

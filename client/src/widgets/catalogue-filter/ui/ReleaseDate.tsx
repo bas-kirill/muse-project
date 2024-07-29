@@ -28,4 +28,4 @@ export const ReleaseDate = ({ checkboxes, handleChange }: Props) => {
       />
     </div>
   );
-}
+};
