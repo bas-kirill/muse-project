@@ -32,17 +32,23 @@ export const InstrumentActions = ({ instrument }: Props) => {
 
   return (
     <div className="instrument-actions">
-      <button className="remove-instrument-button" onClick={handleOnDeleteInstrument}>
+      <button
+        className="remove-instrument-button"
+        onClick={handleOnDeleteInstrument}
+      >
         Remove
       </button>
       <button className="go-to-instrument-details-button">
         <Link to={"/instrument/" + instrument.id.toString()}>Go</Link>
       </button>
 
-      <Modal opened={successModal} closeModal={() => {
-        setSuccessModal(false);
-        window.location.reload();
-      }}>
+      <Modal
+        opened={successModal}
+        closeModal={() => {
+          setSuccessModal(false);
+          window.location.reload();
+        }}
+      >
         <h1>✅ Instrument deleted</h1>
       </Modal>
     </div>

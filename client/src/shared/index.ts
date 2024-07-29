@@ -1,3 +1,3 @@
-import {deleteInstrument} from "./api/delete-instrument";
+import { deleteInstrument } from "./api/delete-instrument";
 
-export {deleteInstrument};
+export { deleteInstrument };
