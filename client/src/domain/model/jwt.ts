@@ -21,7 +21,7 @@ export class Jwt {
     return this.value;
   }
 
-  public toRole(): string {
+  public toRole(): Role {
     return jwtDecode<JwtPayload>(this.value).role;
   }
 
@@ -38,7 +38,7 @@ export class Jwt {
     const jwtRaw = window.localStorage.getItem(
       Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY,
     );
-    if (jwtRaw == null) {
+    if (jwtRaw === null) {
       return null;
     }
     return Jwt.from(jwtRaw);
