@@ -3,10 +3,11 @@ package mu.muse.application.muse
 import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.access.instrument.InstrumentRemover
 import mu.muse.usecase.access.user.UserExtractor
-import mu.muse.usecase.scenario.DeleteInstrumentByIdUseCase
-import mu.muse.usecase.scenario.GetInstrumentByIdUseCase
-import mu.muse.usecase.scenario.GetInstrumentsByCriteriaUseCase
-import mu.muse.usecase.scenario.GetProfileUseCase
+import mu.muse.usecase.scenario.instrument.DeleteInstrumentByIdUseCase
+import mu.muse.usecase.scenario.instrument.GetInstrumentByIdUseCase
+import mu.muse.usecase.scenario.instrument.GetInstrumentTypesUseCase
+import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaUseCase
+import mu.muse.usecase.scenario.profile.GetProfileUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -25,4 +26,7 @@ class UseCaseConfiguration {
 
     @Bean
     fun deleteInstrumentById(instrumentRemover: InstrumentRemover) = DeleteInstrumentByIdUseCase(instrumentRemover)
+
+    @Bean
+    fun getInstrumentTypes() = GetInstrumentTypesUseCase()
 }
