@@ -33,4 +33,4 @@ export const BasicMaterials = ({ checkboxes, handleChange }: Props) => {
       </div>
     </div>
   );
-}
+};

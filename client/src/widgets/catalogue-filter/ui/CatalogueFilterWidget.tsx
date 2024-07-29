@@ -1,5 +1,9 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { Checkboxes, DEFAULT_CHECKBOX, Filters } from "widgets/catalogue-filter";
+import {
+  Checkboxes,
+  DEFAULT_CHECKBOX,
+  Filters,
+} from "widgets/catalogue-filter";
 import { transformCheckboxesToFilters } from "../model/transformCheckboxesToFilters";
 import { InstrumentType } from "widgets/catalogue-filter/ui/InstrumentType";
 import { ManufacturerName } from "widgets/catalogue-filter/ui/ManufacturerName";
@@ -24,7 +28,7 @@ export const CatalogueFilterWidget = ({ onFilterChange }: Props) => {
 
     setCheckboxes((prevState) => ({
       ...prevState,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 

@@ -43,5 +43,5 @@ export const InstrumentType = ({ checkboxes, handleChange }: Props) => {
         <label htmlFor="wind">Духовой</label>
       </div>
     </div>
-  )
-}
+  );
+};

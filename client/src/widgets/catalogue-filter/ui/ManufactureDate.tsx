@@ -28,4 +28,4 @@ export const ManufactureDate = ({ checkboxes, handleChange }: Props) => {
       />
     </div>
   );
-}
+};

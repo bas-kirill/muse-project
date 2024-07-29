@@ -1,6 +1,8 @@
 import { Checkboxes, Filters } from "widgets/catalogue-filter";
 
-export const transformCheckboxesToFilters = (checkboxes: Checkboxes): Filters => {
+export const transformCheckboxesToFilters = (
+  checkboxes: Checkboxes,
+): Filters => {
   const instrumentTypes = ["KEYBOARD", "STRINGED", "WIND"].filter(
     (type) => checkboxes[type as keyof Checkboxes],
   );
@@ -35,9 +37,7 @@ export const transformCheckboxesToFilters = (checkboxes: Checkboxes): Filters =>
         ? null
         : checkboxes.manufactureDateFrom,
     manufactureDateTo:
-      checkboxes.manufactureDateTo === ""
-        ? null
-        : checkboxes.manufactureDateTo,
+      checkboxes.manufactureDateTo === "" ? null : checkboxes.manufactureDateTo,
     releaseDateFrom:
       checkboxes.releaseDateFrom === "" ? null : checkboxes.releaseDateFrom,
     releaseDateTo:
