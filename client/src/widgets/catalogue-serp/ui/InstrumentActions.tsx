@@ -6,7 +6,7 @@ import { InstrumentId } from "domain/model/instrument-id";
 import Jwt from "domain/model/jwt";
 import { Modal } from "widgets/modal";
 import "./InstrumentActions.css";
-import { LOGIN } from "@shared/config/paths";
+import { LOGIN } from "shared/config/paths";
 
 interface Props {
   instrument: Instrument;

@@ -4,7 +4,7 @@ import { Profile } from "domain/model/profile";
 import Jwt from "domain/model/jwt";
 import { API_PROFILE } from "shared/config/backend";
 import { redirect } from "react-router-dom";
-import { LOGIN } from "@shared/config/paths";
+import { LOGIN } from "shared/config/paths";
 
 export const loader = async (): Promise<Profile> => {
   const jwt = Jwt.extractFromLocalStorage();
