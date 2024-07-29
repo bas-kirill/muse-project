@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_INSTRUMENT_BY_ID, SERVER_URL } from "shared/config/backend";
 import Jwt from "domain/model/jwt";
-import { InstrumentId } from "@domain/model/instrument-id";
+import { InstrumentId } from "domain/model/instrument-id";
 
 interface DeleteInstrumentByIdResponse {
   status: number;

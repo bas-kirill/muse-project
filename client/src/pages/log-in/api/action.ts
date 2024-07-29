@@ -40,10 +40,10 @@ export const action: ActionFunction = async ({
   );
 
   if (status === 200) {
-    const jwtRaw = data.jwtToken;
-    Jwt.putToLocalStorage(jwtRaw);
+    const jwt = Jwt.from(data.jwtToken);
+    Jwt.putToLocalStorage(jwt.toStringValue());
     return {
-      jwt: Jwt.from(jwtRaw),
+      jwt: jwt,
       errors: null,
     };
   }
