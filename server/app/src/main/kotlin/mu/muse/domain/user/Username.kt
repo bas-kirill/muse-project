@@ -1,8 +1,9 @@
 package mu.muse.domain.user
 
-import mu.muse.common.types.ValueObject
+import mu.muse.common.annotations.ValueObject
 
-data class Username internal constructor(private val value: String) : ValueObject {
+@ValueObject
+data class Username internal constructor(private val value: String) {
 
     fun toStringValue() = value
 
