@@ -1,6 +1,9 @@
 package mu.muse.common.types
 
-data class Version internal constructor(private val value: Long) : ValueObject {
+import mu.muse.common.annotations.ValueObject
+
+@ValueObject
+data class Version internal constructor(private val value: Long) {
 
     fun toLongValue() = value
 

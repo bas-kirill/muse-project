@@ -1,12 +1,12 @@
 package mu.muse.usecase
 
 import mu.muse.common.types.BusinessError
-import mu.muse.domain.Jwt
 import mu.muse.domain.user.Password
 import mu.muse.domain.user.Username
+import mu.muse.usecase.scenario.JwtRaw
 
 fun interface BasicLogin {
-    fun execute(username: Username, password: Password): Jwt
+    fun execute(username: Username, password: Password): JwtRaw
 }
 
 sealed class BasicLoginError : BusinessError {

@@ -1,9 +1,10 @@
 package mu.muse.domain.user
 
-import mu.muse.common.types.ValueObject
+import mu.muse.common.annotations.ValueObject
 
 // used `class` instead of `enum`, because `@RolesAllowed` requires compile-time constants
-data class Role internal constructor(private val value: String) : ValueObject {
+@ValueObject
+data class Role internal constructor(private val value: String) {
 
     companion object {
         fun from(value: String): Role {
