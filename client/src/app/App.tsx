@@ -12,19 +12,30 @@ import { Catalogue, loader as catalogueLoader } from "pages/catalogue";
 import { action, LogIn } from "pages/log-in";
 import { NotFound } from "pages/not-found";
 import { Instrument, loader as instrumentLoader } from "pages/instrument";
+import {
+  CATALOGUE,
+  CREATE_INSTRUMENT,
+  HOME,
+  INSTRUMENT_BY_ID,
+  LOGIN,
+  NOT_FOUND,
+  PROFILE,
+} from "shared/config/paths";
+import { CreateInstrument } from "pages/create-instrument";
 
 const routes = createRoutesFromElements(
   <Route>
-    <Route path="/" element={<Home />} />
-    <Route path="/profile" element={<UserProfile />} loader={profileLoader} />
-    <Route path="/catalogue" element={<Catalogue />} loader={catalogueLoader} />
-    <Route path="/login" element={<LogIn />} action={action} />
+    <Route path={HOME} element={<Home />} />
+    <Route path={PROFILE} element={<UserProfile />} loader={profileLoader} />
+    <Route path={CATALOGUE} element={<Catalogue />} loader={catalogueLoader} />
+    <Route path={LOGIN} element={<LogIn />} action={action} />
     <Route
-      path="/instrument/:instrumentId"
+      path={INSTRUMENT_BY_ID}
       element={<Instrument />}
       loader={instrumentLoader}
     />
-    <Route path="*" element={<NotFound />} />
+    <Route path={CREATE_INSTRUMENT} element={<CreateInstrument />} />
+    <Route path={NOT_FOUND} element={<NotFound />} />
   </Route>,
 );
 

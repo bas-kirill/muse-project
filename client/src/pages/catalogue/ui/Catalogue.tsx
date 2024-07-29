@@ -8,6 +8,7 @@ import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import axios from "axios";
 import { API_INSTRUMENTS, SERVER_URL } from "shared/config";
 import { Instruments } from "domain/model/instrument";
+import Jwt from "domain/model/jwt";
 
 export function Catalogue() {
   const initialInstruments = useLoaderData() as Instruments; // https://github.com/remix-run/react-router/discussions/9792
@@ -65,6 +66,7 @@ export function Catalogue() {
       <div id="catalogue-filter-serp-wrapper">
         <CatalogueFilterWidget
           onFilterChange={(newFilters: Filters) => setFilters(newFilters)}
+          role={Jwt.extractFromLocalStorage()?.toRole()}
         />
         <CatalogueSerpWidget instruments={instruments} />
       </div>
