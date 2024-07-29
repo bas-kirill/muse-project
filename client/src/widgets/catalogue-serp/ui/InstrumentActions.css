@@ -1,0 +1,14 @@
+.instrument-actions {
+  display: flex;
+
+  .remove-instrument-button {
+    background-color: red;
+    flex-basis: 50%;
+  }
+
+  .go-to-instrument-details-button {
+    background-color: blue;
+    padding: 10px 40px;
+    flex-basis: 50%;
+  }
+}

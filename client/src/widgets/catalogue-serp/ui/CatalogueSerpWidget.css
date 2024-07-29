@@ -11,22 +11,4 @@
   .instrument-card:last-child {
     margin-bottom: 30px;
   }
-
-  .instrument-details {
-    padding: 5px;
-    background-color: paleturquoise;
-    display: flex;
-
-    .instrument-details-description {
-      margin-left: 20px;
-    }
-  }
-
-  .instrument-actions {
-    .go-to-instrument-details-button {
-      background-color: saddlebrown;
-      padding: 10px 40px;
-      float: right;
-    }
-  }
 }
