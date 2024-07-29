@@ -1,27 +1,12 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import "./Profile.css";
-import { Jwt, Profile } from "domain/";
-import { SERVER_URL } from "shared/config";
+import React from "react";
+import "./UserProfile.css";
+import { Profile } from "domain/";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
+import { useLoaderData } from "react-router-dom";
 
 export function UserProfile() {
-  const [profile, setProfile] = useState<Profile>();
-
-  useEffect(() => {
-    const jwt = Jwt.extractFromLocalStorage();
-    if (jwt == null) {
-      return;
-    }
-    axios
-      .get<Profile>(`${SERVER_URL}/api/profile`, {
-        headers: {
-          Authorization: `Bearer ${jwt.toStringValue()}`,
-        },
-      })
-      .then((response) => setProfile(response.data));
-  });
+  const profile = useLoaderData() as Profile;
 
   return (
     <>

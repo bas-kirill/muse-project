@@ -4,8 +4,5 @@ import type { Profile } from "./model/profile";
 import { InstrumentId } from "./model/instrument-id";
 import type { Instrument } from "./model/instrument";
 
-export { Jwt };
-export { Role };
+export { Jwt, Role, InstrumentId, Instrument };
 export type { Profile };
-export { InstrumentId };
-export { Instrument };

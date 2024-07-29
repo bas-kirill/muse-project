@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Home } from "pages/home";
-import { UserProfile } from "pages/profile";
+import { UserProfile, loader as profileLoader } from "pages/profile";
 import { Catalogue, loader as catalogueLoader } from "pages/catalogue";
 import { action, LogIn } from "pages/log-in";
 import { NotFound } from "pages/not-found";
@@ -16,7 +16,7 @@ import { Instrument, loader as instrumentLoader } from "pages/instrument";
 const routes = createRoutesFromElements(
   <Route>
     <Route path="/" element={<Home />} />
-    <Route path="/profile" element={<UserProfile />} />
+    <Route path="/profile" element={<UserProfile />} loader={profileLoader} />
     <Route path="/catalogue" element={<Catalogue />} loader={catalogueLoader} />
     <Route path="/login" element={<LogIn />} action={action} />
     <Route
