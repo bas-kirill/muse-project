@@ -9,6 +9,7 @@ import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition.slices
 class CodeClimate {
 
     @ArchTest
+    @Suppress("VariableNaming")
     val `no cycle dependencies` = slices()
         .matching("mu.muse.(**)")
         .should()
