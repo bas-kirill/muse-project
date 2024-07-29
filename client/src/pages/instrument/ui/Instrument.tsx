@@ -19,7 +19,7 @@ export function Instrument() {
   const handleOnDeleteInstrument = () => {
     const id = InstrumentId.from(data.id);
     deleteInstrument(id)
-      .then((r) => {
+      .then(() => {
         setSuccessModal(true);
       })
       .catch((r) => {
