@@ -14,6 +14,22 @@ export type Checkboxes = {
   metall: boolean;
 };
 
+export const DEFAULT_CHECKBOX: Checkboxes = {
+  KEYBOARD: true,
+  STRINGED: true,
+  WIND: true,
+  audiocom: true,
+  yamaha: true,
+  manufactureDateFrom: "",
+  manufactureDateTo: "",
+  releaseDateFrom: "",
+  releaseDateTo: "",
+  usa: true,
+  cyprus: true,
+  wood: true,
+  metall: true,
+}
+
 export type Filters = {
   instrumentName: string | null;
   instrumentTypes: string[];
