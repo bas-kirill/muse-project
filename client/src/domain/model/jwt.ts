@@ -5,7 +5,7 @@ interface JwtPayload {
   sub: string;
   role: Role;
   iat: number;
-  exp: number;
+  exp: number; // UNIX seconds
 }
 
 export class Jwt {
@@ -23,6 +23,11 @@ export class Jwt {
 
   public toRole(): string {
     return jwtDecode<JwtPayload>(this.value).role;
+  }
+
+  public expired(): boolean {
+    const nowSeconds = Math.floor(Date.now() / 1000);
+    return jwtDecode<JwtPayload>(this.value).exp < nowSeconds;
   }
 
   public static from(jwtRaw: string): Jwt {
