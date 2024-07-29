@@ -13,7 +13,7 @@ plugins {
 }
 
 group = "mu.muse"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
@@ -28,6 +28,10 @@ configurations {
     compileOnly {
         extendsFrom(configurations.annotationProcessor.get())
     }
+}
+
+springBoot {
+    buildInfo()
 }
 
 repositories {
