@@ -36,18 +36,17 @@ export const CreateInstrument = () => {
 
         <div className="create-instrument-field">
           <label htmlFor="country">Country</label>
-          <input type="text" name="country"/>
+          <input type="text" name="country" />
         </div>
 
         <div className="create-instrument-field">
           <label htmlFor="basic-material">Basic Material</label>
-          <input type="text" name="basic-material"/>
+          <input type="text" name="basic-material" />
         </div>
 
         <input type="submit" />
       </form>
       <Footer />
     </>
-  )
-    ;
+  );
 };
