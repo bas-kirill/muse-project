@@ -1,15 +1,12 @@
 package mu.muse
 
 import mu.muse.application.muse.SecurityConfiguration
-import mu.muse.common.types.Version
 import mu.muse.domain.IdGenerator
-import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.user.Password
 import mu.muse.domain.user.Role
 import mu.muse.domain.user.User
 import mu.muse.domain.user.Username
 import mu.muse.domain.user.UsernameId
-import mu.muse.persistence.instrument.InMemoryInstrumentIdGenerator
 import mu.muse.persistence.user.InMemoryUserRepository
 import mu.muse.persistence.user.InMemoryUsernameIdGenerator
 import mu.muse.rest.HelloEndpoint

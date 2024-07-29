@@ -47,6 +47,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("com.tngtech.archunit:archunit-junit5:1.3.0")
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
