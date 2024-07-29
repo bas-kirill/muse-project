@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import "./AddInstrumentCardButton.css";
+import "./CreateInstrumentCardButton.css";
 import {
   Checkboxes,
   DEFAULT_CHECKBOX,

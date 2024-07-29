@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
 import { Jwt } from "domain/";
-import { CATALOGUE, FAVORITE, HOME, LOGIN, PROFILE } from "@shared/config/paths";
+import { CATALOGUE, FAVORITE, HOME, LOGIN, PROFILE } from "shared/config/paths";
 
 export function Header() {
   const [authenticated, setAuthenticated] = useState(false);

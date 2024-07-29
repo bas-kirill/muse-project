@@ -9,7 +9,7 @@ import { InstrumentDetails } from "pages/instrument";
 import { Modal } from "widgets/modal";
 import Jwt from "domain/model/jwt";
 import { deleteInstrument } from "shared";
-import { LOGIN } from "@shared/config/paths";
+import { LOGIN } from "shared/config/paths";
 
 export function Instrument() {
   const data = useLoaderData() as InstrumentDetails;
