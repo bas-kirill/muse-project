@@ -16,13 +16,16 @@ export const loader = async (): Promise<Profile> => {
     throw redirect("/login");
   }
 
-  return axios.get<Profile>(`${SERVER_URL}${API_PROFILE}`, {
-    headers: {
-      "Authorization": `Bearer ${jwt.toStringValue()}`
-    }
-  }).then((response) => {
-    return response.data;
-  }).catch(() => {
-    throw redirect("/login");
-  });
+  return axios
+    .get<Profile>(`${SERVER_URL}${API_PROFILE}`, {
+      headers: {
+        Authorization: `Bearer ${jwt.toStringValue()}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch(() => {
+      throw redirect("/login");
+    });
 };
