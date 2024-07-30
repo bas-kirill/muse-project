@@ -1,5 +1,6 @@
-import electricGuitar from "pages/instrument/ui/electric-guitar-gray.jpg";
 import React from "react";
+import "./InstrumentDescription.css";
+import electricGuitar from "pages/instrument/ui/electric-guitar-gray.jpg";
 import { InstrumentDetails } from "pages/instrument";
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
 
 export const InstrumentDescription = ({instrument}: Props) => {
   return (
-    <div id="instrument-details">
+    <div id="instrument-description">
       <img
         src={electricGuitar}
         width="200"

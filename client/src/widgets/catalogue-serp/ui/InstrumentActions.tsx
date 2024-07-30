@@ -33,16 +33,16 @@ export const InstrumentActions = ({ instrument }: Props) => {
   };
 
   return (
-    <div className="instrument-actions">
+    <div className="serp-instrument-actions">
       {Jwt.extractFromLocalStorage()?.toRole() === Role.Editor && (
         <>
           <button
-            className="remove-instrument-button"
+            className="serp-remove-instrument-button"
             onClick={handleOnDeleteInstrument}
           >
             Remove
           </button>
-          <button className="edit-instrument-button">
+          <button className="serp-edit-instrument-button">
             <Link to={"/instrument/" + instrument.id.toString() + "/edit"}>
               Edit
             </Link>
@@ -50,7 +50,7 @@ export const InstrumentActions = ({ instrument }: Props) => {
         </>
       )}
 
-      <button className="go-to-instrument-details-button">
+      <button className="serp-go-to-instrument-details-button">
         <Link to={"/instrument/" + instrument.id.toString()}>Go</Link>
       </button>
 
@@ -61,7 +61,7 @@ export const InstrumentActions = ({ instrument }: Props) => {
           window.location.reload();
         }}
       >
-        <h1>✅ Instrument deleted</h1>
+        <h1>✅Instrument deleted</h1>
       </Modal>
     </div>
   );

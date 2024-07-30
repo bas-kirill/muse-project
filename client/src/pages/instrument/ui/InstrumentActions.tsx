@@ -1,24 +1,26 @@
 import React, { useState } from "react";
+import "./InstrumentActions.css";
 import { useNavigate } from "react-router-dom";
 import { deleteInstrument } from "shared/api/delete-instrument";
 import Jwt from "domain/model/jwt";
 import { LOGIN } from "shared/config/paths";
 import { Modal } from "widgets/modal";
+import { InstrumentDetails } from "pages/instrument";
 import { InstrumentId } from "domain/model/instrument-id";
 
 interface Props {
-  id: InstrumentId;
+  instrument: InstrumentDetails;
 }
 
-export const InstrumentActions = ({id}: Props) => {
-  const [successModal, setSuccessModal] = useState<boolean>(false);
-  const [errorModal, setErrorModal] = useState<boolean>(false);
+export const InstrumentActions = ({ instrument }: Props) => {
+  const [deleteSuccessModal, setDeleteSuccessModal] = useState<boolean>(false);
+  const [deleteErrorModal, setDeleteErrorModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleOnDeleteInstrument = () => {
-    deleteInstrument(id)
+    deleteInstrument(InstrumentId.from(instrument.id))
       .then(() => {
-        setSuccessModal(true);
+        setDeleteSuccessModal(true);
       })
       .catch((r) => {
         const status = r.toJSON()["status"];
@@ -26,23 +28,31 @@ export const InstrumentActions = ({id}: Props) => {
           Jwt.eraseFromLocalStorage();
           navigate(LOGIN);
         }
-        setErrorModal(true);
+        setDeleteErrorModal(true);
       });
   };
 
+  const handleOnEditInstrument = () => {
+    navigate("/instrument/" + instrument.id + "/edit");
+  };
+
   return (
-    <>
-      <button id="delete-instrument" onClick={handleOnDeleteInstrument}>
+    <div id="instrument-profile-instrument-actions">
+      <button id="instrument-profile-delete-instrument" onClick={handleOnDeleteInstrument}>
         Delete
       </button>
 
-      <Modal opened={successModal} closeModal={() => setSuccessModal(false)}>
-        <h1>Instrument Deleted</h1>
+      <button id="instrument-profile-edit-instrument" onClick={handleOnEditInstrument}>
+        Edit
+      </button>
+
+      <Modal opened={deleteSuccessModal} closeModal={() => setDeleteSuccessModal(false)}>
+        <h1>✅Instrument deleted</h1>
       </Modal>
 
-      <Modal opened={errorModal} closeModal={() => setErrorModal(false)}>
-        <h1>Fail to delete instrument</h1>
+      <Modal opened={deleteErrorModal} closeModal={() => setDeleteErrorModal(false)}>
+        <h1>❌Fail to delete instrument</h1>
       </Modal>
-    </>
-  )
-}
+    </div>
+  );
+};

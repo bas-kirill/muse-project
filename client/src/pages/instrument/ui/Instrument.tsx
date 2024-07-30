@@ -8,14 +8,14 @@ import { InstrumentDescription } from "./InstrumentDescription";
 import { InstrumentDetails } from "pages/instrument";
 
 export function Instrument() {
-  const loader = useLoaderData() as InstrumentDetails;
+  const instrument = useLoaderData() as InstrumentDetails;
 
   return (
     <>
       <Header />
       <div id="instrument">
-        <InstrumentDescription instrument={loader} />
-        <InstrumentActions id={loader.id} />
+        <InstrumentDescription instrument={instrument} />
+        <InstrumentActions instrument={instrument} />
       </div>
       <Footer />
     </>
