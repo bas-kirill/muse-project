@@ -10,3 +10,4 @@ const val API_DELETE_INSTRUMENT_BY_ID = "$API/instrument/{id:\\d+}/delete"  // i
 const val API_INSTRUMENT_TYPES = "$API/instrument/types"
 const val API_INSTRUMENT_MATERIALS = "$API/instrument/materials"
 const val API_COUNTRIES = "$API/countries"
+const val API_CREATE_INSTRUMENT = "$API/instrument/create"
