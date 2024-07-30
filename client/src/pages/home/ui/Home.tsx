@@ -2,8 +2,11 @@ import React from "react";
 import "./Home.css";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
+import { useJwt } from "pages/log-in";
 
 export function Home() {
+  useJwt();
+
   return (
     <div id="home">
       <Header />

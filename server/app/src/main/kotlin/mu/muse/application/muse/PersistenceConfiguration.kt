@@ -62,7 +62,7 @@ class PersistenceConfiguration {
     fun instruments(idGenerator: IdGenerator<InstrumentId>): Set<Instrument> {
 
         val releasedGuitar = Instrument.create(
-            idGenerator = idGenerator,
+            id = idGenerator.generate(),
             name = InstrumentName.from("Fender Stratocaster"),
             type = Instrument.Type.STRINGED,
             manufacturer = Manufacturer.YAMAHA,
@@ -73,7 +73,7 @@ class PersistenceConfiguration {
         )
 
         val notYetReleasedGuitar = Instrument.create(
-            idGenerator = idGenerator,
+            id = idGenerator.generate(),
             name = InstrumentName.from("Fidel Telecastro"),
             type = Instrument.Type.STRINGED,
             manufacturer = Manufacturer.FENDER,
@@ -84,7 +84,7 @@ class PersistenceConfiguration {
         )
 
         val saxophone = Instrument.create(
-            idGenerator = idGenerator,
+            id = idGenerator.generate(),
             name = InstrumentName.from("SaxoStar"),
             type = Instrument.Type.WIND,
             manufacturer = Manufacturer.SIGMA,
@@ -95,7 +95,7 @@ class PersistenceConfiguration {
         )
 
         val piano = Instrument.create(
-            idGenerator = idGenerator,
+            id = idGenerator.generate(),
             name = InstrumentName.from("Yamaha CLP-745B"),
             type = Instrument.Type.KEYBOARD,
             manufacturer = Manufacturer.YAMAHA,

@@ -4,6 +4,7 @@ import mu.muse.rest.HelloEndpoint
 import mu.muse.rest.country.GetCountriesEndpoint
 import mu.muse.rest.instruments.CreateInstrumentEndpoint
 import mu.muse.rest.instruments.DeleteInstrumentByIdEndpoint
+import mu.muse.rest.instruments.EditInstrumentEndpoint
 import mu.muse.rest.instruments.GetInstrumentsByCriteriaEndpoint
 import mu.muse.rest.instruments.GetInstrumentByIdEndpoint
 import mu.muse.rest.instruments.GetInstrumentManufacturersEndpoint
@@ -14,6 +15,7 @@ import mu.muse.rest.profile.GetProfileEndpoint
 import mu.muse.usecase.BasicLogin
 import mu.muse.usecase.CreateInstrument
 import mu.muse.usecase.DeleteInstrumentById
+import mu.muse.usecase.EditInstrument
 import mu.muse.usecase.GetCountries
 import mu.muse.usecase.GetInstrumentsByCriteria
 import mu.muse.usecase.GetInstrumentById
@@ -65,4 +67,7 @@ class RestConfiguration {
     @Bean
     fun getInstrumentManufacturersEndpoint(getInstrumentManufacturers: GetInstrumentManufacturers) =
         GetInstrumentManufacturersEndpoint(getInstrumentManufacturers)
+
+    @Bean
+    fun editInstrumentEndpoint(editInstrument: EditInstrument) = EditInstrumentEndpoint(editInstrument)
 }

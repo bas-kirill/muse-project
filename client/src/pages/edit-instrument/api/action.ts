@@ -10,14 +10,13 @@ import { parseInstrumentDetails } from "pages/create-instrument/model/parseInstr
 import axios from "axios";
 import { SERVER_URL } from "shared/config";
 import Jwt from "domain/model/jwt";
-import { InstrumentId } from "domain/model/instrument-id";
 
 export interface EditInstrumentAction {
   errors: string[] | null;
 }
 
 interface EditInstrumentRequestBody {
-  instrumentId: InstrumentId;
+  instrumentId: number;
   instrumentName: InstrumentName;
   instrumentType: InstrumentType;
   manufacturerName: ManufacturerName;
@@ -49,7 +48,7 @@ export const action: ActionFunction = async ({
   }
 
   const editInstrumentRequestBody: EditInstrumentRequestBody = {
-    instrumentId: instrumentId,
+    instrumentId: instrumentId.toNumberValue(),
     instrumentName: instrumentName,
     instrumentType: instrumentType,
     manufacturerName: manufacturerName,
