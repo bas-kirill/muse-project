@@ -10,22 +10,38 @@ export const parseInstrumentDetails = (data: FormData) => {
   const errors = [];
 
   const instrumentName = data.get("instrument-name");
-  if (instrumentName === null || typeof instrumentName !== "string" || instrumentName === "") {
+  if (
+    instrumentName === null ||
+    typeof instrumentName !== "string" ||
+    instrumentName === ""
+  ) {
     errors.push("Type instrument name");
   }
 
   const instrumentType = data.get("instrument-type");
-  if (instrumentType === null || typeof instrumentType !== "string" || instrumentType === "") {
+  if (
+    instrumentType === null ||
+    typeof instrumentType !== "string" ||
+    instrumentType === ""
+  ) {
     errors.push("Type instrument type");
   }
 
   const manufacturerName = data.get("manufacturer-name");
-  if (manufacturerName === null || typeof manufacturerName !== "string" || manufacturerName === "") {
+  if (
+    manufacturerName === null ||
+    typeof manufacturerName !== "string" ||
+    manufacturerName === ""
+  ) {
     errors.push("Type manufacturer name");
   }
 
   const manufactureDate = data.get("manufacturer-date");
-  if (manufactureDate === null || typeof manufactureDate !== "string" || manufactureDate === "") {
+  if (
+    manufactureDate === null ||
+    typeof manufactureDate !== "string" ||
+    manufactureDate === ""
+  ) {
     errors.push("Type manufacture date");
   }
 
@@ -41,7 +57,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     releaseDate,
     country,
     material,
-    errors
+    errors,
   } as {
     instrumentName: InstrumentName;
     instrumentType: InstrumentType;

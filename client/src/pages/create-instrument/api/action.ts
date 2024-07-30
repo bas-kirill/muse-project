@@ -25,7 +25,9 @@ interface CreateInstrumentRequestBody {
   material: Material;
 }
 
-export const action: ActionFunction = async ({ request }): Promise<CreateInstrumentAction> => {
+export const action: ActionFunction = async ({
+  request,
+}): Promise<CreateInstrumentAction> => {
   const {
     instrumentName,
     instrumentType,
@@ -34,14 +36,12 @@ export const action: ActionFunction = async ({ request }): Promise<CreateInstrum
     releaseDate,
     country,
     material,
-    errors
-  } = parseInstrumentDetails(
-    await request.formData()
-  );
+    errors,
+  } = parseInstrumentDetails(await request.formData());
 
   if (errors.length > 0) {
     return {
-      errors: errors
+      errors: errors,
     };
   }
 
@@ -52,22 +52,22 @@ export const action: ActionFunction = async ({ request }): Promise<CreateInstrum
     manufactureDate: manufactureDate,
     releaseDate: releaseDate,
     country: country,
-    material: material
+    material: material,
   };
 
   const { status } = await axios.post(
     `${SERVER_URL}${API_CREATE_INSTRUMENT}`,
     createInstrumentRequestBody,
-    { validateStatus: () => true } // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
+    { validateStatus: () => true }, // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
   );
 
   if (status === 200) {
     return {
-      errors: null
+      errors: null,
     };
   }
 
   return {
-    errors: [...errors, `Failed to create instrument '${instrumentName}'`]
+    errors: [...errors, `Failed to create instrument '${instrumentName}'`],
   };
 };

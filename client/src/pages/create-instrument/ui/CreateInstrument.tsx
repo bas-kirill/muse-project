@@ -23,8 +23,10 @@ export const CreateInstrument = () => {
         <div className="create-instrument-field">
           <label htmlFor="instrument-type">Instrument Type</label>
           <select name="instrument-type" required>
-            {loader.instrumentTypes.map(instrumentType => (
-              <option key={instrumentType} value={instrumentType}>{instrumentType}</option>
+            {loader.instrumentTypes.map((instrumentType) => (
+              <option key={instrumentType} value={instrumentType}>
+                {instrumentType}
+              </option>
             ))}
           </select>
         </div>
@@ -47,8 +49,10 @@ export const CreateInstrument = () => {
         <div className="create-instrument-field">
           <label htmlFor="country">Country</label>
           <select name="country">
-            {loader.countries.map(country => (
-              <option key={country} value={country}>{country}</option>
+            {loader.countries.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
             ))}
           </select>
         </div>
@@ -56,19 +60,18 @@ export const CreateInstrument = () => {
         <div className="create-instrument-field">
           <label htmlFor="material">Basic Material</label>
           <select name="material" required>
-            {loader.materials.map(material => (
-              <option key={material} value={material}>{material}</option>
+            {loader.materials.map((material) => (
+              <option key={material} value={material}>
+                {material}
+              </option>
             ))}
           </select>
         </div>
 
         <input type="submit" />
       </form>
-      {actionData?.errors && (
-        actionData?.errors.map(error => (
-          <div key={error}>{error}</div>
-        ))
-      )}
+      {actionData?.errors &&
+        actionData?.errors.map((error) => <div key={error}>{error}</div>)}
       <Footer />
     </>
   );

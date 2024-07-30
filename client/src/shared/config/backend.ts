@@ -1,4 +1,5 @@
-export const SERVER_URL = "https://d1d20c73-f152-4b4f-b0bd-72567d20b1a5.mock.pstmn.io";
+export const SERVER_URL =
+  "https://d1d20c73-f152-4b4f-b0bd-72567d20b1a5.mock.pstmn.io";
 
 export const API = "/api";
 export const API_PROFILE = `${API}/profile`;
