@@ -9,10 +9,9 @@ import { ManufactureDate } from "domain/model/manufacture-date";
 import { ReleaseDate } from "domain/model/release-date";
 import { Country } from "domain/model/country";
 import { Materials } from "domain/model/material";
-import { InstrumentId } from "domain/model/instrument-id";
 
 export interface InstrumentDetails {
-  id: InstrumentId;
+  id: number;
   name: InstrumentName;
   type: InstrumentType;
   manufacturer: ManufacturerName;

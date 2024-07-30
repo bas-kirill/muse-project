@@ -1,17 +1,17 @@
-.instrument-actions {
+.serp-instrument-actions {
   display: flex;
 
-  .remove-instrument-button {
+  .serp-remove-instrument-button {
     background-color: red;
     flex-basis: 25%;
   }
 
-  .edit-instrument-button {
+  .serp-edit-instrument-button {
     background-color: fuchsia;
     flex-basis: 25%;
   }
 
-  .go-to-instrument-details-button {
+  .serp-go-to-instrument-details-button {
     background-color: blue;
     padding: 10px 40px;
     flex-basis: 50%;
