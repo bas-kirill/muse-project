@@ -38,7 +38,7 @@ class CreateInstrumentEndpoint(
             manufactureDate,
             releaseDate,
             country,
-            material
+            material,
         )
     }
 
