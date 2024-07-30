@@ -11,7 +11,8 @@ import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 
 fun interface EditInstrument {
-    
+
+    @Suppress("LongParameterList")
     @SuppressWarnings("kotlin:S107")
     fun execute(
         instrumentId: InstrumentId,
