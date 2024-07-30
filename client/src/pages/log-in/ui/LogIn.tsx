@@ -4,7 +4,7 @@ import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { Form, useActionData } from "react-router-dom";
 import { LogInAction } from "../api/action";
-import useJwt from "pages/log-in/model/use-jwt";
+import { useJwt } from "pages/log-in";
 
 export function LogIn() {
   useJwt();

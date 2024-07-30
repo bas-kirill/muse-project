@@ -9,7 +9,7 @@ import axios from "axios";
 import { API_INSTRUMENTS, SERVER_URL } from "shared/config";
 import { Instruments } from "domain/model/instrument";
 import Jwt from "domain/model/jwt";
-import useJwt from "pages/log-in/model/use-jwt";
+import { useJwt } from "pages/log-in";
 
 export function Catalogue() {
   useJwt();
