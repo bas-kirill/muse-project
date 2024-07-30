@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Jwt from "domain/model/jwt";
 
-const useJwt = () => {
+export const useJwt = () => {
   useEffect(() => {
     const jwt = Jwt.extractFromLocalStorage();
 
@@ -14,5 +14,3 @@ const useJwt = () => {
     }
   }, []);
 };
-
-export default useJwt;
