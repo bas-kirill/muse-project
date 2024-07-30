@@ -28,8 +28,8 @@ interface EditInstrumentRequestBody {
 }
 
 export const action: ActionFunction = async ({
-                                               request,
-                                             }): Promise<EditInstrumentAction> => {
+  request,
+}): Promise<EditInstrumentAction> => {
   const {
     instrumentId,
     instrumentName,

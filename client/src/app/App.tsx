@@ -4,7 +4,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
+  RouterProvider,
 } from "react-router-dom";
 import { Home } from "pages/home";
 import { UserProfile, loader as profileLoader } from "pages/profile";
@@ -14,19 +14,24 @@ import { NotFound } from "pages/not-found";
 import { Instrument, loader as instrumentLoader } from "pages/instrument";
 import {
   CATALOGUE,
-  CREATE_INSTRUMENT, EDIT_INSTRUMENT_BY_ID,
+  CREATE_INSTRUMENT,
+  EDIT_INSTRUMENT_BY_ID,
   HOME,
   INSTRUMENT_BY_ID,
   LOGIN,
   NOT_FOUND,
-  PROFILE
+  PROFILE,
 } from "shared/config/paths";
 import {
   CreateInstrument,
   loader as createInstrumentLoader,
-  action as createInstrumentAction
+  action as createInstrumentAction,
 } from "pages/create-instrument";
-import { EditInstrument, loader as editLoader, action as editAction } from "pages/edit-instrument";
+import {
+  EditInstrument,
+  loader as editLoader,
+  action as editAction,
+} from "pages/edit-instrument";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -45,9 +50,14 @@ const routes = createRoutesFromElements(
       loader={createInstrumentLoader}
       action={createInstrumentAction}
     />
-    <Route path={EDIT_INSTRUMENT_BY_ID} element={<EditInstrument />} loader={editLoader} action={editAction} />
+    <Route
+      path={EDIT_INSTRUMENT_BY_ID}
+      element={<EditInstrument />}
+      loader={editLoader}
+      action={editAction}
+    />
     <Route path={NOT_FOUND} element={<NotFound />} />
-  </Route>
+  </Route>,
 );
 
 const router = createBrowserRouter(routes);

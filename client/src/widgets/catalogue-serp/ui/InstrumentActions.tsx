@@ -34,7 +34,6 @@ export const InstrumentActions = ({ instrument }: Props) => {
 
   return (
     <div className="instrument-actions">
-
       {Jwt.extractFromLocalStorage()?.toRole() === Role.Editor && (
         <>
           <button
@@ -44,7 +43,9 @@ export const InstrumentActions = ({ instrument }: Props) => {
             Remove
           </button>
           <button className="edit-instrument-button">
-            <Link to={"/instrument/" + instrument.id.toString() + "/edit"}>Edit</Link>
+            <Link to={"/instrument/" + instrument.id.toString() + "/edit"}>
+              Edit
+            </Link>
           </button>
         </>
       )}

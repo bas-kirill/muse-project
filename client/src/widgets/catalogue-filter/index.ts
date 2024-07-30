@@ -1,15 +1,7 @@
-import {
-  CatalogueFilterWidget
-} from "./ui/CatalogueFilterWidget";
+import { CatalogueFilterWidget } from "./ui/CatalogueFilterWidget";
 
-import type {
-  Filters
-} from "./model/filters";
+import type { Filters } from "./model/filters";
 
-export {
-  CatalogueFilterWidget
-};
+export { CatalogueFilterWidget };
 
-export type {
-  Filters
-};
+export type { Filters };
