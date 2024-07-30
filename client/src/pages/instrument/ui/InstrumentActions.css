@@ -1,17 +1,16 @@
 #instrument-profile-instrument-actions {
-    display: flex;
+  display: flex;
 
-    #instrument-profile-delete-instrument {
-        flex-basis: 50%;
-        background-color: red;
-        padding: 30px;
-    }
+  #instrument-profile-delete-instrument {
+    flex-basis: 50%;
+    background-color: red;
+    padding: 30px;
+  }
 
-    #instrument-profile-edit-instrument {
-        flex-basis: 50%;
-        background-color: blue;
-        text-align: center;
-        padding: 30px;
-    }
+  #instrument-profile-edit-instrument {
+    flex-basis: 50%;
+    background-color: blue;
+    text-align: center;
+    padding: 30px;
+  }
 }
-
