@@ -1,1 +1,1 @@
-export type InstrumentName = string;
+export type InstrumentName = string; // NOSONAR
