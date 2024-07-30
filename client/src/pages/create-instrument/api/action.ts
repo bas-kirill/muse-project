@@ -56,12 +56,13 @@ export const action: ActionFunction = async ({
     material: material,
   };
 
-  const { status } = await axios.post(`${SERVER_URL}${API_CREATE_INSTRUMENT}`,
+  const { status } = await axios.post(
+    `${SERVER_URL}${API_CREATE_INSTRUMENT}`,
     createInstrumentRequestBody,
     {
       headers: {
         Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
-      }
+      },
     }, // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
   );
 
