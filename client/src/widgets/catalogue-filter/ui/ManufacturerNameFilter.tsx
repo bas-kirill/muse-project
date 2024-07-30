@@ -10,37 +10,45 @@ interface Props {
 }
 
 export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
-  const [manufacturerNames, setManufacturerNames] = useState<ManufacturerNames>([]);
+  const [manufacturerNames, setManufacturerNames] = useState<ManufacturerNames>(
+    [],
+  );
 
   useEffect(() => {
-    axios.get<InstrumentTypes>(`${SERVER_URL}${API_MANUFACTURERS}`)
-      .then(r => {
+    axios
+      .get<InstrumentTypes>(`${SERVER_URL}${API_MANUFACTURERS}`)
+      .then((r) => {
         setManufacturerNames(r.data);
       })
-      .catch(e => {
+      .catch((e) => {
         throw new Error(`Failed to extract instrument types: '${e}'`);
       });
-
   }, []);
 
   function onChange() {
-    const elements: NodeListOf<HTMLInputElement> = document
-      .querySelectorAll(".manufacturer-name-filter-checkbox");
+    const elements: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+      ".manufacturer-name-filter-checkbox",
+    );
 
     onValueChange(
       Array.from(elements)
-        .filter(inputTag => inputTag.checked)
-        .map(inputTag => inputTag.name)
+        .filter((inputTag) => inputTag.checked)
+        .map((inputTag) => inputTag.name),
     );
   }
 
   return (
     <div id="manufacturer-name-filter">
       <legend>Manufacturer:</legend>
-      {manufacturerNames.map(manufactureName => (
+      {manufacturerNames.map((manufactureName) => (
         <div key={manufactureName}>
-          <input type="checkbox" name={manufactureName} onChange={onChange}
-                 className="manufacturer-name-filter-checkbox" defaultChecked={true} />
+          <input
+            type="checkbox"
+            name={manufactureName}
+            onChange={onChange}
+            className="manufacturer-name-filter-checkbox"
+            defaultChecked={true}
+          />
           <label htmlFor={manufactureName}>{manufactureName}</label>
         </div>
       ))}

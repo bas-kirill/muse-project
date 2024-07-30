@@ -14,7 +14,7 @@ export const DateFilter = ({ onValueChange, fieldName, labelName }: Props) => {
     if (!manufacturerDate.current) {
       return;
     }
-    onValueChange(manufacturerDate.current.value)
+    onValueChange(manufacturerDate.current.value);
   }
 
   return (

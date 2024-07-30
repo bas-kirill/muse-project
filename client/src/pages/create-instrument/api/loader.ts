@@ -3,7 +3,8 @@ import { SERVER_URL } from "shared/config";
 import {
   API_COUNTRIES,
   API_INSTRUMENT_MATERIALS,
-  API_INSTRUMENT_TYPES, API_MANUFACTURERS
+  API_INSTRUMENT_TYPES,
+  API_MANUFACTURERS,
 } from "shared/config/backend";
 import axios from "axios";
 import { InstrumentTypes } from "domain/model/instrument-type";
@@ -53,13 +54,14 @@ export const loader: LoaderFunction =
       });
 
     let manufacturers: ManufacturerNames = [];
-    await axios.get<ManufacturerNames>(`${SERVER_URL}${API_MANUFACTURERS}`)
+    await axios
+      .get<ManufacturerNames>(`${SERVER_URL}${API_MANUFACTURERS}`)
       .then((data) => {
         manufacturers = data.data;
       })
       .catch(() => {
         throw new Error("Fail to retrieve manufacturer names");
-      })
+      });
 
     return {
       instrumentTypes: instrumentTypes,

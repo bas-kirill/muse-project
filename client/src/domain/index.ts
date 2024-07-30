@@ -7,7 +7,10 @@ import type { InstrumentTypes } from "./model/instrument-type";
 import type { Materials } from "./model/material";
 import type { Country, Countries } from "./model/country";
 import type { InstrumentName } from "./model/instrument-name";
-import type { ManufacturerName, ManufacturerNames } from "./model/manufacturer-name";
+import type {
+  ManufacturerName,
+  ManufacturerNames,
+} from "./model/manufacturer-name";
 import type { ManufactureDate } from "./model/manufacture-date";
 import type { ReleaseDate } from "./model/release-date";
 

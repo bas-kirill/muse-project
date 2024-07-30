@@ -11,35 +11,35 @@ interface Props {
 }
 
 export const MaterialFilter = ({ onValueChange }: Props) => {
-
   const [materials, setMaterials] = useState<Materials>([]);
 
   useEffect(() => {
-    axios.get<InstrumentTypes>(`${SERVER_URL}${API_INSTRUMENT_MATERIALS}`)
-      .then(r => {
+    axios
+      .get<InstrumentTypes>(`${SERVER_URL}${API_INSTRUMENT_MATERIALS}`)
+      .then((r) => {
         setMaterials(r.data);
       })
-      .catch(e => {
+      .catch((e) => {
         throw new Error(`Failed to extract countries: '${e}'`);
       });
-
   }, []);
 
   function onChange() {
-    const elements: NodeListOf<HTMLInputElement> = document
-      .querySelectorAll(".materials-filter-checkbox");
+    const elements: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+      ".materials-filter-checkbox",
+    );
 
     onValueChange(
       Array.from(elements)
-        .filter(inputTag => inputTag.checked)
-        .map(inputTag => inputTag.name)
+        .filter((inputTag) => inputTag.checked)
+        .map((inputTag) => inputTag.name),
     );
   }
 
   return (
     <div id="materials-filter">
       <legend>Основные инструменты:</legend>
-      {materials.map(material => (
+      {materials.map((material) => (
         <div key={material}>
           <input
             type="checkbox"
@@ -51,7 +51,6 @@ export const MaterialFilter = ({ onValueChange }: Props) => {
           />
           <label htmlFor={material}>{material}</label>
         </div>
-
       ))}
     </div>
   );
