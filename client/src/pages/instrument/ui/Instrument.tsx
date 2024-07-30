@@ -4,7 +4,6 @@ import { Footer } from "widgets/footer";
 import { Header } from "widgets/header";
 import electricGuitar from "./electric-guitar-gray.jpg";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import { InstrumentId } from "domain/model/instrument-id";
 import { InstrumentDetails } from "pages/instrument";
 import { Modal } from "widgets/modal";
 import Jwt from "domain/model/jwt";
@@ -18,7 +17,7 @@ export function Instrument() {
   const navigate = useNavigate();
 
   const handleOnDeleteInstrument = () => {
-    const id = InstrumentId.from(data.id);
+    const id = data.id;
     deleteInstrument(id)
       .then(() => {
         setSuccessModal(true);

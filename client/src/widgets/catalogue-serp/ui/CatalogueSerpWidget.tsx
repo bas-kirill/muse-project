@@ -9,6 +9,7 @@ interface Props {
 }
 
 export const CatalogueSerpWidget = ({ instruments }: Props) => {
+
   return (
     <div id="catalogue-serp">
       {instruments.map((instrument: Instrument) => (

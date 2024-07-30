@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { ManufacturerNames } from "@domain/model/manufacturer-name";
+import { ManufacturerNames } from "domain/model/manufacturer-name";
 import axios from "axios";
-import { InstrumentTypes } from "@domain/model/instrument-type";
+import { InstrumentTypes } from "domain/model/instrument-type";
 import { SERVER_URL } from "shared/config";
 import { API_INSTRUMENT_MATERIALS } from "shared/config/backend";
-import { Materials } from "@domain/model/material";
+import { Materials } from "domain/model/material";
 
 interface Props {
   onValueChange: (names: ManufacturerNames) => void;

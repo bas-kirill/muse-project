@@ -1,9 +1,15 @@
-import { CatalogueFilterWidget } from "./ui/CatalogueFilterWidget";
+import {
+  CatalogueFilterWidget
+} from "./ui/CatalogueFilterWidget";
 
-import { DEFAULT_CHECKBOX } from "./model/filters";
+import type {
+  Filters
+} from "./model/filters";
 
-import type { Checkboxes, Filters } from "./model/filters";
+export {
+  CatalogueFilterWidget
+};
 
-export { CatalogueFilterWidget, DEFAULT_CHECKBOX };
-
-export type { Checkboxes, Filters };
+export type {
+  Filters
+};
