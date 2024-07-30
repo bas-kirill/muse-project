@@ -10,6 +10,7 @@ import mu.muse.domain.instrument.ReleaseDate
 
 fun interface CreateInstrument {
 
+    @Suppress("LongParameterList")
     fun execute(
         instrumentName: InstrumentName,
         instrumentType: Instrument.Type,
