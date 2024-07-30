@@ -4,9 +4,6 @@ import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletResponse
-import mu.muse.rest.API_COUNTRIES
-import mu.muse.rest.API_INSTRUMENT_MATERIALS
-import mu.muse.rest.API_INSTRUMENT_TYPES
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.AUTH_BASIC_LOGIN
@@ -28,7 +25,6 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
@@ -60,13 +56,13 @@ class SecurityConfiguration {
 
     @Bean
     fun securityFilter(
-        http: HttpSecurity,
+        httpSecurity: HttpSecurity,
         userDetailsService: UserDetailsService,
         jwtFilter: JwtFilter,
         corsConfigurationSource: CorsConfigurationSource,
         sessionRegistry: SessionRegistry,
     ): SecurityFilterChain { // @formatter:off
-        var http = http
+        var http = httpSecurity
             .csrf { cors -> cors.disable() }
             .cors { cors -> cors.configurationSource(corsConfigurationSource) }
 
@@ -81,12 +77,9 @@ class SecurityConfiguration {
 
         http = http.authorizeHttpRequests { request ->
             request
-                .requestMatchers(AntPathRequestMatcher(AUTH_BASIC_LOGIN)).permitAll()
-                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENTS, HttpMethod.POST.toString())).permitAll()
-                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENT_BY_ID, HttpMethod.GET.toString())).permitAll()
-                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENT_TYPES, HttpMethod.GET.toString())).permitAll()
-                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENT_MATERIALS, HttpMethod.GET.toString())).permitAll()
-                .requestMatchers(AntPathRequestMatcher(API_COUNTRIES, HttpMethod.GET.toString())).permitAll()
+                .requestMatchers(AUTH_BASIC_LOGIN).permitAll()
+                .requestMatchers(HttpMethod.POST, API_INSTRUMENTS).permitAll()
+                .requestMatchers(HttpMethod.GET, API_INSTRUMENT_BY_ID).permitAll()
                 .anyRequest().authenticated()
         }
 
