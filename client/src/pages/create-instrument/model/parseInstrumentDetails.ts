@@ -5,9 +5,14 @@ import { ManufactureDate } from "domain/model/manufacture-date";
 import { ReleaseDate } from "domain/model/release-date";
 import { Country } from "domain/model/country";
 import { Material } from "domain/model/material";
+import { InstrumentId } from "domain/model/instrument-id";
 
 export const parseInstrumentDetails = (data: FormData) => {
   const errors = [];
+
+  const instrumentId = InstrumentId.from(
+    parseInt(data.get("instrument-id") as string),
+  );
 
   const instrumentName = data.get("instrument-name");
   if (
@@ -73,6 +78,7 @@ export const parseInstrumentDetails = (data: FormData) => {
   const material = data.get("material");
 
   return {
+    instrumentId,
     instrumentName,
     instrumentType,
     manufacturerName,
@@ -82,6 +88,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     material,
     errors,
   } as {
+    instrumentId: InstrumentId;
     instrumentName: InstrumentName;
     instrumentType: InstrumentType;
     manufacturerName: ManufacturerName;

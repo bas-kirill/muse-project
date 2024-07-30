@@ -7,6 +7,7 @@ import Jwt from "domain/model/jwt";
 import { Modal } from "widgets/modal";
 import "./InstrumentActions.css";
 import { LOGIN } from "shared/config/paths";
+import { Role } from "domain/model/role";
 
 interface Props {
   instrument: Instrument;
@@ -33,12 +34,22 @@ export const InstrumentActions = ({ instrument }: Props) => {
 
   return (
     <div className="instrument-actions">
-      <button
-        className="remove-instrument-button"
-        onClick={handleOnDeleteInstrument}
-      >
-        Remove
-      </button>
+      {Jwt.extractFromLocalStorage()?.toRole() === Role.Editor && (
+        <>
+          <button
+            className="remove-instrument-button"
+            onClick={handleOnDeleteInstrument}
+          >
+            Remove
+          </button>
+          <button className="edit-instrument-button">
+            <Link to={"/instrument/" + instrument.id.toString() + "/edit"}>
+              Edit
+            </Link>
+          </button>
+        </>
+      )}
+
       <button className="go-to-instrument-details-button">
         <Link to={"/instrument/" + instrument.id.toString()}>Go</Link>
       </button>

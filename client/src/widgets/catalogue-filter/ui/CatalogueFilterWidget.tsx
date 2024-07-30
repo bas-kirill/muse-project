@@ -52,7 +52,7 @@ export const CatalogueFilterWidget = ({ onFilterChange, role }: Props) => {
     instrumentTypes,
     manufacturerNames,
     manufactureDateFrom,
-    manufactureDateFrom,
+    manufactureDateTo,
     releaseDateFrom,
     releaseDateTo,
     countries,
