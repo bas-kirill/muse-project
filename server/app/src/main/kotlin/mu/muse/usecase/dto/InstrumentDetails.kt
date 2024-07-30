@@ -1,6 +1,8 @@
 package mu.muse.usecase.dto
 
 import mu.muse.domain.instrument.Instrument
+import java.time.LocalDate
+import java.time.ZoneId
 
 data class InstrumentDetails(
     val id: Long,
@@ -19,8 +21,12 @@ data class InstrumentDetails(
                 name = instrument.name.toStringValue(),
                 type = instrument.type.name,
                 manufacturer = instrument.manufacturer.name,
-                manufacturerDate = instrument.manufactureDate.toInstantValue().toString(),
-                releaseDate = instrument.releaseDate.toInstantValue().toString(),
+                manufacturerDate = LocalDate.ofInstant(
+                    instrument.manufactureDate.toInstantValue(),
+                    ZoneId.systemDefault(),
+                ).toString(), // e.g.: 2024-09-01
+                releaseDate = LocalDate.ofInstant(instrument.releaseDate.toInstantValue(), ZoneId.systemDefault())
+                    .toString(), // e.g.: 2024-09-01
                 country = instrument.country.name,
                 basicMaterials = instrument.materials.map { it.name },
             )

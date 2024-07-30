@@ -15,6 +15,7 @@ import { Instrument, loader as instrumentLoader } from "pages/instrument";
 import {
   CATALOGUE,
   CREATE_INSTRUMENT,
+  EDIT_INSTRUMENT_BY_ID,
   HOME,
   INSTRUMENT_BY_ID,
   LOGIN,
@@ -26,6 +27,11 @@ import {
   loader as createInstrumentLoader,
   action as createInstrumentAction,
 } from "pages/create-instrument";
+import {
+  EditInstrument,
+  loader as editLoader,
+  action as editAction,
+} from "pages/edit-instrument";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -43,6 +49,12 @@ const routes = createRoutesFromElements(
       element={<CreateInstrument />}
       loader={createInstrumentLoader}
       action={createInstrumentAction}
+    />
+    <Route
+      path={EDIT_INSTRUMENT_BY_ID}
+      element={<EditInstrument />}
+      loader={editLoader}
+      action={editAction}
     />
     <Route path={NOT_FOUND} element={<NotFound />} />
   </Route>,

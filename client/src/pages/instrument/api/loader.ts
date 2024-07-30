@@ -2,16 +2,24 @@ import axios from "axios";
 import { SERVER_URL } from "shared/config";
 import { API_INSTRUMENT_BY_ID } from "shared/config/backend";
 import { LoaderFunction } from "react-router-dom";
+import { InstrumentName } from "domain/model/instrument-name";
+import { InstrumentType } from "domain/model/instrument-type";
+import { ManufacturerName } from "domain/model/manufacturer-name";
+import { ManufactureDate } from "domain/model/manufacture-date";
+import { ReleaseDate } from "domain/model/release-date";
+import { Country } from "domain/model/country";
+import { Materials } from "domain/model/material";
+import { InstrumentId } from "domain/model/instrument-id";
 
 export interface InstrumentDetails {
-  id: number;
-  name: string;
-  type: string;
-  manufacturer: string;
-  manufacturerDate: string;
-  releaseDate: string;
-  country: string;
-  basicMaterials: string[];
+  id: InstrumentId;
+  name: InstrumentName;
+  type: InstrumentType;
+  manufacturer: ManufacturerName;
+  manufacturerDate: ManufactureDate;
+  releaseDate: ReleaseDate;
+  country: Country;
+  basicMaterials: Materials;
 }
 
 export const loader: LoaderFunction = async ({
