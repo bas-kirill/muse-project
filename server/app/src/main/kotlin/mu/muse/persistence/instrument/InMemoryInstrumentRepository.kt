@@ -24,7 +24,7 @@ class InMemoryInstrumentRepository(
             .filter { instrument ->
                 (criteria.name == null || instrument.name.matches(criteria.name)) &&
                     (criteria.types == null || instrument.type in criteria.types) &&
-                    (criteria.manufacturerNames == null || instrument.manufacturerName in criteria.manufacturerNames) &&
+                    (criteria.manufacturers == null || instrument.manufacturer in criteria.manufacturers) &&
                     instrument.manufactureDate.inRangeInclusive(
                         criteria.manufacturerDateFrom,
                         criteria.manufacturerDateTo,

@@ -5,7 +5,7 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.ManufacturerName
+import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.domain.user.Role
@@ -26,7 +26,7 @@ class CreateInstrumentEndpoint(
     fun createInstrument(@RequestBody request: Request) {
         val instrumentName = InstrumentName.from(request.instrumentName)
         val instrumentType = Instrument.Type.valueOf(request.instrumentType)
-        val manufacturerName = ManufacturerName.from(request.manufacturerName)
+        val manufacturer = Manufacturer.valueOf(request.manufacturerName)
         val manufactureDate = ManufacturerDate.from(request.manufactureDate)
         val releaseDate = ReleaseDate.from(request.releaseDate)
         val country = Country.valueOf(request.country)
@@ -34,7 +34,7 @@ class CreateInstrumentEndpoint(
         createInstrument.execute(
             instrumentName,
             instrumentType,
-            manufacturerName,
+            manufacturer,
             manufactureDate,
             releaseDate,
             country,
