@@ -4,10 +4,11 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.usecase.access.instrument.InstrumentRemover
 import mu.muse.usecase.access.instrument.InstrumentExtractor
+import mu.muse.usecase.access.instrument.InstrumentPersister
 
 class InMemoryInstrumentRepository(
     private val storage: MutableMap<InstrumentId, Instrument>,
-) : InstrumentExtractor, InstrumentRemover {
+) : InstrumentExtractor, InstrumentRemover, InstrumentPersister {
 
     override fun findAll(): Collection<Instrument> {
         return storage.values
@@ -36,5 +37,9 @@ class InMemoryInstrumentRepository(
 
     override fun removeInstrument(id: InstrumentId) {
         storage.remove(id)
+    }
+
+    override fun save(instrument: Instrument) {
+        storage[instrument.id] = instrument
     }
 }

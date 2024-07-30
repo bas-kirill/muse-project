@@ -10,6 +10,7 @@ import { ReleaseDate } from "domain/model/release-date";
 import { Country } from "domain/model/country";
 import { Material } from "domain/model/material";
 import { API_CREATE_INSTRUMENT } from "shared/config/backend";
+import Jwt from "domain/model/jwt";
 
 export interface CreateInstrumentAction {
   errors: string[] | null;
@@ -58,7 +59,11 @@ export const action: ActionFunction = async ({
   const { status } = await axios.post(
     `${SERVER_URL}${API_CREATE_INSTRUMENT}`,
     createInstrumentRequestBody,
-    { validateStatus: () => true }, // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
+    {
+      headers: {
+        Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
+      },
+    }, // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
   );
 
   if (status === 200) {

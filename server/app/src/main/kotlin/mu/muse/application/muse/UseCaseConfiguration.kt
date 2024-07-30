@@ -1,9 +1,13 @@
 package mu.muse.application.muse
 
+import mu.muse.domain.IdGenerator
+import mu.muse.domain.instrument.InstrumentId
 import mu.muse.usecase.access.instrument.InstrumentExtractor
+import mu.muse.usecase.access.instrument.InstrumentPersister
 import mu.muse.usecase.access.instrument.InstrumentRemover
 import mu.muse.usecase.access.user.UserExtractor
 import mu.muse.usecase.scenario.country.GetCountriesUseCase
+import mu.muse.usecase.scenario.instrument.CreateInstrumentUseCase
 import mu.muse.usecase.scenario.instrument.DeleteInstrumentByIdUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentMaterialsUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentByIdUseCase
@@ -37,4 +41,10 @@ class UseCaseConfiguration {
 
     @Bean
     fun getCountries() = GetCountriesUseCase()
+
+    @Bean
+    fun createInstrument(
+        idGenerator: IdGenerator<InstrumentId>,
+        instrumentPersister: InstrumentPersister
+    ) = CreateInstrumentUseCase(idGenerator, instrumentPersister)
 }
