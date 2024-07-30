@@ -17,7 +17,7 @@ export interface EditInstrumentAction {
 }
 
 interface EditInstrumentRequestBody {
-  instrumentId: InstrumentId;
+  instrumentId: number;
   instrumentName: InstrumentName;
   instrumentType: InstrumentType;
   manufacturerName: ManufacturerName;
@@ -49,7 +49,7 @@ export const action: ActionFunction = async ({
   }
 
   const editInstrumentRequestBody: EditInstrumentRequestBody = {
-    instrumentId: instrumentId,
+    instrumentId: instrumentId.toNumberValue(),
     instrumentName: instrumentName,
     instrumentType: instrumentType,
     manufacturerName: manufacturerName,

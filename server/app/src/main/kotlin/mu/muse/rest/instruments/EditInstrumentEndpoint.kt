@@ -29,7 +29,7 @@ class EditInstrumentEndpoint(
         val instrumentName = InstrumentName.from(request.instrumentName)
         val instrumentType = Instrument.Type.valueOf(request.instrumentType)
         val manufacturerName = Manufacturer.valueOf(request.manufacturerName)
-        val manufacturerDate = ManufacturerDate.from(request.manufacturerDate)
+        val manufacturerDate = ManufacturerDate.from(request.manufactureDate)
         val releaseDate = ReleaseDate.from(request.releaseDate)
         val country = Country.valueOf(request.country)
         val material = Material.valueOf(request.material)
@@ -50,7 +50,7 @@ class EditInstrumentEndpoint(
         val instrumentName: String,
         val instrumentType: String,
         val manufacturerName: String,
-        val manufacturerDate: LocalDate,
+        val manufactureDate: LocalDate,
         val releaseDate: LocalDate,
         val country: String,
         val material: String,
