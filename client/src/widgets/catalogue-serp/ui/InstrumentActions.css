@@ -1,20 +1,20 @@
 .instrument-actions {
-    display: flex;
+  display: flex;
 
-    .remove-instrument-button {
-        background-color: red;
-        flex-basis: 25%;
-    }
+  .remove-instrument-button {
+    background-color: red;
+    flex-basis: 25%;
+  }
 
-    .edit-instrument-button {
-        background-color: fuchsia;
-        flex-basis: 25%;
-    }
+  .edit-instrument-button {
+    background-color: fuchsia;
+    flex-basis: 25%;
+  }
 
-    .go-to-instrument-details-button {
-        background-color: blue;
-        padding: 10px 40px;
-        flex-basis: 50%;
-        flex-grow: 1;
-    }
+  .go-to-instrument-details-button {
+    background-color: blue;
+    padding: 10px 40px;
+    flex-basis: 50%;
+    flex-grow: 1;
+  }
 }

@@ -10,7 +10,9 @@ import { InstrumentId } from "domain/model/instrument-id";
 export const parseInstrumentDetails = (data: FormData) => {
   const errors = [];
 
-  const instrumentId = InstrumentId.from(parseInt(data.get("instrument-id") as string));
+  const instrumentId = InstrumentId.from(
+    parseInt(data.get("instrument-id") as string),
+  );
 
   const instrumentName = data.get("instrument-name");
   if (
@@ -84,7 +86,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     releaseDate,
     country,
     material,
-    errors
+    errors,
   } as {
     instrumentId: InstrumentId;
     instrumentName: InstrumentName;

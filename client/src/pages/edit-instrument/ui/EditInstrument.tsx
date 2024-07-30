@@ -16,17 +16,30 @@ export const EditInstrument = () => {
       <h1>Edit Instrument</h1>
       <Form method="POST" id="edit-instrument">
         <div className="edit-instrument-field">
-          <input type="hidden" name="instrument-id" value={loader.instrumentForEdit.id} />
+          <input
+            type="hidden"
+            name="instrument-id"
+            value={loader.instrumentForEdit.id}
+          />
         </div>
 
         <div className="edit-instrument-field">
           <label htmlFor="instrument-name">Instrument Name</label>
-          <input type="text" name="instrument-name" defaultValue={loader.instrumentForEdit.name} required />
+          <input
+            type="text"
+            name="instrument-name"
+            defaultValue={loader.instrumentForEdit.name}
+            required
+          />
         </div>
 
         <div className="edit-instrument-field">
           <label htmlFor="instrument-type">Instrument Type</label>
-          <select name="instrument-type" defaultValue={loader.instrumentForEdit.type} required>
+          <select
+            name="instrument-type"
+            defaultValue={loader.instrumentForEdit.type}
+            required
+          >
             {loader.instrumentTypes.map((instrumentType) => (
               <option key={instrumentType} value={instrumentType}>
                 {instrumentType}
@@ -37,7 +50,11 @@ export const EditInstrument = () => {
 
         <div className="edit-instrument-field">
           <label htmlFor="manufacturer-name">Manufacturer name</label>
-          <select name="manufacturer-name" defaultValue={loader.instrumentForEdit.name} required>
+          <select
+            name="manufacturer-name"
+            defaultValue={loader.instrumentForEdit.name}
+            required
+          >
             {loader.manufacturerNames.map((manufacturerName) => (
               <option key={manufacturerName} value={manufacturerName}>
                 {manufacturerName}
@@ -72,7 +89,11 @@ export const EditInstrument = () => {
 
         <div className="edit-instrument-field">
           <label htmlFor="country">Country</label>
-          <select name="country" defaultValue={loader.instrumentForEdit.country} required>
+          <select
+            name="country"
+            defaultValue={loader.instrumentForEdit.country}
+            required
+          >
             {loader.countries.map((country) => (
               <option key={country} value={country}>
                 {country}
@@ -83,7 +104,11 @@ export const EditInstrument = () => {
 
         <div className="edit-instrument-field">
           <label htmlFor="material">Basic Material</label>
-          <select name="material" defaultValue={loader.instrumentForEdit.basicMaterials} required>
+          <select
+            name="material"
+            defaultValue={loader.instrumentForEdit.basicMaterials}
+            required
+          >
             {loader.materials.map((material) => (
               <option key={material} value={material}>
                 {material}

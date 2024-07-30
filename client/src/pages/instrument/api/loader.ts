@@ -23,14 +23,14 @@ export interface InstrumentDetails {
 }
 
 export const loader: LoaderFunction = async ({
-                                               params
-                                             }): Promise<InstrumentDetails> => {
+  params,
+}): Promise<InstrumentDetails> => {
   const url = `${SERVER_URL}${API_INSTRUMENT_BY_ID}` + params.instrumentId;
   const { data, status } = await axios.get<InstrumentDetails>(url);
 
   if (status !== 200) {
     throw new Error(
-      `Failed to extract instrument ID: '${params.instrumentId}'`
+      `Failed to extract instrument ID: '${params.instrumentId}'`,
     );
   }
 
