@@ -7,7 +7,7 @@ interface Props {
   instrument: InstrumentDetails;
 }
 
-export const InstrumentDescription = ({instrument}: Props) => {
+export const InstrumentDescription = ({ instrument }: Props) => {
   return (
     <div id="instrument-description">
       <img
@@ -34,5 +34,5 @@ export const InstrumentDescription = ({instrument}: Props) => {
         <br />
       </div>
     </div>
-  )
-}
+  );
+};
