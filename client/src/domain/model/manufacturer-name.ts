@@ -1,1 +1,1 @@
-export type ManufacturerName = string;
+export type ManufacturerName = string; // NOSONAR

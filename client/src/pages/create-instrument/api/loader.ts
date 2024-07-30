@@ -58,7 +58,7 @@ export const loader: LoaderFunction =
       .then((data) => {
         countries = data.data;
       })
-      .catch((e) => {
+      .catch(() => {
         throw new Error("Fail to retrieve countries");
       });
 
