@@ -1,40 +1,47 @@
 package mu.muse.usecase.scenario.instrument
 
-import mu.muse.domain.IdGenerator
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Manufacturer
+import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
-import mu.muse.usecase.CreateInstrument
+import mu.muse.usecase.EditInstrument
+import mu.muse.usecase.EditInstrumentError
+import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.access.instrument.InstrumentPersister
 
-class CreateInstrumentUseCase(
-    private val idGenerator: IdGenerator<InstrumentId>,
+class EditInstrumentUseCase(
+    private val instrumentExtractor: InstrumentExtractor,
     private val instrumentPersister: InstrumentPersister,
-) : CreateInstrument {
+) : EditInstrument {
+    @Suppress("LongParameterList")
     override fun execute(
+        instrumentId: InstrumentId,
         instrumentName: InstrumentName,
         instrumentType: Instrument.Type,
-        manufacturer: Manufacturer,
-        manufactureDate: ManufacturerDate,
+        manufacturerName: Manufacturer,
+        manufacturerDate: ManufacturerDate,
         releaseDate: ReleaseDate,
         country: Country,
         material: Material
     ) {
-        val instrument = Instrument.create(
-            id = idGenerator.generate(),
+        val oldInstrument = instrumentExtractor.findById(instrumentId)
+            ?: throw EditInstrumentError.UserNotFound(instrumentId)
+
+        val newInstrument = Instrument.create(
+            id = oldInstrument.id,
             name = instrumentName,
             type = instrumentType,
-            manufacturer = manufacturer,
-            manufactureDate = manufactureDate,
+            manufacturer = manufacturerName,
+            manufactureDate = manufacturerDate,
             releaseDate = releaseDate,
             country = country,
             materials = listOf(material),
         )
-        instrumentPersister.save(instrument)
+
+        instrumentPersister.save(newInstrument)
     }
 }

@@ -2,7 +2,6 @@ package mu.muse.domain.instrument
 
 import mu.muse.common.types.AggregateRoot
 import mu.muse.common.types.Version
-import mu.muse.domain.IdGenerator
 
 @Suppress("LongParameterList")
 class Instrument internal constructor(
@@ -22,7 +21,7 @@ class Instrument internal constructor(
         @SuppressWarnings("kotlin:S107")
         @Suppress("LongParameterList")
         fun create(
-            idGenerator: IdGenerator<InstrumentId>,
+            id: InstrumentId,
             name: InstrumentName,
             type: Type,
             manufacturer: Manufacturer,
@@ -32,7 +31,7 @@ class Instrument internal constructor(
             materials: List<Material>
         ): Instrument {
             return Instrument(
-                id = idGenerator.generate(),
+                id = id,
                 name = name,
                 type = type,
                 manufacturer = manufacturer,
