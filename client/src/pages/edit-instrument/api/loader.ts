@@ -79,7 +79,7 @@ export const loader: LoaderFunction = async ({
     });
 
   return {
-    // @ts-expect-error
+    // @ts-expect-error instrument defined, else throws exception
     instrumentForEdit: instrument,
     instrumentTypes: instrumentTypes,
     manufacturerNames: manufacturers,
