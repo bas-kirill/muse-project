@@ -23,7 +23,7 @@ data class InstrumentDetails(
                 manufacturer = instrument.manufacturer.name,
                 manufacturerDate = LocalDate.ofInstant(
                     instrument.manufactureDate.toInstantValue(),
-                    ZoneId.systemDefault()
+                    ZoneId.systemDefault(),
                 ).toString(), // e.g.: 2024-09-01
                 releaseDate = LocalDate.ofInstant(instrument.releaseDate.toInstantValue(), ZoneId.systemDefault())
                     .toString(), // e.g.: 2024-09-01
