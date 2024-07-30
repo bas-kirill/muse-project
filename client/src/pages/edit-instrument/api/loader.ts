@@ -27,7 +27,7 @@ export const loader: LoaderFunction = async ({
 }): Promise<EditInstrumentLoader> => {
   const url = `${SERVER_URL}/api/instrument/` + params.instrumentId;
 
-  let instrument: Instrument;
+  let instrument: Instrument | undefined = undefined;
   await axios
     .get<Instrument>(url)
     .then((data) => {
@@ -79,7 +79,7 @@ export const loader: LoaderFunction = async ({
     });
 
   return {
-    // @ts-ignore
+    // @ts-expect-error
     instrumentForEdit: instrument,
     instrumentTypes: instrumentTypes,
     manufacturerNames: manufacturers,
