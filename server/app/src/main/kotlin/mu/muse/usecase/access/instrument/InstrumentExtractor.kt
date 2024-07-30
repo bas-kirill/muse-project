@@ -5,7 +5,7 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.ManufacturerName
+import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 
@@ -19,7 +19,7 @@ interface InstrumentExtractor {
     data class Criteria(
         val name: InstrumentName?,
         val types: List<Instrument.Type>?,
-        val manufacturerNames: List<ManufacturerName>?,
+        val manufacturers: List<Manufacturer>?,
         val manufacturerDateFrom: ManufacturerDate?,
         val manufacturerDateTo: ManufacturerDate?,
         val releaseDateFrom: ReleaseDate?,
