@@ -4,8 +4,12 @@ import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletResponse
+import mu.muse.rest.API_COUNTRIES
+import mu.muse.rest.API_GET_MANUFACTURER_NAMES
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENT_BY_ID
+import mu.muse.rest.API_INSTRUMENT_MATERIALS
+import mu.muse.rest.API_INSTRUMENT_TYPES
 import mu.muse.rest.AUTH_BASIC_LOGIN
 import mu.muse.usecase.access.user.UserExtractor
 import mu.muse.usecase.scenario.BasicLoginUseCase
@@ -80,6 +84,10 @@ class SecurityConfiguration {
                 .requestMatchers(AUTH_BASIC_LOGIN).permitAll()
                 .requestMatchers(HttpMethod.POST, API_INSTRUMENTS).permitAll()
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_BY_ID).permitAll()
+                .requestMatchers(HttpMethod.GET, API_INSTRUMENT_TYPES).permitAll()
+                .requestMatchers(HttpMethod.GET, API_INSTRUMENT_MATERIALS).permitAll()
+                .requestMatchers(HttpMethod.GET, API_COUNTRIES).permitAll()
+                .requestMatchers(HttpMethod.GET, API_GET_MANUFACTURER_NAMES).permitAll()
                 .anyRequest().authenticated()
         }
 
