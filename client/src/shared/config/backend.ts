@@ -9,3 +9,4 @@ export const API_INSTRUMENT_TYPES = `${API}/instrument/types`;
 export const API_INSTRUMENT_MATERIALS = `${API}/instrument/materials`;
 export const API_COUNTRIES = `${API}/countries`;
 export const API_CREATE_INSTRUMENT = `${API}/instrument/create`;
+export const API_MANUFACTURERS = `${API}/manufacturers`;
