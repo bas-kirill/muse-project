@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CreateInstrumentCardButton.css";
-import {
-  Filters
-} from "widgets/catalogue-filter";
+import { Filters } from "widgets/catalogue-filter";
 import { InstrumentTypeFilter } from "./InstrumentTypeFilter";
 import { Role } from "domain/model/role";
 import { CreateInstrumentCardButton } from "./CreateInstrumentCardButton";
@@ -23,29 +21,33 @@ interface Props {
 }
 
 export const CatalogueFilterWidget = ({ onFilterChange, role }: Props) => {
-  const [instrumentTypes, setInstrumentTypes] = useState<InstrumentTypes | null>(null);
-  const [manufacturerNames, setManufacturerNames] = useState<ManufacturerNames | null>(null);
-  const [manufactureDateFrom, setManufactureDateFrom] = useState<ManufactureDate | null>(null);
-  const [manufactureDateTo, setManufactureDateTo] = useState<ManufactureDate | null>(null);
-  const [releaseDateFrom, setReleaseDateFrom] = useState<ReleaseDate | null>(null);
+  const [instrumentTypes, setInstrumentTypes] =
+    useState<InstrumentTypes | null>(null);
+  const [manufacturerNames, setManufacturerNames] =
+    useState<ManufacturerNames | null>(null);
+  const [manufactureDateFrom, setManufactureDateFrom] =
+    useState<ManufactureDate | null>(null);
+  const [manufactureDateTo, setManufactureDateTo] =
+    useState<ManufactureDate | null>(null);
+  const [releaseDateFrom, setReleaseDateFrom] = useState<ReleaseDate | null>(
+    null,
+  );
   const [releaseDateTo, setReleaseDateTo] = useState<ReleaseDate | null>(null);
   const [countries, setCountries] = useState<Countries | null>(null);
   const [materials, setMaterials] = useState<Materials | null>(null);
 
-
   useEffect(() => {
     onFilterChange({
-        instrumentName: null,
-        instrumentTypes: instrumentTypes,
-        manufacturerNames: manufacturerNames,
-        manufactureDateFrom: manufactureDateFrom,
-        manufactureDateTo: manufactureDateTo,
-        releaseDateFrom: releaseDateFrom,
-        releaseDateTo: releaseDateTo,
-        countries: countries,
-        materials: materials,
-      }
-    );
+      instrumentName: null,
+      instrumentTypes: instrumentTypes,
+      manufacturerNames: manufacturerNames,
+      manufactureDateFrom: manufactureDateFrom,
+      manufactureDateTo: manufactureDateTo,
+      releaseDateFrom: releaseDateFrom,
+      releaseDateTo: releaseDateTo,
+      countries: countries,
+      materials: materials,
+    });
   }, [
     instrumentTypes,
     manufacturerNames,
@@ -57,20 +59,35 @@ export const CatalogueFilterWidget = ({ onFilterChange, role }: Props) => {
     materials,
   ]);
 
-
   return (
     <div id="catalogue-filters">
       <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
       <ManufacturerNameFilter onValueChange={setManufacturerNames} />
       <div id="manufacture-date-filter">
         <legend>Manufacture Date:</legend>
-        <DateFilter onValueChange={setManufactureDateFrom} fieldName={"manufactureDateFrom"} labelName={"From"} />
-        <DateFilter onValueChange={setManufactureDateTo} fieldName={"manufactureDateTo"} labelName={"To"} />
+        <DateFilter
+          onValueChange={setManufactureDateFrom}
+          fieldName={"manufactureDateFrom"}
+          labelName={"From"}
+        />
+        <DateFilter
+          onValueChange={setManufactureDateTo}
+          fieldName={"manufactureDateTo"}
+          labelName={"To"}
+        />
       </div>
       <div id="release-date-filter">
         <legend>Release Date:</legend>
-        <DateFilter onValueChange={setReleaseDateFrom} fieldName={"releaseDateFrom"}  labelName={"From"} />
-        <DateFilter onValueChange={setReleaseDateTo} fieldName={"releaseDateTo"} labelName={"To"} />
+        <DateFilter
+          onValueChange={setReleaseDateFrom}
+          fieldName={"releaseDateFrom"}
+          labelName={"From"}
+        />
+        <DateFilter
+          onValueChange={setReleaseDateTo}
+          fieldName={"releaseDateTo"}
+          labelName={"To"}
+        />
       </div>
       <CountryFilter onValueChange={setCountries} />
       <MaterialFilter onValueChange={setMaterials} />

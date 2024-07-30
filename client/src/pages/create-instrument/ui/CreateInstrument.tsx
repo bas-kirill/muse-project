@@ -60,7 +60,8 @@ export const CreateInstrument = () => {
             name="release-date"
             min="0001-01-01"
             max="9999-12-31"
-            required />
+            required
+          />
         </div>
 
         <div className="create-instrument-field">

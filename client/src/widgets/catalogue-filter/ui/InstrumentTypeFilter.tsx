@@ -12,34 +12,40 @@ export const InstrumentTypeFilter = ({ onValueChange }: Props) => {
   const [instrumentTypes, setInstrumentTypes] = useState<InstrumentTypes>([]);
 
   useEffect(() => {
-    axios.get<InstrumentTypes>(`${SERVER_URL}${API_INSTRUMENT_TYPES}`)
-      .then(r => {
+    axios
+      .get<InstrumentTypes>(`${SERVER_URL}${API_INSTRUMENT_TYPES}`)
+      .then((r) => {
         setInstrumentTypes(r.data);
       })
-      .catch(e => {
+      .catch((e) => {
         throw new Error(`Failed to extract instrument types: '${e}'`);
       });
-
   }, []);
 
   function onChange() {
-    const elements: NodeListOf<HTMLInputElement> = document
-      .querySelectorAll(".instrument-type-filter-checkbox");
+    const elements: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+      ".instrument-type-filter-checkbox",
+    );
 
     onValueChange(
       Array.from(elements)
-        .filter(inputTag => inputTag.checked)
-        .map(inputTag => inputTag.name)
+        .filter((inputTag) => inputTag.checked)
+        .map((inputTag) => inputTag.name),
     );
   }
 
   return (
     <div id="instrument-type-filter">
       <legend>Type:</legend>
-      {instrumentTypes.map(instrumentType => (
+      {instrumentTypes.map((instrumentType) => (
         <div key={instrumentType}>
-          <input type="checkbox" name={instrumentType} onChange={onChange}
-                 className="instrument-type-filter-checkbox" defaultChecked={true}/>
+          <input
+            type="checkbox"
+            name={instrumentType}
+            onChange={onChange}
+            className="instrument-type-filter-checkbox"
+            defaultChecked={true}
+          />
           <label htmlFor={instrumentType}>{instrumentType}</label>
         </div>
       ))}

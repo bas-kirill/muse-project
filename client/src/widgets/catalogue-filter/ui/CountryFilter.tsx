@@ -14,34 +14,40 @@ export const CountryFilter = ({ onValueChange }: Props) => {
   const [countries, setCountries] = useState<Countries>([]);
 
   useEffect(() => {
-    axios.get<InstrumentTypes>(`${SERVER_URL}${API_COUNTRIES}`)
-      .then(r => {
+    axios
+      .get<InstrumentTypes>(`${SERVER_URL}${API_COUNTRIES}`)
+      .then((r) => {
         setCountries(r.data);
       })
-      .catch(e => {
+      .catch((e) => {
         throw new Error(`Failed to extract countries: '${e}'`);
       });
-
   }, []);
 
   function onChange() {
-    const elements: NodeListOf<HTMLInputElement> = document
-      .querySelectorAll(".country-filter-checkbox");
+    const elements: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+      ".country-filter-checkbox",
+    );
 
     onValueChange(
       Array.from(elements)
-        .filter(inputTag => inputTag.checked)
-        .map(inputTag => inputTag.name)
+        .filter((inputTag) => inputTag.checked)
+        .map((inputTag) => inputTag.name),
     );
   }
 
   return (
     <div id="country-filter">
       <legend>Country:</legend>
-      {countries.map(country => (
+      {countries.map((country) => (
         <div key={country}>
-          <input type="checkbox" name={country} onChange={onChange}
-                 className="country-filter-checkbox" defaultChecked={true} />
+          <input
+            type="checkbox"
+            name={country}
+            onChange={onChange}
+            className="country-filter-checkbox"
+            defaultChecked={true}
+          />
           <label htmlFor={country}>{country}</label>
         </div>
       ))}
