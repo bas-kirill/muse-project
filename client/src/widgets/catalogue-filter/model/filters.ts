@@ -1,3 +1,8 @@
+import { InstrumentTypes } from "@domain/model/instrument-type";
+import { InstrumentName } from "@domain/model/instrument-name";
+import { ManufacturerNames } from "@domain/model/manufacturer-name";
+import { ManufactureDate } from "@domain/model/manufacture-date";
+
 export type Checkboxes = {
   KEYBOARD: boolean;
   STRINGED: boolean;
@@ -31,13 +36,13 @@ export const DEFAULT_CHECKBOX: Checkboxes = {
 };
 
 export type Filters = {
-  instrumentName: string | null;
-  instrumentTypes: string[];
-  manufacturerNames: string[];
-  manufactureDateFrom: string | null;
-  manufactureDateTo: string | null;
+  instrumentName: InstrumentName | null;
+  instrumentTypes: InstrumentTypes | null;
+  manufacturerNames: ManufacturerNames | null;
+  manufactureDateFrom: ManufactureDate | null;
+  manufactureDateTo: ManufactureDate | null;
   releaseDateFrom: string | null;
   releaseDateTo: string | null;
-  countries: string[];
-  materials: string[];
+  countries: string[] | null;
+  materials: string[] | null;
 };

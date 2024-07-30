@@ -4,7 +4,7 @@ import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { Form, useActionData, useLoaderData } from "react-router-dom";
 import { CreateInstrumentLoader } from "pages/create-instrument";
-import { CreateInstrumentAction } from "@pages/create-instrument/api/action";
+import { CreateInstrumentAction } from "pages/create-instrument/api/action";
 
 export const CreateInstrument = () => {
   const loader = useLoaderData() as CreateInstrumentLoader;
@@ -33,17 +33,34 @@ export const CreateInstrument = () => {
 
         <div className="create-instrument-field">
           <label htmlFor="manufacturer-name">Manufacturer name</label>
-          <input type="text" name="manufacturer-name" required />
+          <select name="manufacturer-name" required>
+            {loader.manufacturerNames.map((manufacturerName) => (
+              <option key={manufacturerName} value={manufacturerName}>
+                {manufacturerName}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className="create-instrument-field">
           <label htmlFor="manufacturer-date">Manufacturer date</label>
-          <input type="date" name="manufacturer-date" required />
+          <input
+            type="date"
+            name="manufacturer-date"
+            min="0001-01-01"
+            max="9999-12-31"
+            required
+          />
         </div>
 
         <div className="create-instrument-field">
           <label htmlFor="release-date">Release date</label>
-          <input type="date" name="release-date" required />
+          <input
+            type="date"
+            name="release-date"
+            min="0001-01-01"
+            max="9999-12-31"
+            required />
         </div>
 
         <div className="create-instrument-field">
