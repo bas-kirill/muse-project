@@ -1,19 +1,21 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CreateInstrumentCardButton.css";
 import {
-  Checkboxes,
-  DEFAULT_CHECKBOX,
-  Filters,
+  Filters
 } from "widgets/catalogue-filter";
-import { transformCheckboxesToFilters } from "../model/transformCheckboxesToFilters";
-import { InstrumentType } from "./InstrumentType";
-import { ManufacturerName } from "./ManufacturerName";
-import { ManufactureDate } from "./ManufactureDate";
-import { ReleaseDate } from "./ReleaseDate";
-import { Country } from "./Country";
-import { BasicMaterials } from "./BasicMaterials";
+import { InstrumentTypeFilter } from "./InstrumentTypeFilter";
 import { Role } from "domain/model/role";
 import { CreateInstrumentCardButton } from "./CreateInstrumentCardButton";
+import { InstrumentTypes } from "domain/model/instrument-type";
+import { ManufacturerNameFilter } from "widgets/catalogue-filter/ui/ManufacturerNameFilter";
+import { ManufacturerNames } from "domain/model/manufacturer-name";
+import { DateFilter } from "widgets/catalogue-filter/ui/DateFilter";
+import { ManufactureDate } from "domain/model/manufacture-date";
+import { CountryFilter } from "widgets/catalogue-filter/ui/CountryFilter";
+import { Countries } from "domain/model/country";
+import { ReleaseDate } from "domain/model/release-date";
+import { MaterialFilter } from "widgets/catalogue-filter/ui/MaterialFilter";
+import { Materials } from "domain/model/material";
 
 interface Props {
   onFilterChange: (filters: Filters) => void;
@@ -21,29 +23,57 @@ interface Props {
 }
 
 export const CatalogueFilterWidget = ({ onFilterChange, role }: Props) => {
-  const [checkboxes, setCheckboxes] = useState<Checkboxes>(DEFAULT_CHECKBOX);
+  const [instrumentTypes, setInstrumentTypes] = useState<InstrumentTypes | null>(null);
+  const [manufacturerNames, setManufacturerNames] = useState<ManufacturerNames | null>(null);
+  const [manufactureDateFrom, setManufactureDateFrom] = useState<ManufactureDate | null>(null);
+  const [manufactureDateTo, setManufactureDateTo] = useState<ManufactureDate | null>(null);
+  const [releaseDateFrom, setReleaseDateFrom] = useState<ReleaseDate | null>(null);
+  const [releaseDateTo, setReleaseDateTo] = useState<ReleaseDate | null>(null);
+  const [countries, setCountries] = useState<Countries | null>(null);
+  const [materials, setMaterials] = useState<Materials | null>(null);
+
 
   useEffect(() => {
-    onFilterChange(transformCheckboxesToFilters(checkboxes));
-  }, [checkboxes]);
+    onFilterChange({
+        instrumentName: null,
+        instrumentTypes: instrumentTypes,
+        manufacturerNames: manufacturerNames,
+        manufactureDateFrom: manufactureDateFrom,
+        manufactureDateTo: manufactureDateTo,
+        releaseDateFrom: releaseDateFrom,
+        releaseDateTo: releaseDateTo,
+        countries: countries,
+        materials: materials,
+      }
+    );
+  }, [
+    instrumentTypes,
+    manufacturerNames,
+    manufactureDateFrom,
+    manufactureDateFrom,
+    releaseDateFrom,
+    releaseDateTo,
+    countries,
+    materials,
+  ]);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, type, checked } = e.target;
-
-    setCheckboxes((prevState) => ({
-      ...prevState,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
 
   return (
     <div id="catalogue-filters">
-      <InstrumentType checkboxes={checkboxes} handleChange={handleChange} />
-      <ManufacturerName checkboxes={checkboxes} handleChange={handleChange} />
-      <ManufactureDate checkboxes={checkboxes} handleChange={handleChange} />
-      <ReleaseDate checkboxes={checkboxes} handleChange={handleChange} />
-      <Country checkboxes={checkboxes} handleChange={handleChange} />
-      <BasicMaterials checkboxes={checkboxes} handleChange={handleChange} />
+      <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
+      <ManufacturerNameFilter onValueChange={setManufacturerNames} />
+      <div id="manufacture-date-filter">
+        <legend>Manufacture Date:</legend>
+        <DateFilter onValueChange={setManufactureDateFrom} fieldName={"manufactureDateFrom"} labelName={"From"} />
+        <DateFilter onValueChange={setManufactureDateTo} fieldName={"manufactureDateTo"} labelName={"To"} />
+      </div>
+      <div id="release-date-filter">
+        <legend>Release Date:</legend>
+        <DateFilter onValueChange={setReleaseDateFrom} fieldName={"releaseDateFrom"}  labelName={"From"} />
+        <DateFilter onValueChange={setReleaseDateTo} fieldName={"releaseDateTo"} labelName={"To"} />
+      </div>
+      <CountryFilter onValueChange={setCountries} />
+      <MaterialFilter onValueChange={setMaterials} />
       {role === Role.Editor && <CreateInstrumentCardButton />}
     </div>
   );

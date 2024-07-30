@@ -46,7 +46,18 @@ export const parseInstrumentDetails = (data: FormData) => {
   }
 
   const releaseDate = data.get("release-date");
+  if (releaseDate === null || typeof manufactureDate !== "string" || releaseDate === "") {
+    errors.push("Type release date");
+  }
+
+  if (manufactureDate === "string" && releaseDate === "string" && Date.parse(releaseDate) < Date.parse(manufactureDate)) {
+    errors.push("Release date must be after manufacture date");
+  }
+
   const country = data.get("country");
+  if (country === null || typeof country !== "string" || manufactureDate === "") {
+    errors.push("Type country");
+  }
   const material = data.get("material");
 
   return {
@@ -57,7 +68,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     releaseDate,
     country,
     material,
-    errors,
+    errors
   } as {
     instrumentName: InstrumentName;
     instrumentType: InstrumentType;
