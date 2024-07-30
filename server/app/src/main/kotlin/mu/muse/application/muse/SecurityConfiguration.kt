@@ -4,6 +4,9 @@ import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletResponse
+import mu.muse.rest.API_COUNTRIES
+import mu.muse.rest.API_INSTRUMENT_MATERIALS
+import mu.muse.rest.API_INSTRUMENT_TYPES
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.AUTH_BASIC_LOGIN
@@ -12,6 +15,7 @@ import mu.muse.usecase.scenario.BasicLoginUseCase
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity
@@ -78,8 +82,11 @@ class SecurityConfiguration {
         http = http.authorizeHttpRequests { request ->
             request
                 .requestMatchers(AntPathRequestMatcher(AUTH_BASIC_LOGIN)).permitAll()
-                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENTS)).permitAll()
-                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENT_BY_ID)).permitAll()
+                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENTS, HttpMethod.POST.toString())).permitAll()
+                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENT_BY_ID, HttpMethod.GET.toString())).permitAll()
+                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENT_TYPES, HttpMethod.GET.toString())).permitAll()
+                .requestMatchers(AntPathRequestMatcher(API_INSTRUMENT_MATERIALS, HttpMethod.GET.toString())).permitAll()
+                .requestMatchers(AntPathRequestMatcher(API_COUNTRIES, HttpMethod.GET.toString())).permitAll()
                 .anyRequest().authenticated()
         }
 
