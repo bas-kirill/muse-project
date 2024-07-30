@@ -4,7 +4,7 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.ManufacturerName
+import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.usecase.dto.InstrumentDetails
@@ -16,7 +16,7 @@ fun interface GetInstrumentsByCriteria {
     data class Criteria(
         val instrumentName: InstrumentName?,
         val instrumentTypes: List<Instrument.Type>?,
-        val manufacturerNames: List<ManufacturerName>?,
+        val manufacturers: List<Manufacturer>?,
         val manufacturerDateFrom: ManufacturerDate?,
         val manufacturerDateTo: ManufacturerDate?,
         val releaseDateFrom: ReleaseDate?,
