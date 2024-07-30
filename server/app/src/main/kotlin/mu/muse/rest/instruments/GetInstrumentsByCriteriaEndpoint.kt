@@ -4,7 +4,7 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.ManufacturerName
+import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.rest.API_INSTRUMENTS
@@ -30,7 +30,7 @@ class GetInstrumentsByCriteriaEndpoint(
     fun getInstruments(@RequestBody request: Request): Collection<InstrumentDetails> {
         val instrumentName = request.instrumentName?.let { InstrumentName.from(it) }
         val instrumentTypes = request.instrumentTypes?.map { Instrument.Type.valueOf(it) }
-        val manufacturerNames = request.manufacturerNames?.map { ManufacturerName.from(it) }
+        val manufacturers = request.manufacturerNames?.map { Manufacturer.valueOf(it) }
         val manufacturerDateFrom = request.manufactureDateFrom?.let { ManufacturerDate.from(it) }
         val manufacturerDateTo = request.manufactureDateTo?.let { ManufacturerDate.from(it) }
         val releaseDateFrom = request.releaseDateFrom?.let { ReleaseDate.from(it) }
@@ -41,7 +41,7 @@ class GetInstrumentsByCriteriaEndpoint(
             GetInstrumentsByCriteria.Criteria(
                 instrumentName = instrumentName,
                 instrumentTypes = instrumentTypes,
-                manufacturerNames = manufacturerNames,
+                manufacturers = manufacturers,
                 manufacturerDateFrom = manufacturerDateFrom,
                 manufacturerDateTo = manufacturerDateTo,
                 releaseDateFrom = releaseDateFrom,

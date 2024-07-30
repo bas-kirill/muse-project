@@ -19,7 +19,7 @@ class GetInstrumentsByCriteriaUseCase(
             InstrumentExtractor.Criteria(
                 name = criteria.instrumentName,
                 types = criteria.instrumentTypes,
-                manufacturerNames = criteria.manufacturerNames,
+                manufacturers = criteria.manufacturers,
                 manufacturerDateFrom = criteria.manufacturerDateFrom,
                 manufacturerDateTo = criteria.manufacturerDateTo,
                 releaseDateFrom = criteria.releaseDateFrom,

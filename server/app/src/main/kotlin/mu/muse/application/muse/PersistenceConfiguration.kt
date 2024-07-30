@@ -6,7 +6,7 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.ManufacturerName
+import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.domain.user.Password
@@ -65,7 +65,7 @@ class PersistenceConfiguration {
             idGenerator = idGenerator,
             name = InstrumentName.from("Fender Stratocaster"),
             type = Instrument.Type.STRINGED,
-            manufacturerName = ManufacturerName.from("audio.com"),
+            manufacturer = Manufacturer.YAMAHA,
             manufactureDate = ManufacturerDate.from(Instant.parse("2024-07-01T00:00:00Z")),
             releaseDate = ReleaseDate.from(Instant.parse("2024-08-01T00:00:00Z")),
             country = Country.CYPRUS,
@@ -76,7 +76,7 @@ class PersistenceConfiguration {
             idGenerator = idGenerator,
             name = InstrumentName.from("Fidel Telecastro"),
             type = Instrument.Type.STRINGED,
-            manufacturerName = ManufacturerName.from("audio.com"),
+            manufacturer = Manufacturer.FENDER,
             manufactureDate = ManufacturerDate.from(Instant.parse("2024-07-01T00:00:00Z")),
             releaseDate = ReleaseDate.from(Instant.parse("2100-01-01T00:00:00Z")),
             country = Country.CYPRUS,
@@ -87,7 +87,7 @@ class PersistenceConfiguration {
             idGenerator = idGenerator,
             name = InstrumentName.from("SaxoStar"),
             type = Instrument.Type.WIND,
-            manufacturerName = ManufacturerName.from("Yamaha"),
+            manufacturer = Manufacturer.SIGMA,
             manufactureDate = ManufacturerDate.from(Instant.parse("2007-01-01T00:00:00Z")),
             releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
             country = Country.USA,
@@ -98,7 +98,7 @@ class PersistenceConfiguration {
             idGenerator = idGenerator,
             name = InstrumentName.from("Yamaha CLP-745B"),
             type = Instrument.Type.KEYBOARD,
-            manufacturerName = ManufacturerName.from("Yamaha"),
+            manufacturer = Manufacturer.YAMAHA,
             manufactureDate = ManufacturerDate.from(Instant.parse("2007-01-01T00:00:00Z")),
             releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
             country = Country.USA,
