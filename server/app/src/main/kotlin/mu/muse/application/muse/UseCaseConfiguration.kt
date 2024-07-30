@@ -3,6 +3,7 @@ package mu.muse.application.muse
 import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.access.instrument.InstrumentRemover
 import mu.muse.usecase.access.user.UserExtractor
+import mu.muse.usecase.scenario.country.GetCountriesUseCase
 import mu.muse.usecase.scenario.instrument.DeleteInstrumentByIdUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentMaterialsUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentByIdUseCase
@@ -33,4 +34,7 @@ class UseCaseConfiguration {
 
     @Bean
     fun getInstrumentBasicMaterials() = GetInstrumentMaterialsUseCase()
+
+    @Bean
+    fun getCountries() = GetCountriesUseCase()
 }
