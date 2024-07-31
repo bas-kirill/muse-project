@@ -20,6 +20,7 @@ import mu.muse.usecase.scenario.profile.GetProfileUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
+@Suppress("TooManyFunctions")
 @Configuration
 class UseCaseConfiguration {
 
