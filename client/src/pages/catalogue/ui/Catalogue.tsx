@@ -3,22 +3,32 @@ import "./Catalogue.css";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
-import { CatalogueFilterWidget, Filters, DEFAULT_FILTER } from "widgets/catalogue-filter";
+import {
+  CatalogueFilterWidget,
+  Filters,
+  DEFAULT_FILTER,
+} from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import { Instruments } from "domain/model/instrument";
 import Jwt from "domain/model/jwt";
 import { useJwt } from "pages/log-in";
-import { CATALOGUE_DEFAULT_PAGE_NUMBER, CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
+import {
+  CATALOGUE_DEFAULT_PAGE_NUMBER,
+  CATALOGUE_DEFAULT_PAGE_SIZE,
+} from "shared/config/frontend";
 import { getInstrumentsByCriteria } from "shared/api/list-instruments-by-criteria";
 import { Page } from "domain/model/page";
 
 export function Catalogue() {
   useJwt();
   const initialInstruments = useLoaderData() as Instruments; // https://github.com/remix-run/react-router/discussions/9792
-  const [instruments, setInstruments] = useState<Instruments>(initialInstruments);
+  const [instruments, setInstruments] =
+    useState<Instruments>(initialInstruments);
   const [instrumentName, setInstrumentName] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTER);
-  const [pageNumber, setPageNumber] = useState<number>(CATALOGUE_DEFAULT_PAGE_NUMBER);
+  const [pageNumber, setPageNumber] = useState<number>(
+    CATALOGUE_DEFAULT_PAGE_NUMBER,
+  );
   const totalPages = useRef<number>(0);
 
   useEffect(() => {
@@ -32,11 +42,10 @@ export function Catalogue() {
       pageNumber: pageNumber,
       pageSize: CATALOGUE_DEFAULT_PAGE_SIZE,
     } as Page;
-    getInstrumentsByCriteria(filters, page)
-      .then((r) => {
-        setInstruments(r.content);
-        totalPages.current = r.totalPages;
-      });
+    getInstrumentsByCriteria(filters, page).then((r) => {
+      setInstruments(r.content);
+      totalPages.current = r.totalPages;
+    });
   }, [filters, instrumentName, pageNumber]);
 
   return (
@@ -64,12 +73,12 @@ export function Catalogue() {
         <div id="catalogue-serp-and-navbar-wrapper">
           <CatalogueSerpWidget instruments={instruments} />
           <div id="pages-navigation-bar">
-            {(pageNumber > 1) && (
+            {pageNumber > 1 && (
               <button onClick={() => setPageNumber(pageNumber - 1)}>
                 Previous
               </button>
             )}
-            {(pageNumber < totalPages.current) && (
+            {pageNumber < totalPages.current && (
               <button onClick={() => setPageNumber(pageNumber + 1)}>
                 Next
               </button>

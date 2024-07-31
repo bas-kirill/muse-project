@@ -25,4 +25,4 @@ export const DEFAULT_FILTER = {
   releaseDateTo: null,
   countries: null,
   materials: null,
-}
+};

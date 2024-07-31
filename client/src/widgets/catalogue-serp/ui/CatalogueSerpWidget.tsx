@@ -14,7 +14,7 @@ export const CatalogueSerpWidget = ({ instruments }: Props) => {
 
   return (
     <div id="catalogue-serp">
-      {instruments.map(instrument => (
+      {instruments.map((instrument) => (
         <div key={instrument.id.toString()} className="instrument-card">
           <InstrumentDetails instrument={instrument} />
           <InstrumentActions instrument={instrument} />
