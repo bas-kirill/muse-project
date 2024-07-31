@@ -10,7 +10,7 @@ env:
   PROD_PORT: 50507
 jobs:
   scanning:
-    name: GitGuardian scan
+    name: [PR] GitGuardian scan
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
