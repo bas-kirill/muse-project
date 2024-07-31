@@ -17,11 +17,12 @@ import mu.muse.usecase.CreateInstrument
 import mu.muse.usecase.DeleteInstrumentById
 import mu.muse.usecase.EditInstrument
 import mu.muse.usecase.GetCountries
-import mu.muse.usecase.GetInstrumentsByCriteria
+import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
 import mu.muse.usecase.GetInstrumentById
 import mu.muse.usecase.GetInstrumentManufacturers
 import mu.muse.usecase.GetInstrumentMaterials
 import mu.muse.usecase.GetInstrumentTypes
+import mu.muse.usecase.GetInstrumentsByCriteria
 import mu.muse.usecase.GetProfile
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -40,8 +41,10 @@ class RestConfiguration {
     fun getProfileEndpoint(getProfile: GetProfile) = GetProfileEndpoint(getProfile)
 
     @Bean
-    fun getAllInstrumentsEndpoint(getInstrumentsByCriteria: GetInstrumentsByCriteria) =
-        GetInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria)
+    fun getAllInstrumentsEndpoint(
+        getInstrumentsByCriteria: GetInstrumentsByCriteria,
+        getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated
+    ) = GetInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria, getInstrumentsByCriteriaPaginated)
 
     @Bean
     fun getInstrumentByIdEndpoint(getInstrumentById: GetInstrumentById) = GetInstrumentByIdEndpoint(getInstrumentById)

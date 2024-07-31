@@ -14,6 +14,7 @@ import mu.muse.usecase.scenario.instrument.GetInstrumentByIdUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentManufacturersUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentMaterialsUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentTypesUseCase
+import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaPaginatedUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaUseCase
 import mu.muse.usecase.scenario.profile.GetProfileUseCase
 import org.springframework.context.annotation.Bean
@@ -26,8 +27,12 @@ class UseCaseConfiguration {
     fun getProfile(userExtractor: UserExtractor) = GetProfileUseCase(userExtractor)
 
     @Bean
-    fun getAllInstruments(instrumentExtractor: InstrumentExtractor) =
+    fun getInstrumentsByCriteria(instrumentExtractor: InstrumentExtractor) =
         GetInstrumentsByCriteriaUseCase(instrumentExtractor)
+
+    @Bean
+    fun getInstrumentsByCriteriaPaginated(instrumentExtractor: InstrumentExtractor) =
+        GetInstrumentsByCriteriaPaginatedUseCase(instrumentExtractor)
 
     @Bean
     fun getInstrumentById(instrumentExtractor: InstrumentExtractor) = GetInstrumentByIdUseCase(instrumentExtractor)
