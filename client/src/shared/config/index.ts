@@ -1,1 +1,5 @@
 export { SERVER_URL, API_INSTRUMENTS, API_AUTH_BASIC_LOGIN } from "./backend";
+export {
+  CATALOGUE_DEFAULT_PAGE_SIZE,
+  CATALOGUE_DEFAULT_PAGE_NUMBER,
+} from "./frontend";

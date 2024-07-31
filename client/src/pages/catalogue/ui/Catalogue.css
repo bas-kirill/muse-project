@@ -13,6 +13,7 @@
 
   #catalogue-filter-serp-wrapper {
     display: flex;
+    flex-direction: row;
     background-color: darkorchid;
 
     #catalogue-filters {
@@ -20,8 +21,17 @@
       flex: 1;
     }
 
-    #catalogue-serp {
+    #catalogue-serp-and-navbar-wrapper {
+      background-color: aqua;
       flex: 2;
+
+      #pages-navigation-bar {
+        background-color: midnightblue;
+
+        span {
+          margin: 0 10px;
+        }
+      }
     }
   }
 }

@@ -14,3 +14,15 @@ export type Filters = {
   countries: string[] | null;
   materials: string[] | null;
 };
+
+export const DEFAULT_FILTER = {
+  instrumentName: null,
+  instrumentTypes: null,
+  manufacturerNames: null,
+  manufactureDateFrom: null,
+  manufactureDateTo: null,
+  releaseDateFrom: null,
+  releaseDateTo: null,
+  countries: null,
+  materials: null,
+};

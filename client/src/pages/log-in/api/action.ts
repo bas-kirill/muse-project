@@ -2,7 +2,7 @@ import { ActionFunction } from "react-router-dom";
 import { Jwt } from "../../../domain";
 import { parseAsLoginAndPassword } from "../model/parseAsLoginAndPassword";
 import axios from "axios";
-import { API_AUTH_BASIC_LOGIN, SERVER_URL } from "shared/config";
+import { API_AUTH_BASIC_LOGIN, SERVER_URL } from "shared/config/backend";
 
 interface BasicLoginRequestBody {
   username: string;
