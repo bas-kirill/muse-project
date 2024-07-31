@@ -8,7 +8,25 @@ env:
   DEV_PORT: 50505
   STAGING_PORT: 50506
   PROD_PORT: 50507
+
+
 jobs:
+  credentials-check:
+    name: "[PR] GitGuardian scan"
+    runs-on: kiryuxa-1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # fetch all history so multiple commits can be scanned
+      - name: GitGuardian scan
+        uses: GitGuardian/ggshield-action@v1
+        env:
+          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
+          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
+          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+
   client-linter:
     name: "[CLIENT] Linter"
     runs-on: kiryuxa-1
@@ -94,6 +112,7 @@ jobs:
   deploy-dev:
     name: "[SERVER] Deploy to Dev"
     needs:
+      - credentials-check
       - client-linter
       - client-static-analyzer
       - server-linter
@@ -184,6 +203,7 @@ jobs:
     name: "[SERVER] Deploy to Staging"
     if: github.event.ref == 'refs/heads/main'
     needs:
+      - credentials-check
       - client-linter
       - client-static-analyzer
       - server-linter
