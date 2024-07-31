@@ -9,6 +9,20 @@ env:
   STAGING_PORT: 50506
   PROD_PORT: 50507
 jobs:
+  secret-checker:
+    runs-on: kiryuxa-1
+    name: Check for hardcoded secrets
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Check for vulnerabilities
+        id: checks
+        uses: maddygoround/secretduty@v1.3
+        with:
+          severity: "['CRITICAL','MAJOR']"
+      - name: Get results of scan
+        run: echo "Scan Results - ${{ steps.checks.outputs.result }}"
+
   client-linter:
     name: "[CLIENT] Linter"
     runs-on: kiryuxa-1
