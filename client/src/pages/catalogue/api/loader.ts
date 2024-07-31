@@ -10,9 +10,9 @@ export const loader = async (): Promise<Instruments> => {
     {
       params: {
         pageNumber: 1,
-        pageSize: 3
-      }
-    }
+        pageSize: 3,
+      },
+    },
   );
   if (status !== 200) {
     throw new Error(`Failed to extract instruments`);

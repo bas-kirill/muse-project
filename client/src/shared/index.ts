@@ -1,10 +1,6 @@
-import {
-  deleteInstrument,
-} from "./api/delete-instrument";
+import { deleteInstrument } from "./api/delete-instrument";
 
-import {
-  getInstrumentsByCriteria,
-} from "./api/list-instruments-by-criteria";
+import { getInstrumentsByCriteria } from "./api/list-instruments-by-criteria";
 
 import {
   SERVER_URL,
@@ -14,7 +10,7 @@ import {
 
 import {
   CATALOGUE_DEFAULT_PAGE_SIZE,
-  CATALOGUE_DEFAULT_PAGE_NUMBER
+  CATALOGUE_DEFAULT_PAGE_NUMBER,
 } from "./config/frontend";
 
 export {

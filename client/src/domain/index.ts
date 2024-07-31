@@ -13,7 +13,7 @@ import type {
 } from "./model/manufacturer-name";
 import type { ManufactureDate } from "./model/manufacture-date";
 import type { ReleaseDate } from "./model/release-date";
-import type {Page} from "./model/page";
+import type { Page } from "./model/page";
 
 export {
   Jwt,
