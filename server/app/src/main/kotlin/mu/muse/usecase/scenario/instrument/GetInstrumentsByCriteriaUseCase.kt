@@ -3,22 +3,17 @@ package mu.muse.usecase.scenario.instrument
 import mu.muse.usecase.GetInstrumentsByCriteria
 import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.dto.InstrumentDetails
-import org.slf4j.LoggerFactory
-
+import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaPaginatedUseCase.Companion.logger
 
 class GetInstrumentsByCriteriaUseCase(
     private val instrumentExtractor: InstrumentExtractor,
 ) : GetInstrumentsByCriteria {
 
-    companion object  {
-        val logger = LoggerFactory.getLogger(GetInstrumentByIdUseCase::class.java)
-    }
-
-    override fun execute(criteria: GetInstrumentsByCriteria.Criteria): Collection<InstrumentDetails> {
+    override fun execute(criteria: InstrumentExtractor.Criteria): Collection<InstrumentDetails> {
         val instruments = instrumentExtractor.findByCriteria(
             InstrumentExtractor.Criteria(
-                name = criteria.instrumentName,
-                types = criteria.instrumentTypes,
+                name = criteria.name,
+                types = criteria.types,
                 manufacturers = criteria.manufacturers,
                 manufacturerDateFrom = criteria.manufacturerDateFrom,
                 manufacturerDateTo = criteria.manufacturerDateTo,
@@ -31,8 +26,6 @@ class GetInstrumentsByCriteriaUseCase(
 
         logger.info("Extracted '{}' instruments", instruments.size)
 
-        val instrumentDetails = instruments.map { InstrumentDetails.from(it) }
-        return instrumentDetails
+        return instruments.map { InstrumentDetails.from(it) }
     }
-
 }
