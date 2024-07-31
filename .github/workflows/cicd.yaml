@@ -8,9 +8,11 @@ env:
   DEV_PORT: 50505
   STAGING_PORT: 50506
   PROD_PORT: 50507
+
+
 jobs:
   credentials-check:
-    name: [PR] GitGuardian scan
+    name: "[PR] GitGuardian scan"
     runs-on: kiryuxa-1
     steps:
       - name: Checkout
