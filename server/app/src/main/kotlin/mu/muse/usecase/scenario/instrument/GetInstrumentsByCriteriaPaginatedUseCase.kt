@@ -35,7 +35,7 @@ class GetInstrumentsByCriteriaPaginatedUseCase(
             PageRequest(
                 pageNumber = pageRequest.pageNumber,
                 pageSize = pageRequest.pageSize,
-            )
+            ),
         )
 
         logger.info("Extracted '{}' instruments", instruments.contentSize)

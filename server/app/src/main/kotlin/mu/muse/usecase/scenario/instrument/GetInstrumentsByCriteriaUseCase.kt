@@ -21,7 +21,7 @@ class GetInstrumentsByCriteriaUseCase(
                 releaseDateTo = criteria.releaseDateTo,
                 countries = criteria.countries,
                 materials = criteria.materials,
-            )
+            ),
         )
 
         logger.info("Extracted '{}' instruments", instruments.size)
