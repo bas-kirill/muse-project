@@ -1,7 +1,18 @@
-import { CatalogueFilterWidget } from "./ui/CatalogueFilterWidget";
+import {
+  CatalogueFilterWidget
+} from "./ui/CatalogueFilterWidget";
 
-import type { Filters } from "./model/filters";
+import { DEFAULT_FILTER } from "./model/filters";
 
-export { CatalogueFilterWidget };
+import type {
+  Filters
+} from "./model/filters";
 
-export type { Filters };
+export {
+  CatalogueFilterWidget,
+  DEFAULT_FILTER
+};
+
+export type {
+  Filters
+};
