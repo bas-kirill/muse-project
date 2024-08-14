@@ -2,10 +2,12 @@ package mu.muse.application.muse
 
 import mu.muse.domain.IdGenerator
 import mu.muse.domain.instrument.InstrumentId
+import mu.muse.domain.user.UserId
 import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.access.instrument.InstrumentPersister
 import mu.muse.usecase.access.instrument.InstrumentRemover
 import mu.muse.usecase.access.user.UserExtractor
+import mu.muse.usecase.access.user.UserPersister
 import mu.muse.usecase.scenario.country.GetCountriesUseCase
 import mu.muse.usecase.scenario.instrument.CreateInstrumentUseCase
 import mu.muse.usecase.scenario.instrument.DeleteInstrumentByIdUseCase
@@ -17,8 +19,10 @@ import mu.muse.usecase.scenario.instrument.GetInstrumentTypesUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaPaginatedUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaUseCase
 import mu.muse.usecase.scenario.profile.GetProfileUseCase
+import mu.muse.usecase.scenario.registration.RegisterUserUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.crypto.password.PasswordEncoder
 
 @Suppress("TooManyFunctions")
 @Configuration
@@ -62,4 +66,13 @@ class UseCaseConfiguration {
     @Bean
     fun editInstrument(instrumentExtractor: InstrumentExtractor, instrumentPersister: InstrumentPersister) =
         EditInstrumentUseCase(instrumentExtractor, instrumentPersister)
+
+    @Bean
+    fun registerUser(
+        idGenerator: IdGenerator<UserId>,
+        userExtractor: UserExtractor,
+        userPersister: UserPersister,
+        passwordEncoder: PasswordEncoder,
+    ) =
+        RegisterUserUseCase(idGenerator, userExtractor, userPersister, passwordEncoder)
 }

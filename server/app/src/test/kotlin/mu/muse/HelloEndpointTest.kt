@@ -6,7 +6,7 @@ import mu.muse.domain.user.Password
 import mu.muse.domain.user.Role
 import mu.muse.domain.user.User
 import mu.muse.domain.user.Username
-import mu.muse.domain.user.UsernameId
+import mu.muse.domain.user.UserId
 import mu.muse.persistence.user.InMemoryUserRepository
 import mu.muse.persistence.user.InMemoryUsernameIdGenerator
 import mu.muse.rest.HelloEndpoint
@@ -75,11 +75,11 @@ internal class HelloEndpointTest {
         fun usernameIdGenerator() = InMemoryUsernameIdGenerator()
 
         @Bean
-        fun users(usernameIdGenerator: IdGenerator<UsernameId>): Set<User> {
+        fun users(idGenerator: IdGenerator<UserId>): Set<User> {
             val passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
 
             val testUser = User.create(
-                idGenerator = usernameIdGenerator,
+                id = idGenerator.generate(),
                 username = Username.from("user"),
                 password = Password.from(passwordEncoder.encode("123")),
                 role = Role.user(),
@@ -87,7 +87,7 @@ internal class HelloEndpointTest {
             )
 
             val testEditor = User.create(
-                idGenerator = usernameIdGenerator,
+                id = idGenerator.generate(),
                 username = Username.from("editor"),
                 password = Password.from(passwordEncoder.encode("321")),
                 role = Role.editor(),

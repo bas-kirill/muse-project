@@ -1,4 +1,4 @@
-package mu.muse.usecase.scenario
+package mu.muse.usecase.scenario.login
 
 import io.jsonwebtoken.Jwts
 import mu.muse.domain.user.Password
@@ -15,7 +15,7 @@ typealias JwtRaw = String
 
 class BasicLoginUseCase(
     private val authenticationManager: AuthenticationManager,
-    private val userRepository: UserExtractor,
+    private val userExtractor: UserExtractor,
     private val secretKey: Key,
     private val expirationMillis: Long,
 ) : BasicLogin {
@@ -27,7 +27,7 @@ class BasicLoginUseCase(
             ),
         )
 
-        val user = userRepository.findByUsername(username) ?: throw BasicLoginError.UserNotFound(username)
+        val user = userExtractor.findByUsername(username) ?: throw BasicLoginError.UserNotFound(username)
         val claims = Jwts.claims().setSubject(user.username.toStringValue())
 
         return Jwts.builder()

@@ -5,6 +5,7 @@ import mu.muse.common.rest.PageRequest
 import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
 import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.dto.InstrumentDetails
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 
@@ -13,7 +14,7 @@ class GetInstrumentsByCriteriaPaginatedUseCase(
 ) : GetInstrumentsByCriteriaPaginated {
 
     companion object {
-        val logger = LoggerFactory.getLogger(GetInstrumentByIdUseCase::class.java)
+        val logger: Logger = LoggerFactory.getLogger(GetInstrumentsByCriteriaPaginatedUseCase::class.java)
     }
 
     override fun execute(
