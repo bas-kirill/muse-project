@@ -108,7 +108,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        run: ./gradlew build sonar --info
+        run: (cd ./server && gradlew build sonar --info)
 
   server-unit-tests:
     name: "[SERVER] Unit Tests"
