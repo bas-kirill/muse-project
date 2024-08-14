@@ -10,7 +10,6 @@ env:
   PROD_PORT: 50507
   SONAR_PROJECT_KEY: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
 
-
 jobs:
   credentials-check:
     name: "[PR] GitGuardian scan"
@@ -97,6 +96,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_PROJECT_KEY: ${{ env.SONAR_PROJECT_KEY }}
 #      - name: Cache SonarQube packages
 #        uses: actions/cache@v1
 #        with:
