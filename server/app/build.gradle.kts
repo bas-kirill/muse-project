@@ -10,6 +10,7 @@ plugins {
     kotlin("plugin.spring") version "1.9.23" // make all classes as `open` for Spring proxies
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    id("org.sonarqube") version "5.0.0.4638"
 }
 
 group = "mu.muse"
@@ -78,5 +79,12 @@ detekt {
 tasks.withType<Detekt>().configureEach {
     reports {
         html.required.set(true)
+    }
+}
+
+sonar {  // self hosted sonar qube
+    properties {
+        property("sonar.projectKey", "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1")
+        property("sonar.projectName", "muse-project")
     }
 }
