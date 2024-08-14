@@ -1,4 +1,6 @@
-export function parseAsLoginAndPassword(data: FormData) {
+import { MINIMAL_PASSWORD_LENGTH } from "shared/config/frontend";
+
+export function parseForm(data: FormData) {
   const errors = [];
 
   const login = data.get("login");
@@ -15,8 +17,11 @@ export function parseAsLoginAndPassword(data: FormData) {
     errors.push("Type password at form");
   }
 
-  if (typeof password === "string" && password.length < 3) {
-    errors.push("Password must greater 2 symbols");
+  if (
+    typeof password === "string" &&
+    password.length < MINIMAL_PASSWORD_LENGTH
+  ) {
+    errors.push(`Password must greater ${MINIMAL_PASSWORD_LENGTH} symbols`);
   }
 
   return { login, password, errors } as {

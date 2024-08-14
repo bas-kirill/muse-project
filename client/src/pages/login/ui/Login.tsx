@@ -1,17 +1,23 @@
 import React from "react";
-import "./LogIn.css";
+import "./Login.css";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
-import { Form, useActionData } from "react-router-dom";
+import { Form, useActionData, useNavigate } from "react-router-dom";
 import { LogInAction } from "../api/action";
-import { useJwt } from "pages/log-in";
+import { useJwt } from "pages/login";
+import { REGISTRATION_URL } from "shared/config/paths";
 
-export function LogIn() {
+export function Login() {
   useJwt();
   const actionData = useActionData() as LogInAction;
+  const navigate = useNavigate();
+
+  const handleRegisterRedirect = () => {
+    navigate(REGISTRATION_URL);
+  };
 
   return (
-    <div id="log-in">
+    <div id="login-page">
       <Header />
       {actionData?.jwt && (
         <div className="successfull-login">
@@ -24,6 +30,11 @@ export function LogIn() {
           <input type="text" name="login" placeholder={"Login"} />
           <input type="text" name="password" placeholder={"Password"} />
           <input type="submit" value="Log In" />
+          <input
+            type="button"
+            value="Registration"
+            onClick={handleRegisterRedirect}
+          />
           {actionData?.errors && (
             <div className="erroneous-login">
               {actionData?.errors.map((error) => (
@@ -38,4 +49,4 @@ export function LogIn() {
   );
 }
 
-export default LogIn;
+export default Login;

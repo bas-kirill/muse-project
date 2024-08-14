@@ -11,7 +11,7 @@ import {
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import { Instruments } from "domain/model/instrument";
 import Jwt from "domain/model/jwt";
-import { useJwt } from "pages/log-in";
+import { useJwt } from "pages/login";
 import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
   CATALOGUE_DEFAULT_PAGE_SIZE,
