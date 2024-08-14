@@ -122,7 +122,7 @@ jobs:
         uses: phwt/sonarqube-quality-gate-action@v1
         id: quality-gate-result
         with:
-          sonar-project-key: ${{ env.SONAR_PROJECT_KEY }}
+          sonar-project-key: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
           sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
           sonar-token: ${{ secrets.SONAR_TOKEN }}
           github-token: ${{ secrets.GH_TOKEN }}
