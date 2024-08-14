@@ -27,7 +27,10 @@ export function parseForm(data: FormData) {
     errors.push("Type password at form");
   }
 
-  if (typeof password === "string" && password.length < MINIMAL_PASSWORD_LENGTH) {
+  if (
+    typeof password === "string" &&
+    password.length < MINIMAL_PASSWORD_LENGTH
+  ) {
     errors.push(`Password must greater ${MINIMAL_PASSWORD_LENGTH} symbols`);
   }
 

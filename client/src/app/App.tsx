@@ -7,23 +7,15 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Home } from "pages/home";
-import {
-  UserProfile,
-  loader as profileLoader,
-} from "pages/profile";
-import {
-  Catalogue,
-  loader as catalogueLoader,
-} from "pages/catalogue";
+import { UserProfile, loader as profileLoader } from "pages/profile";
+import { Catalogue, loader as catalogueLoader } from "pages/catalogue";
 import {
   action as loginAction,
   Login, // todo(refactor): add suffix `Page`
 } from "pages/login";
+import { NotFound } from "pages/not-found";
 import {
-  NotFound,
-} from "pages/not-found";
-import {
-  Instrument,  // todo(refactor): add suffix `Page`
+  Instrument, // todo(refactor): add suffix `Page`
   loader as instrumentLoader,
 } from "pages/instrument";
 import {
@@ -43,7 +35,7 @@ import {
   action as createInstrumentAction,
 } from "pages/create-instrument";
 import {
-  EditInstrument,  // todo(refactor): add suffix `Page`
+  EditInstrument, // todo(refactor): add suffix `Page`
   loader as editLoader,
   action as editAction,
 } from "pages/edit-instrument";
@@ -79,11 +71,8 @@ const routes = createRoutesFromElements(
       path={REGISTRATION_URL}
       element={<RegistrationPage />}
       action={registrationAction}
-      />
-    <Route
-      path={NOT_FOUND}
-      element={<NotFound />}
     />
+    <Route path={NOT_FOUND} element={<NotFound />} />
   </Route>,
 );
 

@@ -6,7 +6,6 @@ import { Footer } from "widgets/footer";
 import { RegistrationAction } from "pages/registration/api/action";
 
 export const RegistrationPage = () => {
-
   const actionData = useActionData() as RegistrationAction;
 
   return (
@@ -27,13 +26,11 @@ export const RegistrationPage = () => {
         <input type="submit" value="Registration" />
         {actionData?.errors.length > 0 && (
           <div className="erroneous-registration">
-            {actionData?.errors.map((error) => (
-              <div key={error}>{error}</div>
-            ))}
+            {actionData?.errors.map((error) => <div key={error}>{error}</div>)}
           </div>
         )}
       </Form>
       <Footer />
     </div>
-  )
+  );
 };

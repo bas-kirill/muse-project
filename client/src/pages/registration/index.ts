@@ -1,12 +1,5 @@
-import {
-  RegistrationPage,
-} from "./ui/RegistrationPage";
+import { RegistrationPage } from "./ui/RegistrationPage";
 
-import {
-  action,
-} from "./api/action";
+import { action } from "./api/action";
 
-export {
-  RegistrationPage,
-  action,
-}
+export { RegistrationPage, action };

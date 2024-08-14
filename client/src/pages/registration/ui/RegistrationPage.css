@@ -1,28 +1,28 @@
 #registration-page {
-    background-color: olive;
+  background-color: olive;
 
-    form {
-        max-width: 640px;
-        display: flex;
-        flex-direction: column;
+  form {
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
 
-        margin: 50px auto;
+    margin: 50px auto;
 
-        input {
-            font-size: 32px;
-        }
+    input {
+      font-size: 32px;
     }
+  }
 
-    .successfull-registration {
-        background-color: green;
-        font-size: 32px;
-        padding: 0 10px;
-        max-width: 640px;
-        margin: 0 auto;
-    }
+  .successfull-registration {
+    background-color: green;
+    font-size: 32px;
+    padding: 0 10px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
 
-    .erroneous-registration {
-        background-color: red;
-        padding: 20px 10px;
-    }
+  .erroneous-registration {
+    background-color: red;
+    padding: 20px 10px;
+  }
 }

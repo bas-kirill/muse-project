@@ -17,9 +17,7 @@ export interface LogInAction {
 export const action: ActionFunction = async ({
   request,
 }): Promise<LogInAction> => {
-  const { login, password, errors } = parseForm(
-    await request.formData(),
-  );
+  const { login, password, errors } = parseForm(await request.formData());
 
   if (errors.length !== 0) {
     return {

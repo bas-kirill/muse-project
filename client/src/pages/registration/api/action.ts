@@ -4,7 +4,6 @@ import axios from "axios";
 import { SERVER_URL } from "shared/config";
 import { API_REGISTRATION } from "shared/config/backend";
 
-
 interface RegistrationRequestBody {
   name: string;
   surname: string;
@@ -17,10 +16,10 @@ export interface RegistrationAction {
 }
 
 export const action: ActionFunction = async ({
-                                               request
-                                             }): Promise<RegistrationAction> => {
+  request,
+}): Promise<RegistrationAction> => {
   const { name, surname, login, password, errors } = parseForm(
-    await request.formData()
+    await request.formData(),
   );
 
   if (errors.length !== 0) {
@@ -33,13 +32,13 @@ export const action: ActionFunction = async ({
     name: name,
     surname: surname,
     login: login,
-    password: password
+    password: password,
   };
 
   const { status } = await axios.post(
     `${SERVER_URL}${API_REGISTRATION}`,
     registrationRequestBody,
-    { validateStatus: () => true } // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
+    { validateStatus: () => true }, // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
   );
 
   if (status === 200) {
@@ -49,6 +48,6 @@ export const action: ActionFunction = async ({
   }
 
   return {
-    errors: [`Failed to authenticate: '${status}' code`]
+    errors: [`Failed to authenticate: '${status}' code`],
   };
 };

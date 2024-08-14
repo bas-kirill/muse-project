@@ -30,7 +30,11 @@ export function Login() {
           <input type="text" name="login" placeholder={"Login"} />
           <input type="text" name="password" placeholder={"Password"} />
           <input type="submit" value="Log In" />
-          <input type="button" value="Registration" onClick={handleRegisterRedirect} />
+          <input
+            type="button"
+            value="Registration"
+            onClick={handleRegisterRedirect}
+          />
           {actionData?.errors && (
             <div className="erroneous-login">
               {actionData?.errors.map((error) => (
