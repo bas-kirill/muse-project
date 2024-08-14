@@ -13,7 +13,7 @@ env:
 jobs:
   credentials-check:
     name: "[PR] GitGuardian scan"
-    if: false
+    if: false # or in another case, there will be "Error: Server is not responding as expected."
     runs-on: kiryuxa-1
     steps:
       - name: Checkout
