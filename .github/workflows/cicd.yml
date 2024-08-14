@@ -97,36 +97,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_PROJECT_KEY: ${{ env.SONAR_PROJECT_KEY }}
-#      - name: Cache SonarQube packages
-#        uses: actions/cache@v1
-#        with:
-#          path: ~/.sonar/cache
-#          key: ${{ runner.os }}-sonar
-#          restore-keys: ${{ runner.os }}-sonar
-#      - name: Cache Gradle packages
-#        uses: actions/cache@v1
-#        with:
-#          path: ~/.gradle/caches
-#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-#          restore-keys: ${{ runner.os }}-gradle
-#      - name: Build and analyze
-#        env:
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-#          MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
-#        run: (cd ./server && ./gradlew build sonar --info)
+
       - name: Wait for quality gate result
         run: sleep 5
-
-#      - name: Report quality gate result in the pull request comment
-#        uses: phwt/sonarqube-quality-gate-action@v1
-#        id: quality-gate-result
-#        with:
-#          sonar-project-key: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
-#          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
-#          sonar-token: ${{ secrets.SONAR_TOKEN }}
-#          github-token: ${{ secrets.GH_TOKEN }}
-#          branch: ${{ github.ref_name }}
 
       - uses: phwt/sonarqube-quality-gate-action@v1
         id: quality-gate-check
@@ -135,19 +108,11 @@ jobs:
           sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
           sonar-token: ${{ secrets.SONAR_TOKEN }}
           github-token: ${{ secrets.GH_TOKEN }}
-          branch: ${{ github.ref_name }}
 
       - name: Output result
         run: |
           echo "${{ steps.quality-gate-result.outputs.project-status }}"
           echo "${{ steps.quality-gate-result.outputs.quality-gate-result }}"
-
-#      - id: check-gate
-#        name: Check quality gate status
-#        uses: sonarsource/sonarqube-quality-gate-action@1.1.0
-#        timeout-minutes: 5
-#        env:
-#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   server-unit-tests:
     name: "[SERVER] Unit Tests"
