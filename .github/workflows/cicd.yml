@@ -96,6 +96,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       - name: Run Unit Tests
+        env:
+          MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
         run: ./tools/scripts/server/runUnitTests.sh
 #      - name: Publish Unit Test Results
 #        if: always()
