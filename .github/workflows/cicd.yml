@@ -81,9 +81,8 @@ jobs:
       - name: Run static analyzer
         run: ./tools/scripts/server/runStaticAnalyzer.sh
   build:
-    name: Build and analyze
-    runs-on: ubuntu-latest
-
+    name: "[SERVER] Run SonarQube"
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -110,6 +109,28 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
         run: (cd ./server && ./gradlew build sonar --info)
+
+  sonar-report:
+    name: "[SERVER] Sonar Report"
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up Sonar Quality Gate
+        uses: dieuhd/sonar-quality-gate@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GIT_URL: "https://api.github.com"
+          GIT_TOKEN: ${{ secrets.GH_TOKEN }}
+          SONAR_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
+        with:
+          login: ${{ secrets.SONAR_TOKEN }}
+          url: ${{ secrets.SONAR_HOST_URL }}
+          projectKey: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
 
   server-unit-tests:
     name: "[SERVER] Unit Tests"
