@@ -80,7 +80,7 @@ jobs:
 
       - name: Run static analyzer
         run: ./tools/scripts/server/runStaticAnalyzer.sh
-  build:
+  server-sonarqube:
     name: "[SERVER] Run SonarQube"
     runs-on: ubuntu-22.04
     steps:
@@ -149,12 +149,12 @@ jobs:
   deploy-dev:
     name: "[SERVER] Deploy to Dev"
     needs:
-      - credentials-check
       - client-linter
       - client-static-analyzer
       - server-linter
       - server-static-analyzer
       - server-unit-tests
+      - server-sonarqube
     runs-on: ubuntu-22.04
     environment:
       name: dev
@@ -240,12 +240,12 @@ jobs:
     name: "[SERVER] Deploy to Staging"
     if: github.event.ref == 'refs/heads/main'
     needs:
-      - credentials-check
       - client-linter
       - client-static-analyzer
       - server-linter
       - server-static-analyzer
       - server-unit-tests
+      - server-sonarqube
     runs-on: ubuntu-22.04
     environment:
       name: staging
