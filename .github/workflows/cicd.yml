@@ -8,6 +8,7 @@ env:
   DEV_PORT: 50505
   STAGING_PORT: 50506
   PROD_PORT: 50507
+  SONAR_PROJECT_KEY: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
 
 
 jobs:
@@ -91,73 +92,53 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 17
-      - name: Cache SonarQube packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-      - name: Cache Gradle packages
-        uses: actions/cache@v1
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
-      - name: Build and analyze
+      - name: Run sonarqube
+        uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
-        run: (cd ./server && ./gradlew build sonar --info)
-#      - uses: phwt/sonarqube-quality-gate-action@v1
-#        id: quality-gate-check
+#      - name: Cache SonarQube packages
+#        uses: actions/cache@v1
 #        with:
-#          sonar-project-key: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
-#          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
-#          sonar-token: ${{ secrets.SONAR_TOKEN }}
-#          github-token: ${{ secrets.GH_TOKEN }}
-#          branch: main # Optional input
-      - name: Comment results and findings on Pull Request
-        uses: zxkane/sonar-quality-gate@master
-        if: always()
-        env:
-          DEBUG: true
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_URL: "https://api.github.com"
-          GIT_TOKEN: ${{ secrets.GH_TOKEN }}
-          SONAR_URL: http://88.201.171.120:9000
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1
-        with:
-          login: ${{ secrets.SONAR_TOKEN }}
-          skipScanner: true
-
-
-#  test:
-#    runs-on: ubuntu-22.04
-#    steps:
-
-#  sonar-report:
-#    name: "[SERVER] Sonar Report"
-#    runs-on: ubuntu-22.04
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2.3.4
+#          path: ~/.sonar/cache
+#          key: ${{ runner.os }}-sonar
+#          restore-keys: ${{ runner.os }}-sonar
+#      - name: Cache Gradle packages
+#        uses: actions/cache@v1
 #        with:
-#          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-#      - name: Set up Sonar Quality Gate
-#        uses: dieuhd/sonar-quality-gate@v1
+#          path: ~/.gradle/caches
+#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
+#          restore-keys: ${{ runner.os }}-gradle
+#      - name: Build and analyze
 #        env:
-#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-#          GIT_URL: "https://api.github.com"
-#          GIT_TOKEN: ${{ secrets.GH_TOKEN }}
-#          SONAR_URL: ${{ secrets.SONAR_HOST_URL }}
 #          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-#          SONAR_PROJECT_KEY: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
-#        with:
-#          login: ${{ secrets.SONAR_TOKEN }}
-#          url: ${{ secrets.SONAR_HOST_URL }}
-#          projectKey: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
+#          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+#          MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
+#        run: (cd ./server && ./gradlew build sonar --info)
+      - name: Wait for quality gate result
+        run: sleep 5
+
+      - name: Report quality gate result in the pull request comment
+        uses: phwt/sonarqube-quality-gate-action@v1
+        id: quality-gate-result
+        with:
+          sonar-project-key: ${{ env.SONAR_PROJECT_KEY }}
+          sonar-host-url: ${{ secrets.SONAR_HOST_URL }}
+          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
+          branch: ${{ github.ref_name }}
+
+      - name: Output result
+        run: |
+          echo "${{ steps.quality-gate-result.outputs.project-status }}"
+          echo "${{ steps.quality-gate-result.outputs.quality-gate-result }}"
+
+      - id: check-gate
+        name: Check quality gate status
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        timeout-minutes: 5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   server-unit-tests:
     name: "[SERVER] Unit Tests"
