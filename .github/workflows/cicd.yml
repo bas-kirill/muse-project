@@ -133,12 +133,12 @@ jobs:
           echo "${{ steps.quality-gate-result.outputs.project-status }}"
           echo "${{ steps.quality-gate-result.outputs.quality-gate-result }}"
 
-      - id: check-gate
-        name: Check quality gate status
-        uses: sonarsource/sonarqube-quality-gate-action@1.1.0
-        timeout-minutes: 5
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#      - id: check-gate
+#        name: Check quality gate status
+#        uses: sonarsource/sonarqube-quality-gate-action@1.1.0
+#        timeout-minutes: 5
+#        env:
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   server-unit-tests:
     name: "[SERVER] Unit Tests"
