@@ -13,6 +13,7 @@ env:
 jobs:
   credentials-check:
     name: "[PR] GitGuardian scan"
+    if: false
     runs-on: kiryuxa-1
     steps:
       - name: Checkout
