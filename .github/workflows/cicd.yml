@@ -109,10 +109,6 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
         run: (cd ./server && ./gradlew build sonar --info)
-
-  test:
-    runs-on: ubuntu-22.04
-    steps:
       - uses: DesarrolloORT/sonarqube-quality-gate-action@v1
         id: quality-gate-check
         with:
@@ -125,6 +121,11 @@ jobs:
         run: |
           echo "${{ steps.quality-gate-check.outputs.project-status }}"
           echo "${{ steps.quality-gate-check.outputs.quality-gate-result }}"
+
+#  test:
+#    runs-on: ubuntu-22.04
+#    steps:
+
 #  sonar-report:
 #    name: "[SERVER] Sonar Report"
 #    runs-on: ubuntu-22.04
