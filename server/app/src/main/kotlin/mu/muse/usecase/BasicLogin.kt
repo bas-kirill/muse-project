@@ -3,7 +3,7 @@ package mu.muse.usecase
 import mu.muse.common.types.BusinessError
 import mu.muse.domain.user.Password
 import mu.muse.domain.user.Username
-import mu.muse.usecase.scenario.JwtRaw
+import mu.muse.usecase.scenario.login.JwtRaw
 
 fun interface BasicLogin {
     fun execute(username: Username, password: Password): JwtRaw

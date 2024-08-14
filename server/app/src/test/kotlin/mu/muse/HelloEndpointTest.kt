@@ -2,11 +2,12 @@ package mu.muse
 
 import mu.muse.application.muse.SecurityConfiguration
 import mu.muse.domain.IdGenerator
+import mu.muse.domain.user.FullName
 import mu.muse.domain.user.Password
 import mu.muse.domain.user.Role
 import mu.muse.domain.user.User
 import mu.muse.domain.user.Username
-import mu.muse.domain.user.UsernameId
+import mu.muse.domain.user.UserId
 import mu.muse.persistence.user.InMemoryUserRepository
 import mu.muse.persistence.user.InMemoryUsernameIdGenerator
 import mu.muse.rest.HelloEndpoint
@@ -15,7 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.factory.PasswordEncoderFactories
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.test.context.support.WithAnonymousUser
 import org.springframework.security.test.context.support.WithUserDetails
 import org.springframework.test.context.ContextConfiguration
@@ -75,23 +78,21 @@ internal class HelloEndpointTest {
         fun usernameIdGenerator() = InMemoryUsernameIdGenerator()
 
         @Bean
-        fun users(usernameIdGenerator: IdGenerator<UsernameId>): Set<User> {
-            val passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
-
+        fun users(idGenerator: IdGenerator<UserId>, passwordEncoder: PasswordEncoder): Set<User> {
             val testUser = User.create(
-                idGenerator = usernameIdGenerator,
+                id = idGenerator.generate(),
                 username = Username.from("user"),
                 password = Password.from(passwordEncoder.encode("123")),
                 role = Role.user(),
-                fullName = "Anonymous",
+                fullName = FullName.from("Anonymous"),
             )
 
             val testEditor = User.create(
-                idGenerator = usernameIdGenerator,
+                id = idGenerator.generate(),
                 username = Username.from("editor"),
                 password = Password.from(passwordEncoder.encode("321")),
                 role = Role.editor(),
-                fullName = "Editor",
+                fullName = FullName.from("Editor"),
             )
 
             return setOf(testUser, testEditor)

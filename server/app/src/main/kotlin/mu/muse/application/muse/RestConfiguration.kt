@@ -12,6 +12,7 @@ import mu.muse.rest.instruments.GetInstrumentMaterialsEndpoint
 import mu.muse.rest.instruments.GetInstrumentTypesEndpoint
 import mu.muse.rest.login.BasicLoginEndpoint
 import mu.muse.rest.profile.GetProfileEndpoint
+import mu.muse.rest.registration.RegistrationEndpoint
 import mu.muse.usecase.BasicLogin
 import mu.muse.usecase.CreateInstrument
 import mu.muse.usecase.DeleteInstrumentById
@@ -24,6 +25,7 @@ import mu.muse.usecase.GetInstrumentMaterials
 import mu.muse.usecase.GetInstrumentTypes
 import mu.muse.usecase.GetInstrumentsByCriteria
 import mu.muse.usecase.GetProfile
+import mu.muse.usecase.RegisterUser
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -73,4 +75,7 @@ class RestConfiguration {
 
     @Bean
     fun editInstrumentEndpoint(editInstrument: EditInstrument) = EditInstrumentEndpoint(editInstrument)
+
+    @Bean
+    fun registrationEndpoint(registerUser: RegisterUser) = RegistrationEndpoint(registerUser)
 }

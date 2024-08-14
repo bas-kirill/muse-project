@@ -5,8 +5,7 @@ import { SERVER_URL } from "shared/config";
 import { API_REGISTRATION } from "shared/config/backend";
 
 interface RegistrationRequestBody {
-  name: string;
-  surname: string;
+  fullName: string;
   login: string;
   password: string;
 }
@@ -18,7 +17,7 @@ export interface RegistrationAction {
 export const action: ActionFunction = async ({
   request,
 }): Promise<RegistrationAction> => {
-  const { name, surname, login, password, errors } = parseForm(
+  const { fullName, login, password, errors } = parseForm(
     await request.formData(),
   );
 
@@ -29,8 +28,7 @@ export const action: ActionFunction = async ({
   }
 
   const registrationRequestBody: RegistrationRequestBody = {
-    name: name,
-    surname: surname,
+    fullName: fullName,
     login: login,
     password: password,
   };
@@ -48,6 +46,6 @@ export const action: ActionFunction = async ({
   }
 
   return {
-    errors: [`Failed to authenticate: '${status}' code`],
+    errors: [`User already exists`],
   };
 };

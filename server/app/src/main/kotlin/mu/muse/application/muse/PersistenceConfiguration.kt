@@ -5,22 +5,23 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Manufacturer
+import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
+import mu.muse.domain.user.FullName
 import mu.muse.domain.user.Password
 import mu.muse.domain.user.Role
 import mu.muse.domain.user.User
+import mu.muse.domain.user.UserId
 import mu.muse.domain.user.Username
-import mu.muse.domain.user.UsernameId
 import mu.muse.persistence.instrument.InMemoryInstrumentIdGenerator
 import mu.muse.persistence.instrument.InMemoryInstrumentRepository
 import mu.muse.persistence.user.InMemoryUserRepository
 import mu.muse.persistence.user.InMemoryUsernameIdGenerator
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.crypto.factory.PasswordEncoderFactories
+import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.Instant
 
 @Configuration
@@ -30,23 +31,21 @@ class PersistenceConfiguration {
     fun usernameIdGenerator() = InMemoryUsernameIdGenerator()
 
     @Bean
-    fun users(idGenerator: IdGenerator<UsernameId>): Set<User> {
-        val passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
-
+    fun users(idGenerator: IdGenerator<UserId>, passwordEncoder: PasswordEncoder): Set<User> {
         val user = User.create(
-            idGenerator = idGenerator,
+            id = idGenerator.generate(),
             username = Username.from("user"),
             password = Password.from(passwordEncoder.encode("123")),
             role = Role.user(),
-            fullName = "User Userov",
+            fullName = FullName.from("User Userov"),
         )
 
         val editor = User.create(
-            idGenerator = idGenerator,
+            id = idGenerator.generate(),
             username = Username.from("editor"),
             password = Password.from(passwordEncoder.encode("321")),
             role = Role.editor(),
-            fullName = "Editor Editorov",
+            fullName = FullName.from("Editor Editorov"),
         )
 
         return setOf(user, editor)
@@ -60,7 +59,6 @@ class PersistenceConfiguration {
 
     @Bean
     fun instruments(idGenerator: IdGenerator<InstrumentId>): Set<Instrument> {
-
         val releasedGuitar = Instrument.create(
             id = idGenerator.generate(),
             name = InstrumentName.from("Fender Stratocaster"),

@@ -10,9 +10,10 @@ import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.API_INSTRUMENT_MATERIALS
 import mu.muse.rest.API_INSTRUMENT_TYPES
+import mu.muse.rest.API_REGISTRATION
 import mu.muse.rest.AUTH_BASIC_LOGIN
 import mu.muse.usecase.access.user.UserExtractor
-import mu.muse.usecase.scenario.BasicLoginUseCase
+import mu.muse.usecase.scenario.login.BasicLoginUseCase
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -26,6 +27,7 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.core.session.SessionRegistry
 import org.springframework.security.core.session.SessionRegistryImpl
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
@@ -34,10 +36,10 @@ import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import java.security.Key
 
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
+@Suppress("TooManyFunctions")
 class SecurityConfiguration {
 
     @Bean
@@ -88,6 +90,7 @@ class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_MATERIALS).permitAll()
                 .requestMatchers(HttpMethod.GET, API_COUNTRIES).permitAll()
                 .requestMatchers(HttpMethod.GET, API_GET_MANUFACTURER_NAMES).permitAll()
+                .requestMatchers(HttpMethod.POST, API_REGISTRATION).permitAll()
                 .anyRequest().authenticated()
         }
 
@@ -135,4 +138,7 @@ class SecurityConfiguration {
 
     @Bean
     fun securityContextHolderAwareRequestFilter() = SecurityContextHolderAwareRequestFilter()
+
+    @Bean
+    fun passwordEncoder() = BCryptPasswordEncoder()
 }

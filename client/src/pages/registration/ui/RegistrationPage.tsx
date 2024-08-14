@@ -19,8 +19,7 @@ export const RegistrationPage = () => {
       )}
 
       <Form method="POST">
-        <input type="text" name="name" placeholder={"Name"} />
-        <input type="text" name="surname" placeholder={"Surname"} />
+        <input type="text" name="fullName" placeholder={"Full Name"} />
         <input type="text" name="login" placeholder={"Login"} />
         <input type="password" name="password" placeholder={"Password"} />
         <input type="submit" value="Registration" />

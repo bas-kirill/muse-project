@@ -1,14 +1,14 @@
 package mu.muse.persistence.user
 
 import mu.muse.domain.IdGenerator
-import mu.muse.domain.user.UsernameId
+import mu.muse.domain.user.UserId
 import java.util.concurrent.atomic.AtomicLong
 
-class InMemoryUsernameIdGenerator : IdGenerator<UsernameId> {
+class InMemoryUsernameIdGenerator : IdGenerator<UserId> {
 
     private val counter = AtomicLong(0L)
 
-    override fun generate(): UsernameId {
-        return UsernameId.from(counter.incrementAndGet())
+    override fun generate(): UserId {
+        return UserId.from(counter.incrementAndGet())
     }
 }

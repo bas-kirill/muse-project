@@ -2,29 +2,26 @@ package mu.muse.domain.user
 
 import mu.muse.common.types.AggregateRoot
 import mu.muse.common.types.Version
-import mu.muse.domain.IdGenerator
-
-typealias FullName = String
 
 class User internal constructor(
-    id: UsernameId,
+    id: UserId,
     val username: Username,
     val password: Password,
     val role: Role,
     val fullName: FullName,
     version: Version,
-) : AggregateRoot<UsernameId>(id, version) {
+) : AggregateRoot<UserId>(id, version) {
 
     companion object {
         fun create(
-            idGenerator: IdGenerator<UsernameId>,
+            id: UserId,
             username: Username,
             password: Password,
             role: Role,
             fullName: FullName,
         ): User {
             return User(
-                id = idGenerator.generate(),
+                id = id,
                 username = username,
                 password = password,
                 role = role,

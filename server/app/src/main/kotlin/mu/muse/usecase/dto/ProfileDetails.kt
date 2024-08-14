@@ -12,7 +12,7 @@ data class ProfileDetails(
             return ProfileDetails(
                 username = user.username.toStringValue(),
                 role = user.role.toStringValue(),
-                fullName = user.fullName,
+                fullName = user.fullName.toStringValue(),
             )
         }
     }
