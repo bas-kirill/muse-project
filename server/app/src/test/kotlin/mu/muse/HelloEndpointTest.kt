@@ -78,9 +78,6 @@ internal class HelloEndpointTest {
         fun usernameIdGenerator() = InMemoryUsernameIdGenerator()
 
         @Bean
-        fun passwordEncoder() = BCryptPasswordEncoder()
-
-        @Bean
         fun users(idGenerator: IdGenerator<UserId>, passwordEncoder: PasswordEncoder): Set<User> {
             val testUser = User.create(
                 id = idGenerator.generate(),
