@@ -1,5 +1,5 @@
-import { LogIn } from "./ui/LogIn";
+import { Login } from "./ui/Login";
 import { action } from "./api/action";
 import { useJwt } from "./model/use-jwt";
 
-export { LogIn, action, useJwt };
+export { Login, action, useJwt };

@@ -7,11 +7,25 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Home } from "pages/home";
-import { UserProfile, loader as profileLoader } from "pages/profile";
-import { Catalogue, loader as catalogueLoader } from "pages/catalogue";
-import { action as loginAction, LogIn } from "pages/log-in";
-import { NotFound } from "pages/not-found";
-import { Instrument, loader as instrumentLoader } from "pages/instrument";
+import {
+  UserProfile,
+  loader as profileLoader,
+} from "pages/profile";
+import {
+  Catalogue,
+  loader as catalogueLoader,
+} from "pages/catalogue";
+import {
+  action as loginAction,
+  Login, // todo(refactor): add suffix `Page`
+} from "pages/login";
+import {
+  NotFound,
+} from "pages/not-found";
+import {
+  Instrument,  // todo(refactor): add suffix `Page`
+  loader as instrumentLoader,
+} from "pages/instrument";
 import {
   CATALOGUE,
   CREATE_INSTRUMENT,
@@ -21,24 +35,29 @@ import {
   LOGIN,
   NOT_FOUND,
   PROFILE,
+  REGISTRATION_URL,
 } from "shared/config/paths";
 import {
-  CreateInstrument,
+  CreateInstrument, // todo(refactor): add suffix `Page`
   loader as createInstrumentLoader,
   action as createInstrumentAction,
 } from "pages/create-instrument";
 import {
-  EditInstrument,
+  EditInstrument,  // todo(refactor): add suffix `Page`
   loader as editLoader,
   action as editAction,
 } from "pages/edit-instrument";
+import {
+  RegistrationPage,
+  action as registrationAction,
+} from "pages/registration";
 
 const routes = createRoutesFromElements(
   <Route>
     <Route path={HOME} element={<Home />} />
     <Route path={PROFILE} element={<UserProfile />} loader={profileLoader} />
     <Route path={CATALOGUE} element={<Catalogue />} loader={catalogueLoader} />
-    <Route path={LOGIN} element={<LogIn />} action={loginAction} />
+    <Route path={LOGIN} element={<Login />} action={loginAction} />
     <Route
       path={INSTRUMENT_BY_ID}
       element={<Instrument />}
@@ -56,7 +75,15 @@ const routes = createRoutesFromElements(
       loader={editLoader}
       action={editAction}
     />
-    <Route path={NOT_FOUND} element={<NotFound />} />
+    <Route
+      path={REGISTRATION_URL}
+      element={<RegistrationPage />}
+      action={registrationAction}
+      />
+    <Route
+      path={NOT_FOUND}
+      element={<NotFound />}
+    />
   </Route>,
 );
 

@@ -1,6 +1,6 @@
 import { ActionFunction } from "react-router-dom";
 import { Jwt } from "../../../domain";
-import { parseAsLoginAndPassword } from "../model/parseAsLoginAndPassword";
+import { parseForm } from "../model/parseForm";
 import axios from "axios";
 import { API_AUTH_BASIC_LOGIN, SERVER_URL } from "shared/config/backend";
 
@@ -17,7 +17,7 @@ export interface LogInAction {
 export const action: ActionFunction = async ({
   request,
 }): Promise<LogInAction> => {
-  const { login, password, errors } = parseAsLoginAndPassword(
+  const { login, password, errors } = parseForm(
     await request.formData(),
   );
 

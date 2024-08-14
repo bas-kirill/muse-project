@@ -6,4 +6,5 @@ export const FAVORITE = "/favorite";
 export const INSTRUMENT_BY_ID = "/instrument/:instrumentId";
 export const CREATE_INSTRUMENT = "/instrument/create";
 export const EDIT_INSTRUMENT_BY_ID = "/instrument/:instrumentId/edit";
+export const REGISTRATION_URL = "/registration"; // TODO(refactor: add suffix `_URL`
 export const NOT_FOUND = "*";
