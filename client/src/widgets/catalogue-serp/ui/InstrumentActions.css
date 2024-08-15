@@ -11,6 +11,12 @@
     flex-basis: 25%;
   }
 
+  .add-to-favorite-button {
+    background-color: darkred;
+    padding: 10px 40px;
+    flex-basis: 20%;
+  }
+
   .serp-go-to-instrument-details-button {
     background-color: blue;
     padding: 10px 40px;

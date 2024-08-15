@@ -86,7 +86,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
       - name: Set up JDK 17
         uses: actions/setup-java@v1
         with:
@@ -134,12 +134,12 @@ jobs:
         env:
           MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
         run: ./tools/scripts/server/runUnitTests.sh
-#      - name: Publish Unit Test Results
-#        if: always()
-#        uses: EnricoMi/publish-unit-test-result-action@v1.9
-#        with:
-#          files: ./**/**/build/test-results/**/*.xml
-#          report_individual_runs: true
+      #      - name: Publish Unit Test Results
+      #        if: always()
+      #        uses: EnricoMi/publish-unit-test-result-action@v1.9
+      #        with:
+      #          files: ./**/**/build/test-results/**/*.xml
+      #          report_individual_runs: true
       - name: Gather reports
         uses: actions/upload-artifact@v2
         if: always()
