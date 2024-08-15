@@ -9,13 +9,13 @@ export interface FavoriteLoader {
 }
 
 export const loader: LoaderFunction = async (): Promise<FavoriteLoader> => {
-  const favoriteInstrumentIds = await fetchFavoriteInstrumentIdsList()
+  const favoriteInstrumentIds = await fetchFavoriteInstrumentIdsList();
   const filter = {
     instrumentId: favoriteInstrumentIds,
   } as unknown as Filters;
-  const instruments = await getInstrumentsByCriteria(filter)
+  const instruments = await getInstrumentsByCriteria(filter);
 
   return {
     instruments: instruments,
-  }
+  };
 };

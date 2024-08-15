@@ -14,7 +14,7 @@ export type Filters = {
   countries: string[] | null;
   materials: string[] | null;
   instrumentIds: number[] | null;
-}
+};
 
 export const DEFAULT_FILTER = {
   instrumentName: null,

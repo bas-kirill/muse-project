@@ -40,7 +40,9 @@ export function Catalogue() {
   );
 
   useEffect(() => {
-    fetchFavoriteInstrumentIdsList().then((ids) => setFavoriteInstrumentIds(ids));
+    fetchFavoriteInstrumentIdsList().then((ids) =>
+      setFavoriteInstrumentIds(ids),
+    );
 
     if (instrumentName === "") {
       filters.instrumentName = null;

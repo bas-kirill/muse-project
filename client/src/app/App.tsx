@@ -21,13 +21,14 @@ import {
 import {
   CATALOGUE,
   CREATE_INSTRUMENT,
-  EDIT_INSTRUMENT_BY_ID, FAVORITE,
+  EDIT_INSTRUMENT_BY_ID,
+  FAVORITE,
   HOME,
   INSTRUMENT_BY_ID,
   LOGIN,
   NOT_FOUND,
   PROFILE,
-  REGISTRATION_URL
+  REGISTRATION_URL,
 } from "shared/config/paths";
 import {
   CreateInstrument, // todo(refactor): add suffix `Page`
@@ -43,10 +44,7 @@ import {
   RegistrationPage,
   action as registrationAction,
 } from "pages/registration";
-import {
-  FavoritePage,
-  loader as favoriteLoader,
-} from "pages/favorite";
+import { FavoritePage, loader as favoriteLoader } from "pages/favorite";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -76,11 +74,7 @@ const routes = createRoutesFromElements(
       element={<RegistrationPage />}
       action={registrationAction}
     />
-    <Route
-      path={FAVORITE}
-      element={<FavoritePage />}
-      loader={favoriteLoader}
-    />
+    <Route path={FAVORITE} element={<FavoritePage />} loader={favoriteLoader} />
     <Route path={NOT_FOUND} element={<NotFound />} />
   </Route>,
 );

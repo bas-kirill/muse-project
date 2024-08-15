@@ -3,9 +3,7 @@ import { API_INSTRUMENTS, SERVER_URL } from "shared/config";
 import { Filters } from "widgets/catalogue-filter";
 import { Instruments } from "domain/model/instrument";
 
-export const getInstrumentsByCriteria = async (
-  filters: Filters,
-) => {
+export const getInstrumentsByCriteria = async (filters: Filters) => {
   const getInstrumentsByCriteriaRequestBody = JSON.stringify(filters, null, 2);
 
   const { data, status } = await axios.post<Instruments>(
@@ -16,7 +14,7 @@ export const getInstrumentsByCriteria = async (
         "Content-Type": "application/json",
       },
     },
-  )
+  );
 
   if (status !== 200) {
     throw new Error("Failed to fetch instruments");

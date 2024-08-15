@@ -15,7 +15,8 @@ export const CatalogueSerpWidget = ({
   return (
     <div id="catalogue-serp">
       {instruments.map((instrument) => (
-        <InstrumentCard key={instrument.id.toString()}
+        <InstrumentCard
+          key={instrument.id.toString()}
           instrument={instrument}
           favorite={favoriteInstrumentIds.includes(instrument.id)}
         />

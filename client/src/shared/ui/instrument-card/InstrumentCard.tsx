@@ -18,5 +18,5 @@ export const InstrumentCard = (props: Props) => {
         favorite={props.favorite}
       />
     </div>
-  )
-}
+  );
+};

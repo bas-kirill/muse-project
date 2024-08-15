@@ -12,22 +12,24 @@ export const FavoritePage = () => {
 
   useEffect(() => {
     const fetchFavoriteInstruments = async () => {
-      const favoriteInstrumentIds = await fetchFavoriteInstrumentIdsList()
+      const favoriteInstrumentIds = await fetchFavoriteInstrumentIdsList();
       const filter = {
         instrumentIds: favoriteInstrumentIds,
       } as unknown as Filters;
       return await getInstrumentsByCriteria(filter);
-    }
+    };
 
-    fetchFavoriteInstruments().then(instruments => setInstruments(instruments));
+    fetchFavoriteInstruments().then((instruments) =>
+      setInstruments(instruments),
+    );
   }, []);
 
   return (
     <>
-      <Header/>
+      <Header />
 
       <h1>Favorite</h1>
-      {instruments.map(instrument => (
+      {instruments.map((instrument) => (
         <InstrumentCard
           key={instrument.id.toString()}
           instrument={instrument}
@@ -35,5 +37,5 @@ export const FavoritePage = () => {
         />
       ))}
     </>
-  )
-}
+  );
+};
