@@ -4,7 +4,7 @@ import {
   API_INSTRUMENTS,
   CATALOGUE_DEFAULT_PAGE_NUMBER,
   CATALOGUE_DEFAULT_PAGE_SIZE,
-  SERVER_URL
+  SERVER_URL,
 } from "shared/config";
 
 export const fetchInstruments = async () => {
@@ -14,9 +14,9 @@ export const fetchInstruments = async () => {
     {
       params: {
         pageNumber: CATALOGUE_DEFAULT_PAGE_NUMBER,
-        pageSize: CATALOGUE_DEFAULT_PAGE_SIZE
-      }
-    }
+        pageSize: CATALOGUE_DEFAULT_PAGE_SIZE,
+      },
+    },
   );
   if (status !== 200) {
     throw new Error(`Failed to extract instruments`);

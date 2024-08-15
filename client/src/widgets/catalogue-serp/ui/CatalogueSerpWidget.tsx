@@ -9,7 +9,10 @@ interface Props {
   favoriteInstrumentIds: number[];
 }
 
-export const CatalogueSerpWidget = ({ instruments, favoriteInstrumentIds }: Props) => {
+export const CatalogueSerpWidget = ({
+  instruments,
+  favoriteInstrumentIds,
+}: Props) => {
   return (
     <div id="catalogue-serp">
       {instruments.map((instrument) => (

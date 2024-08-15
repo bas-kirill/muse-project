@@ -6,7 +6,7 @@ import { useLoaderData } from "react-router-dom";
 import {
   CatalogueFilterWidget,
   Filters,
-  DEFAULT_FILTER
+  DEFAULT_FILTER,
 } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import { Instruments } from "domain/model/instrument";
@@ -14,7 +14,7 @@ import Jwt from "domain/model/jwt";
 import { useJwt } from "pages/login";
 import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
-  CATALOGUE_DEFAULT_PAGE_SIZE
+  CATALOGUE_DEFAULT_PAGE_SIZE,
 } from "shared/config/frontend";
 import { getInstrumentsByCriteria } from "shared/api/list-instruments-by-criteria";
 import { Page } from "domain/model/page";
@@ -25,18 +25,21 @@ import { CatalogueLoader, fetchFavoriteInstrumentIds } from "pages/catalogue";
 export function Catalogue() {
   useJwt();
   const loader = useLoaderData() as CatalogueLoader; // https://github.com/remix-run/react-router/discussions/9792
-  const [instruments, setInstruments] =
-    useState<Instruments>(loader.instrumentPage.content);
+  const [instruments, setInstruments] = useState<Instruments>(
+    loader.instrumentPage.content,
+  );
   const [instrumentName, setInstrumentName] = useState<string | null>(null);
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTER);
   const [pageNumber, setPageNumber] = useState<number>(
-    CATALOGUE_DEFAULT_PAGE_NUMBER
+    CATALOGUE_DEFAULT_PAGE_NUMBER,
   );
   const totalPages = useRef<number>(0);
-  const [favoriteInstrumentIds, setFavoriteInstrumentIds] = useState<number[]>(loader.favoriteInstrumentIds);
+  const [favoriteInstrumentIds, setFavoriteInstrumentIds] = useState<number[]>(
+    loader.favoriteInstrumentIds,
+  );
 
   useEffect(() => {
-    fetchFavoriteInstrumentIds().then(ids => setFavoriteInstrumentIds(ids));
+    fetchFavoriteInstrumentIds().then((ids) => setFavoriteInstrumentIds(ids));
 
     if (instrumentName === "") {
       filters.instrumentName = null;
@@ -46,7 +49,7 @@ export function Catalogue() {
     }
     const page = {
       pageNumber: pageNumber,
-      pageSize: CATALOGUE_DEFAULT_PAGE_SIZE
+      pageSize: CATALOGUE_DEFAULT_PAGE_SIZE,
     } as Page;
 
     getInstrumentsByCriteria(filters, page).then((r) => {

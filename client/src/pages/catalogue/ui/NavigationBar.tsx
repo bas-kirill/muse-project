@@ -20,5 +20,5 @@ export const NavigationBar = (props: Props) => {
         </button>
       )}
     </div>
-  )
-}
+  );
+};

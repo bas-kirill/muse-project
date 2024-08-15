@@ -5,8 +5,8 @@ export const fetchFavoriteInstrumentIds = async () => {
   const { data, status } = await axios.get<number[]>(
     `${SERVER_URL}/api/favorite/list`,
     {
-      withCredentials: true
-    }
+      withCredentials: true,
+    },
   );
 
   if (status !== 200) {

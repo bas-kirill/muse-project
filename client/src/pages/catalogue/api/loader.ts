@@ -14,5 +14,5 @@ export const loader = async (): Promise<CatalogueLoader> => {
   return {
     instrumentPage: instruments,
     favoriteInstrumentIds: favoriteInstrumentIds,
-  }
+  };
 };

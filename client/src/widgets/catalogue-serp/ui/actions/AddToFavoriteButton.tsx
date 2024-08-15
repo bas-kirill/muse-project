@@ -12,22 +12,25 @@ export const AddToFavoriteButton = (props: Props) => {
 
   const toggleFavorite = async () => {
     if (favorite) {
-      await axios.post(`${SERVER_URL}/api/favorite/remove`,
+      await axios.post(
+        `${SERVER_URL}/api/favorite/remove`,
         {
-          instrumentId: props.instrumentId
+          instrumentId: props.instrumentId,
         },
         {
-          withCredentials: true
-        });
+          withCredentials: true,
+        },
+      );
     } else {
       await axios.post(
         `${SERVER_URL}/api/favorite/add`,
         {
-          instrumentId: props.instrumentId
+          instrumentId: props.instrumentId,
         },
         {
-          withCredentials: true
-        });
+          withCredentials: true,
+        },
+      );
     }
     setFavorite(!favorite);
   };

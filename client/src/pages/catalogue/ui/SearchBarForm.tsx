@@ -15,5 +15,5 @@ export const SearchBarForm = (props: Props) => {
         }}
       />
     </div>
-  )
-}
+  );
+};
