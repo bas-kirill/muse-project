@@ -38,33 +38,37 @@ export const InstrumentActions = ({ instrument }: Props) => {
 
   return (
     <div id="instrument-profile-instrument-actions">
-      <button
-        id="instrument-profile-delete-instrument"
-        onClick={handleOnDeleteInstrument}
-      >
-        Delete
-      </button>
+      {Jwt.extractFromLocalStorage()?.toRole() === "EDITOR" && (
+        <>
+          <button
+            id="instrument-profile-delete-instrument"
+            onClick={handleOnDeleteInstrument}
+          >
+            Delete
+          </button>
 
-      <button
-        id="instrument-profile-edit-instrument"
-        onClick={handleOnEditInstrument}
-      >
-        Edit
-      </button>
+          <button
+            id="instrument-profile-edit-instrument"
+            onClick={handleOnEditInstrument}
+          >
+            Edit
+          </button>
 
-      <Modal
-        opened={deleteSuccessModal}
-        closeModal={() => setDeleteSuccessModal(false)}
-      >
-        <h1>✅Instrument deleted</h1>
-      </Modal>
+          <Modal
+            opened={deleteSuccessModal}
+            closeModal={() => setDeleteSuccessModal(false)}
+          >
+            <h1>✅Instrument deleted</h1>
+          </Modal>
 
-      <Modal
-        opened={deleteErrorModal}
-        closeModal={() => setDeleteErrorModal(false)}
-      >
-        <h1>❌Fail to delete instrument</h1>
-      </Modal>
+          <Modal
+            opened={deleteErrorModal}
+            closeModal={() => setDeleteErrorModal(false)}
+          >
+            <h1>❌Fail to delete instrument</h1>
+          </Modal>
+        </>
+      )}
     </div>
   );
 };
