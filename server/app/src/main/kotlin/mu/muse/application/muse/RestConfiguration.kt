@@ -2,6 +2,7 @@ package mu.muse.application.muse
 
 import mu.muse.rest.HelloEndpoint
 import mu.muse.rest.country.GetCountriesEndpoint
+import mu.muse.rest.favorite.FavoriteEndpoint
 import mu.muse.rest.instruments.CreateInstrumentEndpoint
 import mu.muse.rest.instruments.DeleteInstrumentByIdEndpoint
 import mu.muse.rest.instruments.EditInstrumentEndpoint
@@ -78,4 +79,7 @@ class RestConfiguration {
 
     @Bean
     fun registrationEndpoint(registerUser: RegisterUser) = RegistrationEndpoint(registerUser)
+
+    @Bean
+    fun favoriteEndpoint() = FavoriteEndpoint()
 }

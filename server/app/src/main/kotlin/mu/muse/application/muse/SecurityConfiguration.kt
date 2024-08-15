@@ -5,6 +5,9 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletResponse
 import mu.muse.rest.API_COUNTRIES
+import mu.muse.rest.API_FAVORITE_ADD
+import mu.muse.rest.API_FAVORITE_LIST
+import mu.muse.rest.API_FAVORITE_REMOVE
 import mu.muse.rest.API_GET_MANUFACTURER_NAMES
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENT_BY_ID
@@ -31,9 +34,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
-import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource
+import org.springframework.web.servlet.config.annotation.CorsRegistry
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import java.security.Key
 
 @Configuration
@@ -50,14 +53,16 @@ class SecurityConfiguration {
     fun jwtParser(jwtSecretKey: Key): JwtParser = Jwts.parserBuilder().setSigningKey(jwtSecretKey).build()
 
     @Bean
-    fun corsConfigurationSource(): CorsConfigurationSource {
-        val configuration = CorsConfiguration()
-        configuration.addAllowedOrigin("*")
-        configuration.addAllowedMethod("*") // Allow all HTTP methods
-        configuration.addAllowedHeader("*") // Allow all headers
-        val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", configuration)
-        return source
+    fun corsConfigurer(): WebMvcConfigurer {
+        return object : WebMvcConfigurer {
+            override fun addCorsMappings(registry: CorsRegistry) {
+                registry.addMapping("/api/**")
+                    .allowedOrigins("http://localhost:3000")
+                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .allowCredentials(true)
+            }
+        }
     }
 
     @Bean
@@ -74,7 +79,8 @@ class SecurityConfiguration {
 
         http = http.sessionManagement { session ->
             session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionFixation { it.none() }
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .maximumSessions(1)
                 .sessionRegistry(sessionRegistry)
         }
@@ -91,6 +97,9 @@ class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, API_COUNTRIES).permitAll()
                 .requestMatchers(HttpMethod.GET, API_GET_MANUFACTURER_NAMES).permitAll()
                 .requestMatchers(HttpMethod.POST, API_REGISTRATION).permitAll()
+                .requestMatchers(HttpMethod.POST, API_FAVORITE_ADD).permitAll()
+                .requestMatchers(HttpMethod.POST, API_FAVORITE_REMOVE).permitAll()
+                .requestMatchers(HttpMethod.GET, API_FAVORITE_LIST).permitAll()
                 .anyRequest().authenticated()
         }
 
