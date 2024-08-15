@@ -4,15 +4,17 @@ import Jwt from "domain/model/jwt";
 import { Modal } from "widgets/modal";
 import "./InstrumentActions.css";
 import { Role } from "domain/model/role";
-import { RemoveInstrumentButton } from "./actions/RemoveInstrumentButton";
-import { GoToInstrumentButton } from "./actions/GoToInstrumentButton";
-import { EditInstrumentButton } from "./actions/EditInstrumentButton";
+import { RemoveInstrumentButton } from "./RemoveInstrumentButton";
+import { GoToInstrumentButton } from "./GoToInstrumentButton";
+import { EditInstrumentButton } from "./EditInstrumentButton";
+import { AddToFavoriteButton } from "./AddToFavoriteButton";
 
 interface Props {
   instrument: Instrument;
+  favorite: boolean;
 }
 
-export const InstrumentActions = ({ instrument }: Props) => {
+export const InstrumentActions = ({ instrument, favorite }: Props) => {
   const [successModal, setSuccessModal] = useState<boolean>(false);
 
   return (
@@ -27,6 +29,7 @@ export const InstrumentActions = ({ instrument }: Props) => {
         </>
       )}
 
+      <AddToFavoriteButton instrumentId={instrument.id} favorite={favorite} />
       <GoToInstrumentButton instrument={instrument} />
 
       <Modal
