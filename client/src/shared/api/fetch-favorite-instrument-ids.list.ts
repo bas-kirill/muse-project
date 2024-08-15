@@ -1,7 +1,7 @@
 import axios from "axios";
 import { SERVER_URL } from "shared/config";
 
-export const fetchFavoriteInstrumentIds = async () => {
+export const fetchFavoriteInstrumentIdsList = async () => {
   const { data, status } = await axios.get<number[]>(
     `${SERVER_URL}/api/favorite/list`,
     {

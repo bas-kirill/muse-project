@@ -1,26 +1,24 @@
 import axios from "axios";
-import { Page } from "domain/model/page";
 import { API_INSTRUMENTS, SERVER_URL } from "shared/config";
 import { Filters } from "widgets/catalogue-filter";
+import { Instruments } from "domain/model/instrument";
 
-export const getInstrumentsByCriteria = async (
-  filters: Filters,
-  page: Page,
-) => {
+export const getInstrumentsByCriteria = async (filters: Filters) => {
   const getInstrumentsByCriteriaRequestBody = JSON.stringify(filters, null, 2);
-  const { data } = await axios.post<Page>(
+
+  const { data, status } = await axios.post<Instruments>(
     `${SERVER_URL}${API_INSTRUMENTS}`,
     getInstrumentsByCriteriaRequestBody,
     {
       headers: {
         "Content-Type": "application/json",
       },
-      params: {
-        pageNumber: page.pageNumber,
-        pageSize: page.pageSize,
-      },
     },
   );
+
+  if (status !== 200) {
+    throw new Error("Failed to fetch instruments");
+  }
 
   return data;
 };

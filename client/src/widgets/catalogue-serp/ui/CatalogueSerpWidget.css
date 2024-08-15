@@ -1,12 +1,6 @@
 #catalogue-serp {
   background-color: darkkhaki;
 
-  .instrument-card {
-    display: flex;
-    flex-direction: column;
-    background-color: darkslateblue;
-  }
-
   .instrument-card:last-child {
     margin-bottom: 30px;
   }

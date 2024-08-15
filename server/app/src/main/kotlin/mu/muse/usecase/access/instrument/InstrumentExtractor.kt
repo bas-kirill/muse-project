@@ -31,6 +31,7 @@ interface InstrumentExtractor {
         val releaseDateTo: ReleaseDate?,
         val countries: List<Country>?,
         val materials: List<Material>?,
+        val instrumentIds: List<InstrumentId>?,
     )
 }
 

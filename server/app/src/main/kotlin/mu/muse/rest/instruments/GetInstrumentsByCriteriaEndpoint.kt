@@ -3,6 +3,7 @@ package mu.muse.rest.instruments
 import mu.muse.common.rest.PageRequest
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
+import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
@@ -40,6 +41,7 @@ class GetInstrumentsByCriteriaEndpoint(
         val releaseDateTo = request.releaseDateTo?.let { ReleaseDate.from(it) }
         val countries = request.countries?.map { Country.valueOf(it) }
         val materials = request.materials?.map { Material.valueOf(it) }
+        val instrumentIds = request.instrumentIds?.map { InstrumentId.from(it) }
 
         val criteria = InstrumentExtractor.Criteria(
             name = instrumentName,
@@ -51,6 +53,7 @@ class GetInstrumentsByCriteriaEndpoint(
             releaseDateTo = releaseDateTo,
             countries = countries,
             materials = materials,
+            instrumentIds = instrumentIds,
         )
 
         return if (pageSize == null && pageNumber == null) {
@@ -76,10 +79,7 @@ class GetInstrumentsByCriteriaEndpoint(
         val releaseDateTo: LocalDate?,
         val countries: List<String>?,
         val materials: List<String>?,
+        val instrumentIds: Set<Long>?,
     )
 
-    data class Page(
-        val size: String,
-        val number: String,
-    )
 }

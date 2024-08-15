@@ -8,3 +8,8 @@ export interface Page {
   totalElements: number;
   totalPages: number;
 }
+
+export interface PageRequest {
+  pageSize: number;
+  pageNumber: number;
+}

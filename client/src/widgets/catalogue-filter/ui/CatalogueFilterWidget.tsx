@@ -47,6 +47,7 @@ export const CatalogueFilterWidget = ({ onFilterChange, role }: Props) => {
       releaseDateTo: releaseDateTo,
       countries: countries,
       materials: materials,
+      instrumentIds: null, // there is no such field to search by instrument ids
     });
   }, [
     instrumentTypes,
