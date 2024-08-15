@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class FavoriteEndpoint {
 
-    val FAVORITE_INSTRUMENTS_SESSION_KEY = "FAVORITE_INSTRUMENTS"
+    companion object {
+        private const val FAVORITE_INSTRUMENTS_SESSION_KEY = "FAVORITE_INSTRUMENTS"
+    }
 
     @GetMapping(API_FAVORITE_LIST)
     fun listFavorite(session: HttpSession): List<Long> {
