@@ -1,13 +1,12 @@
-import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import { Instrument } from "domain/model/instrument";
-import { deleteInstrument } from "shared";
-import { InstrumentId } from "domain/model/instrument-id";
 import Jwt from "domain/model/jwt";
 import { Modal } from "widgets/modal";
 import "./InstrumentActions.css";
-import { LOGIN } from "shared/config/paths";
 import { Role } from "domain/model/role";
+import { RemoveInstrumentButton } from "./actions/RemoveInstrumentButton";
+import { GoToInstrumentButton } from "./actions/GoToInstrumentButton";
+import { EditInstrumentButton } from "./actions/EditInstrumentButton";
 
 interface Props {
   instrument: Instrument;
@@ -15,44 +14,17 @@ interface Props {
 
 export const InstrumentActions = ({ instrument }: Props) => {
   const [successModal, setSuccessModal] = useState<boolean>(false);
-  const navigate = useNavigate();
-
-  const handleOnDeleteInstrument = () => {
-    const instrumentId = InstrumentId.from(instrument.id);
-    deleteInstrument(instrumentId)
-      .then(() => {
-        setSuccessModal(true);
-      })
-      .catch((r) => {
-        const status = r.toJSON()["status"];
-        if (status === 401) {
-          Jwt.eraseFromLocalStorage();
-          navigate(LOGIN);
-        }
-      });
-  };
 
   return (
     <div className="serp-instrument-actions">
       {Jwt.extractFromLocalStorage()?.toRole() === Role.Editor && (
         <>
-          <button
-            className="serp-remove-instrument-button"
-            onClick={handleOnDeleteInstrument}
-          >
-            Remove
-          </button>
-          <button className="serp-edit-instrument-button">
-            <Link to={"/instrument/" + instrument.id.toString() + "/edit"}>
-              Edit
-            </Link>
-          </button>
+          <RemoveInstrumentButton instrument={instrument} setSuccessModal={setSuccessModal} />
+          <EditInstrumentButton instrument={instrument} />
         </>
       )}
 
-      <button className="serp-go-to-instrument-details-button">
-        <Link to={"/instrument/" + instrument.id.toString()}>Go</Link>
-      </button>
+      <GoToInstrumentButton instrument={instrument}/>
 
       <Modal
         opened={successModal}

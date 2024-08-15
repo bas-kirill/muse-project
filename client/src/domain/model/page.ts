@@ -1,4 +1,4 @@
-import { Instruments } from "@domain/model/instrument";
+import { Instruments } from "domain/model/instrument";
 
 export interface Page {
   content: Instruments;
