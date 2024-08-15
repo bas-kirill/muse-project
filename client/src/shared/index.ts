@@ -1,6 +1,7 @@
 import { deleteInstrument } from "./api/delete-instrument";
-
-import { getInstrumentsByCriteria } from "./api/list-instruments-by-criteria";
+import { getInstrumentsByCriteria } from "./api/instruments-by-criteria.list";
+import { fetchFavoriteInstrumentIdsList} from "./api/fetch-favorite-instrument-ids.list"
+import { InstrumentCard } from "./ui/instrument-card/InstrumentCard";
 
 import {
   SERVER_URL,
@@ -16,6 +17,9 @@ import {
 export {
   deleteInstrument,
   getInstrumentsByCriteria,
+  fetchFavoriteInstrumentIdsList,
+  InstrumentCard,
+
   SERVER_URL,
   API_INSTRUMENTS,
   API_AUTH_BASIC_LOGIN,

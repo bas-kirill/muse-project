@@ -16,11 +16,12 @@ import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
   CATALOGUE_DEFAULT_PAGE_SIZE,
 } from "shared/config/frontend";
-import { getInstrumentsByCriteria } from "shared/api/list-instruments-by-criteria";
-import { Page } from "domain/model/page";
+import { PageRequest } from "domain/model/page";
 import { SearchBarForm } from "./SearchBarForm";
 import { NavigationBar } from "./NavigationBar";
-import { CatalogueLoader, fetchFavoriteInstrumentIds } from "pages/catalogue";
+import { CatalogueLoader } from "pages/catalogue";
+import { fetchFavoriteInstrumentIdsList } from "shared/api/fetch-favorite-instrument-ids.list";
+import { getInstrumentsByCriteriaPaginated } from "shared/api/instruments-by-criteria-paginated";
 
 export function Catalogue() {
   useJwt();
@@ -39,7 +40,7 @@ export function Catalogue() {
   );
 
   useEffect(() => {
-    fetchFavoriteInstrumentIds().then((ids) => setFavoriteInstrumentIds(ids));
+    fetchFavoriteInstrumentIdsList().then((ids) => setFavoriteInstrumentIds(ids));
 
     if (instrumentName === "") {
       filters.instrumentName = null;
@@ -47,12 +48,12 @@ export function Catalogue() {
     if (instrumentName !== "") {
       filters.instrumentName = instrumentName;
     }
-    const page = {
+    const pageRequest = {
       pageNumber: pageNumber,
       pageSize: CATALOGUE_DEFAULT_PAGE_SIZE,
-    } as Page;
+    } as PageRequest;
 
-    getInstrumentsByCriteria(filters, page).then((r) => {
+    getInstrumentsByCriteriaPaginated(filters, pageRequest).then((r) => {
       setInstruments(r.content);
       totalPages.current = r.totalPages;
     });

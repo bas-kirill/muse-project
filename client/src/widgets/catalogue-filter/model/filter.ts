@@ -13,7 +13,8 @@ export type Filters = {
   releaseDateTo: string | null;
   countries: string[] | null;
   materials: string[] | null;
-};
+  instrumentIds: number[] | null;
+}
 
 export const DEFAULT_FILTER = {
   instrumentName: null,
@@ -25,4 +26,5 @@ export const DEFAULT_FILTER = {
   releaseDateTo: null,
   countries: null,
   materials: null,
+  instrumentIds: null,
 };

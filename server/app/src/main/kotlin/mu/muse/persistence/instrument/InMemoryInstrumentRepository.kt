@@ -68,5 +68,6 @@ private infix fun Instrument.matches(criteria: InstrumentExtractor.Criteria): Bo
         ) &&
         this.releaseDate.inRangeInclusive(criteria.releaseDateFrom, criteria.releaseDateTo) &&
         (criteria.countries == null || this.country in criteria.countries) &&
-        (criteria.materials == null || criteria.materials.containsAll(this.materials))
+        (criteria.materials == null || criteria.materials.containsAll(this.materials)) &&
+        (criteria.instrumentIds == null || criteria.instrumentIds.contains(this.id))
 }

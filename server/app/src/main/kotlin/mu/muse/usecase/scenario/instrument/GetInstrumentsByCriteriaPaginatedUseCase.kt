@@ -32,6 +32,7 @@ class GetInstrumentsByCriteriaPaginatedUseCase(
                 releaseDateTo = criteria.releaseDateTo,
                 countries = criteria.countries,
                 materials = criteria.materials,
+                instrumentIds = criteria.instrumentIds,
             ),
             PageRequest(
                 pageNumber = pageRequest.pageNumber,
