@@ -4,10 +4,10 @@ import Jwt from "domain/model/jwt";
 import { Modal } from "widgets/modal";
 import "./InstrumentActions.css";
 import { Role } from "domain/model/role";
-import { RemoveInstrumentButton } from "./actions/RemoveInstrumentButton";
-import { GoToInstrumentButton } from "./actions/GoToInstrumentButton";
-import { EditInstrumentButton } from "./actions/EditInstrumentButton";
-import { AddToFavoriteButton } from "./actions/AddToFavoriteButton";
+import { RemoveInstrumentButton } from "./RemoveInstrumentButton";
+import { GoToInstrumentButton } from "./GoToInstrumentButton";
+import { EditInstrumentButton } from "./EditInstrumentButton";
+import { AddToFavoriteButton } from "./AddToFavoriteButton";
 
 interface Props {
   instrument: Instrument;
