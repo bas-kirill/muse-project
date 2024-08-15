@@ -8,12 +8,10 @@ interface Props {
 }
 
 export const AddToFavoriteButton = (props: Props) => {
-
   const handleAddToFavorite = () => {
-    axios.post(`${SERVER_URL}${API_FAVORITE}`,
-      {
-        instrumentId: props.instrument.id
-      });
+    axios.post(`${SERVER_URL}${API_FAVORITE}`, {
+      instrumentId: props.instrument.id,
+    });
   };
 
   return (
