@@ -12,4 +12,4 @@ export const GoToInstrumentButton = (props: Props) => {
       <Link to={"/instrument/" + props.instrument.id.toString()}>Go</Link>
     </button>
   );
-}
+};

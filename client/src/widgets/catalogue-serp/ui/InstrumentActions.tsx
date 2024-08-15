@@ -19,12 +19,15 @@ export const InstrumentActions = ({ instrument }: Props) => {
     <div className="serp-instrument-actions">
       {Jwt.extractFromLocalStorage()?.toRole() === Role.Editor && (
         <>
-          <RemoveInstrumentButton instrument={instrument} setSuccessModal={setSuccessModal} />
+          <RemoveInstrumentButton
+            instrument={instrument}
+            setSuccessModal={setSuccessModal}
+          />
           <EditInstrumentButton instrument={instrument} />
         </>
       )}
 
-      <GoToInstrumentButton instrument={instrument}/>
+      <GoToInstrumentButton instrument={instrument} />
 
       <Modal
         opened={successModal}

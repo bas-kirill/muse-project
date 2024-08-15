@@ -37,4 +37,4 @@ export const RemoveInstrumentButton = (props: Props) => {
       Remove
     </button>
   );
-}
+};
