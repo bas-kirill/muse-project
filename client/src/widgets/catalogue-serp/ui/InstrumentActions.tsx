@@ -7,6 +7,7 @@ import { Role } from "domain/model/role";
 import { RemoveInstrumentButton } from "./actions/RemoveInstrumentButton";
 import { GoToInstrumentButton } from "./actions/GoToInstrumentButton";
 import { EditInstrumentButton } from "./actions/EditInstrumentButton";
+import { AddToFavoriteButton } from "./actions/AddToFavoriteButton";
 
 interface Props {
   instrument: Instrument;
@@ -27,6 +28,7 @@ export const InstrumentActions = ({ instrument }: Props) => {
         </>
       )}
 
+      <AddToFavoriteButton instrument={instrument} />
       <GoToInstrumentButton instrument={instrument} />
 
       <Modal
