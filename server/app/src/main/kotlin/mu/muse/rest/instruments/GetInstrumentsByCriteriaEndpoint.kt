@@ -82,8 +82,4 @@ class GetInstrumentsByCriteriaEndpoint(
         val instrumentIds: Set<Long>?,
     )
 
-    data class Page(
-        val size: String,
-        val number: String,
-    )
 }

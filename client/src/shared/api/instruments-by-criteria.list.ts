@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_INSTRUMENTS, SERVER_URL } from "shared/config";
 import { Filters } from "widgets/catalogue-filter";
-import { Instrument, Instruments } from "domain/model/instrument";
+import { Instruments } from "domain/model/instrument";
 
 export const getInstrumentsByCriteria = async (
   filters: Filters,

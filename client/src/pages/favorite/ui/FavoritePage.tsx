@@ -16,8 +16,7 @@ export const FavoritePage = () => {
       const filter = {
         instrumentIds: favoriteInstrumentIds,
       } as unknown as Filters;
-      const instruments = await getInstrumentsByCriteria(filter)
-      return instruments;
+      return await getInstrumentsByCriteria(filter);
     }
 
     fetchFavoriteInstruments().then(instruments => setInstruments(instruments));
