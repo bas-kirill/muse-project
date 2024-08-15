@@ -1,4 +1,3 @@
-import { Instrument } from "domain/model/instrument";
 import axios from "axios";
 import { SERVER_URL } from "shared/config";
 import { useState } from "react";
