@@ -11,7 +11,7 @@ export const FavoritePage = () => {
   const [instruments, setInstruments] = useState<Instruments>([]);
 
   useEffect(() => {
-    const kek = async () => {
+    const fetchFavoriteInstruments = async () => {
       const favoriteInstrumentIds = await fetchFavoriteInstrumentIdsList()
       const filter = {
         instrumentIds: favoriteInstrumentIds,
@@ -20,7 +20,7 @@ export const FavoritePage = () => {
       return instruments;
     }
 
-    kek().then(instruments => setInstruments(instruments));
+    fetchFavoriteInstruments().then(instruments => setInstruments(instruments));
   }, []);
 
   return (
