@@ -9,7 +9,8 @@ import mu.muse.usecase.dto.ProfileDetails
 class GetProfileUseCase(private val userExtractor: UserExtractor) : GetProfile {
 
     override fun execute(username: Username): ProfileDetails {
-        val user = userExtractor.findByUsername(username) ?: throw ShowProfileError.UserNotFound(username)
+        val user = userExtractor.findByUsername(username)
+            ?: throw ShowProfileError.UserNotFound(username)
         return ProfileDetails.from(user)
     }
 }

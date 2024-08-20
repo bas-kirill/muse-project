@@ -11,6 +11,7 @@ plugins {
     id("org.jlleitschuh.gradle.ktlint") version "12.1.1"
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
     id("org.sonarqube") version "5.0.0.4638"
+    id("org.openapi.generator") version "7.8.0"
 }
 
 group = "mu.muse"
@@ -55,6 +56,8 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
+    implementation("io.swagger.core.v3:swagger-annotations:2.2.22")
+    implementation("jakarta.validation:jakarta.validation-api:3.1.0")  // `useSpringBoot3` param requires it
 }
 
 tasks.named<Test>("test") {
@@ -88,4 +91,45 @@ sonar {  // self hosted sonar qube
         property("sonar.projectKey", "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1")
         property("sonar.projectName", "muse-project")
     }
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDir(layout.buildDirectory.dir("openapi/src/main").get().toString())
+        }
+    }
+}
+
+openApiGenerate {
+    apiPackage = "mu.muse.rest.api"
+    modelPackage = "mu.muse.rest.dto"
+    generateApiTests = false
+    generateModelTests = false
+    generateApiDocumentation = false
+    generateModelDocumentation = false
+    inputSpecRootDirectory = "$rootProjectDir/openapi"
+    outputDir = layout.buildDirectory.dir("openapi").get().toString()
+    validateSpec = true
+    generatorName = "kotlin-spring"
+    configOptions = mapOf(
+        "idea" to "true",
+        "sourceFolder" to "src/main/kotlin",
+        "useSpringBoot3" to "true",
+        "serializationLibrary" to "jackson",
+        "useCoroutines" to "true",
+        "useTags" to "true",
+        "exceptionHandler" to "false",
+        "interfaceOnly" to "true",
+        "skipDefaultInterface" to "true",
+        "documentationProvider" to "none",
+    )
+}
+
+tasks.compileKotlin {
+    dependsOn("openApiGenerate")
+}
+
+tasks.test {
+    dependsOn("openApiGenerate")
 }

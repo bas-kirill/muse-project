@@ -8,6 +8,9 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
+[**openapi/*.yml]
+indent_size = 2
+
 [*.{kt,kts}]
 ktlint_standard = disabled
 ktlint_standard_wrapping = enabled

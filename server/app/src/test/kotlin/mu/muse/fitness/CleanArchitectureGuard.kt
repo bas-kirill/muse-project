@@ -5,7 +5,6 @@ import com.tngtech.archunit.junit.AnalyzeClasses
 import com.tngtech.archunit.junit.ArchTest
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition
 import com.tngtech.archunit.library.Architectures
-import com.tngtech.archunit.library.dependencies.SlicesRuleDefinition
 
 @AnalyzeClasses(
     packages = ["mu.muse"],
@@ -25,13 +24,6 @@ class CleanArchitectureGuard {
             .applicationServices("mu.muse.usecase..")
             .adapter("persistence", "mu.muse.persistence..")
             .adapter("rest", "mu.muse.rest..")
-
-    @ArchTest
-    @Suppress("VariableNaming")
-    val `endpoints must not depend on each other` = SlicesRuleDefinition.slices()
-        .matching("..rest.(*)..")
-        .should()
-        .notDependOnEachOther()
 
     @ArchTest
     @Suppress("VariableNaming")

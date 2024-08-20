@@ -1,19 +1,29 @@
 package mu.muse.rest.profile
 
 import mu.muse.domain.user.Username
-import mu.muse.rest.API_PROFILE
+import mu.muse.rest.api.ProfileApi
+import mu.muse.rest.dto.ProfileDetailsResponse
 import mu.muse.usecase.GetProfile
 import mu.muse.usecase.dto.ProfileDetails
-import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.http.ResponseEntity
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.RestController
-import java.security.Principal
 
 @RestController
-class GetProfileEndpoint(private val showProfile: GetProfile) {
+class GetProfileEndpoint(private val getProfile: GetProfile) : ProfileApi {
 
-    @GetMapping(API_PROFILE)
-    fun getProfile(principal: Principal): ProfileDetails {
+    override fun getProfile(): ResponseEntity<ProfileDetailsResponse> {
+        val principal = SecurityContextHolder.getContext().authentication
         val username = Username.from(principal.name)
-        return showProfile.execute(username)
+        val profileDetails = getProfile.execute(username)
+        return profileDetails.toRestResponse()
     }
 }
+
+fun ProfileDetails.toRestResponse() = ResponseEntity.ok().body(
+    ProfileDetailsResponse(
+        username = this.username,
+        role = this.role,
+        fullName = this.fullName,
+    ),
+)
