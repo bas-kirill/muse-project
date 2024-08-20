@@ -129,3 +129,7 @@ openApiGenerate {
 tasks.compileKotlin {
     dependsOn("openApiGenerate")
 }
+
+tasks.test {
+    dependsOn("openApiGenerate")
+}
