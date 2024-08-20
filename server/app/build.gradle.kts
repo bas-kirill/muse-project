@@ -99,6 +99,11 @@ sourceSets {
             srcDir(layout.buildDirectory.dir("openapi/src/main"))
         }
     }
+    test {
+        kotlin {
+            srcDir(layout.buildDirectory.dir("openapi/src/main"))
+        }
+    }
 }
 
 openApiGenerate {
