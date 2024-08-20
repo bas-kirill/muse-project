@@ -96,12 +96,7 @@ sonar {  // self hosted sonar qube
 sourceSets {
     main {
         kotlin {
-            srcDir(layout.buildDirectory.dir("openapi/src/main"))
-        }
-    }
-    test {
-        kotlin {
-            srcDir(layout.buildDirectory.dir("openapi/src/main"))
+            srcDir(layout.buildDirectory.dir("openapi/src/main").get().toString())
         }
     }
 }
