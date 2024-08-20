@@ -113,11 +113,8 @@ openApiGenerate {
     validateSpec = true
     generatorName = "kotlin-spring"
     configOptions = mapOf(
-        "idea" to "true",
         "sourceFolder" to "src/main/kotlin",
         "useSpringBoot3" to "true",
-        "serializationLibrary" to "jackson",
-        "useCoroutines" to "true",
         "useTags" to "true",
         "exceptionHandler" to "false",
         "interfaceOnly" to "true",
