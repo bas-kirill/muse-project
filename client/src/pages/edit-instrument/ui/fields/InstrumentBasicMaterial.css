@@ -1,0 +1,24 @@
+.edit-instrument-field-instrument-span {
+  border: 1px solid;
+  border-radius: 5px;
+
+  span {
+    padding: 0 5px;
+  }
+
+  button {
+    all: unset;
+    display: inline-block;
+    background-color: red;
+    padding: 0 5px;
+    border-radius: 0 5px 5px 0;
+  }
+}
+
+.edit-instrument-field-instrument-span-new {
+  border: 1px green solid;
+}
+
+#used-basic-materials {
+  display: flex;
+}

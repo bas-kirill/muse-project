@@ -5,3 +5,8 @@
     margin-bottom: 30px;
   }
 }
+
+#serp-widget-not-found {
+  font-size: 24px;
+  margin: 5px;
+}

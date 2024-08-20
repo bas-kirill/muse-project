@@ -36,8 +36,12 @@ class InMemoryInstrumentRepository(
             .filter { instrument -> instrument matches criteria }
             .chunked(pageRequest.pageSize)
 
-        val pageContent = chunks.getOrNull(pageRequest.pageNumber - 1)  // page numbers indexing starting 1-based
-            ?: throw InstrumentExtractorError.PageNotFound(pageNumber = pageRequest.pageNumber)
+        val pageContent = if (chunks.isEmpty()) {
+            emptyList()
+        } else {
+            chunks.getOrNull(pageRequest.pageNumber - 1)  // page numbers indexing starting 1-based
+                ?: throw InstrumentExtractorError.PageNotFound(pageNumber = pageRequest.pageNumber)
+        }
 
         return Page(
             content = pageContent,
