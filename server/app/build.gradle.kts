@@ -14,53 +14,6 @@ plugins {
     id("org.openapi.generator") version "7.8.0"
 }
 
-openApiGenerate {
-    apiPackage = "mu.muse.rest.api"
-    modelPackage = "mu.muse.rest.dto"
-    generateApiTests = false
-    generateModelTests = false
-    generateApiDocumentation = false
-    generateModelDocumentation = false
-    inputSpecRootDirectory = "$projectDir/src/main/resources/openapi"
-    outputDir = "$buildDir/openapi"
-
-    validateSpec = true
-//    library = "jvm-spring-restclient"
-
-//    outputDir = "$buildDir/generated"
-    generatorName = "kotlin-spring"
-    configOptions = mapOf(
-        "idea" to "true",
-        "sourceFolder" to "src/main/kotlin",
-        "useSpringBoot3" to "true",
-        "serializationLibrary" to "jackson",
-        "useCoroutines" to "true",
-        "useTags" to "true",
-        "exceptionHandler" to "false",
-        "interfaceOnly" to "true",
-        "skipDefaultInterface" to "true",
-        "documentationProvider" to "none",
-
-    )
-//    generateApiTests = false
-//    generateModelTests = false
-}
-
-//openApiValidate {
-//    inputSpec.set("$rootDir/petstore-v3.0-invalid.yaml")
-//}
-sourceSets {
-    main {
-        kotlin {
-            srcDir("$buildDir/openapi/src/main")
-        }
-    }
-}
-
-tasks.compileKotlin {
-    dependsOn("openApiGenerate")
-}
-
 group = "mu.muse"
 version = "1.0.0-SNAPSHOT"
 
@@ -103,9 +56,8 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.2")
-    // https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations
     implementation("io.swagger.core.v3:swagger-annotations:2.2.22")
-    implementation("jakarta.validation:jakarta.validation-api:3.1.0")
+    implementation("jakarta.validation:jakarta.validation-api:3.1.0")  // `useSpringBoot3` param requires it
 }
 
 tasks.named<Test>("test") {
@@ -139,4 +91,41 @@ sonar {  // self hosted sonar qube
         property("sonar.projectKey", "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1")
         property("sonar.projectName", "muse-project")
     }
+}
+
+sourceSets {
+    main {
+        kotlin {
+            srcDir("$buildDir/openapi/src/main")
+        }
+    }
+}
+
+openApiGenerate {
+    apiPackage = "mu.muse.rest.api"
+    modelPackage = "mu.muse.rest.dto"
+    generateApiTests = false
+    generateModelTests = false
+    generateApiDocumentation = false
+    generateModelDocumentation = false
+    inputSpecRootDirectory = "$projectDir/src/main/resources/openapi"
+    outputDir = "$buildDir/openapi"
+    validateSpec = true
+    generatorName = "kotlin-spring"
+    configOptions = mapOf(
+        "idea" to "true",
+        "sourceFolder" to "src/main/kotlin",
+        "useSpringBoot3" to "true",
+        "serializationLibrary" to "jackson",
+        "useCoroutines" to "true",
+        "useTags" to "true",
+        "exceptionHandler" to "false",
+        "interfaceOnly" to "true",
+        "skipDefaultInterface" to "true",
+        "documentationProvider" to "none",
+    )
+}
+
+tasks.compileKotlin {
+    dependsOn("openApiGenerate")
 }
