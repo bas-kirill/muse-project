@@ -23,15 +23,14 @@ export const CatalogueSerpWidget = (props: Props) => {
       {/*    />*/}
       {/*  </div>*/}
 
-      {props.instruments.length > 0 && props.instruments.map((instrument) => (
-        <InstrumentCard
-          key={instrument.id.toString()}
-          instrument={instrument}
-          favorite={props.favoriteInstrumentIds.includes(instrument.id)}
-        />
-      ))}
-
-
+      {props.instruments.length > 0 &&
+        props.instruments.map((instrument) => (
+          <InstrumentCard
+            key={instrument.id.toString()}
+            instrument={instrument}
+            favorite={props.favoriteInstrumentIds.includes(instrument.id)}
+          />
+        ))}
     </div>
   );
 };

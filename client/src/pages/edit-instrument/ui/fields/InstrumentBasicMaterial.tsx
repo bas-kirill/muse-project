@@ -8,9 +8,11 @@ interface Props {
 }
 
 export const InstrumentBasicMaterialFormField = (props: Props) => {
-  const selectedBasicMaterial: React.MutableRefObject<string | undefined> = useRef<string>();
-  const [basicMaterials, setBasicMaterials] = useState(props.usedMaterialsForInstrument);
-
+  const selectedBasicMaterial: React.MutableRefObject<string | undefined> =
+    useRef<string>();
+  const [basicMaterials, setBasicMaterials] = useState(
+    props.usedMaterialsForInstrument,
+  );
 
   const addInstrumentForEditInstrument = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +33,9 @@ export const InstrumentBasicMaterialFormField = (props: Props) => {
   };
 
   const removeMaterial = (materialForRemoval: Material) => {
-    setBasicMaterials(basicMaterials.filter(material => material !== materialForRemoval));
+    setBasicMaterials(
+      basicMaterials.filter((material) => material !== materialForRemoval),
+    );
   };
 
   return (
@@ -43,8 +47,11 @@ export const InstrumentBasicMaterialFormField = (props: Props) => {
       <div className={"edit-instrument-field-value"}>
         <div id={"used-basic-materials"}>
           {basicMaterials.map((material) => (
-            <div key={material} className={`edit-instrument-field-instrument-span 
-                ${!props.usedMaterialsForInstrument.includes(material) ? "edit-instrument-field-instrument-span-new" : ""}`}>
+            <div
+              key={material}
+              className={`edit-instrument-field-instrument-span 
+                ${!props.usedMaterialsForInstrument.includes(material) ? "edit-instrument-field-instrument-span-new" : ""}`}
+            >
               <span>{material}</span>
               <input type="hidden" name="material" value={material} />
               <button onClick={() => removeMaterial(material)}>-</button>

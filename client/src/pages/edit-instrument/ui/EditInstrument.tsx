@@ -119,20 +119,19 @@ export const EditInstrument = () => {
           </div>
 
           <div className={"edit-instrument-field-value"}>
-          <select
-            name="country"
-            defaultValue={loader.instrumentForEdit.country}
-            required
-          >
-            {loader.countries.map((country) => (
-              <option key={country} value={country}>
-                {country}
-              </option>
-            ))}
-          </select>
+            <select
+              name="country"
+              defaultValue={loader.instrumentForEdit.country}
+              required
+            >
+              {loader.countries.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
-
 
         <InstrumentBasicMaterialFormField
           materials={loader.materials}
