@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const InstrumentBasicMaterialFormField = (props: Props) => {
-  // prettier-ignore
+  /* prettier-ignore */
   let selectedBasicMaterial: React.MutableRefObject<string | undefined> = useRef<string>();
   const [basicMaterials, setBasicMaterials] = useState(props.usedMaterialsForInstrument);
 
