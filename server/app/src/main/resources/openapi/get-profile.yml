@@ -1,0 +1,43 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Get Profile
+servers:
+  - url: http://localhost:8080/
+
+paths:
+  /api/profile:
+    get:
+      summary: Get Profile Info
+      operationId: getProfile
+      tags:
+        - profile
+      responses:
+        "200":
+          description: Profile Details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProfileDetails"
+        default:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ServerError"
+
+components:
+  schemas:
+    ProfileDetails:
+      type: object
+      required: [ username, role, fullName ]
+      properties:
+        username:
+          type: string
+        role:
+          type: string
+        fullName:
+          type: string
+    ServerError:
+      type: object
