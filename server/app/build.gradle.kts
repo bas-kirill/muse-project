@@ -96,7 +96,7 @@ sonar {  // self hosted sonar qube
 sourceSets {
     main {
         kotlin {
-            srcDir("${layout.buildDirectory}/openapi/src/main")
+            srcDir(layout.buildDirectory.dir("openapi/src/main"))
         }
     }
 }
@@ -109,7 +109,7 @@ openApiGenerate {
     generateApiDocumentation = false
     generateModelDocumentation = false
     inputSpecRootDirectory = "$rootProjectDir/openapi"
-    outputDir = "${layout.buildDirectory}/openapi"
+    outputDir = layout.buildDirectory.dir("openapi").toString()
     validateSpec = true
     generatorName = "kotlin-spring"
     configOptions = mapOf(
