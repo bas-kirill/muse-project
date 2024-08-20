@@ -20,7 +20,7 @@ class GetProfileEndpoint(private val showProfile: GetProfile) : ProfileApi {
                 username = user.username.toStringValue(),
                 role = user.role.toStringValue(),
                 fullName = user.fullName.toStringValue(),
-            )
+            ),
         )
     }
 }
