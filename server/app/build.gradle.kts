@@ -109,7 +109,7 @@ openApiGenerate {
     generateApiDocumentation = false
     generateModelDocumentation = false
     inputSpecRootDirectory = "$rootProjectDir/openapi"
-    outputDir = layout.buildDirectory.dir("openapi").toString()
+    outputDir = layout.buildDirectory.dir("openapi").get().toString()
     validateSpec = true
     generatorName = "kotlin-spring"
     configOptions = mapOf(
