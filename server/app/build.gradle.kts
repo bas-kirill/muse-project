@@ -108,7 +108,7 @@ openApiGenerate {
     generateModelTests = false
     generateApiDocumentation = false
     generateModelDocumentation = false
-    inputSpecRootDirectory = "$projectDir/src/main/resources/openapi"
+    inputSpecRootDirectory = "$rootProjectDir/openapi"
     outputDir = "$buildDir/openapi"
     validateSpec = true
     generatorName = "kotlin-spring"
