@@ -1,6 +1,7 @@
 package mu.muse.application.muse
 
 import mu.muse.rest.HelloEndpoint
+import mu.muse.rest.api.ProfileApi
 import mu.muse.rest.country.GetCountriesEndpoint
 import mu.muse.rest.favorite.FavoriteEndpoint
 import mu.muse.rest.instruments.CreateInstrumentEndpoint

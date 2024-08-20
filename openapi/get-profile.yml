@@ -19,7 +19,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ProfileDetails"
+                $ref: "#/components/schemas/ProfileDetailsResponse"
         default:
           description: server error
           content:
@@ -29,7 +29,7 @@ paths:
 
 components:
   schemas:
-    ProfileDetails:
+    ProfileDetailsResponse:
       type: object
       required: [ username, role, fullName ]
       properties:

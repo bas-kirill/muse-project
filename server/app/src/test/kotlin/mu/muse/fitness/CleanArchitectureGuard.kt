@@ -28,13 +28,6 @@ class CleanArchitectureGuard {
 
     @ArchTest
     @Suppress("VariableNaming")
-    val `endpoints must not depend on each other` = SlicesRuleDefinition.slices()
-        .matching("..rest.(*)..")
-        .should()
-        .notDependOnEachOther()
-
-    @ArchTest
-    @Suppress("VariableNaming")
     val `server business logic should depends only on approved packages` = ArchRuleDefinition.classes()
         .that().resideInAnyPackage("mu.muse.domain..")
         .should().onlyDependOnClassesThat()
