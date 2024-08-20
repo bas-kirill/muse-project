@@ -22,7 +22,7 @@ fun interface EditInstrument {
         manufacturerDate: ManufacturerDate,
         releaseDate: ReleaseDate,
         country: Country,
-        material: Material,
+        materials: List<Material>,
     )
 }
 

@@ -8,19 +8,30 @@ interface Props {
   favoriteInstrumentIds: number[];
 }
 
-export const CatalogueSerpWidget = ({
-  instruments,
-  favoriteInstrumentIds,
-}: Props) => {
+export const CatalogueSerpWidget = (props: Props) => {
   return (
     <div id="catalogue-serp">
-      {instruments.map((instrument) => (
+      {props.instruments.length == 0 && (
+        <div id={"serp-widget-not-found"}>Instruments not found :(</div>
+      )}
+      {/*{props.instruments.length > 0 && props.instruments.map((instrument) => (*/}
+      {/*  <div key={instrument.id.toString()} className="instrument-card">*/}
+      {/*    <InstrumentDetails instrument={instrument} />*/}
+      {/*    <InstrumentActions*/}
+      {/*      instrument={instrument}*/}
+      {/*      favorite={props.favoriteInstrumentIds.includes(instrument.id)}*/}
+      {/*    />*/}
+      {/*  </div>*/}
+
+      {props.instruments.length > 0 && props.instruments.map((instrument) => (
         <InstrumentCard
           key={instrument.id.toString()}
           instrument={instrument}
-          favorite={favoriteInstrumentIds.includes(instrument.id)}
+          favorite={props.favoriteInstrumentIds.includes(instrument.id)}
         />
       ))}
+
+
     </div>
   );
 };

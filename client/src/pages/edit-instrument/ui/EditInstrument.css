@@ -6,12 +6,12 @@
   .edit-instrument-field {
     display: flex;
 
-    label {
-      flex-basis: 30%;
+    .edit-instrument-field-name {
+        flex-basis: 30%;
     }
 
-    input {
-      flex-basis: 70%;
+    .edit-instrument-field-value {
+        flex-basis: 70%;
     }
   }
 }

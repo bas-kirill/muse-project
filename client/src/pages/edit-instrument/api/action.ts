@@ -4,12 +4,12 @@ import { ManufacturerName } from "domain/model/manufacturer-name";
 import { ManufactureDate } from "domain/model/manufacture-date";
 import { ReleaseDate } from "domain/model/release-date";
 import { Country } from "domain/model/country";
-import { Material } from "domain/model/material";
+import { Materials } from "domain/model/material";
 import { ActionFunction } from "react-router-dom";
-import { parseInstrumentDetails } from "pages/create-instrument/model/parseInstrumentDetails";
 import axios from "axios";
 import { SERVER_URL } from "shared/config";
 import Jwt from "domain/model/jwt";
+import { parseInstrumentDetails } from "shared/model/parseInstrumentDetails";
 
 export interface EditInstrumentAction {
   errors: string[] | null;
@@ -23,7 +23,7 @@ interface EditInstrumentRequestBody {
   manufactureDate: ManufactureDate;
   releaseDate: ReleaseDate;
   country: Country;
-  material: Material;
+  materials: Materials;
 }
 
 export const action: ActionFunction = async ({
@@ -37,7 +37,7 @@ export const action: ActionFunction = async ({
     manufactureDate,
     releaseDate,
     country,
-    material,
+    materials,
     errors,
   } = parseInstrumentDetails(await request.formData());
 
@@ -55,7 +55,7 @@ export const action: ActionFunction = async ({
     manufactureDate: manufactureDate,
     releaseDate: releaseDate,
     country: country,
-    material: material,
+    materials: materials,
   };
 
   const { status } = await axios.post(

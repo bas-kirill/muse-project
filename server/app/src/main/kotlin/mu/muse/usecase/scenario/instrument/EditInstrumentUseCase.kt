@@ -17,6 +17,7 @@ class EditInstrumentUseCase(
     private val instrumentExtractor: InstrumentExtractor,
     private val instrumentPersister: InstrumentPersister,
 ) : EditInstrument {
+
     @Suppress("LongParameterList")
     override fun execute(
         instrumentId: InstrumentId,
@@ -26,7 +27,7 @@ class EditInstrumentUseCase(
         manufacturerDate: ManufacturerDate,
         releaseDate: ReleaseDate,
         country: Country,
-        material: Material
+        materials: List<Material>,
     ) {
         val oldInstrument = instrumentExtractor.findById(instrumentId)
             ?: throw EditInstrumentError.UserNotFound(instrumentId)
@@ -39,7 +40,7 @@ class EditInstrumentUseCase(
             manufactureDate = manufacturerDate,
             releaseDate = releaseDate,
             country = country,
-            materials = listOf(material),
+            materials = materials,
         )
 
         instrumentPersister.save(newInstrument)

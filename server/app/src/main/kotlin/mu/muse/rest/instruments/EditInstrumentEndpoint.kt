@@ -32,7 +32,7 @@ class EditInstrumentEndpoint(
         val manufacturerDate = ManufacturerDate.from(request.manufactureDate)
         val releaseDate = ReleaseDate.from(request.releaseDate)
         val country = Country.valueOf(request.country)
-        val material = Material.valueOf(request.material)
+        val materials = request.materials.map { Material.valueOf(it) }
         editInstrument.execute(
             instrumentId,
             instrumentName,
@@ -41,7 +41,7 @@ class EditInstrumentEndpoint(
             manufacturerDate,
             releaseDate,
             country,
-            material,
+            materials,
         )
     }
 
@@ -53,6 +53,6 @@ class EditInstrumentEndpoint(
         val manufactureDate: LocalDate,
         val releaseDate: LocalDate,
         val country: String,
-        val material: String,
+        val materials: List<String>,
     )
 }
