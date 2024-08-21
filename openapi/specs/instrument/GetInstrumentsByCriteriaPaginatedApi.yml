@@ -1,0 +1,80 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Get Instruments by Criteria Paginated
+servers:
+  - url: http://localhost:8080/
+
+paths:
+  /api/instruments/paginated:
+    post:
+      summary: Get Instruments by Criteria
+      operationId: getInstrumentsByCriteriaPaginated
+      tags:
+        - getInstrumentsByCriteriaPaginated
+      parameters:
+        - name: pageSize
+          in: query
+          description: Page Size
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: pageNumber
+          in: query
+          description: Page Number (1-based enumeration)
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./components/GetInstrumentByCriteriaRequestBody.yml#/components/schemas/GetInstrumentCriteriaRequestBody"
+        required: true
+      responses:
+        "200":
+          description: Instrument Details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetInstrumentByCriteriaPageResponse"
+        default:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ServerError.yml#/components/schemas/ServerError"
+
+components:
+  schemas:
+    GetInstrumentByCriteriaPageResponse:
+      type: object
+      required: [ content, contentSize, pageSize, pageNumber, totalElements, totalPages ]
+      properties:
+        content:
+          type: array
+          items:
+            $ref: './components/InstrumentDetail.yml#/components/schemas/InstrumentDetail'
+        contentSize:
+          type: integer
+          format: int32
+          description: The number of items in the content.
+        pageSize:
+          type: integer
+          format: int32
+          description: The number of items per page.
+        pageNumber:
+          type: integer
+          format: int32
+          description: The current page number (0-based index).
+        totalElements:
+          type: integer
+          format: int32
+          description: The total number of elements across all pages.
+        totalPages:
+          type: integer
+          format: int32
+          description: The total number of pages.

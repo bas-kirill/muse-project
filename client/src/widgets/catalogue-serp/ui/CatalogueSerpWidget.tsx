@@ -1,10 +1,10 @@
 import React from "react";
 import "./CatalogueSerpWidget.css";
-import { Instruments } from "domain/model/instrument";
 import { InstrumentCard } from "shared/ui/instrument-card/InstrumentCard";
+import { InstrumentDetail } from "@generated/model";
 
 interface Props {
-  instruments: Instruments;
+  instruments: InstrumentDetail[];
   favoriteInstrumentIds: number[];
 }
 
@@ -18,7 +18,7 @@ export const CatalogueSerpWidget = (props: Props) => {
       {props.instruments.length > 0 &&
         props.instruments.map((instrument) => (
           <InstrumentCard
-            key={instrument.id.toString()}
+            key={instrument.id?.toString()}
             instrument={instrument}
             favorite={props.favoriteInstrumentIds.includes(instrument.id)}
           />

@@ -1,0 +1,33 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Instrument Details
+
+paths: {}
+
+components:
+  schemas:
+    InstrumentDetail:
+      type: object
+      required: [ id, name, type, manufacturer, manufacturerDate, releaseDate, country, basicMaterials]
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+        manufacturer:
+          type: string
+        manufacturerDate:
+          type: string
+        releaseDate:
+          type: string
+        country:
+          type: string
+        basicMaterials:
+          type: array
+          items:
+            type: string

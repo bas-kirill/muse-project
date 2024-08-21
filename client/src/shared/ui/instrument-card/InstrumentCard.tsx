@@ -1,11 +1,11 @@
 import { InstrumentDetails } from "./InstrumentDetails";
 import { InstrumentActions } from "./actions/InstrumentActions";
 import React from "react";
-import { Instrument } from "domain/model/instrument";
 import "./InstrumentCard.css";
+import { InstrumentDetail } from "@generated/model";
 
 interface Props {
-  instrument: Instrument;
+  instrument: InstrumentDetail;
   favorite: boolean;
 }
 

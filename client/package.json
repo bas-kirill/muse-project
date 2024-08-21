@@ -31,8 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "bundle": "(cd ../openapi &&  npx openapi-merge-cli --config ./openapi-merge.yml)",
-    "codegen": "rm -rf ./src/generated; openapi-generator-cli generate -i ./../openapi/bundle.yml -o ./src/generated/openapi -g typescript-axios --additional-properties=apiPackage=api,modelPackage=model,supportsES6=true,withSeparateModelsAndApi=true"
+    "codegen": ""
   },
   "eslintConfig": {
     "extends": [

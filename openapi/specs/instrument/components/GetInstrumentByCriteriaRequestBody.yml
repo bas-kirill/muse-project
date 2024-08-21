@@ -1,0 +1,48 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Get Instruments Request Body
+
+paths: {}
+
+components:
+  schemas:
+    GetInstrumentCriteriaRequestBody:
+      type: object
+      properties:
+        instrumentName:
+          type: string
+        instrumentTypes:
+          type: array
+          items:
+            type: string
+        manufacturerNames:
+          type: array
+          items:
+            type: string
+        manufactureDateFrom:
+          type: string
+          format: date
+        manufactureDateTo:
+          type: string
+          format: date
+        releaseDateFrom:
+          type: string
+          format: date
+        releaseDateTo:
+          type: string
+          format: date
+        countries:
+          type: array
+          items:
+            type: string
+        materials:
+          type: array
+          items:
+            type: string
+        instrumentIds:
+          type: array
+          items:
+            type: integer
+            format: int64

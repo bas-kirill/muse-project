@@ -2,30 +2,13 @@ import axios from "axios";
 import { SERVER_URL } from "shared/config";
 import { API_INSTRUMENT_BY_ID } from "shared/config/backend";
 import { LoaderFunction } from "react-router-dom";
-import { InstrumentName } from "domain/model/instrument-name";
-import { InstrumentType } from "domain/model/instrument-type";
-import { ManufacturerName } from "domain/model/manufacturer-name";
-import { ManufactureDate } from "domain/model/manufacture-date";
-import { ReleaseDate } from "domain/model/release-date";
-import { Country } from "domain/model/country";
-import { Materials } from "domain/model/material";
-
-export interface InstrumentDetails {
-  id: number;
-  name: InstrumentName;
-  type: InstrumentType;
-  manufacturer: ManufacturerName;
-  manufacturerDate: ManufactureDate;
-  releaseDate: ReleaseDate;
-  country: Country;
-  basicMaterials: Materials;
-}
+import { InstrumentDetail } from "generated/model";
 
 export const loader: LoaderFunction = async ({
   params,
-}): Promise<InstrumentDetails> => {
+}): Promise<InstrumentDetail> => {
   const url = `${SERVER_URL}${API_INSTRUMENT_BY_ID}` + params.instrumentId;
-  const { data, status } = await axios.get<InstrumentDetails>(url);
+  const { data, status } = await axios.get<InstrumentDetail>(url);
 
   if (status !== 200) {
     throw new Error(

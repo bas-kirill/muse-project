@@ -2,9 +2,10 @@ package mu.muse.usecase.scenario.instrument
 
 import mu.muse.common.persistence.Page
 import mu.muse.common.rest.PageRequest
+import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
 import mu.muse.usecase.access.instrument.InstrumentExtractor
-import mu.muse.usecase.dto.InstrumentDetails
+import mu.muse.usecase.access.instrument.InstrumentExtractorError
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -20,35 +21,27 @@ class GetInstrumentsByCriteriaPaginatedUseCase(
     override fun execute(
         criteria: InstrumentExtractor.Criteria,
         pageRequest: PageRequest,
-    ): Page<InstrumentDetails> {
-        val instruments = instrumentExtractor.findByCriteria(
-            InstrumentExtractor.Criteria(
-                name = criteria.name,
-                types = criteria.types,
-                manufacturers = criteria.manufacturers,
-                manufacturerDateFrom = criteria.manufacturerDateFrom,
-                manufacturerDateTo = criteria.manufacturerDateTo,
-                releaseDateFrom = criteria.releaseDateFrom,
-                releaseDateTo = criteria.releaseDateTo,
-                countries = criteria.countries,
-                materials = criteria.materials,
-                instrumentIds = criteria.instrumentIds,
-            ),
-            PageRequest(
-                pageNumber = pageRequest.pageNumber,
-                pageSize = pageRequest.pageSize,
-            ),
-        )
+    ): Page<InstrumentDetail> {
+        val instruments = instrumentExtractor.findByCriteria(criteria)
 
-        logger.info("Extracted '{}' instruments", instruments.contentSize)
+        val chunks = instruments.chunked(pageRequest.pageSize)
+
+        val pageContent = if (chunks.isEmpty()) {
+            emptyList()
+        } else {
+            chunks.getOrNull(pageRequest.pageNumber - 1)  // page numbers indexing starting 1-based
+                ?: throw InstrumentExtractorError.PageNotFound(pageNumber = pageRequest.pageNumber)
+        }
+
+        logger.info("Extracted '{}' instruments", instruments.size)
 
         return Page(
-            content = instruments.content.map { InstrumentDetails.from(it) },
-            contentSize = instruments.contentSize,
-            pageSize = instruments.pageSize,
-            pageNumber = instruments.pageNumber,
-            totalElements = instruments.totalElements,
-            totalPages = instruments.totalPages,
+            content = pageContent.map { it.toDto() },
+            contentSize = pageContent.size,
+            pageSize = pageRequest.pageSize,
+            pageNumber = pageRequest.pageNumber,
+            totalElements = instrumentExtractor.totalElements(),
+            totalPages = chunks.size,
         )
     }
 
