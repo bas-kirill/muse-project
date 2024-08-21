@@ -36,7 +36,7 @@ interface ProfileApi {
     @RequestMapping(
             method = [RequestMethod.GET],
             value = ["/api/profile"],
-            produces = ["application/json"]
+            produces = ["application/json"],
     )
     fun getProfile(): ResponseEntity<ProfileDetailsResponse>
 }

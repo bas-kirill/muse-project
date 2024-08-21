@@ -38,7 +38,7 @@ interface GetInstrumentsByCriteriaApi {
             method = [RequestMethod.POST],
             value = ["/api/instruments"],
             produces = ["application/json"],
-            consumes = ["application/json"]
+            consumes = ["application/json"],
     )
     fun getInstrumentsByCriteria( @Valid @RequestBody getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody): ResponseEntity<GetInstrumentsByCriteriaResponse>
 }
