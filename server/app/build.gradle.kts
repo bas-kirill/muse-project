@@ -110,7 +110,6 @@ openApiGenerate {
     generateModelDocumentation = false
     inputSpecRootDirectory = "$rootProjectDir/openapi/specs"
     outputDir = layout.buildDirectory.dir("openapi").get().toString()
-    skipValidateSpec = true  // due to we are bundling openapi
     generatorName = "kotlin-spring"
     configOptions = mapOf(
         "sourceFolder" to "src/main/kotlin",

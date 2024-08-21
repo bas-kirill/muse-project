@@ -3,4 +3,4 @@ inputs:
   - inputFile: "./specs/basic-login.yml"
   - inputFile: "./specs/get-profile.yml"
 
-output: "./bundle.yml"
+output: "./specs/bundle.yml"
