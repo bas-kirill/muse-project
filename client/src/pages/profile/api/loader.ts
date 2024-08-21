@@ -7,11 +7,12 @@ import { ProfileApi } from "generated/openapi";
 const profileApi = new ProfileApi();
 
 export const loader = async (): Promise<Profile> => {
-  return profileApi.getProfile({
-    headers: {
-      Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`
-    }
-  })
+  return profileApi
+    .getProfile({
+      headers: {
+        Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`,
+      },
+    })
     .then((response) => {
       return response.data;
     })
