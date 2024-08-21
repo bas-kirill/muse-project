@@ -1,0 +1,6 @@
+inputs:
+  - inputFile: "./specs/server-error.yml"
+  - inputFile: "./specs/basic-login.yml"
+  - inputFile: "./specs/get-profile.yml"
+
+output: "./specs/bundle.yml"
