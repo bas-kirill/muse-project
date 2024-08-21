@@ -7,7 +7,6 @@ import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
 import mu.muse.rest.dto.GetInstrumentsByCriteriaResponse
 import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.usecase.GetInstrumentsByCriteria
-import mu.muse.usecase.scenario.instrument.toDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 

@@ -2,7 +2,7 @@ package mu.muse.usecase.scenario.instrument
 
 import mu.muse.common.persistence.Page
 import mu.muse.common.rest.PageRequest
-import mu.muse.rest.dto.InstrumentDetail
+import mu.muse.domain.instrument.Instrument
 import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
 import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.access.instrument.InstrumentExtractorError
@@ -21,9 +21,8 @@ class GetInstrumentsByCriteriaPaginatedUseCase(
     override fun execute(
         criteria: InstrumentExtractor.Criteria,
         pageRequest: PageRequest,
-    ): Page<InstrumentDetail> {
+    ): Page<Instrument> {
         val instruments = instrumentExtractor.findByCriteria(criteria)
-
         val chunks = instruments.chunked(pageRequest.pageSize)
 
         val pageContent = if (chunks.isEmpty()) {
@@ -36,7 +35,7 @@ class GetInstrumentsByCriteriaPaginatedUseCase(
         logger.info("Extracted '{}' instruments", instruments.size)
 
         return Page(
-            content = pageContent.map { it.toDto() },
+            content = pageContent,
             contentSize = pageContent.size,
             pageSize = pageRequest.pageSize,
             pageNumber = pageRequest.pageNumber,
@@ -44,5 +43,4 @@ class GetInstrumentsByCriteriaPaginatedUseCase(
             totalPages = chunks.size,
         )
     }
-
 }

@@ -13,7 +13,6 @@ import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.rest.api.GetInstrumentsByCriteriaPaginatedApi
 import mu.muse.rest.dto.GetInstrumentByCriteriaPageResponse
 import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
-import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
 import mu.muse.usecase.access.instrument.InstrumentExtractor
 import org.springframework.http.ResponseEntity
@@ -62,9 +61,9 @@ fun GetInstrumentCriteriaRequestBody.toInstrumentCriteria(): InstrumentExtractor
     )
 }
 
-fun Page<InstrumentDetail>.toResponse(): GetInstrumentByCriteriaPageResponse {
+fun Page<Instrument>.toResponse(): GetInstrumentByCriteriaPageResponse {
     return GetInstrumentByCriteriaPageResponse(
-        content = this.content,
+        content = this.content.map { it.toDto() },
         contentSize = this.contentSize,
         pageSize = this.pageSize,
         pageNumber = this.pageNumber,

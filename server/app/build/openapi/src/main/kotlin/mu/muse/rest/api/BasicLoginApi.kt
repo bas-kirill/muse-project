@@ -38,7 +38,7 @@ interface BasicLoginApi {
             method = [RequestMethod.POST],
             value = ["/api/auth/login"],
             produces = ["application/json"],
-            consumes = ["application/json"],
+            consumes = ["application/json"]
     )
     fun basicLogin( @Valid @RequestBody usernameAndPasswordRequestBody: UsernameAndPasswordRequestBody): ResponseEntity<JwtResponse>
 }
