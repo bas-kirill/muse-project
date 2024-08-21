@@ -42,6 +42,8 @@ import {
 import type { GetInstrumentByCriteriaPageResponse } from "../model";
 // @ts-ignore
 import type { GetInstrumentCriteriaRequestBody } from "../model";
+// @ts-ignore
+import type { ServerError } from "../model";
 /**
  * GetInstrumentsByCriteriaPaginatedApi - axios parameter creator
  * @export

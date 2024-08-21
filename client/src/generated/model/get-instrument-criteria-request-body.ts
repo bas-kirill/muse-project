@@ -74,8 +74,8 @@ export interface GetInstrumentCriteriaRequestBody {
   materials?: Array<string>;
   /**
    *
-   * @type {Array<number>}
+   * @type {Array<string>}
    * @memberof GetInstrumentCriteriaRequestBody
    */
-  instrumentIds?: Array<number>;
+  instrumentIds?: Array<string>;
 }

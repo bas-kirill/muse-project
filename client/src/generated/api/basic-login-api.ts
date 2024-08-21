@@ -41,6 +41,8 @@ import {
 // @ts-ignore
 import type { JwtResponse } from "../model";
 // @ts-ignore
+import type { ServerError } from "../model";
+// @ts-ignore
 import type { UsernameAndPasswordRequestBody } from "../model";
 /**
  * BasicLoginApi - axios parameter creator

@@ -6,6 +6,7 @@
 package mu.muse.rest.api
 
 import mu.muse.rest.dto.JwtResponse
+import mu.muse.rest.dto.ServerError
 import mu.muse.rest.dto.UsernameAndPasswordRequestBody
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType

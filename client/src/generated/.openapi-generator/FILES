@@ -2,6 +2,7 @@
 .npmignore
 api.ts
 api/basic-login-api.ts
+api/get-instrument-by-id-api.ts
 api/get-instruments-by-criteria-api.ts
 api/get-instruments-by-criteria-paginated-api.ts
 api/profile-api.ts
@@ -17,4 +18,5 @@ model/index.ts
 model/instrument-detail.ts
 model/jwt-response.ts
 model/profile-details-response.ts
+model/server-error.ts
 model/username-and-password-request-body.ts

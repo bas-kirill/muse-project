@@ -44,5 +44,4 @@ components:
         instrumentIds:
           type: array
           items:
-            type: integer
-            format: int64
+            type: string

@@ -46,7 +46,7 @@ class EditInstrumentEndpoint(
     }
 
     data class Request(
-        val instrumentId: Long,
+        val instrumentId: String,
         val instrumentName: String,
         val instrumentType: String,
         val manufacturerName: String,

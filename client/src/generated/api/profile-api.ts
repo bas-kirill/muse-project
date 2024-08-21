@@ -40,6 +40,8 @@ import {
 } from "../base";
 // @ts-ignore
 import type { ProfileDetailsResponse } from "../model";
+// @ts-ignore
+import type { ServerError } from "../model";
 /**
  * ProfileApi - axios parameter creator
  * @export
