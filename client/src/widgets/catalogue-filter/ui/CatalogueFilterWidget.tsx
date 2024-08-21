@@ -92,7 +92,9 @@ export const CatalogueFilterWidget = (props: Props) => {
       </div>
       <CountryFilter onValueChange={setCountries} />
       <MaterialFilter onValueChange={setMaterials} />
-      {Jwt.extractFromCookie()?.toRole() === Role.Editor && <CreateInstrumentCardButton />}
+      {Jwt.extractFromCookie()?.toRole() === Role.Editor && (
+        <CreateInstrumentCardButton />
+      )}
     </div>
   );
 };

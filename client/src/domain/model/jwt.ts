@@ -44,13 +44,11 @@ export class Jwt {
   }
 
   public static eraseFromCookie() {
-    Cookies.remove(Jwt.COOKIE_JWT_KEY)
+    Cookies.remove(Jwt.COOKIE_JWT_KEY);
   }
 
   public static extractFromLocalStorage(): Jwt | null {
-    const jwtRaw = window.localStorage.getItem(
-      Jwt.COOKIE_JWT_KEY,
-    );
+    const jwtRaw = window.localStorage.getItem(Jwt.COOKIE_JWT_KEY);
     if (jwtRaw === null) {
       return null;
     }

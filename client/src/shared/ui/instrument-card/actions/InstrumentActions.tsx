@@ -17,11 +17,14 @@ interface Props {
 
 export const InstrumentActions = ({ instrument, favorite }: Props) => {
   const [successModal, setSuccessModal] = useState<boolean>(false);
-  const jwt = useRef<string | undefined>(Cookies.get("jwt") as string | undefined)
+  const jwt = useRef<string | undefined>(
+    Cookies.get("jwt") as string | undefined,
+  );
 
   return (
-      <div className="serp-instrument-actions">
-        {jwt.current !== undefined && Jwt.from(jwt.current).toRole() === Role.Editor && (
+    <div className="serp-instrument-actions">
+      {jwt.current !== undefined &&
+        Jwt.from(jwt.current).toRole() === Role.Editor && (
           <>
             <RemoveInstrumentButton
               instrument={instrument}
@@ -31,18 +34,18 @@ export const InstrumentActions = ({ instrument, favorite }: Props) => {
           </>
         )}
 
-        <AddToFavoriteButton instrumentId={instrument.id} favorite={favorite} />
-        <GoToInstrumentButton instrument={instrument} />
+      <AddToFavoriteButton instrumentId={instrument.id} favorite={favorite} />
+      <GoToInstrumentButton instrument={instrument} />
 
-        <Modal
-          opened={successModal}
-          closeModal={() => {
-            setSuccessModal(false);
-            window.location.reload();
-          }}
-        >
-          <h1>✅Instrument deleted</h1>
-        </Modal>
-      </div>
+      <Modal
+        opened={successModal}
+        closeModal={() => {
+          setSuccessModal(false);
+          window.location.reload();
+        }}
+      >
+        <h1>✅Instrument deleted</h1>
+      </Modal>
+    </div>
   );
 };

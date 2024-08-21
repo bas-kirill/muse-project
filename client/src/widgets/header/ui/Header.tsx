@@ -7,7 +7,9 @@ import { Jwt } from "domain/model/jwt";
 import { Role } from "domain/model/role";
 
 export function Header() {
-  const jwt = useRef<string | undefined>(Cookies.get("jwt") as string | undefined)
+  const jwt = useRef<string | undefined>(
+    Cookies.get("jwt") as string | undefined,
+  );
 
   return (
     <header>
@@ -18,11 +20,12 @@ export function Header() {
           </div>
         )}
 
-        {jwt.current !== undefined && Jwt.from(jwt.current).toRole() === Role.Editor && (
-          <div>
-            <Link to={PROFILE}>Profile</Link>
-          </div>
-        )}
+        {jwt.current !== undefined &&
+          Jwt.from(jwt.current).toRole() === Role.Editor && (
+            <div>
+              <Link to={PROFILE}>Profile</Link>
+            </div>
+          )}
         <div>
           <Link to={FAVORITE}>Favorite</Link>
         </div>

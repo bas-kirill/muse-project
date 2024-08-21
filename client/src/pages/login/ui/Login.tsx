@@ -20,9 +20,7 @@ export function Login() {
     <div id="login-page">
       <Header />
       {actionData?.errors.length === 0 && (
-        <div className="successfull-login">
-          ✅ Welcome!
-        </div>
+        <div className="successfull-login">✅ Welcome!</div>
       )}
 
       <Form method="post">
@@ -36,9 +34,7 @@ export function Login() {
         />
         {actionData?.errors.length > 0 && (
           <div className="erroneous-login">
-            {actionData?.errors.map((error) => (
-              <div key={error}>{error}</div>
-            ))}
+            {actionData?.errors.map((error) => <div key={error}>{error}</div>)}
           </div>
         )}
       </Form>
