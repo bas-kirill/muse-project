@@ -3,6 +3,7 @@
 api.ts
 api/basic-login-api.ts
 api/get-instrument-by-id-api.ts
+api/get-instrument-types-api.ts
 api/get-instruments-by-criteria-api.ts
 api/get-instruments-by-criteria-paginated-api.ts
 api/profile-api.ts
@@ -13,6 +14,7 @@ git_push.sh
 index.ts
 model/get-instrument-by-criteria-page-response.ts
 model/get-instrument-criteria-request-body.ts
+model/get-instrument-types-response.ts
 model/get-instruments-by-criteria-response.ts
 model/index.ts
 model/instrument-detail.ts

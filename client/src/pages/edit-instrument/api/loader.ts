@@ -1,22 +1,25 @@
-import { InstrumentTypes } from "domain/model/instrument-type";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { Materials } from "domain/model/material";
 import { Countries } from "domain/model/country";
 import { LoaderFunction } from "react-router-dom";
-import Jwt from "domain/model/jwt";
 import axios from "axios";
 import { SERVER_URL } from "shared/config";
 import {
   API_COUNTRIES,
   API_INSTRUMENT_MATERIALS,
-  API_INSTRUMENT_TYPES,
   API_MANUFACTURERS,
 } from "shared/config/backend";
-import { Instrument } from "domain/model/instrument";
+import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
+import { InstrumentType } from "generated/model/instrument-type";
+import { GetInstrumentByIdApi } from "generated/api/get-instrument-by-id-api";
+import { InstrumentDetail } from "generated/model";
+
+const getInstrumentById = new GetInstrumentByIdApi();
+const getInstrumentTypes = new GetInstrumentTypesApi();
 
 export interface EditInstrumentLoader {
-  instrumentForEdit: Instrument;
-  instrumentTypes: InstrumentTypes;
+  instrumentForEdit: InstrumentDetail;
+  instrumentTypes: InstrumentType[];
   manufacturerNames: ManufacturerNames;
   materials: Materials;
   countries: Countries;
@@ -25,28 +28,11 @@ export interface EditInstrumentLoader {
 export const loader: LoaderFunction = async ({
   params,
 }): Promise<EditInstrumentLoader> => {
-  const url = `${SERVER_URL}/api/instrument/` + params.instrumentId;
+  const instrumentDetailRequest = await getInstrumentById.getInstrumentById(
+    params.instrumentId as string,
+  );
 
-  let instrument: Instrument | undefined = undefined;
-  await axios
-    .get<Instrument>(url)
-    .then((data) => {
-      instrument = data.data;
-    })
-    .catch((e) => {
-      throw new Error(`Fail to retrieve instrument: '${e}'`);
-    });
-
-  let instrumentTypes: string[] = [];
-  console.log(`jwt: ${Jwt.extractFromLocalStorage()?.value}`);
-  await axios
-    .get<InstrumentTypes>(`${SERVER_URL}${API_INSTRUMENT_TYPES}`)
-    .then((data) => {
-      instrumentTypes = data.data;
-    })
-    .catch((e) => {
-      throw new Error(`Fail to retrieve instrument types: ${e}`);
-    });
+  const instrumentTypesRequest = await getInstrumentTypes.getInstrumentTypes();
 
   let materials: Materials = [];
   await axios
@@ -79,9 +65,8 @@ export const loader: LoaderFunction = async ({
     });
 
   return {
-    // @ts-expect-error instrument defined, else throws exception
-    instrumentForEdit: instrument,
-    instrumentTypes: instrumentTypes,
+    instrumentForEdit: instrumentDetailRequest.data,
+    instrumentTypes: instrumentTypesRequest.data.content,
     manufacturerNames: manufacturers,
     materials: materials,
     countries: countries,

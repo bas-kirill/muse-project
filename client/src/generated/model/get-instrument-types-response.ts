@@ -12,9 +12,20 @@
  * Do not edit the class manually.
  */
 
-export * from "./api/basic-login-api";
-export * from "./api/get-instrument-by-id-api";
-export * from "./api/get-instrument-types-api";
-export * from "./api/get-instruments-by-criteria-api";
-export * from "./api/get-instruments-by-criteria-paginated-api";
-export * from "./api/profile-api";
+// May contain unused imports in some cases
+// @ts-ignore
+import type { InstrumentType } from "./instrument-type";
+
+/**
+ *
+ * @export
+ * @interface GetInstrumentTypesResponse
+ */
+export interface GetInstrumentTypesResponse {
+  /**
+   *
+   * @type {Array<InstrumentType>}
+   * @memberof GetInstrumentTypesResponse
+   */
+  content: Array<InstrumentType>;
+}

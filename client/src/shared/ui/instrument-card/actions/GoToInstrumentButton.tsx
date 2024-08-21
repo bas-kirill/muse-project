@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { Instrument } from "domain/model/instrument";
+import { InstrumentDetail } from "generated/model";
 
 interface Props {
-  instrument: Instrument;
+  instrument: InstrumentDetail;
 }
 
 export const GoToInstrumentButton = (props: Props) => {

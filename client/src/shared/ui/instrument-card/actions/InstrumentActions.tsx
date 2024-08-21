@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import { Instrument } from "domain/model/instrument";
 import Jwt from "domain/model/jwt";
 import { Modal } from "widgets/modal";
 import "./InstrumentActions.css";
@@ -9,13 +8,14 @@ import { GoToInstrumentButton } from "./GoToInstrumentButton";
 import { EditInstrumentButton } from "./EditInstrumentButton";
 import { AddToFavoriteButton } from "./AddToFavoriteButton";
 import { Cookies } from "typescript-cookie";
+import { InstrumentDetail } from "generated/model";
 
 interface Props {
-  instrument: Instrument;
+  instrument: InstrumentDetail;
   favorite: boolean;
 }
 
-export const InstrumentActions = ({ instrument, favorite }: Props) => {
+export const InstrumentActions = (props: Props) => {
   const [successModal, setSuccessModal] = useState<boolean>(false);
   const jwt = useRef<string | undefined>(
     Cookies.get("jwt") as string | undefined,
@@ -27,15 +27,18 @@ export const InstrumentActions = ({ instrument, favorite }: Props) => {
         Jwt.from(jwt.current).toRole() === Role.Editor && (
           <>
             <RemoveInstrumentButton
-              instrument={instrument}
+              instrument={props.instrument}
               setSuccessModal={setSuccessModal}
             />
-            <EditInstrumentButton instrument={instrument} />
+            <EditInstrumentButton instrument={props.instrument} />
           </>
         )}
 
-      <AddToFavoriteButton instrumentId={instrument.id} favorite={favorite} />
-      <GoToInstrumentButton instrument={instrument} />
+      <AddToFavoriteButton
+        instrumentId={props.instrument.id}
+        favorite={props.favorite}
+      />
+      <GoToInstrumentButton instrument={props.instrument} />
 
       <Modal
         opened={successModal}

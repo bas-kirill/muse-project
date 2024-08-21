@@ -3,18 +3,19 @@ import { SERVER_URL } from "shared/config";
 import {
   API_COUNTRIES,
   API_INSTRUMENT_MATERIALS,
-  API_INSTRUMENT_TYPES,
   API_MANUFACTURERS,
 } from "shared/config/backend";
 import axios from "axios";
-import { InstrumentTypes } from "domain/model/instrument-type";
-import Jwt from "domain/model/jwt";
 import { Materials } from "domain/model/material";
 import { Countries } from "domain/model/country";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
+import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
+import { InstrumentType } from "generated/model/instrument-type";
+
+const getInstrumentTypes = new GetInstrumentTypesApi();
 
 export interface CreateInstrumentLoader {
-  instrumentTypes: InstrumentTypes;
+  instrumentTypes: InstrumentType[];
   manufacturerNames: ManufacturerNames;
   materials: Materials;
   countries: Countries;
@@ -22,16 +23,9 @@ export interface CreateInstrumentLoader {
 
 export const loader: LoaderFunction =
   async (): Promise<CreateInstrumentLoader> => {
-    let instrumentTypes: string[] = [];
-    console.log(`jwt: ${Jwt.extractFromLocalStorage()?.value}`);
-    await axios
-      .get<InstrumentTypes>(`${SERVER_URL}${API_INSTRUMENT_TYPES}`)
-      .then((data) => {
-        instrumentTypes = data.data;
-      })
-      .catch((e) => {
-        throw new Error(`Fail to retrieve instrument types: ${e}`);
-      });
+    const instrumentTypesRequest =
+      await getInstrumentTypes.getInstrumentTypes();
+    const instrumentTypes = instrumentTypesRequest.data.content;
 
     let materials: Materials = [];
     await axios

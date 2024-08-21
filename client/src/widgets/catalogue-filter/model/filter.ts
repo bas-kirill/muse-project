@@ -1,11 +1,11 @@
-import { InstrumentTypes } from "domain/model/instrument-type";
 import { InstrumentName } from "domain/model/instrument-name";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { ManufactureDate } from "domain/model/manufacture-date";
+import { InstrumentType } from "generated/model/instrument-type";
 
 export type Filters = {
   instrumentName: InstrumentName | null;
-  instrumentTypes: InstrumentTypes | null;
+  instrumentTypes: InstrumentType[] | null;
   manufacturerNames: ManufacturerNames | null;
   manufactureDateFrom: ManufactureDate | null;
   manufactureDateTo: ManufactureDate | null;

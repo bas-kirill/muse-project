@@ -1,33 +1,28 @@
-import { Filters } from "@widgets/catalogue-filter";
-import { Page, PageRequest } from "@domain/model/page";
-import axios from "axios";
-import { API_INSTRUMENTS, SERVER_URL } from "shared/config";
+import { Filters } from "widgets/catalogue-filter";
+import type {
+  GetInstrumentByCriteriaPageResponse,
+  GetInstrumentCriteriaRequestBody,
+} from "generated/model";
+import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api/get-instruments-by-criteria-paginated-api";
+
+const getInstrumentsByCriteriaPaginatedApi =
+  new GetInstrumentsByCriteriaPaginatedApi();
 
 export const getInstrumentsByCriteriaPaginated = async (
   filters: Filters,
-  pageRequest: PageRequest,
-) => {
-  const getInstrumentsByCriteriaRequestBody = JSON.stringify(filters, null, 2);
+  pageSize: number,
+  pageNumber: number,
+): Promise<GetInstrumentByCriteriaPageResponse> => {
+  const response =
+    await getInstrumentsByCriteriaPaginatedApi.getInstrumentsByCriteriaPaginated(
+      pageSize,
+      pageNumber,
+      JSON.stringify(filters, null, 2) as GetInstrumentCriteriaRequestBody,
+    );
 
-  const { data, status } = await axios.post<Page>(
-    `${SERVER_URL}${API_INSTRUMENTS}`,
-    getInstrumentsByCriteriaRequestBody,
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      params: {
-        pageNumber: pageRequest.pageNumber,
-        pageSize: pageRequest.pageSize,
-      },
-    },
-  );
-
-  if (status !== 200) {
-    console.log(data);
-    console.log(status);
+  if (response.status !== 200) {
     throw new Error("Failed to fetch instruments");
   }
 
-  return data;
+  return response.data;
 };

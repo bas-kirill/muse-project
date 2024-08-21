@@ -2,12 +2,12 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@pages/*": ["pages/*"],
-      "@widgets/*": ["widgets/*"],
-      "@domain/*": ["domain/*"],
-      "@shared/*": ["shared/*"],
-      "@app/*": ["app/*"],
-      "@generated/*": ["generated/*"]
+      "pages/*": ["pages/*"],
+      "widgets/*": ["widgets/*"],
+      "domain/*": ["domain/*"],
+      "shared/*": ["shared/*"],
+      "app/*": ["app/*"],
+      "generated/*": ["generated/*"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],

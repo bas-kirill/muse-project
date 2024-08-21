@@ -4,10 +4,10 @@ import { deleteInstrument } from "shared/api/delete-instrument";
 import Jwt from "domain/model/jwt";
 import { LOGIN } from "shared/config/paths";
 import { useNavigate } from "react-router-dom";
-import { Instrument } from "domain/model/instrument";
+import { InstrumentDetail } from "generated/model";
 
 interface Props {
-  instrument: Instrument;
+  instrument: InstrumentDetail;
   setSuccessModal: (successModal: boolean) => void;
 }
 

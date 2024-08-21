@@ -1,7 +1,7 @@
 import React from "react";
 import "./CatalogueSerpWidget.css";
 import { InstrumentCard } from "shared/ui/instrument-card/InstrumentCard";
-import { InstrumentDetail } from "@generated/model";
+import { InstrumentDetail } from "generated/model";
 
 interface Props {
   instruments: InstrumentDetail[];
@@ -11,7 +11,7 @@ interface Props {
 export const CatalogueSerpWidget = (props: Props) => {
   return (
     <div id="catalogue-serp">
-      {props.instruments.length == 0 && (
+      {props.instruments.length === 0 && (
         <div id={"serp-widget-not-found"}>Instruments not found :(</div>
       )}
 

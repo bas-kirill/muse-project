@@ -24,8 +24,8 @@ export const CreateInstrument = () => {
           <label htmlFor="instrument-type">Instrument Type</label>
           <select name="instrument-type" required>
             {loader.instrumentTypes.map((instrumentType) => (
-              <option key={instrumentType} value={instrumentType}>
-                {instrumentType}
+              <option key={instrumentType.type} value={instrumentType.type}>
+                {instrumentType.type}
               </option>
             ))}
           </select>

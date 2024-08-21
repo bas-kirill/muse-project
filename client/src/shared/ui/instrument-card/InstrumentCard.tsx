@@ -1,8 +1,8 @@
-import { InstrumentDetails } from "./InstrumentDetails";
-import { InstrumentActions } from "./actions/InstrumentActions";
 import React from "react";
 import "./InstrumentCard.css";
-import { InstrumentDetail } from "@generated/model";
+import { InstrumentDetails } from "./InstrumentDetails";
+import { InstrumentActions } from "./actions/InstrumentActions";
+import { InstrumentDetail } from "generated/model";
 
 interface Props {
   instrument: InstrumentDetail;

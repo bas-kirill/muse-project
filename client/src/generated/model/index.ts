@@ -1,5 +1,6 @@
 export * from "./get-instrument-by-criteria-page-response";
 export * from "./get-instrument-criteria-request-body";
+export * from "./get-instrument-types-response";
 export * from "./get-instruments-by-criteria-response";
 export * from "./instrument-detail";
 export * from "./jwt-response";

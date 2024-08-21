@@ -12,9 +12,16 @@
  * Do not edit the class manually.
  */
 
-export * from "./api/basic-login-api";
-export * from "./api/get-instrument-by-id-api";
-export * from "./api/get-instrument-types-api";
-export * from "./api/get-instruments-by-criteria-api";
-export * from "./api/get-instruments-by-criteria-paginated-api";
-export * from "./api/profile-api";
+/**
+ *
+ * @export
+ * @interface InstrumentType
+ */
+export interface InstrumentType {
+  /**
+   *
+   * @type {string}
+   * @memberof InstrumentType
+   */
+  type: string;
+}

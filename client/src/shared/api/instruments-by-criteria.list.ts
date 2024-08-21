@@ -1,14 +1,12 @@
 import axios from "axios";
 import { API_INSTRUMENTS, SERVER_URL } from "shared/config";
 import { Filters } from "widgets/catalogue-filter";
-import { Instruments } from "domain/model/instrument";
+import { InstrumentDetail } from "generated/model";
 
 export const getInstrumentsByCriteria = async (filters: Filters) => {
-  const getInstrumentsByCriteriaRequestBody = JSON.stringify(filters, null, 2);
-
-  const { data, status } = await axios.post<Instruments>(
+  const { data, status } = await axios.post<InstrumentDetail[]>(
     `${SERVER_URL}${API_INSTRUMENTS}`,
-    getInstrumentsByCriteriaRequestBody,
+    JSON.stringify(filters, null, 2),
     {
       headers: {
         "Content-Type": "application/json",
