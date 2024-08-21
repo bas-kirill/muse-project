@@ -4,8 +4,10 @@ import { Profile } from "domain/";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
+import { useJwt } from "pages/login";
 
 export function UserProfile() {
+  useJwt();
   const profile = useLoaderData() as Profile;
 
   return (

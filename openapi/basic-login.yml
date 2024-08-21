@@ -1,0 +1,52 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Basic Login
+servers:
+  - url: http://localhost:8080/
+
+paths:
+  /api/auth/login:
+    post:
+      summary: Basic Login
+      operationId: basicLogin
+      tags:
+        - basicLogin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UsernameAndPasswordRequestBody"
+        required: true
+      responses:
+        "200":
+          description: Profile Details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JwtResponse"
+        default:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "./server-error.yml#/components/schemas/ServerError"
+
+components:
+  schemas:
+    UsernameAndPasswordRequestBody:
+      type: object
+      required: [ username, password ]
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    JwtResponse:
+      type: object
+      required: [ jwt ]
+      properties:
+        jwt:
+          type: string

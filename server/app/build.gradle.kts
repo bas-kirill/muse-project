@@ -121,6 +121,9 @@ openApiGenerate {
         "skipDefaultInterface" to "true",
         "documentationProvider" to "none",
     )
+    globalProperties = mapOf(
+        "verbose" to "true",
+    )
 }
 
 tasks.compileKotlin {

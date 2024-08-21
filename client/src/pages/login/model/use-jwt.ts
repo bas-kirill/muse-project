@@ -3,14 +3,14 @@ import Jwt from "domain/model/jwt";
 
 export const useJwt = () => {
   useEffect(() => {
-    const jwt = Jwt.extractFromLocalStorage();
+    const jwt = Jwt.extractFromCookie();
 
     if (jwt === null) {
       return;
     }
 
     if (jwt.expired()) {
-      Jwt.eraseFromLocalStorage(); // need to rerender header
+      Jwt.eraseFromCookie(); // need to rerender header
     }
   }, []);
 };

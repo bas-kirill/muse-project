@@ -1,5 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { Role } from "./role";
+import { Cookies } from "typescript-cookie";
 
 interface JwtPayload {
   sub: string;
@@ -9,7 +10,7 @@ interface JwtPayload {
 }
 
 export class Jwt {
-  public static readonly WINDOW_LOCAL_STORAGE_JWT_KEY = "jwt";
+  public static readonly COOKIE_JWT_KEY = "jwt";
 
   value: string;
 
@@ -34,10 +35,20 @@ export class Jwt {
     return new Jwt(jwtRaw);
   }
 
+  public static extractFromCookie(): Jwt | null {
+    const jwtCookieRaw = Cookies.get(Jwt.COOKIE_JWT_KEY) as string | undefined;
+    if (jwtCookieRaw === undefined) {
+      return null;
+    }
+    return Jwt.from(jwtCookieRaw);
+  }
+
+  public static eraseFromCookie() {
+    Cookies.remove(Jwt.COOKIE_JWT_KEY);
+  }
+
   public static extractFromLocalStorage(): Jwt | null {
-    const jwtRaw = window.localStorage.getItem(
-      Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY,
-    );
+    const jwtRaw = window.localStorage.getItem(Jwt.COOKIE_JWT_KEY);
     if (jwtRaw === null) {
       return null;
     }
@@ -45,11 +56,11 @@ export class Jwt {
   }
 
   public static putToLocalStorage(jwtRaw: string) {
-    window.localStorage.setItem(Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY, jwtRaw);
+    window.localStorage.setItem(Jwt.COOKIE_JWT_KEY, jwtRaw);
   }
 
   public static eraseFromLocalStorage() {
-    window.localStorage.removeItem(Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY);
+    window.localStorage.removeItem(Jwt.COOKIE_JWT_KEY);
   }
 }
 
