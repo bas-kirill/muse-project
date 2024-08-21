@@ -16,7 +16,7 @@ class GetInstrumentTypesEndpoint(
         return ResponseEntity.ok(
             GetInstrumentTypesResponse(
                 content = instrumentTypes.map { it.name },
-            )
+            ),
         )
     }
 }
