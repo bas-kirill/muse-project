@@ -5,7 +5,7 @@
 */
 package mu.muse.rest.api
 
-import mu.muse.rest.dto.ProfileDetailsResponse
+import mu.muse.rest.dto.GetInstrumentTypesResponse
 import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -31,13 +31,13 @@ import kotlin.collections.Map
 
 @RestController
 @Validated
-interface ProfileApi {
+interface GetInstrumentTypesApi {
 
 
     @RequestMapping(
             method = [RequestMethod.GET],
-            value = ["/api/profile"],
+            value = ["/api/instrument/types"],
             produces = ["application/json"]
     )
-    fun getProfile(): ResponseEntity<ProfileDetailsResponse>
+    fun getInstrumentTypes(): ResponseEntity<GetInstrumentTypesResponse>
 }

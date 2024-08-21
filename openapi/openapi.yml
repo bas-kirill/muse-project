@@ -15,6 +15,8 @@ tags:
     x-displayName: getInstrumentsByCriteriaPaginated
   - name: getInstrumentById
     x-displayName: getInstrumentById
+  - name: getInstrumentTypes
+    x-displayName: getInstrumentTypes
 paths:
   /api/auth/login:
     post:
@@ -147,6 +149,25 @@ paths:
                 $ref: '#/components/schemas/InstrumentDetail'
         '500':
           description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/instrument/types:
+    get:
+      summary: Get Instrument Types
+      operationId: getInstrumentTypes
+      tags:
+        - getInstrumentTypes
+      responses:
+        '200':
+          description: Instrument Types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstrumentTypesResponse'
+        '500':
+          description: Server Error
           content:
             application/json:
               schema:
@@ -304,6 +325,13 @@ components:
           type: integer
           format: int32
           description: The total number of pages.
+    GetInstrumentTypesResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: string
 x-tagGroups:
   - name: Basic Login
     tags:
@@ -320,3 +348,6 @@ x-tagGroups:
   - name: Get Instrument By ID
     tags:
       - getInstrumentById
+  - name: Get Instrument Types
+    tags:
+      - getInstrumentTypes

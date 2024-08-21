@@ -1,0 +1,38 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Get Instrument Types
+servers:
+  - url: http://localhost:8080/
+
+paths:
+  /api/instrument/types:
+    get:
+      summary: Get Instrument Types
+      operationId: getInstrumentTypes
+      tags:
+        - getInstrumentTypes
+      responses:
+        "200":
+          description: Instrument Types
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetInstrumentTypesResponse"
+        "500":
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ServerError.yml#/components/schemas/ServerError"
+
+components:
+  schemas:
+    GetInstrumentTypesResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: string
