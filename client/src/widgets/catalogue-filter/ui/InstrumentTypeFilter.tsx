@@ -12,7 +12,8 @@ export const InstrumentTypeFilter = (props: Props) => {
   const [instrumentTypes, setInstrumentTypes] = useState<InstrumentType[]>([]);
 
   useEffect(() => {
-    getInstrumentTypes.getInstrumentTypes()
+    getInstrumentTypes
+      .getInstrumentTypes()
       .then((r) => {
         setInstrumentTypes(r.data.content);
       })
@@ -28,8 +29,8 @@ export const InstrumentTypeFilter = (props: Props) => {
 
     props.onValueChange(
       Array.from(elements)
-        .filter(inputTag => inputTag.checked)
-        .map(inputTag => ({ type: inputTag.name })),
+        .filter((inputTag) => inputTag.checked)
+        .map((inputTag) => ({ type: inputTag.name })),
     );
   }
 

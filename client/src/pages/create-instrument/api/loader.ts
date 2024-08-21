@@ -3,7 +3,7 @@ import { SERVER_URL } from "shared/config";
 import {
   API_COUNTRIES,
   API_INSTRUMENT_MATERIALS,
-  API_MANUFACTURERS
+  API_MANUFACTURERS,
 } from "shared/config/backend";
 import axios from "axios";
 import { Materials } from "domain/model/material";
@@ -23,7 +23,8 @@ export interface CreateInstrumentLoader {
 
 export const loader: LoaderFunction =
   async (): Promise<CreateInstrumentLoader> => {
-    const instrumentTypesRequest = await getInstrumentTypes.getInstrumentTypes();
+    const instrumentTypesRequest =
+      await getInstrumentTypes.getInstrumentTypes();
     let instrumentTypes = instrumentTypesRequest.data.content;
 
     let materials: Materials = [];
@@ -60,6 +61,6 @@ export const loader: LoaderFunction =
       instrumentTypes: instrumentTypes,
       manufacturerNames: manufacturers,
       materials: materials,
-      countries: countries
+      countries: countries,
     };
   };

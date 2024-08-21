@@ -34,7 +34,10 @@ export const InstrumentActions = (props: Props) => {
           </>
         )}
 
-      <AddToFavoriteButton instrumentId={props.instrument.id} favorite={props.favorite} />
+      <AddToFavoriteButton
+        instrumentId={props.instrument.id}
+        favorite={props.favorite}
+      />
       <GoToInstrumentButton instrument={props.instrument} />
 
       <Modal

@@ -21,8 +21,9 @@ interface Props {
 }
 
 export const CatalogueFilterWidget = (props: Props) => {
-  const [instrumentTypes, setInstrumentTypes] =
-    useState<InstrumentType[] | null>(null);
+  const [instrumentTypes, setInstrumentTypes] = useState<
+    InstrumentType[] | null
+  >(null);
   const [manufacturerNames, setManufacturerNames] =
     useState<ManufacturerNames | null>(null);
   const [manufactureDateFrom, setManufactureDateFrom] =

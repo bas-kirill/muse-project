@@ -1,4 +1,3 @@
-
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { Materials } from "domain/model/material";
 import { Countries } from "domain/model/country";
@@ -8,7 +7,7 @@ import { SERVER_URL } from "shared/config";
 import {
   API_COUNTRIES,
   API_INSTRUMENT_MATERIALS,
-  API_MANUFACTURERS
+  API_MANUFACTURERS,
 } from "shared/config/backend";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { InstrumentType } from "generated/model/instrument-type";
@@ -27,13 +26,13 @@ export interface EditInstrumentLoader {
 }
 
 export const loader: LoaderFunction = async ({
-  params
+  params,
 }): Promise<EditInstrumentLoader> => {
-  const instrumentDetailRequest = await
-    getInstrumentById.getInstrumentById(params.instrumentId as string)
+  const instrumentDetailRequest = await getInstrumentById.getInstrumentById(
+    params.instrumentId as string,
+  );
 
-  const instrumentTypesRequest = await
-    getInstrumentTypes.getInstrumentTypes();
+  const instrumentTypesRequest = await getInstrumentTypes.getInstrumentTypes();
 
   let materials: Materials = [];
   await axios
@@ -70,6 +69,6 @@ export const loader: LoaderFunction = async ({
     instrumentTypes: instrumentTypesRequest.data.content,
     manufacturerNames: manufacturers,
     materials: materials,
-    countries: countries
+    countries: countries,
   };
 };

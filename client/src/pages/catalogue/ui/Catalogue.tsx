@@ -49,7 +49,11 @@ export function Catalogue() {
       filters.instrumentName = instrumentName;
     }
 
-    getInstrumentsByCriteriaPaginated(filters, CATALOGUE_DEFAULT_PAGE_SIZE, pageNumber).then((r) => {
+    getInstrumentsByCriteriaPaginated(
+      filters,
+      CATALOGUE_DEFAULT_PAGE_SIZE,
+      pageNumber,
+    ).then((r) => {
       setInstruments(r.content);
       totalPages.current = r.totalPages;
     });
