@@ -3,7 +3,6 @@ package mu.muse.rest.instruments
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.rest.api.GetInstrumentByIdApi
-import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
 import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.usecase.GetInstrumentById
 import org.springframework.http.ResponseEntity
@@ -17,8 +16,8 @@ class GetInstrumentByIdEndpoint(
 ) : GetInstrumentByIdApi {
 
     override fun getInstrumentById(instrumentId: String): ResponseEntity<InstrumentDetail> {
-        val instrumentId = InstrumentId.from(instrumentId)
-        val instrument = getInstrumentById.execute(instrumentId)
+        val id = InstrumentId.from(instrumentId)
+        val instrument = getInstrumentById.execute(id)
         val instrumentDetail = instrument.toDto()
         return ResponseEntity.ok().body(instrumentDetail)
     }
