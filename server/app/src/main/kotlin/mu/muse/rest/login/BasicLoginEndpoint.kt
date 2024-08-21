@@ -29,7 +29,7 @@ class BasicLoginEndpoint(private val basicLogin: BasicLogin) : BasicLoginApi {
         val jwtRaw = basicLogin.execute(id, password)
         val cookie = Cookie("jwt", jwtRaw)
         cookie.isHttpOnly = false // because we need to extract a role from token at client side
-        cookie.maxAge = COOKIE_MAX_AGE_SEVEN_DAYS_IN_SECONDS  // 7 days
+        cookie.maxAge = COOKIE_MAX_AGE_SEVEN_DAYS_IN_SECONDS
         cookie.path = COOKIE_PATH
         (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).response?.addCookie(cookie)
         return jwtRaw.toResponseEntity()
