@@ -19,12 +19,8 @@ class GetInstrumentByIdEndpoint(
     override fun getInstrumentById(instrumentId: String): ResponseEntity<InstrumentDetail> {
         val instrumentId = InstrumentId.from(instrumentId)
         val instrument = getInstrumentById.execute(instrumentId)
-        val instrumentDetail = instrument?.toDto()
-        return if (instrumentDetail == null) {
-            throw RuntimeException("not found")
-        } else {
-            ResponseEntity.ok().body(instrumentDetail)
-        }
+        val instrumentDetail = instrument.toDto()
+        return ResponseEntity.ok().body(instrumentDetail)
     }
 }
 

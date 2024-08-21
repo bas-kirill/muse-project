@@ -39,7 +39,7 @@ interface GetInstrumentsByCriteriaPaginatedApi {
             method = [RequestMethod.POST],
             value = ["/api/instruments/paginated"],
             produces = ["application/json"],
-            consumes = ["application/json"]
+            consumes = ["application/json"],
     )
     fun getInstrumentsByCriteriaPaginated(@NotNull  @Valid @RequestParam(value = "pageSize", required = true) pageSize: kotlin.Int,@NotNull  @Valid @RequestParam(value = "pageNumber", required = true) pageNumber: kotlin.Int, @Valid @RequestBody getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody): ResponseEntity<GetInstrumentByCriteriaPageResponse>
 }
