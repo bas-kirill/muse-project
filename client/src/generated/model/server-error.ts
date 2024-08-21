@@ -17,20 +17,14 @@
 /**
  * 
  * @export
- * @interface UsernameAndPasswordRequestBody
+ * @interface ServerError
  */
-export interface UsernameAndPasswordRequestBody {
+export interface ServerError {
     /**
-     * 
+     * A description of the error.
      * @type {string}
-     * @memberof UsernameAndPasswordRequestBody
+     * @memberof ServerError
      */
-    'username': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof UsernameAndPasswordRequestBody
-     */
-    'password': string;
+    'message': string;
 }
 

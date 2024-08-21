@@ -5,9 +5,8 @@
 */
 package mu.muse.rest.api
 
-import mu.muse.rest.dto.JwtResponse
+import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.rest.dto.ServerError
-import mu.muse.rest.dto.UsernameAndPasswordRequestBody
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -32,14 +31,13 @@ import kotlin.collections.Map
 
 @RestController
 @Validated
-interface BasicLoginApi {
+interface GetInstrumentByIdApi {
 
 
     @RequestMapping(
-            method = [RequestMethod.POST],
-            value = ["/api/auth/login"],
-            produces = ["application/json"],
-            consumes = ["application/json"]
+            method = [RequestMethod.GET],
+            value = ["/api/instrument/{instrumentId}"],
+            produces = ["application/json"]
     )
-    fun basicLogin( @Valid @RequestBody usernameAndPasswordRequestBody: UsernameAndPasswordRequestBody): ResponseEntity<JwtResponse>
+    fun getInstrumentById( @PathVariable("instrumentId") instrumentId: kotlin.String): ResponseEntity<InstrumentDetail>
 }

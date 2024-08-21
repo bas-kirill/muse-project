@@ -2,12 +2,11 @@ package mu.muse.rest.instruments
 
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
-import mu.muse.rest.API_INSTRUMENT_BY_ID
+import mu.muse.rest.api.GetInstrumentByIdApi
+import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
 import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.usecase.GetInstrumentById
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
 import java.time.ZoneId
@@ -15,15 +14,14 @@ import java.time.ZoneId
 @RestController
 class GetInstrumentByIdEndpoint(
     private val getInstrumentById: GetInstrumentById,
-) {
+) : GetInstrumentByIdApi {
 
-    @GetMapping(API_INSTRUMENT_BY_ID)
-    fun getInstrumentById(@PathVariable id: Long): ResponseEntity<*> {
-        val instrumentId = InstrumentId.from(id)
+    override fun getInstrumentById(instrumentId: String): ResponseEntity<InstrumentDetail> {
+        val instrumentId = InstrumentId.from(instrumentId)
         val instrument = getInstrumentById.execute(instrumentId)
         val instrumentDetail = instrument?.toDto()
         return if (instrumentDetail == null) {
-            ResponseEntity.internalServerError().body("Not Found")
+            throw RuntimeException("not found")
         } else {
             ResponseEntity.ok().body(instrumentDetail)
         }

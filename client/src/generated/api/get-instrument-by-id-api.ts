@@ -22,23 +22,27 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { ProfileDetailsResponse } from '../model';
+import type { InstrumentDetail } from '../model';
 // @ts-ignore
 import type { ServerError } from '../model';
 /**
- * ProfileApi - axios parameter creator
+ * GetInstrumentByIdApi - axios parameter creator
  * @export
  */
-export const ProfileApiAxiosParamCreator = function (configuration?: Configuration) {
+export const GetInstrumentByIdApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Get Profile Info
+         * @summary Get Instrument by ID
+         * @param {string} instrumentId Instrument ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProfile: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/api/profile`;
+        getInstrumentById: async (instrumentId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'instrumentId' is not null or undefined
+            assertParamExists('getInstrumentById', 'instrumentId', instrumentId)
+            const localVarPath = `/api/instrument/{instrumentId}`
+                .replace(`{${"instrumentId"}}`, encodeURIComponent(String(instrumentId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -65,62 +69,65 @@ export const ProfileApiAxiosParamCreator = function (configuration?: Configurati
 };
 
 /**
- * ProfileApi - functional programming interface
+ * GetInstrumentByIdApi - functional programming interface
  * @export
  */
-export const ProfileApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = ProfileApiAxiosParamCreator(configuration)
+export const GetInstrumentByIdApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GetInstrumentByIdApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @summary Get Profile Info
+         * @summary Get Instrument by ID
+         * @param {string} instrumentId Instrument ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getProfile(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProfileDetailsResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getProfile(options);
+        async getInstrumentById(instrumentId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<InstrumentDetail>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getInstrumentById(instrumentId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['ProfileApi.getProfile']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GetInstrumentByIdApi.getInstrumentById']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * ProfileApi - factory interface
+ * GetInstrumentByIdApi - factory interface
  * @export
  */
-export const ProfileApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = ProfileApiFp(configuration)
+export const GetInstrumentByIdApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GetInstrumentByIdApiFp(configuration)
     return {
         /**
          * 
-         * @summary Get Profile Info
+         * @summary Get Instrument by ID
+         * @param {string} instrumentId Instrument ID
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getProfile(options?: RawAxiosRequestConfig): AxiosPromise<ProfileDetailsResponse> {
-            return localVarFp.getProfile(options).then((request) => request(axios, basePath));
+        getInstrumentById(instrumentId: string, options?: RawAxiosRequestConfig): AxiosPromise<InstrumentDetail> {
+            return localVarFp.getInstrumentById(instrumentId, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * ProfileApi - object-oriented interface
+ * GetInstrumentByIdApi - object-oriented interface
  * @export
- * @class ProfileApi
+ * @class GetInstrumentByIdApi
  * @extends {BaseAPI}
  */
-export class ProfileApi extends BaseAPI {
+export class GetInstrumentByIdApi extends BaseAPI {
     /**
      * 
-     * @summary Get Profile Info
+     * @summary Get Instrument by ID
+     * @param {string} instrumentId Instrument ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof ProfileApi
+     * @memberof GetInstrumentByIdApi
      */
-    public getProfile(options?: RawAxiosRequestConfig) {
-        return ProfileApiFp(this.configuration).getProfile(options).then((request) => request(this.axios, this.basePath));
+    public getInstrumentById(instrumentId: string, options?: RawAxiosRequestConfig) {
+        return GetInstrumentByIdApiFp(this.configuration).getInstrumentById(instrumentId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

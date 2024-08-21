@@ -13,6 +13,8 @@ tags:
     x-displayName: getInstrumentsByCriteria
   - name: getInstrumentsByCriteriaPaginated
     x-displayName: getInstrumentsByCriteriaPaginated
+  - name: getInstrumentById
+    x-displayName: getInstrumentById
 paths:
   /api/auth/login:
     post:
@@ -123,10 +125,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
+  /api/instrument/{instrumentId}:
+    get:
+      summary: Get Instrument by ID
+      operationId: getInstrumentById
+      tags:
+        - getInstrumentById
+      parameters:
+        - name: instrumentId
+          in: path
+          required: true
+          description: Instrument ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instrument Detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentDetail'
+        '500':
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
 components:
   schemas:
     ServerError:
       type: object
+      properties:
+        message:
+          type: string
+          description: A description of the error.
+      required:
+        - message
+      example:
+        message: Internal Server Error. Please try again later.
     UsernameAndPasswordRequestBody:
       type: object
       required:
@@ -224,8 +260,7 @@ components:
         instrumentIds:
           type: array
           items:
-            type: integer
-            format: int64
+            type: string
     GetInstrumentsByCriteriaResponse:
       type: object
       required:
@@ -282,3 +317,6 @@ x-tagGroups:
   - name: Get Instruments by Criteria Paginated
     tags:
       - getInstrumentsByCriteriaPaginated
+  - name: Get Instrument By ID
+    tags:
+      - getInstrumentById

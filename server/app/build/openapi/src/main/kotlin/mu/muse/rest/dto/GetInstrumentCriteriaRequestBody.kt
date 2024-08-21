@@ -49,7 +49,7 @@ data class GetInstrumentCriteriaRequestBody(
 
     @get:JsonProperty("materials") val materials: kotlin.collections.List<kotlin.String>? = null,
 
-    @get:JsonProperty("instrumentIds") val instrumentIds: kotlin.collections.List<kotlin.Long>? = null
+    @get:JsonProperty("instrumentIds") val instrumentIds: kotlin.collections.List<kotlin.String>? = null
     ) {
 
 }

@@ -16,7 +16,7 @@ class DeleteInstrumentByIdEndpoint(
 
     @RolesAllowed(Role.EDITOR)
     @PostMapping(API_DELETE_INSTRUMENT_BY_ID)
-    fun deleteInstrumentById(@PathVariable id: Long) {
+    fun deleteInstrumentById(@PathVariable id: String) {
         val instrumentId = InstrumentId.from(id)
         deleteInstrumentById.execute(instrumentId)
     }

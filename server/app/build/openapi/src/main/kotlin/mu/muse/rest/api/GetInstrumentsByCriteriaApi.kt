@@ -7,6 +7,7 @@ package mu.muse.rest.api
 
 import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
 import mu.muse.rest.dto.GetInstrumentsByCriteriaResponse
+import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -38,7 +39,7 @@ interface GetInstrumentsByCriteriaApi {
             method = [RequestMethod.POST],
             value = ["/api/instruments"],
             produces = ["application/json"],
-            consumes = ["application/json"],
+            consumes = ["application/json"]
     )
     fun getInstrumentsByCriteria( @Valid @RequestBody getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody): ResponseEntity<GetInstrumentsByCriteriaResponse>
 }

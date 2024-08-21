@@ -12,6 +12,7 @@ rootDir="$currentDir/../../"
   ./specs/instrument/components/GetInstrumentByCriteriaRequestBody.yml \
   ./specs/instrument/GetInstrumentsByCriteriaApi.yml \
   ./specs/instrument/GetInstrumentsByCriteriaPaginatedApi.yml \
+  ./specs/instrument/GetInstrumentById.yml \
   -o ./openapi.yml
 )
 (cd "$rootDir/client" && rm -rf ./src/generated)

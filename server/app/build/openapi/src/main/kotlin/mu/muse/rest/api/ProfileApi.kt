@@ -6,6 +6,7 @@
 package mu.muse.rest.api
 
 import mu.muse.rest.dto.ProfileDetailsResponse
+import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -36,7 +37,7 @@ interface ProfileApi {
     @RequestMapping(
             method = [RequestMethod.GET],
             value = ["/api/profile"],
-            produces = ["application/json"],
+            produces = ["application/json"]
     )
     fun getProfile(): ResponseEntity<ProfileDetailsResponse>
 }

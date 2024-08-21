@@ -10,3 +10,11 @@ components:
   schemas:
     ServerError:
       type: object
+      properties:
+        message:
+          type: string
+          description: A description of the error.
+      required:
+        - message
+      example:
+        message: "Internal Server Error. Please try again later."
