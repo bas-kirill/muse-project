@@ -58,7 +58,7 @@ fun GetInstrumentCriteriaRequestBody.toInstrumentCriteria(): InstrumentExtractor
         releaseDateTo = this.releaseDateTo?.let { ReleaseDate.from(it) },
         countries = this.countries?.map { Country.valueOf(it) },
         materials = this.materials?.map { Material.valueOf(it) },
-        instrumentIds = this.instrumentIds?.map { InstrumentId.from(it) }
+        instrumentIds = this.instrumentIds?.map { InstrumentId.from(it) },
     )
 }
 
@@ -69,6 +69,6 @@ fun Page<InstrumentDetail>.toResponse(): GetInstrumentByCriteriaPageResponse {
         pageSize = this.pageSize,
         pageNumber = this.pageNumber,
         totalElements = this.totalElements,
-        totalPages = this.totalPages
+        totalPages = this.totalPages,
     )
 }
