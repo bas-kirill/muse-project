@@ -5,10 +5,10 @@ import { Header } from "widgets/header";
 import { useLoaderData } from "react-router-dom";
 import { InstrumentActions } from "./InstrumentActions";
 import { InstrumentDescription } from "./InstrumentDescription";
-import { InstrumentDetails } from "pages/instrument";
+import { InstrumentDetail } from "generated/model";
 
 export function Instrument() {
-  const instrument = useLoaderData() as InstrumentDetails;
+  const instrument = useLoaderData() as InstrumentDetail;
 
   return (
     <>

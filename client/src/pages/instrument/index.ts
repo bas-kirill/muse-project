@@ -1,5 +1,4 @@
 import { Instrument } from "./ui/Instrument";
-import { loader, InstrumentDetails } from "./api/loader";
+import { loader } from "./api/loader";
 
 export { Instrument, loader };
-export type { InstrumentDetails };

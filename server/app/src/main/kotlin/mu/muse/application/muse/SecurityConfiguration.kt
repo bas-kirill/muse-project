@@ -10,6 +10,7 @@ import mu.muse.rest.API_FAVORITE_LIST
 import mu.muse.rest.API_FAVORITE_REMOVE
 import mu.muse.rest.API_GET_MANUFACTURER_NAMES
 import mu.muse.rest.API_INSTRUMENTS
+import mu.muse.rest.API_INSTRUMENTS_PAGINATED
 import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.API_INSTRUMENT_MATERIALS
 import mu.muse.rest.API_INSTRUMENT_TYPES
@@ -91,6 +92,7 @@ class SecurityConfiguration {
             request
                 .requestMatchers(AUTH_BASIC_LOGIN).permitAll()
                 .requestMatchers(HttpMethod.POST, API_INSTRUMENTS).permitAll()
+                .requestMatchers(HttpMethod.POST, API_INSTRUMENTS_PAGINATED).permitAll()
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_BY_ID).permitAll()
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_TYPES).permitAll()
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_MATERIALS).permitAll()

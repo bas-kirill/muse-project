@@ -1,7 +1,5 @@
 package mu.muse.usecase.access.instrument
 
-import mu.muse.common.persistence.Page
-import mu.muse.common.rest.PageRequest
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
@@ -13,13 +11,13 @@ import mu.muse.domain.instrument.ReleaseDate
 
 interface InstrumentExtractor {
 
-    fun findAll(): Collection<Instrument>
+    fun findAll(): List<Instrument>
 
     fun findById(id: InstrumentId): Instrument?
 
-    fun findByCriteria(criteria: Criteria): Collection<Instrument>
+    fun findByCriteria(criteria: Criteria): List<Instrument>
 
-    fun findByCriteria(criteria: Criteria, pageRequest: PageRequest): Page<Instrument>
+    fun totalElements(): Int
 
     data class Criteria(
         val name: InstrumentName?,

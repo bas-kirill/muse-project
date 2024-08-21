@@ -5,20 +5,20 @@ import { deleteInstrument } from "shared/api/delete-instrument";
 import Jwt from "domain/model/jwt";
 import { LOGIN } from "shared/config/paths";
 import { Modal } from "widgets/modal";
-import { InstrumentDetails } from "pages/instrument";
 import { InstrumentId } from "domain/model/instrument-id";
+import { InstrumentDetail } from "generated/model";
 
 interface Props {
-  instrument: InstrumentDetails;
+  instrument: InstrumentDetail;
 }
 
-export const InstrumentActions = ({ instrument }: Props) => {
+export const InstrumentActions = (props: Props) => {
   const [deleteSuccessModal, setDeleteSuccessModal] = useState<boolean>(false);
   const [deleteErrorModal, setDeleteErrorModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleOnDeleteInstrument = () => {
-    deleteInstrument(InstrumentId.from(instrument.id))
+    deleteInstrument(InstrumentId.from(props.instrument.id))
       .then(() => {
         setDeleteSuccessModal(true);
       })
@@ -33,7 +33,7 @@ export const InstrumentActions = ({ instrument }: Props) => {
   };
 
   const handleOnEditInstrument = () => {
-    navigate("/instrument/" + instrument.id + "/edit");
+    navigate("/instrument/" + props.instrument.id + "/edit");
   };
 
   return (

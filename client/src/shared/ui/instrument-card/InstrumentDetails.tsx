@@ -1,31 +1,31 @@
 import React from "react";
-import { Instrument } from "domain/model/instrument";
 import guitarImg from "./electric-guitar-gray.jpg";
 import "./InstrumentDetails.css";
+import { InstrumentDetail } from "generated/model";
 
 interface Props {
-  instrument: Instrument;
+  instrument: InstrumentDetail;
 }
 
-export const InstrumentDetails = ({ instrument }: Props) => {
+export const InstrumentDetails = (props: Props) => {
   return (
     <div className="instrument-details">
       <img src={guitarImg} width={100} height={200} alt={"Guitar Gray"} />
       <div className="instrument-details-description">
-        <h2>{instrument.name}</h2>
-        <b>Тип</b>: {instrument.type}
+        <h2>{props.instrument.name}</h2>
+        <b>Type</b>: {props.instrument.type}
         <br />
-        <b>Производитель</b>: {instrument.manufacturer}
+        <b>Manufacturer</b>: {props.instrument.manufacturer}
         <br />
-        <b>Дата изготовления</b>: {instrument.manufacturerDate}
+        <b>Manufacturer Date</b>: {props.instrument.manufacturerDate}
         <br />
-        <b>Дата выпуска</b>: {instrument.releaseDate}
+        <b>Release Date</b>: {props.instrument.releaseDate}
         <br />
-        <b>Страна</b>: {instrument.country}
+        <b>Country</b>: {props.instrument.country}
         <br />
-        <b>Основные материалы</b>:
+        <b>Basic Materials</b>:
         <ul>
-          {instrument.basicMaterials.map((basicMaterial) => (
+          {props.instrument.basicMaterials.map((basicMaterial) => (
             <li key={basicMaterial}>{basicMaterial}</li>
           ))}
         </ul>

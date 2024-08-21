@@ -1,6 +1,6 @@
 import { ActionFunction } from "react-router-dom";
 import { parseForm } from "../model/parseForm";
-import { BasicLoginApi } from "generated/openapi";
+import { BasicLoginApi } from "generated/api/basic-login-api";
 
 export interface LogInAction {
   errors: string[];

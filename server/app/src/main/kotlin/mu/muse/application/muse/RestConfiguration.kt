@@ -11,6 +11,7 @@ import mu.muse.rest.instruments.GetInstrumentManufacturersEndpoint
 import mu.muse.rest.instruments.GetInstrumentMaterialsEndpoint
 import mu.muse.rest.instruments.GetInstrumentTypesEndpoint
 import mu.muse.rest.instruments.GetInstrumentsByCriteriaEndpoint
+import mu.muse.rest.instruments.GetInstrumentsByCriteriaPaginatedEndpoint
 import mu.muse.rest.login.BasicLoginEndpoint
 import mu.muse.rest.profile.GetProfileEndpoint
 import mu.muse.rest.registration.RegistrationEndpoint
@@ -44,10 +45,14 @@ class RestConfiguration {
     fun getProfileEndpoint(getProfile: GetProfile) = GetProfileEndpoint(getProfile)
 
     @Bean
-    fun getAllInstrumentsEndpoint(
-        getInstrumentsByCriteria: GetInstrumentsByCriteria,
-        getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated
-    ) = GetInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria, getInstrumentsByCriteriaPaginated)
+    fun getInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria: GetInstrumentsByCriteria) =
+        GetInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria)
+
+    // @format:off
+    @Bean
+    fun getInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated)
+        = GetInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated)
+    // @format:on
 
     @Bean
     fun getInstrumentByIdEndpoint(getInstrumentById: GetInstrumentById) = GetInstrumentByIdEndpoint(getInstrumentById)

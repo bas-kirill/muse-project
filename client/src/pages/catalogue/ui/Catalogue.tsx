@@ -9,7 +9,6 @@ import {
   DEFAULT_FILTER,
 } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
-import { Instruments } from "domain/model/instrument";
 import { useJwt } from "pages/login";
 import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
@@ -21,11 +20,12 @@ import { NavigationBar } from "./NavigationBar";
 import { CatalogueLoader } from "pages/catalogue";
 import { fetchFavoriteInstrumentIdsList } from "shared/api/fetch-favorite-instrument-ids.list";
 import { getInstrumentsByCriteriaPaginated } from "shared/api/instruments-by-criteria-paginated";
+import { InstrumentDetail } from "generated/model";
 
 export function Catalogue() {
   useJwt();
   const loader = useLoaderData() as CatalogueLoader; // https://github.com/remix-run/react-router/discussions/9792
-  const [instruments, setInstruments] = useState<Instruments>(
+  const [instruments, setInstruments] = useState<InstrumentDetail[]>(
     loader.instrumentPage.content,
   );
   const [instrumentName, setInstrumentName] = useState<string | null>(null);

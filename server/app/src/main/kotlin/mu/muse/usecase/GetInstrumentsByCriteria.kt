@@ -1,8 +1,8 @@
 package mu.muse.usecase
 
+import mu.muse.domain.instrument.Instrument
 import mu.muse.usecase.access.instrument.InstrumentExtractor
-import mu.muse.usecase.dto.InstrumentDetails
 
 fun interface GetInstrumentsByCriteria {
-    fun execute(criteria: InstrumentExtractor.Criteria): Collection<InstrumentDetails>
+    fun execute(criteria: InstrumentExtractor.Criteria): List<Instrument>
 }
