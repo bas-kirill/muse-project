@@ -1,42 +1,41 @@
 import { ActionFunction } from "react-router-dom";
 import { parseForm } from "../model/parseForm";
-import axios from "axios";
-import { API_AUTH_BASIC_LOGIN, SERVER_URL } from "shared/config/backend";
+import { BasicLoginApi } from "generated/openapi";
 
 export interface LogInAction {
   errors: string[];
 }
 
+const basicLoginApi = new BasicLoginApi();
+
 export const action: ActionFunction = async ({
-  request,
-}): Promise<LogInAction> => {
+                                               request
+                                             }): Promise<LogInAction> => {
   const { login, password, errors } = parseForm(await request.formData());
 
   if (errors.length !== 0) {
     return {
-      errors: errors,
+      errors: errors
     };
   }
 
-  const { status } = await axios.post(
-    `${SERVER_URL}${API_AUTH_BASIC_LOGIN}`,
+  const response = await basicLoginApi.basicLogin(
     {
       username: login,
-      password: password,
+      password: password
     },
     {
       withCredentials: true,
-      validateStatus: () => true,
-    },
-  );
+      validateStatus: () => true
+    });
 
-  if (status !== 200) {
+  if (response.status !== 200) {
     return {
-      errors: ["Failed to authenticate"],
+      errors: ["Failed to authenticate"]
     };
   }
 
   return {
-    errors: [],
+    errors: []
   };
 };
