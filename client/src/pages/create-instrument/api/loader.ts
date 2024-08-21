@@ -25,7 +25,7 @@ export const loader: LoaderFunction =
   async (): Promise<CreateInstrumentLoader> => {
     const instrumentTypesRequest =
       await getInstrumentTypes.getInstrumentTypes();
-    let instrumentTypes = instrumentTypesRequest.data.content;
+    const instrumentTypes = instrumentTypesRequest.data.content;
 
     let materials: Materials = [];
     await axios
