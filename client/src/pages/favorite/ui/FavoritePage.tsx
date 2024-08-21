@@ -1,14 +1,13 @@
+import { useEffect, useState } from "react";
 import { Header } from "widgets/header";
 import { InstrumentCard } from "shared/ui/instrument-card/InstrumentCard";
-import { useEffect, useState } from "react";
-import { Instruments } from "domain/model/instrument";
 import { fetchFavoriteInstrumentIdsList } from "shared/api/fetch-favorite-instrument-ids.list";
 import { Filters } from "widgets/catalogue-filter";
 import { getInstrumentsByCriteria } from "shared/api/instruments-by-criteria.list";
+import { InstrumentDetail } from "generated/model";
 
 export const FavoritePage = () => {
-  // const loader = useLoaderData() as FavoriteLoader;
-  const [instruments, setInstruments] = useState<Instruments>([]);
+  const [instruments, setInstruments] = useState<InstrumentDetail[]>([]);
 
   useEffect(() => {
     const fetchFavoriteInstruments = async () => {
@@ -16,6 +15,7 @@ export const FavoritePage = () => {
       const filter = {
         instrumentIds: favoriteInstrumentIds,
       } as unknown as Filters;
+
       return await getInstrumentsByCriteria(filter);
     };
 

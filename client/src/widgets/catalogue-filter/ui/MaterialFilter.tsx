@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import axios from "axios";
-import { InstrumentTypes } from "domain/model/instrument-type";
 import { SERVER_URL } from "shared/config";
 import { API_INSTRUMENT_MATERIALS } from "shared/config/backend";
 import { Materials } from "domain/model/material";
@@ -15,7 +14,7 @@ export const MaterialFilter = ({ onValueChange }: Props) => {
 
   useEffect(() => {
     axios
-      .get<InstrumentTypes>(`${SERVER_URL}${API_INSTRUMENT_MATERIALS}`)
+      .get<Materials>(`${SERVER_URL}${API_INSTRUMENT_MATERIALS}`)
       .then((r) => {
         setMaterials(r.data);
       })

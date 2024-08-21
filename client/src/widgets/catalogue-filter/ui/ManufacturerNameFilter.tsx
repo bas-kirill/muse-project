@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { InstrumentTypes } from "domain/model/instrument-type";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import axios from "axios";
 import { SERVER_URL } from "shared/config";
@@ -16,7 +15,7 @@ export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
 
   useEffect(() => {
     axios
-      .get<InstrumentTypes>(`${SERVER_URL}${API_MANUFACTURERS}`)
+      .get<ManufacturerNames>(`${SERVER_URL}${API_MANUFACTURERS}`)
       .then((r) => {
         setManufacturerNames(r.data);
       })

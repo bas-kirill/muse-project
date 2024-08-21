@@ -14,7 +14,6 @@ import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
   CATALOGUE_DEFAULT_PAGE_SIZE,
 } from "shared/config/frontend";
-import { PageRequest } from "domain/model/page";
 import { SearchBarForm } from "./SearchBarForm";
 import { NavigationBar } from "./NavigationBar";
 import { CatalogueLoader } from "pages/catalogue";
@@ -49,12 +48,8 @@ export function Catalogue() {
     if (instrumentName !== "") {
       filters.instrumentName = instrumentName;
     }
-    const pageRequest = {
-      pageNumber: pageNumber,
-      pageSize: CATALOGUE_DEFAULT_PAGE_SIZE,
-    } as PageRequest;
 
-    getInstrumentsByCriteriaPaginated(filters, pageRequest).then((r) => {
+    getInstrumentsByCriteriaPaginated(filters, CATALOGUE_DEFAULT_PAGE_SIZE, pageNumber).then((r) => {
       setInstruments(r.content);
       totalPages.current = r.totalPages;
     });

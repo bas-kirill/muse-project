@@ -4,7 +4,6 @@ import { Filters } from "widgets/catalogue-filter";
 import { InstrumentTypeFilter } from "./InstrumentTypeFilter";
 import { Role } from "domain/model/role";
 import { CreateInstrumentCardButton } from "./CreateInstrumentCardButton";
-import { InstrumentTypes } from "domain/model/instrument-type";
 import { ManufacturerNameFilter } from "widgets/catalogue-filter/ui/ManufacturerNameFilter";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { DateFilter } from "widgets/catalogue-filter/ui/DateFilter";
@@ -15,6 +14,7 @@ import { ReleaseDate } from "domain/model/release-date";
 import { MaterialFilter } from "widgets/catalogue-filter/ui/MaterialFilter";
 import { Materials } from "domain/model/material";
 import Jwt from "domain/model/jwt";
+import { InstrumentType } from "generated/model/instrument-type";
 
 interface Props {
   onFilterChange: (filters: Filters) => void;
@@ -22,7 +22,7 @@ interface Props {
 
 export const CatalogueFilterWidget = (props: Props) => {
   const [instrumentTypes, setInstrumentTypes] =
-    useState<InstrumentTypes | null>(null);
+    useState<InstrumentType[] | null>(null);
   const [manufacturerNames, setManufacturerNames] =
     useState<ManufacturerNames | null>(null);
   const [manufactureDateFrom, setManufactureDateFrom] =

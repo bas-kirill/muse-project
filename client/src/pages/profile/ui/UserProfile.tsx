@@ -1,10 +1,10 @@
 import React from "react";
 import "./UserProfile.css";
-import { Profile } from "domain/";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
 import { useJwt } from "pages/login";
+import { Profile } from "domain/model/profile";
 
 export function UserProfile() {
   useJwt();

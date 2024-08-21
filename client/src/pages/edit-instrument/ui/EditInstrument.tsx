@@ -51,8 +51,8 @@ export const EditInstrument = () => {
               required
             >
               {loader.instrumentTypes.map((instrumentType) => (
-                <option key={instrumentType} value={instrumentType}>
-                  {instrumentType}
+                <option key={instrumentType.type} value={instrumentType.type}>
+                  {instrumentType.type}
                 </option>
               ))}
             </select>

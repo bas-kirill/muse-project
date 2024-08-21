@@ -1,21 +1,20 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { InstrumentTypes } from "domain/model/instrument-type";
-import { SERVER_URL } from "shared/config";
-import { API_INSTRUMENT_TYPES } from "shared/config/backend";
+import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
+import { InstrumentType } from "generated/model/instrument-type";
+
+const getInstrumentTypes = new GetInstrumentTypesApi();
 
 interface Props {
-  onValueChange: (i: InstrumentTypes) => void;
+  onValueChange: (i: InstrumentType[]) => void;
 }
 
-export const InstrumentTypeFilter = ({ onValueChange }: Props) => {
-  const [instrumentTypes, setInstrumentTypes] = useState<InstrumentTypes>([]);
+export const InstrumentTypeFilter = (props: Props) => {
+  const [instrumentTypes, setInstrumentTypes] = useState<InstrumentType[]>([]);
 
   useEffect(() => {
-    axios
-      .get<InstrumentTypes>(`${SERVER_URL}${API_INSTRUMENT_TYPES}`)
+    getInstrumentTypes.getInstrumentTypes()
       .then((r) => {
-        setInstrumentTypes(r.data);
+        setInstrumentTypes(r.data.content);
       })
       .catch((e) => {
         throw new Error(`Failed to extract instrument types: '${e}'`);
@@ -27,10 +26,10 @@ export const InstrumentTypeFilter = ({ onValueChange }: Props) => {
       ".instrument-type-filter-checkbox",
     );
 
-    onValueChange(
+    props.onValueChange(
       Array.from(elements)
-        .filter((inputTag) => inputTag.checked)
-        .map((inputTag) => inputTag.name),
+        .filter(inputTag => inputTag.checked)
+        .map(inputTag => ({ type: inputTag.name })),
     );
   }
 
@@ -38,15 +37,15 @@ export const InstrumentTypeFilter = ({ onValueChange }: Props) => {
     <div id="instrument-type-filter">
       <legend>Type:</legend>
       {instrumentTypes.map((instrumentType) => (
-        <div key={instrumentType}>
+        <div key={instrumentType.type}>
           <input
             type="checkbox"
-            name={instrumentType}
+            name={instrumentType.type}
             onChange={onChange}
             className="instrument-type-filter-checkbox"
             defaultChecked={true}
           />
-          <label htmlFor={instrumentType}>{instrumentType}</label>
+          <label htmlFor={instrumentType.type}>{instrumentType.type}</label>
         </div>
       ))}
     </div>

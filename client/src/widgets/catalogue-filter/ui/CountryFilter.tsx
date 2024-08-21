@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import axios from "axios";
-import { InstrumentTypes } from "domain/model/instrument-type";
 import { SERVER_URL } from "shared/config";
 import { API_COUNTRIES } from "shared/config/backend";
 import { Countries } from "domain/model/country";
@@ -15,7 +14,7 @@ export const CountryFilter = ({ onValueChange }: Props) => {
 
   useEffect(() => {
     axios
-      .get<InstrumentTypes>(`${SERVER_URL}${API_COUNTRIES}`)
+      .get<Countries>(`${SERVER_URL}${API_COUNTRIES}`)
       .then((r) => {
         setCountries(r.data);
       })
