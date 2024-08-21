@@ -14,13 +14,13 @@ import { Countries } from "domain/model/country";
 import { ReleaseDate } from "domain/model/release-date";
 import { MaterialFilter } from "widgets/catalogue-filter/ui/MaterialFilter";
 import { Materials } from "domain/model/material";
+import Jwt from "domain/model/jwt";
 
 interface Props {
   onFilterChange: (filters: Filters) => void;
-  role: Role | undefined;
 }
 
-export const CatalogueFilterWidget = ({ onFilterChange, role }: Props) => {
+export const CatalogueFilterWidget = (props: Props) => {
   const [instrumentTypes, setInstrumentTypes] =
     useState<InstrumentTypes | null>(null);
   const [manufacturerNames, setManufacturerNames] =
@@ -37,7 +37,7 @@ export const CatalogueFilterWidget = ({ onFilterChange, role }: Props) => {
   const [materials, setMaterials] = useState<Materials | null>(null);
 
   useEffect(() => {
-    onFilterChange({
+    props.onFilterChange({
       instrumentName: null,
       instrumentTypes: instrumentTypes,
       manufacturerNames: manufacturerNames,
@@ -92,7 +92,7 @@ export const CatalogueFilterWidget = ({ onFilterChange, role }: Props) => {
       </div>
       <CountryFilter onValueChange={setCountries} />
       <MaterialFilter onValueChange={setMaterials} />
-      {role === Role.Editor && <CreateInstrumentCardButton />}
+      {Jwt.extractFromCookie()?.toRole() === Role.Editor && <CreateInstrumentCardButton />}
     </div>
   );
 };

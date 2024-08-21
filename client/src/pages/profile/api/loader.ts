@@ -7,26 +7,17 @@ import { redirect } from "react-router-dom";
 import { LOGIN } from "shared/config/paths";
 
 export const loader = async (): Promise<Profile> => {
-  const jwt = Jwt.extractFromLocalStorage();
-
-  if (jwt === null) {
-    throw redirect(LOGIN);
-  }
-
-  if (jwt?.expired()) {
-    throw redirect(LOGIN);
-  }
-
   return axios
     .get<Profile>(`${SERVER_URL}${API_PROFILE}`, {
       headers: {
-        Authorization: `Bearer ${jwt.toStringValue()}`,
+        Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`,
       },
     })
     .then((response) => {
       return response.data;
     })
     .catch(() => {
+      // JWT was changed or expired
       throw redirect(LOGIN);
     });
 };

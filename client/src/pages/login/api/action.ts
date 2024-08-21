@@ -1,17 +1,10 @@
 import { ActionFunction } from "react-router-dom";
-import { Jwt } from "../../../domain";
 import { parseForm } from "../model/parseForm";
 import axios from "axios";
 import { API_AUTH_BASIC_LOGIN, SERVER_URL } from "shared/config/backend";
 
-interface BasicLoginRequestBody {
-  username: string;
-  password: string;
-}
-
 export interface LogInAction {
-  jwt: Jwt | null;
-  errors: string[] | null;
+  errors: string[];
 }
 
 export const action: ActionFunction = async ({
@@ -21,33 +14,29 @@ export const action: ActionFunction = async ({
 
   if (errors.length !== 0) {
     return {
-      jwt: null,
       errors: errors,
     };
   }
 
-  const basicLoginRequestBody: BasicLoginRequestBody = {
-    username: login,
-    password: password,
-  };
-
-  const { data, status } = await axios.post(
+  const { status } = await axios.post(
     `${SERVER_URL}${API_AUTH_BASIC_LOGIN}`,
-    basicLoginRequestBody,
-    { validateStatus: () => true }, // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
+    {
+      username: login,
+      password: password,
+    },
+    {
+      withCredentials: true,
+      validateStatus: () => true,
+    },
   );
 
-  if (status === 200) {
-    const jwt = Jwt.from(data.jwtToken);
-    Jwt.putToLocalStorage(jwt.toStringValue());
+  if (status !== 200) {
     return {
-      jwt: jwt,
-      errors: null,
+      errors: ["Failed to authenticate"],
     };
   }
 
   return {
-    jwt: null,
-    errors: [`Failed to authenticate: '${status}' code`],
+    errors: [],
   };
 };

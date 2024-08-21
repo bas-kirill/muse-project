@@ -19,31 +19,29 @@ export function Login() {
   return (
     <div id="login-page">
       <Header />
-      {actionData?.jwt && (
+      {actionData?.errors.length === 0 && (
         <div className="successfull-login">
-          ✅ Welcome, your role: {actionData?.jwt.toRole()}
+          ✅ Welcome!
         </div>
       )}
 
-      {!actionData?.jwt && (
-        <Form method="post">
-          <input type="text" name="login" placeholder={"Login"} />
-          <input type="text" name="password" placeholder={"Password"} />
-          <input type="submit" value="Log In" />
-          <input
-            type="button"
-            value="Registration"
-            onClick={handleRegisterRedirect}
-          />
-          {actionData?.errors && (
-            <div className="erroneous-login">
-              {actionData?.errors.map((error) => (
-                <div key={error}>{error}</div>
-              ))}
-            </div>
-          )}
-        </Form>
-      )}
+      <Form method="post">
+        <input type="text" name="login" placeholder={"Login"} />
+        <input type="password" name="password" placeholder={"Password"} />
+        <input type="submit" value="Log In" />
+        <input
+          type="button"
+          value="Registration"
+          onClick={handleRegisterRedirect}
+        />
+        {actionData?.errors.length > 0 && (
+          <div className="erroneous-login">
+            {actionData?.errors.map((error) => (
+              <div key={error}>{error}</div>
+            ))}
+          </div>
+        )}
+      </Form>
       <Footer />
     </div>
   );

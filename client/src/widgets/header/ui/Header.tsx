@@ -1,33 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef } from "react";
 import "./Header.css";
 import { Link } from "react-router-dom";
-import { Jwt } from "domain/";
 import { CATALOGUE, FAVORITE, HOME, LOGIN, PROFILE } from "shared/config/paths";
+import { Cookies } from "typescript-cookie";
+import { Jwt } from "domain/model/jwt";
+import { Role } from "domain/model/role";
 
 export function Header() {
-  const [authenticated, setAuthenticated] = useState(false);
-
-  useEffect(() => {
-    const jwtRaw = window.localStorage.getItem(
-      Jwt.WINDOW_LOCAL_STORAGE_JWT_KEY,
-    );
-    if (jwtRaw == null) {
-      setAuthenticated(false);
-      return;
-    }
-
-    setAuthenticated(true);
-  });
+  const jwt = useRef<string | undefined>(Cookies.get("jwt") as string | undefined)
 
   return (
     <header>
       <nav>
-        {!authenticated && (
+        {jwt.current === undefined && (
           <div>
             <Link to={LOGIN}>Log in</Link>
           </div>
         )}
-        {authenticated && (
+
+        {jwt.current !== undefined && Jwt.from(jwt.current).toRole() === Role.Editor && (
           <div>
             <Link to={PROFILE}>Profile</Link>
           </div>
