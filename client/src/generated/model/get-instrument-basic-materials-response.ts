@@ -12,22 +12,20 @@
  * Do not edit the class manually.
  */
 
-
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentBasicMaterial } from './instrument-basic-material';
+import type { InstrumentBasicMaterial } from "./instrument-basic-material";
 
 /**
- * 
+ *
  * @export
  * @interface GetInstrumentBasicMaterialsResponse
  */
 export interface GetInstrumentBasicMaterialsResponse {
-    /**
-     * 
-     * @type {Array<InstrumentBasicMaterial>}
-     * @memberof GetInstrumentBasicMaterialsResponse
-     */
-    'content': Array<InstrumentBasicMaterial>;
+  /**
+   *
+   * @type {Array<InstrumentBasicMaterial>}
+   * @memberof GetInstrumentBasicMaterialsResponse
+   */
+  content: Array<InstrumentBasicMaterial>;
 }
-

@@ -23,7 +23,7 @@ class CreateInstrumentUseCase(
         manufactureDate: ManufacturerDate,
         releaseDate: ReleaseDate,
         country: Country,
-        material: Material
+        materials: List<Material>,
     ) {
         val instrument = Instrument.create(
             id = idGenerator.generate(),
@@ -33,7 +33,7 @@ class CreateInstrumentUseCase(
             manufactureDate = manufactureDate,
             releaseDate = releaseDate,
             country = country,
-            materials = listOf(material),
+            materials = materials,
         )
         instrumentPersister.save(instrument)
     }
