@@ -5,6 +5,7 @@
 */
 package mu.muse.rest.api
 
+import mu.muse.rest.dto.ClientError
 import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
@@ -36,7 +37,7 @@ interface GetInstrumentByIdApi {
 
     @RequestMapping(
             method = [RequestMethod.GET],
-            value = ["/api/instrument/{instrumentId}"],
+            value = ["/instrument/{instrumentId}"],
             produces = ["application/json"]
     )
     fun getInstrumentById( @PathVariable("instrumentId") instrumentId: kotlin.String): ResponseEntity<InstrumentDetail>

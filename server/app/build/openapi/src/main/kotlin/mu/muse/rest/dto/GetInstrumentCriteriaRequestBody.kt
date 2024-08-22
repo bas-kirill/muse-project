@@ -27,29 +27,29 @@ import jakarta.validation.Valid
  */
 data class GetInstrumentCriteriaRequestBody(
 
-    @get:JsonProperty("instrumentName") val instrumentName: kotlin.String? = null,
+    @get:JsonProperty("instrument_name") val instrumentName: kotlin.String? = null,
 
-    @get:JsonProperty("instrumentTypes") val instrumentTypes: kotlin.collections.List<kotlin.String>? = null,
+    @get:JsonProperty("instrument_types") val instrumentTypes: kotlin.collections.List<kotlin.String>? = null,
 
-    @get:JsonProperty("manufacturerNames") val manufacturerNames: kotlin.collections.List<kotlin.String>? = null,
-
-    @field:Valid
-    @get:JsonProperty("manufactureDateFrom") val manufactureDateFrom: java.time.LocalDate? = null,
+    @get:JsonProperty("manufacturer_names") val manufacturerNames: kotlin.collections.List<kotlin.String>? = null,
 
     @field:Valid
-    @get:JsonProperty("manufactureDateTo") val manufactureDateTo: java.time.LocalDate? = null,
+    @get:JsonProperty("manufacture_date_from") val manufactureDateFrom: java.time.LocalDate? = null,
 
     @field:Valid
-    @get:JsonProperty("releaseDateFrom") val releaseDateFrom: java.time.LocalDate? = null,
+    @get:JsonProperty("manufacture_date_to") val manufactureDateTo: java.time.LocalDate? = null,
 
     @field:Valid
-    @get:JsonProperty("releaseDateTo") val releaseDateTo: java.time.LocalDate? = null,
+    @get:JsonProperty("release_date_from") val releaseDateFrom: java.time.LocalDate? = null,
+
+    @field:Valid
+    @get:JsonProperty("release_date_to") val releaseDateTo: java.time.LocalDate? = null,
 
     @get:JsonProperty("countries") val countries: kotlin.collections.List<kotlin.String>? = null,
 
     @get:JsonProperty("materials") val materials: kotlin.collections.List<kotlin.String>? = null,
 
-    @get:JsonProperty("instrumentIds") val instrumentIds: kotlin.collections.List<kotlin.String>? = null
+    @get:JsonProperty("instrument_ids") val instrumentIds: kotlin.collections.List<kotlin.String>? = null
     ) {
 
 }

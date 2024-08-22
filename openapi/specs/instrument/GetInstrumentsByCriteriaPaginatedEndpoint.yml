@@ -1,27 +1,45 @@
-openapi: "3.0.0"
+openapi: "3.1.0"
 
 info:
+  description: Get Instruments by Criteria Paginated
   version: 1.0.0
   title: Get Instruments by Criteria Paginated
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
 servers:
-  - url: http://localhost:8080/
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
+
+tags:
+  - name: getInstrumentsByCriteriaPaginated
+    description: Get Instruments by Criteria Paginated
 
 paths:
-  /api/instruments/paginated:
+  /instruments/paginated:
     post:
-      summary: Get Instruments by Criteria
+      description: Get Instruments by Criteria Paginated
+      summary: Get Instruments by Criteria Paginated
       operationId: getInstrumentsByCriteriaPaginated
       tags:
         - getInstrumentsByCriteriaPaginated
       parameters:
-        - name: pageSize
+        - name: page_size
           in: query
           description: Page Size
           required: true
           schema:
             type: integer
             format: int32
-        - name: pageNumber
+        - name: page_number
           in: query
           description: Page Number (1-based enumeration)
           required: true
@@ -41,6 +59,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetInstrumentByCriteriaPageResponse"
+        "400":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ClientError.yml#/components/schemas/ClientError"
         default:
           description: server error
           content:
@@ -52,29 +76,29 @@ components:
   schemas:
     GetInstrumentByCriteriaPageResponse:
       type: object
-      required: [ content, contentSize, pageSize, pageNumber, totalElements, totalPages ]
+      required: [ content_size, contentSize, page_size, page_number, total_elements, total_pages ]
       properties:
         content:
           type: array
           items:
             $ref: './components/InstrumentDetail.yml#/components/schemas/InstrumentDetail'
-        contentSize:
+        content_size:
           type: integer
           format: int32
           description: The number of items in the content.
-        pageSize:
+        page_size:
           type: integer
           format: int32
           description: The number of items per page.
-        pageNumber:
+        page_number:
           type: integer
           format: int32
           description: The current page number (0-based index).
-        totalElements:
+        total_elements:
           type: integer
           format: int32
           description: The total number of elements across all pages.
-        totalPages:
+        total_pages:
           type: integer
           format: int32
           description: The total number of pages.

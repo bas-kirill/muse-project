@@ -24,7 +24,7 @@ data class ProfileDetailsResponse(
 
     @get:JsonProperty("role", required = true) val role: kotlin.String,
 
-    @get:JsonProperty("fullName", required = true) val fullName: kotlin.String
+    @get:JsonProperty("full_name", required = true) val fullName: kotlin.String
     ) {
 
 }

@@ -1,0 +1,25 @@
+# https://opensource.zalando.com/restful-api-guidelines
+extends:
+  - https://raw.githubusercontent.com/baloise-incubator/spectral-ruleset/main/zalando.yml
+  - spectral:oas
+
+rules:
+  must-provide-api-identifiers: off
+  must-have-info-x-api-id: off
+  must-provide-api-audience: off
+  must-use-problem-json-for-errors: off
+  must-use-problem-json-as-default-response: off
+
+overrides:
+  - files:
+      - "specs/**/*.yml"
+    rules:
+      must-have-info-contact-url: off  # https://github.com/Redocly/redoc/issues/2572
+  - files:
+      - "specs/**/ServerError.yml"
+      - "specs/**/ClientError.yml"
+      - "specs/**/GetInstrumentByCriteriaRequestBody.yml"
+      - "specs/**/InstrumentDetail.yml"
+    rules:
+      oas3-unused-component: off
+      oas3-api-servers: off

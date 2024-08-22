@@ -1,3 +1,4 @@
+export * from "./client-error";
 export * from "./get-instrument-by-criteria-page-response";
 export * from "./get-instrument-criteria-request-body";
 export * from "./get-instrument-types-response";

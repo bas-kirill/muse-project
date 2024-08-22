@@ -1,22 +1,10 @@
 #!/bin/bash
 set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
-rootDir="$currentDir/../../"
+rootDir="$currentDir/../../../"
 
 (cd "$rootDir/openapi" && exec rm -rf ./openapi.yml)
-(cd "$rootDir/openapi" && exec redocly join \
-  ./specs/common/ServerError.yml \
-  ./specs/login/BasicLoginEndpointApi.yml \
-  ./specs/profile/GetProfileApi.yml \
-  ./specs/instrument/components/InstrumentDetail.yml \
-  ./specs/instrument/components/GetInstrumentByCriteriaRequestBody.yml \
-  ./specs/instrument/GetInstrumentsByCriteriaApi.yml \
-  ./specs/instrument/GetInstrumentsByCriteriaPaginatedApi.yml \
-  ./specs/instrument/GetInstrumentById.yml \
-  ./specs/instrument/GetInstrumentTypes.yml \
-  ./specs/registration/UserRegistration.yml \
-  -o ./openapi.yml
-)
+(cd "$rootDir/openapi" && exec redocly join ./specs/**/*.yml -o ./openapi.yml)
 (cd "$rootDir/client" && rm -rf ./src/generated)
 (cd "$rootDir/client" &&
   mkdir -p ./src/generated &&

@@ -11,6 +11,14 @@ env:
   SONAR_PROJECT_KEY: "bas-kirill_muse-project_c40bc999-8826-433b-bb84-8871688b1ab1"
 
 jobs:
+  openapi-linter:
+    name: "[OpenAPI] Linter"
+    runs-on: kiryuxa-1
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run Spectral Linter
+        run: ./tools/scripts/openapi/runLinter.sh
+
   credentials-check:
     name: "[PR] GitGuardian scan"
     if: false # or in another case, there will be "Error: Server is not responding as expected."

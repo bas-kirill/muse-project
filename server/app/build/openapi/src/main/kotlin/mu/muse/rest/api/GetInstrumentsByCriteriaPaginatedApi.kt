@@ -5,6 +5,7 @@
 */
 package mu.muse.rest.api
 
+import mu.muse.rest.dto.ClientError
 import mu.muse.rest.dto.GetInstrumentByCriteriaPageResponse
 import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
 import mu.muse.rest.dto.ServerError
@@ -37,9 +38,9 @@ interface GetInstrumentsByCriteriaPaginatedApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/api/instruments/paginated"],
+            value = ["/instruments/paginated"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )
-    fun getInstrumentsByCriteriaPaginated(@NotNull  @Valid @RequestParam(value = "pageSize", required = true) pageSize: kotlin.Int,@NotNull  @Valid @RequestParam(value = "pageNumber", required = true) pageNumber: kotlin.Int, @Valid @RequestBody getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody): ResponseEntity<GetInstrumentByCriteriaPageResponse>
+    fun getInstrumentsByCriteriaPaginated(@NotNull  @Valid @RequestParam(value = "page_size", required = true) pageSize: kotlin.Int,@NotNull  @Valid @RequestParam(value = "page_number", required = true) pageNumber: kotlin.Int, @Valid @RequestBody getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody): ResponseEntity<GetInstrumentByCriteriaPageResponse>
 }
