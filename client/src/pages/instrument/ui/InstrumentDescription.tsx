@@ -21,13 +21,13 @@ export const InstrumentDescription = (props: Props) => {
         <b>Type</b>: {props.instrument.type}
         <br />
         <b>Manufacturer</b>: {props.instrument.manufacturer} <br />
-        <b>Manufacturer Date</b>: {props.instrument.manufacturerDate} <br />
-        <b>Release Date</b>: {props.instrument.releaseDate} <br />
+        <b>Manufacturer Date</b>: {props.instrument.manufacturer_date} <br />
+        <b>Release Date</b>: {props.instrument.release_date} <br />
         <b>Country</b>: {props.instrument.country}
         <br />
         <b>Basic Materials</b>:
         <ul>
-          {props.instrument.basicMaterials.map((basicMaterial) => (
+          {props.instrument.basic_materials.map((basicMaterial) => (
             <li key={basicMaterial}>{basicMaterial}</li>
           ))}
         </ul>

@@ -1,9 +1,9 @@
 openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
 
 info:
-  description: Get Instrument Types
+  description: Get Instrument Basic Materials
   version: 1.0.0
-  title: Get Instrument Types
+  title: Get Instrument Basic Materials
   contact:
     name: Kirill B
     email: baskirill.an@gmail.com
@@ -20,24 +20,24 @@ servers:
         default: "api"
 
 tags:
-  - name: getInstrumentTypes
-    description: Get Instrument Types
+  - name: getInstrumentBasicMaterials
+    description: Get Instrument Basic Materials
 
 paths:
-  /instrument/types:
+  /instrument/materials:
     get:
-      description: Get Instrument Types
-      summary: Get Instrument Types
-      operationId: getInstrumentTypes
+      description: Get Instrument Basic Materials
+      summary: Get Instrument Basic Materials
+      operationId: getInstrumentBasicMaterials
       tags:
-        - getInstrumentTypes
+        - getInstrumentBasicMaterials
       responses:
         "200":
-          description: Instrument Types
+          description: Instrument Basic Materials
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetInstrumentTypesResponse"
+                $ref: "#/components/schemas/GetInstrumentBasicMaterialsResponse"
         "400":
           description: Client Error
           content:
@@ -53,19 +53,18 @@ paths:
 
 components:
   schemas:
-    InstrumentType:
+    InstrumentBasicMaterial:
       type: object
-      required: [type]
+      required: [ basic_material ]
       properties:
-        instrument_type:
+        basic_material:
           type: string
 
-    GetInstrumentTypesResponse:
+    GetInstrumentBasicMaterialsResponse:
       type: object
       required: [content]
       properties:
         content:
           type: array
           items:
-            $ref: "#/components/schemas/InstrumentType"
-
+            $ref: "#/components/schemas/InstrumentBasicMaterial"

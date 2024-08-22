@@ -3,9 +3,9 @@ import { ManufacturerName } from "domain/model/manufacturer-name";
 import { ManufactureDate } from "domain/model/manufacture-date";
 import { ReleaseDate } from "domain/model/release-date";
 import { Country } from "domain/model/country";
-import { Materials } from "domain/model/material";
 import { InstrumentId } from "domain/model/instrument-id";
 import { InstrumentType } from "generated/model/instrument-type";
+import { InstrumentBasicMaterial } from "generated/model";
 
 export const parseInstrumentDetails = (data: FormData) => {
   const errors = [];
@@ -75,7 +75,13 @@ export const parseInstrumentDetails = (data: FormData) => {
   ) {
     errors.push("Type country");
   }
-  const materials = data.getAll("material") as Materials;
+  const materialsRaw = data.getAll("material") as string[];
+  const materials: InstrumentBasicMaterial[] = materialsRaw.map(
+    (materialRaw) =>
+      ({
+        basic_material: materialRaw,
+      }) as InstrumentBasicMaterial,
+  );
 
   return {
     instrumentId,
@@ -95,7 +101,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     manufactureDate: ManufactureDate;
     releaseDate: ReleaseDate;
     country: Country;
-    materials: Materials;
+    materials: InstrumentBasicMaterial[];
     errors: string[];
   };
 };

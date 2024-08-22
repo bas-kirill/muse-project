@@ -14,18 +14,18 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentType } from "./instrument-type";
+import type { InstrumentBasicMaterial } from "./instrument-basic-material";
 
 /**
  *
  * @export
- * @interface GetInstrumentTypesResponse
+ * @interface GetInstrumentBasicMaterialsResponse
  */
-export interface GetInstrumentTypesResponse {
+export interface GetInstrumentBasicMaterialsResponse {
   /**
    *
-   * @type {Array<InstrumentType>}
-   * @memberof GetInstrumentTypesResponse
+   * @type {Array<InstrumentBasicMaterial>}
+   * @memberof GetInstrumentBasicMaterialsResponse
    */
-  content: Array<InstrumentType>;
+  content: Array<InstrumentBasicMaterial>;
 }

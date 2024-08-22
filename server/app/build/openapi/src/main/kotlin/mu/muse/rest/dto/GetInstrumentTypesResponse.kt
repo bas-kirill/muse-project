@@ -2,6 +2,7 @@ package mu.muse.rest.dto
 
 import java.util.Objects
 import com.fasterxml.jackson.annotation.JsonProperty
+import mu.muse.rest.dto.InstrumentType
 import jakarta.validation.constraints.DecimalMax
 import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.Email
@@ -18,7 +19,8 @@ import jakarta.validation.Valid
  */
 data class GetInstrumentTypesResponse(
 
-    @get:JsonProperty("content") val content: kotlin.collections.List<kotlin.String>? = null
+    @field:Valid
+    @get:JsonProperty("content", required = true) val content: kotlin.collections.List<InstrumentType>
     ) {
 
 }

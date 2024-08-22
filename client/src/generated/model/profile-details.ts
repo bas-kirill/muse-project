@@ -15,25 +15,25 @@
 /**
  *
  * @export
- * @interface ProfileDetailsResponse
+ * @interface ProfileDetails
  */
-export interface ProfileDetailsResponse {
+export interface ProfileDetails {
   /**
    *
    * @type {string}
-   * @memberof ProfileDetailsResponse
+   * @memberof ProfileDetails
    */
   username: string;
   /**
    *
    * @type {string}
-   * @memberof ProfileDetailsResponse
+   * @memberof ProfileDetails
    */
   role: string;
   /**
    *
    * @type {string}
-   * @memberof ProfileDetailsResponse
+   * @memberof ProfileDetails
    */
   full_name: string;
 }
