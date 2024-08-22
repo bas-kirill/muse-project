@@ -12,55 +12,52 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface CreateInstrumentRequestBody
  */
 export interface CreateInstrumentRequestBody {
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateInstrumentRequestBody
-     */
-    'instrument_name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateInstrumentRequestBody
-     */
-    'instrument_type': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateInstrumentRequestBody
-     */
-    'manufacturer_name': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateInstrumentRequestBody
-     */
-    'manufacturer_date': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateInstrumentRequestBody
-     */
-    'release_date': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof CreateInstrumentRequestBody
-     */
-    'country': string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof CreateInstrumentRequestBody
-     */
-    'materials': Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateInstrumentRequestBody
+   */
+  instrument_name: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateInstrumentRequestBody
+   */
+  instrument_type: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateInstrumentRequestBody
+   */
+  manufacturer_name: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateInstrumentRequestBody
+   */
+  manufacturer_date: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateInstrumentRequestBody
+   */
+  release_date: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CreateInstrumentRequestBody
+   */
+  country: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof CreateInstrumentRequestBody
+   */
+  materials: Array<string>;
 }
-

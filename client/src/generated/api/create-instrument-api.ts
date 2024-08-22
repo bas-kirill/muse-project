@@ -12,107 +12,172 @@
  * Do not edit the class manually.
  */
 
-
-import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
-import globalAxios from 'axios';
+import type { Configuration } from "../configuration";
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from "axios";
+import globalAxios from "axios";
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import {
+  DUMMY_BASE_URL,
+  assertParamExists,
+  setApiKeyToObject,
+  setBasicAuthToObject,
+  setBearerAuthToObject,
+  setOAuthToObject,
+  setSearchParams,
+  serializeDataIfNeeded,
+  toPathString,
+  createRequestFunction,
+} from "../common";
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+import {
+  BASE_PATH,
+  COLLECTION_FORMATS,
+  type RequestArgs,
+  BaseAPI,
+  RequiredError,
+  operationServerMap,
+} from "../base";
 // @ts-ignore
-import type { ClientError } from '../model';
+import type { ClientError } from "../model";
 // @ts-ignore
-import type { CreateInstrumentRequestBody } from '../model';
+import type { CreateInstrumentRequestBody } from "../model";
 // @ts-ignore
-import type { ServerError } from '../model';
+import type { ServerError } from "../model";
 /**
  * CreateInstrumentApi - axios parameter creator
  * @export
  */
-export const CreateInstrumentApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Create Instrument
-         * @summary Create Instrument
-         * @param {CreateInstrumentRequestBody} createInstrumentRequestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createInstrument: async (createInstrumentRequestBody: CreateInstrumentRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createInstrumentRequestBody' is not null or undefined
-            assertParamExists('createInstrument', 'createInstrumentRequestBody', createInstrumentRequestBody)
-            const localVarPath = `/instrument/create`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+export const CreateInstrumentApiAxiosParamCreator = function (
+  configuration?: Configuration,
+) {
+  return {
+    /**
+     * Create Instrument
+     * @summary Create Instrument
+     * @param {CreateInstrumentRequestBody} createInstrumentRequestBody
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createInstrument: async (
+      createInstrumentRequestBody: CreateInstrumentRequestBody,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'createInstrumentRequestBody' is not null or undefined
+      assertParamExists(
+        "createInstrument",
+        "createInstrumentRequestBody",
+        createInstrumentRequestBody,
+      );
+      const localVarPath = `/instrument/create`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
+      localVarHeaderParameter["Content-Type"] = "application/json";
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        createInstrumentRequestBody,
+        localVarRequestOptions,
+        configuration,
+      );
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createInstrumentRequestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
 };
 
 /**
  * CreateInstrumentApi - functional programming interface
  * @export
  */
-export const CreateInstrumentApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = CreateInstrumentApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Create Instrument
-         * @summary Create Instrument
-         * @param {CreateInstrumentRequestBody} createInstrumentRequestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async createInstrument(createInstrumentRequestBody: CreateInstrumentRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.createInstrument(createInstrumentRequestBody, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CreateInstrumentApi.createInstrument']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
+export const CreateInstrumentApiFp = function (configuration?: Configuration) {
+  const localVarAxiosParamCreator =
+    CreateInstrumentApiAxiosParamCreator(configuration);
+  return {
+    /**
+     * Create Instrument
+     * @summary Create Instrument
+     * @param {CreateInstrumentRequestBody} createInstrumentRequestBody
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async createInstrument(
+      createInstrumentRequestBody: CreateInstrumentRequestBody,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.createInstrument(
+          createInstrumentRequestBody,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["CreateInstrumentApi.createInstrument"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+  };
 };
 
 /**
  * CreateInstrumentApi - factory interface
  * @export
  */
-export const CreateInstrumentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = CreateInstrumentApiFp(configuration)
-    return {
-        /**
-         * Create Instrument
-         * @summary Create Instrument
-         * @param {CreateInstrumentRequestBody} createInstrumentRequestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        createInstrument(createInstrumentRequestBody: CreateInstrumentRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.createInstrument(createInstrumentRequestBody, options).then((request) => request(axios, basePath));
-        },
-    };
+export const CreateInstrumentApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance,
+) {
+  const localVarFp = CreateInstrumentApiFp(configuration);
+  return {
+    /**
+     * Create Instrument
+     * @summary Create Instrument
+     * @param {CreateInstrumentRequestBody} createInstrumentRequestBody
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    createInstrument(
+      createInstrumentRequestBody: CreateInstrumentRequestBody,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<object> {
+      return localVarFp
+        .createInstrument(createInstrumentRequestBody, options)
+        .then((request) => request(axios, basePath));
+    },
+  };
 };
 
 /**
@@ -122,16 +187,20 @@ export const CreateInstrumentApiFactory = function (configuration?: Configuratio
  * @extends {BaseAPI}
  */
 export class CreateInstrumentApi extends BaseAPI {
-    /**
-     * Create Instrument
-     * @summary Create Instrument
-     * @param {CreateInstrumentRequestBody} createInstrumentRequestBody 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof CreateInstrumentApi
-     */
-    public createInstrument(createInstrumentRequestBody: CreateInstrumentRequestBody, options?: RawAxiosRequestConfig) {
-        return CreateInstrumentApiFp(this.configuration).createInstrument(createInstrumentRequestBody, options).then((request) => request(this.axios, this.basePath));
-    }
+  /**
+   * Create Instrument
+   * @summary Create Instrument
+   * @param {CreateInstrumentRequestBody} createInstrumentRequestBody
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CreateInstrumentApi
+   */
+  public createInstrument(
+    createInstrumentRequestBody: CreateInstrumentRequestBody,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return CreateInstrumentApiFp(this.configuration)
+      .createInstrument(createInstrumentRequestBody, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
 }
-
