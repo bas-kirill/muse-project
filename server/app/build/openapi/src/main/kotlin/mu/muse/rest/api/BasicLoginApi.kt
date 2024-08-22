@@ -37,7 +37,7 @@ interface BasicLoginApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/api/auth/login"],
+            value = ["/auth/login"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )

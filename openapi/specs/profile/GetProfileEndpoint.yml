@@ -1,12 +1,11 @@
-openapi: "3.0.0"
+openapi: "3.1.0"
 
 info:
   description: Get Profile
   version: 1.0.0
   title: Get Profile
   contact:
-    name: Kirill B.
-    url: kiryuxa.com
+    name: Kirill B
     email: baskirill.an@gmail.com
 servers:
   - url: http://localhost:{port}/{basePath}
@@ -21,8 +20,8 @@ servers:
         default: "api"
 
 tags:
-  - name: profile
-    description: Everything about user profile
+  - name: getUserProfile
+    description: Get User Profile
 
 paths:
   /profile:
@@ -31,7 +30,7 @@ paths:
       summary: Get Profile Info
       operationId: getProfile
       tags:
-        - profile
+        - getUserProfile
       responses:
         "200":
           description: Profile Details

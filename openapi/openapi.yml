@@ -1,28 +1,186 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
-  title: Server Error
+  description: Client Error
   version: 1.0.0
+  title: Client Error
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
 servers:
-  - url: http://localhost:8080/
-  - url: http://localhost:8080
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: '8080'
+        enum:
+          - '8080'
+          - '8000'
+      basePath:
+        default: api
 tags:
-  - name: basicLogin
-    x-displayName: basicLogin
-  - name: profile
-    x-displayName: profile
-  - name: getInstrumentsByCriteria
-    x-displayName: getInstrumentsByCriteria
-  - name: getInstrumentsByCriteriaPaginated
-    x-displayName: getInstrumentsByCriteriaPaginated
   - name: getInstrumentById
+    description: Get Instrument by ID
     x-displayName: getInstrumentById
   - name: getInstrumentTypes
+    description: Get Instrument Types
     x-displayName: getInstrumentTypes
+  - name: getInstrumentsByCriteria
+    description: Get Instruments by Criteria
+    x-displayName: getInstrumentsByCriteria
+  - name: getInstrumentsByCriteriaPaginated
+    description: Get Instruments by Criteria Paginated
+    x-displayName: getInstrumentsByCriteriaPaginated
+  - name: basicLogin
+    description: Everything about user
+    x-displayName: basicLogin
+  - name: getUserProfile
+    description: Get User Profile
+    x-displayName: getUserProfile
   - name: userRegistration
+    description: User Registration
     x-displayName: userRegistration
 paths:
-  /api/auth/login:
+  /instrument/{instrumentId}:
+    get:
+      description: Get Instrument by ID
+      summary: Get Instrument by ID
+      operationId: getInstrumentById
+      tags:
+        - getInstrumentById
+      parameters:
+        - name: instrumentId
+          in: path
+          required: true
+          description: Instrument ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Instrument Detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InstrumentDetail'
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /instrument/types:
+    get:
+      description: Get Instrument Types
+      summary: Get Instrument Types
+      operationId: getInstrumentTypes
+      tags:
+        - getInstrumentTypes
+      responses:
+        '200':
+          description: Instrument Types
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstrumentTypesResponse'
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /instruments:
     post:
+      description: Get Instruments by Criteria
+      summary: Get Instruments by Criteria
+      operationId: getInstrumentsByCriteria
+      tags:
+        - getInstrumentsByCriteria
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstrumentCriteriaRequestBody'
+        required: true
+      responses:
+        '200':
+          description: Instrument Details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstrumentsByCriteriaResponse'
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /instruments/paginated:
+    post:
+      description: Get Instruments by Criteria Paginated
+      summary: Get Instruments by Criteria Paginated
+      operationId: getInstrumentsByCriteriaPaginated
+      tags:
+        - getInstrumentsByCriteriaPaginated
+      parameters:
+        - name: page_size
+          in: query
+          description: Page Size
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: page_number
+          in: query
+          description: Page Number (1-based enumeration)
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetInstrumentCriteriaRequestBody'
+        required: true
+      responses:
+        '200':
+          description: Instrument Details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstrumentByCriteriaPageResponse'
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /auth/login:
+    post:
+      description: Basic Authentication
       summary: Basic Login
       operationId: basicLogin
       tags:
@@ -46,12 +204,13 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /api/profile:
+  /profile:
     get:
+      description: Get User Profile
       summary: Get Profile Info
       operationId: getProfile
       tags:
-        - profile
+        - getUserProfile
       responses:
         '200':
           description: Profile Details
@@ -65,118 +224,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /api/instruments:
+  /registration:
     post:
-      summary: Get Instruments by Criteria
-      operationId: getInstrumentsByCriteria
-      tags:
-        - getInstrumentsByCriteria
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GetInstrumentCriteriaRequestBody'
-        required: true
-      responses:
-        '200':
-          description: Instrument Details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetInstrumentsByCriteriaResponse'
-        default:
-          description: server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /api/instruments/paginated:
-    post:
-      summary: Get Instruments by Criteria
-      operationId: getInstrumentsByCriteriaPaginated
-      tags:
-        - getInstrumentsByCriteriaPaginated
-      parameters:
-        - name: pageSize
-          in: query
-          description: Page Size
-          required: true
-          schema:
-            type: integer
-            format: int32
-        - name: pageNumber
-          in: query
-          description: Page Number (1-based enumeration)
-          required: true
-          schema:
-            type: integer
-            format: int32
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GetInstrumentCriteriaRequestBody'
-        required: true
-      responses:
-        '200':
-          description: Instrument Details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetInstrumentByCriteriaPageResponse'
-        default:
-          description: server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /api/instrument/{instrumentId}:
-    get:
-      summary: Get Instrument by ID
-      operationId: getInstrumentById
-      tags:
-        - getInstrumentById
-      parameters:
-        - name: instrumentId
-          in: path
-          required: true
-          description: Instrument ID
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Instrument Detail
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/InstrumentDetail'
-        '500':
-          description: server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /api/instrument/types:
-    get:
-      summary: Get Instrument Types
-      operationId: getInstrumentTypes
-      tags:
-        - getInstrumentTypes
-      responses:
-        '200':
-          description: Instrument Types
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GetInstrumentTypesResponse'
-        '500':
-          description: Server Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ServerError'
-  /api/registration:
-    post:
+      description: Register User
       summary: User Registration
       operationId: userRegistration
       tags:
@@ -202,16 +252,154 @@ paths:
                 $ref: '#/components/schemas/ServerError'
 components:
   schemas:
+    ClientError:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Error description
+      example:
+        message: Client Error
     ServerError:
       type: object
+      required:
+        - message
       properties:
         message:
           type: string
           description: A description of the error.
-      required:
-        - message
       example:
         message: Internal Server Error. Please try again later.
+    InstrumentDetail:
+      type: object
+      required:
+        - id
+        - name
+        - type
+        - manufacturer
+        - manufacturerDate
+        - releaseDate
+        - country
+        - basicMaterials
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+        manufacturer:
+          type: string
+        manufacturer_date:
+          type: string
+        release_date:
+          type: string
+        country:
+          type: string
+        basic_materials:
+          type: array
+          items:
+            type: string
+    GetInstrumentTypesResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: string
+    GetInstrumentsByCriteriaResponse:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstrumentDetail'
+    GetInstrumentCriteriaRequestBody:
+      type: object
+      properties:
+        instrument_name:
+          type: string
+          example: Fender Stratocasto
+        instrument_types:
+          type: array
+          items:
+            type: string
+            example: KEYBOARD
+        manufacturer_names:
+          type: array
+          items:
+            type: string
+            example: Yamaha
+        manufacture_date_from:
+          type: string
+          format: date
+          example: '1998-01-01'
+        manufacture_date_to:
+          type: string
+          format: date
+          example: '1998-01-01'
+        release_date_from:
+          type: string
+          format: date
+          example: '1998-01-01'
+        release_date_to:
+          type: string
+          format: date
+          example: '1998-01-01'
+        countries:
+          type: array
+          items:
+            type: string
+            example: CYPRUS
+        materials:
+          type: array
+          items:
+            type: string
+            example: WOOD
+        instrument_ids:
+          type: array
+          items:
+            type: string
+            example: '1'
+    GetInstrumentByCriteriaPageResponse:
+      type: object
+      required:
+        - content_size
+        - contentSize
+        - page_size
+        - page_number
+        - total_elements
+        - total_pages
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstrumentDetail'
+        content_size:
+          type: integer
+          format: int32
+          description: The number of items in the content.
+        page_size:
+          type: integer
+          format: int32
+          description: The number of items per page.
+        page_number:
+          type: integer
+          format: int32
+          description: The current page number (0-based index).
+        total_elements:
+          type: integer
+          format: int32
+          description: The total number of elements across all pages.
+        total_pages:
+          type: integer
+          format: int32
+          description: The total number of pages.
     UsernameAndPasswordRequestBody:
       type: object
       required:
@@ -234,164 +422,46 @@ components:
       required:
         - username
         - role
-        - fullName
+        - full_name
       properties:
         username:
           type: string
         role:
           type: string
-        fullName:
+        full_name:
           type: string
-    InstrumentDetail:
-      type: object
-      required:
-        - id
-        - name
-        - type
-        - manufacturer
-        - manufacturerDate
-        - releaseDate
-        - country
-        - basicMaterials
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        type:
-          type: string
-        manufacturer:
-          type: string
-        manufacturerDate:
-          type: string
-        releaseDate:
-          type: string
-        country:
-          type: string
-        basicMaterials:
-          type: array
-          items:
-            type: string
-    GetInstrumentCriteriaRequestBody:
-      type: object
-      properties:
-        instrumentName:
-          type: string
-        instrumentTypes:
-          type: array
-          items:
-            type: string
-        manufacturerNames:
-          type: array
-          items:
-            type: string
-        manufactureDateFrom:
-          type: string
-          format: date
-        manufactureDateTo:
-          type: string
-          format: date
-        releaseDateFrom:
-          type: string
-          format: date
-        releaseDateTo:
-          type: string
-          format: date
-        countries:
-          type: array
-          items:
-            type: string
-        materials:
-          type: array
-          items:
-            type: string
-        instrumentIds:
-          type: array
-          items:
-            type: string
-    GetInstrumentsByCriteriaResponse:
-      type: object
-      required:
-        - content
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstrumentDetail'
-    GetInstrumentByCriteriaPageResponse:
-      type: object
-      required:
-        - content
-        - contentSize
-        - pageSize
-        - pageNumber
-        - totalElements
-        - totalPages
-      properties:
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/InstrumentDetail'
-        contentSize:
-          type: integer
-          format: int32
-          description: The number of items in the content.
-        pageSize:
-          type: integer
-          format: int32
-          description: The number of items per page.
-        pageNumber:
-          type: integer
-          format: int32
-          description: The current page number (0-based index).
-        totalElements:
-          type: integer
-          format: int32
-          description: The total number of elements across all pages.
-        totalPages:
-          type: integer
-          format: int32
-          description: The total number of pages.
-    GetInstrumentTypesResponse:
-      type: object
-      properties:
-        content:
-          type: array
-          items:
-            type: string
     RegistrationRequest:
       type: object
       required:
-        - fullName
+        - full_name
         - login
         - password
       properties:
-        fullName:
+        full_name:
           type: string
         login:
           type: string
         password:
           type: string
 x-tagGroups:
-  - name: Basic Login
+  - name: Get Instrument by ID
     tags:
-      - basicLogin
-  - name: Get Profile
+      - getInstrumentById
+  - name: Get Instrument Types
     tags:
-      - profile
+      - getInstrumentTypes
   - name: Get Instruments by Criteria
     tags:
       - getInstrumentsByCriteria
   - name: Get Instruments by Criteria Paginated
     tags:
       - getInstrumentsByCriteriaPaginated
-  - name: Get Instrument By ID
+  - name: Basic Login
     tags:
-      - getInstrumentById
-  - name: Get Instrument Types
+      - basicLogin
+  - name: Get Profile
     tags:
-      - getInstrumentTypes
+      - getUserProfile
   - name: Register User
     tags:
       - userRegistration

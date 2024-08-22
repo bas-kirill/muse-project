@@ -1,12 +1,11 @@
-openapi: "3.0.0"
+openapi: "3.1.0"
 
 info:
   description: Get Instrument Types
   version: 1.0.0
   title: Get Instrument Types
   contact:
-    name: Kirill B.
-    url: kiryuxa.com
+    name: Kirill B
     email: baskirill.an@gmail.com
 servers:
   - url: http://localhost:{port}/{basePath}
@@ -21,8 +20,8 @@ servers:
         default: "api"
 
 tags:
-  - name: instrument
-    description: Everything about instrument
+  - name: getInstrumentTypes
+    description: Get Instrument Types
 
 paths:
   /instrument/types:
@@ -31,7 +30,7 @@ paths:
       summary: Get Instrument Types
       operationId: getInstrumentTypes
       tags:
-        - instrument
+        - getInstrumentTypes
       responses:
         "200":
           description: Instrument Types

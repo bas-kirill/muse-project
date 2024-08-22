@@ -15,27 +15,27 @@ import jakarta.validation.Valid
 
 /**
  * 
- * @param content 
  * @param contentSize The number of items in the content.
  * @param pageSize The number of items per page.
  * @param pageNumber The current page number (0-based index).
  * @param totalElements The total number of elements across all pages.
  * @param totalPages The total number of pages.
+ * @param content 
  */
 data class GetInstrumentByCriteriaPageResponse(
 
+    @get:JsonProperty("content_size", required = true) val contentSize: kotlin.Int,
+
+    @get:JsonProperty("page_size", required = true) val pageSize: kotlin.Int,
+
+    @get:JsonProperty("page_number", required = true) val pageNumber: kotlin.Int,
+
+    @get:JsonProperty("total_elements", required = true) val totalElements: kotlin.Int,
+
+    @get:JsonProperty("total_pages", required = true) val totalPages: kotlin.Int,
+
     @field:Valid
-    @get:JsonProperty("content", required = true) val content: kotlin.collections.List<InstrumentDetail>,
-
-    @get:JsonProperty("contentSize", required = true) val contentSize: kotlin.Int,
-
-    @get:JsonProperty("pageSize", required = true) val pageSize: kotlin.Int,
-
-    @get:JsonProperty("pageNumber", required = true) val pageNumber: kotlin.Int,
-
-    @get:JsonProperty("totalElements", required = true) val totalElements: kotlin.Int,
-
-    @get:JsonProperty("totalPages", required = true) val totalPages: kotlin.Int
+    @get:JsonProperty("content") val content: kotlin.collections.List<InstrumentDetail>? = null
     ) {
 
 }

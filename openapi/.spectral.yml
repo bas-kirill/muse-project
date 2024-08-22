@@ -12,9 +12,14 @@ rules:
 
 overrides:
   - files:
+      - "specs/**/*.yml"
+    rules:
+      must-have-info-contact-url: off  # https://github.com/Redocly/redoc/issues/2572
+  - files:
       - "specs/**/ServerError.yml"
       - "specs/**/ClientError.yml"
       - "specs/**/GetInstrumentByCriteriaRequestBody.yml"
       - "specs/**/InstrumentDetail.yml"
     rules:
       oas3-unused-component: off
+      oas3-api-servers: off

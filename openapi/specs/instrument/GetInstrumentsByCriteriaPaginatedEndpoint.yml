@@ -1,12 +1,11 @@
-openapi: "3.0.0"
+openapi: "3.1.0"
 
 info:
   description: Get Instruments by Criteria Paginated
   version: 1.0.0
   title: Get Instruments by Criteria Paginated
   contact:
-    name: Kirill B.
-    url: kiryuxa.com
+    name: Kirill B
     email: baskirill.an@gmail.com
 servers:
   - url: http://localhost:{port}/{basePath}
@@ -21,17 +20,17 @@ servers:
         default: "api"
 
 tags:
-  - name: instrument
-    description: Everything about instrument
+  - name: getInstrumentsByCriteriaPaginated
+    description: Get Instruments by Criteria Paginated
 
 paths:
   /instruments/paginated:
     post:
-      description: Get Instruments by Criteria
-      summary: Get Instruments by Criteria
+      description: Get Instruments by Criteria Paginated
+      summary: Get Instruments by Criteria Paginated
       operationId: getInstrumentsByCriteriaPaginated
       tags:
-        - instrument
+        - getInstrumentsByCriteriaPaginated
       parameters:
         - name: page_size
           in: query

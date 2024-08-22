@@ -5,6 +5,7 @@
 */
 package mu.muse.rest.api
 
+import mu.muse.rest.dto.ClientError
 import mu.muse.rest.dto.GetInstrumentTypesResponse
 import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
@@ -36,7 +37,7 @@ interface GetInstrumentTypesApi {
 
     @RequestMapping(
             method = [RequestMethod.GET],
-            value = ["/api/instrument/types"],
+            value = ["/instrument/types"],
             produces = ["application/json"]
     )
     fun getInstrumentTypes(): ResponseEntity<GetInstrumentTypesResponse>

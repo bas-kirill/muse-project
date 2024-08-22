@@ -5,6 +5,7 @@
 */
 package mu.muse.rest.api
 
+import mu.muse.rest.dto.ClientError
 import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
 import mu.muse.rest.dto.GetInstrumentsByCriteriaResponse
 import mu.muse.rest.dto.ServerError
@@ -37,7 +38,7 @@ interface GetInstrumentsByCriteriaApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/api/instruments"],
+            value = ["/instruments"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )
