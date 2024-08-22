@@ -2,10 +2,9 @@ import { InstrumentName } from "domain/model/instrument-name";
 import { ManufacturerName } from "domain/model/manufacturer-name";
 import { ManufactureDate } from "domain/model/manufacture-date";
 import { ReleaseDate } from "domain/model/release-date";
-import { Country } from "domain/model/country";
 import { InstrumentId } from "domain/model/instrument-id";
 import { InstrumentType } from "generated/model/instrument-type";
-import { InstrumentBasicMaterial } from "generated/model";
+import { Country, InstrumentBasicMaterial } from "generated/model";
 
 export const parseInstrumentDetails = (data: FormData) => {
   const errors = [];
@@ -67,11 +66,14 @@ export const parseInstrumentDetails = (data: FormData) => {
     errors.push("Release date must be after manufacture date");
   }
 
-  const country = data.get("country");
+  const country = {
+    country: data.get("country"),
+  } as Country;
+
   if (
-    country === null ||
-    typeof country !== "string" ||
-    manufactureDate === ""
+    country.country === null ||
+    typeof country.country !== "string" ||
+    country.country === ""
   ) {
     errors.push("Type country");
   }

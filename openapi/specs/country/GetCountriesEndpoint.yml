@@ -1,0 +1,71 @@
+openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+
+info:
+  description: Get Countries
+  version: 1.0.0
+  title: Get Countries
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
+servers:
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
+
+tags:
+  - name: getCountries
+    description: Get Countries
+
+paths:
+  /countries:
+    get:
+      description: Get Countries
+      summary: Get Countries
+      operationId: getCountries
+      tags:
+        - getCountries
+      responses:
+        "200":
+          description: Country
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCountriesResponse"
+        "400":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ClientError.yml#/components/schemas/ClientError"
+        default:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ServerError.yml#/components/schemas/ServerError"
+
+components:
+  schemas:
+    Country:
+      type: object
+      required: [country]
+      properties:
+        country:
+          type: string
+
+    GetCountriesResponse:
+      type: object
+      required: [content]
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/Country"
+

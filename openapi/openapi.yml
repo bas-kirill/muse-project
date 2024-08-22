@@ -18,6 +18,9 @@ servers:
       basePath:
         default: api
 tags:
+  - name: getCountries
+    description: Get Countries
+    x-displayName: getCountries
   - name: addFavorite
     description: Add Favorite
     x-displayName: addFavorite
@@ -55,6 +58,32 @@ tags:
     description: User Registration
     x-displayName: userRegistration
 paths:
+  /countries:
+    get:
+      description: Get Countries
+      summary: Get Countries
+      operationId: getCountries
+      tags:
+        - getCountries
+      responses:
+        '200':
+          description: Country
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetCountriesResponse'
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
   /favorite/add:
     post:
       description: Add Favorite
@@ -468,6 +497,22 @@ components:
           description: A description of the error.
       example:
         message: Internal Server Error. Please try again later.
+    Country:
+      type: object
+      required:
+        - country
+      properties:
+        country:
+          type: string
+    GetCountriesResponse:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
     AddFavoriteRequestBody:
       type: object
       required:
@@ -659,6 +704,9 @@ components:
         password:
           type: string
 x-tagGroups:
+  - name: Get Countries
+    tags:
+      - getCountries
   - name: Add Favorite
     tags:
       - addFavorite

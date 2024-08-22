@@ -12,58 +12,61 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
  * @interface InstrumentDetail
  */
 export interface InstrumentDetail {
-  /**
-   *
-   * @type {number}
-   * @memberof InstrumentDetail
-   */
-  id: number;
-  /**
-   *
-   * @type {string}
-   * @memberof InstrumentDetail
-   */
-  name: string;
-  /**
-   *
-   * @type {string}
-   * @memberof InstrumentDetail
-   */
-  type: string;
-  /**
-   *
-   * @type {string}
-   * @memberof InstrumentDetail
-   */
-  manufacturer: string;
-  /**
-   *
-   * @type {string}
-   * @memberof InstrumentDetail
-   */
-  manufacturer_date: string;
-  /**
-   *
-   * @type {string}
-   * @memberof InstrumentDetail
-   */
-  release_date: string;
-  /**
-   *
-   * @type {string}
-   * @memberof InstrumentDetail
-   */
-  country: string;
-  /**
-   *
-   * @type {Array<string>}
-   * @memberof InstrumentDetail
-   */
-  basic_materials: Array<string>;
+    /**
+     * 
+     * @type {number}
+     * @memberof InstrumentDetail
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentDetail
+     */
+    'name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentDetail
+     */
+    'type': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentDetail
+     */
+    'manufacturer': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentDetail
+     */
+    'manufacturer_date': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentDetail
+     */
+    'release_date': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentDetail
+     */
+    'country': string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof InstrumentDetail
+     */
+    'basic_materials': Array<string>;
 }
+

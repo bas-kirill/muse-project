@@ -12,16 +12,19 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
  * @interface InstrumentType
  */
 export interface InstrumentType {
-  /**
-   *
-   * @type {string}
-   * @memberof InstrumentType
-   */
-  instrument_type?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentType
+     */
+    'instrument_type'?: string;
 }
+

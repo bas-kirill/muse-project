@@ -1,28 +1,30 @@
 import { ManufacturerNames } from "domain/model/manufacturer-name";
-import { Countries } from "domain/model/country";
 import { LoaderFunction } from "react-router-dom";
 import axios from "axios";
 import { SERVER_URL } from "shared/config";
-import { API_COUNTRIES, API_MANUFACTURERS } from "shared/config/backend";
+import { API_MANUFACTURERS } from "shared/config/backend";
 import { GetInstrumentByIdApi } from "generated/api/get-instrument-by-id-api";
 import {
+  Country,
   InstrumentBasicMaterial,
   InstrumentDetail,
-  type InstrumentType,
+  type InstrumentType
 } from "generated/model";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
+import { GetCountriesApi } from "generated/api/get-countries-api";
 
 const getInstrumentById = new GetInstrumentByIdApi();
 const getInstrumentTypes = new GetInstrumentTypesApi();
 const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi();
+const getCountries = new GetCountriesApi();
 
 export interface EditInstrumentLoader {
   instrumentForEdit: InstrumentDetail;
   instrumentTypes: InstrumentType[];
   manufacturerNames: ManufacturerNames;
   materials: InstrumentBasicMaterial[];
-  countries: Countries;
+  countries: Country[];
 }
 
 export const loader: LoaderFunction = async ({
@@ -37,15 +39,7 @@ export const loader: LoaderFunction = async ({
   const instrumentBasicMaterialsRequest =
     await getInstrumentBasicMaterials.getInstrumentBasicMaterials();
 
-  let countries: string[] = [];
-  await axios
-    .get<Countries>(`${SERVER_URL}${API_COUNTRIES}`)
-    .then((data) => {
-      countries = data.data;
-    })
-    .catch(() => {
-      throw new Error("Fail to retrieve countries");
-    });
+  const countriesRequest = await getCountries.getCountries();
 
   let manufacturers: ManufacturerNames = [];
   await axios
@@ -62,6 +56,6 @@ export const loader: LoaderFunction = async ({
     instrumentTypes: instrumentTypesRequest.data.content,
     manufacturerNames: manufacturers,
     materials: instrumentBasicMaterialsRequest.data.content,
-    countries: countries,
+    countries: countriesRequest.data.content,
   };
 };
