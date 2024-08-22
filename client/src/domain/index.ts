@@ -1,7 +1,7 @@
 import { Jwt } from "./model/jwt";
 import { Role } from "./model/role";
 import { InstrumentId } from "./model/instrument-id";
-import type { Country, Countries } from "./model/country";
+import type { Countries } from "./model/country";
 import type { InstrumentName } from "./model/instrument-name";
 import type {
   ManufacturerName,
@@ -14,7 +14,6 @@ export {
   Jwt,
   Role,
   InstrumentId,
-  Country,
   Countries,
   InstrumentName,
   ManufacturerName,

@@ -1,21 +1,26 @@
 import { LoaderFunction } from "react-router-dom";
 import { SERVER_URL } from "shared/config";
-import { API_COUNTRIES, API_MANUFACTURERS } from "shared/config/backend";
+import { API_MANUFACTURERS } from "shared/config/backend";
 import axios from "axios";
-import { Countries } from "domain/model/country";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
-import type { InstrumentBasicMaterial, InstrumentType } from "generated/model";
+import type {
+  Country,
+  InstrumentBasicMaterial,
+  InstrumentType,
+} from "generated/model";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
+import { GetCountriesApi } from "generated/api/get-countries-api";
 
 const getInstrumentTypes = new GetInstrumentTypesApi();
 const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi();
+const getCountries = new GetCountriesApi();
 
 export interface CreateInstrumentLoader {
   instrumentTypes: InstrumentType[];
   manufacturerNames: ManufacturerNames;
   materials: InstrumentBasicMaterial[];
-  countries: Countries;
+  countries: Country[];
 }
 
 export const loader: LoaderFunction =
@@ -26,15 +31,7 @@ export const loader: LoaderFunction =
     const instrumentBasicMaterialsRequest =
       await getInstrumentBasicMaterials.getInstrumentBasicMaterials();
 
-    let countries: string[] = [];
-    await axios
-      .get<Countries>(`${SERVER_URL}${API_COUNTRIES}`)
-      .then((data) => {
-        countries = data.data;
-      })
-      .catch(() => {
-        throw new Error("Fail to retrieve countries");
-      });
+    const countriesRequest = await getCountries.getCountries();
 
     let manufacturers: ManufacturerNames = [];
     await axios
@@ -50,6 +47,6 @@ export const loader: LoaderFunction =
       instrumentTypes: instrumentTypesRequest.data.content,
       manufacturerNames: manufacturers,
       materials: instrumentBasicMaterialsRequest.data.content,
-      countries: countries,
+      countries: countriesRequest.data.content,
     };
   };

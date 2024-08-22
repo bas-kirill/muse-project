@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
-import axios from "axios";
-import { SERVER_URL } from "shared/config";
-import { API_COUNTRIES } from "shared/config/backend";
-import { Countries } from "domain/model/country";
+import { GetCountriesApi } from "generated/api/get-countries-api";
+import { Country } from "generated/model";
 
 interface Props {
   onValueChange: (names: ManufacturerNames) => void;
 }
 
+const getCountries = new GetCountriesApi();
+
 export const CountryFilter = ({ onValueChange }: Props) => {
-  const [countries, setCountries] = useState<Countries>([]);
+  const [countries, setCountries] = useState<Country[]>([]);
 
   useEffect(() => {
-    axios
-      .get<Countries>(`${SERVER_URL}${API_COUNTRIES}`)
-      .then((r) => {
-        setCountries(r.data);
-      })
-      .catch((e) => {
-        throw new Error(`Failed to extract countries: '${e}'`);
-      });
+    const fetchCountries = async () => {
+      const response = await getCountries.getCountries();
+      setCountries(response.data.content);
+    };
+    fetchCountries();
   }, []);
 
   function onChange() {
@@ -39,15 +36,15 @@ export const CountryFilter = ({ onValueChange }: Props) => {
     <div id="country-filter">
       <legend>Country:</legend>
       {countries.map((country) => (
-        <div key={country}>
+        <div key={country.country}>
           <input
             type="checkbox"
-            name={country}
+            name={country.country}
             onChange={onChange}
             className="country-filter-checkbox"
             defaultChecked={true}
           />
-          <label htmlFor={country}>{country}</label>
+          <label htmlFor={country.country}>{country.country}</label>
         </div>
       ))}
     </div>

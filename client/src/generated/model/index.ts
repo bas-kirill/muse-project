@@ -1,5 +1,7 @@
 export * from "./add-favorite-request-body";
 export * from "./client-error";
+export * from "./country";
+export * from "./get-countries-response";
 export * from "./get-instrument-basic-materials-response";
 export * from "./get-instrument-by-criteria-page-response";
 export * from "./get-instrument-criteria-request-body";
