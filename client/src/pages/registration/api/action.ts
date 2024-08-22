@@ -12,28 +12,28 @@ export const action: ActionFunction = async ({
   request,
 }): Promise<RegistrationAction> => {
   const { fullName, login, password, errors } = parseForm(
-    await request.formData()
+    await request.formData(),
   );
 
   if (errors.length !== 0) {
     return {
-      errors: errors
+      errors: errors,
     };
   }
 
   const response = await userRegistrationApi.userRegistration({
     fullName: fullName,
     login: login,
-    password: password
+    password: password,
   });
 
   if (response.status === 200) {
     return {
-      errors: []
+      errors: [],
     };
   }
 
   return {
-    errors: [`User already exists`]
+    errors: [`User already exists`],
   };
 };
