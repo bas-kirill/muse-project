@@ -13,7 +13,7 @@ class AddFavoriteEndpoint: AddFavoriteApi {
 
     override fun addFavorite(request: AddFavoriteRequestBody): ResponseEntity<Any> {
         val session = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request.session
-        val favorite = session.getAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY) as MutableList<String>?
+        val favorite = session.getAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY) as MutableList<Long>?
         if (favorite == null) {
             session.setAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY, mutableListOf(request.instrumentId))
             return ResponseEntity.ok().build()

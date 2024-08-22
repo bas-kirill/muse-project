@@ -13,7 +13,7 @@ class RemoveFavoriteEndpoint: RemoveFavoriteApi {
 
     override fun removeFavorite(request: RemoveFavoriteRequestBody): ResponseEntity<Any> {
         val session = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request.session
-        val favorite = session.getAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY) as MutableList<String>?
+        val favorite = session.getAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY) as MutableList<Long>?
             ?: return ResponseEntity.ok().build()
         favorite.remove(request.instrumentId)
         session.setAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY, favorite)

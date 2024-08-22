@@ -1,4 +1,5 @@
 # https://opensource.zalando.com/restful-api-guidelines
+# https://apistylebook.stoplight.io/docs/zalando-restful-api-guidelines
 extends:
   - https://raw.githubusercontent.com/baloise-incubator/spectral-ruleset/main/zalando.yml
   - spectral:oas
