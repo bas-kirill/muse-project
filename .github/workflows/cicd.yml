@@ -12,7 +12,7 @@ env:
 
 jobs:
   openapi-linter:
-    name: "[PR] OpenAPI Linter"
+    name: "[OpenAPI] Linter"
     runs-on: kiryuxa-1
     steps:
       - uses: actions/checkout@v1
