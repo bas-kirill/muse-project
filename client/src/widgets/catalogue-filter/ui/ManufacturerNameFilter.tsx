@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
-import axios from "axios";
-import { SERVER_URL } from "shared/config";
-import { API_MANUFACTURERS } from "shared/config/backend";
+import { GetManufacturersApi } from "generated/api/get-manufacturers-api";
+import { Manufacturer } from "generated/model";
 
 interface Props {
   onValueChange: (names: ManufacturerNames) => void;
 }
 
+const getManufacturers = new GetManufacturersApi();
+
 export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
-  const [manufacturerNames, setManufacturerNames] = useState<ManufacturerNames>(
+  const [manufacturers, setManufacturers] = useState<Manufacturer[]>(
     [],
   );
 
   useEffect(() => {
-    axios
-      .get<ManufacturerNames>(`${SERVER_URL}${API_MANUFACTURERS}`)
-      .then((r) => {
-        setManufacturerNames(r.data);
-      })
-      .catch((e) => {
-        throw new Error(`Failed to extract instrument types: '${e}'`);
-      });
+    const fetchManufacturers = async () => {
+      const response = await getManufacturers.getManufacturers();
+      setManufacturers(response.data.content);
+    }
+
+    fetchManufacturers();
   }, []);
 
   function onChange() {
@@ -39,16 +38,16 @@ export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
   return (
     <div id="manufacturer-name-filter">
       <legend>Manufacturer:</legend>
-      {manufacturerNames.map((manufactureName) => (
-        <div key={manufactureName}>
+      {manufacturers.map((manufacturer) => (
+        <div key={manufacturer.manufacturer}>
           <input
             type="checkbox"
-            name={manufactureName}
+            name={manufacturer.manufacturer}
             onChange={onChange}
             className="manufacturer-name-filter-checkbox"
             defaultChecked={true}
           />
-          <label htmlFor={manufactureName}>{manufactureName}</label>
+          <label htmlFor={manufacturer.manufacturer}>{manufacturer.manufacturer}</label>
         </div>
       ))}
     </div>

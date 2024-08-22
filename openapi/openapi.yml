@@ -51,6 +51,9 @@ tags:
   - name: basicLogin
     description: Everything about user
     x-displayName: basicLogin
+  - name: getManufacturers
+    description: Get Manufacturers
+    x-displayName: getManufacturers
   - name: getUserProfile
     description: Get User Profile
     x-displayName: getUserProfile
@@ -398,6 +401,32 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
+  /manufacturer:
+    get:
+      description: Get Manufacturers
+      summary: Get Manufacturers
+      operationId: getManufacturers
+      tags:
+        - getManufacturers
+      responses:
+        '200':
+          description: Manufacturers
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetManufacturersResponse'
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
   /profile:
     get:
       description: Get User Profile
@@ -677,6 +706,22 @@ components:
       properties:
         jwt:
           type: string
+    Manufacturer:
+      type: object
+      required:
+        - manufacturer
+      properties:
+        manufacturer:
+          type: string
+    GetManufacturersResponse:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/Manufacturer'
     ProfileDetails:
       type: object
       required:
@@ -737,6 +782,9 @@ x-tagGroups:
   - name: Basic Login
     tags:
       - basicLogin
+  - name: Get Manufacturers
+    tags:
+      - getManufacturers
   - name: Get Profile
     tags:
       - getUserProfile

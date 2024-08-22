@@ -21,10 +21,10 @@ class GetInstrumentsByCriteriaEndpoint(
         val criteria = request.toInstrumentCriteria()
         val instruments = getInstrumentsByCriteria.execute(criteria = criteria)
         val instrumentsDto = instruments.map { it.toDto() }
-        return ResponseEntity.ok(instrumentsDto.toResponse())
+        return ResponseEntity.ok(instrumentsDto.toRestResponse())
     }
 }
 
-fun List<InstrumentDetail>.toResponse(): GetInstrumentsByCriteriaResponse {
+fun List<InstrumentDetail>.toRestResponse(): GetInstrumentsByCriteriaResponse {
     return GetInstrumentsByCriteriaResponse(content = this)
 }

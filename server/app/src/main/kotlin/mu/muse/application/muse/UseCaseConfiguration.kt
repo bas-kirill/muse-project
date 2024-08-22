@@ -13,7 +13,7 @@ import mu.muse.usecase.scenario.instrument.CreateInstrumentUseCase
 import mu.muse.usecase.scenario.instrument.DeleteInstrumentByIdUseCase
 import mu.muse.usecase.scenario.instrument.EditInstrumentUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentByIdUseCase
-import mu.muse.usecase.scenario.instrument.GetInstrumentManufacturersUseCase
+import mu.muse.usecase.scenario.instrument.GetManufacturersUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentMaterialsUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentTypesUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaPaginatedUseCase
@@ -62,7 +62,7 @@ class UseCaseConfiguration {
     ) = CreateInstrumentUseCase(idGenerator, instrumentPersister)
 
     @Bean
-    fun getInstrumentManufacturers() = GetInstrumentManufacturersUseCase()
+    fun getInstrumentManufacturers() = GetManufacturersUseCase()
 
     @Bean
     fun editInstrument(instrumentExtractor: InstrumentExtractor, instrumentPersister: InstrumentPersister) =

@@ -1,0 +1,71 @@
+openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+
+info:
+  description: Get Manufacturers
+  version: 1.0.0
+  title: Get Manufacturers
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
+servers:
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
+
+tags:
+  - name: getManufacturers
+    description: Get Manufacturers
+
+paths:
+  /manufacturer:
+    get:
+      description: Get Manufacturers
+      summary: Get Manufacturers
+      operationId: getManufacturers
+      tags:
+        - getManufacturers
+      responses:
+        "200":
+          description: Manufacturers
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetManufacturersResponse"
+        "400":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ClientError.yml#/components/schemas/ClientError"
+        default:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ServerError.yml#/components/schemas/ServerError"
+
+components:
+  schemas:
+    Manufacturer:
+      type: object
+      required: [manufacturer]
+      properties:
+        manufacturer:
+          type: string
+
+    GetManufacturersResponse:
+      type: object
+      required: [content]
+      properties:
+        content:
+          type: array
+          items:
+            $ref: "#/components/schemas/Manufacturer"
+
