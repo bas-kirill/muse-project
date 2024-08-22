@@ -18,6 +18,10 @@ class InMemoryInstrumentRepository(
         return storage[id]
     }
 
+    override fun findByIds(ids: List<InstrumentId>): List<Instrument> {
+        return storage.values.filter { it.id in ids }.toMutableList()
+    }
+
     override fun findByCriteria(criteria: InstrumentExtractor.Criteria): List<Instrument> {
         return storage.values
             .sortedBy { it.id.toLongValue() }
@@ -35,7 +39,7 @@ class InMemoryInstrumentRepository(
     override fun totalElements(): Int = storage.values.size
 }
 
-private infix fun Instrument.matches(criteria: InstrumentExtractor.Criteria): Boolean {
+infix fun Instrument.matches(criteria: InstrumentExtractor.Criteria): Boolean {
     return (criteria.name == null || this.name.matches(criteria.name)) &&
         (criteria.types == null || this.type in criteria.types) &&
         (criteria.manufacturers == null || this.manufacturer in criteria.manufacturers) &&

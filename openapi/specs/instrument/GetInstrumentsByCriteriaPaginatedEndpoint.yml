@@ -1,4 +1,4 @@
-openapi: "3.1.0"
+openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
 
 info:
   description: Get Instruments by Criteria Paginated
@@ -81,7 +81,7 @@ components:
         content:
           type: array
           items:
-            $ref: './components/InstrumentDetail.yml#/components/schemas/InstrumentDetail'
+            $ref: "./../common/InstrumentDetail.yml#/components/schemas/InstrumentDetail"
         content_size:
           type: integer
           format: int32

@@ -18,9 +18,9 @@ import jakarta.validation.Valid
  * @param name 
  * @param type 
  * @param manufacturer 
- * @param country 
  * @param manufacturerDate 
  * @param releaseDate 
+ * @param country 
  * @param basicMaterials 
  */
 data class InstrumentDetail(
@@ -33,13 +33,13 @@ data class InstrumentDetail(
 
     @get:JsonProperty("manufacturer", required = true) val manufacturer: kotlin.String,
 
+    @get:JsonProperty("manufacturer_date", required = true) val manufacturerDate: kotlin.String,
+
+    @get:JsonProperty("release_date", required = true) val releaseDate: kotlin.String,
+
     @get:JsonProperty("country", required = true) val country: kotlin.String,
 
-    @get:JsonProperty("manufacturer_date") val manufacturerDate: kotlin.String? = null,
-
-    @get:JsonProperty("release_date") val releaseDate: kotlin.String? = null,
-
-    @get:JsonProperty("basic_materials") val basicMaterials: kotlin.collections.List<kotlin.String>? = null
+    @get:JsonProperty("basic_materials", required = true) val basicMaterials: kotlin.collections.List<kotlin.String>
     ) {
 
 }

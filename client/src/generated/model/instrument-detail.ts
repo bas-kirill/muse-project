@@ -47,13 +47,13 @@ export interface InstrumentDetail {
    * @type {string}
    * @memberof InstrumentDetail
    */
-  manufacturer_date?: string;
+  manufacturer_date: string;
   /**
    *
    * @type {string}
    * @memberof InstrumentDetail
    */
-  release_date?: string;
+  release_date: string;
   /**
    *
    * @type {string}
@@ -65,5 +65,5 @@ export interface InstrumentDetail {
    * @type {Array<string>}
    * @memberof InstrumentDetail
    */
-  basic_materials?: Array<string>;
+  basic_materials: Array<string>;
 }

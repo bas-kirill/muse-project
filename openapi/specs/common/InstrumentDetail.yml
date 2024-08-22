@@ -1,4 +1,4 @@
-openapi: "3.1.0"
+openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
 
 info:
   description: Instrument Details
@@ -14,7 +14,7 @@ components:
   schemas:
     InstrumentDetail:
       type: object
-      required: [ id, name, type, manufacturer, manufacturerDate, releaseDate, country, basicMaterials]
+      required: [ id, name, type, manufacturer, manufacturer_date, release_date, country, basic_materials]
       properties:
         id:
           type: integer

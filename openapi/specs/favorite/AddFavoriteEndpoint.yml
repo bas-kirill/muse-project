@@ -1,9 +1,9 @@
 openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
 
 info:
-  description: Get Instruments by Criteria
+  description: Add Favorite
   version: 1.0.0
-  title: Get Instruments by Criteria
+  title: Add Favorite
   contact:
     name: Kirill B
     email: baskirill.an@gmail.com
@@ -20,22 +20,22 @@ servers:
         default: "api"
 
 tags:
-  - name: getInstrumentsByCriteria
-    description: Get Instruments by Criteria
+  - name: addFavorite
+    description: Add Favorite
 
 paths:
-  /instruments:
+  /favorite/add:
     post:
-      description: Get Instruments by Criteria
-      summary: Get Instruments by Criteria
-      operationId: getInstrumentsByCriteria
+      description: Add Favorite
+      summary: Add Favorite
+      operationId: addFavorite
       tags:
-        - getInstrumentsByCriteria
+        - addFavorite
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "./components/GetInstrumentByCriteriaRequestBody.yml#/components/schemas/GetInstrumentCriteriaRequestBody"
+              $ref: "#/components/schemas/AddFavoriteRequestBody"
         required: true
       responses:
         "200":
@@ -43,7 +43,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetInstrumentsByCriteriaResponse"
+                type: object
         "400":
           description: Client Error
           content:
@@ -59,11 +59,10 @@ paths:
 
 components:
   schemas:
-    GetInstrumentsByCriteriaResponse:
+    AddFavoriteRequestBody:
       type: object
-      required: [ content ]
+      required: [instrument_id]
       properties:
-        content:
-          type: array
-          items:
-            $ref: "./../common/InstrumentDetail.yml#/components/schemas/InstrumentDetail"
+        instrument_id:
+          type: integer
+          format: int64

@@ -18,6 +18,7 @@ import mu.muse.usecase.scenario.instrument.GetInstrumentMaterialsUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentTypesUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaPaginatedUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaUseCase
+import mu.muse.usecase.scenario.instrument.GetInstrumentsByIdsUseCase
 import mu.muse.usecase.scenario.profile.GetProfileUseCase
 import mu.muse.usecase.scenario.registration.RegisterUserUseCase
 import org.springframework.context.annotation.Bean
@@ -73,6 +74,8 @@ class UseCaseConfiguration {
         userExtractor: UserExtractor,
         userPersister: UserPersister,
         passwordEncoder: PasswordEncoder,
-    ) =
-        RegisterUserUseCase(idGenerator, userExtractor, userPersister, passwordEncoder)
+    ) = RegisterUserUseCase(idGenerator, userExtractor, userPersister, passwordEncoder)
+
+    @Bean
+    fun getInstrumentsByIds(instrumentExtractor: InstrumentExtractor) = GetInstrumentsByIdsUseCase(instrumentExtractor)
 }

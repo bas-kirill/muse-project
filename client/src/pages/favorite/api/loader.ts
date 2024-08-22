@@ -1,21 +1,17 @@
 import { LoaderFunction } from "react-router-dom";
-import { fetchFavoriteInstrumentIdsList } from "shared/api/fetch-favorite-instrument-ids.list";
-import { Filters } from "widgets/catalogue-filter";
-import { getInstrumentsByCriteria } from "shared/api/instruments-by-criteria.list";
 import { InstrumentDetail } from "generated/model";
+import { ListFavoriteApi } from "generated/api/list-favorite-api";
 
 export interface FavoriteLoader {
   instrumentDetails: InstrumentDetail[];
 }
 
+const listFavorite = new ListFavoriteApi();
+
 export const loader: LoaderFunction = async (): Promise<FavoriteLoader> => {
-  const favoriteInstrumentIds = await fetchFavoriteInstrumentIdsList();
-  const filter = {
-    instrumentId: favoriteInstrumentIds,
-  } as unknown as Filters;
-  const instruments = await getInstrumentsByCriteria(filter);
+  const response = await listFavorite.listFavorite();
 
   return {
-    instrumentDetails: instruments,
+    instrumentDetails: response.data.content,
   };
 };

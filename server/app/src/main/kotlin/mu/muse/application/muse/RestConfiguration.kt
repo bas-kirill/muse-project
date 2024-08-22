@@ -2,7 +2,9 @@ package mu.muse.application.muse
 
 import mu.muse.rest.HelloEndpoint
 import mu.muse.rest.country.GetCountriesEndpoint
-import mu.muse.rest.favorite.FavoriteEndpoint
+import mu.muse.rest.favorite.AddFavoriteEndpoint
+import mu.muse.rest.favorite.ListFavoriteEndpoint
+import mu.muse.rest.favorite.RemoveFavoriteEndpoint
 import mu.muse.rest.instruments.CreateInstrumentEndpoint
 import mu.muse.rest.instruments.DeleteInstrumentByIdEndpoint
 import mu.muse.rest.instruments.EditInstrumentEndpoint
@@ -26,6 +28,7 @@ import mu.muse.usecase.GetInstrumentMaterials
 import mu.muse.usecase.GetInstrumentTypes
 import mu.muse.usecase.GetInstrumentsByCriteria
 import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
+import mu.muse.usecase.GetInstrumentsByIds
 import mu.muse.usecase.GetProfile
 import mu.muse.usecase.RegisterUser
 import org.springframework.context.annotation.Bean
@@ -86,5 +89,11 @@ class RestConfiguration {
     fun registrationEndpoint(registerUser: RegisterUser) = RegistrationEndpoint(registerUser)
 
     @Bean
-    fun favoriteEndpoint() = FavoriteEndpoint()
+    fun listFavoriteEndpoint(getInstrumentsByIds: GetInstrumentsByIds) = ListFavoriteEndpoint(getInstrumentsByIds)
+
+    @Bean
+    fun addFavoriteEndpoint() = AddFavoriteEndpoint()
+
+    @Bean
+    fun removeFavoriteEndpoint() = RemoveFavoriteEndpoint()
 }
