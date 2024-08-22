@@ -9,7 +9,7 @@ import mu.muse.rest.instruments.CreateInstrumentEndpoint
 import mu.muse.rest.instruments.DeleteInstrumentByIdEndpoint
 import mu.muse.rest.instruments.EditInstrumentEndpoint
 import mu.muse.rest.instruments.GetInstrumentByIdEndpoint
-import mu.muse.rest.instruments.GetInstrumentManufacturersEndpoint
+import mu.muse.rest.instruments.GetManufacturersEndpoint
 import mu.muse.rest.instruments.GetInstrumentMaterialsEndpoint
 import mu.muse.rest.instruments.GetInstrumentTypesEndpoint
 import mu.muse.rest.instruments.GetInstrumentsByCriteriaEndpoint
@@ -23,7 +23,7 @@ import mu.muse.usecase.DeleteInstrumentById
 import mu.muse.usecase.EditInstrument
 import mu.muse.usecase.GetCountries
 import mu.muse.usecase.GetInstrumentById
-import mu.muse.usecase.GetInstrumentManufacturers
+import mu.muse.usecase.GetManufacturers
 import mu.muse.usecase.GetInstrumentMaterials
 import mu.muse.usecase.GetInstrumentTypes
 import mu.muse.usecase.GetInstrumentsByCriteria
@@ -79,8 +79,8 @@ class RestConfiguration {
     fun createInstrumentEndpoint(createInstrument: CreateInstrument) = CreateInstrumentEndpoint(createInstrument)
 
     @Bean
-    fun getInstrumentManufacturersEndpoint(getInstrumentManufacturers: GetInstrumentManufacturers) =
-        GetInstrumentManufacturersEndpoint(getInstrumentManufacturers)
+    fun getInstrumentManufacturersEndpoint(getManufacturers: GetManufacturers) =
+        GetManufacturersEndpoint(getManufacturers)
 
     @Bean
     fun editInstrumentEndpoint(editInstrument: EditInstrument) = EditInstrumentEndpoint(editInstrument)

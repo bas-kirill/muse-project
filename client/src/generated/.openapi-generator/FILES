@@ -10,6 +10,7 @@ api/get-instrument-by-id-api.ts
 api/get-instrument-types-api.ts
 api/get-instruments-by-criteria-api.ts
 api/get-instruments-by-criteria-paginated-api.ts
+api/get-manufacturers-api.ts
 api/get-user-profile-api.ts
 api/list-favorite-api.ts
 api/remove-favorite-api.ts
@@ -28,12 +29,14 @@ model/get-instrument-by-criteria-page-response.ts
 model/get-instrument-criteria-request-body.ts
 model/get-instrument-types-response.ts
 model/get-instruments-by-criteria-response.ts
+model/get-manufacturers-response.ts
 model/index.ts
 model/instrument-basic-material.ts
 model/instrument-detail.ts
 model/instrument-type.ts
 model/jwt-response.ts
 model/list-favorite-response-body.ts
+model/manufacturer.ts
 model/profile-details.ts
 model/registration-request.ts
 model/remove-favorite-request-body.ts

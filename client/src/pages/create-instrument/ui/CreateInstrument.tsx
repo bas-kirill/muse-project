@@ -24,8 +24,11 @@ export const CreateInstrument = () => {
           <label htmlFor="instrument-type">Instrument Type</label>
           <select name="instrument-type" required>
             {loader.instrumentTypes.map((instrumentType) => (
-              <option key={instrumentType.type} value={instrumentType.type}>
-                {instrumentType.type}
+              <option
+                key={instrumentType.instrument_type}
+                value={instrumentType.instrument_type}
+              >
+                {instrumentType.instrument_type}
               </option>
             ))}
           </select>
@@ -34,9 +37,12 @@ export const CreateInstrument = () => {
         <div className="create-instrument-field">
           <label htmlFor="manufacturer-name">Manufacturer name</label>
           <select name="manufacturer-name" required>
-            {loader.manufacturerNames.map((manufacturerName) => (
-              <option key={manufacturerName} value={manufacturerName}>
-                {manufacturerName}
+            {loader.manufacturers.map((manufacturer) => (
+              <option
+                key={manufacturer.manufacturer}
+                value={manufacturer.manufacturer}
+              >
+                {manufacturer.manufacturer}
               </option>
             ))}
           </select>
@@ -68,8 +74,8 @@ export const CreateInstrument = () => {
           <label htmlFor="country">Country</label>
           <select name="country" required>
             {loader.countries.map((country) => (
-              <option key={country} value={country}>
-                {country}
+              <option key={country.country} value={country.country}>
+                {country.country}
               </option>
             ))}
           </select>
@@ -79,8 +85,11 @@ export const CreateInstrument = () => {
           <label htmlFor="material">Basic Material</label>
           <select name="material" required>
             {loader.materials.map((material) => (
-              <option key={material} value={material}>
-                {material}
+              <option
+                key={material.basic_material}
+                value={material.basic_material}
+              >
+                {material.basic_material}
               </option>
             ))}
           </select>

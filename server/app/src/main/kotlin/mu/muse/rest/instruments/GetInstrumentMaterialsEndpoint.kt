@@ -15,11 +15,11 @@ class GetInstrumentMaterialsEndpoint(
 
     override fun getInstrumentBasicMaterials(): ResponseEntity<GetInstrumentBasicMaterialsResponse> {
         val basicMaterials = getInstrumentMaterials.execute()
-        return basicMaterials.toResponse()
+        return basicMaterials.toRestResponse()
     }
 }
 
-fun List<Material>.toResponse(): ResponseEntity<GetInstrumentBasicMaterialsResponse> {
+fun List<Material>.toRestResponse(): ResponseEntity<GetInstrumentBasicMaterialsResponse> {
     return ResponseEntity.ok(
         GetInstrumentBasicMaterialsResponse(
             content = this.map { InstrumentBasicMaterial(it.name) },

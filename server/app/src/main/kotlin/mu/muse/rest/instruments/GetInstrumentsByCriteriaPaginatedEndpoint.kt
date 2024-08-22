@@ -41,7 +41,7 @@ class GetInstrumentsByCriteriaPaginatedEndpoint(
         )
 
         return ResponseEntity.ok(
-            instrumentsPaginated.toResponse(),
+            instrumentsPaginated.toRestResponse(),
         )
     }
 }
@@ -61,7 +61,7 @@ fun GetInstrumentCriteriaRequestBody.toInstrumentCriteria(): InstrumentExtractor
     )
 }
 
-fun Page<Instrument>.toResponse(): GetInstrumentByCriteriaPageResponse {
+fun Page<Instrument>.toRestResponse(): GetInstrumentByCriteriaPageResponse {
     return GetInstrumentByCriteriaPageResponse(
         content = this.content.map { it.toDto() },
         contentSize = this.contentSize,

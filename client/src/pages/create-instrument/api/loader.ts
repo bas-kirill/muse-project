@@ -1,24 +1,23 @@
 import { LoaderFunction } from "react-router-dom";
-import { SERVER_URL } from "shared/config";
-import { API_MANUFACTURERS } from "shared/config/backend";
-import axios from "axios";
-import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import type {
   Country,
   InstrumentBasicMaterial,
   InstrumentType,
+  Manufacturer,
 } from "generated/model";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
 import { GetCountriesApi } from "generated/api/get-countries-api";
+import { GetManufacturersApi } from "generated/api/get-manufacturers-api";
 
 const getInstrumentTypes = new GetInstrumentTypesApi();
 const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi();
 const getCountries = new GetCountriesApi();
+const getManufacturers = new GetManufacturersApi();
 
 export interface CreateInstrumentLoader {
   instrumentTypes: InstrumentType[];
-  manufacturerNames: ManufacturerNames;
+  manufacturers: Manufacturer[];
   materials: InstrumentBasicMaterial[];
   countries: Country[];
 }
@@ -33,19 +32,11 @@ export const loader: LoaderFunction =
 
     const countriesRequest = await getCountries.getCountries();
 
-    let manufacturers: ManufacturerNames = [];
-    await axios
-      .get<ManufacturerNames>(`${SERVER_URL}${API_MANUFACTURERS}`)
-      .then((data) => {
-        manufacturers = data.data;
-      })
-      .catch(() => {
-        throw new Error("Fail to retrieve manufacturer names");
-      });
+    const manufacturersRequest = await getManufacturers.getManufacturers();
 
     return {
       instrumentTypes: instrumentTypesRequest.data.content,
-      manufacturerNames: manufacturers,
+      manufacturers: manufacturersRequest.data.content,
       materials: instrumentBasicMaterialsRequest.data.content,
       countries: countriesRequest.data.content,
     };

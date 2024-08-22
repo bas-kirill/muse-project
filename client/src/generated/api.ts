@@ -21,6 +21,7 @@ export * from "./api/get-instrument-by-id-api";
 export * from "./api/get-instrument-types-api";
 export * from "./api/get-instruments-by-criteria-api";
 export * from "./api/get-instruments-by-criteria-paginated-api";
+export * from "./api/get-manufacturers-api";
 export * from "./api/get-user-profile-api";
 export * from "./api/list-favorite-api";
 export * from "./api/remove-favorite-api";
