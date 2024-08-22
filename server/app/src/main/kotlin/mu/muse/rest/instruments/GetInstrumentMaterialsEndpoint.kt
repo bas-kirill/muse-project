@@ -1,18 +1,26 @@
 package mu.muse.rest.instruments
 
 import mu.muse.domain.instrument.Material
-import mu.muse.rest.API_INSTRUMENT_MATERIALS
+import mu.muse.rest.api.GetInstrumentBasicMaterialsApi
+import mu.muse.rest.dto.GetInstrumentBasicMaterialsResponse
+import mu.muse.rest.dto.InstrumentBasicMaterial
 import mu.muse.usecase.GetInstrumentMaterials
-import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class GetInstrumentMaterialsEndpoint(
     private val getInstrumentMaterials: GetInstrumentMaterials,
-) {
+) : GetInstrumentBasicMaterialsApi {
 
-    @GetMapping(API_INSTRUMENT_MATERIALS)
-    fun getInstrumentBasicMaterials(): List<Material> {
-        return getInstrumentMaterials.execute()
+    override fun getInstrumentBasicMaterials(): ResponseEntity<GetInstrumentBasicMaterialsResponse> {
+        val basicMaterials = getInstrumentMaterials.execute()
+        return basicMaterials.toResponse()
     }
+}
+
+fun List<Material>.toResponse(): ResponseEntity<GetInstrumentBasicMaterialsResponse> {
+    return ResponseEntity.ok(GetInstrumentBasicMaterialsResponse(content = this.map {
+        InstrumentBasicMaterial(it.name)
+    }))
 }

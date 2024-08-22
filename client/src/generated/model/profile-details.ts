@@ -17,14 +17,26 @@
 /**
  * 
  * @export
- * @interface ClientError
+ * @interface ProfileDetails
  */
-export interface ClientError {
+export interface ProfileDetails {
     /**
-     * Error description
+     * 
      * @type {string}
-     * @memberof ClientError
+     * @memberof ProfileDetails
      */
-    'message': string;
+    'username': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfileDetails
+     */
+    'role': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ProfileDetails
+     */
+    'full_name': string;
 }
 

@@ -17,14 +17,14 @@
 /**
  * 
  * @export
- * @interface ClientError
+ * @interface InstrumentBasicMaterial
  */
-export interface ClientError {
+export interface InstrumentBasicMaterial {
     /**
-     * Error description
+     * 
      * @type {string}
-     * @memberof ClientError
+     * @memberof InstrumentBasicMaterial
      */
-    'message': string;
+    'basic_material': string;
 }
 

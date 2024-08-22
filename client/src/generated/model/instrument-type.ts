@@ -17,14 +17,14 @@
 /**
  * 
  * @export
- * @interface ClientError
+ * @interface InstrumentType
  */
-export interface ClientError {
+export interface InstrumentType {
     /**
-     * Error description
+     * 
      * @type {string}
-     * @memberof ClientError
+     * @memberof InstrumentType
      */
-    'message': string;
+    'instrument_type'?: string;
 }
 

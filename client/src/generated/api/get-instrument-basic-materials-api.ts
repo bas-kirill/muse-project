@@ -24,23 +24,23 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ClientError } from '../model';
 // @ts-ignore
-import type { GetInstrumentTypesResponse } from '../model';
+import type { GetInstrumentBasicMaterialsResponse } from '../model';
 // @ts-ignore
 import type { ServerError } from '../model';
 /**
- * GetInstrumentTypesApi - axios parameter creator
+ * GetInstrumentBasicMaterialsApi - axios parameter creator
  * @export
  */
-export const GetInstrumentTypesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const GetInstrumentBasicMaterialsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Get Instrument Types
-         * @summary Get Instrument Types
+         * Get Instrument Basic Materials
+         * @summary Get Instrument Basic Materials
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getInstrumentTypes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/instrument/types`;
+        getInstrumentBasicMaterials: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/instrument/materials`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -67,62 +67,62 @@ export const GetInstrumentTypesApiAxiosParamCreator = function (configuration?: 
 };
 
 /**
- * GetInstrumentTypesApi - functional programming interface
+ * GetInstrumentBasicMaterialsApi - functional programming interface
  * @export
  */
-export const GetInstrumentTypesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = GetInstrumentTypesApiAxiosParamCreator(configuration)
+export const GetInstrumentBasicMaterialsApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = GetInstrumentBasicMaterialsApiAxiosParamCreator(configuration)
     return {
         /**
-         * Get Instrument Types
-         * @summary Get Instrument Types
+         * Get Instrument Basic Materials
+         * @summary Get Instrument Basic Materials
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getInstrumentTypes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetInstrumentTypesResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getInstrumentTypes(options);
+        async getInstrumentBasicMaterials(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetInstrumentBasicMaterialsResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.getInstrumentBasicMaterials(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GetInstrumentTypesApi.getInstrumentTypes']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['GetInstrumentBasicMaterialsApi.getInstrumentBasicMaterials']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * GetInstrumentTypesApi - factory interface
+ * GetInstrumentBasicMaterialsApi - factory interface
  * @export
  */
-export const GetInstrumentTypesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GetInstrumentTypesApiFp(configuration)
+export const GetInstrumentBasicMaterialsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = GetInstrumentBasicMaterialsApiFp(configuration)
     return {
         /**
-         * Get Instrument Types
-         * @summary Get Instrument Types
+         * Get Instrument Basic Materials
+         * @summary Get Instrument Basic Materials
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getInstrumentTypes(options?: RawAxiosRequestConfig): AxiosPromise<GetInstrumentTypesResponse> {
-            return localVarFp.getInstrumentTypes(options).then((request) => request(axios, basePath));
+        getInstrumentBasicMaterials(options?: RawAxiosRequestConfig): AxiosPromise<GetInstrumentBasicMaterialsResponse> {
+            return localVarFp.getInstrumentBasicMaterials(options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * GetInstrumentTypesApi - object-oriented interface
+ * GetInstrumentBasicMaterialsApi - object-oriented interface
  * @export
- * @class GetInstrumentTypesApi
+ * @class GetInstrumentBasicMaterialsApi
  * @extends {BaseAPI}
  */
-export class GetInstrumentTypesApi extends BaseAPI {
+export class GetInstrumentBasicMaterialsApi extends BaseAPI {
     /**
-     * Get Instrument Types
-     * @summary Get Instrument Types
+     * Get Instrument Basic Materials
+     * @summary Get Instrument Basic Materials
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetInstrumentTypesApi
+     * @memberof GetInstrumentBasicMaterialsApi
      */
-    public getInstrumentTypes(options?: RawAxiosRequestConfig) {
-        return GetInstrumentTypesApiFp(this.configuration).getInstrumentTypes(options).then((request) => request(this.axios, this.basePath));
+    public getInstrumentBasicMaterials(options?: RawAxiosRequestConfig) {
+        return GetInstrumentBasicMaterialsApiFp(this.configuration).getInstrumentBasicMaterials(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

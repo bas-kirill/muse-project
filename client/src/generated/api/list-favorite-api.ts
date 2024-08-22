@@ -24,23 +24,23 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ClientError } from '../model';
 // @ts-ignore
-import type { GetInstrumentTypesResponse } from '../model';
+import type { ListFavoriteResponseBody } from '../model';
 // @ts-ignore
 import type { ServerError } from '../model';
 /**
- * GetInstrumentTypesApi - axios parameter creator
+ * ListFavoriteApi - axios parameter creator
  * @export
  */
-export const GetInstrumentTypesApiAxiosParamCreator = function (configuration?: Configuration) {
+export const ListFavoriteApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Get Instrument Types
-         * @summary Get Instrument Types
+         * List Favorite
+         * @summary List Favorite
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getInstrumentTypes: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/instrument/types`;
+        listFavorite: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/favorite/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -48,7 +48,7 @@ export const GetInstrumentTypesApiAxiosParamCreator = function (configuration?: 
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -67,62 +67,62 @@ export const GetInstrumentTypesApiAxiosParamCreator = function (configuration?: 
 };
 
 /**
- * GetInstrumentTypesApi - functional programming interface
+ * ListFavoriteApi - functional programming interface
  * @export
  */
-export const GetInstrumentTypesApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = GetInstrumentTypesApiAxiosParamCreator(configuration)
+export const ListFavoriteApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = ListFavoriteApiAxiosParamCreator(configuration)
     return {
         /**
-         * Get Instrument Types
-         * @summary Get Instrument Types
+         * List Favorite
+         * @summary List Favorite
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getInstrumentTypes(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetInstrumentTypesResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getInstrumentTypes(options);
+        async listFavorite(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ListFavoriteResponseBody>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.listFavorite(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GetInstrumentTypesApi.getInstrumentTypes']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['ListFavoriteApi.listFavorite']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * GetInstrumentTypesApi - factory interface
+ * ListFavoriteApi - factory interface
  * @export
  */
-export const GetInstrumentTypesApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GetInstrumentTypesApiFp(configuration)
+export const ListFavoriteApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = ListFavoriteApiFp(configuration)
     return {
         /**
-         * Get Instrument Types
-         * @summary Get Instrument Types
+         * List Favorite
+         * @summary List Favorite
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getInstrumentTypes(options?: RawAxiosRequestConfig): AxiosPromise<GetInstrumentTypesResponse> {
-            return localVarFp.getInstrumentTypes(options).then((request) => request(axios, basePath));
+        listFavorite(options?: RawAxiosRequestConfig): AxiosPromise<ListFavoriteResponseBody> {
+            return localVarFp.listFavorite(options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * GetInstrumentTypesApi - object-oriented interface
+ * ListFavoriteApi - object-oriented interface
  * @export
- * @class GetInstrumentTypesApi
+ * @class ListFavoriteApi
  * @extends {BaseAPI}
  */
-export class GetInstrumentTypesApi extends BaseAPI {
+export class ListFavoriteApi extends BaseAPI {
     /**
-     * Get Instrument Types
-     * @summary Get Instrument Types
+     * List Favorite
+     * @summary List Favorite
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof GetInstrumentTypesApi
+     * @memberof ListFavoriteApi
      */
-    public getInstrumentTypes(options?: RawAxiosRequestConfig) {
-        return GetInstrumentTypesApiFp(this.configuration).getInstrumentTypes(options).then((request) => request(this.axios, this.basePath));
+    public listFavorite(options?: RawAxiosRequestConfig) {
+        return ListFavoriteApiFp(this.configuration).listFavorite(options).then((request) => request(this.axios, this.basePath));
     }
 }
 

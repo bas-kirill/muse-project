@@ -2,22 +2,23 @@ import { LoaderFunction } from "react-router-dom";
 import { SERVER_URL } from "shared/config";
 import {
   API_COUNTRIES,
-  API_INSTRUMENT_MATERIALS,
-  API_MANUFACTURERS,
+  API_MANUFACTURERS
 } from "shared/config/backend";
 import axios from "axios";
 import { Materials } from "domain/model/material";
 import { Countries } from "domain/model/country";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
-import { InstrumentType } from "generated/model/instrument-type";
+import type { InstrumentBasicMaterial, InstrumentType } from "generated/model";
+import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
 
 const getInstrumentTypes = new GetInstrumentTypesApi();
+const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi();
 
 export interface CreateInstrumentLoader {
   instrumentTypes: InstrumentType[];
   manufacturerNames: ManufacturerNames;
-  materials: Materials;
+  materials: InstrumentBasicMaterial[];
   countries: Countries;
 }
 
@@ -25,17 +26,9 @@ export const loader: LoaderFunction =
   async (): Promise<CreateInstrumentLoader> => {
     const instrumentTypesRequest =
       await getInstrumentTypes.getInstrumentTypes();
-    const instrumentTypes = instrumentTypesRequest.data.content;
 
-    let materials: Materials = [];
-    await axios
-      .get<Materials>(`${SERVER_URL}${API_INSTRUMENT_MATERIALS}`)
-      .then((data) => {
-        materials = data.data;
-      })
-      .catch((e) => {
-        throw new Error(`Fail to retrieve instrument materials: ${e}`);
-      });
+    const instrumentBasicMaterialsRequest =
+      await getInstrumentBasicMaterials.getInstrumentBasicMaterials();
 
     let countries: string[] = [];
     await axios
@@ -58,9 +51,9 @@ export const loader: LoaderFunction =
       });
 
     return {
-      instrumentTypes: instrumentTypes,
+      instrumentTypes: instrumentTypesRequest.data.content,
       manufacturerNames: manufacturers,
-      materials: materials,
-      countries: countries,
+      materials: instrumentBasicMaterialsRequest.data.content,
+      countries: countries
     };
   };

@@ -22,26 +22,28 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { RegistrationRequest } from '../model';
+import type { ClientError } from '../model';
+// @ts-ignore
+import type { RemoveFavoriteRequestBody } from '../model';
 // @ts-ignore
 import type { ServerError } from '../model';
 /**
- * UserRegistrationApi - axios parameter creator
+ * RemoveFavoriteApi - axios parameter creator
  * @export
  */
-export const UserRegistrationApiAxiosParamCreator = function (configuration?: Configuration) {
+export const RemoveFavoriteApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Register User
-         * @summary User Registration
-         * @param {RegistrationRequest} registrationRequest 
+         * Remove Favorite
+         * @summary Remove Favorite
+         * @param {RemoveFavoriteRequestBody} removeFavoriteRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userRegistration: async (registrationRequest: RegistrationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'registrationRequest' is not null or undefined
-            assertParamExists('userRegistration', 'registrationRequest', registrationRequest)
-            const localVarPath = `/registration`;
+        removeFavorite: async (removeFavoriteRequestBody: RemoveFavoriteRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'removeFavoriteRequestBody' is not null or undefined
+            assertParamExists('removeFavorite', 'removeFavoriteRequestBody', removeFavoriteRequestBody)
+            const localVarPath = `/favorite/remove`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -60,7 +62,7 @@ export const UserRegistrationApiAxiosParamCreator = function (configuration?: Co
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(registrationRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(removeFavoriteRequestBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -71,65 +73,65 @@ export const UserRegistrationApiAxiosParamCreator = function (configuration?: Co
 };
 
 /**
- * UserRegistrationApi - functional programming interface
+ * RemoveFavoriteApi - functional programming interface
  * @export
  */
-export const UserRegistrationApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = UserRegistrationApiAxiosParamCreator(configuration)
+export const RemoveFavoriteApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = RemoveFavoriteApiAxiosParamCreator(configuration)
     return {
         /**
-         * Register User
-         * @summary User Registration
-         * @param {RegistrationRequest} registrationRequest 
+         * Remove Favorite
+         * @summary Remove Favorite
+         * @param {RemoveFavoriteRequestBody} removeFavoriteRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userRegistration(registrationRequest: RegistrationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.userRegistration(registrationRequest, options);
+        async removeFavorite(removeFavoriteRequestBody: RemoveFavoriteRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.removeFavorite(removeFavoriteRequestBody, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UserRegistrationApi.userRegistration']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['RemoveFavoriteApi.removeFavorite']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * UserRegistrationApi - factory interface
+ * RemoveFavoriteApi - factory interface
  * @export
  */
-export const UserRegistrationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = UserRegistrationApiFp(configuration)
+export const RemoveFavoriteApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = RemoveFavoriteApiFp(configuration)
     return {
         /**
-         * Register User
-         * @summary User Registration
-         * @param {RegistrationRequest} registrationRequest 
+         * Remove Favorite
+         * @summary Remove Favorite
+         * @param {RemoveFavoriteRequestBody} removeFavoriteRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userRegistration(registrationRequest: RegistrationRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.userRegistration(registrationRequest, options).then((request) => request(axios, basePath));
+        removeFavorite(removeFavoriteRequestBody: RemoveFavoriteRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.removeFavorite(removeFavoriteRequestBody, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * UserRegistrationApi - object-oriented interface
+ * RemoveFavoriteApi - object-oriented interface
  * @export
- * @class UserRegistrationApi
+ * @class RemoveFavoriteApi
  * @extends {BaseAPI}
  */
-export class UserRegistrationApi extends BaseAPI {
+export class RemoveFavoriteApi extends BaseAPI {
     /**
-     * Register User
-     * @summary User Registration
-     * @param {RegistrationRequest} registrationRequest 
+     * Remove Favorite
+     * @summary Remove Favorite
+     * @param {RemoveFavoriteRequestBody} removeFavoriteRequestBody 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UserRegistrationApi
+     * @memberof RemoveFavoriteApi
      */
-    public userRegistration(registrationRequest: RegistrationRequest, options?: RawAxiosRequestConfig) {
-        return UserRegistrationApiFp(this.configuration).userRegistration(registrationRequest, options).then((request) => request(this.axios, this.basePath));
+    public removeFavorite(removeFavoriteRequestBody: RemoveFavoriteRequestBody, options?: RawAxiosRequestConfig) {
+        return RemoveFavoriteApiFp(this.configuration).removeFavorite(removeFavoriteRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -30,6 +30,9 @@ tags:
   - name: deleteInstrumentById
     description: Delete Instrument by ID
     x-displayName: deleteInstrumentById
+  - name: getInstrumentBasicMaterials
+    description: Get Instrument Basic Materials
+    x-displayName: getInstrumentBasicMaterials
   - name: getInstrumentById
     description: Get Instrument by ID
     x-displayName: getInstrumentById
@@ -164,6 +167,32 @@ paths:
             application/json:
               schema:
                 type: object
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /instrument/materials:
+    get:
+      description: Get Instrument Basic Materials
+      summary: Get Instrument Basic Materials
+      operationId: getInstrumentBasicMaterials
+      tags:
+        - getInstrumentBasicMaterials
+      responses:
+        '200':
+          description: Instrument Basic Materials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetInstrumentBasicMaterialsResponse'
         '400':
           description: Client Error
           content:
@@ -353,7 +382,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProfileDetailsResponse'
+                $ref: '#/components/schemas/ProfileDetails'
         default:
           description: server error
           content:
@@ -464,13 +493,38 @@ components:
         instrument_id:
           type: integer
           format: int64
-    GetInstrumentTypesResponse:
+    InstrumentBasicMaterial:
       type: object
+      required:
+        - basic_material
+      properties:
+        basic_material:
+          type: string
+    GetInstrumentBasicMaterialsResponse:
+      type: object
+      required:
+        - content
       properties:
         content:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/InstrumentBasicMaterial'
+    InstrumentType:
+      type: object
+      required:
+        - type
+      properties:
+        instrument_type:
+          type: string
+    GetInstrumentTypesResponse:
+      type: object
+      required:
+        - content
+      properties:
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/InstrumentType'
     GetInstrumentsByCriteriaResponse:
       type: object
       required:
@@ -578,7 +632,7 @@ components:
       properties:
         jwt:
           type: string
-    ProfileDetailsResponse:
+    ProfileDetails:
       type: object
       required:
         - username
@@ -617,6 +671,9 @@ x-tagGroups:
   - name: Delete Instrument by ID
     tags:
       - deleteInstrumentById
+  - name: Get Instrument Basic Materials
+    tags:
+      - getInstrumentBasicMaterials
   - name: Get Instrument by ID
     tags:
       - getInstrumentById

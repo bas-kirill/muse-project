@@ -22,26 +22,28 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { RegistrationRequest } from '../model';
+import type { AddFavoriteRequestBody } from '../model';
+// @ts-ignore
+import type { ClientError } from '../model';
 // @ts-ignore
 import type { ServerError } from '../model';
 /**
- * UserRegistrationApi - axios parameter creator
+ * AddFavoriteApi - axios parameter creator
  * @export
  */
-export const UserRegistrationApiAxiosParamCreator = function (configuration?: Configuration) {
+export const AddFavoriteApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Register User
-         * @summary User Registration
-         * @param {RegistrationRequest} registrationRequest 
+         * Add Favorite
+         * @summary Add Favorite
+         * @param {AddFavoriteRequestBody} addFavoriteRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userRegistration: async (registrationRequest: RegistrationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'registrationRequest' is not null or undefined
-            assertParamExists('userRegistration', 'registrationRequest', registrationRequest)
-            const localVarPath = `/registration`;
+        addFavorite: async (addFavoriteRequestBody: AddFavoriteRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'addFavoriteRequestBody' is not null or undefined
+            assertParamExists('addFavorite', 'addFavoriteRequestBody', addFavoriteRequestBody)
+            const localVarPath = `/favorite/add`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -60,7 +62,7 @@ export const UserRegistrationApiAxiosParamCreator = function (configuration?: Co
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(registrationRequest, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(addFavoriteRequestBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -71,65 +73,65 @@ export const UserRegistrationApiAxiosParamCreator = function (configuration?: Co
 };
 
 /**
- * UserRegistrationApi - functional programming interface
+ * AddFavoriteApi - functional programming interface
  * @export
  */
-export const UserRegistrationApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = UserRegistrationApiAxiosParamCreator(configuration)
+export const AddFavoriteApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = AddFavoriteApiAxiosParamCreator(configuration)
     return {
         /**
-         * Register User
-         * @summary User Registration
-         * @param {RegistrationRequest} registrationRequest 
+         * Add Favorite
+         * @summary Add Favorite
+         * @param {AddFavoriteRequestBody} addFavoriteRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userRegistration(registrationRequest: RegistrationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.userRegistration(registrationRequest, options);
+        async addFavorite(addFavoriteRequestBody: AddFavoriteRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.addFavorite(addFavoriteRequestBody, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['UserRegistrationApi.userRegistration']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['AddFavoriteApi.addFavorite']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * UserRegistrationApi - factory interface
+ * AddFavoriteApi - factory interface
  * @export
  */
-export const UserRegistrationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = UserRegistrationApiFp(configuration)
+export const AddFavoriteApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = AddFavoriteApiFp(configuration)
     return {
         /**
-         * Register User
-         * @summary User Registration
-         * @param {RegistrationRequest} registrationRequest 
+         * Add Favorite
+         * @summary Add Favorite
+         * @param {AddFavoriteRequestBody} addFavoriteRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userRegistration(registrationRequest: RegistrationRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.userRegistration(registrationRequest, options).then((request) => request(axios, basePath));
+        addFavorite(addFavoriteRequestBody: AddFavoriteRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.addFavorite(addFavoriteRequestBody, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * UserRegistrationApi - object-oriented interface
+ * AddFavoriteApi - object-oriented interface
  * @export
- * @class UserRegistrationApi
+ * @class AddFavoriteApi
  * @extends {BaseAPI}
  */
-export class UserRegistrationApi extends BaseAPI {
+export class AddFavoriteApi extends BaseAPI {
     /**
-     * Register User
-     * @summary User Registration
-     * @param {RegistrationRequest} registrationRequest 
+     * Add Favorite
+     * @summary Add Favorite
+     * @param {AddFavoriteRequestBody} addFavoriteRequestBody 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UserRegistrationApi
+     * @memberof AddFavoriteApi
      */
-    public userRegistration(registrationRequest: RegistrationRequest, options?: RawAxiosRequestConfig) {
-        return UserRegistrationApiFp(this.configuration).userRegistration(registrationRequest, options).then((request) => request(this.axios, this.basePath));
+    public addFavorite(addFavoriteRequestBody: AddFavoriteRequestBody, options?: RawAxiosRequestConfig) {
+        return AddFavoriteApiFp(this.configuration).addFavorite(addFavoriteRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

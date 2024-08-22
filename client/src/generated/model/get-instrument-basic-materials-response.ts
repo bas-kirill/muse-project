@@ -15,19 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentDetail } from './instrument-detail';
+import type { InstrumentBasicMaterial } from './instrument-basic-material';
 
 /**
  * 
  * @export
- * @interface ListFavoriteResponseBody
+ * @interface GetInstrumentBasicMaterialsResponse
  */
-export interface ListFavoriteResponseBody {
+export interface GetInstrumentBasicMaterialsResponse {
     /**
      * 
-     * @type {Array<InstrumentDetail>}
-     * @memberof ListFavoriteResponseBody
+     * @type {Array<InstrumentBasicMaterial>}
+     * @memberof GetInstrumentBasicMaterialsResponse
      */
-    'content': Array<InstrumentDetail>;
+    'content': Array<InstrumentBasicMaterial>;
 }
 
