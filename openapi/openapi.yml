@@ -30,6 +30,9 @@ tags:
   - name: removeFavorite
     description: Remove Favorite
     x-displayName: removeFavorite
+  - name: createInstrument
+    description: Create Instrument
+    x-displayName: createInstrument
   - name: deleteInstrumentById
     description: Delete Instrument by ID
     x-displayName: deleteInstrumentById
@@ -173,6 +176,38 @@ paths:
                 $ref: '#/components/schemas/ClientError'
         default:
           description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /instrument/create:
+    post:
+      description: Create Instrument
+      summary: Create Instrument
+      operationId: createInstrument
+      tags:
+        - createInstrument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstrumentRequestBody'
+        required: true
+      responses:
+        '200':
+          description: Instrument Types
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: Server Error
           content:
             application/json:
               schema:
@@ -567,6 +602,35 @@ components:
         instrument_id:
           type: integer
           format: int64
+    CreateInstrumentRequestBody:
+      type: object
+      required:
+        - instrument_name
+        - instrument_type
+        - manufacturer_name
+        - manufacturer_date
+        - release_date
+        - country
+        - materials
+      properties:
+        instrument_name:
+          type: string
+        instrument_type:
+          type: string
+        manufacturer_name:
+          type: string
+        manufacturer_date:
+          type: string
+          format: date
+        release_date:
+          type: string
+          format: date
+        country:
+          type: string
+        materials:
+          type: array
+          items:
+            type: string
     InstrumentBasicMaterial:
       type: object
       required:
@@ -586,7 +650,7 @@ components:
     InstrumentType:
       type: object
       required:
-        - type
+        - instrument_type
       properties:
         instrument_type:
           type: string
@@ -761,6 +825,9 @@ x-tagGroups:
   - name: Remove Favorite
     tags:
       - removeFavorite
+  - name: Create Instrument
+    tags:
+      - createInstrument
   - name: Delete Instrument by ID
     tags:
       - deleteInstrumentById

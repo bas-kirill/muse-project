@@ -23,5 +23,5 @@ export interface InstrumentType {
    * @type {string}
    * @memberof InstrumentType
    */
-  instrument_type?: string;
+  instrument_type: string;
 }

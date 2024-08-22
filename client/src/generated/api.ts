@@ -14,6 +14,7 @@
 
 export * from "./api/add-favorite-api";
 export * from "./api/basic-login-api";
+export * from "./api/create-instrument-api";
 export * from "./api/delete-instrument-by-id-api";
 export * from "./api/get-countries-api";
 export * from "./api/get-instrument-basic-materials-api";
