@@ -12,31 +12,28 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface ProfileDetailsResponse
  */
 export interface ProfileDetailsResponse {
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
-     */
-    'username': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
-     */
-    'role': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
-     */
-    'full_name': string;
+  /**
+   *
+   * @type {string}
+   * @memberof ProfileDetailsResponse
+   */
+  username: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ProfileDetailsResponse
+   */
+  role: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ProfileDetailsResponse
+   */
+  full_name: string;
 }
-

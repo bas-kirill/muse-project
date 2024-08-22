@@ -53,8 +53,8 @@ class RestConfiguration {
 
     // @format:off
     @Bean
-    fun getInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated) =
-        GetInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated)
+    fun getInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated)
+        = GetInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated)
     // @format:on
 
     @Bean

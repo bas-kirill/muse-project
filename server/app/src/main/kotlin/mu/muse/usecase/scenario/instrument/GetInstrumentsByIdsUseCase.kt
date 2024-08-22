@@ -1,5 +1,6 @@
 package mu.muse.usecase.scenario.instrument
 
+import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.rest.instruments.toDto
@@ -10,8 +11,8 @@ class GetInstrumentsByIdsUseCase(
     private val instrumentExtractor: InstrumentExtractor,
 ) : GetInstrumentsByIds {
 
-    override fun execute(ids: List<InstrumentId>): List<InstrumentDetail> {
+    override fun execute(ids: List<InstrumentId>): List<Instrument> {
         val instruments = instrumentExtractor.findByIds(ids)
-        return instruments.map { it.toDto() }
+        return instruments
     }
 }

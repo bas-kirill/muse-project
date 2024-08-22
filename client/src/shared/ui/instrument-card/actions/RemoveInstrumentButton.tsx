@@ -14,13 +14,14 @@ export const RemoveInstrumentButton = (props: Props) => {
   useJwt();
 
   const handleOnDeleteInstrument = () => {
-    removeFavorite.removeFavorite({
-      instrument_id: props.instrument.id
-    })
+    removeFavorite
+      .removeFavorite({
+        instrument_id: props.instrument.id,
+      })
       .then(() => {
         props.setSuccessModal(true);
       })
-      .catch((r) => {
+      .catch(() => {
         throw new Error(`Fail to remove instrument ${props.instrument.id}`);
       });
   };

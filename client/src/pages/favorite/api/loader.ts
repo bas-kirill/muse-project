@@ -9,7 +9,7 @@ export interface FavoriteLoader {
 const listFavorite = new ListFavoriteApi();
 
 export const loader: LoaderFunction = async (): Promise<FavoriteLoader> => {
-  const response = await listFavorite.listFavorite()
+  const response = await listFavorite.listFavorite();
 
   return {
     instrumentDetails: response.data.content,
