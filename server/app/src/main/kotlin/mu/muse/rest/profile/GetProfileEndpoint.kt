@@ -1,7 +1,7 @@
 package mu.muse.rest.profile
 
 import mu.muse.domain.user.Username
-import mu.muse.rest.api.ProfileApi
+import mu.muse.rest.api.GetUserProfileApi
 import mu.muse.rest.dto.ProfileDetailsResponse
 import mu.muse.usecase.GetProfile
 import mu.muse.usecase.dto.ProfileDetails
@@ -10,7 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class GetProfileEndpoint(private val getProfile: GetProfile) : ProfileApi {
+class GetProfileEndpoint(private val getProfile: GetProfile) : GetUserProfileApi {
 
     override fun getProfile(): ResponseEntity<ProfileDetailsResponse> {
         val principal = SecurityContextHolder.getContext().authentication
