@@ -31,12 +31,6 @@ paths:
       operationId: listFavorite
       tags:
         - listFavorite
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "./../common/InstrumentDetail.yml#/components/schemas/InstrumentDetail"
-        required: true
       responses:
         "200":
           description: Instrument Details
@@ -61,6 +55,7 @@ components:
   schemas:
     ListFavoriteResponseBody:
       type: object
+      required: [content]
       properties:
         content:
           type: array

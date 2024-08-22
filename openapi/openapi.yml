@@ -88,12 +88,6 @@ paths:
       operationId: listFavorite
       tags:
         - listFavorite
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/InstrumentDetail'
-        required: true
       responses:
         '200':
           description: Instrument Details
@@ -414,9 +408,12 @@ components:
         - instrument_id
       properties:
         instrument_id:
-          type: string
+          type: number
+          format: int64
     ListFavoriteResponseBody:
       type: object
+      required:
+        - content
       properties:
         content:
           type: array
@@ -429,7 +426,8 @@ components:
         - instrument_id
       properties:
         instrument_id:
-          type: string
+          type: number
+          format: int64
     GetInstrumentTypesResponse:
       type: object
       properties:

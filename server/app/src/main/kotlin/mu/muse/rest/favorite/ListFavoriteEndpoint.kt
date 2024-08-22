@@ -16,7 +16,7 @@ class ListFavoriteEndpoint(
     private val getInstrumentsByIds: GetInstrumentsByIds,
 ): ListFavoriteApi {
 
-    override fun listFavorite(instrumentDetail: InstrumentDetail): ResponseEntity<ListFavoriteResponseBody> {
+    override fun listFavorite(): ResponseEntity<ListFavoriteResponseBody> {
         val session = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request.session
         val favoriteIds = session.getAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY) as MutableList<String>?
             ?: return ResponseEntity.ok(ListFavoriteResponseBody(mutableListOf()))

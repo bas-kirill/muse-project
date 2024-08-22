@@ -1,31 +1,27 @@
 import React from "react";
-import { InstrumentId } from "domain/model/instrument-id";
-import { deleteInstrument } from "shared/api/delete-instrument";
-import Jwt from "domain/model/jwt";
-import { LOGIN } from "shared/config/paths";
-import { useNavigate } from "react-router-dom";
 import { InstrumentDetail } from "generated/model";
+import { useJwt } from "pages/login";
+import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 
 interface Props {
   instrument: InstrumentDetail;
   setSuccessModal: (successModal: boolean) => void;
 }
 
+const removeFavorite = new RemoveFavoriteApi();
+
 export const RemoveInstrumentButton = (props: Props) => {
-  const navigate = useNavigate();
+  useJwt();
 
   const handleOnDeleteInstrument = () => {
-    const instrumentId = InstrumentId.from(props.instrument.id);
-    deleteInstrument(instrumentId)
+    removeFavorite.removeFavorite({
+      instrument_id: props.instrument.id
+    })
       .then(() => {
         props.setSuccessModal(true);
       })
       .catch((r) => {
-        const status = r.toJSON()["status"];
-        if (status === 401) {
-          Jwt.eraseFromLocalStorage();
-          navigate(LOGIN);
-        }
+        throw new Error(`Fail to remove instrument ${props.instrument.id}`);
       });
   };
 

@@ -13,15 +13,15 @@ import jakarta.validation.constraints.Size
 import jakarta.validation.Valid
 
 /**
- *
- * @param id
- * @param name
- * @param type
- * @param manufacturer
- * @param manufacturerDate
- * @param releaseDate
- * @param country
- * @param basicMaterials
+ * 
+ * @param id 
+ * @param name 
+ * @param type 
+ * @param manufacturer 
+ * @param manufacturerDate 
+ * @param releaseDate 
+ * @param country 
+ * @param basicMaterials 
  */
 data class InstrumentDetail(
 

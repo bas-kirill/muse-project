@@ -64,4 +64,5 @@ components:
       required: [instrument_id]
       properties:
         instrument_id:
-          type: string
+          type: number
+          format: int64

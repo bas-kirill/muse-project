@@ -14,7 +14,7 @@ export const deleteInstrument = async (
 
   const headers = {
     "Content-Type": "application/json",
-    Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
+    Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`,
   };
 
   const { status } = await axios.post(
