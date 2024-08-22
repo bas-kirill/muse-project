@@ -76,7 +76,7 @@ components:
   schemas:
     GetInstrumentByCriteriaPageResponse:
       type: object
-      required: [ content_size, contentSize, page_size, page_number, total_elements, total_pages ]
+      required: [ content, content_size, page_size, page_number, total_elements, total_pages ]
       properties:
         content:
           type: array

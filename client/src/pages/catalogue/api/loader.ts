@@ -1,13 +1,17 @@
-import { fetchFavoriteInstrumentIdsList } from "shared/api/fetch-favorite-instrument-ids.list";
 import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
   CATALOGUE_DEFAULT_PAGE_SIZE,
 } from "shared/config";
-import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api";
+import {
+  GetInstrumentsByCriteriaPaginatedApi,
+  ListFavoriteApi,
+} from "generated/api";
 import { GetInstrumentByCriteriaPageResponse } from "generated/model";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();
+
+const listFavoriteApi = new ListFavoriteApi();
 
 export interface CatalogueLoader {
   instrumentPage: GetInstrumentByCriteriaPageResponse;
@@ -15,7 +19,7 @@ export interface CatalogueLoader {
 }
 
 export const loader = async (): Promise<CatalogueLoader> => {
-  const instrumentsPagePromise =
+  const instrumentsPage =
     await getInstrumentsByCriteriaPaginated.getInstrumentsByCriteriaPaginated(
       CATALOGUE_DEFAULT_PAGE_SIZE,
       CATALOGUE_DEFAULT_PAGE_NUMBER,
@@ -24,10 +28,13 @@ export const loader = async (): Promise<CatalogueLoader> => {
         withCredentials: true,
       },
     );
-  const favoriteInstrumentIds = await fetchFavoriteInstrumentIdsList();
 
+  const favoriteInstrumentDetails = await listFavoriteApi.listFavorite();
+  const favoriteInstrumentIds = favoriteInstrumentDetails.data.content.map(
+    (favorite) => favorite.id,
+  );
   return {
-    instrumentPage: instrumentsPagePromise.data,
+    instrumentPage: instrumentsPage.data,
     favoriteInstrumentIds: favoriteInstrumentIds,
   };
 };

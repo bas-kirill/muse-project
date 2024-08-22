@@ -27,7 +27,7 @@ export interface GetInstrumentByCriteriaPageResponse {
    * @type {Array<InstrumentDetail>}
    * @memberof GetInstrumentByCriteriaPageResponse
    */
-  content?: Array<InstrumentDetail>;
+  content: Array<InstrumentDetail>;
   /**
    * The number of items in the content.
    * @type {number}

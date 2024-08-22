@@ -27,6 +27,9 @@ tags:
   - name: removeFavorite
     description: Remove Favorite
     x-displayName: removeFavorite
+  - name: deleteInstrumentById
+    description: Delete Instrument by ID
+    x-displayName: deleteInstrumentById
   - name: getInstrumentById
     description: Get Instrument by ID
     x-displayName: getInstrumentById
@@ -135,6 +138,40 @@ paths:
                 $ref: '#/components/schemas/ClientError'
         default:
           description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /instrument/{instrumentId}/delete:
+    get:
+      description: Get Instrument Types
+      summary: Get Instrument Types
+      operationId: deleteInstrumentById
+      tags:
+        - deleteInstrumentById
+      parameters:
+        - name: instrumentId
+          in: path
+          required: true
+          description: Instrument ID
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Instrument Types
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: Server Error
           content:
             application/json:
               schema:
@@ -493,8 +530,8 @@ components:
     GetInstrumentByCriteriaPageResponse:
       type: object
       required:
+        - content
         - content_size
-        - contentSize
         - page_size
         - page_number
         - total_elements
@@ -577,6 +614,9 @@ x-tagGroups:
   - name: Remove Favorite
     tags:
       - removeFavorite
+  - name: Delete Instrument by ID
+    tags:
+      - deleteInstrumentById
   - name: Get Instrument by ID
     tags:
       - getInstrumentById

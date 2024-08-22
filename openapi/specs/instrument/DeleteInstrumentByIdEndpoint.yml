@@ -1,0 +1,60 @@
+openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+
+info:
+  description: Delete Instrument by ID
+  version: 1.0.0
+  title: Delete Instrument by ID
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
+servers:
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
+
+tags:
+  - name: deleteInstrumentById
+    description: Delete Instrument by ID
+
+paths:
+  /instrument/{instrumentId}/delete:
+    get:
+      description: Get Instrument Types
+      summary: Get Instrument Types
+      operationId: deleteInstrumentById
+      tags:
+        - deleteInstrumentById
+      parameters:
+        - name: instrumentId
+          in: path
+          required: true
+          description: Instrument ID
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: Instrument Types
+          content:
+            application/json:
+              schema:
+                type: object
+        "400":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ClientError.yml#/components/schemas/ClientError"
+        default:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ServerError.yml#/components/schemas/ServerError"

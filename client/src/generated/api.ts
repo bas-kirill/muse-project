@@ -14,6 +14,7 @@
 
 export * from "./api/add-favorite-api";
 export * from "./api/basic-login-api";
+export * from "./api/delete-instrument-by-id-api";
 export * from "./api/get-instrument-by-id-api";
 export * from "./api/get-instrument-types-api";
 export * from "./api/get-instruments-by-criteria-api";
