@@ -75,7 +75,10 @@ export const EditInstrument = () => {
               required
             >
               {loader.manufacturers.map((manufacturer) => (
-                <option key={manufacturer.manufacturer} value={manufacturer.manufacturer}>
+                <option
+                  key={manufacturer.manufacturer}
+                  value={manufacturer.manufacturer}
+                >
                   {manufacturer.manufacturer}
                 </option>
               ))}

@@ -30,20 +30,23 @@ export const action: ActionFunction = async ({
     };
   }
 
-  const response = await editInstrument.editInstrument({
-    instrument_id: instrumentId.toNumberValue(),
-    instrument_name: instrumentName,
-    instrument_type: instrumentType.instrument_type,
-    manufacturer_name: manufacturerName,
-    manufacturer_date: manufactureDate,
-    release_date: releaseDate,
-    country: country.country,
-    materials: materials.map((material) => material.basic_material),
-  }, {
-    headers: {
-      Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
+  const response = await editInstrument.editInstrument(
+    {
+      instrument_id: instrumentId.toNumberValue(),
+      instrument_name: instrumentName,
+      instrument_type: instrumentType.instrument_type,
+      manufacturer_name: manufacturerName,
+      manufacturer_date: manufactureDate,
+      release_date: releaseDate,
+      country: country.country,
+      materials: materials.map((material) => material.basic_material),
     },
-  })
+    {
+      headers: {
+        Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
+      },
+    },
+  );
 
   if (response.status === 200) {
     return {
