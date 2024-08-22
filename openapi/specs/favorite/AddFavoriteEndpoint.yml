@@ -64,5 +64,4 @@ components:
       required: [instrument_id]
       properties:
         instrument_id:
-          type: integer
-          format: int64
+          $ref: "./../common/InstrumentId.yml#/components/schemas/InstrumentId"

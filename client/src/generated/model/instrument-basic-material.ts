@@ -12,16 +12,19 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
  * @interface InstrumentBasicMaterial
  */
 export interface InstrumentBasicMaterial {
-  /**
-   *
-   * @type {string}
-   * @memberof InstrumentBasicMaterial
-   */
-  basic_material: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof InstrumentBasicMaterial
+     */
+    'basic_material': string;
 }
+

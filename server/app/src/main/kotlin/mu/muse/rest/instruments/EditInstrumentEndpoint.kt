@@ -11,7 +11,10 @@ import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.domain.user.Role
 import mu.muse.rest.API_EDIT_INSTRUMENT
+import mu.muse.rest.api.EditInstrumentApi
+import mu.muse.rest.dto.EditInstrumentRequestBody
 import mu.muse.usecase.EditInstrument
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -20,16 +23,15 @@ import java.time.LocalDate
 @RestController
 class EditInstrumentEndpoint(
     private val editInstrument: EditInstrument,
-) {
+): EditInstrumentApi {
 
     @RolesAllowed(Role.EDITOR)
-    @PostMapping(API_EDIT_INSTRUMENT)
-    fun editInstrument(@RequestBody request: Request) {
-        val instrumentId = InstrumentId.from(request.instrumentId)
+    override fun editInstrument(request: EditInstrumentRequestBody): ResponseEntity<Any> {
+        val instrumentId = InstrumentId.from(request.instrumentId.toString())
         val instrumentName = InstrumentName.from(request.instrumentName)
         val instrumentType = Instrument.Type.valueOf(request.instrumentType)
         val manufacturerName = Manufacturer.valueOf(request.manufacturerName)
-        val manufacturerDate = ManufacturerDate.from(request.manufactureDate)
+        val manufacturerDate = ManufacturerDate.from(request.manufacturerDate)
         val releaseDate = ReleaseDate.from(request.releaseDate)
         val country = Country.valueOf(request.country)
         val materials = request.materials.map { Material.valueOf(it) }
@@ -43,16 +45,6 @@ class EditInstrumentEndpoint(
             country,
             materials,
         )
+        return ResponseEntity.ok().build()
     }
-
-    data class Request(
-        val instrumentId: String,
-        val instrumentName: String,
-        val instrumentType: String,
-        val manufacturerName: String,
-        val manufactureDate: LocalDate,
-        val releaseDate: LocalDate,
-        val country: String,
-        val materials: List<String>,
-    )
 }

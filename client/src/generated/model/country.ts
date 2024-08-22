@@ -12,16 +12,19 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
  * @interface Country
  */
 export interface Country {
-  /**
-   *
-   * @type {string}
-   * @memberof Country
-   */
-  country: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Country
+     */
+    'country': string;
 }
+
