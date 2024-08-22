@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import "./InstrumentActions.css";
 import { useNavigate } from "react-router-dom";
-import { deleteInstrument } from "shared/api/delete-instrument";
 import Jwt from "domain/model/jwt";
 import { LOGIN } from "shared/config/paths";
 import { Modal } from "widgets/modal";
-import { InstrumentId } from "domain/model/instrument-id";
 import { InstrumentDetail } from "generated/model";
+import { DeleteInstrumentByIdApi } from "generated/api/delete-instrument-by-id-api";
 
 interface Props {
   instrument: InstrumentDetail;
 }
+
+const deleteInstrumentById = new DeleteInstrumentByIdApi();
 
 export const InstrumentActions = (props: Props) => {
   const [deleteSuccessModal, setDeleteSuccessModal] = useState<boolean>(false);
@@ -18,7 +19,7 @@ export const InstrumentActions = (props: Props) => {
   const navigate = useNavigate();
 
   const handleOnDeleteInstrument = () => {
-    deleteInstrument(InstrumentId.from(props.instrument.id))
+    deleteInstrumentById.deleteInstrumentById(props.instrument.id)
       .then(() => {
         setDeleteSuccessModal(true);
       })

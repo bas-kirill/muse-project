@@ -17,26 +17,14 @@
 /**
  * 
  * @export
- * @interface ProfileDetailsResponse
+ * @interface RemoveFavoriteRequestBody
  */
-export interface ProfileDetailsResponse {
+export interface RemoveFavoriteRequestBody {
     /**
      * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
+     * @type {number}
+     * @memberof RemoveFavoriteRequestBody
      */
-    'username': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
-     */
-    'role': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
-     */
-    'full_name': string;
+    'instrument_id': number;
 }
 

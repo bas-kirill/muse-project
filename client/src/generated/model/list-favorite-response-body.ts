@@ -13,30 +13,21 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { InstrumentDetail } from './instrument-detail';
 
 /**
  * 
  * @export
- * @interface ProfileDetailsResponse
+ * @interface ListFavoriteResponseBody
  */
-export interface ProfileDetailsResponse {
+export interface ListFavoriteResponseBody {
     /**
      * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
+     * @type {Array<InstrumentDetail>}
+     * @memberof ListFavoriteResponseBody
      */
-    'username': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
-     */
-    'role': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
-     */
-    'full_name': string;
+    'content': Array<InstrumentDetail>;
 }
 

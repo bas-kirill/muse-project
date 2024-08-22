@@ -3,6 +3,7 @@
 api.ts
 api/add-favorite-api.ts
 api/basic-login-api.ts
+api/delete-instrument-by-id-api.ts
 api/get-instrument-by-id-api.ts
 api/get-instrument-types-api.ts
 api/get-instruments-by-criteria-api.ts

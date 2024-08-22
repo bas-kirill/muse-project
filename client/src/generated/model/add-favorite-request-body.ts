@@ -17,26 +17,14 @@
 /**
  * 
  * @export
- * @interface ProfileDetailsResponse
+ * @interface AddFavoriteRequestBody
  */
-export interface ProfileDetailsResponse {
+export interface AddFavoriteRequestBody {
     /**
      * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
+     * @type {number}
+     * @memberof AddFavoriteRequestBody
      */
-    'username': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
-     */
-    'role': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ProfileDetailsResponse
-     */
-    'full_name': string;
+    'instrument_id': number;
 }
 

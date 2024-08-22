@@ -12,20 +12,22 @@
  * Do not edit the class manually.
  */
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentDetail } from "./instrument-detail";
+import type { InstrumentDetail } from './instrument-detail';
 
 /**
- *
+ * 
  * @export
  * @interface GetInstrumentsByCriteriaResponse
  */
 export interface GetInstrumentsByCriteriaResponse {
-  /**
-   *
-   * @type {Array<InstrumentDetail>}
-   * @memberof GetInstrumentsByCriteriaResponse
-   */
-  content: Array<InstrumentDetail>;
+    /**
+     * 
+     * @type {Array<InstrumentDetail>}
+     * @memberof GetInstrumentsByCriteriaResponse
+     */
+    'content': Array<InstrumentDetail>;
 }
+

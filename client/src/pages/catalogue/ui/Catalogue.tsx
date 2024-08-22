@@ -17,9 +17,14 @@ import {
 import { SearchBarForm } from "./SearchBarForm";
 import { NavigationBar } from "./NavigationBar";
 import { CatalogueLoader } from "pages/catalogue";
-import { fetchFavoriteInstrumentIdsList } from "shared/api/fetch-favorite-instrument-ids.list";
-import { getInstrumentsByCriteriaPaginated } from "shared/api/instruments-by-criteria-paginated";
-import { InstrumentDetail } from "generated/model";
+import { type GetInstrumentCriteriaRequestBody, InstrumentDetail } from "generated/model";
+import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api/get-instruments-by-criteria-paginated-api";
+import { ListFavoriteApi } from "generated/api/list-favorite-api";
+
+const getInstrumentsByCriteriaPaginated =
+  new GetInstrumentsByCriteriaPaginatedApi();
+
+const listFavoriteApi = new ListFavoriteApi();
 
 export function Catalogue() {
   useJwt();
@@ -38,9 +43,9 @@ export function Catalogue() {
   );
 
   useEffect(() => {
-    fetchFavoriteInstrumentIdsList().then((ids) =>
-      setFavoriteInstrumentIds(ids),
-    );
+    listFavoriteApi.listFavorite().then((favorites) =>
+      setFavoriteInstrumentIds(favorites.data.content.map(favorite => favorite.id)),
+    )
 
     if (instrumentName === "") {
       filters.instrumentName = null;
@@ -49,13 +54,13 @@ export function Catalogue() {
       filters.instrumentName = instrumentName;
     }
 
-    getInstrumentsByCriteriaPaginated(
-      filters,
+    getInstrumentsByCriteriaPaginated.getInstrumentsByCriteriaPaginated(
       CATALOGUE_DEFAULT_PAGE_SIZE,
       pageNumber,
+      JSON.stringify(filters, null, 2) as GetInstrumentCriteriaRequestBody,
     ).then((r) => {
-      setInstruments(r.content);
-      totalPages.current = r.totalPages;
+      setInstruments(r.data.content);
+      totalPages.current = r.data.total_pages;
     });
   }, [filters, instrumentName, pageNumber]);
 
