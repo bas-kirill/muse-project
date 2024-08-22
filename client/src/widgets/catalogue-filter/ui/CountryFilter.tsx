@@ -16,7 +16,7 @@ export const CountryFilter = ({ onValueChange }: Props) => {
     const fetchCountries = async () => {
       const response = await getCountries.getCountries();
       setCountries(response.data.content);
-    }
+    };
     fetchCountries();
   }, []);
 

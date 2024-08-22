@@ -12,19 +12,16 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface ServerError
  */
 export interface ServerError {
-    /**
-     * A description of the error.
-     * @type {string}
-     * @memberof ServerError
-     */
-    'message': string;
+  /**
+   * A description of the error.
+   * @type {string}
+   * @memberof ServerError
+   */
+  message: string;
 }
-

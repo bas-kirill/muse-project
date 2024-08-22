@@ -12,73 +12,70 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface GetInstrumentCriteriaRequestBody
  */
 export interface GetInstrumentCriteriaRequestBody {
-    /**
-     * 
-     * @type {string}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'instrument_name'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'instrument_types'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'manufacturer_names'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'manufacture_date_from'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'manufacture_date_to'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'release_date_from'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'release_date_to'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'countries'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'materials'?: Array<string>;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof GetInstrumentCriteriaRequestBody
-     */
-    'instrument_ids'?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  instrument_name?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  instrument_types?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  manufacturer_names?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  manufacture_date_from?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  manufacture_date_to?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  release_date_from?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  release_date_to?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  countries?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  materials?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof GetInstrumentCriteriaRequestBody
+   */
+  instrument_ids?: Array<string>;
 }
-

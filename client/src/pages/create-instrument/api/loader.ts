@@ -4,7 +4,11 @@ import { API_MANUFACTURERS } from "shared/config/backend";
 import axios from "axios";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
-import type { Country, InstrumentBasicMaterial, InstrumentType } from "generated/model";
+import type {
+  Country,
+  InstrumentBasicMaterial,
+  InstrumentType,
+} from "generated/model";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
 import { GetCountriesApi } from "generated/api/get-countries-api";
 
