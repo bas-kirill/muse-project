@@ -1,8 +1,25 @@
+# spectral-disable oas3-unused-component
 openapi: "3.0.0"
 
 info:
+  description: Instrument Details
   version: 1.0.0
   title: Instrument Details
+  contact:
+    name: Kirill B.
+    url: kiryuxa.com
+    email: baskirill.an@gmail.com
+servers:
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
 
 paths: {}
 
@@ -21,13 +38,13 @@ components:
           type: string
         manufacturer:
           type: string
-        manufacturerDate:
+        manufacturer_date:
           type: string
-        releaseDate:
+        release_date:
           type: string
         country:
           type: string
-        basicMaterials:
+        basic_materials:
           type: array
           items:
             type: string

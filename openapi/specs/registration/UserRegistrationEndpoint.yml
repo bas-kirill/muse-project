@@ -1,18 +1,37 @@
 openapi: "3.0.0"
 
 info:
+  description: Register User
   version: 1.0.0
   title: Register User
+  contact:
+    name: Kirill B.
+    url: kiryuxa.com
+    email: baskirill.an@gmail.com
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
+
+tags:
+  - name: user
+    description: Everything about user
 
 paths:
-  /api/registration:
+  /registration:
     post:
+      description: Register User
       summary: User Registration
       operationId: userRegistration
       tags:
-        - userRegistration
+        - user
       requestBody:
         content:
           application/json:
@@ -37,9 +56,9 @@ components:
   schemas:
     RegistrationRequest:
       type: object
-      required: [fullName, login, password]
+      required: [full_name, login, password]
       properties:
-        fullName:
+        full_name:
           type: string
         login:
           type: string

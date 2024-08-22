@@ -1,14 +1,33 @@
 openapi: "3.0.0"
 
 info:
+  description: Get Profile
   version: 1.0.0
   title: Get Profile
+  contact:
+    name: Kirill B.
+    url: kiryuxa.com
+    email: baskirill.an@gmail.com
 servers:
-  - url: http://localhost:8080/
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
+
+tags:
+  - name: profile
+    description: Everything about user profile
 
 paths:
-  /api/profile:
+  /profile:
     get:
+      description: Get User Profile
       summary: Get Profile Info
       operationId: getProfile
       tags:
@@ -31,11 +50,11 @@ components:
   schemas:
     ProfileDetailsResponse:
       type: object
-      required: [ username, role, fullName ]
+      required: [username, role, full_name]
       properties:
         username:
           type: string
         role:
           type: string
-        fullName:
+        full_name:
           type: string

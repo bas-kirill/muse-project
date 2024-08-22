@@ -1,18 +1,37 @@
 openapi: "3.0.0"
 
 info:
+  description: Get Instrument Types
   version: 1.0.0
   title: Get Instrument Types
+  contact:
+    name: Kirill B.
+    url: kiryuxa.com
+    email: baskirill.an@gmail.com
 servers:
-  - url: http://localhost:8080/
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
+
+tags:
+  - name: instrument
+    description: Everything about instrument
 
 paths:
-  /api/instrument/types:
+  /instrument/types:
     get:
+      description: Get Instrument Types
       summary: Get Instrument Types
       operationId: getInstrumentTypes
       tags:
-        - getInstrumentTypes
+        - instrument
       responses:
         "200":
           description: Instrument Types
@@ -20,7 +39,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetInstrumentTypesResponse"
-        "500":
+        "400":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ClientError.yml#/components/schemas/ClientError"
+        default:
           description: Server Error
           content:
             application/json:

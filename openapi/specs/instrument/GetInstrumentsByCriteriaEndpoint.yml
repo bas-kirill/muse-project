@@ -1,18 +1,37 @@
 openapi: "3.0.0"
 
 info:
+  description: Get Instruments by Criteria
   version: 1.0.0
   title: Get Instruments by Criteria
+  contact:
+    name: Kirill B.
+    url: kiryuxa.com
+    email: baskirill.an@gmail.com
 servers:
-  - url: http://localhost:8080/
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
+
+tags:
+  - name: instrument
+    description: Everything about instrument
 
 paths:
-  /api/instruments:
+  /instruments:
     post:
+      description: Get Instruments by Criteria
       summary: Get Instruments by Criteria
       operationId: getInstrumentsByCriteria
       tags:
-        - getInstrumentsByCriteria
+        - instrument
       requestBody:
         content:
           application/json:
@@ -26,6 +45,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetInstrumentsByCriteriaResponse"
+        "400":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ClientError.yml#/components/schemas/ClientError"
         default:
           description: server error
           content:

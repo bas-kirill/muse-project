@@ -2,9 +2,9 @@
 openapi: "3.0.0"
 
 info:
-  description: Server Error
+  description: Client Error
   version: 1.0.0
-  title: Server Error
+  title: Client Error
   contact:
     name: Kirill B.
     url: kiryuxa.com
@@ -25,12 +25,12 @@ paths: {}
 
 components:
   schemas:
-    ServerError:
+    ClientError:
       type: object
       required: [message]
       properties:
         message:
           type: string
-          description: A description of the error.
+          description: Error description
       example:
-        message: "Internal Server Error. Please try again later."
+        message: "Client Error"

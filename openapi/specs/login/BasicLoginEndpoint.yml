@@ -1,18 +1,37 @@
 openapi: "3.0.0"
 
 info:
+  description: Basic Login
   version: 1.0.0
   title: Basic Login
+  contact:
+    name: Kirill B.
+    url: kiryuxa.com
+    email: baskirill.an@gmail.com
 servers:
-  - url: http://localhost:8080/
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
+
+tags:
+  - name: user
+    description: Everything about user
 
 paths:
-  /api/auth/login:
+  /auth/login:
     post:
+      description: Basic Authentication
       summary: Basic Login
       operationId: basicLogin
       tags:
-        - basicLogin
+        - user
       requestBody:
         content:
           application/json:

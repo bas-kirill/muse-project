@@ -1,8 +1,25 @@
+# spectral-disable oas3-unused-component
 openapi: "3.0.0"
 
 info:
+  description: Get Instruments Request Body
   version: 1.0.0
   title: Get Instruments Request Body
+  contact:
+    name: Kirill B.
+    url: kiryuxa.com
+    email: baskirill.an@gmail.com
+servers:
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+      basePath:
+        default: "api"
 
 paths: {}
 
@@ -11,37 +28,47 @@ components:
     GetInstrumentCriteriaRequestBody:
       type: object
       properties:
-        instrumentName:
+        instrument_name:
           type: string
-        instrumentTypes:
+          example: "Fender Stratocasto"
+        instrument_types:
           type: array
           items:
             type: string
-        manufacturerNames:
+            example: "KEYBOARD"
+        manufacturer_names:
           type: array
           items:
             type: string
-        manufactureDateFrom:
+            example: "Yamaha"
+        manufacture_date_from:
           type: string
           format: date
-        manufactureDateTo:
+          example: "1998-01-01"
+        manufacture_date_to:
           type: string
           format: date
-        releaseDateFrom:
+          example: "1998-01-01"
+        release_date_from:
           type: string
           format: date
-        releaseDateTo:
+          example: "1998-01-01"
+        release_date_to:
           type: string
           format: date
+          example: "1998-01-01"
         countries:
           type: array
           items:
             type: string
+            example: "CYPRUS"
         materials:
           type: array
           items:
             type: string
-        instrumentIds:
+            example: "WOOD"
+        instrument_ids:
           type: array
           items:
             type: string
+            example: "1"
