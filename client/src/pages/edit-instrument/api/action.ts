@@ -1,12 +1,13 @@
 import { ActionFunction } from "react-router-dom";
-import axios from "axios";
-import { SERVER_URL } from "shared/config";
 import Jwt from "domain/model/jwt";
 import { parseInstrumentDetails } from "shared/model/parseInstrumentDetails";
+import { EditInstrumentApi } from "generated/api/edit-instrument-api";
 
 export interface EditInstrumentAction {
-  errors: string[] | null;
+  errors: string[];
 }
+
+const editInstrument = new EditInstrumentApi();
 
 export const action: ActionFunction = async ({
   request,
@@ -29,28 +30,24 @@ export const action: ActionFunction = async ({
     };
   }
 
-  const { status } = await axios.post(
-    `${SERVER_URL}/api/instrument/edit`,
-    {
-      instrumentId: instrumentId.toNumberValue(),
-      instrumentName: instrumentName,
-      instrumentType: instrumentType,
-      manufacturerName: manufacturerName,
-      manufactureDate: manufactureDate,
-      releaseDate: releaseDate,
-      country: country,
-      materials: materials,
+  const response = await editInstrument.editInstrument({
+    instrument_id: instrumentId.toNumberValue(),
+    instrument_name: instrumentName,
+    instrument_type: instrumentType.instrument_type,
+    manufacturer_name: manufacturerName,
+    manufacturer_date: manufactureDate,
+    release_date: releaseDate,
+    country: country.country,
+    materials: materials.map((material) => material.basic_material),
+  }, {
+    headers: {
+      Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
     },
-    {
-      headers: {
-        Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
-      },
-    }, // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
-  );
+  })
 
-  if (status === 200) {
+  if (response.status === 200) {
     return {
-      errors: null,
+      errors: [],
     };
   }
 
