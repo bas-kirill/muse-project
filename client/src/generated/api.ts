@@ -18,3 +18,4 @@ export * from "./api/get-instrument-types-api";
 export * from "./api/get-instruments-by-criteria-api";
 export * from "./api/get-instruments-by-criteria-paginated-api";
 export * from "./api/profile-api";
+export * from "./api/user-registration-api";

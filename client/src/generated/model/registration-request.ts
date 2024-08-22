@@ -15,13 +15,25 @@
 /**
  *
  * @export
- * @interface InstrumentType
+ * @interface RegistrationRequest
  */
-export interface InstrumentType {
+export interface RegistrationRequest {
   /**
    *
    * @type {string}
-   * @memberof InstrumentType
+   * @memberof RegistrationRequest
    */
-  type: string;
+  fullName: string;
+  /**
+   *
+   * @type {string}
+   * @memberof RegistrationRequest
+   */
+  login: string;
+  /**
+   *
+   * @type {string}
+   * @memberof RegistrationRequest
+   */
+  password: string;
 }

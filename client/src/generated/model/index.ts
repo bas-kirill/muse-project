@@ -5,5 +5,6 @@ export * from "./get-instruments-by-criteria-response";
 export * from "./instrument-detail";
 export * from "./jwt-response";
 export * from "./profile-details-response";
+export * from "./registration-request";
 export * from "./server-error";
 export * from "./username-and-password-request-body";

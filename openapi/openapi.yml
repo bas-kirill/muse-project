@@ -4,6 +4,7 @@ info:
   version: 1.0.0
 servers:
   - url: http://localhost:8080/
+  - url: http://localhost:8080
 tags:
   - name: basicLogin
     x-displayName: basicLogin
@@ -17,6 +18,8 @@ tags:
     x-displayName: getInstrumentById
   - name: getInstrumentTypes
     x-displayName: getInstrumentTypes
+  - name: userRegistration
+    x-displayName: userRegistration
 paths:
   /api/auth/login:
     post:
@@ -168,6 +171,31 @@ paths:
                 $ref: '#/components/schemas/GetInstrumentTypesResponse'
         '500':
           description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/registration:
+    post:
+      summary: User Registration
+      operationId: userRegistration
+      tags:
+        - userRegistration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+        required: true
+      responses:
+        '200':
+          description: User Registration
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: server error
           content:
             application/json:
               schema:
@@ -332,6 +360,19 @@ components:
           type: array
           items:
             type: string
+    RegistrationRequest:
+      type: object
+      required:
+        - fullName
+        - login
+        - password
+      properties:
+        fullName:
+          type: string
+        login:
+          type: string
+        password:
+          type: string
 x-tagGroups:
   - name: Basic Login
     tags:
@@ -351,3 +392,6 @@ x-tagGroups:
   - name: Get Instrument Types
     tags:
       - getInstrumentTypes
+  - name: Register User
+    tags:
+      - userRegistration
