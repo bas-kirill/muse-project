@@ -20,7 +20,9 @@ class GetInstrumentMaterialsEndpoint(
 }
 
 fun List<Material>.toResponse(): ResponseEntity<GetInstrumentBasicMaterialsResponse> {
-    return ResponseEntity.ok(GetInstrumentBasicMaterialsResponse(content = this.map {
-        InstrumentBasicMaterial(it.name)
-    }))
+    return ResponseEntity.ok(
+        GetInstrumentBasicMaterialsResponse(
+            content = this.map { InstrumentBasicMaterial(it.name) },
+        ),
+    )
 }

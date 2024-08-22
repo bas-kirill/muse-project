@@ -29,7 +29,7 @@ import mu.muse.usecase.GetInstrumentTypes
 import mu.muse.usecase.GetInstrumentsByCriteria
 import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
 import mu.muse.usecase.GetInstrumentsByIds
-import mu.muse.usecase.GetProfile
+import mu.muse.usecase.GetUser
 import mu.muse.usecase.RegisterUser
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -45,7 +45,7 @@ class RestConfiguration {
     fun loginEndpoint(basicLogin: BasicLogin) = BasicLoginEndpoint(basicLogin)
 
     @Bean
-    fun getProfileEndpoint(getProfile: GetProfile) = GetProfileEndpoint(getProfile)
+    fun getProfileEndpoint(getUser: GetUser) = GetProfileEndpoint(getUser)
 
     @Bean
     fun getInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria: GetInstrumentsByCriteria) =

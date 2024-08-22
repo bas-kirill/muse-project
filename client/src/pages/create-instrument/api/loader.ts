@@ -1,11 +1,7 @@
 import { LoaderFunction } from "react-router-dom";
 import { SERVER_URL } from "shared/config";
-import {
-  API_COUNTRIES,
-  API_MANUFACTURERS
-} from "shared/config/backend";
+import { API_COUNTRIES, API_MANUFACTURERS } from "shared/config/backend";
 import axios from "axios";
-import { Materials } from "domain/model/material";
 import { Countries } from "domain/model/country";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
@@ -54,6 +50,6 @@ export const loader: LoaderFunction =
       instrumentTypes: instrumentTypesRequest.data.content,
       manufacturerNames: manufacturers,
       materials: instrumentBasicMaterialsRequest.data.content,
-      countries: countries
+      countries: countries,
     };
   };

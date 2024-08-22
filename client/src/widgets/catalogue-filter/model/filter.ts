@@ -2,6 +2,7 @@ import { InstrumentName } from "domain/model/instrument-name";
 import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { ManufactureDate } from "domain/model/manufacture-date";
 import { InstrumentType } from "generated/model/instrument-type";
+import { InstrumentBasicMaterial } from "generated/model";
 
 export type Filters = {
   instrumentName: InstrumentName | null;
@@ -12,7 +13,7 @@ export type Filters = {
   releaseDateFrom: string | null;
   releaseDateTo: string | null;
   countries: string[] | null;
-  materials: string[] | null;
+  materials: InstrumentBasicMaterial[] | null;
   instrumentIds: number[] | null;
 };
 

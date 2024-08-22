@@ -19,7 +19,7 @@ import mu.muse.usecase.scenario.instrument.GetInstrumentTypesUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaPaginatedUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByIdsUseCase
-import mu.muse.usecase.scenario.profile.GetProfileUseCase
+import mu.muse.usecase.scenario.profile.GetUserUseCase
 import mu.muse.usecase.scenario.registration.RegisterUserUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -30,7 +30,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 class UseCaseConfiguration {
 
     @Bean
-    fun getProfile(userExtractor: UserExtractor) = GetProfileUseCase(userExtractor)
+    fun getProfile(userExtractor: UserExtractor) = GetUserUseCase(userExtractor)
 
     @Bean
     fun getInstrumentsByCriteria(instrumentExtractor: InstrumentExtractor) =

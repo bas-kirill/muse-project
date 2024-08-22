@@ -1,15 +1,15 @@
 import { ManufacturerNames } from "domain/model/manufacturer-name";
-import { Materials } from "domain/model/material";
 import { Countries } from "domain/model/country";
 import { LoaderFunction } from "react-router-dom";
 import axios from "axios";
 import { SERVER_URL } from "shared/config";
-import {
-  API_COUNTRIES,
-  API_MANUFACTURERS
-} from "shared/config/backend";
+import { API_COUNTRIES, API_MANUFACTURERS } from "shared/config/backend";
 import { GetInstrumentByIdApi } from "generated/api/get-instrument-by-id-api";
-import { InstrumentBasicMaterial, InstrumentDetail, type InstrumentType } from "generated/model";
+import {
+  InstrumentBasicMaterial,
+  InstrumentDetail,
+  type InstrumentType,
+} from "generated/model";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
 
@@ -26,15 +26,13 @@ export interface EditInstrumentLoader {
 }
 
 export const loader: LoaderFunction = async ({
-                                               params
-                                             }): Promise<EditInstrumentLoader> => {
-  const instrumentDetailRequest =
-    await getInstrumentById.getInstrumentById(
-      params.instrumentId as string
-    );
+  params,
+}): Promise<EditInstrumentLoader> => {
+  const instrumentDetailRequest = await getInstrumentById.getInstrumentById(
+    params.instrumentId as string,
+  );
 
-  const instrumentTypesRequest =
-    await getInstrumentTypes.getInstrumentTypes();
+  const instrumentTypesRequest = await getInstrumentTypes.getInstrumentTypes();
 
   const instrumentBasicMaterialsRequest =
     await getInstrumentBasicMaterials.getInstrumentBasicMaterials();
@@ -64,6 +62,6 @@ export const loader: LoaderFunction = async ({
     instrumentTypes: instrumentTypesRequest.data.content,
     manufacturerNames: manufacturers,
     materials: instrumentBasicMaterialsRequest.data.content,
-    countries: countries
+    countries: countries,
   };
 };

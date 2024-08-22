@@ -1,29 +1,11 @@
-import { InstrumentName } from "domain/model/instrument-name";
-import { ManufacturerName } from "domain/model/manufacturer-name";
-import { ManufactureDate } from "domain/model/manufacture-date";
-import { ReleaseDate } from "domain/model/release-date";
-import { Country } from "domain/model/country";
-import { Materials } from "domain/model/material";
 import { ActionFunction } from "react-router-dom";
 import axios from "axios";
 import { SERVER_URL } from "shared/config";
 import Jwt from "domain/model/jwt";
 import { parseInstrumentDetails } from "shared/model/parseInstrumentDetails";
-import { InstrumentType } from "generated/model/instrument-type";
 
 export interface EditInstrumentAction {
   errors: string[] | null;
-}
-
-interface EditInstrumentRequestBody {
-  instrumentId: number;
-  instrumentName: InstrumentName;
-  instrumentType: InstrumentType;
-  manufacturerName: ManufacturerName;
-  manufactureDate: ManufactureDate;
-  releaseDate: ReleaseDate;
-  country: Country;
-  materials: Materials;
 }
 
 export const action: ActionFunction = async ({
@@ -47,20 +29,18 @@ export const action: ActionFunction = async ({
     };
   }
 
-  const editInstrumentRequestBody: EditInstrumentRequestBody = {
-    instrumentId: instrumentId.toNumberValue(),
-    instrumentName: instrumentName,
-    instrumentType: instrumentType,
-    manufacturerName: manufacturerName,
-    manufactureDate: manufactureDate,
-    releaseDate: releaseDate,
-    country: country,
-    materials: materials,
-  };
-
   const { status } = await axios.post(
     `${SERVER_URL}/api/instrument/edit`,
-    editInstrumentRequestBody,
+    {
+      instrumentId: instrumentId.toNumberValue(),
+      instrumentName: instrumentName,
+      instrumentType: instrumentType,
+      manufacturerName: manufacturerName,
+      manufactureDate: manufactureDate,
+      releaseDate: releaseDate,
+      country: country,
+      materials: materials,
+    },
     {
       headers: {
         Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,

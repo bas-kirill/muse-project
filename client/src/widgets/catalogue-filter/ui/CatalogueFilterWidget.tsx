@@ -12,9 +12,9 @@ import { CountryFilter } from "widgets/catalogue-filter/ui/CountryFilter";
 import { Countries } from "domain/model/country";
 import { ReleaseDate } from "domain/model/release-date";
 import { MaterialFilter } from "widgets/catalogue-filter/ui/MaterialFilter";
-import { Materials } from "domain/model/material";
 import Jwt from "domain/model/jwt";
 import { InstrumentType } from "generated/model/instrument-type";
+import { InstrumentBasicMaterial } from "generated/model";
 
 interface Props {
   onFilterChange: (filters: Filters) => void;
@@ -35,7 +35,9 @@ export const CatalogueFilterWidget = (props: Props) => {
   );
   const [releaseDateTo, setReleaseDateTo] = useState<ReleaseDate | null>(null);
   const [countries, setCountries] = useState<Countries | null>(null);
-  const [materials, setMaterials] = useState<Materials | null>(null);
+  const [materials, setMaterials] = useState<InstrumentBasicMaterial[] | null>(
+    null,
+  );
 
   useEffect(() => {
     props.onFilterChange({
