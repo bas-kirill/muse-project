@@ -81,7 +81,7 @@ components:
         content:
           type: array
           items:
-            $ref: './components/InstrumentDetail.yml#/components/schemas/InstrumentDetail'
+            $ref: "./../common/InstrumentDetail.yml#/components/schemas/InstrumentDetail"
         content_size:
           type: integer
           format: int32

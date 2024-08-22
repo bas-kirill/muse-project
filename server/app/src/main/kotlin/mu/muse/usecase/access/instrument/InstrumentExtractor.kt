@@ -15,6 +15,8 @@ interface InstrumentExtractor {
 
     fun findById(id: InstrumentId): Instrument?
 
+    fun findByIds(ids: List<InstrumentId>): List<Instrument>
+
     fun findByCriteria(criteria: Criteria): List<Instrument>
 
     fun totalElements(): Int

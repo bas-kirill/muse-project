@@ -1,0 +1,3 @@
+package mu.muse.rest
+
+const val FAVORITE_INSTRUMENTS_SESSION_KEY = "FAVORITE_INSTRUMENTS"

@@ -14,7 +14,7 @@ components:
   schemas:
     InstrumentDetail:
       type: object
-      required: [ id, name, type, manufacturer, manufacturerDate, releaseDate, country, basicMaterials]
+      required: [ id, name, type, manufacturer, manufacturer_date, release_date, country, basic_materials]
       properties:
         id:
           type: integer

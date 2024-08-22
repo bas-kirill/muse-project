@@ -12,28 +12,31 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
  * @interface RegistrationRequest
  */
 export interface RegistrationRequest {
-  /**
-   *
-   * @type {string}
-   * @memberof RegistrationRequest
-   */
-  full_name: string;
-  /**
-   *
-   * @type {string}
-   * @memberof RegistrationRequest
-   */
-  login: string;
-  /**
-   *
-   * @type {string}
-   * @memberof RegistrationRequest
-   */
-  password: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RegistrationRequest
+     */
+    'full_name': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RegistrationRequest
+     */
+    'login': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof RegistrationRequest
+     */
+    'password': string;
 }
+

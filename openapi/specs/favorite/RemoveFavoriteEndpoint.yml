@@ -1,9 +1,9 @@
 openapi: "3.1.0"
 
 info:
-  description: Get Instrument by ID
+  description: Remove Favorite
   version: 1.0.0
-  title: Get Instrument by ID
+  title: Remove Favorite
   contact:
     name: Kirill B
     email: baskirill.an@gmail.com
@@ -20,31 +20,30 @@ servers:
         default: "api"
 
 tags:
-  - name: getInstrumentById
-    description: Get Instrument by ID
+  - name: removeFavorite
+    description: Remove Favorite
 
 paths:
-  /instrument/{instrumentId}:
-    get:
-      description: Get Instrument by ID
-      summary: Get Instrument by ID
-      operationId: getInstrumentById
+  /favorite/remove:
+    post:
+      description: Remove Favorite
+      summary: Remove Favorite
+      operationId: removeFavorite
       tags:
-        - getInstrumentById
-      parameters:
-        - name: instrumentId
-          in: path
-          required: true
-          description: Instrument ID
-          schema:
-            type: string
+        - removeFavorite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RemoveFavoriteRequestBody"
+        required: true
       responses:
         "200":
-          description: Instrument Detail
+          description: Instrument Details
           content:
             application/json:
               schema:
-                $ref: "./../common/InstrumentDetail.yml#/components/schemas/InstrumentDetail"
+                type: object
         "400":
           description: Client Error
           content:
@@ -57,3 +56,12 @@ paths:
             application/json:
               schema:
                 $ref: "./../common/ServerError.yml#/components/schemas/ServerError"
+
+components:
+  schemas:
+    RemoveFavoriteRequestBody:
+      type: object
+      required: [instrument_id]
+      properties:
+        instrument_id:
+          type: string

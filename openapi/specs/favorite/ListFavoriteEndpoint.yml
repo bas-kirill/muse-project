@@ -1,9 +1,9 @@
 openapi: "3.1.0"
 
 info:
-  description: Get Instrument by ID
+  description: List Favorite
   version: 1.0.0
-  title: Get Instrument by ID
+  title: List Favorite
   contact:
     name: Kirill B
     email: baskirill.an@gmail.com
@@ -20,31 +20,30 @@ servers:
         default: "api"
 
 tags:
-  - name: getInstrumentById
-    description: Get Instrument by ID
+  - name: listFavorite
+    description: List Favorite
 
 paths:
-  /instrument/{instrumentId}:
-    get:
-      description: Get Instrument by ID
-      summary: Get Instrument by ID
-      operationId: getInstrumentById
+  /favorite/list:
+    post:
+      description: List Favorite
+      summary: List Favorite
+      operationId: listFavorite
       tags:
-        - getInstrumentById
-      parameters:
-        - name: instrumentId
-          in: path
-          required: true
-          description: Instrument ID
-          schema:
-            type: string
+        - listFavorite
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "./../common/InstrumentDetail.yml#/components/schemas/InstrumentDetail"
+        required: true
       responses:
         "200":
-          description: Instrument Detail
+          description: Instrument Details
           content:
             application/json:
               schema:
-                $ref: "./../common/InstrumentDetail.yml#/components/schemas/InstrumentDetail"
+                $ref: "#/components/schemas/ListFavoriteResponseBody"
         "400":
           description: Client Error
           content:
@@ -57,3 +56,13 @@ paths:
             application/json:
               schema:
                 $ref: "./../common/ServerError.yml#/components/schemas/ServerError"
+
+components:
+  schemas:
+    ListFavoriteResponseBody:
+      type: object
+      properties:
+        content:
+          type: array
+          items:
+            type: "./../common/InstrumentDetail.yml#/components/schemas/InstrumentDetail"
