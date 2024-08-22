@@ -1,0 +1,47 @@
+openapi: "3.0.0"
+
+info:
+  version: 1.0.0
+  title: Register User
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /api/registration:
+    post:
+      summary: User Registration
+      operationId: userRegistration
+      tags:
+        - userRegistration
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegistrationRequest"
+        required: true
+      responses:
+        "200":
+          description: User Registration
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ServerError.yml#/components/schemas/ServerError"
+
+components:
+  schemas:
+    RegistrationRequest:
+      type: object
+      required: [fullName, login, password]
+      properties:
+        fullName:
+          type: string
+        login:
+          type: string
+        password:
+          type: string

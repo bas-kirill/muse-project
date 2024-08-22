@@ -22,28 +22,26 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { JwtResponse } from '../model';
+import type { RegistrationRequest } from '../model';
 // @ts-ignore
 import type { ServerError } from '../model';
-// @ts-ignore
-import type { UsernameAndPasswordRequestBody } from '../model';
 /**
- * BasicLoginApi - axios parameter creator
+ * UserRegistrationApi - axios parameter creator
  * @export
  */
-export const BasicLoginApiAxiosParamCreator = function (configuration?: Configuration) {
+export const UserRegistrationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Basic Login
-         * @param {UsernameAndPasswordRequestBody} usernameAndPasswordRequestBody 
+         * @summary User Registration
+         * @param {RegistrationRequest} registrationRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        basicLogin: async (usernameAndPasswordRequestBody: UsernameAndPasswordRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'usernameAndPasswordRequestBody' is not null or undefined
-            assertParamExists('basicLogin', 'usernameAndPasswordRequestBody', usernameAndPasswordRequestBody)
-            const localVarPath = `/api/auth/login`;
+        userRegistration: async (registrationRequest: RegistrationRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'registrationRequest' is not null or undefined
+            assertParamExists('userRegistration', 'registrationRequest', registrationRequest)
+            const localVarPath = `/api/registration`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -62,7 +60,7 @@ export const BasicLoginApiAxiosParamCreator = function (configuration?: Configur
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(usernameAndPasswordRequestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(registrationRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -73,65 +71,65 @@ export const BasicLoginApiAxiosParamCreator = function (configuration?: Configur
 };
 
 /**
- * BasicLoginApi - functional programming interface
+ * UserRegistrationApi - functional programming interface
  * @export
  */
-export const BasicLoginApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = BasicLoginApiAxiosParamCreator(configuration)
+export const UserRegistrationApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = UserRegistrationApiAxiosParamCreator(configuration)
     return {
         /**
          * 
-         * @summary Basic Login
-         * @param {UsernameAndPasswordRequestBody} usernameAndPasswordRequestBody 
+         * @summary User Registration
+         * @param {RegistrationRequest} registrationRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async basicLogin(usernameAndPasswordRequestBody: UsernameAndPasswordRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<JwtResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.basicLogin(usernameAndPasswordRequestBody, options);
+        async userRegistration(registrationRequest: RegistrationRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userRegistration(registrationRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['BasicLoginApi.basicLogin']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['UserRegistrationApi.userRegistration']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * BasicLoginApi - factory interface
+ * UserRegistrationApi - factory interface
  * @export
  */
-export const BasicLoginApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = BasicLoginApiFp(configuration)
+export const UserRegistrationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = UserRegistrationApiFp(configuration)
     return {
         /**
          * 
-         * @summary Basic Login
-         * @param {UsernameAndPasswordRequestBody} usernameAndPasswordRequestBody 
+         * @summary User Registration
+         * @param {RegistrationRequest} registrationRequest 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        basicLogin(usernameAndPasswordRequestBody: UsernameAndPasswordRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<JwtResponse> {
-            return localVarFp.basicLogin(usernameAndPasswordRequestBody, options).then((request) => request(axios, basePath));
+        userRegistration(registrationRequest: RegistrationRequest, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.userRegistration(registrationRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * BasicLoginApi - object-oriented interface
+ * UserRegistrationApi - object-oriented interface
  * @export
- * @class BasicLoginApi
+ * @class UserRegistrationApi
  * @extends {BaseAPI}
  */
-export class BasicLoginApi extends BaseAPI {
+export class UserRegistrationApi extends BaseAPI {
     /**
      * 
-     * @summary Basic Login
-     * @param {UsernameAndPasswordRequestBody} usernameAndPasswordRequestBody 
+     * @summary User Registration
+     * @param {RegistrationRequest} registrationRequest 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof BasicLoginApi
+     * @memberof UserRegistrationApi
      */
-    public basicLogin(usernameAndPasswordRequestBody: UsernameAndPasswordRequestBody, options?: RawAxiosRequestConfig) {
-        return BasicLoginApiFp(this.configuration).basicLogin(usernameAndPasswordRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public userRegistration(registrationRequest: RegistrationRequest, options?: RawAxiosRequestConfig) {
+        return UserRegistrationApiFp(this.configuration).userRegistration(registrationRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
