@@ -61,6 +61,6 @@ export interface CreateInstrumentRequestBody {
      * @type {Array<string>}
      * @memberof CreateInstrumentRequestBody
      */
-    'materials'?: Array<string>;
+    'materials': Array<string>;
 }
 

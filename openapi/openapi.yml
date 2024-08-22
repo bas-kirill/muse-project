@@ -611,7 +611,7 @@ components:
         - manufacturer_date
         - release_date
         - country
-        - material
+        - materials
       properties:
         instrument_name:
           type: string

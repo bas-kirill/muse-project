@@ -61,7 +61,7 @@ components:
   schemas:
     CreateInstrumentRequestBody:
       type: object
-      required: [ instrument_name, instrument_type, manufacturer_name, manufacturer_date,release_date,country, material ]
+      required: [ instrument_name, instrument_type, manufacturer_name, manufacturer_date,release_date,country, materials ]
       properties:
         instrument_name:
           type: string

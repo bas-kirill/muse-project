@@ -18,6 +18,6 @@ fun interface CreateInstrument {
         manufactureDate: ManufacturerDate,
         releaseDate: ReleaseDate,
         country: Country,
-        material: Material
+        material: List<Material>,
     )
 }

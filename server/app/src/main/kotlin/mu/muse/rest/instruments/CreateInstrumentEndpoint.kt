@@ -9,15 +9,11 @@ import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.domain.user.Role
-import mu.muse.rest.API_CREATE_INSTRUMENT
 import mu.muse.rest.api.CreateInstrumentApi
 import mu.muse.rest.dto.CreateInstrumentRequestBody
 import mu.muse.usecase.CreateInstrument
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDate
 
 @RestController
 class CreateInstrumentEndpoint(
@@ -32,7 +28,7 @@ class CreateInstrumentEndpoint(
         val manufactureDate = ManufacturerDate.from(request.manufacturerDate)
         val releaseDate = ReleaseDate.from(request.releaseDate)
         val country = Country.valueOf(request.country)
-        val material = Material.valueOf(request.material)
+        val materials = request.materials.map { Material.valueOf(it) }
         createInstrument.execute(
             instrumentName,
             instrumentType,
@@ -40,7 +36,7 @@ class CreateInstrumentEndpoint(
             manufactureDate,
             releaseDate,
             country,
-            material,
+            materials,
         )
         return ResponseEntity.ok().build()
     }
