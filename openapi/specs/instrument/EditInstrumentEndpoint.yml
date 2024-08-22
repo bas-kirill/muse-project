@@ -1,9 +1,9 @@
 openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
 
 info:
-  description: Remove Favorite
+  description: Edit Instrument
   version: 1.0.0
-  title: Remove Favorite
+  title: Edit Instrument
   contact:
     name: Kirill B
     email: baskirill.an@gmail.com
@@ -20,26 +20,26 @@ servers:
         default: "api"
 
 tags:
-  - name: removeFavorite
-    description: Remove Favorite
+  - name: editInstrument
+    description: Edit Instrument
 
 paths:
-  /favorite/remove:
+  /instrument/edit:
     post:
-      description: Remove Favorite
-      summary: Remove Favorite
-      operationId: removeFavorite
+      description: Edit Instrument
+      summary: Edit Instrument
+      operationId: editInstrument
       tags:
-        - removeFavorite
+        - editInstrument
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RemoveFavoriteRequestBody"
+              $ref: '#/components/schemas/EditInstrumentRequestBody'
         required: true
       responses:
         "200":
-          description: Instrument Details
+          description: Instrument Types
           content:
             application/json:
               schema:
@@ -51,7 +51,7 @@ paths:
               schema:
                 $ref: "./../common/ClientError.yml#/components/schemas/ClientError"
         default:
-          description: server error
+          description: Server Error
           content:
             application/json:
               schema:
@@ -59,9 +59,27 @@ paths:
 
 components:
   schemas:
-    RemoveFavoriteRequestBody:
+    EditInstrumentRequestBody:
       type: object
-      required: [instrument_id]
+      required: [ instrument_name, instrument_type, manufacturer_name, manufacturer_date,release_date,country, materials ]
       properties:
         instrument_id:
           $ref: "./../common/InstrumentId.yml#/components/schemas/InstrumentId"
+        instrument_name:
+          type: string
+        instrument_type:
+          type: string
+        manufacturer_name:
+          type: string
+        manufacturer_date:
+          type: string
+          format: date
+        release_date:
+          type: string
+          format: date
+        country:
+          type: string
+        materials:
+          type: array
+          items:
+            type: string

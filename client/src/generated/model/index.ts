@@ -2,6 +2,7 @@ export * from "./add-favorite-request-body";
 export * from "./client-error";
 export * from "./country";
 export * from "./create-instrument-request-body";
+export * from "./edit-instrument-request-body";
 export * from "./get-countries-response";
 export * from "./get-instrument-basic-materials-response";
 export * from "./get-instrument-by-criteria-page-response";

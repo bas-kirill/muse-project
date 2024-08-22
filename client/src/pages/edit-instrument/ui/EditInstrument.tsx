@@ -74,9 +74,12 @@ export const EditInstrument = () => {
               defaultValue={loader.instrumentForEdit.name}
               required
             >
-              {loader.manufacturers.map((manufacturerName) => (
-                <option key={manufacturerName} value={manufacturerName}>
-                  {manufacturerName}
+              {loader.manufacturers.map((manufacturer) => (
+                <option
+                  key={manufacturer.manufacturer}
+                  value={manufacturer.manufacturer}
+                >
+                  {manufacturer.manufacturer}
                 </option>
               ))}
             </select>
@@ -149,7 +152,7 @@ export const EditInstrument = () => {
 
         <input type="submit" value="Edit" />
       </Form>
-      {actionData?.errors &&
+      {actionData.errors.length > 0 &&
         actionData?.errors.map((error) => <div key={error}>{error}</div>)}
       <Footer />
     </>

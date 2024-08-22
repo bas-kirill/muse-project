@@ -36,6 +36,9 @@ tags:
   - name: deleteInstrumentById
     description: Delete Instrument by ID
     x-displayName: deleteInstrumentById
+  - name: editInstrument
+    description: Edit Instrument
+    x-displayName: editInstrument
   - name: getInstrumentBasicMaterials
     description: Get Instrument Basic Materials
     x-displayName: getInstrumentBasicMaterials
@@ -227,6 +230,38 @@ paths:
           schema:
             type: integer
             format: int64
+      responses:
+        '200':
+          description: Instrument Types
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /instrument/edit:
+    post:
+      description: Edit Instrument
+      summary: Edit Instrument
+      operationId: editInstrument
+      tags:
+        - editInstrument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditInstrumentRequestBody'
+        required: true
       responses:
         '200':
           description: Instrument Types
@@ -551,6 +586,9 @@ components:
           type: array
           items:
             type: string
+    InstrumentId:
+      type: integer
+      format: int64
     ServerError:
       type: object
       required:
@@ -583,8 +621,7 @@ components:
         - instrument_id
       properties:
         instrument_id:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/InstrumentId'
     ListFavoriteResponseBody:
       type: object
       required:
@@ -600,8 +637,7 @@ components:
         - instrument_id
       properties:
         instrument_id:
-          type: integer
-          format: int64
+          $ref: '#/components/schemas/InstrumentId'
     CreateInstrumentRequestBody:
       type: object
       required:
@@ -613,6 +649,37 @@ components:
         - country
         - materials
       properties:
+        instrument_name:
+          type: string
+        instrument_type:
+          type: string
+        manufacturer_name:
+          type: string
+        manufacturer_date:
+          type: string
+          format: date
+        release_date:
+          type: string
+          format: date
+        country:
+          type: string
+        materials:
+          type: array
+          items:
+            type: string
+    EditInstrumentRequestBody:
+      type: object
+      required:
+        - instrument_name
+        - instrument_type
+        - manufacturer_name
+        - manufacturer_date
+        - release_date
+        - country
+        - materials
+      properties:
+        instrument_id:
+          $ref: '#/components/schemas/InstrumentId'
         instrument_name:
           type: string
         instrument_type:
@@ -831,6 +898,9 @@ x-tagGroups:
   - name: Delete Instrument by ID
     tags:
       - deleteInstrumentById
+  - name: Edit Instrument
+    tags:
+      - editInstrument
   - name: Get Instrument Basic Materials
     tags:
       - getInstrumentBasicMaterials
