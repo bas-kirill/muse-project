@@ -24,7 +24,10 @@ export const CreateInstrument = () => {
           <label htmlFor="instrument-type">Instrument Type</label>
           <select name="instrument-type" required>
             {loader.instrumentTypes.map((instrumentType) => (
-              <option key={instrumentType.instrument_type} value={instrumentType.instrument_type}>
+              <option
+                key={instrumentType.instrument_type}
+                value={instrumentType.instrument_type}
+              >
                 {instrumentType.instrument_type}
               </option>
             ))}
@@ -35,7 +38,10 @@ export const CreateInstrument = () => {
           <label htmlFor="manufacturer-name">Manufacturer name</label>
           <select name="manufacturer-name" required>
             {loader.manufacturers.map((manufacturer) => (
-              <option key={manufacturer.manufacturer} value={manufacturer.manufacturer}>
+              <option
+                key={manufacturer.manufacturer}
+                value={manufacturer.manufacturer}
+              >
                 {manufacturer.manufacturer}
               </option>
             ))}
@@ -79,7 +85,10 @@ export const CreateInstrument = () => {
           <label htmlFor="material">Basic Material</label>
           <select name="material" required>
             {loader.materials.map((material) => (
-              <option key={material.basic_material} value={material.basic_material}>
+              <option
+                key={material.basic_material}
+                value={material.basic_material}
+              >
                 {material.basic_material}
               </option>
             ))}

@@ -4,7 +4,8 @@ import {
   Country,
   InstrumentBasicMaterial,
   InstrumentDetail,
-  type InstrumentType, Manufacturer
+  type InstrumentType,
+  Manufacturer,
 } from "generated/model";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
@@ -26,10 +27,10 @@ export interface EditInstrumentLoader {
 }
 
 export const loader: LoaderFunction = async ({
-                                               params
-                                             }): Promise<EditInstrumentLoader> => {
+  params,
+}): Promise<EditInstrumentLoader> => {
   const instrumentDetailRequest = await getInstrumentById.getInstrumentById(
-    params.instrumentId as string
+    params.instrumentId as string,
   );
 
   const instrumentTypesRequest = await getInstrumentTypes.getInstrumentTypes();
@@ -45,6 +46,6 @@ export const loader: LoaderFunction = async ({
     instrumentTypes: instrumentTypesRequest.data.content,
     manufacturers: manufacturersRequest.data.content,
     materials: instrumentBasicMaterialsRequest.data.content,
-    countries: countriesRequest.data.content
+    countries: countriesRequest.data.content,
   };
 };

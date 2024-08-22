@@ -52,7 +52,10 @@ export const EditInstrument = () => {
               required
             >
               {loader.instrumentTypes.map((instrumentType) => (
-                <option key={instrumentType.instrument_type} value={instrumentType.instrument_type}>
+                <option
+                  key={instrumentType.instrument_type}
+                  value={instrumentType.instrument_type}
+                >
                   {instrumentType.instrument_type}
                 </option>
               ))}
@@ -136,9 +139,12 @@ export const EditInstrument = () => {
 
         <InstrumentBasicMaterialFormField
           materials={loader.materials}
-          usedMaterialsForInstrument={loader.instrumentForEdit.basic_materials.map(material => ({
-            basic_material: material
-          } as InstrumentBasicMaterial))}
+          usedMaterialsForInstrument={loader.instrumentForEdit.basic_materials.map(
+            (material) =>
+              ({
+                basic_material: material,
+              }) as InstrumentBasicMaterial,
+          )}
         />
 
         <input type="submit" value="Edit" />

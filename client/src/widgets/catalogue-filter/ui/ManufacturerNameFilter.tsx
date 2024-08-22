@@ -10,15 +10,13 @@ interface Props {
 const getManufacturers = new GetManufacturersApi();
 
 export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
-  const [manufacturers, setManufacturers] = useState<Manufacturer[]>(
-    [],
-  );
+  const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
 
   useEffect(() => {
     const fetchManufacturers = async () => {
       const response = await getManufacturers.getManufacturers();
       setManufacturers(response.data.content);
-    }
+    };
 
     fetchManufacturers();
   }, []);
@@ -47,7 +45,9 @@ export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
             className="manufacturer-name-filter-checkbox"
             defaultChecked={true}
           />
-          <label htmlFor={manufacturer.manufacturer}>{manufacturer.manufacturer}</label>
+          <label htmlFor={manufacturer.manufacturer}>
+            {manufacturer.manufacturer}
+          </label>
         </div>
       ))}
     </div>

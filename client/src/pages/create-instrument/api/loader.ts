@@ -3,7 +3,8 @@ import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import type {
   Country,
   InstrumentBasicMaterial,
-  InstrumentType, Manufacturer
+  InstrumentType,
+  Manufacturer,
 } from "generated/model";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
 import { GetCountriesApi } from "generated/api/get-countries-api";
@@ -37,6 +38,6 @@ export const loader: LoaderFunction =
       instrumentTypes: instrumentTypesRequest.data.content,
       manufacturers: manufacturersRequest.data.content,
       materials: instrumentBasicMaterialsRequest.data.content,
-      countries: countriesRequest.data.content
+      countries: countriesRequest.data.content,
     };
   };

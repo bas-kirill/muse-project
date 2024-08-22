@@ -12,22 +12,20 @@
  * Do not edit the class manually.
  */
 
-
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentDetail } from './instrument-detail';
+import type { InstrumentDetail } from "./instrument-detail";
 
 /**
- * 
+ *
  * @export
  * @interface ListFavoriteResponseBody
  */
 export interface ListFavoriteResponseBody {
-    /**
-     * 
-     * @type {Array<InstrumentDetail>}
-     * @memberof ListFavoriteResponseBody
-     */
-    'content': Array<InstrumentDetail>;
+  /**
+   *
+   * @type {Array<InstrumentDetail>}
+   * @memberof ListFavoriteResponseBody
+   */
+  content: Array<InstrumentDetail>;
 }
-
