@@ -22,28 +22,28 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { AddFavoriteRequestBody } from '../model';
-// @ts-ignore
 import type { ClientError } from '../model';
+// @ts-ignore
+import type { CreateInstrumentRequestBody } from '../model';
 // @ts-ignore
 import type { ServerError } from '../model';
 /**
- * AddFavoriteApi - axios parameter creator
+ * CreateInstrumentApi - axios parameter creator
  * @export
  */
-export const AddFavoriteApiAxiosParamCreator = function (configuration?: Configuration) {
+export const CreateInstrumentApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
-         * Add Favorite
-         * @summary Add Favorite
-         * @param {AddFavoriteRequestBody} addFavoriteRequestBody 
+         * Create Instrument
+         * @summary Create Instrument
+         * @param {CreateInstrumentRequestBody} createInstrumentRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addFavorite: async (addFavoriteRequestBody: AddFavoriteRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'addFavoriteRequestBody' is not null or undefined
-            assertParamExists('addFavorite', 'addFavoriteRequestBody', addFavoriteRequestBody)
-            const localVarPath = `/favorite/add`;
+        createInstrument: async (createInstrumentRequestBody: CreateInstrumentRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createInstrumentRequestBody' is not null or undefined
+            assertParamExists('createInstrument', 'createInstrumentRequestBody', createInstrumentRequestBody)
+            const localVarPath = `/instrument/create`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -62,7 +62,7 @@ export const AddFavoriteApiAxiosParamCreator = function (configuration?: Configu
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(addFavoriteRequestBody, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createInstrumentRequestBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -73,65 +73,65 @@ export const AddFavoriteApiAxiosParamCreator = function (configuration?: Configu
 };
 
 /**
- * AddFavoriteApi - functional programming interface
+ * CreateInstrumentApi - functional programming interface
  * @export
  */
-export const AddFavoriteApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = AddFavoriteApiAxiosParamCreator(configuration)
+export const CreateInstrumentApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CreateInstrumentApiAxiosParamCreator(configuration)
     return {
         /**
-         * Add Favorite
-         * @summary Add Favorite
-         * @param {AddFavoriteRequestBody} addFavoriteRequestBody 
+         * Create Instrument
+         * @summary Create Instrument
+         * @param {CreateInstrumentRequestBody} createInstrumentRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async addFavorite(addFavoriteRequestBody: AddFavoriteRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.addFavorite(addFavoriteRequestBody, options);
+        async createInstrument(createInstrumentRequestBody: CreateInstrumentRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.createInstrument(createInstrumentRequestBody, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['AddFavoriteApi.addFavorite']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CreateInstrumentApi.createInstrument']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * AddFavoriteApi - factory interface
+ * CreateInstrumentApi - factory interface
  * @export
  */
-export const AddFavoriteApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = AddFavoriteApiFp(configuration)
+export const CreateInstrumentApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CreateInstrumentApiFp(configuration)
     return {
         /**
-         * Add Favorite
-         * @summary Add Favorite
-         * @param {AddFavoriteRequestBody} addFavoriteRequestBody 
+         * Create Instrument
+         * @summary Create Instrument
+         * @param {CreateInstrumentRequestBody} createInstrumentRequestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        addFavorite(addFavoriteRequestBody: AddFavoriteRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<object> {
-            return localVarFp.addFavorite(addFavoriteRequestBody, options).then((request) => request(axios, basePath));
+        createInstrument(createInstrumentRequestBody: CreateInstrumentRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.createInstrument(createInstrumentRequestBody, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * AddFavoriteApi - object-oriented interface
+ * CreateInstrumentApi - object-oriented interface
  * @export
- * @class AddFavoriteApi
+ * @class CreateInstrumentApi
  * @extends {BaseAPI}
  */
-export class AddFavoriteApi extends BaseAPI {
+export class CreateInstrumentApi extends BaseAPI {
     /**
-     * Add Favorite
-     * @summary Add Favorite
-     * @param {AddFavoriteRequestBody} addFavoriteRequestBody 
+     * Create Instrument
+     * @summary Create Instrument
+     * @param {CreateInstrumentRequestBody} createInstrumentRequestBody 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof AddFavoriteApi
+     * @memberof CreateInstrumentApi
      */
-    public addFavorite(addFavoriteRequestBody: AddFavoriteRequestBody, options?: RawAxiosRequestConfig) {
-        return AddFavoriteApiFp(this.configuration).addFavorite(addFavoriteRequestBody, options).then((request) => request(this.axios, this.basePath));
+    public createInstrument(createInstrumentRequestBody: CreateInstrumentRequestBody, options?: RawAxiosRequestConfig) {
+        return CreateInstrumentApiFp(this.configuration).createInstrument(createInstrumentRequestBody, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

@@ -1,9 +1,9 @@
 openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
 
 info:
-  description: Get Instrument Types
+  description: Create Instrument
   version: 1.0.0
-  title: Get Instrument Types
+  title: Create Instrument
   contact:
     name: Kirill B
     email: baskirill.an@gmail.com
@@ -20,24 +20,30 @@ servers:
         default: "api"
 
 tags:
-  - name: getInstrumentTypes
-    description: Get Instrument Types
+  - name: createInstrument
+    description: Create Instrument
 
 paths:
-  /instrument/types:
-    get:
-      description: Get Instrument Types
-      summary: Get Instrument Types
-      operationId: getInstrumentTypes
+  /instrument/create:
+    post:
+      description: Create Instrument
+      summary: Create Instrument
+      operationId: createInstrument
       tags:
-        - getInstrumentTypes
+        - createInstrument
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInstrumentRequestBody'
+        required: true
       responses:
         "200":
           description: Instrument Types
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetInstrumentTypesResponse"
+                type: object
         "400":
           description: Client Error
           content:
@@ -53,19 +59,25 @@ paths:
 
 components:
   schemas:
-    InstrumentType:
+    CreateInstrumentRequestBody:
       type: object
-      required: [instrument_type]
+      required: [ instrument_name, instrument_type, manufacturer_name, manufacturer_date,release_date,country, material ]
       properties:
+        instrument_name:
+          type: string
         instrument_type:
           type: string
-
-    GetInstrumentTypesResponse:
-      type: object
-      required: [content]
-      properties:
-        content:
+        manufacturer_name:
+          type: string
+        manufacturer_date:
+          type: string
+          format: date
+        release_date:
+          type: string
+          format: date
+        country:
+          type: string
+        materials:
           type: array
           items:
-            $ref: "#/components/schemas/InstrumentType"
-
+            type: string

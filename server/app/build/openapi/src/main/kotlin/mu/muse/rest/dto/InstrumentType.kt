@@ -18,7 +18,7 @@ import jakarta.validation.Valid
  */
 data class InstrumentType(
 
-    @get:JsonProperty("instrument_type") val instrumentType: kotlin.String? = null
+    @get:JsonProperty("instrument_type", required = true) val instrumentType: kotlin.String
     ) {
 
 }

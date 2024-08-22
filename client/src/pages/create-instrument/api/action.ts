@@ -1,13 +1,13 @@
 import { ActionFunction } from "react-router-dom";
-import axios from "axios";
-import { SERVER_URL } from "shared/config";
-import { API_CREATE_INSTRUMENT } from "shared/config/backend";
 import Jwt from "domain/model/jwt";
 import { parseInstrumentDetails } from "shared/model/parseInstrumentDetails";
+import { CreateInstrumentApi } from "generated/api/create-instrument-api";
 
 export interface CreateInstrumentAction {
   errors: string[] | null;
 }
+
+const createInstrument = new CreateInstrumentApi();
 
 export const action: ActionFunction = async ({
   request,
@@ -29,25 +29,21 @@ export const action: ActionFunction = async ({
     };
   }
 
-  const { status } = await axios.post(
-    `${SERVER_URL}${API_CREATE_INSTRUMENT}`,
-    {
-      instrumentName: instrumentName,
-      instrumentType: instrumentType,
-      manufacturerName: manufacturerName,
-      manufactureDate: manufactureDate,
-      releaseDate: releaseDate,
-      country: country,
-      material: materials,
+  const response = await createInstrument.createInstrument({
+    instrument_name: instrumentName,
+    instrument_type: instrumentType.instrument_type,
+    manufacturer_name: manufacturerName,
+    manufacturer_date: manufactureDate,
+    release_date: releaseDate,
+    country: country.country,
+    materials: materials.map((material) => material.basic_material),
+  },{
+    headers: {
+      Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
     },
-    {
-      headers: {
-        Authorization: `Bearer ${Jwt.extractFromLocalStorage()?.toStringValue()}`,
-      },
-    }, // https://stackoverflow.com/questions/39153080/how-can-i-get-the-status-code-from-an-http-error-in-axios
-  );
+  })
 
-  if (status === 200) {
+  if (response.status === 200) {
     return {
       errors: null,
     };

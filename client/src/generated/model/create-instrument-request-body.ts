@@ -17,56 +17,50 @@
 /**
  * 
  * @export
- * @interface InstrumentDetail
+ * @interface CreateInstrumentRequestBody
  */
-export interface InstrumentDetail {
-    /**
-     * 
-     * @type {number}
-     * @memberof InstrumentDetail
-     */
-    'id': number;
+export interface CreateInstrumentRequestBody {
     /**
      * 
      * @type {string}
-     * @memberof InstrumentDetail
+     * @memberof CreateInstrumentRequestBody
      */
-    'name': string;
+    'instrument_name': string;
     /**
      * 
      * @type {string}
-     * @memberof InstrumentDetail
+     * @memberof CreateInstrumentRequestBody
      */
-    'type': string;
+    'instrument_type': string;
     /**
      * 
      * @type {string}
-     * @memberof InstrumentDetail
+     * @memberof CreateInstrumentRequestBody
      */
-    'manufacturer': string;
+    'manufacturer_name': string;
     /**
      * 
      * @type {string}
-     * @memberof InstrumentDetail
+     * @memberof CreateInstrumentRequestBody
      */
     'manufacturer_date': string;
     /**
      * 
      * @type {string}
-     * @memberof InstrumentDetail
+     * @memberof CreateInstrumentRequestBody
      */
     'release_date': string;
     /**
      * 
      * @type {string}
-     * @memberof InstrumentDetail
+     * @memberof CreateInstrumentRequestBody
      */
     'country': string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof InstrumentDetail
+     * @memberof CreateInstrumentRequestBody
      */
-    'basic_materials': Array<string>;
+    'materials'?: Array<string>;
 }
 

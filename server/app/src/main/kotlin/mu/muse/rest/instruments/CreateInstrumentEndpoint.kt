@@ -10,7 +10,10 @@ import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.domain.user.Role
 import mu.muse.rest.API_CREATE_INSTRUMENT
+import mu.muse.rest.api.CreateInstrumentApi
+import mu.muse.rest.dto.CreateInstrumentRequestBody
 import mu.muse.usecase.CreateInstrument
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -19,15 +22,14 @@ import java.time.LocalDate
 @RestController
 class CreateInstrumentEndpoint(
     private val createInstrument: CreateInstrument,
-) {
+): CreateInstrumentApi {
 
     @RolesAllowed(Role.EDITOR)
-    @PostMapping(API_CREATE_INSTRUMENT)
-    fun createInstrument(@RequestBody request: Request) {
+    override fun createInstrument(request: CreateInstrumentRequestBody): ResponseEntity<Any> {
         val instrumentName = InstrumentName.from(request.instrumentName)
         val instrumentType = Instrument.Type.valueOf(request.instrumentType)
         val manufacturer = Manufacturer.valueOf(request.manufacturerName)
-        val manufactureDate = ManufacturerDate.from(request.manufactureDate)
+        val manufactureDate = ManufacturerDate.from(request.manufacturerDate)
         val releaseDate = ReleaseDate.from(request.releaseDate)
         val country = Country.valueOf(request.country)
         val material = Material.valueOf(request.material)
@@ -40,15 +42,6 @@ class CreateInstrumentEndpoint(
             country,
             material,
         )
+        return ResponseEntity.ok().build()
     }
-
-    data class Request(
-        val instrumentName: String,
-        val instrumentType: String,
-        val manufacturerName: String,
-        val manufactureDate: LocalDate,
-        val releaseDate: LocalDate,
-        val country: String,
-        val material: String,
-    )
 }

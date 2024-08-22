@@ -12,22 +12,25 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
  * @interface UsernameAndPasswordRequestBody
  */
 export interface UsernameAndPasswordRequestBody {
-  /**
-   *
-   * @type {string}
-   * @memberof UsernameAndPasswordRequestBody
-   */
-  username: string;
-  /**
-   *
-   * @type {string}
-   * @memberof UsernameAndPasswordRequestBody
-   */
-  password: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsernameAndPasswordRequestBody
+     */
+    'username': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsernameAndPasswordRequestBody
+     */
+    'password': string;
 }
+
