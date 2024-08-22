@@ -12,19 +12,16 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface GetInstrumentTypesResponse
  */
 export interface GetInstrumentTypesResponse {
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof GetInstrumentTypesResponse
-     */
-    'content'?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof GetInstrumentTypesResponse
+   */
+  content?: Array<string>;
 }
-

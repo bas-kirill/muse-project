@@ -1,8 +1,11 @@
 import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
-  CATALOGUE_DEFAULT_PAGE_SIZE
+  CATALOGUE_DEFAULT_PAGE_SIZE,
 } from "shared/config";
-import { GetInstrumentsByCriteriaPaginatedApi, ListFavoriteApi } from "generated/api";
+import {
+  GetInstrumentsByCriteriaPaginatedApi,
+  ListFavoriteApi,
+} from "generated/api";
 import { GetInstrumentByCriteriaPageResponse } from "generated/model";
 
 const getInstrumentsByCriteriaPaginated =
@@ -22,14 +25,16 @@ export const loader = async (): Promise<CatalogueLoader> => {
       CATALOGUE_DEFAULT_PAGE_NUMBER,
       {},
       {
-        withCredentials: true
-      }
+        withCredentials: true,
+      },
     );
 
   const favoriteInstrumentDetails = await listFavoriteApi.listFavorite();
-  const favoriteInstrumentIds = favoriteInstrumentDetails.data.content.map((favorite) => favorite.id);
+  const favoriteInstrumentIds = favoriteInstrumentDetails.data.content.map(
+    (favorite) => favorite.id,
+  );
   return {
     instrumentPage: instrumentsPage.data,
-    favoriteInstrumentIds: favoriteInstrumentIds
+    favoriteInstrumentIds: favoriteInstrumentIds,
   };
 };

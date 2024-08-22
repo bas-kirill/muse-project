@@ -19,7 +19,8 @@ export const InstrumentActions = (props: Props) => {
   const navigate = useNavigate();
 
   const handleOnDeleteInstrument = () => {
-    deleteInstrumentById.deleteInstrumentById(props.instrument.id)
+    deleteInstrumentById
+      .deleteInstrumentById(props.instrument.id)
       .then(() => {
         setDeleteSuccessModal(true);
       })

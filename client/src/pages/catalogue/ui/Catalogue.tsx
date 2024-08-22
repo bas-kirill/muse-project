@@ -17,7 +17,10 @@ import {
 import { SearchBarForm } from "./SearchBarForm";
 import { NavigationBar } from "./NavigationBar";
 import { CatalogueLoader } from "pages/catalogue";
-import { type GetInstrumentCriteriaRequestBody, InstrumentDetail } from "generated/model";
+import {
+  type GetInstrumentCriteriaRequestBody,
+  InstrumentDetail,
+} from "generated/model";
 import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api/get-instruments-by-criteria-paginated-api";
 import { ListFavoriteApi } from "generated/api/list-favorite-api";
 
@@ -43,9 +46,13 @@ export function Catalogue() {
   );
 
   useEffect(() => {
-    listFavoriteApi.listFavorite().then((favorites) =>
-      setFavoriteInstrumentIds(favorites.data.content.map(favorite => favorite.id)),
-    )
+    listFavoriteApi
+      .listFavorite()
+      .then((favorites) =>
+        setFavoriteInstrumentIds(
+          favorites.data.content.map((favorite) => favorite.id),
+        ),
+      );
 
     if (instrumentName === "") {
       filters.instrumentName = null;
@@ -54,14 +61,16 @@ export function Catalogue() {
       filters.instrumentName = instrumentName;
     }
 
-    getInstrumentsByCriteriaPaginated.getInstrumentsByCriteriaPaginated(
-      CATALOGUE_DEFAULT_PAGE_SIZE,
-      pageNumber,
-      JSON.stringify(filters, null, 2) as GetInstrumentCriteriaRequestBody,
-    ).then((r) => {
-      setInstruments(r.data.content);
-      totalPages.current = r.data.total_pages;
-    });
+    getInstrumentsByCriteriaPaginated
+      .getInstrumentsByCriteriaPaginated(
+        CATALOGUE_DEFAULT_PAGE_SIZE,
+        pageNumber,
+        JSON.stringify(filters, null, 2) as GetInstrumentCriteriaRequestBody,
+      )
+      .then((r) => {
+        setInstruments(r.data.content);
+        totalPages.current = r.data.total_pages;
+      });
   }, [filters, instrumentName, pageNumber]);
 
   return (

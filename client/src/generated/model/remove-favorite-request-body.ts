@@ -12,19 +12,16 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface RemoveFavoriteRequestBody
  */
 export interface RemoveFavoriteRequestBody {
-    /**
-     * 
-     * @type {number}
-     * @memberof RemoveFavoriteRequestBody
-     */
-    'instrument_id': number;
+  /**
+   *
+   * @type {number}
+   * @memberof RemoveFavoriteRequestBody
+   */
+  instrument_id: number;
 }
-
