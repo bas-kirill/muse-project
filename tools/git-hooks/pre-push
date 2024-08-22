@@ -8,6 +8,8 @@ if [ "$DIFFS_COUNT" -ne 0 ]; then
 fi
 
 # Run checks
+./tools/scripts/openapi/runLinter.sh
+
 ./tools/scripts/server/buildJar.sh
 ./tools/scripts/server/runLinter.sh
 ./tools/scripts/server/runStaticAnalyzer.sh
