@@ -12,6 +12,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
     id("org.sonarqube") version "5.0.0.4638"
     id("org.openapi.generator") version "7.8.0"
+    id("info.solidsoft.pitest") version "1.15.0"
 }
 
 group = "mu.muse"
@@ -129,6 +130,16 @@ tasks.compileKotlin {
     dependsOn("openApiGenerate")
 }
 
+tasks.runKtlintCheckOverMainSourceSet {
+    dependsOn("openApiGenerate")
+}
+
 tasks.test {
     dependsOn("openApiGenerate")
+}
+
+pitest {
+    junit5PluginVersion = "1.3.0"
+    targetClasses = setOf("mu.muse.*")
+    timestampedReports = false
 }
