@@ -37,7 +37,7 @@ interface GetManufacturersApi {
 
     @RequestMapping(
             method = [RequestMethod.GET],
-            value = ["/manufacturer"],
+            value = ["/api/manufacturer"],
             produces = ["application/json"]
     )
     fun getManufacturers(): ResponseEntity<GetManufacturersResponse>

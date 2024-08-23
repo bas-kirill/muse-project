@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: userRegistration
     description: User Registration
 
 paths:
-  /registration:
+  /api/registration:
     post:
       description: Register User
       summary: User Registration

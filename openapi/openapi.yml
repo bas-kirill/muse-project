@@ -15,8 +15,6 @@ servers:
         enum:
           - '8080'
           - '8000'
-      basePath:
-        default: api
 tags:
   - name: getCountries
     description: Get Countries
@@ -67,7 +65,7 @@ tags:
     description: User Registration
     x-displayName: userRegistration
 paths:
-  /countries:
+  /api/countries:
     get:
       description: Get Countries
       summary: Get Countries
@@ -93,7 +91,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /favorite/add:
+  /api/favorite/add:
     post:
       description: Add Favorite
       summary: Add Favorite
@@ -104,7 +102,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddFavoriteRequestBody'
+              $ref: '#/components/schemas/InstrumentId'
         required: true
       responses:
         '200':
@@ -125,8 +123,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /favorite/list:
-    post:
+  /api/favorite/list:
+    get:
       description: List Favorite
       summary: List Favorite
       operationId: listFavorite
@@ -151,7 +149,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /favorite/remove:
+  /api/favorite/remove:
     post:
       description: Remove Favorite
       summary: Remove Favorite
@@ -183,7 +181,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /instrument/create:
+  /api/instrument/create:
     post:
       description: Create Instrument
       summary: Create Instrument
@@ -215,7 +213,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /instrument/{instrumentId}/delete:
+  /api/instrument/{instrumentId}/delete:
     get:
       description: Get Instrument Types
       summary: Get Instrument Types
@@ -249,7 +247,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /instrument/edit:
+  /api/instrument/edit:
     post:
       description: Edit Instrument
       summary: Edit Instrument
@@ -281,7 +279,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /instrument/materials:
+  /api/instrument/materials:
     get:
       description: Get Instrument Basic Materials
       summary: Get Instrument Basic Materials
@@ -307,7 +305,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /instrument/{instrumentId}:
+  /api/instrument/{instrumentId}:
     get:
       description: Get Instrument by ID
       summary: Get Instrument by ID
@@ -340,7 +338,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /instrument/types:
+  /api/instrument/types:
     get:
       description: Get Instrument Types
       summary: Get Instrument Types
@@ -366,7 +364,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /instruments:
+  /api/instruments:
     post:
       description: Get Instruments by Criteria
       summary: Get Instruments by Criteria
@@ -398,7 +396,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /instruments/paginated:
+  /api/instruments/paginated:
     post:
       description: Get Instruments by Criteria Paginated
       summary: Get Instruments by Criteria Paginated
@@ -445,7 +443,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /auth/login:
+  /api/auth/login:
     post:
       description: Basic Authentication
       summary: Basic Login
@@ -471,7 +469,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /manufacturer:
+  /api/manufacturer:
     get:
       description: Get Manufacturers
       summary: Get Manufacturers
@@ -497,7 +495,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /profile:
+  /api/profile:
     get:
       description: Get User Profile
       summary: Get Profile Info
@@ -517,7 +515,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ServerError'
-  /registration:
+  /api/registration:
     post:
       description: Register User
       summary: User Registration
@@ -671,13 +669,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Country'
-    AddFavoriteRequestBody:
-      type: object
-      required:
-        - instrument_id
-      properties:
-        instrument_id:
-          $ref: '#/components/schemas/InstrumentId'
     ListFavoriteResponseBody:
       type: object
       required:

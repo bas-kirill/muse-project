@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: getInstrumentTypes
     description: Get Instrument Types
 
 paths:
-  /instrument/types:
+  /api/instrument/types:
     get:
       description: Get Instrument Types
       summary: Get Instrument Types

@@ -6,24 +6,30 @@ import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 interface Props {
   instrument: InstrumentDetail;
   setSuccessModal: (successModal: boolean) => void;
+  setErrorModal: (errorModal: boolean) => void;
 }
 
-const removeFavorite = new RemoveFavoriteApi();
+const removeFavoriteApi = new RemoveFavoriteApi();
 
 export const RemoveInstrumentButton = (props: Props) => {
   useJwt();
 
   const handleOnDeleteInstrument = () => {
-    removeFavorite
-      .removeFavorite(props.instrument.instrument_id)
-      .then(() => {
+    const removeFavorite = async () => {
+      const response = await removeFavoriteApi
+        .removeFavorite(props.instrument.instrument_id, {
+          withCredentials: true,
+        })
+
+      if (response.status === 200) {
         props.setSuccessModal(true);
-      })
-      .catch(() => {
-        throw new Error(
-          `Fail to remove instrument ${props.instrument.instrument_id.instrument_id}`,
-        );
-      });
+        return
+      }
+
+      props.setErrorModal(true);
+    }
+
+    removeFavorite();
   };
 
   return (

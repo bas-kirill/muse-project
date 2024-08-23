@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: getInstrumentById
     description: Get Instrument by ID
 
 paths:
-  /instrument/{instrumentId}:
+  /api/instrument/{instrumentId}:
     get:
       description: Get Instrument by ID
       summary: Get Instrument by ID

@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: getInstrumentsByCriteriaPaginated
     description: Get Instruments by Criteria Paginated
 
 paths:
-  /instruments/paginated:
+  /api/instruments/paginated:
     post:
       description: Get Instruments by Criteria Paginated
       summary: Get Instruments by Criteria Paginated

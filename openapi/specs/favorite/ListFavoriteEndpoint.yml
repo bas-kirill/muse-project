@@ -16,16 +16,14 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: listFavorite
     description: List Favorite
 
 paths:
-  /favorite/list:
-    post:
+  /api/favorite/list:
+    get:
       description: List Favorite
       summary: List Favorite
       operationId: listFavorite

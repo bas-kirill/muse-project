@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: createInstrument
     description: Create Instrument
 
 paths:
-  /instrument/create:
+  /api/instrument/create:
     post:
       description: Create Instrument
       summary: Create Instrument

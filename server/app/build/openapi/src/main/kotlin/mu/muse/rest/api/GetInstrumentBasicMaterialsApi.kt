@@ -37,7 +37,7 @@ interface GetInstrumentBasicMaterialsApi {
 
     @RequestMapping(
             method = [RequestMethod.GET],
-            value = ["/instrument/materials"],
+            value = ["/api/instrument/materials"],
             produces = ["application/json"]
     )
     fun getInstrumentBasicMaterials(): ResponseEntity<GetInstrumentBasicMaterialsResponse>

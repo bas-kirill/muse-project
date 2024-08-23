@@ -22,7 +22,6 @@ common.ts
 configuration.ts
 git_push.sh
 index.ts
-model/add-favorite-request-body.ts
 model/basic-material.ts
 model/client-error.ts
 model/country.ts

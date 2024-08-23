@@ -38,7 +38,7 @@ interface GetInstrumentsByCriteriaApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/instruments"],
+            value = ["/api/instruments"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )

@@ -37,7 +37,7 @@ interface CreateInstrumentApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/instrument/create"],
+            value = ["/api/instrument/create"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )

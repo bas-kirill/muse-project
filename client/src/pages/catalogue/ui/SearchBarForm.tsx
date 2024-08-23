@@ -1,8 +1,10 @@
 import React from "react";
 import { InstrumentName } from "generated/model";
+import { Filters } from "widgets/catalogue-filter";
 
 interface Props {
-  setInstrumentName: (name: InstrumentName) => void;
+  filters: Filters;
+  setFilters: (filter: Filters) => void;
 }
 
 export const SearchBarForm = (props: Props) => {
@@ -12,9 +14,12 @@ export const SearchBarForm = (props: Props) => {
         type="text"
         placeholder={"Search..."}
         onChange={(e) => {
-          props.setInstrumentName({
-            instrument_name: e.target.value,
-          } as InstrumentName);
+          props.setFilters({
+            ...props.filters,
+            instrumentName: ({
+              instrument_name: e.target.value
+            } as InstrumentName)
+          })
         }}
       />
     </div>

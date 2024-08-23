@@ -37,7 +37,7 @@ interface GetInstrumentTypesApi {
 
     @RequestMapping(
             method = [RequestMethod.GET],
-            value = ["/instrument/types"],
+            value = ["/api/instrument/types"],
             produces = ["application/json"]
     )
     fun getInstrumentTypes(): ResponseEntity<GetInstrumentTypesResponse>

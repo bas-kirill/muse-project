@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: getCountries
     description: Get Countries
 
 paths:
-  /countries:
+  /api/countries:
     get:
       description: Get Countries
       summary: Get Countries

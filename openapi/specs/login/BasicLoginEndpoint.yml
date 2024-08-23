@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: basicLogin
     description: Everything about user
 
 paths:
-  /auth/login:
+  /api/auth/login:
     post:
       description: Basic Authentication
       summary: Basic Login

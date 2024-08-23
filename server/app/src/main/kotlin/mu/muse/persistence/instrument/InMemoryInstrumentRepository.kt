@@ -40,7 +40,7 @@ class InMemoryInstrumentRepository(
 }
 
 infix fun Instrument.matches(criteria: InstrumentExtractor.Criteria): Boolean {
-    return (criteria.name == null || this.name.matches(criteria.name)) &&
+    return (criteria.name == null || criteria.name.emptiness() || this.name.matches(criteria.name)) &&
         (criteria.types == null || this.type in criteria.types) &&
         (criteria.manufacturers == null || this.manufacturer in criteria.manufacturers) &&
         this.manufactureDate.inRangeInclusive(

@@ -1,8 +1,8 @@
 import React from "react";
 
 interface Props {
-  pageNumber: number;
   totalPages: number;
+  pageNumber: number;
   setPageNumber: (pageNumber: number) => void;
 }
 
