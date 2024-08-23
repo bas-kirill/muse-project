@@ -21,4 +21,3 @@ export type Filters = {
   materials: BasicMaterial[] | null;
   instrumentIds: InstrumentId[] | null;
 };
-

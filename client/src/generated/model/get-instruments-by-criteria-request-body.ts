@@ -12,97 +12,95 @@
  * Do not edit the class manually.
  */
 
-
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BasicMaterial } from './basic-material';
+import type { BasicMaterial } from "./basic-material";
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Country } from './country';
+import type { Country } from "./country";
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentId } from './instrument-id';
+import type { InstrumentId } from "./instrument-id";
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentName } from './instrument-name';
+import type { InstrumentName } from "./instrument-name";
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentType } from './instrument-type';
+import type { InstrumentType } from "./instrument-type";
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ManufactureDate } from './manufacture-date';
+import type { ManufactureDate } from "./manufacture-date";
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ManufacturerName } from './manufacturer-name';
+import type { ManufacturerName } from "./manufacturer-name";
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ReleaseDate } from './release-date';
+import type { ReleaseDate } from "./release-date";
 
 /**
- * 
+ *
  * @export
  * @interface GetInstrumentsByCriteriaRequestBody
  */
 export interface GetInstrumentsByCriteriaRequestBody {
-    /**
-     * 
-     * @type {InstrumentName}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'instrument_name'?: InstrumentName | null;
-    /**
-     * 
-     * @type {Array<InstrumentType>}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'instrument_types'?: Array<InstrumentType> | null;
-    /**
-     * 
-     * @type {Array<ManufacturerName>}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'manufacturer_names'?: Array<ManufacturerName> | null;
-    /**
-     * 
-     * @type {ManufactureDate}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'manufacture_date_from'?: ManufactureDate | null;
-    /**
-     * 
-     * @type {ManufactureDate}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'manufacture_date_to'?: ManufactureDate | null;
-    /**
-     * 
-     * @type {ReleaseDate}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'release_date_from'?: ReleaseDate | null;
-    /**
-     * 
-     * @type {ReleaseDate}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'release_date_to'?: ReleaseDate | null;
-    /**
-     * 
-     * @type {Array<Country>}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'countries'?: Array<Country> | null;
-    /**
-     * 
-     * @type {Array<BasicMaterial>}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'materials'?: Array<BasicMaterial> | null;
-    /**
-     * 
-     * @type {Array<InstrumentId>}
-     * @memberof GetInstrumentsByCriteriaRequestBody
-     */
-    'instrument_ids'?: Array<InstrumentId> | null;
+  /**
+   *
+   * @type {InstrumentName}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  instrument_name?: InstrumentName | null;
+  /**
+   *
+   * @type {Array<InstrumentType>}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  instrument_types?: Array<InstrumentType> | null;
+  /**
+   *
+   * @type {Array<ManufacturerName>}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  manufacturer_names?: Array<ManufacturerName> | null;
+  /**
+   *
+   * @type {ManufactureDate}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  manufacture_date_from?: ManufactureDate | null;
+  /**
+   *
+   * @type {ManufactureDate}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  manufacture_date_to?: ManufactureDate | null;
+  /**
+   *
+   * @type {ReleaseDate}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  release_date_from?: ReleaseDate | null;
+  /**
+   *
+   * @type {ReleaseDate}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  release_date_to?: ReleaseDate | null;
+  /**
+   *
+   * @type {Array<Country>}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  countries?: Array<Country> | null;
+  /**
+   *
+   * @type {Array<BasicMaterial>}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  materials?: Array<BasicMaterial> | null;
+  /**
+   *
+   * @type {Array<InstrumentId>}
+   * @memberof GetInstrumentsByCriteriaRequestBody
+   */
+  instrument_ids?: Array<InstrumentId> | null;
 }
-

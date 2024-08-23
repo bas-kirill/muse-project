@@ -3,22 +3,14 @@ import "./Catalogue.css";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
-import {
-  CatalogueFilterWidget,
-  Filters
-} from "widgets/catalogue-filter";
+import { CatalogueFilterWidget, Filters } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import { useJwt } from "pages/login";
-import {
-  CATALOGUE_DEFAULT_PAGE_SIZE
-} from "shared/config/frontend";
+import { CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
 import { SearchBarForm } from "./SearchBarForm";
 import { NavigationBar } from "./NavigationBar";
 import { ListFavoriteApi } from "generated/api/list-favorite-api";
-import {
-  InstrumentDetail,
-  InstrumentId
-} from "generated/model";
+import { InstrumentDetail, InstrumentId } from "generated/model";
 import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api/get-instruments-by-criteria-paginated-api";
 import { CatalogueLoader } from "pages/catalogue";
 
@@ -32,25 +24,25 @@ export function Catalogue() {
 
   const loader = useLoaderData() as CatalogueLoader; // https://github.com/remix-run/react-router/discussions/9792
 
-  const [instruments, setInstruments] =
-    useState<InstrumentDetail[]>(loader.instrumentPage.content);
-  const [filters, setFilters] =
-    useState<Filters>(loader.defaultFilter);
-  const [pageNumber, setPageNumber] =
-    useState<number>(loader.instrumentPage.page_number);
-  const totalPages =
-    useRef<number>(loader.instrumentPage.total_pages);
-  const [favoriteInstrumentIds, setFavoriteInstrumentIds] =
-    useState<InstrumentId[]>(loader.favoriteInstrumentIds);
+  const [instruments, setInstruments] = useState<InstrumentDetail[]>(
+    loader.instrumentPage.content,
+  );
+  const [filters, setFilters] = useState<Filters>(loader.defaultFilter);
+  const [pageNumber, setPageNumber] = useState<number>(
+    loader.instrumentPage.page_number,
+  );
+  const totalPages = useRef<number>(loader.instrumentPage.total_pages);
+  const [favoriteInstrumentIds, setFavoriteInstrumentIds] = useState<
+    InstrumentId[]
+  >(loader.favoriteInstrumentIds);
 
   useEffect(() => {
     const fetchFavorite = async () => {
-      const response = await listFavoriteApi
-        .listFavorite({
-          withCredentials: true
-        });
+      const response = await listFavoriteApi.listFavorite({
+        withCredentials: true,
+      });
       setFavoriteInstrumentIds(
-        response.data.content.map((favorite) => favorite.instrument_id)
+        response.data.content.map((favorite) => favorite.instrument_id),
       );
     };
 
@@ -71,8 +63,8 @@ export function Catalogue() {
             release_date_to: filters.releaseDateTo,
             countries: filters.countries,
             materials: filters.materials,
-            instrument_ids: filters.instrumentIds
-          }
+            instrument_ids: filters.instrumentIds,
+          },
         );
       setInstruments(response.data.content);
       totalPages.current = response.data.total_pages;

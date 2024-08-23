@@ -1,14 +1,14 @@
 import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
-  CATALOGUE_DEFAULT_PAGE_SIZE
+  CATALOGUE_DEFAULT_PAGE_SIZE,
 } from "shared/config";
 import {
   GetInstrumentsByCriteriaPaginatedApi,
-  ListFavoriteApi
+  ListFavoriteApi,
 } from "generated/api";
 import {
   GetInstrumentByCriteriaPageResponse,
-  InstrumentId
+  InstrumentId,
 } from "generated/model";
 import { Filters } from "widgets/catalogue-filter";
 
@@ -37,15 +37,15 @@ export const loader = async (): Promise<CatalogueLoader> => {
         release_date_to: null,
         countries: null,
         materials: null,
-        instrument_ids: null
-      }
+        instrument_ids: null,
+      },
     );
 
   const favoriteInstrumentsRequest = await listFavoriteApi.listFavorite({
     withCredentials: true,
   });
   const favoriteInstrumentIds = favoriteInstrumentsRequest.data.content.map(
-    (favorite) => favorite.instrument_id
+    (favorite) => favorite.instrument_id,
   );
   return {
     instrumentPage: instrumentsPage.data,
@@ -60,7 +60,7 @@ export const loader = async (): Promise<CatalogueLoader> => {
       releaseDateTo: null,
       countries: null,
       materials: null,
-      instrumentIds: null
-    }
+      instrumentIds: null,
+    },
   };
 };

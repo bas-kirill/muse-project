@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useJwt } from "pages/login";
 import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 import { AddFavoriteApi } from "generated/api/add-favorite-api";
@@ -22,11 +22,9 @@ export const AddOrRemoveFavoriteButton = (props: Props) => {
         withCredentials: true,
       });
     } else {
-      addFavorite.addFavorite(props.instrumentId,
-        {
-          withCredentials: true,
-        },
-      );
+      addFavorite.addFavorite(props.instrumentId, {
+        withCredentials: true,
+      });
     }
     setFavorite(!favorite);
   };

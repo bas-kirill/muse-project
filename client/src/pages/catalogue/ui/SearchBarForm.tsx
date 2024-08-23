@@ -16,10 +16,10 @@ export const SearchBarForm = (props: Props) => {
         onChange={(e) => {
           props.setFilters({
             ...props.filters,
-            instrumentName: ({
-              instrument_name: e.target.value
-            } as InstrumentName)
-          })
+            instrumentName: {
+              instrument_name: e.target.value,
+            } as InstrumentName,
+          });
         }}
       />
     </div>

@@ -16,18 +16,20 @@ export const RemoveInstrumentButton = (props: Props) => {
 
   const handleOnDeleteInstrument = () => {
     const removeFavorite = async () => {
-      const response = await removeFavoriteApi
-        .removeFavorite(props.instrument.instrument_id, {
+      const response = await removeFavoriteApi.removeFavorite(
+        props.instrument.instrument_id,
+        {
           withCredentials: true,
-        })
+        },
+      );
 
       if (response.status === 200) {
         props.setSuccessModal(true);
-        return
+        return;
       }
 
       props.setErrorModal(true);
-    }
+    };
 
     removeFavorite();
   };
