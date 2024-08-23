@@ -1,4 +1,4 @@
-package mu.muse.persistence.instrument
+package mu.muse.persistence.instrument.inmemory
 
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
@@ -42,13 +42,13 @@ class InMemoryInstrumentRepository(
 @Suppress("CyclomaticComplexMethod")
 infix fun Instrument.matches(criteria: InstrumentExtractor.Criteria): Boolean =
     (criteria.name == null || criteria.name.emptiness() || this.name.matches(criteria.name)) &&
-    (criteria.types == null || this.type in criteria.types) &&
-    (criteria.manufacturers == null || this.manufacturer in criteria.manufacturers) &&
-    this.manufactureDate.inRangeInclusive(
-        criteria.manufacturerDateFrom,
-        criteria.manufacturerDateTo,
-    ) &&
-    this.releaseDate.inRangeInclusive(criteria.releaseDateFrom, criteria.releaseDateTo) &&
-    (criteria.countries == null || this.country in criteria.countries) &&
-    (criteria.materials == null || criteria.materials.containsAll(this.materials)) &&
-    (criteria.instrumentIds == null || criteria.instrumentIds.contains(this.id))
+        (criteria.types == null || this.type in criteria.types) &&
+        (criteria.manufacturers == null || this.manufacturer in criteria.manufacturers) &&
+        this.manufactureDate.inRangeInclusive(
+            criteria.manufacturerDateFrom,
+            criteria.manufacturerDateTo,
+        ) &&
+        this.releaseDate.inRangeInclusive(criteria.releaseDateFrom, criteria.releaseDateTo) &&
+        (criteria.countries == null || this.country in criteria.countries) &&
+        (criteria.materials == null || criteria.materials.containsAll(this.materials)) &&
+        (criteria.instrumentIds == null || criteria.instrumentIds.contains(this.id))

@@ -6,5 +6,7 @@ class UserId internal constructor(private val value: Long) {
             require(value >= 1L && value <= Long.MAX_VALUE)
             return UserId(value)
         }
+
+        fun zero() = UserId(0)
     }
 }

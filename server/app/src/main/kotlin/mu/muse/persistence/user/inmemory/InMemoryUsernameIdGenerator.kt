@@ -1,4 +1,4 @@
-package mu.muse.persistence.user
+package mu.muse.persistence.user.inmemory
 
 import mu.muse.domain.IdGenerator
 import mu.muse.domain.user.UserId

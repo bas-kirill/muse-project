@@ -25,7 +25,7 @@ class GetInstrumentByIdEndpoint(
     private val getInstrumentById: GetInstrumentById,
 ) : GetInstrumentByIdApi {
 
-    override fun getInstrumentById(instrumentId: String): ResponseEntity<InstrumentDetail> {
+    override fun getInstrumentById(instrumentId: Long): ResponseEntity<InstrumentDetail> {
         val id = InstrumentId.from(instrumentId)
         val instrument = getInstrumentById.execute(id)
         val instrumentDetail = instrument.toDto()
