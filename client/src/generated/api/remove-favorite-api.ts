@@ -65,7 +65,7 @@ export const RemoveFavoriteApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'instrumentId' is not null or undefined
       assertParamExists("removeFavorite", "instrumentId", instrumentId);
-      const localVarPath = `/favorite/remove`;
+      const localVarPath = `/api/favorite/remove`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;

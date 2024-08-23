@@ -8,7 +8,7 @@ import mu.muse.rest.API_COUNTRIES
 import mu.muse.rest.API_FAVORITE_ADD
 import mu.muse.rest.API_FAVORITE_LIST
 import mu.muse.rest.API_FAVORITE_REMOVE
-import mu.muse.rest.API_GET_MANUFACTURER_NAMES
+import mu.muse.rest.API_MANUFACTURERS
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENTS_PAGINATED
 import mu.muse.rest.API_INSTRUMENT_BY_ID
@@ -97,7 +97,7 @@ class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_TYPES).permitAll()
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_MATERIALS).permitAll()
                 .requestMatchers(HttpMethod.GET, API_COUNTRIES).permitAll()
-                .requestMatchers(HttpMethod.GET, API_GET_MANUFACTURER_NAMES).permitAll()
+                .requestMatchers(HttpMethod.GET, API_MANUFACTURERS).permitAll()
                 .requestMatchers(HttpMethod.POST, API_REGISTRATION).permitAll()
                 .requestMatchers(HttpMethod.POST, API_FAVORITE_ADD).permitAll()
                 .requestMatchers(HttpMethod.POST, API_FAVORITE_REMOVE).permitAll()

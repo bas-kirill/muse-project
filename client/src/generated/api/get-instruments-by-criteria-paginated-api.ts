@@ -87,7 +87,7 @@ export const GetInstrumentsByCriteriaPaginatedApiAxiosParamCreator = function (
         "getInstrumentsByCriteriaRequestBody",
         getInstrumentsByCriteriaRequestBody,
       );
-      const localVarPath = `/instruments/paginated`;
+      const localVarPath = `/api/instruments/paginated`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;

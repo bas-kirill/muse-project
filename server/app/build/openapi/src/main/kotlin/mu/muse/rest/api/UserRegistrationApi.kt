@@ -36,7 +36,7 @@ interface UserRegistrationApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/registration"],
+            value = ["/api/registration"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )

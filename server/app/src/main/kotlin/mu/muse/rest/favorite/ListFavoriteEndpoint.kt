@@ -4,7 +4,6 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.rest.FAVORITE_INSTRUMENTS_SESSION_KEY
 import mu.muse.rest.api.ListFavoriteApi
-import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.rest.dto.ListFavoriteResponseBody
 import mu.muse.rest.instruments.toDto
 import mu.muse.usecase.GetInstrumentsByIds

@@ -1,4 +1,3 @@
-export * from "./add-favorite-request-body";
 export * from "./basic-material";
 export * from "./client-error";
 export * from "./country";

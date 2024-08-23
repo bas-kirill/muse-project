@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: getInstrumentsByCriteria
     description: Get Instruments by Criteria
 
 paths:
-  /instruments:
+  /api/instruments:
     post:
       description: Get Instruments by Criteria
       summary: Get Instruments by Criteria

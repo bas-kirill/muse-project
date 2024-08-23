@@ -4,6 +4,8 @@ data class InstrumentName internal constructor(private val value: String) {
 
     fun toStringValue() = value
 
+    fun emptiness() = value.isEmpty()
+
     fun matches(other: InstrumentName): Boolean {
         return value.lowercase().contains(other.toStringValue().lowercase())
     }

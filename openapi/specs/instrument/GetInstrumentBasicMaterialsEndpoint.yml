@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: getInstrumentBasicMaterials
     description: Get Instrument Basic Materials
 
 paths:
-  /instrument/materials:
+  /api/instrument/materials:
     get:
       description: Get Instrument Basic Materials
       summary: Get Instrument Basic Materials

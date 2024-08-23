@@ -61,7 +61,7 @@ export const GetManufacturersApiAxiosParamCreator = function (
     getManufacturers: async (
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
-      const localVarPath = `/manufacturer`;
+      const localVarPath = `/api/manufacturer`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;

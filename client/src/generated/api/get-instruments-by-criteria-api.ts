@@ -71,7 +71,7 @@ export const GetInstrumentsByCriteriaApiAxiosParamCreator = function (
         "getInstrumentsByCriteriaRequestBody",
         getInstrumentsByCriteriaRequestBody,
       );
-      const localVarPath = `/instruments`;
+      const localVarPath = `/api/instruments`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;

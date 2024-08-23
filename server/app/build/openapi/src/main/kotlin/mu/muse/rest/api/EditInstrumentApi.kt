@@ -37,7 +37,7 @@ interface EditInstrumentApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/instrument/edit"],
+            value = ["/api/instrument/edit"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )

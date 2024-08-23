@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useState } from "react";
 import { useJwt } from "pages/login";
 import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 import { AddFavoriteApi } from "generated/api/add-favorite-api";
@@ -12,31 +12,26 @@ interface Props {
 const removeFavorite = new RemoveFavoriteApi();
 const addFavorite = new AddFavoriteApi();
 
-export const AddFavoriteButton = (props: Props) => {
+export const AddOrRemoveFavoriteButton = (props: Props) => {
   useJwt();
-  const favoriteRef = useRef<boolean>(props.favorite);
+  const [favorite, setFavorite] = useState<boolean>(props.favorite);
 
   const toggleFavorite = async () => {
-    if (favoriteRef.current) {
+    if (favorite) {
       removeFavorite.removeFavorite(props.instrumentId, {
         withCredentials: true,
       });
     } else {
-      addFavorite.addFavorite(
-        {
-          instrument_id: props.instrumentId,
-        },
-        {
-          withCredentials: true,
-        },
-      );
+      addFavorite.addFavorite(props.instrumentId, {
+        withCredentials: true,
+      });
     }
-    favoriteRef.current = !favoriteRef.current;
+    setFavorite(!favorite);
   };
 
   return (
     <button onClick={toggleFavorite}>
-      {favoriteRef.current ? "Remove from Favorite" : "Add to Favorite"}
+      {favorite ? "Remove from Favorite" : "Add to Favorite"}
     </button>
   );
 };

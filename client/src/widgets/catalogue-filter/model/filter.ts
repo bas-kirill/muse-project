@@ -21,16 +21,3 @@ export type Filters = {
   materials: BasicMaterial[] | null;
   instrumentIds: InstrumentId[] | null;
 };
-
-export const DEFAULT_FILTER = {
-  instrumentName: null,
-  instrumentTypes: null,
-  manufacturerNames: null,
-  manufactureDateFrom: null,
-  manufactureDateTo: null,
-  releaseDateFrom: null,
-  releaseDateTo: null,
-  countries: null,
-  materials: null,
-  instrumentIds: null,
-};

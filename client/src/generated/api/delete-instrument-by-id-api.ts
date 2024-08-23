@@ -63,7 +63,7 @@ export const DeleteInstrumentByIdApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'instrumentId' is not null or undefined
       assertParamExists("deleteInstrumentById", "instrumentId", instrumentId);
-      const localVarPath = `/instrument/{instrumentId}/delete`.replace(
+      const localVarPath = `/api/instrument/{instrumentId}/delete`.replace(
         `{${"instrumentId"}}`,
         encodeURIComponent(String(instrumentId)),
       );

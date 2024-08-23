@@ -67,7 +67,7 @@ export const UserRegistrationApiAxiosParamCreator = function (
         "registrationRequest",
         registrationRequest,
       );
-      const localVarPath = `/registration`;
+      const localVarPath = `/api/registration`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;

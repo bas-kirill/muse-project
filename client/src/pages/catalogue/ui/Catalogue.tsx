@@ -3,27 +3,16 @@ import "./Catalogue.css";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
-import {
-  CatalogueFilterWidget,
-  Filters,
-  DEFAULT_FILTER,
-} from "widgets/catalogue-filter";
+import { CatalogueFilterWidget, Filters } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import { useJwt } from "pages/login";
-import {
-  CATALOGUE_DEFAULT_PAGE_NUMBER,
-  CATALOGUE_DEFAULT_PAGE_SIZE,
-} from "shared/config/frontend";
+import { CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
 import { SearchBarForm } from "./SearchBarForm";
 import { NavigationBar } from "./NavigationBar";
-import { CatalogueLoader } from "pages/catalogue";
 import { ListFavoriteApi } from "generated/api/list-favorite-api";
-import {
-  InstrumentDetail,
-  InstrumentId,
-  InstrumentName,
-} from "generated/model";
+import { InstrumentDetail, InstrumentId } from "generated/model";
 import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api/get-instruments-by-criteria-paginated-api";
+import { CatalogueLoader } from "pages/catalogue";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();
@@ -32,37 +21,32 @@ const listFavoriteApi = new ListFavoriteApi();
 
 export function Catalogue() {
   useJwt();
+
   const loader = useLoaderData() as CatalogueLoader; // https://github.com/remix-run/react-router/discussions/9792
+
   const [instruments, setInstruments] = useState<InstrumentDetail[]>(
     loader.instrumentPage.content,
   );
-  const [instrumentName, setInstrumentName] = useState<InstrumentName | null>(
-    null,
-  );
-  const [filters, setFilters] = useState<Filters>(DEFAULT_FILTER);
+  const [filters, setFilters] = useState<Filters>(loader.defaultFilter);
   const [pageNumber, setPageNumber] = useState<number>(
-    CATALOGUE_DEFAULT_PAGE_NUMBER,
+    loader.instrumentPage.page_number,
   );
-  const totalPages = useRef<number>(0);
+  const totalPages = useRef<number>(loader.instrumentPage.total_pages);
   const [favoriteInstrumentIds, setFavoriteInstrumentIds] = useState<
     InstrumentId[]
   >(loader.favoriteInstrumentIds);
 
   useEffect(() => {
-    listFavoriteApi
-      .listFavorite()
-      .then((favorites) =>
-        setFavoriteInstrumentIds(
-          favorites.data.content.map((favorite) => favorite.instrument_id),
-        ),
+    const fetchFavorite = async () => {
+      const response = await listFavoriteApi.listFavorite({
+        withCredentials: true,
+      });
+      setFavoriteInstrumentIds(
+        response.data.content.map((favorite) => favorite.instrument_id),
       );
+    };
 
-    if (instrumentName?.instrument_name === "") {
-      filters.instrumentName = null;
-    }
-    if (instrumentName?.instrument_name !== "") {
-      filters.instrumentName = instrumentName;
-    }
+    fetchFavorite();
 
     const fetchInstruments = async () => {
       const response =
@@ -87,20 +71,16 @@ export function Catalogue() {
     };
 
     fetchInstruments();
-  }, [filters, instrumentName, pageNumber]);
+  }, [filters, pageNumber]);
 
   return (
     <div id="catalogue">
       <Header />
 
-      <SearchBarForm setInstrumentName={setInstrumentName} />
+      <SearchBarForm filters={filters} setFilters={setFilters} />
 
       <div id="catalogue-wrapper">
-        <CatalogueFilterWidget
-          onFilterChange={(newFilters: Filters) => {
-            setFilters(newFilters);
-          }}
-        />
+        <CatalogueFilterWidget onFilterChange={setFilters} />
 
         <div id="catalogue-serp-navbar-wrapper">
           <CatalogueSerpWidget
@@ -108,8 +88,8 @@ export function Catalogue() {
             favoriteInstrumentIds={favoriteInstrumentIds}
           />
           <NavigationBar
-            pageNumber={pageNumber}
             totalPages={totalPages.current}
+            pageNumber={pageNumber}
             setPageNumber={setPageNumber}
           />
         </div>

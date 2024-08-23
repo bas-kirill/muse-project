@@ -38,7 +38,7 @@ interface GetInstrumentsByCriteriaPaginatedApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/instruments/paginated"],
+            value = ["/api/instruments/paginated"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )

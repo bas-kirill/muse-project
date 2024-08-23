@@ -36,7 +36,7 @@ interface DeleteInstrumentByIdApi {
 
     @RequestMapping(
             method = [RequestMethod.GET],
-            value = ["/instrument/{instrumentId}/delete"],
+            value = ["/api/instrument/{instrumentId}/delete"],
             produces = ["application/json"]
     )
     fun deleteInstrumentById( @PathVariable("instrumentId") instrumentId: kotlin.Long): ResponseEntity<kotlin.Any>

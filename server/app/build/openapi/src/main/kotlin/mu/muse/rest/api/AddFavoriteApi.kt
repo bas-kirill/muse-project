@@ -5,8 +5,8 @@
 */
 package mu.muse.rest.api
 
-import mu.muse.rest.dto.AddFavoriteRequestBody
 import mu.muse.rest.dto.ClientError
+import mu.muse.rest.dto.InstrumentId
 import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -37,9 +37,9 @@ interface AddFavoriteApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/favorite/add"],
+            value = ["/api/favorite/add"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )
-    fun addFavorite( @Valid @RequestBody addFavoriteRequestBody: AddFavoriteRequestBody): ResponseEntity<kotlin.Any>
+    fun addFavorite( @Valid @RequestBody instrumentId: InstrumentId): ResponseEntity<kotlin.Any>
 }

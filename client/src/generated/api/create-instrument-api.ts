@@ -69,7 +69,7 @@ export const CreateInstrumentApiAxiosParamCreator = function (
         "createInstrumentRequestBody",
         createInstrumentRequestBody,
       );
-      const localVarPath = `/instrument/create`;
+      const localVarPath = `/api/instrument/create`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;

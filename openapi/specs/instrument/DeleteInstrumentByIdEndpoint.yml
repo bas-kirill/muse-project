@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: deleteInstrumentById
     description: Delete Instrument by ID
 
 paths:
-  /instrument/{instrumentId}/delete:
+  /api/instrument/{instrumentId}/delete:
     get:
       description: Get Instrument Types
       summary: Get Instrument Types

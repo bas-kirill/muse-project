@@ -36,8 +36,8 @@ interface ListFavoriteApi {
 
 
     @RequestMapping(
-            method = [RequestMethod.POST],
-            value = ["/favorite/list"],
+            method = [RequestMethod.GET],
+            value = ["/api/favorite/list"],
             produces = ["application/json"]
     )
     fun listFavorite(): ResponseEntity<ListFavoriteResponseBody>

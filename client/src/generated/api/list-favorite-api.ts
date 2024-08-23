@@ -61,7 +61,7 @@ export const ListFavoriteApiAxiosParamCreator = function (
     listFavorite: async (
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
-      const localVarPath = `/favorite/list`;
+      const localVarPath = `/api/favorite/list`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -70,7 +70,7 @@ export const ListFavoriteApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: "GET",
         ...baseOptions,
         ...options,
       };

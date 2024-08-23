@@ -37,7 +37,7 @@ interface GetCountriesApi {
 
     @RequestMapping(
             method = [RequestMethod.GET],
-            value = ["/countries"],
+            value = ["/api/countries"],
             produces = ["application/json"]
     )
     fun getCountries(): ResponseEntity<GetCountriesResponse>

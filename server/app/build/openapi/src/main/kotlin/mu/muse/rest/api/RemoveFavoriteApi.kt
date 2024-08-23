@@ -37,7 +37,7 @@ interface RemoveFavoriteApi {
 
     @RequestMapping(
             method = [RequestMethod.POST],
-            value = ["/favorite/remove"],
+            value = ["/api/favorite/remove"],
             produces = ["application/json"],
             consumes = ["application/json"]
     )

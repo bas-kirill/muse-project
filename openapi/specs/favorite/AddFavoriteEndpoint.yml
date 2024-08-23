@@ -16,15 +16,13 @@ servers:
         enum:
           - "8080"
           - "8000"
-      basePath:
-        default: "api"
 
 tags:
   - name: addFavorite
     description: Add Favorite
 
 paths:
-  /favorite/add:
+  /api/favorite/add:
     post:
       description: Add Favorite
       summary: Add Favorite
@@ -35,7 +33,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/AddFavoriteRequestBody"
+              $ref: "./../common/InstrumentId.yml#/components/schemas/InstrumentId"
         required: true
       responses:
         "200":
@@ -56,12 +54,3 @@ paths:
             application/json:
               schema:
                 $ref: "./../common/ServerError.yml#/components/schemas/ServerError"
-
-components:
-  schemas:
-    AddFavoriteRequestBody:
-      type: object
-      required: [instrument_id]
-      properties:
-        instrument_id:
-          $ref: "./../common/InstrumentId.yml#/components/schemas/InstrumentId"

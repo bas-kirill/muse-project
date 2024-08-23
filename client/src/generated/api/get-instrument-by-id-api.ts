@@ -65,7 +65,7 @@ export const GetInstrumentByIdApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'instrumentId' is not null or undefined
       assertParamExists("getInstrumentById", "instrumentId", instrumentId);
-      const localVarPath = `/instrument/{instrumentId}`.replace(
+      const localVarPath = `/api/instrument/{instrumentId}`.replace(
         `{${"instrumentId"}}`,
         encodeURIComponent(String(instrumentId)),
       );
