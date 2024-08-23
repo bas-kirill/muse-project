@@ -25,20 +25,21 @@ export function Header() {
         {/* prettier-ignore */}
         {/* eslint-disable-next-line */}
         <button onClick={(_) => navigate(FAVORITE)}>Favorite</button>
-        {/* prettier-ignore */}
         {jwt.current === undefined && (
           <>
+            {/* prettier-ignore */}
             {/* eslint-disable-next-line */}
             <button onClick={(_) => navigate(LOGIN)}>Login</button>
           </>
         )}
-        {/* prettier-ignore */}
-        {jwt.current !== undefined && Jwt.from(jwt.current).toRole() === Role.Editor && (
-          <>
-            {/* eslint-disable-next-line */}
-            <button onClick={(_) => navigate(PROFILE)}>Profile</button>
-          </>
-        )}
+        {jwt.current !== undefined &&
+          Jwt.from(jwt.current).toRole() === Role.Editor && (
+            <>
+              {/* prettier-ignore */}
+              {/* eslint-disable-next-line */}
+              <button onClick={(_) => navigate(PROFILE)}>Profile</button>
+            </>
+          )}
       </nav>
     </header>
   );
