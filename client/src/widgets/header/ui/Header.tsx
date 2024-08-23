@@ -17,20 +17,28 @@ export function Header() {
     <header>
       <nav>
         {/* prettier-ignore */}
+        {/* eslint-disable-next-line */}
         <button onClick={(_) => navigate(HOME)}>Home</button>
         {/* prettier-ignore */}
+        {/* eslint-disable-next-line */}
         <button onClick={(_) => navigate(CATALOGUE)}>Catalogue</button>
         {/* prettier-ignore */}
+        {/* eslint-disable-next-line */}
         <button onClick={(_) => navigate(FAVORITE)}>Favorite</button>
         {/* prettier-ignore */}
         {jwt.current === undefined && (
-          <button onClick={(_) => navigate(LOGIN)}>Login</button>
+          <>
+            {/* eslint-disable-next-line */}
+            <button onClick={(_) => navigate(LOGIN)}>Login</button>
+          </>
         )}
         {/* prettier-ignore */}
-        {jwt.current !== undefined &&
-          Jwt.from(jwt.current).toRole() === Role.Editor && (
+        {jwt.current !== undefined && Jwt.from(jwt.current).toRole() === Role.Editor && (
+          <>
+            {/* eslint-disable-next-line */}
             <button onClick={(_) => navigate(PROFILE)}>Profile</button>
-          )}
+          </>
+        )}
       </nav>
     </header>
   );
