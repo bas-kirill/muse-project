@@ -35,7 +35,9 @@ export const InstrumentActions = (props: Props) => {
   };
 
   const handleOnEditInstrument = () => {
-    navigate("/instrument/" + props.instrument.instrument_id.instrument_id + "/edit");
+    navigate(
+      "/instrument/" + props.instrument.instrument_id.instrument_id + "/edit",
+    );
   };
 
   return (

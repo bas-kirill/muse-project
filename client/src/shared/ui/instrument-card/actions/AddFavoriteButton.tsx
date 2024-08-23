@@ -18,12 +18,9 @@ export const AddFavoriteButton = (props: Props) => {
 
   const toggleFavorite = async () => {
     if (favoriteRef.current) {
-      removeFavorite.removeFavorite(
-        props.instrumentId,
-        {
-          withCredentials: true,
-        },
-      );
+      removeFavorite.removeFavorite(props.instrumentId, {
+        withCredentials: true,
+      });
     } else {
       addFavorite.addFavorite(
         {

@@ -28,9 +28,12 @@ export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
     onValueChange(
       Array.from(elements)
         .filter((inputTag) => inputTag.checked)
-        .map((inputTag) => ({
-          manufacturer_name: inputTag.name,
-        } as ManufacturerName)),
+        .map(
+          (inputTag) =>
+            ({
+              manufacturer_name: inputTag.name,
+            }) as ManufacturerName,
+        ),
     );
   }
 

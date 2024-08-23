@@ -12,109 +12,179 @@
  * Do not edit the class manually.
  */
 
-
-import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
-import globalAxios from 'axios';
+import type { Configuration } from "../configuration";
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from "axios";
+import globalAxios from "axios";
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import {
+  DUMMY_BASE_URL,
+  assertParamExists,
+  setApiKeyToObject,
+  setBasicAuthToObject,
+  setBearerAuthToObject,
+  setOAuthToObject,
+  setSearchParams,
+  serializeDataIfNeeded,
+  toPathString,
+  createRequestFunction,
+} from "../common";
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+import {
+  BASE_PATH,
+  COLLECTION_FORMATS,
+  type RequestArgs,
+  BaseAPI,
+  RequiredError,
+  operationServerMap,
+} from "../base";
 // @ts-ignore
-import type { ClientError } from '../model';
+import type { ClientError } from "../model";
 // @ts-ignore
-import type { GetInstrumentsByCriteriaRequestBody } from '../model';
+import type { GetInstrumentsByCriteriaRequestBody } from "../model";
 // @ts-ignore
-import type { GetInstrumentsByCriteriaResponse } from '../model';
+import type { GetInstrumentsByCriteriaResponse } from "../model";
 // @ts-ignore
-import type { ServerError } from '../model';
+import type { ServerError } from "../model";
 /**
  * GetInstrumentsByCriteriaApi - axios parameter creator
  * @export
  */
-export const GetInstrumentsByCriteriaApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Get Instruments by Criteria
-         * @summary Get Instruments by Criteria
-         * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getInstrumentsByCriteria: async (getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'getInstrumentsByCriteriaRequestBody' is not null or undefined
-            assertParamExists('getInstrumentsByCriteria', 'getInstrumentsByCriteriaRequestBody', getInstrumentsByCriteriaRequestBody)
-            const localVarPath = `/instruments`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+export const GetInstrumentsByCriteriaApiAxiosParamCreator = function (
+  configuration?: Configuration,
+) {
+  return {
+    /**
+     * Get Instruments by Criteria
+     * @summary Get Instruments by Criteria
+     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getInstrumentsByCriteria: async (
+      getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'getInstrumentsByCriteriaRequestBody' is not null or undefined
+      assertParamExists(
+        "getInstrumentsByCriteria",
+        "getInstrumentsByCriteriaRequestBody",
+        getInstrumentsByCriteriaRequestBody,
+      );
+      const localVarPath = `/instruments`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
+      localVarHeaderParameter["Content-Type"] = "application/json";
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        getInstrumentsByCriteriaRequestBody,
+        localVarRequestOptions,
+        configuration,
+      );
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(getInstrumentsByCriteriaRequestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
 };
 
 /**
  * GetInstrumentsByCriteriaApi - functional programming interface
  * @export
  */
-export const GetInstrumentsByCriteriaApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = GetInstrumentsByCriteriaApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Get Instruments by Criteria
-         * @summary Get Instruments by Criteria
-         * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetInstrumentsByCriteriaResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GetInstrumentsByCriteriaApi.getInstrumentsByCriteria']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
+export const GetInstrumentsByCriteriaApiFp = function (
+  configuration?: Configuration,
+) {
+  const localVarAxiosParamCreator =
+    GetInstrumentsByCriteriaApiAxiosParamCreator(configuration);
+  return {
+    /**
+     * Get Instruments by Criteria
+     * @summary Get Instruments by Criteria
+     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getInstrumentsByCriteria(
+      getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string,
+      ) => AxiosPromise<GetInstrumentsByCriteriaResponse>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getInstrumentsByCriteria(
+          getInstrumentsByCriteriaRequestBody,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap[
+          "GetInstrumentsByCriteriaApi.getInstrumentsByCriteria"
+        ]?.[localVarOperationServerIndex]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+  };
 };
 
 /**
  * GetInstrumentsByCriteriaApi - factory interface
  * @export
  */
-export const GetInstrumentsByCriteriaApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GetInstrumentsByCriteriaApiFp(configuration)
-    return {
-        /**
-         * Get Instruments by Criteria
-         * @summary Get Instruments by Criteria
-         * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<GetInstrumentsByCriteriaResponse> {
-            return localVarFp.getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody, options).then((request) => request(axios, basePath));
-        },
-    };
+export const GetInstrumentsByCriteriaApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance,
+) {
+  const localVarFp = GetInstrumentsByCriteriaApiFp(configuration);
+  return {
+    /**
+     * Get Instruments by Criteria
+     * @summary Get Instruments by Criteria
+     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getInstrumentsByCriteria(
+      getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<GetInstrumentsByCriteriaResponse> {
+      return localVarFp
+        .getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody, options)
+        .then((request) => request(axios, basePath));
+    },
+  };
 };
 
 /**
@@ -124,16 +194,20 @@ export const GetInstrumentsByCriteriaApiFactory = function (configuration?: Conf
  * @extends {BaseAPI}
  */
 export class GetInstrumentsByCriteriaApi extends BaseAPI {
-    /**
-     * Get Instruments by Criteria
-     * @summary Get Instruments by Criteria
-     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GetInstrumentsByCriteriaApi
-     */
-    public getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody, options?: RawAxiosRequestConfig) {
-        return GetInstrumentsByCriteriaApiFp(this.configuration).getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody, options).then((request) => request(this.axios, this.basePath));
-    }
+  /**
+   * Get Instruments by Criteria
+   * @summary Get Instruments by Criteria
+   * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof GetInstrumentsByCriteriaApi
+   */
+  public getInstrumentsByCriteria(
+    getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return GetInstrumentsByCriteriaApiFp(this.configuration)
+      .getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
 }
-

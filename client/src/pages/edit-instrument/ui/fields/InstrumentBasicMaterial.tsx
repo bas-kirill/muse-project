@@ -9,9 +9,9 @@ interface Props {
 
 export const InstrumentBasicMaterialFormField = (props: Props) => {
   const selectedBasicMaterial = useRef<BasicMaterial>();
-  const [basicMaterials, setBasicMaterials] = useState<
-    BasicMaterial[]
-  >(props.usedMaterialsForInstrument);
+  const [basicMaterials, setBasicMaterials] = useState<BasicMaterial[]>(
+    props.usedMaterialsForInstrument,
+  );
 
   const addInstrumentForEditInstrument = (e: React.FormEvent) => {
     e.preventDefault();

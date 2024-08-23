@@ -18,7 +18,11 @@ import { SearchBarForm } from "./SearchBarForm";
 import { NavigationBar } from "./NavigationBar";
 import { CatalogueLoader } from "pages/catalogue";
 import { ListFavoriteApi } from "generated/api/list-favorite-api";
-import { InstrumentDetail, InstrumentId, InstrumentName } from "generated/model";
+import {
+  InstrumentDetail,
+  InstrumentId,
+  InstrumentName,
+} from "generated/model";
 import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api/get-instruments-by-criteria-paginated-api";
 
 const getInstrumentsByCriteriaPaginated =
@@ -32,15 +36,17 @@ export function Catalogue() {
   const [instruments, setInstruments] = useState<InstrumentDetail[]>(
     loader.instrumentPage.content,
   );
-  const [instrumentName, setInstrumentName] = useState<InstrumentName | null>(null);
+  const [instrumentName, setInstrumentName] = useState<InstrumentName | null>(
+    null,
+  );
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTER);
   const [pageNumber, setPageNumber] = useState<number>(
     CATALOGUE_DEFAULT_PAGE_NUMBER,
   );
   const totalPages = useRef<number>(0);
-  const [favoriteInstrumentIds, setFavoriteInstrumentIds] = useState<InstrumentId[]>(
-    loader.favoriteInstrumentIds,
-  );
+  const [favoriteInstrumentIds, setFavoriteInstrumentIds] = useState<
+    InstrumentId[]
+  >(loader.favoriteInstrumentIds);
 
   useEffect(() => {
     listFavoriteApi
@@ -59,8 +65,8 @@ export function Catalogue() {
     }
 
     const fetchInstruments = async () => {
-      const response = await getInstrumentsByCriteriaPaginated
-        .getInstrumentsByCriteriaPaginated(
+      const response =
+        await getInstrumentsByCriteriaPaginated.getInstrumentsByCriteriaPaginated(
           CATALOGUE_DEFAULT_PAGE_SIZE,
           pageNumber,
           {
@@ -75,10 +81,10 @@ export function Catalogue() {
             materials: filters.materials,
             instrument_ids: filters.instrumentIds,
           },
-        )
+        );
       setInstruments(response.data.content);
       totalPages.current = response.data.total_pages;
-    }
+    };
 
     fetchInstruments();
   }, [filters, instrumentName, pageNumber]);

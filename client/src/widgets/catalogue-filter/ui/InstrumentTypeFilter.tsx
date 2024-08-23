@@ -24,15 +24,18 @@ export const InstrumentTypeFilter = (props: Props) => {
 
   function onChange() {
     const elements: NodeListOf<HTMLInputElement> = document.querySelectorAll(
-      ".instrument-type-filter-checkbox"
+      ".instrument-type-filter-checkbox",
     );
 
     props.onValueChange(
       Array.from(elements)
         .filter((inputTag) => inputTag.checked)
-        .map((inputTag) => ({
-          instrument_type: inputTag.name,
-        } as InstrumentType))
+        .map(
+          (inputTag) =>
+            ({
+              instrument_type: inputTag.name,
+            }) as InstrumentType,
+        ),
     );
   }
 
@@ -48,7 +51,9 @@ export const InstrumentTypeFilter = (props: Props) => {
             className="instrument-type-filter-checkbox"
             defaultChecked={true}
           />
-          <label htmlFor={instrumentType.instrument_type}>{instrumentType.instrument_type}</label>
+          <label htmlFor={instrumentType.instrument_type}>
+            {instrumentType.instrument_type}
+          </label>
         </div>
       ))}
     </div>

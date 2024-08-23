@@ -12,127 +12,218 @@
  * Do not edit the class manually.
  */
 
-
-import type { Configuration } from '../configuration';
-import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
-import globalAxios from 'axios';
+import type { Configuration } from "../configuration";
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from "axios";
+import globalAxios from "axios";
 // Some imports not used depending on template conditions
 // @ts-ignore
-import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
+import {
+  DUMMY_BASE_URL,
+  assertParamExists,
+  setApiKeyToObject,
+  setBasicAuthToObject,
+  setBearerAuthToObject,
+  setOAuthToObject,
+  setSearchParams,
+  serializeDataIfNeeded,
+  toPathString,
+  createRequestFunction,
+} from "../common";
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+import {
+  BASE_PATH,
+  COLLECTION_FORMATS,
+  type RequestArgs,
+  BaseAPI,
+  RequiredError,
+  operationServerMap,
+} from "../base";
 // @ts-ignore
-import type { ClientError } from '../model';
+import type { ClientError } from "../model";
 // @ts-ignore
-import type { GetInstrumentByCriteriaPageResponse } from '../model';
+import type { GetInstrumentByCriteriaPageResponse } from "../model";
 // @ts-ignore
-import type { GetInstrumentsByCriteriaRequestBody } from '../model';
+import type { GetInstrumentsByCriteriaRequestBody } from "../model";
 // @ts-ignore
-import type { ServerError } from '../model';
+import type { ServerError } from "../model";
 /**
  * GetInstrumentsByCriteriaPaginatedApi - axios parameter creator
  * @export
  */
-export const GetInstrumentsByCriteriaPaginatedApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
-        /**
-         * Get Instruments by Criteria Paginated
-         * @summary Get Instruments by Criteria Paginated
-         * @param {number} pageSize Page Size
-         * @param {number} pageNumber Page Number (1-based enumeration)
-         * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getInstrumentsByCriteriaPaginated: async (pageSize: number, pageNumber: number, getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'pageSize' is not null or undefined
-            assertParamExists('getInstrumentsByCriteriaPaginated', 'pageSize', pageSize)
-            // verify required parameter 'pageNumber' is not null or undefined
-            assertParamExists('getInstrumentsByCriteriaPaginated', 'pageNumber', pageNumber)
-            // verify required parameter 'getInstrumentsByCriteriaRequestBody' is not null or undefined
-            assertParamExists('getInstrumentsByCriteriaPaginated', 'getInstrumentsByCriteriaRequestBody', getInstrumentsByCriteriaRequestBody)
-            const localVarPath = `/instruments/paginated`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
+export const GetInstrumentsByCriteriaPaginatedApiAxiosParamCreator = function (
+  configuration?: Configuration,
+) {
+  return {
+    /**
+     * Get Instruments by Criteria Paginated
+     * @summary Get Instruments by Criteria Paginated
+     * @param {number} pageSize Page Size
+     * @param {number} pageNumber Page Number (1-based enumeration)
+     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getInstrumentsByCriteriaPaginated: async (
+      pageSize: number,
+      pageNumber: number,
+      getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'pageSize' is not null or undefined
+      assertParamExists(
+        "getInstrumentsByCriteriaPaginated",
+        "pageSize",
+        pageSize,
+      );
+      // verify required parameter 'pageNumber' is not null or undefined
+      assertParamExists(
+        "getInstrumentsByCriteriaPaginated",
+        "pageNumber",
+        pageNumber,
+      );
+      // verify required parameter 'getInstrumentsByCriteriaRequestBody' is not null or undefined
+      assertParamExists(
+        "getInstrumentsByCriteriaPaginated",
+        "getInstrumentsByCriteriaRequestBody",
+        getInstrumentsByCriteriaRequestBody,
+      );
+      const localVarPath = `/instruments/paginated`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
+      const localVarRequestOptions = {
+        method: "POST",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
 
-            if (pageSize !== undefined) {
-                localVarQueryParameter['page_size'] = pageSize;
-            }
+      if (pageSize !== undefined) {
+        localVarQueryParameter["page_size"] = pageSize;
+      }
 
-            if (pageNumber !== undefined) {
-                localVarQueryParameter['page_number'] = pageNumber;
-            }
+      if (pageNumber !== undefined) {
+        localVarQueryParameter["page_number"] = pageNumber;
+      }
 
+      localVarHeaderParameter["Content-Type"] = "application/json";
 
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        getInstrumentsByCriteriaRequestBody,
+        localVarRequestOptions,
+        configuration,
+      );
 
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(getInstrumentsByCriteriaRequestBody, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-    }
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+  };
 };
 
 /**
  * GetInstrumentsByCriteriaPaginatedApi - functional programming interface
  * @export
  */
-export const GetInstrumentsByCriteriaPaginatedApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = GetInstrumentsByCriteriaPaginatedApiAxiosParamCreator(configuration)
-    return {
-        /**
-         * Get Instruments by Criteria Paginated
-         * @summary Get Instruments by Criteria Paginated
-         * @param {number} pageSize Page Size
-         * @param {number} pageNumber Page Number (1-based enumeration)
-         * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getInstrumentsByCriteriaPaginated(pageSize: number, pageNumber: number, getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GetInstrumentByCriteriaPageResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getInstrumentsByCriteriaPaginated(pageSize, pageNumber, getInstrumentsByCriteriaRequestBody, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['GetInstrumentsByCriteriaPaginatedApi.getInstrumentsByCriteriaPaginated']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
+export const GetInstrumentsByCriteriaPaginatedApiFp = function (
+  configuration?: Configuration,
+) {
+  const localVarAxiosParamCreator =
+    GetInstrumentsByCriteriaPaginatedApiAxiosParamCreator(configuration);
+  return {
+    /**
+     * Get Instruments by Criteria Paginated
+     * @summary Get Instruments by Criteria Paginated
+     * @param {number} pageSize Page Size
+     * @param {number} pageNumber Page Number (1-based enumeration)
+     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async getInstrumentsByCriteriaPaginated(
+      pageSize: number,
+      pageNumber: number,
+      getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string,
+      ) => AxiosPromise<GetInstrumentByCriteriaPageResponse>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.getInstrumentsByCriteriaPaginated(
+          pageSize,
+          pageNumber,
+          getInstrumentsByCriteriaRequestBody,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap[
+          "GetInstrumentsByCriteriaPaginatedApi.getInstrumentsByCriteriaPaginated"
+        ]?.[localVarOperationServerIndex]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+  };
 };
 
 /**
  * GetInstrumentsByCriteriaPaginatedApi - factory interface
  * @export
  */
-export const GetInstrumentsByCriteriaPaginatedApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = GetInstrumentsByCriteriaPaginatedApiFp(configuration)
-    return {
-        /**
-         * Get Instruments by Criteria Paginated
-         * @summary Get Instruments by Criteria Paginated
-         * @param {number} pageSize Page Size
-         * @param {number} pageNumber Page Number (1-based enumeration)
-         * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getInstrumentsByCriteriaPaginated(pageSize: number, pageNumber: number, getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody, options?: RawAxiosRequestConfig): AxiosPromise<GetInstrumentByCriteriaPageResponse> {
-            return localVarFp.getInstrumentsByCriteriaPaginated(pageSize, pageNumber, getInstrumentsByCriteriaRequestBody, options).then((request) => request(axios, basePath));
-        },
-    };
+export const GetInstrumentsByCriteriaPaginatedApiFactory = function (
+  configuration?: Configuration,
+  basePath?: string,
+  axios?: AxiosInstance,
+) {
+  const localVarFp = GetInstrumentsByCriteriaPaginatedApiFp(configuration);
+  return {
+    /**
+     * Get Instruments by Criteria Paginated
+     * @summary Get Instruments by Criteria Paginated
+     * @param {number} pageSize Page Size
+     * @param {number} pageNumber Page Number (1-based enumeration)
+     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    getInstrumentsByCriteriaPaginated(
+      pageSize: number,
+      pageNumber: number,
+      getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<GetInstrumentByCriteriaPageResponse> {
+      return localVarFp
+        .getInstrumentsByCriteriaPaginated(
+          pageSize,
+          pageNumber,
+          getInstrumentsByCriteriaRequestBody,
+          options,
+        )
+        .then((request) => request(axios, basePath));
+    },
+  };
 };
 
 /**
@@ -142,18 +233,29 @@ export const GetInstrumentsByCriteriaPaginatedApiFactory = function (configurati
  * @extends {BaseAPI}
  */
 export class GetInstrumentsByCriteriaPaginatedApi extends BaseAPI {
-    /**
-     * Get Instruments by Criteria Paginated
-     * @summary Get Instruments by Criteria Paginated
-     * @param {number} pageSize Page Size
-     * @param {number} pageNumber Page Number (1-based enumeration)
-     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GetInstrumentsByCriteriaPaginatedApi
-     */
-    public getInstrumentsByCriteriaPaginated(pageSize: number, pageNumber: number, getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody, options?: RawAxiosRequestConfig) {
-        return GetInstrumentsByCriteriaPaginatedApiFp(this.configuration).getInstrumentsByCriteriaPaginated(pageSize, pageNumber, getInstrumentsByCriteriaRequestBody, options).then((request) => request(this.axios, this.basePath));
-    }
+  /**
+   * Get Instruments by Criteria Paginated
+   * @summary Get Instruments by Criteria Paginated
+   * @param {number} pageSize Page Size
+   * @param {number} pageNumber Page Number (1-based enumeration)
+   * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof GetInstrumentsByCriteriaPaginatedApi
+   */
+  public getInstrumentsByCriteriaPaginated(
+    pageSize: number,
+    pageNumber: number,
+    getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return GetInstrumentsByCriteriaPaginatedApiFp(this.configuration)
+      .getInstrumentsByCriteriaPaginated(
+        pageSize,
+        pageNumber,
+        getInstrumentsByCriteriaRequestBody,
+        options,
+      )
+      .then((request) => request(this.axios, this.basePath));
+  }
 }
-

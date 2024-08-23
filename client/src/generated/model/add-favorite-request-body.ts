@@ -12,22 +12,20 @@
  * Do not edit the class manually.
  */
 
-
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentId } from './instrument-id';
+import type { InstrumentId } from "./instrument-id";
 
 /**
- * 
+ *
  * @export
  * @interface AddFavoriteRequestBody
  */
 export interface AddFavoriteRequestBody {
-    /**
-     * 
-     * @type {InstrumentId}
-     * @memberof AddFavoriteRequestBody
-     */
-    'instrument_id': InstrumentId;
+  /**
+   *
+   * @type {InstrumentId}
+   * @memberof AddFavoriteRequestBody
+   */
+  instrument_id: InstrumentId;
 }
-

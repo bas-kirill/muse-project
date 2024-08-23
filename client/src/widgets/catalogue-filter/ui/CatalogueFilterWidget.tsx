@@ -10,7 +10,13 @@ import { CountryFilter } from "widgets/catalogue-filter/ui/CountryFilter";
 import { MaterialFilter } from "widgets/catalogue-filter/ui/MaterialFilter";
 import Jwt from "domain/model/jwt";
 import { InstrumentType } from "generated/model/instrument-type";
-import { BasicMaterial, Country, ManufactureDate, ManufacturerName, ReleaseDate } from "generated/model";
+import {
+  BasicMaterial,
+  Country,
+  ManufactureDate,
+  ManufacturerName,
+  ReleaseDate,
+} from "generated/model";
 import { ReleaseDateFilter } from "widgets/catalogue-filter/ui/ReleaseDateFilter";
 
 interface Props {
@@ -21,8 +27,9 @@ export const CatalogueFilterWidget = (props: Props) => {
   const [instrumentTypes, setInstrumentTypes] = useState<
     InstrumentType[] | null
   >(null);
-  const [manufacturerNames, setManufacturerNames] =
-    useState<ManufacturerName[] | null>(null);
+  const [manufacturerNames, setManufacturerNames] = useState<
+    ManufacturerName[] | null
+  >(null);
   const [manufactureDateFrom, setManufactureDateFrom] =
     useState<ManufactureDate | null>(null);
   const [manufactureDateTo, setManufactureDateTo] =
@@ -32,9 +39,7 @@ export const CatalogueFilterWidget = (props: Props) => {
   );
   const [releaseDateTo, setReleaseDateTo] = useState<ReleaseDate | null>(null);
   const [countries, setCountries] = useState<Country[] | null>(null);
-  const [materials, setMaterials] = useState<BasicMaterial[] | null>(
-    null,
-  );
+  const [materials, setMaterials] = useState<BasicMaterial[] | null>(null);
 
   useEffect(() => {
     props.onFilterChange({

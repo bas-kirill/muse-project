@@ -12,9 +12,9 @@ export const SearchBarForm = (props: Props) => {
         type="text"
         placeholder={"Search..."}
         onChange={(e) => {
-          props.setInstrumentName(({
+          props.setInstrumentName({
             instrument_name: e.target.value,
-          } as InstrumentName));
+          } as InstrumentName);
         }}
       />
     </div>

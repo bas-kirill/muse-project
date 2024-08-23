@@ -6,7 +6,10 @@ import {
   GetInstrumentsByCriteriaPaginatedApi,
   ListFavoriteApi,
 } from "generated/api";
-import { GetInstrumentByCriteriaPageResponse, InstrumentId } from "generated/model";
+import {
+  GetInstrumentByCriteriaPageResponse,
+  InstrumentId,
+} from "generated/model";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();

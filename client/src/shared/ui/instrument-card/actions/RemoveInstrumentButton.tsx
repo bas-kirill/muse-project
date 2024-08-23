@@ -20,7 +20,9 @@ export const RemoveInstrumentButton = (props: Props) => {
         props.setSuccessModal(true);
       })
       .catch(() => {
-        throw new Error(`Fail to remove instrument ${props.instrument.instrument_id.instrument_id}`);
+        throw new Error(
+          `Fail to remove instrument ${props.instrument.instrument_id.instrument_id}`,
+        );
       });
   };
 

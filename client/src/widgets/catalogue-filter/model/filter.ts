@@ -1,10 +1,12 @@
 import {
   BasicMaterial,
-  Country, InstrumentId,
+  Country,
+  InstrumentId,
   InstrumentName,
-  InstrumentType, ManufactureDate,
+  InstrumentType,
+  ManufactureDate,
   ManufacturerName,
-  ReleaseDate
+  ReleaseDate,
 } from "generated/model";
 
 export type Filters = {
