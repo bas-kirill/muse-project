@@ -9,7 +9,7 @@ interface Props {
 export const GoToInstrumentButton = (props: Props) => {
   return (
     <button className="serp-go-to-instrument-details-button">
-      <Link to={"/instrument/" + props.instrument.id.toString()}>Go</Link>
+      <Link to={"/instrument/" + props.instrument.instrument_id.instrument_id}>Go</Link>
     </button>
   );
 };

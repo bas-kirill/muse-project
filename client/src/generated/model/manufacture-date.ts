@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Client Error
- * Client Error
+ * Country
+ * Basic Material
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: baskirill.an@gmail.com
@@ -12,16 +12,19 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
- * @interface RemoveFavoriteRequestBody
+ * @interface ManufactureDate
  */
-export interface RemoveFavoriteRequestBody {
-  /**
-   *
-   * @type {number}
-   * @memberof RemoveFavoriteRequestBody
-   */
-  instrument_id: number;
+export interface ManufactureDate {
+    /**
+     * 
+     * @type {string}
+     * @memberof ManufactureDate
+     */
+    'manufacture_date': string;
 }
+

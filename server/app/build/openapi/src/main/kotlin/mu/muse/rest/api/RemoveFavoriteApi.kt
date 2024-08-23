@@ -6,7 +6,7 @@
 package mu.muse.rest.api
 
 import mu.muse.rest.dto.ClientError
-import mu.muse.rest.dto.RemoveFavoriteRequestBody
+import mu.muse.rest.dto.InstrumentId
 import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -41,5 +41,5 @@ interface RemoveFavoriteApi {
             produces = ["application/json"],
             consumes = ["application/json"]
     )
-    fun removeFavorite( @Valid @RequestBody removeFavoriteRequestBody: RemoveFavoriteRequestBody): ResponseEntity<kotlin.Any>
+    fun removeFavorite( @Valid @RequestBody instrumentId: InstrumentId): ResponseEntity<kotlin.Any>
 }

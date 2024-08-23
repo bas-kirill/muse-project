@@ -7,7 +7,7 @@ package mu.muse.rest.api
 
 import mu.muse.rest.dto.ClientError
 import mu.muse.rest.dto.GetInstrumentByCriteriaPageResponse
-import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
+import mu.muse.rest.dto.GetInstrumentsByCriteriaRequestBody
 import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -42,5 +42,5 @@ interface GetInstrumentsByCriteriaPaginatedApi {
             produces = ["application/json"],
             consumes = ["application/json"]
     )
-    fun getInstrumentsByCriteriaPaginated(@NotNull  @Valid @RequestParam(value = "page_size", required = true) pageSize: kotlin.Int,@NotNull  @Valid @RequestParam(value = "page_number", required = true) pageNumber: kotlin.Int, @Valid @RequestBody getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody): ResponseEntity<GetInstrumentByCriteriaPageResponse>
+    fun getInstrumentsByCriteriaPaginated(@NotNull  @Valid @RequestParam(value = "page_size", required = true) pageSize: kotlin.Int,@NotNull  @Valid @RequestParam(value = "page_number", required = true) pageNumber: kotlin.Int, @Valid @RequestBody getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody): ResponseEntity<GetInstrumentByCriteriaPageResponse>
 }

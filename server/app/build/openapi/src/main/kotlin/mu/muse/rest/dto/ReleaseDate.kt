@@ -14,11 +14,12 @@ import jakarta.validation.Valid
 
 /**
  * 
- * @param basicMaterial 
+ * @param releaseDate 
  */
-data class InstrumentBasicMaterial(
+data class ReleaseDate(
 
-    @get:JsonProperty("basic_material", required = true) val basicMaterial: kotlin.String
+    @field:Valid
+    @get:JsonProperty("release_date", required = true) val releaseDate: java.time.LocalDate
     ) {
 
 }

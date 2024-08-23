@@ -2,8 +2,8 @@ package mu.muse.rest.instruments
 
 import mu.muse.domain.instrument.Material
 import mu.muse.rest.api.GetInstrumentBasicMaterialsApi
+import mu.muse.rest.dto.BasicMaterial
 import mu.muse.rest.dto.GetInstrumentBasicMaterialsResponse
-import mu.muse.rest.dto.InstrumentBasicMaterial
 import mu.muse.usecase.GetInstrumentMaterials
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
@@ -22,7 +22,7 @@ class GetInstrumentMaterialsEndpoint(
 fun List<Material>.toRestResponse(): ResponseEntity<GetInstrumentBasicMaterialsResponse> {
     return ResponseEntity.ok(
         GetInstrumentBasicMaterialsResponse(
-            content = this.map { InstrumentBasicMaterial(it.name) },
+            content = this.map { BasicMaterial(basicMaterial = it.name) },
         ),
     )
 }

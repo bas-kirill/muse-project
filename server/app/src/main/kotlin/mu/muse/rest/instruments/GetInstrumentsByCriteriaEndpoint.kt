@@ -3,7 +3,7 @@
 package mu.muse.rest.instruments
 
 import mu.muse.rest.api.GetInstrumentsByCriteriaApi
-import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
+import mu.muse.rest.dto.GetInstrumentsByCriteriaRequestBody
 import mu.muse.rest.dto.GetInstrumentsByCriteriaResponse
 import mu.muse.rest.dto.InstrumentDetail
 import mu.muse.usecase.GetInstrumentsByCriteria
@@ -16,7 +16,7 @@ class GetInstrumentsByCriteriaEndpoint(
 ) : GetInstrumentsByCriteriaApi {
 
     override fun getInstrumentsByCriteria(
-        request: GetInstrumentCriteriaRequestBody,
+        request: GetInstrumentsByCriteriaRequestBody,
     ): ResponseEntity<GetInstrumentsByCriteriaResponse> {
         val criteria = request.toInstrumentCriteria()
         val instruments = getInstrumentsByCriteria.execute(criteria = criteria)

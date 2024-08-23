@@ -2,7 +2,7 @@ import { LoaderFunction } from "react-router-dom";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import type {
   Country,
-  InstrumentBasicMaterial,
+  BasicMaterial,
   InstrumentType,
   Manufacturer,
 } from "generated/model";
@@ -18,7 +18,7 @@ const getManufacturers = new GetManufacturersApi();
 export interface CreateInstrumentLoader {
   instrumentTypes: InstrumentType[];
   manufacturers: Manufacturer[];
-  materials: InstrumentBasicMaterial[];
+  materials: BasicMaterial[];
   countries: Country[];
 }
 

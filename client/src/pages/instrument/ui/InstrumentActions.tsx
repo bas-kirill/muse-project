@@ -20,7 +20,7 @@ export const InstrumentActions = (props: Props) => {
 
   const handleOnDeleteInstrument = () => {
     deleteInstrumentById
-      .deleteInstrumentById(props.instrument.id)
+      .deleteInstrumentById(props.instrument.instrument_id.instrument_id)
       .then(() => {
         setDeleteSuccessModal(true);
       })
@@ -35,7 +35,7 @@ export const InstrumentActions = (props: Props) => {
   };
 
   const handleOnEditInstrument = () => {
-    navigate("/instrument/" + props.instrument.id + "/edit");
+    navigate("/instrument/" + props.instrument.instrument_id.instrument_id + "/edit");
   };
 
   return (

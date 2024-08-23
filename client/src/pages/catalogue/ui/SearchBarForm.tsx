@@ -1,7 +1,8 @@
 import React from "react";
+import { InstrumentName } from "generated/model";
 
 interface Props {
-  setInstrumentName: (name: string) => void;
+  setInstrumentName: (name: InstrumentName) => void;
 }
 
 export const SearchBarForm = (props: Props) => {
@@ -11,7 +12,9 @@ export const SearchBarForm = (props: Props) => {
         type="text"
         placeholder={"Search..."}
         onChange={(e) => {
-          props.setInstrumentName(e.target.value);
+          props.setInstrumentName(({
+            instrument_name: e.target.value,
+          } as InstrumentName));
         }}
       />
     </div>

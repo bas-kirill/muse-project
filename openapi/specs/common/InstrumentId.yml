@@ -13,5 +13,10 @@ paths: {}
 components:
   schemas:
     InstrumentId:
-      type: integer
-      format: int64
+      type: object
+      required: [instrument_id]
+      properties:
+        instrument_id:
+          type: integer
+          format: int64
+          example: 1

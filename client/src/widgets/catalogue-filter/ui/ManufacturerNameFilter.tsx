@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { GetManufacturersApi } from "generated/api/get-manufacturers-api";
-import { Manufacturer } from "generated/model";
+import { Manufacturer, ManufacturerName } from "generated/model";
 
 interface Props {
-  onValueChange: (names: ManufacturerNames) => void;
+  onValueChange: (names: ManufacturerName[]) => void;
 }
 
 const getManufacturers = new GetManufacturersApi();
@@ -29,7 +28,9 @@ export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
     onValueChange(
       Array.from(elements)
         .filter((inputTag) => inputTag.checked)
-        .map((inputTag) => inputTag.name),
+        .map((inputTag) => ({
+          manufacturer_name: inputTag.name,
+        } as ManufacturerName)),
     );
   }
 

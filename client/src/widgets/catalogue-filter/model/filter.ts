@@ -1,20 +1,23 @@
-import { InstrumentName } from "domain/model/instrument-name";
-import { ManufacturerNames } from "domain/model/manufacturer-name";
-import { ManufactureDate } from "domain/model/manufacture-date";
-import { InstrumentType } from "generated/model/instrument-type";
-import { InstrumentBasicMaterial } from "generated/model";
+import {
+  BasicMaterial,
+  Country, InstrumentId,
+  InstrumentName,
+  InstrumentType, ManufactureDate,
+  ManufacturerName,
+  ReleaseDate
+} from "generated/model";
 
 export type Filters = {
   instrumentName: InstrumentName | null;
   instrumentTypes: InstrumentType[] | null;
-  manufacturerNames: ManufacturerNames | null;
+  manufacturerNames: ManufacturerName[] | null;
   manufactureDateFrom: ManufactureDate | null;
   manufactureDateTo: ManufactureDate | null;
-  releaseDateFrom: string | null;
-  releaseDateTo: string | null;
-  countries: string[] | null;
-  materials: InstrumentBasicMaterial[] | null;
-  instrumentIds: number[] | null;
+  releaseDateFrom: ReleaseDate | null;
+  releaseDateTo: ReleaseDate | null;
+  countries: Country[] | null;
+  materials: BasicMaterial[] | null;
+  instrumentIds: InstrumentId[] | null;
 };
 
 export const DEFAULT_FILTER = {

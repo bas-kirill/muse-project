@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  description: Client Error
+  description: Basic Material
   version: 1.0.0
-  title: Client Error
+  title: Country
   contact:
     name: Kirill B
     email: baskirill.an@gmail.com
@@ -162,7 +162,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RemoveFavoriteRequestBody'
+              $ref: '#/components/schemas/InstrumentId'
         required: true
       responses:
         '200':
@@ -377,7 +377,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetInstrumentCriteriaRequestBody'
+              $ref: '#/components/schemas/GetInstrumentsByCriteriaRequestBody'
         required: true
       responses:
         '200':
@@ -424,7 +424,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetInstrumentCriteriaRequestBody'
+              $ref: '#/components/schemas/GetInstrumentsByCriteriaRequestBody'
         required: true
       responses:
         '200':
@@ -545,6 +545,14 @@ paths:
                 $ref: '#/components/schemas/ServerError'
 components:
   schemas:
+    BasicMaterial:
+      type: object
+      required:
+        - basic_material
+      properties:
+        basic_material:
+          type: string
+          example: WOOD
     ClientError:
       type: object
       required:
@@ -555,40 +563,95 @@ components:
           description: Error description
       example:
         message: Client Error
+    Country:
+      type: object
+      required:
+        - country
+      properties:
+        country:
+          type: string
+          example: CYPRUS
     InstrumentDetail:
       type: object
       required:
-        - id
-        - name
-        - type
-        - manufacturer
+        - instrument_id
+        - instrument_name
+        - instrument_type
+        - manufacturer_name
         - manufacturer_date
         - release_date
         - country
         - basic_materials
       properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        type:
-          type: string
-        manufacturer:
-          type: string
+        instrument_id:
+          $ref: '#/components/schemas/InstrumentId'
+        instrument_name:
+          $ref: '#/components/schemas/InstrumentName'
+        instrument_type:
+          $ref: '#/components/schemas/InstrumentType'
+        manufacturer_name:
+          $ref: '#/components/schemas/ManufacturerName'
         manufacturer_date:
-          type: string
+          $ref: '#/components/schemas/ManufactureDate'
         release_date:
-          type: string
+          $ref: '#/components/schemas/ReleaseDate'
         country:
-          type: string
+          $ref: '#/components/schemas/Country'
         basic_materials:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/BasicMaterial'
     InstrumentId:
-      type: integer
-      format: int64
+      type: object
+      required:
+        - instrument_id
+      properties:
+        instrument_id:
+          type: integer
+          format: int64
+          example: 1
+    InstrumentName:
+      type: object
+      required:
+        - instrument_name
+      properties:
+        instrument_name:
+          type: string
+          example: Fender Stratocaster
+    InstrumentType:
+      type: object
+      required:
+        - instrument_type
+      properties:
+        instrument_type:
+          type: string
+          example: STRINGED
+    ManufacturerName:
+      type: object
+      required:
+        - manufacturer_name
+      properties:
+        manufacturer_name:
+          type: string
+          example: STRINGED
+    ManufactureDate:
+      type: object
+      required:
+        - manufacture_date
+      properties:
+        manufacture_date:
+          type: string
+          format: date
+          example: '1998-01-01'
+    ReleaseDate:
+      type: object
+      required:
+        - release_date
+      properties:
+        release_date:
+          type: string
+          format: date
+          example: '1998-01-01'
     ServerError:
       type: object
       required:
@@ -599,13 +662,6 @@ components:
           description: A description of the error.
       example:
         message: Internal Server Error. Please try again later.
-    Country:
-      type: object
-      required:
-        - country
-      properties:
-        country:
-          type: string
     GetCountriesResponse:
       type: object
       required:
@@ -631,13 +687,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InstrumentDetail'
-    RemoveFavoriteRequestBody:
-      type: object
-      required:
-        - instrument_id
-      properties:
-        instrument_id:
-          $ref: '#/components/schemas/InstrumentId'
     CreateInstrumentRequestBody:
       type: object
       required:
@@ -650,23 +699,21 @@ components:
         - materials
       properties:
         instrument_name:
-          type: string
+          $ref: '#/components/schemas/InstrumentName'
         instrument_type:
-          type: string
+          $ref: '#/components/schemas/InstrumentType'
         manufacturer_name:
-          type: string
+          $ref: '#/components/schemas/ManufacturerName'
         manufacturer_date:
-          type: string
-          format: date
+          $ref: '#/components/schemas/ManufactureDate'
         release_date:
-          type: string
-          format: date
+          $ref: '#/components/schemas/ReleaseDate'
         country:
-          type: string
+          $ref: '#/components/schemas/Country'
         materials:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/BasicMaterial'
     EditInstrumentRequestBody:
       type: object
       required:
@@ -681,30 +728,21 @@ components:
         instrument_id:
           $ref: '#/components/schemas/InstrumentId'
         instrument_name:
-          type: string
+          $ref: '#/components/schemas/InstrumentName'
         instrument_type:
-          type: string
+          $ref: '#/components/schemas/InstrumentType'
         manufacturer_name:
-          type: string
+          $ref: '#/components/schemas/ManufacturerName'
         manufacturer_date:
-          type: string
-          format: date
+          $ref: '#/components/schemas/ManufactureDate'
         release_date:
-          type: string
-          format: date
+          $ref: '#/components/schemas/ReleaseDate'
         country:
-          type: string
+          $ref: '#/components/schemas/Country'
         materials:
           type: array
           items:
-            type: string
-    InstrumentBasicMaterial:
-      type: object
-      required:
-        - basic_material
-      properties:
-        basic_material:
-          type: string
+            $ref: '#/components/schemas/BasicMaterial'
     GetInstrumentBasicMaterialsResponse:
       type: object
       required:
@@ -713,14 +751,7 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/InstrumentBasicMaterial'
-    InstrumentType:
-      type: object
-      required:
-        - instrument_type
-      properties:
-        instrument_type:
-          type: string
+            $ref: '#/components/schemas/BasicMaterial'
     GetInstrumentTypesResponse:
       type: object
       required:
@@ -739,53 +770,54 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InstrumentDetail'
-    GetInstrumentCriteriaRequestBody:
+    GetInstrumentsByCriteriaRequestBody:
       type: object
       properties:
         instrument_name:
-          type: string
-          example: Fender Stratocasto
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/InstrumentName'
         instrument_types:
+          nullable: true
           type: array
           items:
-            type: string
-            example: KEYBOARD
+            $ref: '#/components/schemas/InstrumentType'
         manufacturer_names:
+          nullable: true
           type: array
           items:
-            type: string
-            example: Yamaha
+            $ref: '#/components/schemas/ManufacturerName'
         manufacture_date_from:
-          type: string
-          format: date
-          example: '1998-01-01'
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ManufactureDate'
         manufacture_date_to:
-          type: string
-          format: date
-          example: '1998-01-01'
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ManufactureDate'
         release_date_from:
-          type: string
-          format: date
-          example: '1998-01-01'
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ReleaseDate'
         release_date_to:
-          type: string
-          format: date
-          example: '1998-01-01'
+          nullable: true
+          allOf:
+            - $ref: '#/components/schemas/ReleaseDate'
         countries:
+          nullable: true
           type: array
           items:
-            type: string
-            example: CYPRUS
+            $ref: '#/components/schemas/Country'
         materials:
+          nullable: true
           type: array
           items:
-            type: string
-            example: WOOD
+            $ref: '#/components/schemas/BasicMaterial'
         instrument_ids:
+          nullable: true
           type: array
           items:
-            type: string
-            example: '1'
+            $ref: '#/components/schemas/InstrumentId'
     GetInstrumentByCriteriaPageResponse:
       type: object
       required:

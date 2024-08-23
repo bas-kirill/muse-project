@@ -53,13 +53,6 @@ paths:
 
 components:
   schemas:
-    Country:
-      type: object
-      required: [country]
-      properties:
-        country:
-          type: string
-
     GetCountriesResponse:
       type: object
       required: [content]
@@ -67,5 +60,4 @@ components:
         content:
           type: array
           items:
-            $ref: "#/components/schemas/Country"
-
+            $ref: "./../common/Country.yml#/components/schemas/Country"

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Client Error
- * Client Error
+ * Country
+ * Basic Material
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: baskirill.an@gmail.com
@@ -12,22 +12,25 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
  * @interface UsernameAndPasswordRequestBody
  */
 export interface UsernameAndPasswordRequestBody {
-  /**
-   *
-   * @type {string}
-   * @memberof UsernameAndPasswordRequestBody
-   */
-  username: string;
-  /**
-   *
-   * @type {string}
-   * @memberof UsernameAndPasswordRequestBody
-   */
-  password: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsernameAndPasswordRequestBody
+     */
+    'username': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UsernameAndPasswordRequestBody
+     */
+    'password': string;
 }
+

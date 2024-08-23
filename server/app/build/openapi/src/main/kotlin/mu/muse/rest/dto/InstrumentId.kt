@@ -16,7 +16,7 @@ import jakarta.validation.Valid
  * 
  * @param instrumentId 
  */
-data class RemoveFavoriteRequestBody(
+data class InstrumentId(
 
     @get:JsonProperty("instrument_id", required = true) val instrumentId: kotlin.Long
     ) {

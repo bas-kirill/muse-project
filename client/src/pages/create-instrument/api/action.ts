@@ -32,12 +32,12 @@ export const action: ActionFunction = async ({
   const response = await createInstrument.createInstrument(
     {
       instrument_name: instrumentName,
-      instrument_type: instrumentType.instrument_type,
+      instrument_type: instrumentType,
       manufacturer_name: manufacturerName,
       manufacturer_date: manufactureDate,
       release_date: releaseDate,
-      country: country.country,
-      materials: materials.map((material) => material.basic_material),
+      country: country,
+      materials: materials,
     },
     {
       headers: {

@@ -19,8 +19,8 @@ class AddFavoriteEndpoint: AddFavoriteApi {
             return ResponseEntity.ok().build()
         }
 
-        if (request.instrumentId !in favorite) {
-            favorite.add(request.instrumentId)
+        if (request.instrumentId.instrumentId !in favorite) {
+            favorite.add(request.instrumentId.instrumentId)
         }
 
         session.setAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY, favorite)

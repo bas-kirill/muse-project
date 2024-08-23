@@ -28,13 +28,13 @@ class EditInstrumentEndpoint(
     @RolesAllowed(Role.EDITOR)
     override fun editInstrument(request: EditInstrumentRequestBody): ResponseEntity<Any> {
         val instrumentId = InstrumentId.from(request.instrumentId.toString())
-        val instrumentName = InstrumentName.from(request.instrumentName)
-        val instrumentType = Instrument.Type.valueOf(request.instrumentType)
-        val manufacturerName = Manufacturer.valueOf(request.manufacturerName)
-        val manufacturerDate = ManufacturerDate.from(request.manufacturerDate)
-        val releaseDate = ReleaseDate.from(request.releaseDate)
-        val country = Country.valueOf(request.country)
-        val materials = request.materials.map { Material.valueOf(it) }
+        val instrumentName = InstrumentName.from(request.instrumentName.instrumentName)
+        val instrumentType = Instrument.Type.valueOf(request.instrumentType.instrumentType)
+        val manufacturerName = Manufacturer.valueOf(request.manufacturerName.manufacturerName)
+        val manufacturerDate = ManufacturerDate.from(request.manufacturerDate.manufactureDate)
+        val releaseDate = ReleaseDate.from(request.releaseDate.releaseDate)
+        val country = Country.valueOf(request.country.country)
+        val materials = request.materials.map { Material.valueOf(it.basicMaterial) }
         editInstrument.execute(
             instrumentId,
             instrumentName,

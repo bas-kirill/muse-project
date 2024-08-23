@@ -14,24 +14,32 @@ components:
   schemas:
     InstrumentDetail:
       type: object
-      required: [ id, name, type, manufacturer, manufacturer_date, release_date, country, basic_materials]
+      required: [
+        instrument_id,
+        instrument_name,
+        instrument_type,
+        manufacturer_name,
+        manufacturer_date,
+        release_date,
+        country,
+        basic_materials
+      ]
       properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-        type:
-          type: string
-        manufacturer:
-          type: string
+        instrument_id:
+          $ref: "./../common/InstrumentId.yml#/components/schemas/InstrumentId"
+        instrument_name:
+          $ref: "./../common/InstrumentName.yml#/components/schemas/InstrumentName"
+        instrument_type:
+          $ref: "./../common/InstrumentType.yml#/components/schemas/InstrumentType"
+        manufacturer_name:
+          $ref: "./../common/ManufacturerName.yml#/components/schemas/ManufacturerName"
         manufacturer_date:
-          type: string
+          $ref: "./../common/ManufactureDate.yml#/components/schemas/ManufactureDate"
         release_date:
-          type: string
+          $ref: "./../common/ReleaseDate.yml#/components/schemas/ReleaseDate"
         country:
-          type: string
+          $ref: "./../common/Country.yml#/components/schemas/Country"
         basic_materials:
           type: array
           items:
-            type: string
+            $ref: "./../common/BasicMaterial.yml#/components/schemas/BasicMaterial"
