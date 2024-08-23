@@ -1,0 +1,60 @@
+@import "Home.queries.css";
+@import "react-slideshow-image/dist/styles.css";
+
+
+#home {
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+#home-logo {
+  height: 45vh;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+#home-search-bar-form {
+  display: flex;
+  margin-bottom: 1em;
+
+  input[type="text"] {
+    background-color: #f0f0f0;
+    font-size: 2.5rem;
+    text-align: center;
+    flex: 4;
+    padding: 0;
+    margin: 0;
+  }
+
+  input[type="submit"] {
+    background-color: #FFB400;
+    font-size: 2.5rem;
+    flex: 1;
+  }
+}
+
+#home-reasons-choose {
+  display: flex;
+
+  div {
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.5rem;
+    flex: 1;
+    margin: 0 20px;
+  }
+}
+
+#trending-instruments {
+  margin: 0 15px 15px 15px;
+}
+
+.each-slide {
+  margin: 0 15px;
+}
