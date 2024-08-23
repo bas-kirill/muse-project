@@ -6,7 +6,6 @@ import { Form, useActionData, useLoaderData } from "react-router-dom";
 import { EditInstrumentLoader } from "pages/edit-instrument/api/loader";
 import { EditInstrumentAction } from "pages/edit-instrument/api/action";
 import { InstrumentBasicMaterialFormField } from "./fields/InstrumentBasicMaterial";
-import { InstrumentBasicMaterial } from "generated/model";
 
 export const EditInstrument = () => {
   const loader = useLoaderData() as EditInstrumentLoader;
@@ -15,13 +14,13 @@ export const EditInstrument = () => {
   return (
     <>
       <Header />
-      <h1>{loader.instrumentForEdit.name}</h1>
+      <h1>{loader.instrumentForEdit.instrument_name.instrument_name}</h1>
       <Form method="POST" id="edit-instrument">
         <div className="edit-instrument-field">
           <input
             type="hidden"
             name="instrument-id"
-            value={loader.instrumentForEdit.id}
+            value={loader.instrumentForEdit.instrument_id.instrument_id}
           />
         </div>
 
@@ -34,7 +33,9 @@ export const EditInstrument = () => {
             <input
               type="text"
               name="instrument-name"
-              defaultValue={loader.instrumentForEdit.name}
+              defaultValue={
+                loader.instrumentForEdit.instrument_name.instrument_name
+              }
               required
             />
           </div>
@@ -48,7 +49,9 @@ export const EditInstrument = () => {
           <div className={"edit-instrument-field-value"}>
             <select
               name="instrument-type"
-              defaultValue={loader.instrumentForEdit.type}
+              defaultValue={
+                loader.instrumentForEdit.instrument_type.instrument_type
+              }
               required
             >
               {loader.instrumentTypes.map((instrumentType) => (
@@ -71,7 +74,9 @@ export const EditInstrument = () => {
           <div className={"edit-instrument-field-value"}>
             <select
               name="manufacturer-name"
-              defaultValue={loader.instrumentForEdit.name}
+              defaultValue={
+                loader.instrumentForEdit.manufacturer_name.manufacturer_name
+              }
               required
             >
               {loader.manufacturers.map((manufacturer) => (
@@ -97,7 +102,9 @@ export const EditInstrument = () => {
               name="manufacturer-date"
               min="0001-01-01"
               max="9999-12-31"
-              defaultValue={loader.instrumentForEdit.manufacturer_date}
+              defaultValue={
+                loader.instrumentForEdit.manufacturer_date.manufacture_date
+              }
               required
             />
           </div>
@@ -114,7 +121,7 @@ export const EditInstrument = () => {
               name="release-date"
               min="0001-01-01"
               max="9999-12-31"
-              defaultValue={loader.instrumentForEdit.release_date}
+              defaultValue={loader.instrumentForEdit.release_date.release_date}
               required
             />
           </div>
@@ -128,7 +135,7 @@ export const EditInstrument = () => {
           <div className={"edit-instrument-field-value"}>
             <select
               name="country"
-              defaultValue={loader.instrumentForEdit.country}
+              defaultValue={loader.instrumentForEdit.country.country}
               required
             >
               {loader.countries.map((country) => (
@@ -142,12 +149,7 @@ export const EditInstrument = () => {
 
         <InstrumentBasicMaterialFormField
           materials={loader.materials}
-          usedMaterialsForInstrument={loader.instrumentForEdit.basic_materials.map(
-            (material) =>
-              ({
-                basic_material: material,
-              }) as InstrumentBasicMaterial,
-          )}
+          usedMaterialsForInstrument={loader.instrumentForEdit.basic_materials}
         />
 
         <input type="submit" value="Edit" />

@@ -5,16 +5,19 @@ import { InstrumentTypeFilter } from "./InstrumentTypeFilter";
 import { Role } from "domain/model/role";
 import { CreateInstrumentCardButton } from "./CreateInstrumentCardButton";
 import { ManufacturerNameFilter } from "widgets/catalogue-filter/ui/ManufacturerNameFilter";
-import { ManufacturerNames } from "domain/model/manufacturer-name";
-import { DateFilter } from "widgets/catalogue-filter/ui/DateFilter";
-import { ManufactureDate } from "domain/model/manufacture-date";
+import { ManufactureDateFilter } from "widgets/catalogue-filter/ui/ManufactureDateFilter";
 import { CountryFilter } from "widgets/catalogue-filter/ui/CountryFilter";
-import { Countries } from "domain/model/country";
-import { ReleaseDate } from "domain/model/release-date";
 import { MaterialFilter } from "widgets/catalogue-filter/ui/MaterialFilter";
 import Jwt from "domain/model/jwt";
 import { InstrumentType } from "generated/model/instrument-type";
-import { InstrumentBasicMaterial } from "generated/model";
+import {
+  BasicMaterial,
+  Country,
+  ManufactureDate,
+  ManufacturerName,
+  ReleaseDate,
+} from "generated/model";
+import { ReleaseDateFilter } from "widgets/catalogue-filter/ui/ReleaseDateFilter";
 
 interface Props {
   onFilterChange: (filters: Filters) => void;
@@ -24,8 +27,9 @@ export const CatalogueFilterWidget = (props: Props) => {
   const [instrumentTypes, setInstrumentTypes] = useState<
     InstrumentType[] | null
   >(null);
-  const [manufacturerNames, setManufacturerNames] =
-    useState<ManufacturerNames | null>(null);
+  const [manufacturerNames, setManufacturerNames] = useState<
+    ManufacturerName[] | null
+  >(null);
   const [manufactureDateFrom, setManufactureDateFrom] =
     useState<ManufactureDate | null>(null);
   const [manufactureDateTo, setManufactureDateTo] =
@@ -34,10 +38,8 @@ export const CatalogueFilterWidget = (props: Props) => {
     null,
   );
   const [releaseDateTo, setReleaseDateTo] = useState<ReleaseDate | null>(null);
-  const [countries, setCountries] = useState<Countries | null>(null);
-  const [materials, setMaterials] = useState<InstrumentBasicMaterial[] | null>(
-    null,
-  );
+  const [countries, setCountries] = useState<Country[] | null>(null);
+  const [materials, setMaterials] = useState<BasicMaterial[] | null>(null);
 
   useEffect(() => {
     props.onFilterChange({
@@ -69,12 +71,12 @@ export const CatalogueFilterWidget = (props: Props) => {
       <ManufacturerNameFilter onValueChange={setManufacturerNames} />
       <div id="manufacture-date-filter">
         <legend>Manufacture Date:</legend>
-        <DateFilter
+        <ManufactureDateFilter
           onValueChange={setManufactureDateFrom}
           fieldName={"manufactureDateFrom"}
           labelName={"From"}
         />
-        <DateFilter
+        <ManufactureDateFilter
           onValueChange={setManufactureDateTo}
           fieldName={"manufactureDateTo"}
           labelName={"To"}
@@ -82,12 +84,12 @@ export const CatalogueFilterWidget = (props: Props) => {
       </div>
       <div id="release-date-filter">
         <legend>Release Date:</legend>
-        <DateFilter
+        <ReleaseDateFilter
           onValueChange={setReleaseDateFrom}
           fieldName={"releaseDateFrom"}
           labelName={"From"}
         />
-        <DateFilter
+        <ReleaseDateFilter
           onValueChange={setReleaseDateTo}
           fieldName={"releaseDateTo"}
           labelName={"To"}

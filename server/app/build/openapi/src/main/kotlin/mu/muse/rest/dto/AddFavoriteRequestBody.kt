@@ -2,6 +2,7 @@ package mu.muse.rest.dto
 
 import java.util.Objects
 import com.fasterxml.jackson.annotation.JsonProperty
+import mu.muse.rest.dto.InstrumentId
 import jakarta.validation.constraints.DecimalMax
 import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.Email
@@ -18,7 +19,8 @@ import jakarta.validation.Valid
  */
 data class AddFavoriteRequestBody(
 
-    @get:JsonProperty("instrument_id", required = true) val instrumentId: kotlin.Long
+    @field:Valid
+    @get:JsonProperty("instrument_id", required = true) val instrumentId: InstrumentId
     ) {
 
 }

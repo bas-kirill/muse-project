@@ -6,7 +6,7 @@
 package mu.muse.rest.api
 
 import mu.muse.rest.dto.ClientError
-import mu.muse.rest.dto.GetInstrumentCriteriaRequestBody
+import mu.muse.rest.dto.GetInstrumentsByCriteriaRequestBody
 import mu.muse.rest.dto.GetInstrumentsByCriteriaResponse
 import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
@@ -42,5 +42,5 @@ interface GetInstrumentsByCriteriaApi {
             produces = ["application/json"],
             consumes = ["application/json"]
     )
-    fun getInstrumentsByCriteria( @Valid @RequestBody getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody): ResponseEntity<GetInstrumentsByCriteriaResponse>
+    fun getInstrumentsByCriteria( @Valid @RequestBody getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody): ResponseEntity<GetInstrumentsByCriteriaResponse>
 }

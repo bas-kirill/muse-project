@@ -12,50 +12,52 @@ paths: {}
 
 components:
   schemas:
-    GetInstrumentCriteriaRequestBody:
+    GetInstrumentsByCriteriaRequestBody:
       type: object
       properties:
         instrument_name:
-          type: string
-          example: "Fender Stratocasto"
+          # https://stackoverflow.com/questions/40920441/how-to-specify-a-property-can-be-null-or-a-reference-with-swagger
+          nullable: true
+          allOf:
+            - $ref: "./../../common/InstrumentName.yml#/components/schemas/InstrumentName"
         instrument_types:
+          nullable: true
           type: array
           items:
-            type: string
-            example: "KEYBOARD"
+            $ref: './../../common/InstrumentType.yml#/components/schemas/InstrumentType'
         manufacturer_names:
+          nullable: true
           type: array
           items:
-            type: string
-            example: "Yamaha"
+            $ref: './../../common/ManufacturerName.yml#/components/schemas/ManufacturerName'
         manufacture_date_from:
-          type: string
-          format: date
-          example: "1998-01-01"
+          nullable: true
+          allOf:
+            - $ref: "./../../common/ManufactureDate.yml#/components/schemas/ManufactureDate"
         manufacture_date_to:
-          type: string
-          format: date
-          example: "1998-01-01"
+          nullable: true
+          allOf:
+            - $ref: "./../../common/ManufactureDate.yml#/components/schemas/ManufactureDate"
         release_date_from:
-          type: string
-          format: date
-          example: "1998-01-01"
+          nullable: true
+          allOf:
+            - $ref: "./../../common/ReleaseDate.yml#/components/schemas/ReleaseDate"
         release_date_to:
-          type: string
-          format: date
-          example: "1998-01-01"
+          nullable: true
+          allOf:
+            - $ref: "./../../common/ReleaseDate.yml#/components/schemas/ReleaseDate"
         countries:
+          nullable: true
           type: array
           items:
-            type: string
-            example: "CYPRUS"
+            $ref: "./../../common/Country.yml#/components/schemas/Country"
         materials:
+          nullable: true
           type: array
           items:
-            type: string
-            example: "WOOD"
+            $ref: "./../../common/BasicMaterial.yml#/components/schemas/BasicMaterial"
         instrument_ids:
+          nullable: true
           type: array
           items:
-            type: string
-            example: "1"
+            $ref: "./../../common/InstrumentId.yml#/components/schemas/InstrumentId"

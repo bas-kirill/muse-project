@@ -1,0 +1,22 @@
+openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+
+info:
+  description: Release Date From
+  version: 1.0.0
+  title: Country
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
+
+paths: {}
+
+components:
+  schemas:
+    ReleaseDate:
+      type: object
+      required: [release_date]
+      properties:
+        release_date:
+          type: string
+          format: date
+          example: "1998-01-01"

@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Client Error
- * Client Error
+ * Country
+ * Basic Material
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: baskirill.an@gmail.com
@@ -41,7 +41,7 @@ import {
 // @ts-ignore
 import type { ClientError } from "../model";
 // @ts-ignore
-import type { GetInstrumentCriteriaRequestBody } from "../model";
+import type { GetInstrumentsByCriteriaRequestBody } from "../model";
 // @ts-ignore
 import type { GetInstrumentsByCriteriaResponse } from "../model";
 // @ts-ignore
@@ -57,19 +57,19 @@ export const GetInstrumentsByCriteriaApiAxiosParamCreator = function (
     /**
      * Get Instruments by Criteria
      * @summary Get Instruments by Criteria
-     * @param {GetInstrumentCriteriaRequestBody} getInstrumentCriteriaRequestBody
+     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getInstrumentsByCriteria: async (
-      getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody,
+      getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
-      // verify required parameter 'getInstrumentCriteriaRequestBody' is not null or undefined
+      // verify required parameter 'getInstrumentsByCriteriaRequestBody' is not null or undefined
       assertParamExists(
         "getInstrumentsByCriteria",
-        "getInstrumentCriteriaRequestBody",
-        getInstrumentCriteriaRequestBody,
+        "getInstrumentsByCriteriaRequestBody",
+        getInstrumentsByCriteriaRequestBody,
       );
       const localVarPath = `/instruments`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -98,7 +98,7 @@ export const GetInstrumentsByCriteriaApiAxiosParamCreator = function (
         ...options.headers,
       };
       localVarRequestOptions.data = serializeDataIfNeeded(
-        getInstrumentCriteriaRequestBody,
+        getInstrumentsByCriteriaRequestBody,
         localVarRequestOptions,
         configuration,
       );
@@ -124,12 +124,12 @@ export const GetInstrumentsByCriteriaApiFp = function (
     /**
      * Get Instruments by Criteria
      * @summary Get Instruments by Criteria
-     * @param {GetInstrumentCriteriaRequestBody} getInstrumentCriteriaRequestBody
+     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async getInstrumentsByCriteria(
-      getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody,
+      getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
       options?: RawAxiosRequestConfig,
     ): Promise<
       (
@@ -139,7 +139,7 @@ export const GetInstrumentsByCriteriaApiFp = function (
     > {
       const localVarAxiosArgs =
         await localVarAxiosParamCreator.getInstrumentsByCriteria(
-          getInstrumentCriteriaRequestBody,
+          getInstrumentsByCriteriaRequestBody,
           options,
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
@@ -172,16 +172,16 @@ export const GetInstrumentsByCriteriaApiFactory = function (
     /**
      * Get Instruments by Criteria
      * @summary Get Instruments by Criteria
-     * @param {GetInstrumentCriteriaRequestBody} getInstrumentCriteriaRequestBody
+     * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getInstrumentsByCriteria(
-      getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody,
+      getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<GetInstrumentsByCriteriaResponse> {
       return localVarFp
-        .getInstrumentsByCriteria(getInstrumentCriteriaRequestBody, options)
+        .getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -197,17 +197,17 @@ export class GetInstrumentsByCriteriaApi extends BaseAPI {
   /**
    * Get Instruments by Criteria
    * @summary Get Instruments by Criteria
-   * @param {GetInstrumentCriteriaRequestBody} getInstrumentCriteriaRequestBody
+   * @param {GetInstrumentsByCriteriaRequestBody} getInstrumentsByCriteriaRequestBody
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GetInstrumentsByCriteriaApi
    */
   public getInstrumentsByCriteria(
-    getInstrumentCriteriaRequestBody: GetInstrumentCriteriaRequestBody,
+    getInstrumentsByCriteriaRequestBody: GetInstrumentsByCriteriaRequestBody,
     options?: RawAxiosRequestConfig,
   ) {
     return GetInstrumentsByCriteriaApiFp(this.configuration)
-      .getInstrumentsByCriteria(getInstrumentCriteriaRequestBody, options)
+      .getInstrumentsByCriteria(getInstrumentsByCriteriaRequestBody, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

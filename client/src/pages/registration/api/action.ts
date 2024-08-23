@@ -22,7 +22,7 @@ export const action: ActionFunction = async ({
   }
 
   const response = await userRegistrationApi.userRegistration({
-    fullName: fullName,
+    full_name: fullName,
     login: login,
     password: password,
   });

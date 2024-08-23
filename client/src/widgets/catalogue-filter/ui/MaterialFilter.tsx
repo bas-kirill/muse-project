@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { InstrumentBasicMaterial } from "generated/model";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
+import { BasicMaterial } from "generated/model";
 
 interface Props {
-  onValueChange: (names: InstrumentBasicMaterial[]) => void;
+  onValueChange: (names: BasicMaterial[]) => void;
 }
 
 const getInstrumentMaterials = new GetInstrumentBasicMaterialsApi();
 
 export const MaterialFilter = ({ onValueChange }: Props) => {
-  const [materials, setMaterials] = useState<InstrumentBasicMaterial[]>([]);
+  const [materials, setMaterials] = useState<BasicMaterial[]>([]);
 
   useEffect(() => {
     const fetchMaterials = async () => {
@@ -37,7 +37,7 @@ export const MaterialFilter = ({ onValueChange }: Props) => {
           (inputTag) =>
             ({
               basic_material: inputTag.name,
-            }) as InstrumentBasicMaterial,
+            }) as BasicMaterial,
         ),
     );
   }

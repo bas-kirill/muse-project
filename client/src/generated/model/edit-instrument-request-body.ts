@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Client Error
- * Client Error
+ * Country
+ * Basic Material
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: baskirill.an@gmail.com
@@ -12,6 +12,31 @@
  * Do not edit the class manually.
  */
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { BasicMaterial } from "./basic-material";
+// May contain unused imports in some cases
+// @ts-ignore
+import type { Country } from "./country";
+// May contain unused imports in some cases
+// @ts-ignore
+import type { InstrumentId } from "./instrument-id";
+// May contain unused imports in some cases
+// @ts-ignore
+import type { InstrumentName } from "./instrument-name";
+// May contain unused imports in some cases
+// @ts-ignore
+import type { InstrumentType } from "./instrument-type";
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ManufactureDate } from "./manufacture-date";
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ManufacturerName } from "./manufacturer-name";
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ReleaseDate } from "./release-date";
+
 /**
  *
  * @export
@@ -20,50 +45,50 @@
 export interface EditInstrumentRequestBody {
   /**
    *
-   * @type {number}
+   * @type {InstrumentId}
    * @memberof EditInstrumentRequestBody
    */
-  instrument_id?: number;
+  instrument_id?: InstrumentId;
   /**
    *
-   * @type {string}
+   * @type {InstrumentName}
    * @memberof EditInstrumentRequestBody
    */
-  instrument_name: string;
+  instrument_name: InstrumentName;
   /**
    *
-   * @type {string}
+   * @type {InstrumentType}
    * @memberof EditInstrumentRequestBody
    */
-  instrument_type: string;
+  instrument_type: InstrumentType;
   /**
    *
-   * @type {string}
+   * @type {ManufacturerName}
    * @memberof EditInstrumentRequestBody
    */
-  manufacturer_name: string;
+  manufacturer_name: ManufacturerName;
   /**
    *
-   * @type {string}
+   * @type {ManufactureDate}
    * @memberof EditInstrumentRequestBody
    */
-  manufacturer_date: string;
+  manufacturer_date: ManufactureDate;
   /**
    *
-   * @type {string}
+   * @type {ReleaseDate}
    * @memberof EditInstrumentRequestBody
    */
-  release_date: string;
+  release_date: ReleaseDate;
   /**
    *
-   * @type {string}
+   * @type {Country}
    * @memberof EditInstrumentRequestBody
    */
-  country: string;
+  country: Country;
   /**
    *
-   * @type {Array<string>}
+   * @type {Array<BasicMaterial>}
    * @memberof EditInstrumentRequestBody
    */
-  materials: Array<string>;
+  materials: Array<BasicMaterial>;
 }

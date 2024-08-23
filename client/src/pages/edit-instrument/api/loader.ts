@@ -1,8 +1,8 @@
 import { LoaderFunction } from "react-router-dom";
 import { GetInstrumentByIdApi } from "generated/api/get-instrument-by-id-api";
 import {
+  BasicMaterial,
   Country,
-  InstrumentBasicMaterial,
   InstrumentDetail,
   type InstrumentType,
   Manufacturer,
@@ -22,7 +22,7 @@ export interface EditInstrumentLoader {
   instrumentForEdit: InstrumentDetail;
   instrumentTypes: InstrumentType[];
   manufacturers: Manufacturer[];
-  materials: InstrumentBasicMaterial[];
+  materials: BasicMaterial[];
   countries: Country[];
 }
 

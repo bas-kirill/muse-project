@@ -30,7 +30,12 @@ export const InstrumentTypeFilter = (props: Props) => {
     props.onValueChange(
       Array.from(elements)
         .filter((inputTag) => inputTag.checked)
-        .map((inputTag) => ({ type: inputTag.name })),
+        .map(
+          (inputTag) =>
+            ({
+              instrument_type: inputTag.name,
+            }) as InstrumentType,
+        ),
     );
   }
 
@@ -38,15 +43,17 @@ export const InstrumentTypeFilter = (props: Props) => {
     <div id="instrument-type-filter">
       <legend>Type:</legend>
       {instrumentTypes.map((instrumentType) => (
-        <div key={instrumentType.type}>
+        <div key={instrumentType.instrument_type}>
           <input
             type="checkbox"
-            name={instrumentType.type}
+            name={instrumentType.instrument_type}
             onChange={onChange}
             className="instrument-type-filter-checkbox"
             defaultChecked={true}
           />
-          <label htmlFor={instrumentType.type}>{instrumentType.type}</label>
+          <label htmlFor={instrumentType.instrument_type}>
+            {instrumentType.instrument_type}
+          </label>
         </div>
       ))}
     </div>

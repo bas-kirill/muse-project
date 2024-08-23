@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Client Error
- * Client Error
+ * Country
+ * Basic Material
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: baskirill.an@gmail.com
@@ -15,13 +15,13 @@
 /**
  *
  * @export
- * @interface InstrumentBasicMaterial
+ * @interface ManufacturerName
  */
-export interface InstrumentBasicMaterial {
+export interface ManufacturerName {
   /**
    *
    * @type {string}
-   * @memberof InstrumentBasicMaterial
+   * @memberof ManufacturerName
    */
-  basic_material: string;
+  manufacturer_name: string;
 }

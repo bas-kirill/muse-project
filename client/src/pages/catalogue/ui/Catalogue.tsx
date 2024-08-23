@@ -17,12 +17,13 @@ import {
 import { SearchBarForm } from "./SearchBarForm";
 import { NavigationBar } from "./NavigationBar";
 import { CatalogueLoader } from "pages/catalogue";
+import { ListFavoriteApi } from "generated/api/list-favorite-api";
 import {
-  type GetInstrumentCriteriaRequestBody,
   InstrumentDetail,
+  InstrumentId,
+  InstrumentName,
 } from "generated/model";
 import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api/get-instruments-by-criteria-paginated-api";
-import { ListFavoriteApi } from "generated/api/list-favorite-api";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();
@@ -35,42 +36,57 @@ export function Catalogue() {
   const [instruments, setInstruments] = useState<InstrumentDetail[]>(
     loader.instrumentPage.content,
   );
-  const [instrumentName, setInstrumentName] = useState<string | null>(null);
+  const [instrumentName, setInstrumentName] = useState<InstrumentName | null>(
+    null,
+  );
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTER);
   const [pageNumber, setPageNumber] = useState<number>(
     CATALOGUE_DEFAULT_PAGE_NUMBER,
   );
   const totalPages = useRef<number>(0);
-  const [favoriteInstrumentIds, setFavoriteInstrumentIds] = useState<number[]>(
-    loader.favoriteInstrumentIds,
-  );
+  const [favoriteInstrumentIds, setFavoriteInstrumentIds] = useState<
+    InstrumentId[]
+  >(loader.favoriteInstrumentIds);
 
   useEffect(() => {
     listFavoriteApi
       .listFavorite()
       .then((favorites) =>
         setFavoriteInstrumentIds(
-          favorites.data.content.map((favorite) => favorite.id),
+          favorites.data.content.map((favorite) => favorite.instrument_id),
         ),
       );
 
-    if (instrumentName === "") {
+    if (instrumentName?.instrument_name === "") {
       filters.instrumentName = null;
     }
-    if (instrumentName !== "") {
+    if (instrumentName?.instrument_name !== "") {
       filters.instrumentName = instrumentName;
     }
 
-    getInstrumentsByCriteriaPaginated
-      .getInstrumentsByCriteriaPaginated(
-        CATALOGUE_DEFAULT_PAGE_SIZE,
-        pageNumber,
-        JSON.stringify(filters, null, 2) as GetInstrumentCriteriaRequestBody,
-      )
-      .then((r) => {
-        setInstruments(r.data.content);
-        totalPages.current = r.data.total_pages;
-      });
+    const fetchInstruments = async () => {
+      const response =
+        await getInstrumentsByCriteriaPaginated.getInstrumentsByCriteriaPaginated(
+          CATALOGUE_DEFAULT_PAGE_SIZE,
+          pageNumber,
+          {
+            instrument_name: filters.instrumentName,
+            instrument_types: filters.instrumentTypes,
+            manufacturer_names: filters.manufacturerNames,
+            manufacture_date_from: filters.manufactureDateFrom,
+            manufacture_date_to: filters.manufactureDateTo,
+            release_date_from: filters.releaseDateFrom,
+            release_date_to: filters.releaseDateTo,
+            countries: filters.countries,
+            materials: filters.materials,
+            instrument_ids: filters.instrumentIds,
+          },
+        );
+      setInstruments(response.data.content);
+      totalPages.current = response.data.total_pages;
+    };
+
+    fetchInstruments();
   }, [filters, instrumentName, pageNumber]);
 
   return (

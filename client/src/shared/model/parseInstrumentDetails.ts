@@ -1,67 +1,61 @@
-import { InstrumentName } from "domain/model/instrument-name";
-import { ManufacturerName } from "domain/model/manufacturer-name";
-import { ManufactureDate } from "domain/model/manufacture-date";
-import { ReleaseDate } from "domain/model/release-date";
-import { InstrumentId } from "domain/model/instrument-id";
 import { InstrumentType } from "generated/model/instrument-type";
-import { Country, InstrumentBasicMaterial } from "generated/model";
+import {
+  BasicMaterial,
+  Country,
+  InstrumentId,
+  InstrumentName,
+  ManufactureDate,
+  ManufacturerName,
+  ReleaseDate,
+} from "generated/model";
 
 export const parseInstrumentDetails = (data: FormData) => {
   const errors = [];
 
-  const instrumentId = InstrumentId.from(
-    parseInt(data.get("instrument-id") as string),
-  );
+  const instrumentId = {
+    instrument_id: parseInt(data.get("instrument-id") as string),
+  } as InstrumentId;
 
-  const instrumentName = data.get("instrument-name");
-  if (
-    instrumentName === null ||
-    typeof instrumentName !== "string" ||
-    instrumentName === ""
-  ) {
+  const instrumentName = {
+    instrument_name: data.get("instrument-name"),
+  } as InstrumentName;
+  if (instrumentName === null || instrumentName.instrument_name === "") {
     errors.push("Type instrument name");
   }
 
-  const instrumentType = data.get("instrument-type");
-  if (
-    instrumentType === null ||
-    typeof instrumentType !== "string" ||
-    instrumentType === ""
-  ) {
+  const instrumentType = {
+    instrument_type: data.get("instrument-type"),
+  } as InstrumentType;
+  if (instrumentType === null || instrumentType.instrument_type === "") {
     errors.push("Type instrument type");
   }
 
-  const manufacturerName = data.get("manufacturer-name");
-  if (
-    manufacturerName === null ||
-    typeof manufacturerName !== "string" ||
-    manufacturerName === ""
-  ) {
+  const manufacturerName = {
+    manufacturer_name: data.get("manufacturer-name"),
+  } as ManufacturerName;
+  if (manufacturerName === null || manufacturerName.manufacturer_name === "") {
     errors.push("Type manufacturer name");
   }
 
-  const manufactureDate = data.get("manufacturer-date");
-  if (
-    manufactureDate === null ||
-    typeof manufactureDate !== "string" ||
-    manufactureDate === ""
-  ) {
+  const manufactureDate = {
+    manufacture_date: data.get("manufacturer-date"),
+  } as ManufactureDate;
+  if (manufactureDate === null || manufactureDate.manufacture_date === "") {
     errors.push("Type manufacture date");
   }
 
-  const releaseDate = data.get("release-date");
-  if (
-    releaseDate === null ||
-    typeof manufactureDate !== "string" ||
-    releaseDate === ""
-  ) {
+  const releaseDate = {
+    release_date: data.get("release-date"),
+  } as ReleaseDate;
+  if (releaseDate === null || releaseDate.release_date === "") {
     errors.push("Type release date");
   }
 
   if (
-    manufactureDate === "string" &&
-    releaseDate === "string" &&
-    Date.parse(releaseDate) < Date.parse(manufactureDate)
+    manufactureDate.manufacture_date === "string" &&
+    releaseDate.release_date === "string" &&
+    Date.parse(releaseDate.release_date) <
+      Date.parse(manufactureDate.manufacture_date)
   ) {
     errors.push("Release date must be after manufacture date");
   }
@@ -70,19 +64,15 @@ export const parseInstrumentDetails = (data: FormData) => {
     country: data.get("country"),
   } as Country;
 
-  if (
-    country.country === null ||
-    typeof country.country !== "string" ||
-    country.country === ""
-  ) {
+  if (country.country === null || country.country === "") {
     errors.push("Type country");
   }
   const materialsRaw = data.getAll("material") as string[];
-  const materials: InstrumentBasicMaterial[] = materialsRaw.map(
+  const materials: BasicMaterial[] = materialsRaw.map(
     (materialRaw) =>
       ({
         basic_material: materialRaw,
-      }) as InstrumentBasicMaterial,
+      }) as BasicMaterial,
   );
 
   return {
@@ -103,7 +93,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     manufactureDate: ManufactureDate;
     releaseDate: ReleaseDate;
     country: Country;
-    materials: InstrumentBasicMaterial[];
+    materials: BasicMaterial[];
     errors: string[];
   };
 };

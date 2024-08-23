@@ -9,7 +9,13 @@ interface Props {
 export const EditInstrumentButton = (props: Props) => {
   return (
     <button className="serp-edit-instrument-button">
-      <Link to={"/instrument/" + props.instrument.id.toString() + "/edit"}>
+      <Link
+        to={
+          "/instrument/" +
+          props.instrument.instrument_id.instrument_id +
+          "/edit"
+        }
+      >
         Edit
       </Link>
     </button>

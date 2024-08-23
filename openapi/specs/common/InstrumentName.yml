@@ -1,0 +1,21 @@
+openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+
+info:
+  description: Instrument Name
+  version: 1.0.0
+  title: Country
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
+
+paths: {}
+
+components:
+  schemas:
+    InstrumentName:
+      type: object
+      required: [instrument_name]
+      properties:
+        instrument_name:
+          type: string
+          example: "Fender Stratocaster"

@@ -35,7 +35,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/RemoveFavoriteRequestBody"
+              $ref: "./../common/InstrumentId.yml#/components/schemas/InstrumentId"
         required: true
       responses:
         "200":
@@ -56,12 +56,3 @@ paths:
             application/json:
               schema:
                 $ref: "./../common/ServerError.yml#/components/schemas/ServerError"
-
-components:
-  schemas:
-    RemoveFavoriteRequestBody:
-      type: object
-      required: [instrument_id]
-      properties:
-        instrument_id:
-          $ref: "./../common/InstrumentId.yml#/components/schemas/InstrumentId"

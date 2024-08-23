@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Client Error
- * Client Error
+ * Country
+ * Basic Material
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: baskirill.an@gmail.com
@@ -41,7 +41,7 @@ import {
 // @ts-ignore
 import type { ClientError } from "../model";
 // @ts-ignore
-import type { RemoveFavoriteRequestBody } from "../model";
+import type { InstrumentId } from "../model";
 // @ts-ignore
 import type { ServerError } from "../model";
 /**
@@ -55,20 +55,16 @@ export const RemoveFavoriteApiAxiosParamCreator = function (
     /**
      * Remove Favorite
      * @summary Remove Favorite
-     * @param {RemoveFavoriteRequestBody} removeFavoriteRequestBody
+     * @param {InstrumentId} instrumentId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     removeFavorite: async (
-      removeFavoriteRequestBody: RemoveFavoriteRequestBody,
+      instrumentId: InstrumentId,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
-      // verify required parameter 'removeFavoriteRequestBody' is not null or undefined
-      assertParamExists(
-        "removeFavorite",
-        "removeFavoriteRequestBody",
-        removeFavoriteRequestBody,
-      );
+      // verify required parameter 'instrumentId' is not null or undefined
+      assertParamExists("removeFavorite", "instrumentId", instrumentId);
       const localVarPath = `/favorite/remove`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -96,7 +92,7 @@ export const RemoveFavoriteApiAxiosParamCreator = function (
         ...options.headers,
       };
       localVarRequestOptions.data = serializeDataIfNeeded(
-        removeFavoriteRequestBody,
+        instrumentId,
         localVarRequestOptions,
         configuration,
       );
@@ -120,18 +116,18 @@ export const RemoveFavoriteApiFp = function (configuration?: Configuration) {
     /**
      * Remove Favorite
      * @summary Remove Favorite
-     * @param {RemoveFavoriteRequestBody} removeFavoriteRequestBody
+     * @param {InstrumentId} instrumentId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async removeFavorite(
-      removeFavoriteRequestBody: RemoveFavoriteRequestBody,
+      instrumentId: InstrumentId,
       options?: RawAxiosRequestConfig,
     ): Promise<
       (axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>
     > {
       const localVarAxiosArgs = await localVarAxiosParamCreator.removeFavorite(
-        removeFavoriteRequestBody,
+        instrumentId,
         options,
       );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
@@ -164,16 +160,16 @@ export const RemoveFavoriteApiFactory = function (
     /**
      * Remove Favorite
      * @summary Remove Favorite
-     * @param {RemoveFavoriteRequestBody} removeFavoriteRequestBody
+     * @param {InstrumentId} instrumentId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     removeFavorite(
-      removeFavoriteRequestBody: RemoveFavoriteRequestBody,
+      instrumentId: InstrumentId,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<object> {
       return localVarFp
-        .removeFavorite(removeFavoriteRequestBody, options)
+        .removeFavorite(instrumentId, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -189,17 +185,17 @@ export class RemoveFavoriteApi extends BaseAPI {
   /**
    * Remove Favorite
    * @summary Remove Favorite
-   * @param {RemoveFavoriteRequestBody} removeFavoriteRequestBody
+   * @param {InstrumentId} instrumentId
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof RemoveFavoriteApi
    */
   public removeFavorite(
-    removeFavoriteRequestBody: RemoveFavoriteRequestBody,
+    instrumentId: InstrumentId,
     options?: RawAxiosRequestConfig,
   ) {
     return RemoveFavoriteApiFp(this.configuration)
-      .removeFavorite(removeFavoriteRequestBody, options)
+      .removeFavorite(instrumentId, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

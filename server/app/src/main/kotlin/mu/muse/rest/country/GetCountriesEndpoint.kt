@@ -21,7 +21,7 @@ class GetCountriesEndpoint(
 fun List<Country>.toResponse(): ResponseEntity<GetCountriesResponse> {
     return ResponseEntity.ok(
         GetCountriesResponse(
-            content = this.map { mu.muse.rest.dto.Country(it.name) },
+            content = this.map { mu.muse.rest.dto.Country(country = it.name) },
         ),
     )
 }

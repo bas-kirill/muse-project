@@ -15,14 +15,14 @@ export const RemoveInstrumentButton = (props: Props) => {
 
   const handleOnDeleteInstrument = () => {
     removeFavorite
-      .removeFavorite({
-        instrument_id: props.instrument.id,
-      })
+      .removeFavorite(props.instrument.instrument_id)
       .then(() => {
         props.setSuccessModal(true);
       })
       .catch(() => {
-        throw new Error(`Fail to remove instrument ${props.instrument.id}`);
+        throw new Error(
+          `Fail to remove instrument ${props.instrument.instrument_id.instrument_id}`,
+        );
       });
   };
 

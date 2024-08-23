@@ -12,7 +12,7 @@ export const FavoritePage = () => {
       <h1>Favorite</h1>
       {loader.instrumentDetails.map((instrument) => (
         <InstrumentCard
-          key={instrument.id.toString()}
+          key={instrument.instrument_id.instrument_id}
           instrument={instrument}
           favorite={true}
         />

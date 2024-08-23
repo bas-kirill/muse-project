@@ -2,9 +2,10 @@ import { useRef } from "react";
 import { useJwt } from "pages/login";
 import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 import { AddFavoriteApi } from "generated/api/add-favorite-api";
+import { InstrumentId } from "generated/model";
 
 interface Props {
-  instrumentId: number;
+  instrumentId: InstrumentId;
   favorite: boolean;
 }
 
@@ -17,14 +18,9 @@ export const AddFavoriteButton = (props: Props) => {
 
   const toggleFavorite = async () => {
     if (favoriteRef.current) {
-      removeFavorite.removeFavorite(
-        {
-          instrument_id: props.instrumentId,
-        },
-        {
-          withCredentials: true,
-        },
-      );
+      removeFavorite.removeFavorite(props.instrumentId, {
+        withCredentials: true,
+      });
     } else {
       addFavorite.addFavorite(
         {

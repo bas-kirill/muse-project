@@ -2,6 +2,14 @@ package mu.muse.rest.dto
 
 import java.util.Objects
 import com.fasterxml.jackson.annotation.JsonProperty
+import mu.muse.rest.dto.BasicMaterial
+import mu.muse.rest.dto.Country
+import mu.muse.rest.dto.InstrumentId
+import mu.muse.rest.dto.InstrumentName
+import mu.muse.rest.dto.InstrumentType
+import mu.muse.rest.dto.ManufactureDate
+import mu.muse.rest.dto.ManufacturerName
+import mu.muse.rest.dto.ReleaseDate
 import jakarta.validation.constraints.DecimalMax
 import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.Email
@@ -14,10 +22,10 @@ import jakarta.validation.Valid
 
 /**
  * 
- * @param id 
- * @param name 
- * @param type 
- * @param manufacturer 
+ * @param instrumentId 
+ * @param instrumentName 
+ * @param instrumentType 
+ * @param manufacturerName 
  * @param manufacturerDate 
  * @param releaseDate 
  * @param country 
@@ -25,21 +33,29 @@ import jakarta.validation.Valid
  */
 data class InstrumentDetail(
 
-    @get:JsonProperty("id", required = true) val id: kotlin.Long,
+    @field:Valid
+    @get:JsonProperty("instrument_id", required = true) val instrumentId: InstrumentId,
 
-    @get:JsonProperty("name", required = true) val name: kotlin.String,
+    @field:Valid
+    @get:JsonProperty("instrument_name", required = true) val instrumentName: InstrumentName,
 
-    @get:JsonProperty("type", required = true) val type: kotlin.String,
+    @field:Valid
+    @get:JsonProperty("instrument_type", required = true) val instrumentType: InstrumentType,
 
-    @get:JsonProperty("manufacturer", required = true) val manufacturer: kotlin.String,
+    @field:Valid
+    @get:JsonProperty("manufacturer_name", required = true) val manufacturerName: ManufacturerName,
 
-    @get:JsonProperty("manufacturer_date", required = true) val manufacturerDate: kotlin.String,
+    @field:Valid
+    @get:JsonProperty("manufacturer_date", required = true) val manufacturerDate: ManufactureDate,
 
-    @get:JsonProperty("release_date", required = true) val releaseDate: kotlin.String,
+    @field:Valid
+    @get:JsonProperty("release_date", required = true) val releaseDate: ReleaseDate,
 
-    @get:JsonProperty("country", required = true) val country: kotlin.String,
+    @field:Valid
+    @get:JsonProperty("country", required = true) val country: Country,
 
-    @get:JsonProperty("basic_materials", required = true) val basicMaterials: kotlin.collections.List<kotlin.String>
+    @field:Valid
+    @get:JsonProperty("basic_materials", required = true) val basicMaterials: kotlin.collections.List<BasicMaterial>
     ) {
 
 }

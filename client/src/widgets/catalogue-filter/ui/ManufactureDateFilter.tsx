@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ManufactureDate } from "domain/model/manufacture-date";
+import { ManufactureDate } from "generated/model";
 
 interface Props {
   onValueChange: (names: ManufactureDate | null) => void;
@@ -7,14 +7,20 @@ interface Props {
   labelName: string;
 }
 
-export const DateFilter = ({ onValueChange, fieldName, labelName }: Props) => {
+export const ManufactureDateFilter = ({
+  onValueChange,
+  fieldName,
+  labelName,
+}: Props) => {
   const manufacturerDate = useRef<HTMLInputElement>(null);
 
   function onChange() {
     if (!manufacturerDate.current) {
       return;
     }
-    onValueChange(manufacturerDate.current.value);
+    onValueChange({
+      manufacture_date: manufacturerDate.current.value,
+    } as ManufactureDate);
   }
 
   return (

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { ManufacturerNames } from "domain/model/manufacturer-name";
 import { GetCountriesApi } from "generated/api/get-countries-api";
 import { Country } from "generated/model";
 
 interface Props {
-  onValueChange: (names: ManufacturerNames) => void;
+  onValueChange: (names: Country[]) => void;
 }
 
 const getCountries = new GetCountriesApi();
@@ -28,7 +27,12 @@ export const CountryFilter = ({ onValueChange }: Props) => {
     onValueChange(
       Array.from(elements)
         .filter((inputTag) => inputTag.checked)
-        .map((inputTag) => inputTag.name),
+        .map(
+          (inputTag) =>
+            ({
+              country: inputTag.name,
+            }) as Country,
+        ),
     );
   }
 

@@ -53,13 +53,6 @@ paths:
 
 components:
   schemas:
-    InstrumentType:
-      type: object
-      required: [instrument_type]
-      properties:
-        instrument_type:
-          type: string
-
     GetInstrumentTypesResponse:
       type: object
       required: [content]
@@ -67,5 +60,4 @@ components:
         content:
           type: array
           items:
-            $ref: "#/components/schemas/InstrumentType"
-
+            $ref: "./../common/InstrumentType.yml#/components/schemas/InstrumentType"

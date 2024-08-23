@@ -6,7 +6,10 @@ import {
   GetInstrumentsByCriteriaPaginatedApi,
   ListFavoriteApi,
 } from "generated/api";
-import { GetInstrumentByCriteriaPageResponse } from "generated/model";
+import {
+  GetInstrumentByCriteriaPageResponse,
+  InstrumentId,
+} from "generated/model";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();
@@ -15,7 +18,7 @@ const listFavoriteApi = new ListFavoriteApi();
 
 export interface CatalogueLoader {
   instrumentPage: GetInstrumentByCriteriaPageResponse;
-  favoriteInstrumentIds: number[];
+  favoriteInstrumentIds: InstrumentId[];
 }
 
 export const loader = async (): Promise<CatalogueLoader> => {
@@ -31,7 +34,7 @@ export const loader = async (): Promise<CatalogueLoader> => {
 
   const favoriteInstrumentDetails = await listFavoriteApi.listFavorite();
   const favoriteInstrumentIds = favoriteInstrumentDetails.data.content.map(
-    (favorite) => favorite.id,
+    (favorite) => favorite.instrument_id,
   );
   return {
     instrumentPage: instrumentsPage.data,

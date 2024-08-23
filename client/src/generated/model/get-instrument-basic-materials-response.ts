@@ -1,8 +1,8 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Client Error
- * Client Error
+ * Country
+ * Basic Material
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: baskirill.an@gmail.com
@@ -14,7 +14,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentBasicMaterial } from "./instrument-basic-material";
+import type { BasicMaterial } from "./basic-material";
 
 /**
  *
@@ -24,8 +24,8 @@ import type { InstrumentBasicMaterial } from "./instrument-basic-material";
 export interface GetInstrumentBasicMaterialsResponse {
   /**
    *
-   * @type {Array<InstrumentBasicMaterial>}
+   * @type {Array<BasicMaterial>}
    * @memberof GetInstrumentBasicMaterialsResponse
    */
-  content: Array<InstrumentBasicMaterial>;
+  content: Array<BasicMaterial>;
 }

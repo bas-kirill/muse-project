@@ -35,7 +35,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "./components/GetInstrumentByCriteriaRequestBody.yml#/components/schemas/GetInstrumentCriteriaRequestBody"
+              $ref: "./components/GetInstrumentByCriteriaRequestBody.yml#/components/schemas/GetInstrumentsByCriteriaRequestBody"
         required: true
       responses:
         "200":

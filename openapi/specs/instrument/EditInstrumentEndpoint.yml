@@ -61,25 +61,31 @@ components:
   schemas:
     EditInstrumentRequestBody:
       type: object
-      required: [ instrument_name, instrument_type, manufacturer_name, manufacturer_date,release_date,country, materials ]
+      required: [
+        instrument_name,
+        instrument_type,
+        manufacturer_name,
+        manufacturer_date,
+        release_date,
+        country,
+        materials
+      ]
       properties:
         instrument_id:
           $ref: "./../common/InstrumentId.yml#/components/schemas/InstrumentId"
         instrument_name:
-          type: string
+          $ref: "./../common/InstrumentName.yml#/components/schemas/InstrumentName"
         instrument_type:
-          type: string
+          $ref: "./../common/InstrumentType.yml#/components/schemas/InstrumentType"
         manufacturer_name:
-          type: string
+          $ref: "./../common/ManufacturerName.yml#/components/schemas/ManufacturerName"
         manufacturer_date:
-          type: string
-          format: date
+          $ref: "./../common/ManufactureDate.yml#/components/schemas/ManufactureDate"
         release_date:
-          type: string
-          format: date
+          $ref: "./../common/ReleaseDate.yml#/components/schemas/ReleaseDate"
         country:
-          type: string
+          $ref: "./../common/Country.yml#/components/schemas/Country"
         materials:
           type: array
           items:
-            type: string
+            $ref: "./../common/BasicMaterial.yml#/components/schemas/BasicMaterial"
