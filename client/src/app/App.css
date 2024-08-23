@@ -6,15 +6,27 @@
 ::before,
 ::after {
   box-sizing: inherit;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    avenir next,
+    avenir,
+    segoe ui,
+    helvetica neue,
+    helvetica,
+    Ubuntu,
+    roboto,
+    noto,
+    arial,
+    sans-serif;
 }
 
 #app {
-  border: 1px solid black;
-  background-color: gray;
+  background-color: #f0f0f0;
   max-width: 1024px;
   margin: 0 auto;
 }
 
-#app > h1 {
+h1 {
   text-align: center;
 }
