@@ -11,10 +11,10 @@ servers:
     description: Local server (uses local data)
     variables:
       port:
-        default: '8080'
+        default: "8080"
         enum:
-          - '8080'
-          - '8000'
+          - "8080"
+          - "8000"
 tags:
   - name: getCountries
     description: Get Countries
@@ -73,24 +73,24 @@ paths:
       tags:
         - getCountries
       responses:
-        '200':
+        "200":
           description: Country
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetCountriesResponse'
-        '400':
+                $ref: "#/components/schemas/GetCountriesResponse"
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/favorite/add:
     post:
       description: Add Favorite
@@ -102,27 +102,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstrumentId'
+              $ref: "#/components/schemas/InstrumentId"
         required: true
       responses:
-        '200':
+        "200":
           description: Instrument Details
           content:
             application/json:
               schema:
                 type: object
-        '400':
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/favorite/list:
     get:
       description: List Favorite
@@ -131,24 +131,24 @@ paths:
       tags:
         - listFavorite
       responses:
-        '200':
+        "200":
           description: Instrument Details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListFavoriteResponseBody'
-        '400':
+                $ref: "#/components/schemas/ListFavoriteResponseBody"
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/favorite/remove:
     post:
       description: Remove Favorite
@@ -160,27 +160,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/InstrumentId'
+              $ref: "#/components/schemas/InstrumentId"
         required: true
       responses:
-        '200':
+        "200":
           description: Instrument Details
           content:
             application/json:
               schema:
                 type: object
-        '400':
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/instrument/create:
     post:
       description: Create Instrument
@@ -192,27 +192,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateInstrumentRequestBody'
+              $ref: "#/components/schemas/CreateInstrumentRequestBody"
         required: true
       responses:
-        '200':
+        "200":
           description: Instrument Types
           content:
             application/json:
               schema:
                 type: object
-        '400':
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/instrument/{instrumentId}/delete:
     get:
       description: Get Instrument Types
@@ -229,24 +229,24 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: Instrument Types
           content:
             application/json:
               schema:
                 type: object
-        '400':
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/instrument/edit:
     post:
       description: Edit Instrument
@@ -258,27 +258,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EditInstrumentRequestBody'
+              $ref: "#/components/schemas/EditInstrumentRequestBody"
         required: true
       responses:
-        '200':
+        "200":
           description: Instrument Types
           content:
             application/json:
               schema:
                 type: object
-        '400':
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/instrument/materials:
     get:
       description: Get Instrument Basic Materials
@@ -287,24 +287,24 @@ paths:
       tags:
         - getInstrumentBasicMaterials
       responses:
-        '200':
+        "200":
           description: Instrument Basic Materials
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetInstrumentBasicMaterialsResponse'
-        '400':
+                $ref: "#/components/schemas/GetInstrumentBasicMaterialsResponse"
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/instrument/{instrumentId}:
     get:
       description: Get Instrument by ID
@@ -320,24 +320,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Instrument Detail
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/InstrumentDetail'
-        '400':
+                $ref: "#/components/schemas/InstrumentDetail"
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/instrument/types:
     get:
       description: Get Instrument Types
@@ -346,24 +346,24 @@ paths:
       tags:
         - getInstrumentTypes
       responses:
-        '200':
+        "200":
           description: Instrument Types
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetInstrumentTypesResponse'
-        '400':
+                $ref: "#/components/schemas/GetInstrumentTypesResponse"
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/instruments:
     post:
       description: Get Instruments by Criteria
@@ -375,27 +375,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetInstrumentsByCriteriaRequestBody'
+              $ref: "#/components/schemas/GetInstrumentsByCriteriaRequestBody"
         required: true
       responses:
-        '200':
+        "200":
           description: Instrument Details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetInstrumentsByCriteriaResponse'
-        '400':
+                $ref: "#/components/schemas/GetInstrumentsByCriteriaResponse"
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/instruments/paginated:
     post:
       description: Get Instruments by Criteria Paginated
@@ -422,27 +422,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/GetInstrumentsByCriteriaRequestBody'
+              $ref: "#/components/schemas/GetInstrumentsByCriteriaRequestBody"
         required: true
       responses:
-        '200':
+        "200":
           description: Instrument Details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetInstrumentByCriteriaPageResponse'
-        '400':
+                $ref: "#/components/schemas/GetInstrumentByCriteriaPageResponse"
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/auth/login:
     post:
       description: Basic Authentication
@@ -454,21 +454,21 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UsernameAndPasswordRequestBody'
+              $ref: "#/components/schemas/UsernameAndPasswordRequestBody"
         required: true
       responses:
-        '200':
+        "200":
           description: Profile Details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/JwtResponse'
+                $ref: "#/components/schemas/JwtResponse"
         default:
           description: server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/manufacturer:
     get:
       description: Get Manufacturers
@@ -477,24 +477,24 @@ paths:
       tags:
         - getManufacturers
       responses:
-        '200':
+        "200":
           description: Manufacturers
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetManufacturersResponse'
-        '400':
+                $ref: "#/components/schemas/GetManufacturersResponse"
+        "400":
           description: Client Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ClientError'
+                $ref: "#/components/schemas/ClientError"
         default:
           description: Server Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/profile:
     get:
       description: Get User Profile
@@ -503,18 +503,18 @@ paths:
       tags:
         - getUserProfile
       responses:
-        '200':
+        "200":
           description: Profile Details
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProfileDetails'
+                $ref: "#/components/schemas/ProfileDetails"
         default:
           description: server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
   /api/registration:
     post:
       description: Register User
@@ -526,10 +526,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RegistrationRequest'
+              $ref: "#/components/schemas/RegistrationRequest"
         required: true
       responses:
-        '200':
+        "200":
           description: User Registration
           content:
             application/json:
@@ -540,7 +540,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ServerError'
+                $ref: "#/components/schemas/ServerError"
 components:
   schemas:
     BasicMaterial:
@@ -582,23 +582,23 @@ components:
         - basic_materials
       properties:
         instrument_id:
-          $ref: '#/components/schemas/InstrumentId'
+          $ref: "#/components/schemas/InstrumentId"
         instrument_name:
-          $ref: '#/components/schemas/InstrumentName'
+          $ref: "#/components/schemas/InstrumentName"
         instrument_type:
-          $ref: '#/components/schemas/InstrumentType'
+          $ref: "#/components/schemas/InstrumentType"
         manufacturer_name:
-          $ref: '#/components/schemas/ManufacturerName'
+          $ref: "#/components/schemas/ManufacturerName"
         manufacturer_date:
-          $ref: '#/components/schemas/ManufactureDate'
+          $ref: "#/components/schemas/ManufactureDate"
         release_date:
-          $ref: '#/components/schemas/ReleaseDate'
+          $ref: "#/components/schemas/ReleaseDate"
         country:
-          $ref: '#/components/schemas/Country'
+          $ref: "#/components/schemas/Country"
         basic_materials:
           type: array
           items:
-            $ref: '#/components/schemas/BasicMaterial'
+            $ref: "#/components/schemas/BasicMaterial"
     InstrumentId:
       type: object
       required:
@@ -640,7 +640,7 @@ components:
         manufacture_date:
           type: string
           format: date
-          example: '1998-01-01'
+          example: "1998-01-01"
     ReleaseDate:
       type: object
       required:
@@ -649,7 +649,7 @@ components:
         release_date:
           type: string
           format: date
-          example: '1998-01-01'
+          example: "1998-01-01"
     ServerError:
       type: object
       required:
@@ -668,7 +668,7 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/Country'
+            $ref: "#/components/schemas/Country"
     ListFavoriteResponseBody:
       type: object
       required:
@@ -677,7 +677,7 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/InstrumentDetail'
+            $ref: "#/components/schemas/InstrumentDetail"
     CreateInstrumentRequestBody:
       type: object
       required:
@@ -690,21 +690,21 @@ components:
         - materials
       properties:
         instrument_name:
-          $ref: '#/components/schemas/InstrumentName'
+          $ref: "#/components/schemas/InstrumentName"
         instrument_type:
-          $ref: '#/components/schemas/InstrumentType'
+          $ref: "#/components/schemas/InstrumentType"
         manufacturer_name:
-          $ref: '#/components/schemas/ManufacturerName'
+          $ref: "#/components/schemas/ManufacturerName"
         manufacturer_date:
-          $ref: '#/components/schemas/ManufactureDate'
+          $ref: "#/components/schemas/ManufactureDate"
         release_date:
-          $ref: '#/components/schemas/ReleaseDate'
+          $ref: "#/components/schemas/ReleaseDate"
         country:
-          $ref: '#/components/schemas/Country'
+          $ref: "#/components/schemas/Country"
         materials:
           type: array
           items:
-            $ref: '#/components/schemas/BasicMaterial'
+            $ref: "#/components/schemas/BasicMaterial"
     EditInstrumentRequestBody:
       type: object
       required:
@@ -717,23 +717,23 @@ components:
         - materials
       properties:
         instrument_id:
-          $ref: '#/components/schemas/InstrumentId'
+          $ref: "#/components/schemas/InstrumentId"
         instrument_name:
-          $ref: '#/components/schemas/InstrumentName'
+          $ref: "#/components/schemas/InstrumentName"
         instrument_type:
-          $ref: '#/components/schemas/InstrumentType'
+          $ref: "#/components/schemas/InstrumentType"
         manufacturer_name:
-          $ref: '#/components/schemas/ManufacturerName'
+          $ref: "#/components/schemas/ManufacturerName"
         manufacturer_date:
-          $ref: '#/components/schemas/ManufactureDate'
+          $ref: "#/components/schemas/ManufactureDate"
         release_date:
-          $ref: '#/components/schemas/ReleaseDate'
+          $ref: "#/components/schemas/ReleaseDate"
         country:
-          $ref: '#/components/schemas/Country'
+          $ref: "#/components/schemas/Country"
         materials:
           type: array
           items:
-            $ref: '#/components/schemas/BasicMaterial'
+            $ref: "#/components/schemas/BasicMaterial"
     GetInstrumentBasicMaterialsResponse:
       type: object
       required:
@@ -742,7 +742,7 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/BasicMaterial'
+            $ref: "#/components/schemas/BasicMaterial"
     GetInstrumentTypesResponse:
       type: object
       required:
@@ -751,7 +751,7 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/InstrumentType'
+            $ref: "#/components/schemas/InstrumentType"
     GetInstrumentsByCriteriaResponse:
       type: object
       required:
@@ -760,55 +760,55 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/InstrumentDetail'
+            $ref: "#/components/schemas/InstrumentDetail"
     GetInstrumentsByCriteriaRequestBody:
       type: object
       properties:
         instrument_name:
           nullable: true
           allOf:
-            - $ref: '#/components/schemas/InstrumentName'
+            - $ref: "#/components/schemas/InstrumentName"
         instrument_types:
           nullable: true
           type: array
           items:
-            $ref: '#/components/schemas/InstrumentType'
+            $ref: "#/components/schemas/InstrumentType"
         manufacturer_names:
           nullable: true
           type: array
           items:
-            $ref: '#/components/schemas/ManufacturerName'
+            $ref: "#/components/schemas/ManufacturerName"
         manufacture_date_from:
           nullable: true
           allOf:
-            - $ref: '#/components/schemas/ManufactureDate'
+            - $ref: "#/components/schemas/ManufactureDate"
         manufacture_date_to:
           nullable: true
           allOf:
-            - $ref: '#/components/schemas/ManufactureDate'
+            - $ref: "#/components/schemas/ManufactureDate"
         release_date_from:
           nullable: true
           allOf:
-            - $ref: '#/components/schemas/ReleaseDate'
+            - $ref: "#/components/schemas/ReleaseDate"
         release_date_to:
           nullable: true
           allOf:
-            - $ref: '#/components/schemas/ReleaseDate'
+            - $ref: "#/components/schemas/ReleaseDate"
         countries:
           nullable: true
           type: array
           items:
-            $ref: '#/components/schemas/Country'
+            $ref: "#/components/schemas/Country"
         materials:
           nullable: true
           type: array
           items:
-            $ref: '#/components/schemas/BasicMaterial'
+            $ref: "#/components/schemas/BasicMaterial"
         instrument_ids:
           nullable: true
           type: array
           items:
-            $ref: '#/components/schemas/InstrumentId'
+            $ref: "#/components/schemas/InstrumentId"
     GetInstrumentByCriteriaPageResponse:
       type: object
       required:
@@ -822,7 +822,7 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/InstrumentDetail'
+            $ref: "#/components/schemas/InstrumentDetail"
         content_size:
           type: integer
           format: int32
@@ -875,7 +875,7 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/Manufacturer'
+            $ref: "#/components/schemas/Manufacturer"
     ProfileDetails:
       type: object
       required:

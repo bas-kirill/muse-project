@@ -13,9 +13,7 @@ export const FavoritePage = () => {
       <h1>Favorite</h1>
 
       {loader.instrumentDetails.length == 0 && (
-        <div style={{textAlign: "center"}}>
-          Favorite List is Empty
-        </div>
+        <div style={{ textAlign: "center" }}>Favorite List is Empty</div>
       )}
 
       {loader.instrumentDetails.map((instrument) => (

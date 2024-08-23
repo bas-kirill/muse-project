@@ -17,7 +17,7 @@ rules:
   # => https://opensource.zalando.com/restful-api-guidelines/#110
 
   must-always-return-json-objects-as-top-level-data-structures:
-    message: 'Top-level data structure must be an object'
+    message: "Top-level data structure must be an object"
     description: MUST always return JSON objects as top-level data structures [110]
     documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#110
     severity: error
@@ -29,7 +29,7 @@ rules:
   # => https://opensource.zalando.com/restful-api-guidelines/#112
 
   should-use-x-extensible-enum:
-    message: 'Should use `x-extensible-enum` instead of `enum`'
+    message: "Should use `x-extensible-enum` instead of `enum`"
     description: SHOULD used open-ended list of values (x-extensible-enum) for enumerations [112]
     documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#112
     severity: warn
@@ -55,7 +55,7 @@ rules:
   # => https://opensource.zalando.com/restful-api-guidelines/#116
 
   must-use-semantic-versioning:
-    message: '{{error}}'
+    message: "{{error}}"
     description: MUST use semantic versioning [116]
     documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#116
     severity: error
@@ -164,7 +164,7 @@ rules:
   # => https://opensource.zalando.com/restful-api-guidelines/#146
 
   should-limit-number-of-resource-types:
-    message: '{{error}}'
+    message: "{{error}}"
     description: SHOULD limit number of resource types [146]
     documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#146
     severity: warn
@@ -192,7 +192,7 @@ rules:
   # => https://opensource.zalando.com/restful-api-guidelines/#150
 
   must-use-standard-http-status-codes:
-    message: '{{property}} is not a standardized response code'
+    message: "{{property}} is not a standardized response code"
     description: MUST use standard HTTP status codes [150]
     documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#150
     severity: error
@@ -201,57 +201,57 @@ rules:
       function: enumeration
       functionOptions:
         values:
-          - '100'
-          - '101'
-          - '200'
-          - '201'
-          - '202'
-          - '203'
-          - '204'
-          - '205'
-          - '206'
-          - '207'
-          - '300'
-          - '301'
-          - '302'
-          - '303'
-          - '304'
-          - '305'
-          - '307'
-          - '400'
-          - '401'
-          - '402'
-          - '403'
-          - '404'
-          - '405'
-          - '406'
-          - '407'
-          - '408'
-          - '409'
-          - '410'
-          - '411'
-          - '412'
-          - '413'
-          - '414'
-          - '415'
-          - '416'
-          - '417'
-          - '423'
-          - '426'
-          - '428'
-          - '429'
-          - '431'
-          - '500'
-          - '501'
-          - '502'
-          - '503'
-          - '504'
-          - '505'
-          - '511'
+          - "100"
+          - "101"
+          - "200"
+          - "201"
+          - "202"
+          - "203"
+          - "204"
+          - "205"
+          - "206"
+          - "207"
+          - "300"
+          - "301"
+          - "302"
+          - "303"
+          - "304"
+          - "305"
+          - "307"
+          - "400"
+          - "401"
+          - "402"
+          - "403"
+          - "404"
+          - "405"
+          - "406"
+          - "407"
+          - "408"
+          - "409"
+          - "410"
+          - "411"
+          - "412"
+          - "413"
+          - "414"
+          - "415"
+          - "416"
+          - "417"
+          - "423"
+          - "426"
+          - "428"
+          - "429"
+          - "431"
+          - "500"
+          - "501"
+          - "502"
+          - "503"
+          - "504"
+          - "505"
+          - "511"
           - default
 
   should-use-well-understood-http-status-codes:
-    message: '{{error}}'
+    message: "{{error}}"
     description: MUST use standard HTTP status codes [150]
     documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#150
     severity: warn
@@ -261,40 +261,40 @@ rules:
       functionOptions:
         wellUnderstood:
           # Success Codes
-          '200': [ALL]
-          '201': [POST, PUT]
-          '202': [POST, PUT, DELETE, PATCH]
-          '204': [PUT, DELETE, PATCH]
-          '207': [POST]
+          "200": [ALL]
+          "201": [POST, PUT]
+          "202": [POST, PUT, DELETE, PATCH]
+          "204": [PUT, DELETE, PATCH]
+          "207": [POST]
 
           # Redirection Codes
-          '301': [ALL]
-          '303': [PATCH, POST, PUT, DELETE]
-          '304': [GET, HEAD]
+          "301": [ALL]
+          "303": [PATCH, POST, PUT, DELETE]
+          "304": [GET, HEAD]
 
           # Client Side Error Codes
-          '400': [ALL]
-          '401': [ALL]
-          '403': [ALL]
-          '404': [ALL]
-          '405': [ALL]
-          '406': [ALL]
-          '408': [ALL]
-          '409': [POST, PUT, DELETE, PATCH]
-          '410': [ALL]
-          '412': [PUT, DELETE, PATCH]
-          '415': [POST, PUT, DELETE, PATCH]
-          '423': [PUT, DELETE, PATCH]
-          '428': [ALL]
-          '429': [ALL]
+          "400": [ALL]
+          "401": [ALL]
+          "403": [ALL]
+          "404": [ALL]
+          "405": [ALL]
+          "406": [ALL]
+          "408": [ALL]
+          "409": [POST, PUT, DELETE, PATCH]
+          "410": [ALL]
+          "412": [PUT, DELETE, PATCH]
+          "415": [POST, PUT, DELETE, PATCH]
+          "423": [PUT, DELETE, PATCH]
+          "428": [ALL]
+          "429": [ALL]
 
           # Server Side Error Codes
-          '500': [ALL]
-          '501': [ALL]
-          '503': [ALL]
+          "500": [ALL]
+          "501": [ALL]
+          "503": [ALL]
 
           # OpenApi
-          'default': [ALL]
+          "default": [ALL]
 
   # MUST specify success and error responses [151]
   # => https://opensource.zalando.com/restful-api-guidelines/#151
@@ -404,7 +404,7 @@ rules:
       function: truthy
 
   must-use-valid-problem-json-schema:
-    message: '{{error}}'
+    message: "{{error}}"
     description: MUST support problem JSON [176]
     documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#176
     severity: error
@@ -417,7 +417,7 @@ rules:
   # => https://opensource.zalando.com/restful-api-guidelines/#215
 
   must-provide-api-identifiers:
-    message: '{{error}}'
+    message: "{{error}}"
     description: MUST provide API identifiers [215]
     documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#215
     severity: error
@@ -503,7 +503,7 @@ rules:
   # => https://opensource.zalando.com/restful-api-guidelines/#240
 
   should-declare-enum-values-using-upper-snake-case-format:
-    message: 'Enum values should be in UPPER_SNAKE_CASE format'
+    message: "Enum values should be in UPPER_SNAKE_CASE format"
     description: SHOULD declare enum values using UPPER_SNAKE_CASE format [240]
     documentationUrl: https://opensource.zalando.com/restful-api-guidelines/#240
     severity: warn

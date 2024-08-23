@@ -1,4 +1,4 @@
-openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+openapi: "3.0.0" # openApiGenerate gradle task do not support officially 3.1.0 openapi version
 
 info:
   description: Get Instruments Request Body
@@ -24,12 +24,12 @@ components:
           nullable: true
           type: array
           items:
-            $ref: './../../common/InstrumentType.yml#/components/schemas/InstrumentType'
+            $ref: "./../../common/InstrumentType.yml#/components/schemas/InstrumentType"
         manufacturer_names:
           nullable: true
           type: array
           items:
-            $ref: './../../common/ManufacturerName.yml#/components/schemas/ManufacturerName'
+            $ref: "./../../common/ManufacturerName.yml#/components/schemas/ManufacturerName"
         manufacture_date_from:
           nullable: true
           allOf:

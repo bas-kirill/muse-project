@@ -6,12 +6,22 @@
 ::before,
 ::after {
   box-sizing: inherit;
-  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
-  helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    avenir next,
+    avenir,
+    segoe ui,
+    helvetica neue,
+    helvetica,
+    Ubuntu,
+    roboto,
+    noto,
+    arial,
+    sans-serif;
 }
 
 #app {
-  /*background-color: rgba(128, 128, 128, 0.5);*/
   background-color: #f0f0f0;
   max-width: 1024px;
   margin: 0 auto;

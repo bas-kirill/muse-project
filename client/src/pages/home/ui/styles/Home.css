@@ -1,7 +1,6 @@
 @import "Home.queries.css";
 @import "react-slideshow-image/dist/styles.css";
 
-
 #home {
   display: flex;
   flex-direction: column;
@@ -32,7 +31,7 @@
   }
 
   input[type="submit"] {
-    background-color: #FFB400;
+    background-color: #ffb400;
     font-size: 2.5rem;
     flex: 1;
   }

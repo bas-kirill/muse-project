@@ -1,4 +1,4 @@
-openapi: "3.0.0"  # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+openapi: "3.0.0" # openApiGenerate gradle task do not support officially 3.1.0 openapi version
 
 info:
   description: Remove Favorite
