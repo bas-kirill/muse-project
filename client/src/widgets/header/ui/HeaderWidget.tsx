@@ -1,12 +1,12 @@
 import React, { useRef } from "react";
-import "./Header.css";
+import "./styles/HeaderWidget.css";
 import { useNavigate } from "react-router-dom";
 import { CATALOGUE, FAVORITE, HOME, LOGIN, PROFILE } from "shared/config/paths";
 import { Cookies } from "typescript-cookie";
 import { Jwt } from "domain/model/jwt";
 import { Role } from "domain/model/role";
 
-export function Header() {
+export function HeaderWidget() {
   const jwt = useRef<string | undefined>(undefined);
 
   if (typeof document !== "undefined") {
@@ -48,4 +48,4 @@ export function Header() {
   );
 }
 
-export default Header;
+export default HeaderWidget;

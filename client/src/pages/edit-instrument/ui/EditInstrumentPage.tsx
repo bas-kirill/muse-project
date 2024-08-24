@@ -1,19 +1,19 @@
 import React from "react";
-import "./EditInstrument.css";
-import { Header } from "widgets/header";
-import { Footer } from "widgets/footer";
+import "./styles/EditInstrumentPage.css";
+import { HeaderWidget } from "widgets/header";
+import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useLoaderData } from "react-router-dom";
 import { EditInstrumentLoader } from "pages/edit-instrument/api/loader";
 import { EditInstrumentAction } from "pages/edit-instrument/api/action";
-import { InstrumentBasicMaterialFormField } from "./fields/InstrumentBasicMaterial";
+import { InstrumentBasicMaterialFormField } from "./InstrumentBasicMaterialFormField";
 
-export const EditInstrument = () => {
+export const EditInstrumentPage = () => {
   const loader = useLoaderData() as EditInstrumentLoader;
   const actionData = useActionData() as EditInstrumentAction;
 
   return (
     <>
-      <Header />
+      <HeaderWidget />
       <h1>{loader.instrumentForEdit.instrument_name.instrument_name}</h1>
       <Form method="POST" id="edit-instrument">
         <div className="edit-instrument-field">
@@ -156,7 +156,7 @@ export const EditInstrument = () => {
       </Form>
       {actionData.errors.length > 0 &&
         actionData?.errors.map((error) => <div key={error}>{error}</div>)}
-      <Footer />
+      <FooterWidget />
     </>
   );
 };

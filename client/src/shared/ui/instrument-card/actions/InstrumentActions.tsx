@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Jwt from "domain/model/jwt";
-import { Modal } from "widgets/modal";
+import { ModalWidget } from "widgets/modal";
 import "./InstrumentActions.css";
 import { Role } from "domain/model/role";
 import { RemoveInstrumentButton } from "./RemoveInstrumentButton";
@@ -42,7 +42,7 @@ export const InstrumentActions = (props: Props) => {
       />
       <GoToInstrumentButton instrument={props.instrument} />
 
-      <Modal
+      <ModalWidget
         opened={errorModal}
         closeModal={() => {
           setErrorModal(false);
@@ -50,9 +50,9 @@ export const InstrumentActions = (props: Props) => {
         }}
       >
         <h1>❌Fail delete instrument</h1>
-      </Modal>
+      </ModalWidget>
 
-      <Modal
+      <ModalWidget
         opened={successModal}
         closeModal={() => {
           setSuccessModal(false);
@@ -60,7 +60,7 @@ export const InstrumentActions = (props: Props) => {
         }}
       >
         <h1>✅Instrument deleted</h1>
-      </Modal>
+      </ModalWidget>
     </div>
   );
 };

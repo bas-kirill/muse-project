@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./InstrumentBasicMaterial.css";
+import "./styles/InstrumentBasicMaterial.css";
 import { BasicMaterial } from "generated/model";
 
 interface Props {

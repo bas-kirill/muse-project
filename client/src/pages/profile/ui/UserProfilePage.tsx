@@ -1,16 +1,16 @@
 import React from "react";
-import "./UserProfile.css";
-import { Header } from "widgets/header";
-import { Footer } from "widgets/footer";
+import "./styles/UserProfilePage.css";
+import { HeaderWidget } from "widgets/header";
+import { FooterWidget } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
 import { ProfileDetails } from "generated/model";
 
-export function UserProfile() {
+export function UserProfilePage() {
   const profile = useLoaderData() as ProfileDetails;
 
   return (
     <>
-      <Header />
+      <HeaderWidget />
       <div id="profile">
         <h1>{profile?.full_name}</h1>
         <div>
@@ -20,9 +20,9 @@ export function UserProfile() {
           <b>Role</b>: {profile?.role}
         </div>
       </div>
-      <Footer />
+      <FooterWidget />
     </>
   );
 }
 
-export default UserProfile;
+export default UserProfilePage;

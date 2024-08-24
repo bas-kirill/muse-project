@@ -1,5 +1,5 @@
 import React from "react";
-import "./InstrumentDescription.css";
+import "./styles/InstrumentDescription.css";
 import electricGuitar from "pages/instrument/ui/electric-guitar-gray.jpg";
 import { InstrumentDetail } from "generated/model";
 

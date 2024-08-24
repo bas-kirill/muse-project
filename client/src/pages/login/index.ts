@@ -1,4 +1,4 @@
-import { Login } from "./ui/Login";
+import { LoginPage } from "./ui/LoginPage";
 import { action } from "./api/action";
 
-export { Login, action };
+export { LoginPage, action };
