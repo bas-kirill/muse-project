@@ -5,7 +5,7 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.InstrumentPhoto
+import mu.muse.domain.instrument.InstrumentBase64Photo
 import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Material
@@ -25,7 +25,6 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
-import java.sql.Timestamp
 import java.time.Instant
 
 @Configuration
@@ -78,7 +77,7 @@ class Application : CommandLineRunner {
             releaseDate = ReleaseDate.from(Instant.parse("2100-01-01T00:00:00Z")),
             country = Country.CYPRUS,
             materials = listOf(Material.WOOD),
-            image = InstrumentPhoto.from(
+            image = InstrumentBase64Photo.fromByteArray(
                 javaClass.getResourceAsStream("/image/rock_guitar.webp").use { it!!.readBytes() }),
         )
 
@@ -91,7 +90,8 @@ class Application : CommandLineRunner {
             releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
             country = Country.USA,
             materials = listOf(Material.METALL),
-            image = InstrumentPhoto.from(javaClass.getResourceAsStream("/image/saxo.webp").use { it!!.readBytes() }),
+            image = InstrumentBase64Photo.fromByteArray(
+                javaClass.getResourceAsStream("/image/saxo.webp").use { it!!.readBytes() }),
         )
 
         val guitar = Instrument.create(
@@ -103,7 +103,8 @@ class Application : CommandLineRunner {
             releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
             country = Country.USA,
             materials = listOf(Material.WOOD),
-            image = InstrumentPhoto.from(javaClass.getResourceAsStream("/image/guitar.webp").use { it!!.readBytes() }),
+            image = InstrumentBase64Photo.fromByteArray(
+                javaClass.getResourceAsStream("/image/guitar.webp").use { it!!.readBytes() }),
         )
 
         val violin = Instrument.create(
@@ -115,7 +116,8 @@ class Application : CommandLineRunner {
             releaseDate = ReleaseDate.from(Instant.parse("1955-07-01T00:00:00Z")),
             country = Country.USA,
             materials = listOf(Material.WOOD),
-            image = InstrumentPhoto.from(javaClass.getResourceAsStream("/image/violin.webp").use { it!!.readBytes() }),
+            image = InstrumentBase64Photo.fromByteArray(
+                javaClass.getResourceAsStream("/image/violin.webp").use { it!!.readBytes() }),
         )
 
         sequenceOf(rockGuitar, saxophone, guitar, violin).forEach { instrument ->

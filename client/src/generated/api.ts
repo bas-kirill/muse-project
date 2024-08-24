@@ -22,6 +22,7 @@ export * from './api/edit-instrument-api';
 export * from './api/get-countries-api';
 export * from './api/get-instrument-basic-materials-api';
 export * from './api/get-instrument-by-id-api';
+export * from './api/get-instrument-photo-api';
 export * from './api/get-instrument-types-api';
 export * from './api/get-instruments-by-criteria-api';
 export * from './api/get-instruments-by-criteria-paginated-api';

@@ -55,7 +55,6 @@ export const CatalogueFilterWidget = (props: Props) => {
       instrumentIds: null, // there is no such field to search by instrument ids
     });
   }, [
-    props,
     instrumentTypes,
     manufacturerNames,
     manufactureDateFrom,
