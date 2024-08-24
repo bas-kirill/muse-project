@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/HomePage.css";
+import styles from "./styles/HomePage.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { Slide } from "react-slideshow-image";
@@ -47,16 +47,16 @@ const trendingInstrumentsResponsiveSettings = [
 
 export function HomePage() {
   return (
-    <div id="home">
+    <div className={styles.home}>
       <HeaderWidget />
 
       <div
-        id="home-logo"
+        className={styles.home_logo}
         style={{
           background: `url(${homeLogo}) no-repeat center, linear-gradient(blue, cyan)`,
         }}
       >
-        <form id="home-search-bar-form">
+        <form className={styles.search_bar__form}>
           <input type="text" placeholder="What instrument?" />
           <input type="submit" value="Search" />
         </form>
@@ -64,7 +64,7 @@ export function HomePage() {
 
       <h1 style={{ color: "#002244" }}>Why Choose Us for Your Musical Needs</h1>
 
-      <div id="home-reasons-choose">
+      <div className={styles.reasons}>
         <div>
           We offer a wide range of high-quality instruments for all skill levels
         </div>
@@ -74,13 +74,13 @@ export function HomePage() {
 
       <h1>Trending Instruments</h1>
 
-      <div id={"trending-instruments"}>
+      <div className={styles.trends}>
         <Slide
           autoplay={true}
           responsive={trendingInstrumentsResponsiveSettings}
         >
           {images.map((img) => (
-            <div key={img.image} className="each-slide">
+            <div key={img.image} className={styles.eachSlide}>
               <img
                 src={img.image}
                 alt={img.caption}

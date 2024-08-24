@@ -1,9 +1,9 @@
 import { InstrumentCard } from "./ui/InstrumentCard";
-import { InstrumentDetails } from "./ui/InstrumentDetails";
+import { InstrumentDescription } from "./ui/InstrumentDescription";
 import { InstrumentActions } from "./ui/InstrumentActions";
 
 export {
   InstrumentCard,
-  InstrumentDetails,
+  InstrumentDescription,
   InstrumentActions,
 }

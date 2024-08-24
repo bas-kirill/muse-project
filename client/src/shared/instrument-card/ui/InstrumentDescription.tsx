@@ -9,7 +9,7 @@ interface Props {
 
 const getInstrumentPhoto = new GetInstrumentPhotoApi();
 
-export const InstrumentDetails = (props: Props) => {
+export const InstrumentDescription = (props: Props) => {
   const [photo, setPhoto] = useState<string | undefined>();
 
   useEffect(() => {

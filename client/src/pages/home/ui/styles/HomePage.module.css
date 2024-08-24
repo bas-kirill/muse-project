@@ -1,7 +1,7 @@
 @import "HomePage.queries.css";
 @import "react-slideshow-image/dist/styles.css";
 
-#home {
+.home {
   display: flex;
   flex-direction: column;
 
@@ -11,13 +11,13 @@
   }
 }
 
-#home-logo {
+.home_logo {
   height: 45vh;
   display: flex;
   flex-direction: column-reverse;
 }
 
-#home-search-bar-form {
+.search_bar__form {
   display: flex;
   margin-bottom: 1em;
 
@@ -37,7 +37,7 @@
   }
 }
 
-#home-reasons-choose {
+.reasons {
   display: flex;
 
   div {
@@ -50,7 +50,7 @@
   }
 }
 
-#trending-instruments {
+.trends {
   margin: 0 15px 15px 15px;
 }
 
