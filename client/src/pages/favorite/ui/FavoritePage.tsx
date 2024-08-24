@@ -1,8 +1,10 @@
-import { HeaderWidget } from "widgets/header";
-import { InstrumentCard } from "shared/ui/instrument-card/InstrumentCard";
-import { useLoaderData } from "react-router-dom";
+import React from "react";
 import { FavoriteLoader } from "pages/favorite";
+import { HeaderWidget } from "widgets/header";
+import { useLoaderData } from "react-router-dom";
+
 import { FooterWidget } from "widgets/footer";
+import { InstrumentCard } from "shared/instrument-card";
 
 export const FavoritePage = () => {
   const loader = useLoaderData() as FavoriteLoader;
@@ -10,6 +12,7 @@ export const FavoritePage = () => {
   return (
     <>
       <HeaderWidget />
+
       <h1>Favorite</h1>
 
       {loader.instrumentDetails.length === 0 && (
