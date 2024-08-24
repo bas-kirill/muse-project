@@ -1,0 +1,12 @@
+.catalogue_serp {
+  background-color: darkkhaki;
+}
+
+.instrument-card:last-child {
+  margin-bottom: 30px;
+}
+
+.not_found {
+  font-size: 24px;
+  margin: 5px;
+}

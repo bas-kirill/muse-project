@@ -1,0 +1,5 @@
+.instrument_card {
+  display: flex;
+  flex-direction: column;
+  background-color: darkslateblue;
+}
