@@ -1,7 +1,7 @@
 import { ActionFunction } from "react-router-dom";
 import Jwt from "domain/model/jwt";
-import { parseInstrumentDetails } from "shared/model/parseInstrumentDetails";
 import { CreateInstrumentApi } from "generated/api/create-instrument-api";
+import { parseInstrumentDetails } from "shared";
 
 export interface CreateInstrumentAction {
   errors: string[] | null;
@@ -20,6 +20,7 @@ export const action: ActionFunction = async ({
     releaseDate,
     country,
     materials,
+    instrumentPhoto,
     errors,
   } = parseInstrumentDetails(await request.formData());
 
@@ -31,13 +32,18 @@ export const action: ActionFunction = async ({
 
   const response = await createInstrument.createInstrument(
     {
-      instrument_name: instrumentName,
-      instrument_type: instrumentType,
-      manufacturer_name: manufacturerName,
-      manufacturer_date: manufactureDate,
-      release_date: releaseDate,
-      country: country,
-      materials: materials,
+      instrument_detail: {
+        instrument_name: instrumentName,
+        instrument_type: instrumentType,
+        manufacturer_name: manufacturerName,
+        manufacturer_date: manufactureDate,
+        release_date: releaseDate,
+        country: country,
+        basic_materials: materials,
+      },
+      instrument_photo: {
+        photo: instrumentPhoto.photo,
+      },
     },
     {
       headers: {
@@ -53,6 +59,9 @@ export const action: ActionFunction = async ({
   }
 
   return {
-    errors: [...errors, `Failed to create instrument '${instrumentName}'`],
+    errors: [
+      ...errors,
+      `Failed to create instrument '${instrumentName.instrument_name}'`,
+    ],
   };
 };

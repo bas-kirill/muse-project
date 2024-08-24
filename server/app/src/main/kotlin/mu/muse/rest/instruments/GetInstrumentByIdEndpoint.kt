@@ -50,7 +50,7 @@ fun Instrument.toDto(): InstrumentDetail {
         instrumentName = this.name.toDto(),
         instrumentType = this.type.toDto(),
         manufacturerName = this.manufacturer.toDto(),
-        manufacturerDate = this.manufactureDate.toDto(), // e.g.: 2024-09-01
+        manufacturerDate = this.manufactureDate.toDto(),
         releaseDate = this.releaseDate.toDto(),
         country = this.country.toDto(),
         basicMaterials = this.materials.toDto(),

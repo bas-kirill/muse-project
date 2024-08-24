@@ -20,3 +20,12 @@ components:
           type: integer
           format: int64
           example: 1
+  parameters:
+    instrumentId:
+      name: instrumentId
+      in: path
+      description: Instrument ID
+      required: true
+      schema:
+        type: integer
+        format: int64

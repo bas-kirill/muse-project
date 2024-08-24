@@ -1,0 +1,21 @@
+openapi: "3.0.0" # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+
+info:
+  description: Basic Material
+  version: 1.0.0
+  title: Country
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
+
+paths: {}
+
+components:
+  schemas:
+    InstrumentPhoto:
+      type: object
+      required: [photo]
+      properties:
+        photo:
+          type: string
+          format: base64

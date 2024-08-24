@@ -1,18 +1,37 @@
-import React from "react";
-import guitarImg from "./electric-guitar-gray.jpg";
-import "./InstrumentDetails.css";
+import React, { useEffect, useState } from "react";
+import "./styles/InstrumentDetails.css";
 import { InstrumentDetail } from "generated/model";
+import { GetInstrumentPhotoApi } from "generated/api/get-instrument-photo-api";
 
 interface Props {
   instrument: InstrumentDetail;
 }
 
+const getInstrumentPhoto = new GetInstrumentPhotoApi();
+
 export const InstrumentDetails = (props: Props) => {
+  const [photo, setPhoto] = useState<string | undefined>();
+
+  useEffect(() => {
+    const fetchPhoto = async () => {
+      const response = await getInstrumentPhoto.getInstrumentPhoto(
+        props.instrument.instrument_id.instrument_id,
+      );
+
+      setPhoto(response.data.photo);
+    };
+
+    fetchPhoto();
+  }, [props.instrument]);
+
   return (
     <div className="instrument-details">
-      <img src={guitarImg} width={100} height={200} alt={"Guitar Gray"} />
+      {photo !== undefined && (
+        <img src={`data:image/*; base64, ${photo}`} width={250} height={300} />
+      )}
       <div className="instrument-details-description">
         <h2>{props.instrument.manufacturer_name.manufacturer_name}</h2>
+        <br />
         <b>Type</b>: {props.instrument.instrument_type.instrument_type}
         <br />
         <b>Manufacturer</b>:{" "}

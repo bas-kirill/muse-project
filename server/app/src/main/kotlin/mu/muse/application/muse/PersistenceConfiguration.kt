@@ -56,4 +56,6 @@ class PersistenceConfiguration {
 
     @Bean
     fun instrumentRepository(namedTemplate: NamedParameterJdbcTemplate) = PostgresInstrumentRepository(namedTemplate)
+
+
 }

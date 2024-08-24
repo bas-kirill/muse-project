@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
-import "./styles/InstrumentBasicMaterial.css";
+import formStyles from "./styles/EditInstrumentPage.module.css";
+import styles from "./styles/InstrumentBasicMaterial.module.css";
 import { BasicMaterial } from "generated/model";
 
 interface Props {
-  usedMaterialsForInstrument: BasicMaterial[];
   materials: BasicMaterial[];
+  usedMaterialsForInstrument: BasicMaterial[];
 }
 
 export const InstrumentBasicMaterialFormField = (props: Props) => {
@@ -41,18 +42,20 @@ export const InstrumentBasicMaterialFormField = (props: Props) => {
   };
 
   return (
-    <div className="edit-instrument-field">
-      <div className={"edit-instrument-field-name"}>
-        <span>Basic Material</span>
-      </div>
+    <div className={formStyles.edit_instrument__form__field}>
+      <span className={formStyles.edit_instrument__form__field__key}>
+        Basic Material
+      </span>
 
-      <div className={"edit-instrument-field-value"}>
-        <div id={"used-basic-materials"}>
+      <div className={formStyles.edit_instrument__form__field__value}>
+        <div className={styles.used_basic_materials}>
           {basicMaterials.map((material) => (
             <div
               key={material.basic_material}
-              className={`edit-instrument-field-instrument-span 
-                ${!props.usedMaterialsForInstrument.includes(material) ? "edit-instrument-field-instrument-span-new" : ""}`}
+              className={`
+                ${styles.edit_instrument_field_instrument_span} 
+                ${!props.usedMaterialsForInstrument.includes(material) ? styles.edit_instrument_field_instrument_span_new : ""}
+              `}
             >
               <span>{material.basic_material}</span>
               <input

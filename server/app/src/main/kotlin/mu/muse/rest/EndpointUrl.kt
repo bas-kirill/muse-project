@@ -1,0 +1,20 @@
+package mu.muse.rest
+
+const val AUTH_BASIC_LOGIN = "/api/auth/login"
+
+const val API = "/api"
+const val API_INSTRUMENTS = "$API/instruments"
+const val API_INSTRUMENTS_PAGINATED = "$API/instruments/paginated"
+const val API_INSTRUMENT_BY_ID = "$API/instrument/{id:\\d+}"
+const val API_DELETE_INSTRUMENT_BY_ID = "$API/instrument/{id:\\d+}/delete"
+const val API_INSTRUMENT_TYPES = "$API/instrument/types"
+const val API_INSTRUMENT_MATERIALS = "$API/instrument/materials"
+const val API_COUNTRIES = "$API/countries"
+const val API_MANUFACTURERS = "$API/manufacturer"
+const val API_CREATE_INSTRUMENT = "$API/instrument/create"
+const val API_EDIT_INSTRUMENT = "$API/instrument/edit"
+const val API_REGISTRATION = "$API/registration"
+const val API_FAVORITE_LIST = "$API/favorite/list"
+const val API_FAVORITE_ADD = "$API/favorite/add"
+const val API_FAVORITE_REMOVE = "$API/favorite/remove"
+const val API_INSTRUMENT_PHOTO = "$API/instrument/photo/{id:\\d+}"

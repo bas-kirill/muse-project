@@ -7,8 +7,8 @@ import type {
   Manufacturer,
 } from "generated/model";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
-import { GetCountriesApi } from "generated/api/get-countries-api";
-import { GetManufacturersApi } from "generated/api/get-manufacturers-api";
+import { GetCountriesApi } from "generated/api";
+import { GetManufacturersApi } from "generated/api";
 
 const getInstrumentTypes = new GetInstrumentTypesApi();
 const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi();

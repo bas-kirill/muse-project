@@ -57,18 +57,17 @@ paths:
 
 components:
   schemas:
-    CreateInstrumentRequestBody:
+    InstrumentDetailWithoutId:
       type: object
-      required:
-        [
-          instrument_name,
-          instrument_type,
-          manufacturer_name,
-          manufacturer_date,
-          release_date,
-          country,
-          materials,
-        ]
+      required: [
+        instrument_name,
+        instrument_type,
+        manufacturer_name,
+        manufacturer_date,
+        release_date,
+        country,
+        basic_materials,
+      ]
       properties:
         instrument_name:
           $ref: "./../common/InstrumentName.yml#/components/schemas/InstrumentName"
@@ -82,7 +81,16 @@ components:
           $ref: "./../common/ReleaseDate.yml#/components/schemas/ReleaseDate"
         country:
           $ref: "./../common/Country.yml#/components/schemas/Country"
-        materials:
+        basic_materials:
           type: array
           items:
             $ref: "./../common/BasicMaterial.yml#/components/schemas/BasicMaterial"
+
+    CreateInstrumentRequestBody:
+      type: object
+      required: [ instrument_detail, instrument_photo ]
+      properties:
+        instrument_detail:
+          $ref: "#/components/schemas/InstrumentDetailWithoutId"
+        instrument_photo:
+          $ref: "./../common/InstrumentPhoto.yml#/components/schemas/InstrumentPhoto"

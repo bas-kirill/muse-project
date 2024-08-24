@@ -11,7 +11,6 @@ export function HeaderWidget() {
 
   if (typeof document !== "undefined") {
     jwt.current = Cookies.get("jwt") as string | undefined;
-    console.log(`jwt: '${jwt.current}'`);
   }
 
   const navigate = useNavigate();

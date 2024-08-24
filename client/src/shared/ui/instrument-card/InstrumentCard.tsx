@@ -1,5 +1,5 @@
 import React from "react";
-import "./InstrumentCard.css";
+import "./styles/InstrumentCard.css";
 import { InstrumentDetails } from "./InstrumentDetails";
 import { InstrumentActions } from "./actions/InstrumentActions";
 import { InstrumentDetail } from "generated/model";

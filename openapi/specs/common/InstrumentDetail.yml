@@ -27,20 +27,20 @@ components:
         ]
       properties:
         instrument_id:
-          $ref: "./../common/InstrumentId.yml#/components/schemas/InstrumentId"
+          $ref: "./InstrumentId.yml#/components/schemas/InstrumentId"
         instrument_name:
-          $ref: "./../common/InstrumentName.yml#/components/schemas/InstrumentName"
+          $ref: "./InstrumentName.yml#/components/schemas/InstrumentName"
         instrument_type:
-          $ref: "./../common/InstrumentType.yml#/components/schemas/InstrumentType"
+          $ref: "./InstrumentType.yml#/components/schemas/InstrumentType"
         manufacturer_name:
-          $ref: "./../common/ManufacturerName.yml#/components/schemas/ManufacturerName"
+          $ref: "./ManufacturerName.yml#/components/schemas/ManufacturerName"
         manufacturer_date:
-          $ref: "./../common/ManufactureDate.yml#/components/schemas/ManufactureDate"
+          $ref: "./ManufactureDate.yml#/components/schemas/ManufactureDate"
         release_date:
-          $ref: "./../common/ReleaseDate.yml#/components/schemas/ReleaseDate"
+          $ref: "./ReleaseDate.yml#/components/schemas/ReleaseDate"
         country:
-          $ref: "./../common/Country.yml#/components/schemas/Country"
+          $ref: "./Country.yml#/components/schemas/Country"
         basic_materials:
           type: array
           items:
-            $ref: "./../common/BasicMaterial.yml#/components/schemas/BasicMaterial"
+            $ref: "./BasicMaterial.yml#/components/schemas/BasicMaterial"

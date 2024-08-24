@@ -42,7 +42,7 @@ export const InstrumentActions = (props: Props) => {
 
   return (
     <div id="instrument-profile-instrument-actions">
-      {Jwt.extractFromLocalStorage()?.toRole() === "EDITOR" && (
+      {Jwt.extractFromCookie()?.toRole() === "EDITOR" && (
         <>
           <button
             id="instrument-profile-delete-instrument"

@@ -1,0 +1,52 @@
+openapi: "3.0.0" # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+
+info:
+  description: Get Instrument Photo Endpoint
+  version: 1.0.0
+  title: Get Instrument Photo
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
+servers:
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+
+tags:
+  - name: getInstrumentPhoto
+    description: Get Instrument Photo
+
+paths:
+  /api/instrument/photo/{instrumentId}:
+    get:
+      description: Get Instrument Photo
+      summary: Get Instrument Photo
+      operationId: getInstrumentPhoto
+      tags:
+        - getInstrumentPhoto
+      parameters:
+        - $ref: "./../common/InstrumentId.yml#/components/parameters/instrumentId"
+      responses:
+        "200":
+          description: Instrument Types
+          content:
+            image/*:
+              schema:
+                $ref: "./../common/InstrumentPhoto.yml#/components/schemas/InstrumentPhoto"
+        "400":
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ClientError.yml#/components/schemas/ClientError"
+        default:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ServerError.yml#/components/schemas/ServerError"

@@ -1,12 +1,6 @@
-insert into users
-(user_id, username, password, role, full_name)
-values
-(nextval('user_id_seq'), 'user', '{noop}123', 'USER', 'User Userov'),
-(nextval('user_id_seq'), 'editor', '{noop}321', 'EDITOR', 'Editor Editorov');
+-- do not use `data.sql` due to inserting images requiring `pg_read_binary_file`,
+-- but it requires absolute path, or it will take images from `select show_directory;`
+-- there is approach to use symbolic links via `ln -s`, but it requires additional infrastructure configuration
+-- so, was chosen to bootstrap development data at application start at infra level
 
-insert into instruments
-(instrument_id, instrument_name, instrument_type, manufacturer_name, manufacturer_date, release_date, country, materials)
-values
-(nextval('instrument_id_seq'), 'Fidel Telecastro', 'STRINGED', 'FENDER', '2024-07-01T00:00:00Z', '2100-01-01T00:00:00Z', 'CYPRUS', '{WOOD}'),
-(nextval('instrument_id_seq'), 'SaxoStar', 'WIND', 'SIGMA', '2007-01-01T00:00:00Z', '2008-07-01T00:00:00Z', 'USA', '{METALL}'),
-(nextval('instrument_id_seq'), 'Yamaha CLP-745B', 'KEYBOARD', 'YAMAHA', '2007-01-01T00:00:00Z', '2008-07-01T00:00:00Z', 'USA', '{WOOD}');
+select 1; -- 'script' must not be null or empty
