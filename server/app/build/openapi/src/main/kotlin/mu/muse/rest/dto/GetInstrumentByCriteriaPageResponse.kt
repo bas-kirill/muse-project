@@ -27,15 +27,15 @@ data class GetInstrumentByCriteriaPageResponse(
     @field:Valid
     @get:JsonProperty("content", required = true) val content: kotlin.collections.List<InstrumentDetail>,
 
-    @get:JsonProperty("content_size", required = true) val contentSize: kotlin.Int,
+    @get:JsonProperty("content_size", required = true) val contentSize: kotlin.Long,
 
-    @get:JsonProperty("page_size", required = true) val pageSize: kotlin.Int,
+    @get:JsonProperty("page_size", required = true) val pageSize: kotlin.Long,
 
-    @get:JsonProperty("page_number", required = true) val pageNumber: kotlin.Int,
+    @get:JsonProperty("page_number", required = true) val pageNumber: kotlin.Long,
 
-    @get:JsonProperty("total_elements", required = true) val totalElements: kotlin.Int,
+    @get:JsonProperty("total_elements", required = true) val totalElements: kotlin.Long,
 
-    @get:JsonProperty("total_pages", required = true) val totalPages: kotlin.Int
+    @get:JsonProperty("total_pages", required = true) val totalPages: kotlin.Long
     ) {
 
 }

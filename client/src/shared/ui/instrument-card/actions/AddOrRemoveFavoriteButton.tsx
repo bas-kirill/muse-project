@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useJwt } from "pages/login";
 import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 import { AddFavoriteApi } from "generated/api/add-favorite-api";
 import { InstrumentId } from "generated/model";
@@ -13,7 +12,6 @@ const removeFavorite = new RemoveFavoriteApi();
 const addFavorite = new AddFavoriteApi();
 
 export const AddOrRemoveFavoriteButton = (props: Props) => {
-  useJwt();
   const [favorite, setFavorite] = useState<boolean>(props.favorite);
 
   const toggleFavorite = async () => {

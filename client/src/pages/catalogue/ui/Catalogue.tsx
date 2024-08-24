@@ -5,7 +5,6 @@ import { Footer } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
 import { CatalogueFilterWidget, Filters } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
-import { useJwt } from "pages/login";
 import { CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
 import { SearchBarForm } from "./SearchBarForm";
 import { NavigationBar } from "./NavigationBar";
@@ -20,8 +19,6 @@ const getInstrumentsByCriteriaPaginated =
 const listFavoriteApi = new ListFavoriteApi();
 
 export function Catalogue() {
-  useJwt();
-
   const loader = useLoaderData() as CatalogueLoader; // https://github.com/remix-run/react-router/discussions/9792
 
   const [instruments, setInstruments] = useState<InstrumentDetail[]>(

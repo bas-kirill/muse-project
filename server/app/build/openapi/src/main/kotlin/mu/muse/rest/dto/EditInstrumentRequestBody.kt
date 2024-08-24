@@ -22,6 +22,7 @@ import jakarta.validation.Valid
 
 /**
  * 
+ * @param instrumentId 
  * @param instrumentName 
  * @param instrumentType 
  * @param manufacturerName 
@@ -29,9 +30,11 @@ import jakarta.validation.Valid
  * @param releaseDate 
  * @param country 
  * @param materials 
- * @param instrumentId 
  */
 data class EditInstrumentRequestBody(
+
+    @field:Valid
+    @get:JsonProperty("instrument_id", required = true) val instrumentId: InstrumentId,
 
     @field:Valid
     @get:JsonProperty("instrument_name", required = true) val instrumentName: InstrumentName,
@@ -52,10 +55,7 @@ data class EditInstrumentRequestBody(
     @get:JsonProperty("country", required = true) val country: Country,
 
     @field:Valid
-    @get:JsonProperty("materials", required = true) val materials: kotlin.collections.List<BasicMaterial>,
-
-    @field:Valid
-    @get:JsonProperty("instrument_id") val instrumentId: InstrumentId? = null
+    @get:JsonProperty("materials", required = true) val materials: kotlin.collections.List<BasicMaterial>
     ) {
 
 }

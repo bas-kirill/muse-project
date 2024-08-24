@@ -36,7 +36,7 @@ class InMemoryInstrumentRepository(
         storage[instrument.id] = instrument
     }
 
-    override fun totalElements(): Int = storage.values.size
+    override fun totalElements(): Long = storage.values.size.toLong()
 }
 
 @Suppress("CyclomaticComplexMethod")

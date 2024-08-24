@@ -8,12 +8,12 @@ import mu.muse.rest.API_COUNTRIES
 import mu.muse.rest.API_FAVORITE_ADD
 import mu.muse.rest.API_FAVORITE_LIST
 import mu.muse.rest.API_FAVORITE_REMOVE
-import mu.muse.rest.API_MANUFACTURERS
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENTS_PAGINATED
 import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.API_INSTRUMENT_MATERIALS
 import mu.muse.rest.API_INSTRUMENT_TYPES
+import mu.muse.rest.API_MANUFACTURERS
 import mu.muse.rest.API_REGISTRATION
 import mu.muse.rest.AUTH_BASIC_LOGIN
 import mu.muse.usecase.access.user.UserExtractor
@@ -32,6 +32,9 @@ import org.springframework.security.core.session.SessionRegistry
 import org.springframework.security.core.session.SessionRegistryImpl
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder
+import org.springframework.security.crypto.password.NoOpPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
@@ -39,6 +42,7 @@ import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import java.security.Key
+
 
 @Configuration
 @EnableWebSecurity
@@ -151,5 +155,12 @@ class SecurityConfiguration {
     fun securityContextHolderAwareRequestFilter() = SecurityContextHolderAwareRequestFilter()
 
     @Bean
-    fun passwordEncoder() = BCryptPasswordEncoder()
+    fun passwordEncoder(): PasswordEncoder {
+        val idForEncode = "bcrypt"
+        val encoders: MutableMap<String, PasswordEncoder> = mutableMapOf(
+            idForEncode to BCryptPasswordEncoder(),
+            "noop" to NoOpPasswordEncoder.getInstance(),  // dev env only
+        )
+        return DelegatingPasswordEncoder(idForEncode, encoders);
+    }
 }

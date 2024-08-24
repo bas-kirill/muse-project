@@ -8,7 +8,7 @@ export const loader: LoaderFunction = async ({
   params,
 }): Promise<InstrumentDetail> => {
   const response = await getInstrumentById.getInstrumentById(
-    params.instrumentId as string,
+    parseInt(params.instrumentId as string),
   );
 
   if (response.status !== 200) {

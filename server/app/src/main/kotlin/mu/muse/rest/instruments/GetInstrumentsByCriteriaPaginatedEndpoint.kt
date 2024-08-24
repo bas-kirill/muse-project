@@ -57,7 +57,7 @@ fun GetInstrumentsByCriteriaRequestBody.toInstrumentCriteria(): InstrumentExtrac
         releaseDateTo = this.releaseDateTo?.let { ReleaseDate.from(it.releaseDate) },
         countries = this.countries?.map { Country.valueOf(it.country) },
         materials = this.materials?.map { Material.valueOf(it.basicMaterial) },
-        instrumentIds = this.instrumentIds?.map { InstrumentId.from(it.toString()) },
+        instrumentIds = this.instrumentIds?.map { InstrumentId.from(it.instrumentId) },
     )
 }
 

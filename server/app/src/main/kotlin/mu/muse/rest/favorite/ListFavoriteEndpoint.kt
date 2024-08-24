@@ -22,7 +22,7 @@ class ListFavoriteEndpoint(
         val favoriteIds = session.getAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY) as MutableList<Long>?
             ?: return ResponseEntity.ok(ListFavoriteResponseBody(mutableListOf()))
 
-        val favoriteInstrumentIds = favoriteIds.map { InstrumentId.from(it.toString()) }
+        val favoriteInstrumentIds = favoriteIds.map { InstrumentId.from(it) }
         val instruments = getInstrumentsByIds.execute(favoriteInstrumentIds)
         return instruments.toResponse()
     }

@@ -36,11 +36,11 @@ class GetInstrumentsByCriteriaPaginatedUseCase(
 
         return Page(
             content = pageContent,
-            contentSize = pageContent.size,
-            pageSize = pageRequest.pageSize,
-            pageNumber = pageRequest.pageNumber,
+            contentSize = pageContent.size.toLong(),
+            pageSize = pageRequest.pageSize.toLong(),
+            pageNumber = pageRequest.pageNumber.toLong(),
             totalElements = instrumentExtractor.totalElements(),
-            totalPages = chunks.size,
+            totalPages = chunks.size.toLong(),
         )
     }
 }

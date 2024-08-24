@@ -4,11 +4,9 @@ import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { Form, useActionData, useNavigate } from "react-router-dom";
 import { LogInAction } from "../api/action";
-import { useJwt } from "pages/login";
 import { REGISTRATION_URL } from "shared/config/paths";
 
 export function Login() {
-  useJwt();
   const actionData = useActionData() as LogInAction;
   const navigate = useNavigate();
 

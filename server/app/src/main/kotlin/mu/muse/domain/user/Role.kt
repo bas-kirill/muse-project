@@ -8,11 +8,11 @@ data class Role internal constructor(private val value: String) {
 
     companion object {
         fun from(value: String): Role {
-            when (value) {
+            return when (value) {
                 USER -> Role(USER)
                 EDITOR -> Role(EDITOR)
+                else -> throw IllegalArgumentException("Unknown role: $value")
             }
-            throw IllegalArgumentException("Unknown role: $value")
         }
 
         const val USER = "USER"

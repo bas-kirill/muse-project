@@ -25,62 +25,76 @@ class PostgresInstrumentRepository(
     private val keyHolder = GeneratedKeyHolder()
 
     override fun findAll(): List<Instrument> {
-        val sql = "select " +
-            "instrument_id, " +
-            "instrument_name, " +
-            "instrument_type, " +
-            "manufacturer_name, " +
-            "manufacturer_date, " +
-            "release_date, " +
-            "country, " +
-            "materials " +
-            "from instruments"
+        val sql = """
+            select
+              instrument_id,
+              instrument_name,
+              instrument_type,
+              manufacturer_name,
+              manufacturer_date,
+              release_date,
+              country,
+              materials
+            from instruments
+        """.trimIndent()
         return namedTemplate.query(sql) { rs, _ -> rs.toInstrument() }
     }
 
     override fun findById(id: InstrumentId): Instrument? {
-        val sql = "select " +
-            "instrument_id, " +
-            "instrument_name, " +
-            "instrument_type, " +
-            "manufacturer_name, " +
-            "manufacturer_date, " +
-            "release_date, " +
-            "country, " +
-            "materials " +
-            "from instruments " +
-            "where instrument_id = :instrument_id"
-        val params = MapSqlParameterSource().addValue("instrument_id", id.toLongValue())
+        val sql = """
+            select
+              instrument_id,
+              instrument_name,
+              instrument_type,
+              manufacturer_name,
+              manufacturer_date,
+              release_date,
+              country,
+              materials
+            from instruments
+            where instrument_id = :instrument_id
+        """.trimIndent()
+        val params = mapOf("instrument_id" to id.toLongValue())
         return namedTemplate.queryForObject(sql, params) { rs, _ -> rs.toInstrument() }
     }
 
     override fun findByIds(ids: List<InstrumentId>): List<Instrument> {
-        val sql = "select " +
-            "instrument_id, " +
-            "instrument_name, " +
-            "instrument_type, " +
-            "manufacturer_name, " +
-            "manufacturer_date, " +
-            "release_date, " +
-            "country, " +
-            "materials " +
-            "from instruments " +
-            "where instrument_id in :instrument_ids"
-        val params = MapSqlParameterSource().addValue("instrument_ids", ids)
+        if (ids.isEmpty()) {
+            return emptyList()
+        }
+
+        val sql = """
+            select
+              instrument_id,
+              instrument_name,
+              instrument_type,
+              manufacturer_name,
+              manufacturer_date,
+              release_date,
+              country,
+              materials
+            from instruments
+            where instrument_id in (:instrument_ids)
+        """.trimIndent()
+
+        val params = mapOf("instrument_ids" to ids.map { it.toLongValue() })
         return namedTemplate.query(sql, params) { rs, _ -> rs.toInstrument() }
     }
 
+
     override fun findByCriteria(criteria: InstrumentExtractor.Criteria): List<Instrument> {
-        val sql = "select " +
-            "instrument_id, " +
-            "instrument_name, " +
-            "instrument_type, " +
-            "manufacturer_name, " +
-            "manufacturer_date, " +
-            "release_date, " +
-            "country, " +
-            "materials " +
-            "from instruments"
+        val sql = """
+            select
+              instrument_id,
+              instrument_name,
+              instrument_type,
+              manufacturer_name,
+              manufacturer_date,
+              release_date,
+              country,
+              materials
+            from instruments
+        """.trimIndent()
         val instruments = namedTemplate.query(sql) { rs, _ -> rs.toInstrument() }
         return instruments.filter { it matches criteria }
     }
@@ -97,20 +111,52 @@ class PostgresInstrumentRepository(
     }
 
     override fun save(instrument: Instrument) {
-        val sql = "insert into instruments (instrument_name, instrument_type, manufacturer_name, manufacturer_date, release_date, country, materials) " +
-            "values (:instrument_name, :instrument_type, :manufacturer_name, :manufacturer_date, :release_date, :country, :materials)"
-        val params = MapSqlParameterSource()
-            .addValue("instrument_name", instrument.name.toStringValue())
-            .addValue("instrument_type", instrument.type.name)
-            .addValue("manufacturer_name", instrument.manufacturer.name)
-            .addValue("manufacturer_date", instrument.manufactureDate.toInstantValue())
-            .addValue("release_date", instrument.releaseDate.toInstantValue())
-            .addValue("country", instrument.country.name)
-            .addValue("materials", instrument.materials)
+        val sql = """
+            insert into instruments (
+                instrument_id,
+                instrument_name,
+                instrument_type,
+                manufacturer_name,
+                manufacturer_date,
+                release_date,
+                country,
+                materials
+            )
+            values (
+              :instrument_id,
+              :instrument_name,
+              :instrument_type,
+              :manufacturer_name,
+              :manufacturer_date,
+              :release_date,
+              :country,
+              :materials
+            )
+            on conflict (instrument_id) do update
+            set
+              instrument_name = :instrument_name,
+              instrument_type = :instrument_type,
+              manufacturer_name = :manufacturer_name,
+              manufacturer_date = :manufacturer_date,
+              release_date = :release_date,
+              country = :country,
+              materials = :materials
+        """.trimIndent()
+        val params = mapOf(
+            "instrument_id" to instrument.id.toLongValue(),
+            "instrument_name" to instrument.name.toStringValue(),
+            "instrument_type" to instrument.type.name,
+            "manufacturer_name" to instrument.manufacturer.name,
+            "manufacturer_date" to instrument.manufactureDate.toInstantValue(),
+            "release_date" to instrument.releaseDate.toInstantValue(),
+            "country" to instrument.country.name,
+            "materials" to instrument.materials,
+        )
         namedTemplate.update(sql, params)
     }
 }
 
+fun Array<String>.toBasicMaterials() = this.toList().map { Material.valueOf(it) }
 fun ResultSet.toInstrument() = Instrument(
     id = InstrumentId.from(this.getLong("instrument_id")),
     name = InstrumentName.from(this.getString("instrument_name")),
@@ -119,6 +165,6 @@ fun ResultSet.toInstrument() = Instrument(
     manufactureDate = ManufacturerDate.from(this.getTimestamp("manufacturer_date").toInstant()),
     releaseDate = ReleaseDate.from(this.getTimestamp("release_date").toInstant()),
     country = Country.valueOf(this.getString("country")),
-    materials = (this.getArray("materials").getArray() as Array<String>).toList().map { Material.valueOf(it) },
+    materials = (this.getArray("materials").getArray() as Array<String>).toBasicMaterials(),
     version = Version.new(),
 )
