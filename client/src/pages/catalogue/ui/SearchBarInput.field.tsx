@@ -17,8 +17,8 @@ export const SearchBarInputField = (props: Props) => {
         props.setFilters({
           ...props.filters,
           instrumentName: {
-            instrument_name: e.target.value
-          } as InstrumentName
+            instrument_name: e.target.value,
+          } as InstrumentName,
         });
       }}
       className={styles.search_bar__input}

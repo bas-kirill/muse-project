@@ -1,4 +1,4 @@
-import { InstrumentCard} from "shared/instrument-card";
+import { InstrumentCard } from "shared/instrument-card";
 import { getCookie } from "shared/cookie/get-cookie";
 import { useJwt } from "./jwt/use-jwt";
 

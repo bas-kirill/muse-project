@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/LoginPage.module.css";
+import styles from "./styles/Login.page.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useNavigate } from "react-router-dom";

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/RegistrationPage.module.css";
+import styles from "./styles/Registration.page.module.css";
 import { HeaderWidget } from "widgets/header";
 import { Form, useActionData } from "react-router-dom";
 import { FooterWidget } from "widgets/footer";
@@ -13,9 +13,7 @@ export const RegistrationPage = () => {
       <HeaderWidget />
 
       {actionData?.errors.length === 0 && (
-        <div className={styles.registration__ok}>
-          ✅ Registration Completed
-        </div>
+        <div className={styles.registration__ok}>✅ Registration Completed</div>
       )}
 
       <Form method="POST" className={styles.registration__form}>

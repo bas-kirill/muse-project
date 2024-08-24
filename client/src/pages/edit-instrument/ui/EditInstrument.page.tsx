@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/EditInstrumentPage.module.css";
+import styles from "./styles/EditInstrument.page.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useLoaderData } from "react-router-dom";

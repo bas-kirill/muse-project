@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/HomePage.module.css";
+import styles from "./styles/Home.page.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { Slide } from "react-slideshow-image";

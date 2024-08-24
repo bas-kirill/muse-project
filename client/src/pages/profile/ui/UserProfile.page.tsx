@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/UserProfilePage.css";
+import "./styles/UserProfile.page.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";

@@ -17,8 +17,8 @@ export const RemoveInstrumentButton = (props: Props) => {
       const response = await removeFavoriteApi.removeFavorite(
         props.instrument.instrument_id,
         {
-          withCredentials: true
-        }
+          withCredentials: true,
+        },
       );
 
       if (response.status === 200) {

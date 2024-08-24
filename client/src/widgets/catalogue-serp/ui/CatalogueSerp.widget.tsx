@@ -15,15 +15,16 @@ export const CatalogueSerpWidget = (props: Props) => {
         <div className={styles.not_found}>Instruments not found :(</div>
       )}
 
-      {props.instruments.length > 0 && props.instruments.map((instrument) => (
-        <InstrumentCard
-          key={instrument.instrument_id.instrument_id}
-          instrument={instrument}
-          favorite={props.favoriteInstrumentIds
-            .map((id) => id.instrument_id)
-            .includes(instrument.instrument_id.instrument_id)}
-        />
-      ))}
+      {props.instruments.length > 0 &&
+        props.instruments.map((instrument) => (
+          <InstrumentCard
+            key={instrument.instrument_id.instrument_id}
+            instrument={instrument}
+            favorite={props.favoriteInstrumentIds
+              .map((id) => id.instrument_id)
+              .includes(instrument.instrument_id.instrument_id)}
+          />
+        ))}
     </div>
   );
 };

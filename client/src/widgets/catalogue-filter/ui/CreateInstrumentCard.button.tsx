@@ -11,7 +11,10 @@ export const CreateInstrumentCardButton = () => {
   };
 
   return (
-    <button className={styles.instrument__add__button} onClick={handleOnAddInstrumentButtonClick}>
+    <button
+      className={styles.instrument__add__button}
+      onClick={handleOnAddInstrumentButtonClick}
+    >
       Add new instrument
     </button>
   );

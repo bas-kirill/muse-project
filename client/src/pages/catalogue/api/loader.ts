@@ -7,7 +7,10 @@ import {
   InstrumentId,
 } from "generated/model";
 import { Filters } from "widgets/catalogue-filter";
-import { CATALOGUE_DEFAULT_PAGE_NUMBER, CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
+import {
+  CATALOGUE_DEFAULT_PAGE_NUMBER,
+  CATALOGUE_DEFAULT_PAGE_SIZE,
+} from "shared/config/frontend";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();

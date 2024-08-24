@@ -9,7 +9,7 @@ import {
   AddOrRemoveFavoriteButton,
   EditInstrumentButton,
   GoToInstrumentButton,
-  RemoveInstrumentButton
+  RemoveInstrumentButton,
 } from "shared/instrument-card-actions";
 
 interface Props {
@@ -21,7 +21,7 @@ export const InstrumentActions = (props: Props) => {
   const [errorModal, setErrorModal] = useState<boolean>(false);
   const [successModal, setSuccessModal] = useState<boolean>(false);
   const jwt = useRef<string | undefined>(
-    Cookies.get("jwt") as string | undefined
+    Cookies.get("jwt") as string | undefined,
   );
 
   return (

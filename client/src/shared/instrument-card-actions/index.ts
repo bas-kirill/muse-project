@@ -7,5 +7,5 @@ export {
   AddOrRemoveFavoriteButton,
   EditInstrumentButton,
   RemoveInstrumentButton,
-  GoToInstrumentButton
+  GoToInstrumentButton,
 };
