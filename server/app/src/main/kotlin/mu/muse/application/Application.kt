@@ -33,9 +33,6 @@ import java.time.Instant
 class Application : CommandLineRunner {
 
     @Autowired
-    lateinit var namedTemplate: NamedParameterJdbcTemplate
-
-    @Autowired
     lateinit var userIdGenerator: IdGenerator<UserId>
 
     @Autowired
@@ -47,6 +44,8 @@ class Application : CommandLineRunner {
     @Autowired
     lateinit var instrumentPersister: InstrumentPersister
 
+    @Suppress("LongMethod")
+    // todo(tech-debt): use 2 different CLI runners and add dev profile
     override fun run(vararg args: String?) {
         val user = User.create(
             id = userIdGenerator.generate(),
