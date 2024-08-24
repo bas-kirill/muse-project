@@ -40,7 +40,7 @@ export const InstrumentTypeFilter = (props: Props) => {
   }
 
   return (
-    <div id="instrument-type-filter">
+    <div>
       <legend>Type:</legend>
       {instrumentTypes.map((instrumentType) => (
         <div key={instrumentType.instrument_type}>

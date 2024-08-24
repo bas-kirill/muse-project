@@ -37,7 +37,7 @@ export const CountryFilter = ({ onValueChange }: Props) => {
   }
 
   return (
-    <div id="country-filter">
+    <div>
       <legend>Country:</legend>
       {countries.map((country) => (
         <div key={country.country}>

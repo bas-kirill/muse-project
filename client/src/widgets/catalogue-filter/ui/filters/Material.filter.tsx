@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
+import { GetInstrumentBasicMaterialsApi } from "generated/api";
 import { BasicMaterial } from "generated/model";
 
 interface Props {
@@ -43,7 +43,7 @@ export const MaterialFilter = ({ onValueChange }: Props) => {
   }
 
   return (
-    <div id="materials-filter">
+    <div>
       <legend>Basic Materials:</legend>
       {materials.map((material) => (
         <div key={material.basic_material}>

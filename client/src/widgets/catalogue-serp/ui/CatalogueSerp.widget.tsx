@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles/CatalogueSerpWidget.module.css";
-import { InstrumentCard } from "shared/ui/instrument-card/InstrumentCard";
 import { InstrumentDetail, InstrumentId } from "generated/model";
+import { InstrumentCard } from "shared/instrument-card";
 
 interface Props {
   instruments: InstrumentDetail[];

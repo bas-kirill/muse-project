@@ -38,7 +38,7 @@ export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
   }
 
   return (
-    <div id="manufacturer-name-filter">
+    <div>
       <legend>Manufacturer:</legend>
       {manufacturers.map((manufacturer) => (
         <div key={manufacturer.manufacturer}>

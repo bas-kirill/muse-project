@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import "./styles/CreateInstrumentCardButton.css";
 import { Filters } from "widgets/catalogue-filter";
-import { InstrumentTypeFilter } from "./filters/InstrumentTypeFilter";
 import { Role } from "domain/model/role";
-import { CreateInstrumentCardButton } from "./CreateInstrumentCardButton";
-import { ManufacturerNameFilter } from "widgets/catalogue-filter/ui/filters/ManufacturerNameFilter";
-import { ManufactureDateFilter } from "widgets/catalogue-filter/ui/filters/ManufactureDateFilter";
-import { CountryFilter } from "widgets/catalogue-filter/ui/filters/CountryFilter";
-import { MaterialFilter } from "widgets/catalogue-filter/ui/filters/MaterialFilter";
 import Jwt from "domain/model/jwt";
-import { InstrumentType } from "generated/model/instrument-type";
 import {
+  InstrumentType,
   BasicMaterial,
   Country,
   ManufactureDate,
   ManufacturerName,
   ReleaseDate,
 } from "generated/model";
-import { ReleaseDateFilter } from "widgets/catalogue-filter/ui/filters/ReleaseDateFilter";
+import { InstrumentTypeFilter } from "widgets/catalogue-filter/ui/filters/InstrumentType.filter";
+import { ManufacturerNameFilter } from "widgets/catalogue-filter/ui/filters/ManufacturerName.filter";
+import { ManufactureDateFilter } from "widgets/catalogue-filter/ui/filters/ManufactureDate.filter";
+import { ReleaseDateFilter } from "widgets/catalogue-filter/ui/filters/ReleaseDate.filter";
+import { CountryFilter } from "widgets/catalogue-filter/ui/filters/Country.filter";
+import { MaterialFilter } from "widgets/catalogue-filter/ui/filters/Material.filter";
+import { CreateInstrumentCardButton } from "widgets/catalogue-filter/ui/CreateInstrumentCard.button";
 
 interface Props {
   onFilterChange: (filters: Filters) => void;
@@ -52,7 +52,7 @@ export const CatalogueFilterWidget = (props: Props) => {
       releaseDateTo: releaseDateTo,
       countries: countries,
       materials: materials,
-      instrumentIds: null, // there is no such field to search by instrument ids
+      instrumentIds: null, // there is no such form field to search by instrument ids
     });
   }, [
     instrumentTypes,
@@ -66,10 +66,11 @@ export const CatalogueFilterWidget = (props: Props) => {
   ]);
 
   return (
-    <div id="catalogue-filters">
+    <div>
       <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
       <ManufacturerNameFilter onValueChange={setManufacturerNames} />
-      <div id="manufacture-date-filter">
+
+      <div>
         <legend>Manufacture Date:</legend>
         <ManufactureDateFilter
           onValueChange={setManufactureDateFrom}
@@ -82,7 +83,8 @@ export const CatalogueFilterWidget = (props: Props) => {
           labelName={"To"}
         />
       </div>
-      <div id="release-date-filter">
+
+      <div>
         <legend>Release Date:</legend>
         <ReleaseDateFilter
           onValueChange={setReleaseDateFrom}
@@ -95,8 +97,10 @@ export const CatalogueFilterWidget = (props: Props) => {
           labelName={"To"}
         />
       </div>
+
       <CountryFilter onValueChange={setCountries} />
       <MaterialFilter onValueChange={setMaterials} />
+
       {Jwt.extractFromCookie()?.toRole() === Role.Editor && (
         <CreateInstrumentCardButton />
       )}

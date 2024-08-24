@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/CreateInstrumentCardButton.css";
+import styles from "./styles/CreateInstrumentCard.button.module.css";
 import { useNavigate } from "react-router-dom";
 import { CREATE_INSTRUMENT } from "shared/config/paths";
 
@@ -11,7 +11,7 @@ export const CreateInstrumentCardButton = () => {
   };
 
   return (
-    <button id="add-instrument-card" onClick={handleOnAddInstrumentButtonClick}>
+    <button className={styles.instrument__add__button} onClick={handleOnAddInstrumentButtonClick}>
       Add new instrument
     </button>
   );
