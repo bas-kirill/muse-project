@@ -18,5 +18,4 @@ components:
       properties:
         photo:
           type: string
-          format: binary
-          example: "WOOD"
+          format: base64

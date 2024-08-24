@@ -15,6 +15,7 @@ import mu.muse.usecase.scenario.instrument.EditInstrumentUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentByIdUseCase
 import mu.muse.usecase.scenario.instrument.GetManufacturersUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentMaterialsUseCase
+import mu.muse.usecase.scenario.instrument.GetInstrumentPhotoUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentTypesUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaPaginatedUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaUseCase
@@ -78,4 +79,8 @@ class UseCaseConfiguration {
 
     @Bean
     fun getInstrumentsByIds(instrumentExtractor: InstrumentExtractor) = GetInstrumentsByIdsUseCase(instrumentExtractor)
+
+    @Bean
+    fun getInstrumentPhoto(instrumentExtractor: InstrumentExtractor) = GetInstrumentPhotoUseCase(instrumentExtractor)
+
 }

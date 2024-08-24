@@ -23,7 +23,7 @@ create table instruments(
     release_date timestamptz not null,
     country varchar(256) not null,
     materials varchar(256)[] not null,
-    image bytea not null
+    image text not null
 );
 
 create sequence instrument_id_seq increment 1 start 1;

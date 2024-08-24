@@ -27,9 +27,6 @@ import type { InstrumentId } from './instrument-id';
 import type { InstrumentName } from './instrument-name';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentPhoto } from './instrument-photo';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { InstrumentType } from './instrument-type';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -95,11 +92,5 @@ export interface InstrumentDetail {
      * @memberof InstrumentDetail
      */
     'basic_materials': Array<BasicMaterial>;
-    /**
-     * 
-     * @type {InstrumentPhoto}
-     * @memberof InstrumentDetail
-     */
-    'image': InstrumentPhoto;
 }
 

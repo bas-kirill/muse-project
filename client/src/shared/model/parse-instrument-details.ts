@@ -1,12 +1,12 @@
-import { InstrumentType } from "generated/model/instrument-type";
 import {
   BasicMaterial,
   Country,
   InstrumentId,
-  InstrumentName,
+  InstrumentName, InstrumentPhoto,
   ManufactureDate,
   ManufacturerName,
   ReleaseDate,
+  InstrumentType,
 } from "generated/model";
 
 export const parseInstrumentDetails = (data: FormData) => {
@@ -55,7 +55,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     manufactureDate.manufacture_date === "string" &&
     releaseDate.release_date === "string" &&
     Date.parse(releaseDate.release_date) <
-      Date.parse(manufactureDate.manufacture_date)
+    Date.parse(manufactureDate.manufacture_date)
   ) {
     errors.push("Release date must be after manufacture date");
   }
@@ -75,6 +75,11 @@ export const parseInstrumentDetails = (data: FormData) => {
       }) as BasicMaterial,
   );
 
+  const instrumentPhotoRaw = data.get("instrument-image")
+  const instrumentPhoto = {
+    photo: instrumentPhotoRaw,
+  } as InstrumentPhoto;
+
   return {
     instrumentId,
     instrumentName,
@@ -84,6 +89,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     releaseDate,
     country,
     materials,
+    instrumentPhoto,
     errors,
   } as {
     instrumentId: InstrumentId;
@@ -94,6 +100,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     releaseDate: ReleaseDate;
     country: Country;
     materials: BasicMaterial[];
+    instrumentPhoto: InstrumentPhoto;
     errors: string[];
   };
 };

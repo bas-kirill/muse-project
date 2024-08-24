@@ -11,6 +11,7 @@ import mu.muse.rest.instruments.EditInstrumentEndpoint
 import mu.muse.rest.instruments.GetInstrumentByIdEndpoint
 import mu.muse.rest.instruments.GetManufacturersEndpoint
 import mu.muse.rest.instruments.GetInstrumentMaterialsEndpoint
+import mu.muse.rest.instruments.GetInstrumentPhotoEndpoint
 import mu.muse.rest.instruments.GetInstrumentTypesEndpoint
 import mu.muse.rest.instruments.GetInstrumentsByCriteriaEndpoint
 import mu.muse.rest.instruments.GetInstrumentsByCriteriaPaginatedEndpoint
@@ -25,6 +26,7 @@ import mu.muse.usecase.GetCountries
 import mu.muse.usecase.GetInstrumentById
 import mu.muse.usecase.GetManufacturers
 import mu.muse.usecase.GetInstrumentMaterials
+import mu.muse.usecase.GetInstrumentPhoto
 import mu.muse.usecase.GetInstrumentTypes
 import mu.muse.usecase.GetInstrumentsByCriteria
 import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
@@ -53,8 +55,8 @@ class RestConfiguration {
 
     // @format:off
     @Bean
-    fun getInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated)
-        = GetInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated)
+    fun getInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated) =
+        GetInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated)
     // @format:on
 
     @Bean
@@ -96,4 +98,8 @@ class RestConfiguration {
 
     @Bean
     fun removeFavoriteEndpoint() = RemoveFavoriteEndpoint()
+
+    @Bean
+    fun getInstrumentPhotoEndpoint(getInstrumentPhoto: GetInstrumentPhoto) =
+        GetInstrumentPhotoEndpoint(getInstrumentPhoto)
 }

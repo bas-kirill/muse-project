@@ -13,7 +13,7 @@ class Instrument internal constructor(
     val releaseDate: ReleaseDate,
     val country: Country,
     val materials: List<Material>,
-    val image: InstrumentPhoto,
+    val image: InstrumentBase64Photo,
     version: Version,
 ) : AggregateRoot<InstrumentId>(id, version) {
 
@@ -30,7 +30,7 @@ class Instrument internal constructor(
             releaseDate: ReleaseDate,
             country: Country,
             materials: List<Material>,
-            image: InstrumentPhoto,
+            image: InstrumentBase64Photo,
         ): Instrument {
             return Instrument(
                 id = id,

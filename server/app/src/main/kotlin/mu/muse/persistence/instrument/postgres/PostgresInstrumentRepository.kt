@@ -5,7 +5,7 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.InstrumentPhoto
+import mu.muse.domain.instrument.InstrumentBase64Photo
 import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Material
@@ -14,9 +14,7 @@ import mu.muse.persistence.instrument.inmemory.matches
 import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.access.instrument.InstrumentPersister
 import mu.muse.usecase.access.instrument.InstrumentRemover
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
-import org.springframework.jdbc.support.GeneratedKeyHolder
 import java.sql.ResultSet
 import java.sql.Timestamp
 
@@ -50,7 +48,8 @@ class PostgresInstrumentRepository(
               manufacturer_date,
               release_date,
               country,
-              materials
+              materials,
+              image
             from instruments
             where instrument_id = :instrument_id
         """.trimIndent()
@@ -72,7 +71,8 @@ class PostgresInstrumentRepository(
               manufacturer_date,
               release_date,
               country,
-              materials
+              materials,
+              image
             from instruments
             where instrument_id in (:instrument_ids)
         """.trimIndent()
@@ -92,7 +92,8 @@ class PostgresInstrumentRepository(
               manufacturer_date,
               release_date,
               country,
-              materials
+              materials,
+              image
             from instruments
         """.trimIndent()
         val instruments = namedTemplate.query(sql) { rs, _ -> rs.toInstrument() }
@@ -156,7 +157,7 @@ class PostgresInstrumentRepository(
             "release_date" to Timestamp.from(instrument.releaseDate.toInstantValue()),
             "country" to instrument.country.name,
             "materials" to instrument.materials.map { it.name }.toTypedArray(),
-            "image" to instrument.image.toByteArray(),
+            "image" to instrument.image.toStringValue(),
         )
         namedTemplate.update(sql, params)
     }
@@ -172,6 +173,6 @@ fun ResultSet.toInstrument() = Instrument(
     releaseDate = ReleaseDate.from(this.getTimestamp("release_date").toInstant()),
     country = Country.valueOf(this.getString("country")),
     materials = (this.getArray("materials").getArray() as Array<String>).toBasicMaterials(),
-    image = InstrumentPhoto.from(this.getBytes("image")),
+    image = InstrumentBase64Photo.from(this.getString("image")),
     version = Version.new(),
 )

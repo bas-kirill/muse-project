@@ -9,6 +9,7 @@ api/edit-instrument-api.ts
 api/get-countries-api.ts
 api/get-instrument-basic-materials-api.ts
 api/get-instrument-by-id-api.ts
+api/get-instrument-photo-api.ts
 api/get-instrument-types-api.ts
 api/get-instruments-by-criteria-api.ts
 api/get-instruments-by-criteria-paginated-api.ts
@@ -35,6 +36,7 @@ model/get-instruments-by-criteria-request-body.ts
 model/get-instruments-by-criteria-response.ts
 model/get-manufacturers-response.ts
 model/index.ts
+model/instrument-detail-without-id.ts
 model/instrument-detail.ts
 model/instrument-id.ts
 model/instrument-name.ts

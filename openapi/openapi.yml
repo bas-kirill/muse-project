@@ -43,6 +43,9 @@ tags:
   - name: getInstrumentById
     description: Get Instrument by ID
     x-displayName: getInstrumentById
+  - name: getInstrumentPhoto
+    description: Get Instrument Photo
+    x-displayName: getInstrumentPhoto
   - name: getInstrumentTypes
     description: Get Instrument Types
     x-displayName: getInstrumentTypes
@@ -221,13 +224,7 @@ paths:
       tags:
         - deleteInstrumentById
       parameters:
-        - name: instrumentId
-          in: path
-          required: true
-          description: Instrument ID
-          schema:
-            type: integer
-            format: int64
+        - $ref: '#/components/parameters/instrumentId'
       responses:
         '200':
           description: Instrument Types
@@ -313,13 +310,7 @@ paths:
       tags:
         - getInstrumentById
       parameters:
-        - name: instrumentId
-          in: path
-          required: true
-          description: Instrument ID
-          schema:
-            type: integer
-            format: int64
+        - $ref: '#/components/parameters/instrumentId'
       responses:
         '200':
           description: Instrument Detail
@@ -335,6 +326,34 @@ paths:
                 $ref: '#/components/schemas/ClientError'
         default:
           description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/instrument/photo/{instrumentId}:
+    get:
+      description: Get Instrument Photo
+      summary: Get Instrument Photo
+      operationId: getInstrumentPhoto
+      tags:
+        - getInstrumentPhoto
+      parameters:
+        - $ref: '#/components/parameters/instrumentId'
+      responses:
+        '200':
+          description: Instrument Types
+          content:
+            image/*:
+              schema:
+                $ref: '#/components/schemas/InstrumentPhoto'
+        '400':
+          description: Client Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClientError'
+        default:
+          description: Server Error
           content:
             application/json:
               schema:
@@ -581,7 +600,6 @@ components:
         - release_date
         - country
         - basic_materials
-        - image
       properties:
         instrument_id:
           $ref: '#/components/schemas/InstrumentId'
@@ -601,8 +619,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BasicMaterial'
-        image:
-          $ref: '#/components/schemas/InstrumentPhoto'
     InstrumentId:
       type: object
       required:
@@ -661,8 +677,7 @@ components:
       properties:
         photo:
           type: string
-          format: binary
-          example: WOOD
+          format: base64
     ServerError:
       type: object
       required:
@@ -691,7 +706,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InstrumentDetail'
-    CreateInstrumentRequestBody:
+    InstrumentDetailWithoutId:
       type: object
       required:
         - instrument_name
@@ -700,8 +715,7 @@ components:
         - manufacturer_date
         - release_date
         - country
-        - materials
-        - image
+        - basic_materials
       properties:
         instrument_name:
           $ref: '#/components/schemas/InstrumentName'
@@ -715,44 +729,29 @@ components:
           $ref: '#/components/schemas/ReleaseDate'
         country:
           $ref: '#/components/schemas/Country'
-        materials:
+        basic_materials:
           type: array
           items:
             $ref: '#/components/schemas/BasicMaterial'
-        image:
+    CreateInstrumentRequestBody:
+      type: object
+      required:
+        - instrument_detail
+        - instrument_photo
+      properties:
+        instrument_detail:
+          $ref: '#/components/schemas/InstrumentDetailWithoutId'
+        instrument_photo:
           $ref: '#/components/schemas/InstrumentPhoto'
     EditInstrumentRequestBody:
       type: object
       required:
-        - instrument_id
-        - instrument_name
-        - instrument_type
-        - manufacturer_name
-        - manufacturer_date
-        - release_date
-        - country
-        - materials
-        - image
+        - instrument_detail
+        - instrument_photo
       properties:
-        instrument_id:
-          $ref: '#/components/schemas/InstrumentId'
-        instrument_name:
-          $ref: '#/components/schemas/InstrumentName'
-        instrument_type:
-          $ref: '#/components/schemas/InstrumentType'
-        manufacturer_name:
-          $ref: '#/components/schemas/ManufacturerName'
-        manufacturer_date:
-          $ref: '#/components/schemas/ManufactureDate'
-        release_date:
-          $ref: '#/components/schemas/ReleaseDate'
-        country:
-          $ref: '#/components/schemas/Country'
-        materials:
-          type: array
-          items:
-            $ref: '#/components/schemas/BasicMaterial'
-        image:
+        instrument_detail:
+          $ref: '#/components/schemas/InstrumentDetail'
+        instrument_photo:
           $ref: '#/components/schemas/InstrumentPhoto'
     GetInstrumentBasicMaterialsResponse:
       type: object
@@ -922,6 +921,15 @@ components:
           type: string
         password:
           type: string
+  parameters:
+    instrumentId:
+      name: instrumentId
+      in: path
+      description: Instrument ID
+      required: true
+      schema:
+        type: integer
+        format: int64
 x-tagGroups:
   - name: Get Countries
     tags:
@@ -950,6 +958,9 @@ x-tagGroups:
   - name: Get Instrument by ID
     tags:
       - getInstrumentById
+  - name: Get Instrument Photo
+    tags:
+      - getInstrumentPhoto
   - name: Get Instrument Types
     tags:
       - getInstrumentTypes

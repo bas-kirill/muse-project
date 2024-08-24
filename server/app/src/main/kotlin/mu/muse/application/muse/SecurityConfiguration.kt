@@ -12,6 +12,7 @@ import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENTS_PAGINATED
 import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.API_INSTRUMENT_MATERIALS
+import mu.muse.rest.API_INSTRUMENT_PHOTO
 import mu.muse.rest.API_INSTRUMENT_TYPES
 import mu.muse.rest.API_MANUFACTURERS
 import mu.muse.rest.API_REGISTRATION
@@ -106,6 +107,7 @@ class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, API_FAVORITE_ADD).permitAll()
                 .requestMatchers(HttpMethod.POST, API_FAVORITE_REMOVE).permitAll()
                 .requestMatchers(HttpMethod.GET, API_FAVORITE_LIST).permitAll()
+                .requestMatchers(HttpMethod.GET, API_INSTRUMENT_PHOTO).permitAll()
                 .anyRequest().authenticated()
         }
 

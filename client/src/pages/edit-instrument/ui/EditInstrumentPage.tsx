@@ -152,6 +152,16 @@ export const EditInstrumentPage = () => {
           usedMaterialsForInstrument={loader.instrumentForEdit.basic_materials}
         />
 
+        <div className="edit-instrument-field">
+          <div className={"edit-instrument-field-name"}>
+            <label htmlFor="image">Image</label>
+          </div>
+
+          <div className={"edit-instrument-field-value"}>
+            <input type={"file"} name={"instrument-image"} accept={"image/*"}/>
+          </div>
+        </div>
+
         <input type="submit" value="Edit" />
       </Form>
       {actionData.errors.length > 0 &&

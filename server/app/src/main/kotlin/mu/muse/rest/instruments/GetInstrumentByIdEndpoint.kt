@@ -4,7 +4,6 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.InstrumentPhoto
 import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Material
@@ -16,7 +15,6 @@ import mu.muse.rest.dto.InstrumentType
 import mu.muse.rest.dto.ManufactureDate
 import mu.muse.rest.dto.ManufacturerName
 import mu.muse.usecase.GetInstrumentById
-import org.springframework.core.io.ByteArrayResource
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
@@ -45,7 +43,6 @@ fun ReleaseDate.toDto() =
 
 fun Country.toDto() = mu.muse.rest.dto.Country(country = this.name)
 fun List<Material>.toDto() = this.map { BasicMaterial(basicMaterial = it.name) }
-fun InstrumentPhoto.toDto() = mu.muse.rest.dto.InstrumentPhoto(ByteArrayResource(this.toByteArray()))
 
 fun Instrument.toDto(): InstrumentDetail {
     return InstrumentDetail(
@@ -57,6 +54,5 @@ fun Instrument.toDto(): InstrumentDetail {
         releaseDate = this.releaseDate.toDto(),
         country = this.country.toDto(),
         basicMaterials = this.materials.toDto(),
-        image = this.image.toDto(),
     )
 }

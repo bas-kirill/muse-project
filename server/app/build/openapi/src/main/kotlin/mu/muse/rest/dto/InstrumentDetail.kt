@@ -6,7 +6,6 @@ import mu.muse.rest.dto.BasicMaterial
 import mu.muse.rest.dto.Country
 import mu.muse.rest.dto.InstrumentId
 import mu.muse.rest.dto.InstrumentName
-import mu.muse.rest.dto.InstrumentPhoto
 import mu.muse.rest.dto.InstrumentType
 import mu.muse.rest.dto.ManufactureDate
 import mu.muse.rest.dto.ManufacturerName
@@ -31,7 +30,6 @@ import jakarta.validation.Valid
  * @param releaseDate 
  * @param country 
  * @param basicMaterials 
- * @param image 
  */
 data class InstrumentDetail(
 
@@ -57,10 +55,7 @@ data class InstrumentDetail(
     @get:JsonProperty("country", required = true) val country: Country,
 
     @field:Valid
-    @get:JsonProperty("basic_materials", required = true) val basicMaterials: kotlin.collections.List<BasicMaterial>,
-
-    @field:Valid
-    @get:JsonProperty("image", required = true) val image: InstrumentPhoto
+    @get:JsonProperty("basic_materials", required = true) val basicMaterials: kotlin.collections.List<BasicMaterial>
     ) {
 
 }

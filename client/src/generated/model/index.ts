@@ -11,6 +11,7 @@ export * from './get-instruments-by-criteria-request-body';
 export * from './get-instruments-by-criteria-response';
 export * from './get-manufacturers-response';
 export * from './instrument-detail';
+export * from './instrument-detail-without-id';
 export * from './instrument-id';
 export * from './instrument-name';
 export * from './instrument-photo';
