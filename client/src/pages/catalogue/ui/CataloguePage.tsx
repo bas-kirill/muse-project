@@ -7,11 +7,11 @@ import { CatalogueFilterWidget, Filters } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import { CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
 import { SearchBarInputField } from "./SearchBarInputField";
-import { NavigationBar } from "./NavigationBar";
 import { ListFavoriteApi } from "generated/api/list-favorite-api";
 import { InstrumentDetail, InstrumentId } from "generated/model";
-import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api/get-instruments-by-criteria-paginated-api";
+import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api";
 import { CatalogueLoader } from "pages/catalogue";
+import { NavigationBarWidget } from "widgets/navbar";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();
@@ -86,7 +86,7 @@ export function CataloguePage() {
             instruments={instruments}
             favoriteInstrumentIds={favoriteInstrumentIds}
           />
-          <NavigationBar
+          <NavigationBarWidget
             totalPages={totalPages.current}
             pageNumber={pageNumber}
             setPageNumber={setPageNumber}

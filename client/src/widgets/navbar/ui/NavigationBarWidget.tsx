@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./styles/NavigationBarWidget.module.css";
 
 interface Props {
   totalPages: number;
@@ -8,7 +9,7 @@ interface Props {
 
 export const NavigationBarWidget = (props: Props) => {
   return (
-    <div id="pages-navigation-bar">
+    <div className={styles.navbar} id="pages-navigation-bar">
       {props.pageNumber > 1 && (
         <button onClick={() => props.setPageNumber(props.pageNumber - 1)}>
           Previous
