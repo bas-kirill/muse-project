@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/CatalogueSerpWidget.css";
+import styles from "./styles/CatalogueSerpWidget.module.css";
 import { InstrumentCard } from "shared/ui/instrument-card/InstrumentCard";
 import { InstrumentDetail, InstrumentId } from "generated/model";
 
@@ -10,21 +10,20 @@ interface Props {
 
 export const CatalogueSerpWidget = (props: Props) => {
   return (
-    <div id="catalogue-serp">
+    <div className={styles.catalogue_serp} id="catalogue-serp">
       {props.instruments.length === 0 && (
-        <div id={"serp-widget-not-found"}>Instruments not found :(</div>
+        <div className={styles.not_found}>Instruments not found :(</div>
       )}
 
-      {props.instruments.length > 0 &&
-        props.instruments.map((instrument) => (
-          <InstrumentCard
-            key={instrument.instrument_id.instrument_id}
-            instrument={instrument}
-            favorite={props.favoriteInstrumentIds
-              .map((id) => id.instrument_id)
-              .includes(instrument.instrument_id.instrument_id)}
-          />
-        ))}
+      {props.instruments.length > 0 && props.instruments.map((instrument) => (
+        <InstrumentCard
+          key={instrument.instrument_id.instrument_id}
+          instrument={instrument}
+          favorite={props.favoriteInstrumentIds
+            .map((id) => id.instrument_id)
+            .includes(instrument.instrument_id.instrument_id)}
+        />
+      ))}
     </div>
   );
 };
