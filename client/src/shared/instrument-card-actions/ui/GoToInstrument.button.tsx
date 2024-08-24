@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/GoToInstrumentButton.module.css";
+import styles from "./styles/GoToInstrument.button.module.css";
 import { Link } from "react-router-dom";
 
 import { InstrumentDetail } from "generated/model";

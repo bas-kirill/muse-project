@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/AddOrRemoveFavoriteButton.module.css";
+import styles from "./styles/AddOrRemoveFavorite.button.module.css";
 import { useState } from "react";
 import {
   AddFavoriteApi,

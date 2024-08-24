@@ -11,7 +11,7 @@ import { ListFavoriteApi } from "generated/api/list-favorite-api";
 import { InstrumentDetail, InstrumentId } from "generated/model";
 import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api";
 import { CatalogueLoader } from "pages/catalogue";
-import { NavigationBarWidget } from "widgets/navbar";
+import { NavigationBarWidget } from "widgets/catalogue-navbar";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();

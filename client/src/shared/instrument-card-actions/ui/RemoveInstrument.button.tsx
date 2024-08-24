@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/RemoveInstrumentButton.module.css";
+import styles from "./styles/RemoveInstrument.button.module.css";
 import { InstrumentDetail } from "generated/model";
 import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 
