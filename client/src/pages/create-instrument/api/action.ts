@@ -43,7 +43,7 @@ export const action: ActionFunction = async ({
       },
       instrument_photo: {
         photo: instrumentPhoto.photo,
-      }
+      },
     },
     {
       headers: {
@@ -59,6 +59,9 @@ export const action: ActionFunction = async ({
   }
 
   return {
-    errors: [...errors, `Failed to create instrument '${instrumentName.instrument_name}'`],
+    errors: [
+      ...errors,
+      `Failed to create instrument '${instrumentName.instrument_name}'`,
+    ],
   };
 };

@@ -2,7 +2,8 @@ import {
   BasicMaterial,
   Country,
   InstrumentId,
-  InstrumentName, InstrumentPhoto,
+  InstrumentName,
+  InstrumentPhoto,
   ManufactureDate,
   ManufacturerName,
   ReleaseDate,
@@ -55,7 +56,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     manufactureDate.manufacture_date === "string" &&
     releaseDate.release_date === "string" &&
     Date.parse(releaseDate.release_date) <
-    Date.parse(manufactureDate.manufacture_date)
+      Date.parse(manufactureDate.manufacture_date)
   ) {
     errors.push("Release date must be after manufacture date");
   }
@@ -75,7 +76,7 @@ export const parseInstrumentDetails = (data: FormData) => {
       }) as BasicMaterial,
   );
 
-  const instrumentPhotoRaw = data.get("instrument-image")
+  const instrumentPhotoRaw = data.get("instrument-image");
   const instrumentPhoto = {
     photo: instrumentPhotoRaw,
   } as InstrumentPhoto;

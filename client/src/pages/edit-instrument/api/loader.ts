@@ -3,9 +3,10 @@ import { GetInstrumentByIdApi } from "generated/api/get-instrument-by-id-api";
 import {
   BasicMaterial,
   Country,
-  InstrumentDetail, InstrumentPhoto,
+  InstrumentDetail,
+  InstrumentPhoto,
   type InstrumentType,
-  Manufacturer
+  Manufacturer,
 } from "generated/model";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
@@ -44,7 +45,7 @@ export const loader: LoaderFunction = async ({
   const countriesRequest = await getCountries.getCountries();
   const manufacturersRequest = await getManufacturers.getManufacturers();
   const instrumentPhotoRequest = await getInstrumentPhoto.getInstrumentPhoto(
-    parseInt(params.instrumentId as string)
+    parseInt(params.instrumentId as string),
   );
 
   return {

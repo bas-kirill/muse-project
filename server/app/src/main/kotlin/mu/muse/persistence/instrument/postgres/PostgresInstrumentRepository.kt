@@ -108,7 +108,7 @@ class PostgresInstrumentRepository(
     override fun removeInstrument(id: InstrumentId) {
         val sql = "delete from instruments where instrument_id = :instrument_id"
         val params = mapOf(
-            "instrument_id" to id.toLongValue()
+            "instrument_id" to id.toLongValue(),
         )
         namedTemplate.update(sql, params)
     }

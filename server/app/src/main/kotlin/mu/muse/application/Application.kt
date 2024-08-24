@@ -78,7 +78,8 @@ class Application : CommandLineRunner {
             country = Country.CYPRUS,
             materials = listOf(Material.WOOD),
             image = InstrumentBase64Photo.fromByteArray(
-                javaClass.getResourceAsStream("/image/rock_guitar.webp").use { it!!.readBytes() }),
+                javaClass.getResourceAsStream("/image/rock_guitar.webp").use { it!!.readBytes() },
+            ),
         )
 
         val saxophone = Instrument.create(
@@ -91,7 +92,8 @@ class Application : CommandLineRunner {
             country = Country.USA,
             materials = listOf(Material.METALL),
             image = InstrumentBase64Photo.fromByteArray(
-                javaClass.getResourceAsStream("/image/saxo.webp").use { it!!.readBytes() }),
+                javaClass.getResourceAsStream("/image/saxo.webp").use { it!!.readBytes() },
+            ),
         )
 
         val guitar = Instrument.create(
@@ -104,7 +106,8 @@ class Application : CommandLineRunner {
             country = Country.USA,
             materials = listOf(Material.WOOD),
             image = InstrumentBase64Photo.fromByteArray(
-                javaClass.getResourceAsStream("/image/guitar.webp").use { it!!.readBytes() }),
+                javaClass.getResourceAsStream("/image/guitar.webp").use { it!!.readBytes() },
+            ),
         )
 
         val violin = Instrument.create(
@@ -117,7 +120,8 @@ class Application : CommandLineRunner {
             country = Country.USA,
             materials = listOf(Material.WOOD),
             image = InstrumentBase64Photo.fromByteArray(
-                javaClass.getResourceAsStream("/image/violin.webp").use { it!!.readBytes() }),
+                javaClass.getResourceAsStream("/image/violin.webp").use { it!!.readBytes() },
+            ),
         )
 
         sequenceOf(rockGuitar, saxophone, guitar, violin).forEach { instrument ->

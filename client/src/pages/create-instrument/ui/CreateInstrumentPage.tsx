@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./styles/CreateInstrumentPage.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
@@ -146,7 +146,8 @@ export const CreateInstrumentPage = () => {
           </label>
 
           <select
-            name="material" className={styles.create_instrument__form__field__value}
+            name="material"
+            className={styles.create_instrument__form__field__value}
             required
           >
             {loader.materials.map((material) => (
@@ -161,14 +162,20 @@ export const CreateInstrumentPage = () => {
         </div>
 
         <div className={styles.create_instrument__form__field}>
-          <label htmlFor={"instrument-image"} className={styles.create_instrument__form__field__key}>Image Photo</label>
+          <label
+            htmlFor={"instrument-image"}
+            className={styles.create_instrument__form__field__key}
+          >
+            Image Photo
+          </label>
 
           <input
             type={"file"}
             name={"instrument-photo"}
             accept={"image/*"}
             className={styles.create_instrument__form__field__value}
-            required={true} />
+            required={true}
+          />
         </div>
 
         <input type="submit" value="Create Instrument" />

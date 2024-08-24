@@ -41,29 +41,31 @@ import {
 // @ts-ignore
 import type { ClientError } from "../model";
 // @ts-ignore
+import type { InstrumentPhoto } from "../model";
+// @ts-ignore
 import type { ServerError } from "../model";
 /**
- * DeleteInstrumentByIdApi - axios parameter creator
+ * GetInstrumentPhotoApi - axios parameter creator
  * @export
  */
-export const DeleteInstrumentByIdApiAxiosParamCreator = function (
+export const GetInstrumentPhotoApiAxiosParamCreator = function (
   configuration?: Configuration,
 ) {
   return {
     /**
-     * Get Instrument Types
-     * @summary Get Instrument Types
+     * Get Instrument Photo
+     * @summary Get Instrument Photo
      * @param {number} instrumentId Instrument ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteInstrumentById: async (
+    getInstrumentPhoto: async (
       instrumentId: number,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'instrumentId' is not null or undefined
-      assertParamExists("deleteInstrumentById", "instrumentId", instrumentId);
-      const localVarPath = `/api/instrument/{instrumentId}/delete`.replace(
+      assertParamExists("getInstrumentPhoto", "instrumentId", instrumentId);
+      const localVarPath = `/api/instrument/photo/{instrumentId}`.replace(
         `{${"instrumentId"}}`,
         encodeURIComponent(String(instrumentId)),
       );
@@ -100,36 +102,39 @@ export const DeleteInstrumentByIdApiAxiosParamCreator = function (
 };
 
 /**
- * DeleteInstrumentByIdApi - functional programming interface
+ * GetInstrumentPhotoApi - functional programming interface
  * @export
  */
-export const DeleteInstrumentByIdApiFp = function (
+export const GetInstrumentPhotoApiFp = function (
   configuration?: Configuration,
 ) {
   const localVarAxiosParamCreator =
-    DeleteInstrumentByIdApiAxiosParamCreator(configuration);
+    GetInstrumentPhotoApiAxiosParamCreator(configuration);
   return {
     /**
-     * Get Instrument Types
-     * @summary Get Instrument Types
+     * Get Instrument Photo
+     * @summary Get Instrument Photo
      * @param {number} instrumentId Instrument ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async deleteInstrumentById(
+    async getInstrumentPhoto(
       instrumentId: number,
       options?: RawAxiosRequestConfig,
     ): Promise<
-      (axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>
+      (
+        axios?: AxiosInstance,
+        basePath?: string,
+      ) => AxiosPromise<InstrumentPhoto>
     > {
       const localVarAxiosArgs =
-        await localVarAxiosParamCreator.deleteInstrumentById(
+        await localVarAxiosParamCreator.getInstrumentPhoto(
           instrumentId,
           options,
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DeleteInstrumentByIdApi.deleteInstrumentById"]?.[
+        operationServerMap["GetInstrumentPhotoApi.getInstrumentPhoto"]?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -144,55 +149,55 @@ export const DeleteInstrumentByIdApiFp = function (
 };
 
 /**
- * DeleteInstrumentByIdApi - factory interface
+ * GetInstrumentPhotoApi - factory interface
  * @export
  */
-export const DeleteInstrumentByIdApiFactory = function (
+export const GetInstrumentPhotoApiFactory = function (
   configuration?: Configuration,
   basePath?: string,
   axios?: AxiosInstance,
 ) {
-  const localVarFp = DeleteInstrumentByIdApiFp(configuration);
+  const localVarFp = GetInstrumentPhotoApiFp(configuration);
   return {
     /**
-     * Get Instrument Types
-     * @summary Get Instrument Types
+     * Get Instrument Photo
+     * @summary Get Instrument Photo
      * @param {number} instrumentId Instrument ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    deleteInstrumentById(
+    getInstrumentPhoto(
       instrumentId: number,
       options?: RawAxiosRequestConfig,
-    ): AxiosPromise<object> {
+    ): AxiosPromise<InstrumentPhoto> {
       return localVarFp
-        .deleteInstrumentById(instrumentId, options)
+        .getInstrumentPhoto(instrumentId, options)
         .then((request) => request(axios, basePath));
     },
   };
 };
 
 /**
- * DeleteInstrumentByIdApi - object-oriented interface
+ * GetInstrumentPhotoApi - object-oriented interface
  * @export
- * @class DeleteInstrumentByIdApi
+ * @class GetInstrumentPhotoApi
  * @extends {BaseAPI}
  */
-export class DeleteInstrumentByIdApi extends BaseAPI {
+export class GetInstrumentPhotoApi extends BaseAPI {
   /**
-   * Get Instrument Types
-   * @summary Get Instrument Types
+   * Get Instrument Photo
+   * @summary Get Instrument Photo
    * @param {number} instrumentId Instrument ID
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
-   * @memberof DeleteInstrumentByIdApi
+   * @memberof GetInstrumentPhotoApi
    */
-  public deleteInstrumentById(
+  public getInstrumentPhoto(
     instrumentId: number,
     options?: RawAxiosRequestConfig,
   ) {
-    return DeleteInstrumentByIdApiFp(this.configuration)
-      .deleteInstrumentById(instrumentId, options)
+    return GetInstrumentPhotoApiFp(this.configuration)
+      .getInstrumentPhoto(instrumentId, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

@@ -14,7 +14,7 @@ export const action: ActionFunction = async ({
 }): Promise<EditInstrumentAction> => {
   return {
     errors: [],
-  }
+  };
 
   const {
     instrumentId,
@@ -65,6 +65,9 @@ export const action: ActionFunction = async ({
   }
 
   return {
-    errors: [...errors, `Failed to edit instrument: '${instrumentName.instrument_name}'`],
+    errors: [
+      ...errors,
+      `Failed to edit instrument: '${instrumentName.instrument_name}'`,
+    ],
   };
 };

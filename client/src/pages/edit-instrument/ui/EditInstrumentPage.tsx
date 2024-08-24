@@ -37,8 +37,12 @@ export const EditInstrumentPage = () => {
           </div>
 
           <div className={styles.edit_instrument__form__field}>
-            <label htmlFor="instrument-name" className={styles.edit_instrument__form__field__key}>Instrument
-              Name</label>
+            <label
+              htmlFor="instrument-name"
+              className={styles.edit_instrument__form__field__key}
+            >
+              Instrument Name
+            </label>
 
             <input
               type="text"
@@ -52,8 +56,12 @@ export const EditInstrumentPage = () => {
           </div>
 
           <div className={styles.edit_instrument__form__field}>
-            <label htmlFor="instrument-type" className={styles.edit_instrument__form__field__key}>Instrument
-              Type</label>
+            <label
+              htmlFor="instrument-type"
+              className={styles.edit_instrument__form__field__key}
+            >
+              Instrument Type
+            </label>
 
             <select
               name="instrument-type"
@@ -75,8 +83,12 @@ export const EditInstrumentPage = () => {
           </div>
 
           <div className={styles.edit_instrument__form__field}>
-            <label htmlFor="manufacturer-name" className={styles.edit_instrument__form__field__key}>Manufacturer
-              name</label>
+            <label
+              htmlFor="manufacturer-name"
+              className={styles.edit_instrument__form__field__key}
+            >
+              Manufacturer name
+            </label>
 
             <select
               name="manufacturer-name"
@@ -98,8 +110,12 @@ export const EditInstrumentPage = () => {
           </div>
 
           <div className={styles.edit_instrument__form__field}>
-            <label htmlFor="manufacturer-date" className={styles.edit_instrument__form__field__key}>Manufacturer
-              date</label>
+            <label
+              htmlFor="manufacturer-date"
+              className={styles.edit_instrument__form__field__key}
+            >
+              Manufacturer date
+            </label>
 
             <input
               type="date"
@@ -115,7 +131,12 @@ export const EditInstrumentPage = () => {
           </div>
 
           <div className={styles.edit_instrument__form__field}>
-            <label htmlFor="release-date" className={styles.edit_instrument__form__field__key}>Release date</label>
+            <label
+              htmlFor="release-date"
+              className={styles.edit_instrument__form__field__key}
+            >
+              Release date
+            </label>
 
             <input
               type="date"
@@ -129,7 +150,12 @@ export const EditInstrumentPage = () => {
           </div>
 
           <div className={styles.edit_instrument__form__field}>
-            <label htmlFor="country" className={styles.edit_instrument__form__field__key}>Country</label>
+            <label
+              htmlFor="country"
+              className={styles.edit_instrument__form__field__key}
+            >
+              Country
+            </label>
 
             <select
               name="country"
@@ -147,24 +173,33 @@ export const EditInstrumentPage = () => {
 
           <InstrumentBasicMaterialFormField
             materials={loader.materials}
-            usedMaterialsForInstrument={loader.instrumentForEdit.basic_materials}
+            usedMaterialsForInstrument={
+              loader.instrumentForEdit.basic_materials
+            }
           />
 
           <div className={styles.edit_instrument__form__field}>
-            <label htmlFor={"instrument-image"} className={styles.edit_instrument__form__field__key}>Image Photo</label>
+            <label
+              htmlFor={"instrument-image"}
+              className={styles.edit_instrument__form__field__key}
+            >
+              Image Photo
+            </label>
 
             <input
               type={"file"}
               name={"instrument-photo"}
               accept={"image/*"}
               className={styles.edit_instrument__form__field__value}
-              required={true} />
+              required={true}
+            />
           </div>
 
           <input type="submit" value="Edit" />
         </Form>
       </div>
-      {actionData !== undefined && actionData.errors.length > 0 &&
+      {actionData !== undefined &&
+        actionData.errors.length > 0 &&
         actionData.errors.map((error) => <div key={error}>{error}</div>)}
       <FooterWidget />
     </>

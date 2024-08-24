@@ -11,7 +11,7 @@ interface Props {
 export const InstrumentBasicMaterialFormField = (props: Props) => {
   const selectedBasicMaterial = useRef<BasicMaterial>();
   const [basicMaterials, setBasicMaterials] = useState<BasicMaterial[]>(
-    props.usedMaterialsForInstrument
+    props.usedMaterialsForInstrument,
   );
 
   const addInstrumentForEditInstrument = (e: React.FormEvent) => {
@@ -36,14 +36,16 @@ export const InstrumentBasicMaterialFormField = (props: Props) => {
     setBasicMaterials(
       basicMaterials.filter(
         (material) =>
-          material.basic_material !== materialForRemoval.basic_material
-      )
+          material.basic_material !== materialForRemoval.basic_material,
+      ),
     );
   };
 
   return (
     <div className={formStyles.edit_instrument__form__field}>
-      <span className={formStyles.edit_instrument__form__field__key}>Basic Material</span>
+      <span className={formStyles.edit_instrument__form__field__key}>
+        Basic Material
+      </span>
 
       <div className={formStyles.edit_instrument__form__field__value}>
         <div className={styles.used_basic_materials}>
@@ -72,7 +74,7 @@ export const InstrumentBasicMaterialFormField = (props: Props) => {
               return;
             }
             selectedBasicMaterial.current = {
-              basic_material: e.target.value
+              basic_material: e.target.value,
             } as BasicMaterial;
           }}
           required

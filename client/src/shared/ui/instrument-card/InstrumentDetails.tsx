@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./styles/InstrumentDetails.css";
 import { InstrumentDetail } from "generated/model";
 import { GetInstrumentPhotoApi } from "generated/api/get-instrument-photo-api";
-import { Base64 } from "js-base64";
 
 interface Props {
   instrument: InstrumentDetail;
@@ -11,13 +10,13 @@ interface Props {
 const getInstrumentPhoto = new GetInstrumentPhotoApi();
 
 export const InstrumentDetails = (props: Props) => {
-
   const [photo, setPhoto] = useState<string | undefined>();
 
   useEffect(() => {
     const fetchPhoto = async () => {
-      const response = await getInstrumentPhoto
-        .getInstrumentPhoto(props.instrument.instrument_id.instrument_id);
+      const response = await getInstrumentPhoto.getInstrumentPhoto(
+        props.instrument.instrument_id.instrument_id,
+      );
 
       setPhoto(response.data.photo);
     };
