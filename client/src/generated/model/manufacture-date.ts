@@ -12,19 +12,16 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface ManufactureDate
  */
 export interface ManufactureDate {
-    /**
-     * 
-     * @type {string}
-     * @memberof ManufactureDate
-     */
-    'manufacture_date': string;
+  /**
+   *
+   * @type {string}
+   * @memberof ManufactureDate
+   */
+  manufacture_date: string;
 }
-

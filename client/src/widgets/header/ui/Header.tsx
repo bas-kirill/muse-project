@@ -9,7 +9,7 @@ import { Role } from "domain/model/role";
 export function Header() {
   const jwt = useRef<string | undefined>(undefined);
 
-  if (typeof document !== 'undefined') {
+  if (typeof document !== "undefined") {
     jwt.current = Cookies.get("jwt") as string | undefined;
     console.log(`jwt: '${jwt.current}'`);
   }

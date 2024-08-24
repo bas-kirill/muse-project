@@ -15,12 +15,6 @@ import javax.sql.DataSource
 @Configuration
 class PersistenceConfiguration {
 
-//    val POSTGRES_USER_ENV = System.getenv("POSTGRES_USER") ?: throw RuntimeException("`POSTGRES_USER` env not found")
-//    val POSTGRES_PASSWORD_ENV = System.getenv("POSTGRES_PASSWORD") ?: throw RuntimeException("`POSTGRES_PASSWORD` env not found")
-//    val POSTGRES_DB = System.getenv("POSTGRES_DB") ?: throw RuntimeException("`POSTGRES_DB` env not found")
-//    val SERVER_JDBC_URL_ENV = System.getenv("POSTGRES_DSN") ?: throw RuntimeException("`SERVER_JDBC_URL` env not found")
-
-
     @Value("\${POSTGRES_USER}")
     private lateinit var postgresUser: String
 
@@ -29,6 +23,10 @@ class PersistenceConfiguration {
 
     @Value("\${POSTGRES_DSN}")
     private lateinit var postgresDsn: String
+
+    companion object {
+        const val MAXIMUM_POOL_SIZE = 25
+    }
 
 
     @Bean
@@ -40,7 +38,7 @@ class PersistenceConfiguration {
         hikariConfig.jdbcUrl = postgresDsn
         val hikariDatasource = HikariDataSource(hikariConfig)
         // 25 is a good enough data pool size, it is a database in a container after all
-        hikariDatasource.maximumPoolSize = 25
+        hikariDatasource.maximumPoolSize = MAXIMUM_POOL_SIZE
         return hikariDatasource
     }
 

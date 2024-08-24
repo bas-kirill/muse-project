@@ -12,19 +12,16 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface Manufacturer
  */
 export interface Manufacturer {
-    /**
-     * 
-     * @type {string}
-     * @memberof Manufacturer
-     */
-    'manufacturer': string;
+  /**
+   *
+   * @type {string}
+   * @memberof Manufacturer
+   */
+  manufacturer: string;
 }
-

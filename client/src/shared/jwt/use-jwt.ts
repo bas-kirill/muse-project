@@ -13,6 +13,5 @@ export const useJwt = () => {
       Jwt.eraseFromCookie(); // need to rerender header
       navigate(LOGIN);
     }
-
   }, [navigate]);
 };

@@ -21,6 +21,7 @@ class PostgresUserRepository(
         val logger = LoggerFactory.getLogger(PostgresUserRepository::class.java)
     }
 
+    @Suppress("SwallowedException")
     override fun findByUsername(username: Username): User? {
         val sql = """
             select
@@ -33,8 +34,6 @@ class PostgresUserRepository(
             namedTemplate.queryForObject(sql, params) { rs, _ -> rs.toUser() }
         } catch (e: EmptyResultDataAccessException) {
             null
-        } catch (e: Exception) {
-            throw RuntimeException("Failed to find user by username ${username.toStringValue()}", e)
         }
     }
 

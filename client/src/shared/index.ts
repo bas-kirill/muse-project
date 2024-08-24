@@ -1,5 +1,5 @@
 import { InstrumentCard } from "./ui/instrument-card/InstrumentCard";
-import {getCookie} from "shared/cookie/get-cookie";
+import { getCookie } from "shared/cookie/get-cookie";
 import { useJwt } from "./jwt/use-jwt";
 
 import {

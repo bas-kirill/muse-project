@@ -11,7 +11,6 @@ interface Props {
 const removeFavoriteApi = new RemoveFavoriteApi();
 
 export const RemoveInstrumentButton = (props: Props) => {
-
   const handleOnDeleteInstrument = () => {
     const removeFavorite = async () => {
       const response = await removeFavoriteApi.removeFavorite(
