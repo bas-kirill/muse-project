@@ -1,8 +1,8 @@
 import React from "react";
-import "./RegistrationPage.css";
-import { Header } from "widgets/header";
+import "./styles/RegistrationPage.css";
+import { HeaderWidget } from "widgets/header";
 import { Form, useActionData } from "react-router-dom";
-import { Footer } from "widgets/footer";
+import { FooterWidget } from "widgets/footer";
 import { RegistrationAction } from "pages/registration/api/action";
 
 export const RegistrationPage = () => {
@@ -10,7 +10,7 @@ export const RegistrationPage = () => {
 
   return (
     <div id="registration-page">
-      <Header />
+      <HeaderWidget />
 
       {actionData?.errors.length === 0 && (
         <div className="successfull-registration">
@@ -29,7 +29,7 @@ export const RegistrationPage = () => {
           </div>
         )}
       </Form>
-      <Footer />
+      <FooterWidget />
     </div>
   );
 };

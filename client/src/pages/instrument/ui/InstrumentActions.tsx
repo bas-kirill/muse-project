@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./InstrumentActions.css";
+import "./styles/InstrumentActions.css";
 import { useNavigate } from "react-router-dom";
 import Jwt from "domain/model/jwt";
 import { LOGIN } from "shared/config/paths";
-import { Modal } from "widgets/modal";
+import { ModalWidget } from "widgets/modal";
 import { InstrumentDetail } from "generated/model";
 import { DeleteInstrumentByIdApi } from "generated/api/delete-instrument-by-id-api";
 
@@ -58,19 +58,19 @@ export const InstrumentActions = (props: Props) => {
             Edit
           </button>
 
-          <Modal
+          <ModalWidget
             opened={deleteSuccessModal}
             closeModal={() => setDeleteSuccessModal(false)}
           >
             <h1>✅Instrument deleted</h1>
-          </Modal>
+          </ModalWidget>
 
-          <Modal
+          <ModalWidget
             opened={deleteErrorModal}
             closeModal={() => setDeleteErrorModal(false)}
           >
             <h1>❌Fail to delete instrument</h1>
-          </Modal>
+          </ModalWidget>
         </>
       )}
     </div>

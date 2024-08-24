@@ -6,16 +6,16 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { Home } from "pages/home";
-import { UserProfile, loader as profileLoader } from "pages/profile";
-import { Catalogue, loader as catalogueLoader } from "pages/catalogue";
+import { HomePage } from "pages/home";
+import { UserProfilePage, loader as profileLoader } from "pages/profile";
+import { CataloguePage, loader as catalogueLoader } from "pages/catalogue";
 import {
   action as loginAction,
-  Login, // todo(refactor): add suffix `Page`
+  LoginPage, // todo(refactor): add suffix `Page`
 } from "pages/login";
-import { NotFound } from "pages/not-found";
+import { NotFoundPage } from "pages/not-found";
 import {
-  Instrument, // todo(refactor): add suffix `Page`
+  InstrumentPage, // todo(refactor): add suffix `Page`
   loader as instrumentLoader,
 } from "pages/instrument";
 import {
@@ -31,12 +31,12 @@ import {
   REGISTRATION_URL,
 } from "shared/config/paths";
 import {
-  CreateInstrument, // todo(refactor): add suffix `Page`
+  CreateInstrumentPage, // todo(refactor): add suffix `Page`
   loader as createInstrumentLoader,
   action as createInstrumentAction,
 } from "pages/create-instrument";
 import {
-  EditInstrument, // todo(refactor): add suffix `Page`
+  EditInstrumentPage, // todo(refactor): add suffix `Page`
   loader as editLoader,
   action as editAction,
 } from "pages/edit-instrument";
@@ -48,24 +48,32 @@ import { FavoritePage, loader as favoriteLoader } from "pages/favorite";
 
 const routes = createRoutesFromElements(
   <Route>
-    <Route path={HOME} element={<Home />} />
-    <Route path={PROFILE} element={<UserProfile />} loader={profileLoader} />
-    <Route path={CATALOGUE} element={<Catalogue />} loader={catalogueLoader} />
-    <Route path={LOGIN} element={<Login />} action={loginAction} />
+    <Route path={HOME} element={<HomePage />} />
+    <Route
+      path={PROFILE}
+      element={<UserProfilePage />}
+      loader={profileLoader}
+    />
+    <Route
+      path={CATALOGUE}
+      element={<CataloguePage />}
+      loader={catalogueLoader}
+    />
+    <Route path={LOGIN} element={<LoginPage />} action={loginAction} />
     <Route
       path={INSTRUMENT_BY_ID}
-      element={<Instrument />}
+      element={<InstrumentPage />}
       loader={instrumentLoader}
     />
     <Route
       path={CREATE_INSTRUMENT}
-      element={<CreateInstrument />}
+      element={<CreateInstrumentPage />}
       loader={createInstrumentLoader}
       action={createInstrumentAction}
     />
     <Route
       path={EDIT_INSTRUMENT_BY_ID}
-      element={<EditInstrument />}
+      element={<EditInstrumentPage />}
       loader={editLoader}
       action={editAction}
     />
@@ -75,7 +83,7 @@ const routes = createRoutesFromElements(
       action={registrationAction}
     />
     <Route path={FAVORITE} element={<FavoritePage />} loader={favoriteLoader} />
-    <Route path={NOT_FOUND} element={<NotFound />} />
+    <Route path={NOT_FOUND} element={<NotFoundPage />} />
   </Route>,
 );
 

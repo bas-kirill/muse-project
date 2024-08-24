@@ -1,6 +1,6 @@
-import { Catalogue } from "./ui/Catalogue";
+import { CataloguePage } from "./ui/CataloguePage";
 import { loader } from "./api/loader";
 import { CatalogueLoader } from "./api/loader";
 
-export { Catalogue, loader };
+export { CataloguePage, loader };
 export type { CatalogueLoader };

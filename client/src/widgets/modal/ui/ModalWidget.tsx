@@ -5,7 +5,7 @@ interface Props {
   closeModal: () => void;
 }
 
-export function Modal(props: React.PropsWithChildren<Props>) {
+export function ModalWidget(props: React.PropsWithChildren<Props>) {
   const ref = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {

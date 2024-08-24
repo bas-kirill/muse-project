@@ -1,18 +1,18 @@
 import React from "react";
-import "./CreateInstrument.css";
-import { Header } from "widgets/header";
-import { Footer } from "widgets/footer";
+import "./styles/CreateInstrumentPage.css";
+import { HeaderWidget } from "widgets/header";
+import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useLoaderData } from "react-router-dom";
 import { CreateInstrumentLoader } from "pages/create-instrument";
 import { CreateInstrumentAction } from "pages/create-instrument/api/action";
 
-export const CreateInstrument = () => {
+export const CreateInstrumentPage = () => {
   const loader = useLoaderData() as CreateInstrumentLoader;
   const actionData = useActionData() as CreateInstrumentAction;
 
   return (
     <>
-      <Header />
+      <HeaderWidget />
       <h1>Instrument Creation</h1>
       <Form method="POST" id="create-instrument">
         <div className="create-instrument-field">
@@ -99,7 +99,7 @@ export const CreateInstrument = () => {
       </Form>
       {actionData?.errors &&
         actionData?.errors.map((error) => <div key={error}>{error}</div>)}
-      <Footer />
+      <FooterWidget />
     </>
   );
 };

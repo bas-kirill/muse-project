@@ -1,5 +1,5 @@
 import React from "react";
-import "./CatalogueSerpWidget.css";
+import "./styles/CatalogueSerpWidget.css";
 import { InstrumentCard } from "shared/ui/instrument-card/InstrumentCard";
 import { InstrumentDetail, InstrumentId } from "generated/model";
 

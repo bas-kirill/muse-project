@@ -1,5 +1,5 @@
-import { EditInstrument } from "./ui/EditInstrument";
+import { EditInstrumentPage } from "./ui/EditInstrumentPage";
 import { action } from "./api/action";
 import { loader } from "./api/loader";
 
-export { EditInstrument, action, loader };
+export { EditInstrumentPage, action, loader };

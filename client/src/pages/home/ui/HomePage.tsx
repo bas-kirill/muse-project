@@ -1,7 +1,7 @@
 import React from "react";
-import "./styles/Home.css";
-import { Header } from "widgets/header";
-import { Footer } from "widgets/footer";
+import "./styles/HomePage.css";
+import { HeaderWidget } from "widgets/header";
+import { FooterWidget } from "widgets/footer";
 import { Slide } from "react-slideshow-image";
 import saxophone from "pages/home/ui/images/saxo.webp";
 import guitar from "pages/home/ui/images/guitar.webp";
@@ -45,10 +45,10 @@ const trendingInstrumentsResponsiveSettings = [
   },
 ];
 
-export function Home() {
+export function HomePage() {
   return (
     <div id="home">
-      <Header />
+      <HeaderWidget />
 
       <div
         id="home-logo"
@@ -91,9 +91,9 @@ export function Home() {
         </Slide>
       </div>
 
-      <Footer />
+      <FooterWidget />
     </div>
   );
 }
 
-export default Home;
+export default HomePage;

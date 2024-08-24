@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./Catalogue.css";
-import { Header } from "widgets/header";
-import { Footer } from "widgets/footer";
+import "./styles/CataloguePage.css";
+import { HeaderWidget } from "widgets/header";
+import { FooterWidget } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
 import { CatalogueFilterWidget, Filters } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
@@ -18,7 +18,7 @@ const getInstrumentsByCriteriaPaginated =
 
 const listFavoriteApi = new ListFavoriteApi();
 
-export function Catalogue() {
+export function CataloguePage() {
   const loader = useLoaderData() as CatalogueLoader; // https://github.com/remix-run/react-router/discussions/9792
 
   const [instruments, setInstruments] = useState<InstrumentDetail[]>(
@@ -72,7 +72,7 @@ export function Catalogue() {
 
   return (
     <div id="catalogue">
-      <Header />
+      <HeaderWidget />
 
       <SearchBarForm filters={filters} setFilters={setFilters} />
 
@@ -92,9 +92,9 @@ export function Catalogue() {
         </div>
       </div>
 
-      <Footer />
+      <FooterWidget />
     </div>
   );
 }
 
-export default Catalogue;
+export default CataloguePage;

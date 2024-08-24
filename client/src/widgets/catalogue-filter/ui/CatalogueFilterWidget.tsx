@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./CreateInstrumentCardButton.css";
+import "./styles/CreateInstrumentCardButton.css";
 import { Filters } from "widgets/catalogue-filter";
-import { InstrumentTypeFilter } from "./InstrumentTypeFilter";
+import { InstrumentTypeFilter } from "./filters/InstrumentTypeFilter";
 import { Role } from "domain/model/role";
 import { CreateInstrumentCardButton } from "./CreateInstrumentCardButton";
-import { ManufacturerNameFilter } from "widgets/catalogue-filter/ui/ManufacturerNameFilter";
-import { ManufactureDateFilter } from "widgets/catalogue-filter/ui/ManufactureDateFilter";
-import { CountryFilter } from "widgets/catalogue-filter/ui/CountryFilter";
-import { MaterialFilter } from "widgets/catalogue-filter/ui/MaterialFilter";
+import { ManufacturerNameFilter } from "widgets/catalogue-filter/ui/filters/ManufacturerNameFilter";
+import { ManufactureDateFilter } from "widgets/catalogue-filter/ui/filters/ManufactureDateFilter";
+import { CountryFilter } from "widgets/catalogue-filter/ui/filters/CountryFilter";
+import { MaterialFilter } from "widgets/catalogue-filter/ui/filters/MaterialFilter";
 import Jwt from "domain/model/jwt";
 import { InstrumentType } from "generated/model/instrument-type";
 import {
@@ -17,7 +17,7 @@ import {
   ManufacturerName,
   ReleaseDate,
 } from "generated/model";
-import { ReleaseDateFilter } from "widgets/catalogue-filter/ui/ReleaseDateFilter";
+import { ReleaseDateFilter } from "widgets/catalogue-filter/ui/filters/ReleaseDateFilter";
 
 interface Props {
   onFilterChange: (filters: Filters) => void;
@@ -55,6 +55,7 @@ export const CatalogueFilterWidget = (props: Props) => {
       instrumentIds: null, // there is no such field to search by instrument ids
     });
   }, [
+    props,
     instrumentTypes,
     manufacturerNames,
     manufactureDateFrom,

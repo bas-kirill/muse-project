@@ -1,12 +1,12 @@
 import React from "react";
-import "./Login.css";
-import { Header } from "widgets/header";
-import { Footer } from "widgets/footer";
+import "./styles/LoginPage.css";
+import { HeaderWidget } from "widgets/header";
+import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useNavigate } from "react-router-dom";
 import { LogInAction } from "../api/action";
 import { REGISTRATION_URL } from "shared/config/paths";
 
-export function Login() {
+export function LoginPage() {
   const actionData = useActionData() as LogInAction;
   const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ export function Login() {
 
   return (
     <div id="login-page">
-      <Header />
+      <HeaderWidget />
       {actionData?.errors.length === 0 && (
         <div className="successfull-login">✅ Welcome!</div>
       )}
@@ -36,9 +36,9 @@ export function Login() {
           </div>
         )}
       </Form>
-      <Footer />
+      <FooterWidget />
     </div>
   );
 }
 
-export default Login;
+export default LoginPage;
