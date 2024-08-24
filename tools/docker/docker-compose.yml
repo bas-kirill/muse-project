@@ -32,6 +32,10 @@ services:
       - ${SERVER_DEBUG_PORT}:5005
     environment:
       - MUSE_JWT_SECRET_KEY
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_DSN
     networks:
       - muse
     depends_on:
