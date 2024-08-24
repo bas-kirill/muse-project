@@ -10,7 +10,7 @@ class PostgresInstrumentIdGenerator(
 
     override fun generate(): InstrumentId {
         val instrumentIdRaw = namedParameter.queryForObject(
-            "select nextval('instrument_id')",
+            "select nextval('instrument_id_seq')",
             mapOf<String, Any>(),
             Long::class.java,
         )!!

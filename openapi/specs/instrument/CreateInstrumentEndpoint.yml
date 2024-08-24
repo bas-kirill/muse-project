@@ -68,6 +68,7 @@ components:
           release_date,
           country,
           materials,
+          image,
         ]
       properties:
         instrument_name:
@@ -86,3 +87,5 @@ components:
           type: array
           items:
             $ref: "./../common/BasicMaterial.yml#/components/schemas/BasicMaterial"
+        image:
+          $ref: "./../common/InstrumentPhoto.yml#/components/schemas/InstrumentPhoto"

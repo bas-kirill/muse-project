@@ -12,74 +12,85 @@
  * Do not edit the class manually.
  */
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import type { BasicMaterial } from "./basic-material";
+import type { BasicMaterial } from './basic-material';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Country } from "./country";
+import type { Country } from './country';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentName } from "./instrument-name";
+import type { InstrumentName } from './instrument-name';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentType } from "./instrument-type";
+import type { InstrumentPhoto } from './instrument-photo';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ManufactureDate } from "./manufacture-date";
+import type { InstrumentType } from './instrument-type';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ManufacturerName } from "./manufacturer-name";
+import type { ManufactureDate } from './manufacture-date';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ReleaseDate } from "./release-date";
+import type { ManufacturerName } from './manufacturer-name';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { ReleaseDate } from './release-date';
 
 /**
- *
+ * 
  * @export
  * @interface CreateInstrumentRequestBody
  */
 export interface CreateInstrumentRequestBody {
-  /**
-   *
-   * @type {InstrumentName}
-   * @memberof CreateInstrumentRequestBody
-   */
-  instrument_name: InstrumentName;
-  /**
-   *
-   * @type {InstrumentType}
-   * @memberof CreateInstrumentRequestBody
-   */
-  instrument_type: InstrumentType;
-  /**
-   *
-   * @type {ManufacturerName}
-   * @memberof CreateInstrumentRequestBody
-   */
-  manufacturer_name: ManufacturerName;
-  /**
-   *
-   * @type {ManufactureDate}
-   * @memberof CreateInstrumentRequestBody
-   */
-  manufacturer_date: ManufactureDate;
-  /**
-   *
-   * @type {ReleaseDate}
-   * @memberof CreateInstrumentRequestBody
-   */
-  release_date: ReleaseDate;
-  /**
-   *
-   * @type {Country}
-   * @memberof CreateInstrumentRequestBody
-   */
-  country: Country;
-  /**
-   *
-   * @type {Array<BasicMaterial>}
-   * @memberof CreateInstrumentRequestBody
-   */
-  materials: Array<BasicMaterial>;
+    /**
+     * 
+     * @type {InstrumentName}
+     * @memberof CreateInstrumentRequestBody
+     */
+    'instrument_name': InstrumentName;
+    /**
+     * 
+     * @type {InstrumentType}
+     * @memberof CreateInstrumentRequestBody
+     */
+    'instrument_type': InstrumentType;
+    /**
+     * 
+     * @type {ManufacturerName}
+     * @memberof CreateInstrumentRequestBody
+     */
+    'manufacturer_name': ManufacturerName;
+    /**
+     * 
+     * @type {ManufactureDate}
+     * @memberof CreateInstrumentRequestBody
+     */
+    'manufacturer_date': ManufactureDate;
+    /**
+     * 
+     * @type {ReleaseDate}
+     * @memberof CreateInstrumentRequestBody
+     */
+    'release_date': ReleaseDate;
+    /**
+     * 
+     * @type {Country}
+     * @memberof CreateInstrumentRequestBody
+     */
+    'country': Country;
+    /**
+     * 
+     * @type {Array<BasicMaterial>}
+     * @memberof CreateInstrumentRequestBody
+     */
+    'materials': Array<BasicMaterial>;
+    /**
+     * 
+     * @type {InstrumentPhoto}
+     * @memberof CreateInstrumentRequestBody
+     */
+    'image': InstrumentPhoto;
 }
+

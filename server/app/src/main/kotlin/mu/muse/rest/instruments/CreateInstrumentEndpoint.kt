@@ -4,6 +4,7 @@ import jakarta.annotation.security.RolesAllowed
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentName
+import mu.muse.domain.instrument.InstrumentPhoto
 import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.Material
@@ -29,14 +30,16 @@ class CreateInstrumentEndpoint(
         val releaseDate = ReleaseDate.from(request.releaseDate.releaseDate)
         val country = Country.valueOf(request.country.country)
         val materials = request.materials.map { Material.valueOf(it.basicMaterial) }
+        val photo = InstrumentPhoto.from(request.image.photo.contentAsByteArray)
         createInstrument.execute(
-            instrumentName,
-            instrumentType,
-            manufacturer,
-            manufactureDate,
-            releaseDate,
-            country,
-            materials,
+            instrumentName = instrumentName,
+            instrumentType = instrumentType,
+            manufacturer = manufacturer,
+            manufactureDate = manufactureDate,
+            releaseDate = releaseDate,
+            country = country,
+            materials = materials,
+            photo = photo,
         )
         return ResponseEntity.ok().build()
     }

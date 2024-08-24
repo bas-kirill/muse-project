@@ -5,6 +5,7 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
+import mu.muse.domain.instrument.InstrumentPhoto
 import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.Material
@@ -16,6 +17,7 @@ class CreateInstrumentUseCase(
     private val idGenerator: IdGenerator<InstrumentId>,
     private val instrumentPersister: InstrumentPersister,
 ) : CreateInstrument {
+
     override fun execute(
         instrumentName: InstrumentName,
         instrumentType: Instrument.Type,
@@ -24,6 +26,7 @@ class CreateInstrumentUseCase(
         releaseDate: ReleaseDate,
         country: Country,
         materials: List<Material>,
+        photo: InstrumentPhoto,
     ) {
         val instrument = Instrument.create(
             id = idGenerator.generate(),
@@ -34,6 +37,7 @@ class CreateInstrumentUseCase(
             releaseDate = releaseDate,
             country = country,
             materials = materials,
+            image = photo,
         )
         instrumentPersister.save(instrument)
     }

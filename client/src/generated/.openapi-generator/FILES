@@ -38,6 +38,7 @@ model/index.ts
 model/instrument-detail.ts
 model/instrument-id.ts
 model/instrument-name.ts
+model/instrument-photo.ts
 model/instrument-type.ts
 model/jwt-response.ts
 model/list-favorite-response-body.ts

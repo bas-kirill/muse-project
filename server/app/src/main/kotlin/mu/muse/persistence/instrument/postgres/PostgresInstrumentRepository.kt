@@ -5,6 +5,7 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
+import mu.muse.domain.instrument.InstrumentPhoto
 import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Material
@@ -17,12 +18,11 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.jdbc.support.GeneratedKeyHolder
 import java.sql.ResultSet
+import java.sql.Timestamp
 
 class PostgresInstrumentRepository(
     private val namedTemplate: NamedParameterJdbcTemplate,
 ) : InstrumentExtractor, InstrumentRemover, InstrumentPersister {
-
-    private val keyHolder = GeneratedKeyHolder()
 
     override fun findAll(): List<Instrument> {
         val sql = """
@@ -106,8 +106,10 @@ class PostgresInstrumentRepository(
 
     override fun removeInstrument(id: InstrumentId) {
         val sql = "delete from instruments where instrument_id = :instrument_id"
-        val params = MapSqlParameterSource().addValue("instrument_id", id.toLongValue())
-        namedTemplate.update(sql, params, keyHolder)
+        val params = mapOf(
+            "instrument_id" to id.toLongValue()
+        )
+        namedTemplate.update(sql, params)
     }
 
     override fun save(instrument: Instrument) {
@@ -120,7 +122,8 @@ class PostgresInstrumentRepository(
                 manufacturer_date,
                 release_date,
                 country,
-                materials
+                materials,
+                image
             )
             values (
               :instrument_id,
@@ -130,7 +133,8 @@ class PostgresInstrumentRepository(
               :manufacturer_date,
               :release_date,
               :country,
-              :materials
+              :materials,
+              :image
             )
             on conflict (instrument_id) do update
             set
@@ -140,17 +144,19 @@ class PostgresInstrumentRepository(
               manufacturer_date = :manufacturer_date,
               release_date = :release_date,
               country = :country,
-              materials = :materials
+              materials = :materials,
+              image = :image
         """.trimIndent()
         val params = mapOf(
             "instrument_id" to instrument.id.toLongValue(),
             "instrument_name" to instrument.name.toStringValue(),
             "instrument_type" to instrument.type.name,
             "manufacturer_name" to instrument.manufacturer.name,
-            "manufacturer_date" to instrument.manufactureDate.toInstantValue(),
-            "release_date" to instrument.releaseDate.toInstantValue(),
+            "manufacturer_date" to Timestamp.from(instrument.manufactureDate.toInstantValue()),
+            "release_date" to Timestamp.from(instrument.releaseDate.toInstantValue()),
             "country" to instrument.country.name,
-            "materials" to instrument.materials,
+            "materials" to instrument.materials.map { it.name }.toTypedArray(),
+            "image" to instrument.image.toByteArray(),
         )
         namedTemplate.update(sql, params)
     }
@@ -166,5 +172,6 @@ fun ResultSet.toInstrument() = Instrument(
     releaseDate = ReleaseDate.from(this.getTimestamp("release_date").toInstant()),
     country = Country.valueOf(this.getString("country")),
     materials = (this.getArray("materials").getArray() as Array<String>).toBasicMaterials(),
+    image = InstrumentPhoto.from(this.getBytes("image")),
     version = Version.new(),
 )

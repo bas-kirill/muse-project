@@ -5,6 +5,7 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
+import mu.muse.domain.instrument.InstrumentPhoto
 import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Material
@@ -31,15 +32,17 @@ class EditInstrumentEndpoint(
         val releaseDate = ReleaseDate.from(request.releaseDate.releaseDate)
         val country = Country.valueOf(request.country.country)
         val materials = request.materials.map { Material.valueOf(it.basicMaterial) }
+        val photo = InstrumentPhoto.from(request.image.photo.contentAsByteArray)
         editInstrument.execute(
-            instrumentId,
-            instrumentName,
-            instrumentType,
-            manufacturerName,
-            manufacturerDate,
-            releaseDate,
-            country,
-            materials,
+            instrumentId = instrumentId,
+            instrumentName = instrumentName,
+            instrumentType = instrumentType,
+            manufacturerName = manufacturerName,
+            manufacturerDate = manufacturerDate,
+            releaseDate = releaseDate,
+            country = country,
+            materials = materials,
+            photo = photo,
         )
         return ResponseEntity.ok().build()
     }
