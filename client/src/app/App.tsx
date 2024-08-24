@@ -49,8 +49,16 @@ import { FavoritePage, loader as favoriteLoader } from "pages/favorite";
 const routes = createRoutesFromElements(
   <Route>
     <Route path={HOME} element={<HomePage />} />
-    <Route path={PROFILE} element={<UserProfilePage />} loader={profileLoader} />
-    <Route path={CATALOGUE} element={<CataloguePage />} loader={catalogueLoader} />
+    <Route
+      path={PROFILE}
+      element={<UserProfilePage />}
+      loader={profileLoader}
+    />
+    <Route
+      path={CATALOGUE}
+      element={<CataloguePage />}
+      loader={catalogueLoader}
+    />
     <Route path={LOGIN} element={<LoginPage />} action={loginAction} />
     <Route
       path={INSTRUMENT_BY_ID}
