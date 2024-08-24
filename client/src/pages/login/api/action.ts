@@ -1,5 +1,5 @@
 import { ActionFunction } from "react-router-dom";
-import { parseForm } from "../model/parseForm";
+import { parseLoginForm } from "./../model/parse-login-form";
 import { BasicLoginApi } from "generated/api/basic-login-api";
 
 export interface LogInAction {
@@ -11,7 +11,7 @@ const basicLoginApi = new BasicLoginApi();
 export const action: ActionFunction = async ({
   request,
 }): Promise<LogInAction> => {
-  const { login, password, errors } = parseForm(await request.formData());
+  const { login, password, errors } = parseLoginForm(await request.formData());
 
   if (errors.length !== 0) {
     return {

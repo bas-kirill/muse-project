@@ -1,6 +1,6 @@
 import { MINIMAL_PASSWORD_LENGTH } from "shared/config/frontend";
 
-export function parseForm(data: FormData) {
+export function parseLoginForm(data: FormData) {
   const errors = [];
 
   const login = data.get("login");

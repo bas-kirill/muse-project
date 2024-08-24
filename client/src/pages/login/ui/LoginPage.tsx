@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles/LoginPage.css";
+import styles from "./styles/LoginPage.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useNavigate } from "react-router-dom";
@@ -15,29 +15,31 @@ export function LoginPage() {
   };
 
   return (
-    <div id="login-page">
+    <>
       <HeaderWidget />
+
       {actionData?.errors.length === 0 && (
-        <div className="successfull-login">✅ Welcome!</div>
+        <div className={styles.login__ok}>✅ Welcome!</div>
       )}
 
-      <Form method="post">
+      <Form method="post" className={styles.login__form}>
         <input type="text" name="login" placeholder={"Login"} />
         <input type="password" name="password" placeholder={"Password"} />
-        <input type="submit" value="Log In" />
+        <input type="submit" value="Login" />
         <input
           type="button"
           value="Registration"
           onClick={handleRegisterRedirect}
         />
         {actionData?.errors.length > 0 && (
-          <div className="erroneous-login">
+          <div className={styles.login__error}>
             {actionData?.errors.map((error) => <div key={error}>{error}</div>)}
           </div>
         )}
       </Form>
+
       <FooterWidget />
-    </div>
+    </>
   );
 }
 
