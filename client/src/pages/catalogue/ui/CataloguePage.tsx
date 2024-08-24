@@ -6,12 +6,12 @@ import { useLoaderData } from "react-router-dom";
 import { CatalogueFilterWidget, Filters } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import { CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
-import { SearchBarInputField } from "./SearchBarInputField";
 import { ListFavoriteApi } from "generated/api/list-favorite-api";
 import { InstrumentDetail, InstrumentId } from "generated/model";
 import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api";
 import { CatalogueLoader } from "pages/catalogue";
 import { NavigationBarWidget } from "widgets/catalogue-navbar";
+import { SearchBarInputField } from "pages/catalogue/ui/SearchBarInput.field";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();
