@@ -6,7 +6,7 @@ interface Props {
   setPageNumber: (pageNumber: number) => void;
 }
 
-export const NavigationBar = (props: Props) => {
+export const NavigationBarWidget = (props: Props) => {
   return (
     <div id="pages-navigation-bar">
       {props.pageNumber > 1 && (

@@ -1,0 +1,11 @@
+.search_bar__input {
+  width: 100%;
+  background-color: darkslateblue;
+
+  input[type="text"] {
+    background-color: white;
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+  }
+}

@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./styles/CataloguePage.css";
+import styles from "./styles/CataloguePage.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
 import { CatalogueFilterWidget, Filters } from "widgets/catalogue-filter";
 import { CatalogueSerpWidget } from "widgets/catalogue-serp";
 import { CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
-import { SearchBarForm } from "./SearchBarForm";
+import { SearchBarInputField } from "./SearchBarInputField";
 import { NavigationBar } from "./NavigationBar";
 import { ListFavoriteApi } from "generated/api/list-favorite-api";
 import { InstrumentDetail, InstrumentId } from "generated/model";
@@ -71,15 +71,17 @@ export function CataloguePage() {
   }, [filters, pageNumber]);
 
   return (
-    <div id="catalogue">
+    <>
       <HeaderWidget />
 
-      <SearchBarForm filters={filters} setFilters={setFilters} />
+      <SearchBarInputField filters={filters} setFilters={setFilters} />
 
-      <div id="catalogue-wrapper">
-        <CatalogueFilterWidget onFilterChange={setFilters} />
+      <div className={styles.catalogue__wrapper}>
+        <div className={styles.catalogue__filters__wrapper}>
+          <CatalogueFilterWidget onFilterChange={setFilters} />
+        </div>
 
-        <div id="catalogue-serp-navbar-wrapper">
+        <div className={styles.catalogue__serp__navbar__wrapper}>
           <CatalogueSerpWidget
             instruments={instruments}
             favoriteInstrumentIds={favoriteInstrumentIds}
@@ -93,7 +95,7 @@ export function CataloguePage() {
       </div>
 
       <FooterWidget />
-    </div>
+    </>
   );
 }
 
