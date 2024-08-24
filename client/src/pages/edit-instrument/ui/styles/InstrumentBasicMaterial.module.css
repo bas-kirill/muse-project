@@ -1,4 +1,4 @@
-.edit-instrument-field-instrument-span {
+.edit_instrument_field_instrument_span {
   border: 1px solid;
   border-radius: 5px;
 
@@ -15,10 +15,10 @@
   }
 }
 
-.edit-instrument-field-instrument-span-new {
+.edit_instrument_field_instrument_span_new {
   border: 1px green solid;
 }
 
-#used-basic-materials {
+.used_basic_materials {
   display: flex;
 }

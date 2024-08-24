@@ -1,0 +1,27 @@
+.edit_instrument__wrapper {
+  display: flex;
+}
+
+.edit_instrument__img {
+  flex: 1;
+}
+
+.edit_instrument__form {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.edit_instrument__form__field {
+  display: flex;
+  flex-direction: row;
+}
+
+.edit_instrument__form__field__key {
+  flex-basis: 30%;
+}
+
+.edit_instrument__form__field__value {
+  flex-basis: 70%;
+}
