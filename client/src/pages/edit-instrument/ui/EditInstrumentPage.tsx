@@ -151,7 +151,7 @@ export const EditInstrumentPage = () => {
           />
 
           <div className={styles.edit_instrument__form__field}>
-            <label htmlFor={"instrument-image"} className={styles.edit_instrument__form__field__key}>Image</label>
+            <label htmlFor={"instrument-image"} className={styles.edit_instrument__form__field__key}>Image Photo</label>
 
             <input
               type={"file"}
