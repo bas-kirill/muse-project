@@ -90,21 +90,21 @@ components:
             $ref: "./../common/InstrumentDetail.yml#/components/schemas/InstrumentDetail"
         content_size:
           type: integer
-          format: int32
+          format: int64
           description: The number of items in the content.
         page_size:
           type: integer
-          format: int32
+          format: int64
           description: The number of items per page.
         page_number:
           type: integer
-          format: int32
+          format: int64
           description: The current page number (0-based index).
         total_elements:
           type: integer
-          format: int32
+          format: int64
           description: The total number of elements across all pages.
         total_pages:
           type: integer
-          format: int32
+          format: int64
           description: The total number of pages.

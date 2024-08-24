@@ -30,7 +30,7 @@ export const loader: LoaderFunction = async ({
   params,
 }): Promise<EditInstrumentLoader> => {
   const instrumentDetailRequest = await getInstrumentById.getInstrumentById(
-    params.instrumentId as string,
+    parseInt(params.instrumentId as string),
   );
 
   const instrumentTypesRequest = await getInstrumentTypes.getInstrumentTypes();

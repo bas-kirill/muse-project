@@ -1,4 +1,4 @@
-package mu.muse.persistence.instrument
+package mu.muse.persistence.instrument.inmemory
 
 import mu.muse.domain.IdGenerator
 import mu.muse.domain.instrument.InstrumentId

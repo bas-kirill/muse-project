@@ -40,5 +40,5 @@ interface GetInstrumentByIdApi {
             value = ["/api/instrument/{instrumentId}"],
             produces = ["application/json"]
     )
-    fun getInstrumentById( @PathVariable("instrumentId") instrumentId: kotlin.String): ResponseEntity<InstrumentDetail>
+    fun getInstrumentById( @PathVariable("instrumentId") instrumentId: kotlin.Long): ResponseEntity<InstrumentDetail>
 }

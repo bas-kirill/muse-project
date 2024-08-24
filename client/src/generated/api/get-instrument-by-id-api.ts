@@ -55,12 +55,12 @@ export const GetInstrumentByIdApiAxiosParamCreator = function (
     /**
      * Get Instrument by ID
      * @summary Get Instrument by ID
-     * @param {string} instrumentId Instrument ID
+     * @param {number} instrumentId Instrument ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getInstrumentById: async (
-      instrumentId: string,
+      instrumentId: number,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'instrumentId' is not null or undefined
@@ -112,12 +112,12 @@ export const GetInstrumentByIdApiFp = function (configuration?: Configuration) {
     /**
      * Get Instrument by ID
      * @summary Get Instrument by ID
-     * @param {string} instrumentId Instrument ID
+     * @param {number} instrumentId Instrument ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     async getInstrumentById(
-      instrumentId: string,
+      instrumentId: number,
       options?: RawAxiosRequestConfig,
     ): Promise<
       (
@@ -160,12 +160,12 @@ export const GetInstrumentByIdApiFactory = function (
     /**
      * Get Instrument by ID
      * @summary Get Instrument by ID
-     * @param {string} instrumentId Instrument ID
+     * @param {number} instrumentId Instrument ID
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
     getInstrumentById(
-      instrumentId: string,
+      instrumentId: number,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<InstrumentDetail> {
       return localVarFp
@@ -185,13 +185,13 @@ export class GetInstrumentByIdApi extends BaseAPI {
   /**
    * Get Instrument by ID
    * @summary Get Instrument by ID
-   * @param {string} instrumentId Instrument ID
+   * @param {number} instrumentId Instrument ID
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof GetInstrumentByIdApi
    */
   public getInstrumentById(
-    instrumentId: string,
+    instrumentId: number,
     options?: RawAxiosRequestConfig,
   ) {
     return GetInstrumentByIdApiFp(this.configuration)

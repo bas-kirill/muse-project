@@ -2,7 +2,6 @@ import React from "react";
 import "./styles/Home.css";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
-import { useJwt } from "pages/login";
 import { Slide } from "react-slideshow-image";
 import saxophone from "pages/home/ui/images/saxo.webp";
 import guitar from "pages/home/ui/images/guitar.webp";
@@ -47,8 +46,6 @@ const trendingInstrumentsResponsiveSettings = [
 ];
 
 export function Home() {
-  useJwt();
-
   return (
     <div id="home">
       <Header />
@@ -56,7 +53,7 @@ export function Home() {
       <div
         id="home-logo"
         style={{
-          background: `url(${homeLogo}) no-repeat center, linear-gradient(red, yellow)`,
+          background: `url(${homeLogo}) no-repeat center, linear-gradient(blue, cyan)`,
         }}
       >
         <form id="home-search-bar-form">

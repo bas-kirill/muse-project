@@ -48,7 +48,7 @@ export interface EditInstrumentRequestBody {
    * @type {InstrumentId}
    * @memberof EditInstrumentRequestBody
    */
-  instrument_id?: InstrumentId;
+  instrument_id: InstrumentId;
   /**
    *
    * @type {InstrumentName}

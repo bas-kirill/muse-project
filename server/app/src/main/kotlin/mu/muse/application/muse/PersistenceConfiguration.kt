@@ -1,112 +1,59 @@
 package mu.muse.application.muse
 
-import mu.muse.domain.IdGenerator
-import mu.muse.domain.instrument.Country
-import mu.muse.domain.instrument.Instrument
-import mu.muse.domain.instrument.InstrumentId
-import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.Manufacturer
-import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.Material
-import mu.muse.domain.instrument.ReleaseDate
-import mu.muse.domain.user.FullName
-import mu.muse.domain.user.Password
-import mu.muse.domain.user.Role
-import mu.muse.domain.user.User
-import mu.muse.domain.user.UserId
-import mu.muse.domain.user.Username
-import mu.muse.persistence.instrument.InMemoryInstrumentIdGenerator
-import mu.muse.persistence.instrument.InMemoryInstrumentRepository
-import mu.muse.persistence.user.InMemoryUserRepository
-import mu.muse.persistence.user.InMemoryUsernameIdGenerator
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
+import mu.muse.persistence.instrument.postgres.PostgresInstrumentIdGenerator
+import mu.muse.persistence.instrument.postgres.PostgresInstrumentRepository
+import mu.muse.persistence.user.postgres.PostgresUserIdGenerator
+import mu.muse.persistence.user.postgres.PostgresUserRepository
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.security.crypto.password.PasswordEncoder
-import java.time.Instant
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
+import javax.sql.DataSource
 
 @Configuration
 class PersistenceConfiguration {
 
-    @Bean
-    fun usernameIdGenerator() = InMemoryUsernameIdGenerator()
+    @Value("\${POSTGRES_USER}")
+    private lateinit var postgresUser: String
+
+    @Value("\${POSTGRES_PASSWORD}")
+    private lateinit var postgresPassword: String
+
+    @Value("\${POSTGRES_DSN}")
+    private lateinit var postgresDsn: String
+
+    companion object {
+        const val MAXIMUM_POOL_SIZE = 25
+    }
+
 
     @Bean
-    fun users(idGenerator: IdGenerator<UserId>, passwordEncoder: PasswordEncoder): Set<User> {
-        val user = User.create(
-            id = idGenerator.generate(),
-            username = Username.from("user"),
-            password = Password.from(passwordEncoder.encode("123")),
-            role = Role.user(),
-            fullName = FullName.from("User Userov"),
-        )
-
-        val editor = User.create(
-            id = idGenerator.generate(),
-            username = Username.from("editor"),
-            password = Password.from(passwordEncoder.encode("321")),
-            role = Role.editor(),
-            fullName = FullName.from("Editor Editorov"),
-        )
-
-        return setOf(user, editor)
+    fun dataSource(): DataSource {
+        val hikariConfig = HikariConfig()
+        hikariConfig.username = postgresUser
+        hikariConfig.password = postgresPassword
+        hikariConfig.driverClassName = "org.postgresql.Driver"
+        hikariConfig.jdbcUrl = postgresDsn
+        val hikariDatasource = HikariDataSource(hikariConfig)
+        // 25 is a good enough data pool size, it is a database in a container after all
+        hikariDatasource.maximumPoolSize = MAXIMUM_POOL_SIZE
+        return hikariDatasource
     }
 
     @Bean
-    fun userRepository(users: Set<User>) = InMemoryUserRepository(users.associateBy { it.username }.toMutableMap())
+    fun namedTemplate(dataSource: DataSource) = NamedParameterJdbcTemplate(dataSource)
 
     @Bean
-    fun instrumentIdGenerator() = InMemoryInstrumentIdGenerator()
+    fun userIdGenerator(namedTemplate: NamedParameterJdbcTemplate) = PostgresUserIdGenerator(namedTemplate)
 
     @Bean
-    fun instruments(idGenerator: IdGenerator<InstrumentId>): Set<Instrument> {
-        val releasedGuitar = Instrument.create(
-            id = idGenerator.generate(),
-            name = InstrumentName.from("Fender Stratocaster"),
-            type = Instrument.Type.STRINGED,
-            manufacturer = Manufacturer.YAMAHA,
-            manufactureDate = ManufacturerDate.from(Instant.parse("2024-07-01T00:00:00Z")),
-            releaseDate = ReleaseDate.from(Instant.parse("2024-08-01T00:00:00Z")),
-            country = Country.CYPRUS,
-            materials = listOf(Material.WOOD),
-        )
-
-        val notYetReleasedGuitar = Instrument.create(
-            id = idGenerator.generate(),
-            name = InstrumentName.from("Fidel Telecastro"),
-            type = Instrument.Type.STRINGED,
-            manufacturer = Manufacturer.FENDER,
-            manufactureDate = ManufacturerDate.from(Instant.parse("2024-07-01T00:00:00Z")),
-            releaseDate = ReleaseDate.from(Instant.parse("2100-01-01T00:00:00Z")),
-            country = Country.CYPRUS,
-            materials = listOf(Material.WOOD),
-        )
-
-        val saxophone = Instrument.create(
-            id = idGenerator.generate(),
-            name = InstrumentName.from("SaxoStar"),
-            type = Instrument.Type.WIND,
-            manufacturer = Manufacturer.SIGMA,
-            manufactureDate = ManufacturerDate.from(Instant.parse("2007-01-01T00:00:00Z")),
-            releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
-            country = Country.USA,
-            materials = listOf(Material.METALL),
-        )
-
-        val piano = Instrument.create(
-            id = idGenerator.generate(),
-            name = InstrumentName.from("Yamaha CLP-745B"),
-            type = Instrument.Type.KEYBOARD,
-            manufacturer = Manufacturer.YAMAHA,
-            manufactureDate = ManufacturerDate.from(Instant.parse("2007-01-01T00:00:00Z")),
-            releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
-            country = Country.USA,
-            materials = listOf(Material.WOOD),
-        )
-
-        return setOf(notYetReleasedGuitar, releasedGuitar, saxophone, piano)
-    }
+    fun userRepository(namedTemplate: NamedParameterJdbcTemplate) = PostgresUserRepository(namedTemplate)
 
     @Bean
-    fun instrumentRepository(instruments: Set<Instrument>) =
-        InMemoryInstrumentRepository(instruments.associateBy { it.id }.toMutableMap())
+    fun instrumentIdGenerator(namedTemplate: NamedParameterJdbcTemplate) = PostgresInstrumentIdGenerator(namedTemplate)
+
+    @Bean
+    fun instrumentRepository(namedTemplate: NamedParameterJdbcTemplate) = PostgresInstrumentRepository(namedTemplate)
 }

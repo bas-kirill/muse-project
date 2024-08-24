@@ -35,7 +35,8 @@ paths:
           required: true
           description: Instrument ID
           schema:
-            type: string
+            type: integer
+            format: int64
       responses:
         "200":
           description: Instrument Detail

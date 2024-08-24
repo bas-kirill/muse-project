@@ -19,7 +19,7 @@ interface InstrumentExtractor {
 
     fun findByCriteria(criteria: Criteria): List<Instrument>
 
-    fun totalElements(): Int
+    fun totalElements(): Long
 
     data class Criteria(
         val name: InstrumentName?,

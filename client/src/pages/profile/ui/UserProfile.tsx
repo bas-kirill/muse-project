@@ -3,11 +3,9 @@ import "./UserProfile.css";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
-import { useJwt } from "pages/login";
 import { ProfileDetails } from "generated/model";
 
 export function UserProfile() {
-  useJwt();
   const profile = useLoaderData() as ProfileDetails;
 
   return (

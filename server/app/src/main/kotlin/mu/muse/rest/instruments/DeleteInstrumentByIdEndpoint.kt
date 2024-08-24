@@ -15,7 +15,7 @@ class DeleteInstrumentByIdEndpoint(
 
     @RolesAllowed(Role.EDITOR)
     override fun deleteInstrumentById(instrumentId: Long): ResponseEntity<Any> {
-        val id = InstrumentId.from(instrumentId.toString())
+        val id = InstrumentId.from(instrumentId)
         deleteInstrumentById.execute(id)
         return ResponseEntity.ok().build()
     }

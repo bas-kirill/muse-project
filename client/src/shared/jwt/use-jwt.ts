@@ -9,13 +9,9 @@ export const useJwt = () => {
   useEffect(() => {
     const jwt = Jwt.extractFromCookie();
 
-    if (jwt === null) {
-      return;
-    }
-
-    if (jwt.expired()) {
+    if (jwt === null || jwt.expired()) {
       Jwt.eraseFromCookie(); // need to rerender header
       navigate(LOGIN);
     }
-  }, []);
+  }, [navigate]);
 };

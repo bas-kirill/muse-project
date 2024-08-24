@@ -1,4 +1,6 @@
 import { InstrumentCard } from "./ui/instrument-card/InstrumentCard";
+import { getCookie } from "shared/cookie/get-cookie";
+import { useJwt } from "./jwt/use-jwt";
 
 import {
   CATALOGUE_DEFAULT_PAGE_SIZE,
@@ -9,4 +11,6 @@ export {
   InstrumentCard,
   CATALOGUE_DEFAULT_PAGE_SIZE,
   CATALOGUE_DEFAULT_PAGE_NUMBER,
+  getCookie,
+  useJwt,
 };

@@ -1,6 +1,5 @@
 import React from "react";
 import { InstrumentDetail } from "generated/model";
-import { useJwt } from "pages/login";
 import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 
 interface Props {
@@ -12,8 +11,6 @@ interface Props {
 const removeFavoriteApi = new RemoveFavoriteApi();
 
 export const RemoveInstrumentButton = (props: Props) => {
-  useJwt();
-
   const handleOnDeleteInstrument = () => {
     const removeFavorite = async () => {
       const response = await removeFavoriteApi.removeFavorite(

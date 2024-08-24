@@ -3,6 +3,27 @@ networks:
     driver: bridge
 
 services:
+  postgres:
+    image: postgres:16.4
+    container_name: muse-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_DSN: ${POSTGRES_DSN}
+    volumes:
+      - ./store/pg/data:/var/lib/postgresql/data
+    ports:
+      - ${POSTGRES_PORT}:5432
+    networks:
+      - muse
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   muse-server:
     image: muse-server:latest
     container_name: muse-server
@@ -11,8 +32,15 @@ services:
       - ${SERVER_DEBUG_PORT}:5005
     environment:
       - MUSE_JWT_SECRET_KEY
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - POSTGRES_DSN
     networks:
       - muse
+    depends_on:
+      postgres:
+        condition: service_healthy
 
   muse-client:
     image: muse-client:latest

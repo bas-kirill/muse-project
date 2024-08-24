@@ -3,8 +3,7 @@ set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../../"
 
-(cd "$rootDir/openapi" && exec rm -rf ./openapi.yml)
-(cd "$rootDir/openapi" && exec redocly join ./specs/**/*.yml -o ./openapi.yml)
+(cd "$rootDir" && exec ./tools/scripts/openapi/bundle.sh)
 (cd "$rootDir/client" && rm -rf ./src/generated)
 (cd "$rootDir/client" &&
   mkdir -p ./src/generated &&

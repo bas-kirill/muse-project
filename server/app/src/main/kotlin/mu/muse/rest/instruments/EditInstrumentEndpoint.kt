@@ -10,15 +10,11 @@ import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.domain.user.Role
-import mu.muse.rest.API_EDIT_INSTRUMENT
 import mu.muse.rest.api.EditInstrumentApi
 import mu.muse.rest.dto.EditInstrumentRequestBody
 import mu.muse.usecase.EditInstrument
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDate
 
 @RestController
 class EditInstrumentEndpoint(
@@ -27,7 +23,7 @@ class EditInstrumentEndpoint(
 
     @RolesAllowed(Role.EDITOR)
     override fun editInstrument(request: EditInstrumentRequestBody): ResponseEntity<Any> {
-        val instrumentId = InstrumentId.from(request.instrumentId.toString())
+        val instrumentId = InstrumentId.from(request.instrumentId.instrumentId)
         val instrumentName = InstrumentName.from(request.instrumentName.instrumentName)
         val instrumentType = Instrument.Type.valueOf(request.instrumentType.instrumentType)
         val manufacturerName = Manufacturer.valueOf(request.manufacturerName.manufacturerName)

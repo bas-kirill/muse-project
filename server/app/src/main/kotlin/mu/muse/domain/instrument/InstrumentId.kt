@@ -8,8 +8,7 @@ data class InstrumentId internal constructor(private val value: Long) {
     fun toLongValue() = value
 
     companion object {
-        fun from(valueStringRaw: String): InstrumentId {
-            val valueLongRaw = valueStringRaw.toLong()
+        fun from(valueLongRaw: Long): InstrumentId {
             require(valueLongRaw >= 0 && valueLongRaw <= Long.MAX_VALUE)
             return InstrumentId(valueLongRaw)
         }
