@@ -5,7 +5,7 @@ import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useLoaderData } from "react-router-dom";
 import { EditInstrumentLoader } from "pages/edit-instrument/api/loader";
 import { EditInstrumentAction } from "pages/edit-instrument/api/action";
-import { InstrumentBasicMaterialFormField } from "./InstrumentBasicMaterialFormField";
+import { InstrumentBasicMaterialField } from "./InstrumentBasicMaterial.field";
 import { useJwt } from "shared/jwt/use-jwt";
 
 export const EditInstrumentPage = () => {
@@ -171,7 +171,7 @@ export const EditInstrumentPage = () => {
             </select>
           </div>
 
-          <InstrumentBasicMaterialFormField
+          <InstrumentBasicMaterialField
             materials={loader.materials}
             usedMaterialsForInstrument={
               loader.instrumentForEdit.basic_materials

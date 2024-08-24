@@ -8,7 +8,7 @@ interface Props {
   usedMaterialsForInstrument: BasicMaterial[];
 }
 
-export const InstrumentBasicMaterialFormField = (props: Props) => {
+export const InstrumentBasicMaterialField = (props: Props) => {
   const selectedBasicMaterial = useRef<BasicMaterial>();
   const [basicMaterials, setBasicMaterials] = useState<BasicMaterial[]>(
     props.usedMaterialsForInstrument,
