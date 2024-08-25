@@ -18,7 +18,7 @@ servers:
           - "8000"
 
 tags:
-  - name: userLogout
+  - name: logout
     description: Logout
 
 paths:
@@ -26,9 +26,9 @@ paths:
     post:
       description: Logout Endpoint
       summary: Logout Endpoint
-      operationId: userLogout
+      operationId: logout
       tags:
-        - userLogout
+        - logout
       responses:
         "200":
           description: Profile Details

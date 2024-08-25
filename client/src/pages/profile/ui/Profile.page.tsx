@@ -2,13 +2,39 @@ import React from "react";
 import styles from "./styles/Profile.page.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import { ProfileDetails } from "generated/model";
 import { useJwt } from "shared/jwt/use-jwt";
+import { LogoutApi } from "generated/api/logout-api";
+import Jwt from "domain/model/jwt";
+import { LOGIN } from "shared/config/paths";
+
+const logout = new LogoutApi();
 
 export function ProfilePage() {
   useJwt();
+  const navigate = useNavigate();
   const profile = useLoaderData() as ProfileDetails;
+
+  const onLogoutHandler = () => {
+    const fetchLogout = async () => {
+      const response = await logout.logout({
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`
+        }
+      });
+
+      if (response.status === 200) {
+        navigate(LOGIN);
+        return;
+      }
+
+      throw new Error("Fail to logout");
+    };
+
+    fetchLogout();
+  };
 
   return (
     <>
@@ -23,10 +49,7 @@ export function ProfilePage() {
         <div>
           <b>Role</b>: <span>{profile?.role}</span>
         </div>
-        <button
-          onClick={e => e.target}
-          className={styles.logout__button}
-        >
+        <button onClick={onLogoutHandler} className={styles.logout__button}>
           Logout
         </button>
       </div>

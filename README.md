@@ -12,7 +12,7 @@ https://www.figma.com/design/Kskaw5xH0D8rsljazkXmFL/Muse-Project?node-id=0-1&t=v
 
 🛠Tech Stack: Kotlin, Spring Boot, Gradle, PostgreSQL
 
-🔄DevOps: Docker, Docker Compose, Testcontainers, GitHub CI/CD (Self-Hosted Runners), GitGuardian
+🔄DevOps: Docker, Docker Compose, TestcЩontainers, GitHub CI/CD (Self-Hosted Runners), GitGuardian
 
 🏛️Arch: Clean Architecture, DDD, Feature Slicing, REST, TDD, Service Based, ArchUnit, Monorepository
 

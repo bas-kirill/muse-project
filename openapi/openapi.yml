@@ -58,9 +58,9 @@ tags:
   - name: basicLogin
     description: Everything about user
     x-displayName: basicLogin
-  - name: userLogout
+  - name: logout
     description: Logout
-    x-displayName: userLogout
+    x-displayName: logout
   - name: getManufacturers
     description: Get Manufacturers
     x-displayName: getManufacturers
@@ -496,9 +496,9 @@ paths:
     post:
       description: Logout Endpoint
       summary: Logout Endpoint
-      operationId: userLogout
+      operationId: logout
       tags:
-        - userLogout
+        - logout
       responses:
         '200':
           description: Profile Details
@@ -998,7 +998,7 @@ x-tagGroups:
       - basicLogin
   - name: Logout Endpoint
     tags:
-      - userLogout
+      - logout
   - name: Get Manufacturers
     tags:
       - getManufacturers

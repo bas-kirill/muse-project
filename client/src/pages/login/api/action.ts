@@ -1,8 +1,9 @@
-import { ActionFunction } from "react-router-dom";
+import { ActionFunction, redirect } from "react-router-dom";
 import { parseLoginForm } from "./../model/parse-login-form";
-import { BasicLoginApi } from "generated/api/basic-login-api";
+import { BasicLoginApi } from "generated/api";
+import { PROFILE } from "shared/config/paths";
 
-export interface LogInAction {
+export interface LoginAction {
   errors: string[];
 }
 
@@ -10,7 +11,7 @@ const basicLoginApi = new BasicLoginApi();
 
 export const action: ActionFunction = async ({
   request,
-}): Promise<LogInAction> => {
+}): Promise<LoginAction | Response> => {
   const { login, password, errors } = parseLoginForm(await request.formData());
 
   if (errors.length !== 0) {
@@ -29,6 +30,10 @@ export const action: ActionFunction = async ({
       validateStatus: () => true,
     },
   );
+
+  if (response.status === 200) {
+    return redirect(PROFILE);
+  }
 
   if (response.status !== 200) {
     return {

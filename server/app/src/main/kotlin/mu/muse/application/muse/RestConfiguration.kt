@@ -16,6 +16,7 @@ import mu.muse.rest.instruments.GetInstrumentTypesEndpoint
 import mu.muse.rest.instruments.GetInstrumentsByCriteriaEndpoint
 import mu.muse.rest.instruments.GetInstrumentsByCriteriaPaginatedEndpoint
 import mu.muse.rest.login.BasicLoginEndpoint
+import mu.muse.rest.logout.LogoutEndpoint
 import mu.muse.rest.profile.GetProfileEndpoint
 import mu.muse.rest.registration.RegistrationEndpoint
 import mu.muse.usecase.BasicLogin
@@ -102,4 +103,7 @@ class RestConfiguration {
     @Bean
     fun getInstrumentPhotoEndpoint(getInstrumentPhoto: GetInstrumentPhoto) =
         GetInstrumentPhotoEndpoint(getInstrumentPhoto)
+
+    @Bean
+    fun logoutEndpoint() = LogoutEndpoint()
 }

@@ -1,3 +1,6 @@
 package mu.muse.rest
 
 const val FAVORITE_INSTRUMENTS_SESSION_KEY = "FAVORITE_INSTRUMENTS"
+
+const val COOKIE_SESSION_ID = "SESSIONID"
+const val COOKIE_JWT_KEY = "jwt"
