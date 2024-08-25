@@ -20,7 +20,7 @@ class RemoveFavoriteEndpoint(
         val username = Username.from(principal.username)
         removeFavorite.execute(
             username = username,
-            instrumentId = instrumentId
+            instrumentId = instrumentId,
         )
         return ResponseEntity.ok().build()
     }

@@ -20,7 +20,7 @@ class AddFavoriteEndpoint(
         val username = Username.from(principal.username)
         addFavorite.execute(
             username = username,
-            instrumentId = instrumentId
+            instrumentId = instrumentId,
         )
         return ResponseEntity.ok().build()
     }

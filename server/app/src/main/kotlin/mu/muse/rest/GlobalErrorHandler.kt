@@ -2,8 +2,8 @@ package mu.muse.rest
 
 import mu.muse.rest.dto.ClientError
 import mu.muse.rest.dto.ServerError
-import mu.muse.usecase.ClientException
-import mu.muse.usecase.ServerException
+import mu.muse.common.ClientException
+import mu.muse.common.ServerException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
@@ -23,8 +23,8 @@ class GlobalErrorHandler {
         return ResponseEntity.badRequest().body(
             ClientError(
                 message = e.message,
-                cause = e.cause?.message
-            )
+                cause = e.cause?.message,
+            ),
         )
     }
 
@@ -35,7 +35,7 @@ class GlobalErrorHandler {
             ServerError(
                 message = e.message,
                 cause = e.cause?.message,
-            )
+            ),
         )
     }
 
@@ -45,7 +45,8 @@ class GlobalErrorHandler {
         return ResponseEntity.internalServerError().body(
             ServerError(
                 message = e.message,
-            )
+                cause = e.cause?.message,
+            ),
         )
     }
 }
