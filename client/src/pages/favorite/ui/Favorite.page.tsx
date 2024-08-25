@@ -7,16 +7,18 @@ import { InstrumentCard } from "shared/instrument-card";
 import { useJwt } from "shared/jwt/use-jwt";
 import { useLoaderData } from "react-router-dom";
 import { FavoriteLoader } from "pages/favorite";
+import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 
 export const FavoritePage = () => {
   useJwt();
+  const {darkMode} = useDarkMode();
   const loader = useLoaderData() as FavoriteLoader;
 
   return (
     <>
       <HeaderWidget />
 
-      <h1 className={styles.h1}>Favorite</h1>
+      <h1 className={`${styles.h1} ${darkMode && styles.h1__dark}`}>Favorite</h1>
 
       {loader.instrumentDetails.length === 0 && (
         <div className={styles.favorite__empty}>Favorite List is Empty</div>

@@ -3,6 +3,10 @@
   margin: 0.5em 0;
 }
 
+.h1__dark {
+  color: #ffffff;
+}
+
 .favorite__empty {
   text-align: center;
 }
