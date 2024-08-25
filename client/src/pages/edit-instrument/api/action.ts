@@ -1,7 +1,7 @@
 import { ActionFunction } from "react-router-dom";
 import Jwt from "domain/model/jwt";
-import { parseInstrumentDetails } from "shared";
 import { EditInstrumentApi } from "generated/api/edit-instrument-api";
+import { parseInstrumentDetails } from "shared/model";
 
 export interface EditInstrumentAction {
   errors: string[];

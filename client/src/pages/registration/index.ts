@@ -1,4 +1,4 @@
-import { RegistrationPage } from "./ui/RegistrationPage";
+import { RegistrationPage } from "./ui/Registration.page";
 
 import { action } from "./api/action";
 

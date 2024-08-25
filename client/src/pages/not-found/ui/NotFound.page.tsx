@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/NotFoundPage.module.css";
+import styles from "./styles/NotFound.page.module.css";
 import { HeaderWidget } from "widgets/header";
 
 export function NotFoundPage() {

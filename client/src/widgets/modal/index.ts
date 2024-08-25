@@ -1,3 +1,3 @@
-import { ModalWidget } from "./ui/ModalWidget";
+import { ModalWidget } from "./ui/Modal.widget";
 
 export { ModalWidget };

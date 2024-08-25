@@ -1,5 +1,5 @@
 @media (max-width: 570px) {
-  #home-search-bar-form {
+  .home {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,7 +18,7 @@
     }
   }
 
-  #home-reasons-choose {
+  .reasons {
     flex-direction: column;
 
     div {
@@ -29,7 +29,7 @@
     }
   }
 
-  #trending-instruments {
+  .trends {
     margin: 0 1.5em 1.5em 1.5em !important;
   }
 }

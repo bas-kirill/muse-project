@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles/Home.page.module.css";
+import "react-slideshow-image/dist/styles.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { Slide } from "react-slideshow-image";
@@ -80,7 +81,7 @@ export function HomePage() {
           responsive={trendingInstrumentsResponsiveSettings}
         >
           {images.map((img) => (
-            <div key={img.image} className={styles.eachSlide}>
+            <div key={img.image} className={styles.each_slide}>
               <img
                 src={img.image}
                 alt={img.caption}
