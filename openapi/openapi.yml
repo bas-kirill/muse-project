@@ -142,7 +142,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListFavoriteResponseBody'
+                $ref: '#/components/schemas/ListFavoriteResponse'
         '400':
           description: Client Error
           content:
@@ -602,8 +602,12 @@ components:
         message:
           type: string
           description: Error description
+        cause:
+          type: string
+          description: Exception stack trace
       example:
         message: Client Error
+        cause: Client Error
     Country:
       type: object
       required:
@@ -703,14 +707,16 @@ components:
           format: base64
     ServerError:
       type: object
-      required:
-        - message
       properties:
         message:
           type: string
-          description: A description of the error.
+          description: A description of the error
+        cause:
+          type: string
+          description: Exception stack trace
       example:
         message: Internal Server Error. Please try again later.
+        cause: Internal Server Error
     GetCountriesResponse:
       type: object
       required:
@@ -720,7 +726,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Country'
-    ListFavoriteResponseBody:
+    ListFavoriteResponse:
       type: object
       required:
         - content

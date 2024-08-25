@@ -18,7 +18,7 @@ import mu.muse.rest.API_MANUFACTURERS
 import mu.muse.rest.API_REGISTRATION
 import mu.muse.rest.API_LOGIN
 import mu.muse.usecase.access.user.UserExtractor
-import mu.muse.usecase.scenario.login.BasicLoginUseCase
+import mu.muse.usecase.scenario.user.BasicLoginUseCase
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -104,9 +104,6 @@ class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, API_COUNTRIES).permitAll()
                 .requestMatchers(HttpMethod.GET, API_MANUFACTURERS).permitAll()
                 .requestMatchers(HttpMethod.POST, API_REGISTRATION).permitAll()
-                .requestMatchers(HttpMethod.POST, API_FAVORITE_ADD).permitAll()
-                .requestMatchers(HttpMethod.POST, API_FAVORITE_REMOVE).permitAll()
-                .requestMatchers(HttpMethod.GET, API_FAVORITE_LIST).permitAll()
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_PHOTO).permitAll()
                 .anyRequest().authenticated()
         }

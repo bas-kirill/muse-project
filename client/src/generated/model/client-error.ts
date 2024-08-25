@@ -24,4 +24,10 @@ export interface ClientError {
    * @memberof ClientError
    */
   message: string;
+  /**
+   * Exception stack trace
+   * @type {string}
+   * @memberof ClientError
+   */
+  cause?: string;
 }

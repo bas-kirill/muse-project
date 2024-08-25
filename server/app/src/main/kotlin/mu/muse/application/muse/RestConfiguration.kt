@@ -19,11 +19,13 @@ import mu.muse.rest.login.BasicLoginEndpoint
 import mu.muse.rest.logout.LogoutEndpoint
 import mu.muse.rest.profile.GetProfileEndpoint
 import mu.muse.rest.registration.RegistrationEndpoint
+import mu.muse.usecase.AddFavorite
 import mu.muse.usecase.BasicLogin
 import mu.muse.usecase.CreateInstrument
 import mu.muse.usecase.DeleteInstrumentById
 import mu.muse.usecase.EditInstrument
 import mu.muse.usecase.GetCountries
+import mu.muse.usecase.GetFavoriteByUsername
 import mu.muse.usecase.GetInstrumentById
 import mu.muse.usecase.GetManufacturers
 import mu.muse.usecase.GetInstrumentMaterials
@@ -34,6 +36,7 @@ import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
 import mu.muse.usecase.GetInstrumentsByIds
 import mu.muse.usecase.GetUser
 import mu.muse.usecase.RegisterUser
+import mu.muse.usecase.RemoveFavorite
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
@@ -92,13 +95,13 @@ class RestConfiguration {
     fun registrationEndpoint(registerUser: RegisterUser) = RegistrationEndpoint(registerUser)
 
     @Bean
-    fun listFavoriteEndpoint(getInstrumentsByIds: GetInstrumentsByIds) = ListFavoriteEndpoint(getInstrumentsByIds)
+    fun listFavoriteEndpoint(getFavoriteByUsername: GetFavoriteByUsername) = ListFavoriteEndpoint(getFavoriteByUsername)
 
     @Bean
-    fun addFavoriteEndpoint() = AddFavoriteEndpoint()
+    fun addFavoriteEndpoint(addFavorite: AddFavorite) = AddFavoriteEndpoint(addFavorite)
 
     @Bean
-    fun removeFavoriteEndpoint() = RemoveFavoriteEndpoint()
+    fun removeFavoriteEndpoint(removeFavorite: RemoveFavorite) = RemoveFavoriteEndpoint(removeFavorite)
 
     @Bean
     fun getInstrumentPhotoEndpoint(getInstrumentPhoto: GetInstrumentPhoto) =

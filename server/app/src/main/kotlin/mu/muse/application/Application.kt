@@ -46,29 +46,6 @@ class Application : CommandLineRunner {
     @Suppress("LongMethod")
     // todo(tech-debt): use 2 different CLI runners and add dev profile
     override fun run(vararg args: String?) {
-        val user = User.create(
-            id = userIdGenerator.generate(),
-            username = Username.from("user"),
-            password = Password.from("{noop}123"),
-            role = Role.user(),
-            fullName = FullName.from("User Userov"),
-        )
-
-        val editor = User.create(
-            id = userIdGenerator.generate(),
-            username = Username.from("editor"),
-            password = Password.from("{noop}321"),
-            role = Role.editor(),
-            fullName = FullName.from("Editor Editorov"),
-        )
-
-        sequenceOf(
-            user,
-            editor,
-        ).forEach {
-            userPersister.save(it)
-        }
-
         val rockGuitar = Instrument.create(
             id = instrumentIdGenerator.generate(),
             name = InstrumentName.from("Fidel Telecastro"),
@@ -147,6 +124,31 @@ class Application : CommandLineRunner {
             fortepiano,
         ).forEach { instrument ->
             instrumentPersister.save(instrument)
+        }
+
+        val user = User.create(
+            id = userIdGenerator.generate(),
+            username = Username.from("user"),
+            password = Password.from("{noop}123"),
+            role = Role.user(),
+            fullName = FullName.from("User Userov"),
+            favoriteIds = mutableListOf(saxophone.id, fortepiano.id),
+        )
+
+        val editor = User.create(
+            id = userIdGenerator.generate(),
+            username = Username.from("editor"),
+            password = Password.from("{noop}321"),
+            role = Role.editor(),
+            fullName = FullName.from("Editor Editorov"),
+            favoriteIds = mutableListOf(violin.id, rockGuitar.id),
+        )
+
+        sequenceOf(
+            user,
+            editor,
+        ).forEach {
+            userPersister.save(it)
         }
     }
 }

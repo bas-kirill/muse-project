@@ -1,22 +1,27 @@
 package mu.muse.rest.favorite
 
-import mu.muse.rest.FAVORITE_INSTRUMENTS_SESSION_KEY
+import mu.muse.domain.instrument.InstrumentId
+import mu.muse.domain.user.Username
 import mu.muse.rest.api.RemoveFavoriteApi
-import mu.muse.rest.dto.InstrumentId
+import mu.muse.usecase.RemoveFavorite
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.context.request.RequestContextHolder
-import org.springframework.web.context.request.ServletRequestAttributes
 
 @RestController
-class RemoveFavoriteEndpoint: RemoveFavoriteApi {
+class RemoveFavoriteEndpoint(
+    private val removeFavorite: RemoveFavorite,
+): RemoveFavoriteApi {
 
-    override fun removeFavorite(request: InstrumentId): ResponseEntity<Any> {
-        val session = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request.session
-        val favorite = session.getAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY) as MutableList<Long>?
-            ?: return ResponseEntity.ok().build()
-        favorite.remove(request.instrumentId)
-        session.setAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY, favorite)
+    override fun removeFavorite(request: mu.muse.rest.dto.InstrumentId): ResponseEntity<Any> {
+        val instrumentId = InstrumentId.from(request.instrumentId)
+        val principal = SecurityContextHolder.getContext().authentication.principal as UserDetails
+        val username = Username.from(principal.username)
+        removeFavorite.execute(
+            username = username,
+            instrumentId = instrumentId,
+        )
         return ResponseEntity.ok().build()
     }
 }

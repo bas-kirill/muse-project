@@ -41,7 +41,7 @@ import {
 // @ts-ignore
 import type { ClientError } from "../model";
 // @ts-ignore
-import type { ListFavoriteResponseBody } from "../model";
+import type { ListFavoriteResponse } from "../model";
 // @ts-ignore
 import type { ServerError } from "../model";
 /**
@@ -114,7 +114,7 @@ export const ListFavoriteApiFp = function (configuration?: Configuration) {
       (
         axios?: AxiosInstance,
         basePath?: string,
-      ) => AxiosPromise<ListFavoriteResponseBody>
+      ) => AxiosPromise<ListFavoriteResponse>
     > {
       const localVarAxiosArgs =
         await localVarAxiosParamCreator.listFavorite(options);
@@ -153,7 +153,7 @@ export const ListFavoriteApiFactory = function (
      */
     listFavorite(
       options?: RawAxiosRequestConfig,
-    ): AxiosPromise<ListFavoriteResponseBody> {
+    ): AxiosPromise<ListFavoriteResponse> {
       return localVarFp
         .listFavorite(options)
         .then((request) => request(axios, basePath));

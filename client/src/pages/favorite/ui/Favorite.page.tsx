@@ -1,13 +1,15 @@
 import React from "react";
 import styles from "./styles/Favorite.page.module.css";
-import { FavoriteLoader } from "pages/favorite";
 import { HeaderWidget } from "widgets/header";
-import { useLoaderData } from "react-router-dom";
 
 import { FooterWidget } from "widgets/footer";
 import { InstrumentCard } from "shared/instrument-card";
+import { useJwt } from "shared/jwt/use-jwt";
+import { useLoaderData } from "react-router-dom";
+import { FavoriteLoader } from "pages/favorite";
 
 export const FavoritePage = () => {
+  useJwt();
   const loader = useLoaderData() as FavoriteLoader;
 
   return (
@@ -26,7 +28,6 @@ export const FavoritePage = () => {
             <InstrumentCard
               key={instrument.instrument_id.instrument_id}
               instrument={instrument}
-              favorite={true}
             />
           </div>
         ))}

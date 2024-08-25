@@ -41,6 +41,7 @@ class RegisterUserUseCase(
             password = passwordEncoder.encode(password),
             role = Role.user(),
             fullName = fullName,
+            favoriteIds = mutableListOf(),
         )
 
         userPersister.save(user)

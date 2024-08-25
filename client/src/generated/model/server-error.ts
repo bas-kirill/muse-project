@@ -19,9 +19,15 @@
  */
 export interface ServerError {
   /**
-   * A description of the error.
+   * A description of the error
    * @type {string}
    * @memberof ServerError
    */
-  message: string;
+  message?: string;
+  /**
+   * Exception stack trace
+   * @type {string}
+   * @memberof ServerError
+   */
+  cause?: string;
 }

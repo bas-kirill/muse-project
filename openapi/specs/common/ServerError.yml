@@ -14,10 +14,13 @@ components:
   schemas:
     ServerError:
       type: object
-      required: [message]
       properties:
         message:
           type: string
-          description: A description of the error.
+          description: A description of the error
+        cause:
+          type: string
+          description: Exception stack trace
       example:
         message: "Internal Server Error. Please try again later."
+        cause: "Internal Server Error"

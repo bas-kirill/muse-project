@@ -83,6 +83,7 @@ internal class HelloEndpointTest {
                 password = Password.from(passwordEncoder.encode("123")),
                 role = Role.user(),
                 fullName = FullName.from("Anonymous"),
+                favoriteIds = mutableListOf(),
             )
 
             val testEditor = User.create(
@@ -91,6 +92,7 @@ internal class HelloEndpointTest {
                 password = Password.from(passwordEncoder.encode("321")),
                 role = Role.editor(),
                 fullName = FullName.from("Editor"),
+                favoriteIds = mutableListOf(),
             )
 
             return setOf(testUser, testEditor)

@@ -9,7 +9,8 @@ create table users(
     username varchar(256) not null unique,
     password varchar(256) not null,
     role varchar(256) not null,
-    full_name varchar(256) not null
+    full_name varchar(256) not null,
+    favorite_ids bigint[] not null
 );
 
 create sequence user_id_seq increment 1 start 1;

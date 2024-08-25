@@ -19,5 +19,9 @@ components:
         message:
           type: string
           description: Error description
+        cause:
+          type: string
+          description: Exception stack trace
       example:
         message: "Client Error"
+        cause: "Client Error"

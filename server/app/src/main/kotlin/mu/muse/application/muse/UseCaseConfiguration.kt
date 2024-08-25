@@ -9,6 +9,9 @@ import mu.muse.usecase.access.instrument.InstrumentRemover
 import mu.muse.usecase.access.user.UserExtractor
 import mu.muse.usecase.access.user.UserPersister
 import mu.muse.usecase.scenario.country.GetCountriesUseCase
+import mu.muse.usecase.scenario.favorite.AddFavoriteUseCase
+import mu.muse.usecase.scenario.favorite.GetFavoriteByUsernameUseCase
+import mu.muse.usecase.scenario.favorite.RemoveFavoriteUseCase
 import mu.muse.usecase.scenario.instrument.CreateInstrumentUseCase
 import mu.muse.usecase.scenario.instrument.DeleteInstrumentByIdUseCase
 import mu.muse.usecase.scenario.instrument.EditInstrumentUseCase
@@ -20,7 +23,7 @@ import mu.muse.usecase.scenario.instrument.GetInstrumentTypesUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaPaginatedUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByCriteriaUseCase
 import mu.muse.usecase.scenario.instrument.GetInstrumentsByIdsUseCase
-import mu.muse.usecase.scenario.profile.GetUserUseCase
+import mu.muse.usecase.scenario.user.GetUserUseCase
 import mu.muse.usecase.scenario.registration.RegisterUserUseCase
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -82,5 +85,18 @@ class UseCaseConfiguration {
 
     @Bean
     fun getInstrumentPhoto(instrumentExtractor: InstrumentExtractor) = GetInstrumentPhotoUseCase(instrumentExtractor)
+
+    @Bean
+    fun addFavorite(userExtractor: UserExtractor, userPersister: UserPersister) =
+        AddFavoriteUseCase(userExtractor, userPersister)
+
+    @Bean
+    fun getUserFavorite(userExtractor: UserExtractor, instrumentExtractor: InstrumentExtractor) =
+        GetFavoriteByUsernameUseCase(userExtractor, instrumentExtractor)
+
+    @Bean
+    fun removeFavorite(userExtractor: UserExtractor, userPersister: UserPersister) =
+        RemoveFavoriteUseCase(userExtractor, userPersister)
+
 
 }

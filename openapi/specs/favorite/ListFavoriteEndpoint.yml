@@ -35,7 +35,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ListFavoriteResponseBody"
+                $ref: "#/components/schemas/ListFavoriteResponse"
         "400":
           description: Client Error
           content:
@@ -51,7 +51,7 @@ paths:
 
 components:
   schemas:
-    ListFavoriteResponseBody:
+    ListFavoriteResponse:
       type: object
       required: [content]
       properties:

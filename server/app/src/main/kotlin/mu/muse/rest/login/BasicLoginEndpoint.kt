@@ -8,7 +8,7 @@ import mu.muse.rest.api.BasicLoginApi
 import mu.muse.rest.dto.JwtResponse
 import mu.muse.rest.dto.UsernameAndPasswordRequestBody
 import mu.muse.usecase.BasicLogin
-import mu.muse.usecase.scenario.login.JwtRaw
+import mu.muse.usecase.scenario.user.JwtRaw
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.context.request.RequestContextHolder

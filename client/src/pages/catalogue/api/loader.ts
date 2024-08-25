@@ -1,11 +1,5 @@
-import {
-  GetInstrumentsByCriteriaPaginatedApi,
-  ListFavoriteApi,
-} from "generated/api";
-import {
-  GetInstrumentByCriteriaPageResponse,
-  InstrumentId,
-} from "generated/model";
+import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api";
+import { GetInstrumentByCriteriaPageResponse } from "generated/model";
 import { Filters } from "widgets/catalogue-filter";
 import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
@@ -14,11 +8,9 @@ import {
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();
-const listFavoriteApi = new ListFavoriteApi();
 
 export interface CatalogueLoader {
   instrumentPage: GetInstrumentByCriteriaPageResponse;
-  favoriteInstrumentIds: InstrumentId[];
   defaultFilter: Filters;
 }
 
@@ -41,15 +33,8 @@ export const loader = async (): Promise<CatalogueLoader> => {
       },
     );
 
-  const favoriteInstrumentsRequest = await listFavoriteApi.listFavorite({
-    withCredentials: true,
-  });
-  const favoriteInstrumentIds = favoriteInstrumentsRequest.data.content.map(
-    (favorite) => favorite.instrument_id,
-  );
   return {
     instrumentPage: instrumentsPage.data,
-    favoriteInstrumentIds: favoriteInstrumentIds,
     defaultFilter: {
       instrumentName: null,
       instrumentTypes: null,

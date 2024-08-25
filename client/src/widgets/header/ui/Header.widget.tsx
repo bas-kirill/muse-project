@@ -23,9 +23,13 @@ export function HeaderWidget() {
         {/* prettier-ignore */}
         {/* eslint-disable-next-line */}
         <button onClick={(_) => navigate(CATALOGUE)}>Catalogue</button>
-        {/* prettier-ignore */}
-        {/* eslint-disable-next-line */}
-        <button onClick={(_) => navigate(FAVORITE)}>Favorite</button>
+        {jwt.current !== undefined && (
+          <>
+            {/* prettier-ignore */}
+            {/* eslint-disable-next-line */}
+            <button onClick={(_) => navigate(FAVORITE)}>Favorite</button>
+          </>
+        )}
         {jwt.current === undefined && (
           <>
             {/* prettier-ignore */}

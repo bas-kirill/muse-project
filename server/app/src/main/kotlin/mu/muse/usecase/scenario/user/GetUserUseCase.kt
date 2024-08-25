@@ -1,4 +1,4 @@
-package mu.muse.usecase.scenario.profile
+package mu.muse.usecase.scenario.user
 
 import mu.muse.domain.user.User
 import mu.muse.domain.user.Username

@@ -6,8 +6,7 @@ import { useLoaderData } from "react-router-dom";
 import { SidebarFilterWidget, Filters } from "widgets/catalogue-filter";
 import { SerpWidget } from "widgets/catalogue-serp";
 import { CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
-import { ListFavoriteApi } from "generated/api/list-favorite-api";
-import { InstrumentDetail, InstrumentId } from "generated/model";
+import { InstrumentDetail } from "generated/model";
 import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api";
 import { CatalogueLoader } from "pages/catalogue";
 import { NavigationBarWidget } from "widgets/catalogue-navbar";
@@ -15,8 +14,6 @@ import { SearchBarInputField } from "pages/catalogue/ui/SearchBarInput.field";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();
-
-const listFavoriteApi = new ListFavoriteApi();
 
 export function CataloguePage() {
   const loader = useLoaderData() as CatalogueLoader; // https://github.com/remix-run/react-router/discussions/9792
@@ -29,22 +26,8 @@ export function CataloguePage() {
     loader.instrumentPage.page_number,
   );
   const totalPages = useRef<number>(loader.instrumentPage.total_pages);
-  const [favoriteInstrumentIds, setFavoriteInstrumentIds] = useState<
-    InstrumentId[]
-  >(loader.favoriteInstrumentIds);
 
   useEffect(() => {
-    const fetchFavorite = async () => {
-      const response = await listFavoriteApi.listFavorite({
-        withCredentials: true,
-      });
-      setFavoriteInstrumentIds(
-        response.data.content.map((favorite) => favorite.instrument_id),
-      );
-    };
-
-    fetchFavorite();
-
     const fetchInstruments = async () => {
       const response =
         await getInstrumentsByCriteriaPaginated.getInstrumentsByCriteriaPaginated(
@@ -83,10 +66,7 @@ export function CataloguePage() {
           </div>
 
           <div className={styles.catalogue__serp__navbar__wrapper}>
-            <SerpWidget
-              instruments={instruments}
-              favoriteInstrumentIds={favoriteInstrumentIds}
-            />
+            <SerpWidget instruments={instruments} />
             <NavigationBarWidget
               totalPages={totalPages.current}
               pageNumber={pageNumber}
@@ -100,5 +80,3 @@ export function CataloguePage() {
     </>
   );
 }
-
-export default CataloguePage;

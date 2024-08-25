@@ -17,7 +17,7 @@ export * from "./instrument-name";
 export * from "./instrument-photo";
 export * from "./instrument-type";
 export * from "./jwt-response";
-export * from "./list-favorite-response-body";
+export * from "./list-favorite-response";
 export * from "./manufacture-date";
 export * from "./manufacturer";
 export * from "./manufacturer-name";

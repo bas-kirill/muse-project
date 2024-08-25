@@ -29,10 +29,9 @@ export function InstrumentPage() {
         <div>
           <InstrumentActions
             instrument={loader.instrument}
-            favorite={loader.favorite}
             removeButton={true}
-            editButton={true}
             favoriteButton={true}
+            editButton={true}
             showButton={false}
           />
         </div>

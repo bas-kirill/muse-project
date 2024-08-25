@@ -6,7 +6,7 @@
 package mu.muse.rest.api
 
 import mu.muse.rest.dto.ClientError
-import mu.muse.rest.dto.ListFavoriteResponseBody
+import mu.muse.rest.dto.ListFavoriteResponse
 import mu.muse.rest.dto.ServerError
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -40,5 +40,5 @@ interface ListFavoriteApi {
             value = ["/api/favorite/list"],
             produces = ["application/json"]
     )
-    fun listFavorite(): ResponseEntity<ListFavoriteResponseBody>
+    fun listFavorite(): ResponseEntity<ListFavoriteResponse>
 }

@@ -1,29 +1,27 @@
 package mu.muse.rest.favorite
 
-import mu.muse.rest.FAVORITE_INSTRUMENTS_SESSION_KEY
+import mu.muse.domain.instrument.InstrumentId
+import mu.muse.domain.user.Username
 import mu.muse.rest.api.AddFavoriteApi
-import mu.muse.rest.dto.InstrumentId
+import mu.muse.usecase.AddFavorite
 import org.springframework.http.ResponseEntity
+import org.springframework.security.core.context.SecurityContextHolder
+import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.context.request.RequestContextHolder
-import org.springframework.web.context.request.ServletRequestAttributes
 
 @RestController
-class AddFavoriteEndpoint: AddFavoriteApi {
+class AddFavoriteEndpoint(
+    private val addFavorite: AddFavorite,
+): AddFavoriteApi {
 
-    override fun addFavorite(request: InstrumentId): ResponseEntity<Any> {
-        val session = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request.session
-        val favorite = session.getAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY) as MutableList<Long>?
-        if (favorite == null) {
-            session.setAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY, mutableListOf(request.instrumentId))
-            return ResponseEntity.ok().build()
-        }
-
-        if (request.instrumentId !in favorite) {
-            favorite.add(request.instrumentId)
-        }
-
-        session.setAttribute(FAVORITE_INSTRUMENTS_SESSION_KEY, favorite)
+    override fun addFavorite(request: mu.muse.rest.dto.InstrumentId): ResponseEntity<Any> {
+        val instrumentId = InstrumentId.from(request.instrumentId)
+        val principal = SecurityContextHolder.getContext().authentication.principal as UserDetails
+        val username = Username.from(principal.username)
+        addFavorite.execute(
+            username = username,
+            instrumentId = instrumentId,
+        )
         return ResponseEntity.ok().build()
     }
 }

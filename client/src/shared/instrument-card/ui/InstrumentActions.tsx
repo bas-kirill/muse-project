@@ -15,7 +15,6 @@ import { getCookie } from "shared/cookie/cookie";
 
 interface Props {
   instrument: InstrumentDetail;
-  favorite: boolean;
   removeButton: boolean;
   editButton: boolean;
   favoriteButton: boolean;
@@ -23,9 +22,10 @@ interface Props {
 }
 
 export const InstrumentActions = (props: Props) => {
+  const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));
+
   const [errorModal, setErrorModal] = useState<boolean>(false);
   const [successModal, setSuccessModal] = useState<boolean>(false);
-  const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));
 
   return (
     <div className={styles.actions__wrapper}>
@@ -45,11 +45,8 @@ export const InstrumentActions = (props: Props) => {
           <EditInstrumentButton instrument={props.instrument} />
         )}
 
-      {props.favoriteButton && (
-        <FavoriteButton
-          instrumentId={props.instrument.instrument_id}
-          favorite={props.favorite}
-        />
+      {props.favoriteButton && jwt.current !== undefined && (
+        <FavoriteButton instrumentId={props.instrument.instrument_id} />
       )}
 
       {props.showButton && (
@@ -75,20 +72,6 @@ export const InstrumentActions = (props: Props) => {
       >
         <h1>✅Instrument deleted</h1>
       </ModalWidget>
-
-      {/*<ModalWidget*/}
-      {/*  opened={deleteSuccessModal}*/}
-      {/*  closeModal={() => setDeleteSuccessModal(false)}*/}
-      {/*>*/}
-      {/*  <h1>✅Instrument deleted</h1>*/}
-      {/*</ModalWidget>*/}
-
-      {/*<ModalWidget*/}
-      {/*  opened={deleteErrorModal}*/}
-      {/*  closeModal={() => setDeleteErrorModal(false)}*/}
-      {/*>*/}
-      {/*  <h1>❌Fail to delete instrument</h1>*/}
-      {/*</ModalWidget>*/}
     </div>
   );
 };
