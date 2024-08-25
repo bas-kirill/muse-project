@@ -9,14 +9,13 @@ interface Props {
 
 const getInstrumentPhoto = new GetInstrumentPhotoApi();
 
-
 export const InstrumentPhoto = (props: Props) => {
   const [photo, setPhoto] = useState<string | undefined>();
 
   useEffect(() => {
     const fetchPhoto = async () => {
       const response = await getInstrumentPhoto.getInstrumentPhoto(
-        props.instrument.instrument_id.instrument_id
+        props.instrument.instrument_id.instrument_id,
       );
 
       setPhoto(response.data.photo);

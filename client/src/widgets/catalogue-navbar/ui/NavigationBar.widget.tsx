@@ -25,7 +25,9 @@ export const NavigationBarWidget = (props: Props) => {
           ${styles.navbar__button} 
           ${props.pageNumber === props.totalPages && styles.navbar__non_clickable}
         `}
-        onClick={() => props.setPageNumber(Math.min(props.pageNumber + 1, props.totalPages))}
+        onClick={() =>
+          props.setPageNumber(Math.min(props.pageNumber + 1, props.totalPages))
+        }
       >
         Next
       </button>

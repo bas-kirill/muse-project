@@ -9,9 +9,9 @@ header {
     padding: 1em 0;
     text-align: center;
     /*background-color: #55c4fa;*/
-    background-color:  #1E90FF;
+    background-color: #1e90ff;
     color: #ffffff;
-    border: 1px #CCCCCC solid;
+    border: 1px #cccccc solid;
   }
 
   nav > button:hover {

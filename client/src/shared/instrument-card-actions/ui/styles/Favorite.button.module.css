@@ -1,16 +1,16 @@
 .favorite__button {
-  background-color: #1E90FF;
-  color: #FFFFFF;
+  background-color: #1e90ff;
+  color: #ffffff;
   flex: 1;
   cursor: pointer;
-  border: 1px #CCCCCC solid;
+  border: 1px #cccccc solid;
 }
 
 .favorite {
-  color: #DC143C;
+  color: #dc143c;
   font-weight: bold;
 }
 
 .favorite__button:hover {
-  background-color: #007BFF;
+  background-color: #007bff;
 }

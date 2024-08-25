@@ -1,6 +1,10 @@
 import React from "react";
 import styles from "./styles/InstrumentCard.module.css";
-import { InstrumentDescription, InstrumentPhoto, InstrumentActions } from "shared/instrument-card";
+import {
+  InstrumentDescription,
+  InstrumentPhoto,
+  InstrumentActions,
+} from "shared/instrument-card";
 import { InstrumentDetail } from "generated/model";
 
 interface Props {

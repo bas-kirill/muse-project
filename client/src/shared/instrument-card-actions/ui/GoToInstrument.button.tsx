@@ -12,10 +12,14 @@ export const GoToInstrumentButton = (props: Props) => {
   const navigate = useNavigate();
 
   return (
-    <button className={styles.go_to_instrument__button} onClick={_ => {
-      const uri = `/instrument/${props.instrument.instrument_id.instrument_id}`;
-      navigate(uri);
-    }}>
+    <button
+      className={styles.go_to_instrument__button}
+      /* eslint-disable */
+      onClick={(_) => {
+        const uri = `/instrument/${props.instrument.instrument_id.instrument_id}`;
+        navigate(uri);
+      }}
+    >
       Show
     </button>
   );

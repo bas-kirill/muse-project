@@ -74,13 +74,10 @@ export function CataloguePage() {
     <>
       <HeaderWidget />
 
-
-
       <div className={styles.catalogue__wrapper}>
         <SearchBarInputField filters={filters} setFilters={setFilters} />
 
         <div className={styles.catalogue__filters__serp__navbar__wrapper}>
-
           <div className={styles.catalogue__filters__wrapper}>
             <SidebarFilterWidget onFilterChange={setFilters} />
           </div>

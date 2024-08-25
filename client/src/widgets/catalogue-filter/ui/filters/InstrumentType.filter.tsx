@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Filter.module.css";
 import textStyle from "./Text.module.css";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { InstrumentType } from "generated/model/instrument-type";
@@ -16,9 +15,8 @@ export const InstrumentTypeFilter = (props: Props) => {
   useEffect(() => {
     const fetchTypes = async () => {
       const response = await getInstrumentTypes.getInstrumentTypes();
-      setInstrumentTypes(response.data.content)
-    }
-
+      setInstrumentTypes(response.data.content);
+    };
 
     fetchTypes();
   }, []);
@@ -42,7 +40,9 @@ export const InstrumentTypeFilter = (props: Props) => {
 
   return (
     <div>
-      <legend className={`${textStyle.primary}`} style={{padding: "0"}}>Type</legend>
+      <legend className={`${textStyle.primary}`} style={{ padding: "0" }}>
+        Type
+      </legend>
       {instrumentTypes.map((instrumentType) => (
         <div key={instrumentType.instrument_type}>
           <input

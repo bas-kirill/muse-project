@@ -1,11 +1,11 @@
 .edit_instrument__button {
   flex: 1;
   cursor: pointer;
-  background-color: #28A745;
+  background-color: #28a745;
   color: white;
-  border: 1px #CCCCCC solid;
+  border: 1px #cccccc solid;
 }
 
 .edit_instrument__button:hover {
-  background-color: #007BFF;
+  background-color: #007bff;
 }
