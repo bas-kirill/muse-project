@@ -74,7 +74,7 @@ export function HomePage() {
       </div>
 
       <h1>Trending Instruments</h1>
-      
+
       <div className={styles.trends}>
         <Slide
           autoplay={true}
