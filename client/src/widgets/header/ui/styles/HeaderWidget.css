@@ -5,12 +5,13 @@ header {
   }
 
   nav > button {
-    border: 1px solid black;
     flex: 1;
     padding: 1em 0;
     text-align: center;
-    background-color: #55c4fa;
+    /*background-color: #55c4fa;*/
+    background-color:  #1E90FF;
     color: #ffffff;
+    border: 1px #CCCCCC solid;
   }
 
   nav > button:hover {

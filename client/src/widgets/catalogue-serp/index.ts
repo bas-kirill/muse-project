@@ -1,3 +1,3 @@
-import { CatalogueSerpWidget } from "./ui/CatalogueSerp.widget";
+import { SerpWidget } from "./ui/Serp.widget";
 
-export { CatalogueSerpWidget };
+export { SerpWidget };

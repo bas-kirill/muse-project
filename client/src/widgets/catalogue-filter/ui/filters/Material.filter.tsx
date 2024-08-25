@@ -44,7 +44,7 @@ export const MaterialFilter = ({ onValueChange }: Props) => {
 
   return (
     <div>
-      <legend>Basic Materials:</legend>
+      <legend style={{padding: "0"}}>Basic Materials:</legend>
       {materials.map((material) => (
         <div key={material.basic_material}>
           <input

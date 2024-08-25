@@ -39,17 +39,16 @@ export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
 
   return (
     <div>
-      <legend>Manufacturer:</legend>
+      <legend style={{padding: "0"}}>Manufacturer:</legend>
       {manufacturers.map((manufacturer) => (
         <div key={manufacturer.manufacturer}>
           <input
             type="checkbox"
             name={manufacturer.manufacturer}
             onChange={onChange}
-            className="manufacturer-name-filter-checkbox"
             defaultChecked={true}
           />
-          <label htmlFor={manufacturer.manufacturer}>
+          <label htmlFor={manufacturer.manufacturer} style={{ padding: "0" }}>
             {manufacturer.manufacturer}
           </label>
         </div>

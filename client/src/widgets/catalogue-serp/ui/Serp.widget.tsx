@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/CatalogueSerpWidget.module.css";
+import styles from "./styles/Serp.widget.module.css";
 import { InstrumentDetail, InstrumentId } from "generated/model";
 import { InstrumentCard } from "shared/instrument-card";
 
@@ -8,9 +8,9 @@ interface Props {
   favoriteInstrumentIds: InstrumentId[];
 }
 
-export const CatalogueSerpWidget = (props: Props) => {
+export const SerpWidget = (props: Props) => {
   return (
-    <div className={styles.catalogue_serp} id="catalogue-serp">
+    <div className={styles.serp}>
       {props.instruments.length === 0 && (
         <div className={styles.not_found}>Instruments not found :(</div>
       )}

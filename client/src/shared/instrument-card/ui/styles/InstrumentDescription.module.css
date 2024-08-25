@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+}
+
+.instrument_description__header {
+  color: #000000;
+}
+
+.instrument__description {
+  flex: 3;
+}
+
+.primary {
+  color: #212529;
+}
+
+.secondary {
+  color: #6C757D;
+}

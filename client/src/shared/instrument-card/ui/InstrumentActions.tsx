@@ -6,7 +6,7 @@ import { Role } from "domain/model/role";
 import { Cookies } from "typescript-cookie";
 import { InstrumentDetail } from "generated/model";
 import {
-  AddOrRemoveFavoriteButton,
+  FavoriteButton,
   EditInstrumentButton,
   GoToInstrumentButton,
   RemoveInstrumentButton,
@@ -38,7 +38,7 @@ export const InstrumentActions = (props: Props) => {
           </>
         )}
 
-      <AddOrRemoveFavoriteButton
+      <FavoriteButton
         instrumentId={props.instrument.instrument_id}
         favorite={props.favorite}
       />

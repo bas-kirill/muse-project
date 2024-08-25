@@ -3,8 +3,8 @@ import styles from "./styles/Catalogue.page.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";
-import { CatalogueFilterWidget, Filters } from "widgets/catalogue-filter";
-import { CatalogueSerpWidget } from "widgets/catalogue-serp";
+import { SidebarFilterWidget, Filters } from "widgets/catalogue-filter";
+import { SerpWidget } from "widgets/catalogue-serp";
 import { CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
 import { ListFavoriteApi } from "generated/api/list-favorite-api";
 import { InstrumentDetail, InstrumentId } from "generated/model";
@@ -74,23 +74,28 @@ export function CataloguePage() {
     <>
       <HeaderWidget />
 
-      <SearchBarInputField filters={filters} setFilters={setFilters} />
+
 
       <div className={styles.catalogue__wrapper}>
-        <div className={styles.catalogue__filters__wrapper}>
-          <CatalogueFilterWidget onFilterChange={setFilters} />
-        </div>
+        <SearchBarInputField filters={filters} setFilters={setFilters} />
 
-        <div className={styles.catalogue__serp__navbar__wrapper}>
-          <CatalogueSerpWidget
-            instruments={instruments}
-            favoriteInstrumentIds={favoriteInstrumentIds}
-          />
-          <NavigationBarWidget
-            totalPages={totalPages.current}
-            pageNumber={pageNumber}
-            setPageNumber={setPageNumber}
-          />
+        <div className={styles.catalogue__filters__serp__navbar__wrapper}>
+
+          <div className={styles.catalogue__filters__wrapper}>
+            <SidebarFilterWidget onFilterChange={setFilters} />
+          </div>
+
+          <div className={styles.catalogue__serp__navbar__wrapper}>
+            <SerpWidget
+              instruments={instruments}
+              favoriteInstrumentIds={favoriteInstrumentIds}
+            />
+            <NavigationBarWidget
+              totalPages={totalPages.current}
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
+            />
+          </div>
         </div>
       </div>
 

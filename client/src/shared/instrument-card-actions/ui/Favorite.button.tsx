@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/AddOrRemoveFavorite.button.module.css";
+import styles from "./styles/Favorite.button.module.css";
 import { useState } from "react";
 import { AddFavoriteApi, RemoveFavoriteApi } from "generated/api";
 import { InstrumentId } from "generated/model";
@@ -12,17 +12,17 @@ interface Props {
 const removeFavorite = new RemoveFavoriteApi();
 const addFavorite = new AddFavoriteApi();
 
-export const AddOrRemoveFavoriteButton = (props: Props) => {
+export const FavoriteButton = (props: Props) => {
   const [favorite, setFavorite] = useState<boolean>(props.favorite);
 
   const toggleFavorite = async () => {
     if (favorite) {
       removeFavorite.removeFavorite(props.instrumentId, {
-        withCredentials: true,
+        withCredentials: true
       });
     } else {
       addFavorite.addFavorite(props.instrumentId, {
-        withCredentials: true,
+        withCredentials: true
       });
     }
     setFavorite(!favorite);
@@ -31,9 +31,12 @@ export const AddOrRemoveFavoriteButton = (props: Props) => {
   return (
     <button
       onClick={toggleFavorite}
-      className={styles.favorite_add_remove__button}
+      className={`
+        ${styles.favorite__button}
+        ${favorite ? styles.favorite : ""}
+      `}
     >
-      {favorite ? "Remove from Favorite" : "Add to Favorite"}
+      Favorite
     </button>
   );
 };

@@ -22,11 +22,12 @@
 }
 
 #app {
-  background-color: #f0f0f0;
+  background-color: #F5F5F5;
   max-width: 1024px;
   margin: 0 auto;
+  border: 1px #DEE2E6 solid;
 }
 
 h1 {
-  text-align: center;
+  margin: 0;
 }

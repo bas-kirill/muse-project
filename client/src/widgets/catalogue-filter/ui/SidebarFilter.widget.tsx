@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./styles/CreateInstrumentCard.button.module.css";
+import styles from "./styles/SidebarFilter.widget.module.css";
 import { Filters } from "widgets/catalogue-filter";
 import { Role } from "domain/model/role";
 import Jwt from "domain/model/jwt";
@@ -23,7 +23,7 @@ interface Props {
   onFilterChange: (filters: Filters) => void;
 }
 
-export const CatalogueFilterWidget = (props: Props) => {
+export const SidebarFilterWidget = (props: Props) => {
   const [instrumentTypes, setInstrumentTypes] = useState<
     InstrumentType[] | null
   >(null);
@@ -66,40 +66,55 @@ export const CatalogueFilterWidget = (props: Props) => {
   ]);
 
   return (
-    <div>
-      <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
-      <ManufacturerNameFilter onValueChange={setManufacturerNames} />
-
-      <div>
-        <legend>Manufacture Date:</legend>
-        <ManufactureDateFilter
-          onValueChange={setManufactureDateFrom}
-          fieldName={"manufactureDateFrom"}
-          labelName={"From"}
-        />
-        <ManufactureDateFilter
-          onValueChange={setManufactureDateTo}
-          fieldName={"manufactureDateTo"}
-          labelName={"To"}
-        />
+    <div className={styles.filter_sidebar}>
+      <div className={styles.filter__wrapper}>
+        <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
+      </div>
+      <div className={styles.filter__wrapper}>
+        <ManufacturerNameFilter onValueChange={setManufacturerNames} />
       </div>
 
-      <div>
-        <legend>Release Date:</legend>
-        <ReleaseDateFilter
-          onValueChange={setReleaseDateFrom}
-          fieldName={"releaseDateFrom"}
-          labelName={"From"}
-        />
-        <ReleaseDateFilter
-          onValueChange={setReleaseDateTo}
-          fieldName={"releaseDateTo"}
-          labelName={"To"}
-        />
+      <div className={styles.filter__wrapper}>
+        <legend style={{ padding: "0" }}>Manufacture Date</legend>
+
+        <div className={styles.vertical__wrapper}>
+          <ManufactureDateFilter
+            onValueChange={setManufactureDateFrom}
+            fieldName={"manufactureDateFrom"}
+            labelName={""}
+          />
+
+          <ManufactureDateFilter
+            onValueChange={setManufactureDateTo}
+            fieldName={"manufactureDateTo"}
+            labelName={""}
+          />
+        </div>
       </div>
 
-      <CountryFilter onValueChange={setCountries} />
-      <MaterialFilter onValueChange={setMaterials} />
+      <div className={styles.filter__wrapper}>
+        <legend style={{ padding: "0" }}>Release Date</legend>
+        <div className={styles.vertical__wrapper}>
+          <ReleaseDateFilter
+            onValueChange={setReleaseDateFrom}
+            fieldName={"releaseDateFrom"}
+            labelName={""}
+          />
+          <ReleaseDateFilter
+            onValueChange={setReleaseDateTo}
+            fieldName={"releaseDateTo"}
+            labelName={""}
+          />
+        </div>
+      </div>
+
+      <div className={styles.filter__wrapper}>
+        <CountryFilter onValueChange={setCountries} />
+      </div>
+
+      <div className={styles.filter__wrapper}>
+        <MaterialFilter onValueChange={setMaterials} />
+      </div>
 
       {Jwt.extractFromCookie()?.toRole() === Role.Editor && (
         <CreateInstrumentCardButton />
