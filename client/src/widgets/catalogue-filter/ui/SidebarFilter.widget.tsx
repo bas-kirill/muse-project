@@ -25,7 +25,7 @@ interface Props {
 }
 
 export const SidebarFilterWidget = (props: Props) => {
-  const {darkMode} = useDarkMode();
+  const { darkMode } = useDarkMode();
 
   const [instrumentTypes, setInstrumentTypes] = useState<
     InstrumentType[] | null
@@ -69,10 +69,12 @@ export const SidebarFilterWidget = (props: Props) => {
   ]);
 
   return (
-    <div className={`
+    <div
+      className={`
       ${styles.filter_sidebar}
       ${darkMode && styles.filter_sidebar__dark}
-    `}>
+    `}
+    >
       <div className={styles.media__horizontal__wrapper}>
         <div className={styles.filter__wrapper}>
           <InstrumentTypeFilter onValueChange={setInstrumentTypes} />

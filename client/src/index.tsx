@@ -10,6 +10,7 @@ root.render(
   <ThemeProvider>
     <React.StrictMode>
       <App />
-    </React.StrictMode>,
-  </ThemeProvider>
+    </React.StrictMode>
+    ,
+  </ThemeProvider>,
 );

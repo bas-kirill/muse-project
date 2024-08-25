@@ -14,7 +14,7 @@ interface Props {
 const removeFavoriteApi = new RemoveFavoriteApi();
 
 export const RemoveInstrumentButton = (props: Props) => {
-  const {darkMode} = useDarkMode();
+  const { darkMode } = useDarkMode();
 
   const handleOnDeleteInstrument = () => {
     const removeFavorite = async () => {

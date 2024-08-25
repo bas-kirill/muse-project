@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const InstrumentDescription = (props: Props) => {
-  const {darkMode} = useDarkMode();
+  const { darkMode } = useDarkMode();
 
   const {
     instrument_name: { instrument_name },
@@ -26,20 +26,47 @@ export const InstrumentDescription = (props: Props) => {
         <h1 className={`${darkMode ? styles.h1__dark : styles.h1}`}>
           {instrument_name}
         </h1>
-        <b className={`${darkMode ? styles.secondary__dark : styles.secondary}`}>Type</b>: <span>{instrument_type}</span>
+        <b
+          className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
+        >
+          Type
+        </b>
+        : <span>{instrument_type}</span>
         <br />
-        <b className={`${darkMode ? styles.secondary__dark : styles.secondary}`}>Manufacturer</b>:{" "}
-        <span>{manufacturer_name}</span>
+        <b
+          className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
+        >
+          Manufacturer
+        </b>
+        : <span>{manufacturer_name}</span>
         <br />
-        <b className={`${darkMode ? styles.secondary__dark : styles.secondary}`}>Manufacturer date</b>:{" "}
-        <span>{manufacture_date}</span>
+        <b
+          className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
+        >
+          Manufacturer date
+        </b>
+        : <span>{manufacture_date}</span>
         <br />
-        <b className={`${darkMode ? styles.secondary__dark : styles.secondary}`}>Release Date</b>:{" "}
-        <span>{release_date}</span>
+        <b
+          className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
+        >
+          Release Date
+        </b>
+        : <span>{release_date}</span>
         <br />
-        <b className={`${darkMode ? styles.secondary__dark : styles.secondary}`}>Country</b>: <span>{country}</span>
+        <b
+          className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
+        >
+          Country
+        </b>
+        : <span>{country}</span>
         <br />
-        <b className={`${darkMode ? styles.secondary__dark : styles.secondary}`}>Basic Materials</b>:
+        <b
+          className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
+        >
+          Basic Materials
+        </b>
+        :
         <>
           {basic_materials.map((basic_material, index) => (
             <span>

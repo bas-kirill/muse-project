@@ -7,15 +7,15 @@
 }
 
 .light {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
 }
 
 .dark {
   background-color: #333333;
-  color: #FFD700;
+  color: #ffd700;
 
   &::placeholder {
-    color: #FFD700;
+    color: #ffd700;
   }
 }
 

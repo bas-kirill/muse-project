@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const EditInstrumentButton = (props: Props) => {
-  const {darkMode} = useDarkMode();
+  const { darkMode } = useDarkMode();
   const navigate = useNavigate();
 
   return (

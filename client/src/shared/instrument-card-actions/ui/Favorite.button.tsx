@@ -37,7 +37,7 @@ export const FavoriteButton = (props: Props) => {
       });
 
       const favoriteRawIds = favoriteRequest.data.content.map(
-        it => it.instrument_id.instrument_id,
+        (it) => it.instrument_id.instrument_id,
       );
       const instrumentId = props.instrumentId.instrument_id;
       setFavorite(favoriteRawIds.includes(instrumentId));

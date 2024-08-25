@@ -16,7 +16,7 @@ const logout = new LogoutApi();
 
 export function ProfilePage() {
   useJwt();
-  const {darkMode, toggleTheme} = useDarkMode();
+  const { toggleTheme } = useDarkMode();
   const navigate = useNavigate();
   const profile = useLoaderData() as ProfileDetails;
 

@@ -1,4 +1,11 @@
-import { createContext, useContext, useState, ReactNode, FC, useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  FC,
+  useEffect,
+} from "react";
 import { DARK_MODE } from "shared/config/frontend";
 
 interface ThemeContextProps {
@@ -40,7 +47,7 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
 export const useDarkMode = (): ThemeContextProps => {
   const context = useContext(ThemeContext);
   if (!context) {
-    throw new Error('useDarkMode must be used within a ThemeProvider');
+    throw new Error("useDarkMode must be used within a ThemeProvider");
   }
   return context;
 };

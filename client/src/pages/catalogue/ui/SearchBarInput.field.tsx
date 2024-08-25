@@ -10,8 +10,7 @@ interface Props {
 }
 
 export const SearchBarInputField = (props: Props) => {
-
-  const {darkMode } = useDarkMode();
+  const { darkMode } = useDarkMode();
 
   return (
     <input

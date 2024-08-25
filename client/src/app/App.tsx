@@ -5,19 +5,19 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
+  RouterProvider,
 } from "react-router-dom";
 import { HomePage } from "pages/home";
 import { ProfilePage, loader as profileLoader } from "pages/profile";
 import { CataloguePage, loader as catalogueLoader } from "pages/catalogue";
 import {
   action as loginAction,
-  LoginPage // todo(refactor): add suffix `Page`
+  LoginPage, // todo(refactor): add suffix `Page`
 } from "pages/login";
 import { NotFoundPage } from "pages/not-found";
 import {
   InstrumentPage, // todo(refactor): add suffix `Page`
-  loader as instrumentLoader
+  loader as instrumentLoader,
 } from "pages/instrument";
 import {
   CATALOGUE,
@@ -29,21 +29,21 @@ import {
   LOGIN,
   NOT_FOUND,
   PROFILE,
-  REGISTRATION_URL
+  REGISTRATION_URL,
 } from "shared/config/paths";
 import {
   CreateInstrumentPage, // todo(refactor): add suffix `Page`
   loader as createInstrumentLoader,
-  action as createInstrumentAction
+  action as createInstrumentAction,
 } from "pages/create-instrument";
 import {
   EditInstrumentPage, // todo(refactor): add suffix `Page`
   loader as editLoader,
-  action as editAction
+  action as editAction,
 } from "pages/edit-instrument";
 import {
   RegistrationPage,
-  action as registrationAction
+  action as registrationAction,
 } from "pages/registration";
 import { FavoritePage, loader as favoriteLoader } from "pages/favorite";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
@@ -82,7 +82,7 @@ const routes = createRoutesFromElements(
     />
     <Route path={FAVORITE} element={<FavoritePage />} loader={favoriteLoader} />
     <Route path={NOT_FOUND} element={<NotFoundPage />} />
-  </Route>
+  </Route>,
 );
 
 const router = createBrowserRouter(routes);

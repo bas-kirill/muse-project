@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const SerpWidget = (props: Props) => {
-  const {darkMode} = useDarkMode();
+  const { darkMode } = useDarkMode();
 
   return (
     <div className={styles.serp}>
@@ -19,10 +19,12 @@ export const SerpWidget = (props: Props) => {
 
       {props.instruments.length > 0 &&
         props.instruments.map((instrument) => (
-          <div className={`
+          <div
+            className={`
             ${styles.serp__instrument_card_wrapper}
             ${darkMode ? styles.instrument_card__wrapper__dark : styles.instrument_card__wrapper__light}
-          `}>
+          `}
+          >
             <InstrumentCard
               key={instrument.instrument_id.instrument_id}
               instrument={instrument}

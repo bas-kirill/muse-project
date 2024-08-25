@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const ShowInstrumentButton = (props: Props) => {
-  const {darkMode} = useDarkMode();
+  const { darkMode } = useDarkMode();
   const navigate = useNavigate();
 
   const handleOnClick = () => {
