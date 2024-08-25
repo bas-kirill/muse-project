@@ -3,11 +3,11 @@ import styles from "./styles/Login.page.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useNavigate } from "react-router-dom";
-import { LogInAction } from "../api/action";
+import { LoginAction } from "../api/action";
 import { REGISTRATION_URL } from "shared/config/paths";
 
 export function LoginPage() {
-  const actionData = useActionData() as LogInAction;
+  const actionData = useActionData() as LoginAction;
   const navigate = useNavigate();
 
   const handleRegisterRedirect = () => {
@@ -17,10 +17,6 @@ export function LoginPage() {
   return (
     <>
       <HeaderWidget />
-
-      {actionData?.errors.length === 0 && (
-        <div className={styles.login__ok}>✅ Welcome!</div>
-      )}
 
       <Form method="post" className={styles.login__form}>
         <input type="text" name="login" placeholder={"Login"} />

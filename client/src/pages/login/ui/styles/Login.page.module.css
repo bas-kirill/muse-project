@@ -9,16 +9,3 @@
     font-size: 2em;
   }
 }
-
-.login__ok {
-  max-width: 640px;
-  background-color: green;
-  font-size: 2em;
-  padding: 0 10px;
-  margin: 0 auto;
-}
-
-.login__error {
-  background-color: red;
-  padding: 20px 10px;
-}
