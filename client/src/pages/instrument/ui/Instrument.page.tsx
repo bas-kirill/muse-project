@@ -3,7 +3,11 @@ import styles from "./styles/Instrument.page.module.css";
 import { FooterWidget } from "widgets/footer";
 import { HeaderWidget } from "widgets/header";
 import { useLoaderData } from "react-router-dom";
-import { InstrumentActions, InstrumentCard, InstrumentDescription, InstrumentPhoto } from "shared/instrument-card";
+import {
+  InstrumentActions,
+  InstrumentDescription,
+  InstrumentPhoto,
+} from "shared/instrument-card";
 import { InstrumentLoader } from "pages/instrument";
 
 export function InstrumentPage() {
@@ -32,7 +36,6 @@ export function InstrumentPage() {
             showButton={false}
           />
         </div>
-
       </div>
       <FooterWidget />
     </>

@@ -12,26 +12,26 @@ const getInstrumentById = new GetInstrumentByIdApi();
 const listFavorite = new ListFavoriteApi();
 
 export const loader: LoaderFunction = async ({
-  params
+  params,
 }): Promise<InstrumentLoader> => {
-const instrumentRequest = await getInstrumentById.getInstrumentById(
-  parseInt(params.instrumentId as string)
+  const instrumentRequest = await getInstrumentById.getInstrumentById(
+    parseInt(params.instrumentId as string),
   );
 
   const listFavoriteRequest = await listFavorite.listFavorite({
-    withCredentials: true
+    withCredentials: true,
   });
 
   if (instrumentRequest.status !== 200) {
     throw new Error(
-      `Failed to extract instrument ID: '${params.instrumentId}'`
+      `Failed to extract instrument ID: '${params.instrumentId}'`,
     );
   }
 
   const instrument = instrumentRequest.data;
-  const favoriteIds = listFavoriteRequest.data.content
-    .map(instrument_detail => instrument_detail.instrument_id.instrument_id);
-
+  const favoriteIds = listFavoriteRequest.data.content.map(
+    (instrument_detail) => instrument_detail.instrument_id.instrument_id,
+  );
 
   return {
     instrument: instrument,

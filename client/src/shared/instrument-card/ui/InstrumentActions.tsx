@@ -29,18 +29,21 @@ export const InstrumentActions = (props: Props) => {
 
   return (
     <div className={styles.actions__wrapper}>
-      {props.removeButton && jwt.current !== undefined &&
+      {props.removeButton &&
+        jwt.current !== undefined &&
         Jwt.from(jwt.current).toRole() === Role.Editor && (
-            <RemoveInstrumentButton
-              instrument={props.instrument}
-              setErrorModal={setErrorModal}
-              setSuccessModal={setSuccessModal}
-            />
+          <RemoveInstrumentButton
+            instrument={props.instrument}
+            setErrorModal={setErrorModal}
+            setSuccessModal={setSuccessModal}
+          />
         )}
 
-      {props.editButton && jwt.current !== undefined && Jwt.from(jwt.current).toRole() === Role.Editor && (
-        <EditInstrumentButton instrument={props.instrument} />
-      )}
+      {props.editButton &&
+        jwt.current !== undefined &&
+        Jwt.from(jwt.current).toRole() === Role.Editor && (
+          <EditInstrumentButton instrument={props.instrument} />
+        )}
 
       {props.favoriteButton && (
         <FavoriteButton
@@ -52,7 +55,6 @@ export const InstrumentActions = (props: Props) => {
       {props.showButton && (
         <ShowInstrumentButton instrument={props.instrument} />
       )}
-
 
       <ModalWidget
         opened={errorModal}

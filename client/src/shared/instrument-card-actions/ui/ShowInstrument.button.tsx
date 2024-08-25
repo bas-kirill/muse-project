@@ -18,10 +18,13 @@ export const ShowInstrumentButton = (props: Props) => {
   };
 
   return (
-    <button className={`
+    <button
+      className={`
       ${actionBtnStyle.action__button}
       ${styles.show_instrument__button}
-    `} onClick={handleOnClick}>
+    `}
+      onClick={handleOnClick}
+    >
       Show
     </button>
   );

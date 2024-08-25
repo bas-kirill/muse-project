@@ -22,13 +22,12 @@ export const FavoritePage = () => {
 
       <div className={styles.instruments__wrapper}>
         {loader.instrumentDetails.map((instrument) => (
-            <InstrumentCard
-              key={instrument.instrument_id.instrument_id}
-              instrument={instrument}
-              favorite={true}
-            />
+          <InstrumentCard
+            key={instrument.instrument_id.instrument_id}
+            instrument={instrument}
+            favorite={true}
+          />
         ))}
-
       </div>
 
       <FooterWidget />
