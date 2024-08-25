@@ -4,6 +4,7 @@ import mu.muse.common.types.AggregateRoot
 import mu.muse.common.types.Version
 import mu.muse.domain.instrument.InstrumentId
 
+@Suppress("LongParameterList")
 class User internal constructor(
     id: UserId,
     val username: Username,
@@ -15,6 +16,7 @@ class User internal constructor(
 ) : AggregateRoot<UserId>(id, version) {
 
     companion object {
+        @Suppress("LongParameterList")
         fun create(
             id: UserId,
             username: Username,
