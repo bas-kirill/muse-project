@@ -1,11 +1,5 @@
 .search_bar__input {
-  /*height: 3em;*/
-
-  /*input[type="text"] {*/
-  /*  background-color: white;*/
-
   font-size: 2em;
   text-align: start;
   border: 1px #dee2e6 solid;
-  /*}*/
 }

@@ -20,15 +20,15 @@ export const FavoritePage = () => {
         <div className={styles.favorite__empty}>Favorite List is Empty</div>
       )}
 
-      {loader.instrumentDetails.map((instrument) => (
-        <div className={styles.instrument__wrapper}>
+      <div className={styles.instruments__wrapper}>
+        {loader.instrumentDetails.map((instrument) => (
           <InstrumentCard
             key={instrument.instrument_id.instrument_id}
             instrument={instrument}
             favorite={true}
           />
-        </div>
-      ))}
+        ))}
+      </div>
 
       <FooterWidget />
     </>

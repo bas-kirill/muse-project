@@ -1,3 +1,5 @@
+@import "./Catalogue.page.queries.module.css";
+
 .catalogue__wrapper {
   display: flex;
   flex-direction: column;

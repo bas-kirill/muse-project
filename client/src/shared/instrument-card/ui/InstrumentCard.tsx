@@ -20,6 +20,10 @@ export const InstrumentCard = (props: Props) => {
       <InstrumentActions
         instrument={props.instrument}
         favorite={props.favorite}
+        removeButton={true}
+        editButton={true}
+        favoriteButton={true}
+        showButton={true}
       />
     </div>
   );

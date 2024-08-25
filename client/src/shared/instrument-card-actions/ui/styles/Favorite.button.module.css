@@ -1,13 +1,10 @@
 .favorite__button {
   background-color: #1e90ff;
-  color: #ffffff;
-  flex: 1;
-  cursor: pointer;
-  border: 1px #cccccc solid;
+  margin-bottom: 3px;
 }
 
 .favorite {
-  color: #dc143c;
+  color: #dc143c !important;
   font-weight: bold;
 }
 

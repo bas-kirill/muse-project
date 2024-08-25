@@ -1,0 +1,17 @@
+.instruments__wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+
+.instrument__photo__description__wrapper {
+  display: flex;
+}
+
+.instrument__photo__wrapper {
+  flex: 1;
+}
+
+.instrument__description__wrapper {
+  flex: 1;
+}

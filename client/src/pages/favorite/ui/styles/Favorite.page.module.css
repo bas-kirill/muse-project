@@ -1,10 +1,14 @@
 .h1 {
   text-align: center;
+  margin: 0.5em 0;
 }
 
 .favorite__empty {
   text-align: center;
 }
 
-.instrument__wrapper {
+.instruments__wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }

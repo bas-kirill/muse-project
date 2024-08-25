@@ -7,7 +7,7 @@ import { InstrumentDetail } from "generated/model";
 import {
   FavoriteButton,
   EditInstrumentButton,
-  GoToInstrumentButton,
+  ShowInstrumentButton,
   RemoveInstrumentButton,
 } from "shared/instrument-card-actions";
 import { COOKIE_JWT_KEY } from "shared/config/frontend";
@@ -16,6 +16,10 @@ import { getCookie } from "shared/cookie/cookie";
 interface Props {
   instrument: InstrumentDetail;
   favorite: boolean;
+  removeButton: boolean;
+  editButton: boolean;
+  favoriteButton: boolean;
+  showButton: boolean;
 }
 
 export const InstrumentActions = (props: Props) => {
@@ -24,24 +28,33 @@ export const InstrumentActions = (props: Props) => {
   const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));
 
   return (
-    <div className={styles.instrument_actions__wrapper}>
-      {jwt.current !== undefined &&
+    <div className={styles.actions__wrapper}>
+      {props.removeButton &&
+        jwt.current !== undefined &&
         Jwt.from(jwt.current).toRole() === Role.Editor && (
-          <>
-            <RemoveInstrumentButton
-              instrument={props.instrument}
-              setErrorModal={setErrorModal}
-              setSuccessModal={setSuccessModal}
-            />
-            <EditInstrumentButton instrument={props.instrument} />
-          </>
+          <RemoveInstrumentButton
+            instrument={props.instrument}
+            setErrorModal={setErrorModal}
+            setSuccessModal={setSuccessModal}
+          />
         )}
 
-      <FavoriteButton
-        instrumentId={props.instrument.instrument_id}
-        favorite={props.favorite}
-      />
-      <GoToInstrumentButton instrument={props.instrument} />
+      {props.editButton &&
+        jwt.current !== undefined &&
+        Jwt.from(jwt.current).toRole() === Role.Editor && (
+          <EditInstrumentButton instrument={props.instrument} />
+        )}
+
+      {props.favoriteButton && (
+        <FavoriteButton
+          instrumentId={props.instrument.instrument_id}
+          favorite={props.favorite}
+        />
+      )}
+
+      {props.showButton && (
+        <ShowInstrumentButton instrument={props.instrument} />
+      )}
 
       <ModalWidget
         opened={errorModal}

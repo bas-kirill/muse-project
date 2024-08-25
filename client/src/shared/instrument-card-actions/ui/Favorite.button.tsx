@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles/Favorite.button.module.css";
+import actionBtnStyle from "./styles/Action.button.module.css";
 import { useState } from "react";
 import { AddFavoriteApi, RemoveFavoriteApi } from "generated/api";
 import { InstrumentId } from "generated/model";
@@ -32,6 +33,7 @@ export const FavoriteButton = (props: Props) => {
     <button
       onClick={toggleFavorite}
       className={`
+        ${actionBtnStyle.action__button}
         ${styles.favorite__button}
         ${favorite ? styles.favorite : ""}
       `}

@@ -39,7 +39,7 @@ export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
 
   return (
     <div>
-      <legend style={{ padding: "0" }}>Manufacturer:</legend>
+      <legend style={{ padding: "0" }}>Manufacturer</legend>
       {manufacturers.map((manufacturer) => (
         <div key={manufacturer.manufacturer}>
           <input

@@ -58,8 +58,16 @@ export function HomePage() {
         }}
       >
         <form className={styles.search_bar__form}>
-          <input type="text" placeholder="What instrument?" />
-          <input type="submit" value="Search" />
+          <input
+            type="text"
+            placeholder="What instrument?"
+            className={styles.search_bar__form__input__text}
+          />
+          <input
+            type="submit"
+            value="Search"
+            className={styles.search_bar__form__input__submit}
+          />
         </form>
       </div>
 

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles/EditInstrument.button.module.css";
+import actionBtnStyle from "./styles/Action.button.module.css";
 import { useNavigate } from "react-router-dom";
 import { InstrumentDetail } from "generated/model";
 
@@ -12,7 +13,10 @@ export const EditInstrumentButton = (props: Props) => {
 
   return (
     <button
-      className={styles.edit_instrument__button}
+      className={`
+        ${actionBtnStyle.action__button}
+        ${styles.edit_instrument__button}
+      `}
       /* eslint-disable */
       onClick={(_) => {
         const uri = `/instrument/${props.instrument.instrument_id.instrument_id}/edit`;
