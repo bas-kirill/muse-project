@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/SearchBarInput.field.module.css";
+import styles from "./styles/SearchBarInput.field.module.scss";
 import { InstrumentName } from "generated/model";
 import { Filters } from "widgets/catalogue-filter";
 

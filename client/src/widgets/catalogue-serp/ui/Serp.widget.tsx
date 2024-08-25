@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./styles/Serp.widget.module.css";
+import styles from "./styles/Serp.widget.module.scss";
 import { InstrumentDetail, InstrumentId } from "generated/model";
 import { InstrumentCard } from "shared/instrument-card";
 
@@ -17,13 +17,15 @@ export const SerpWidget = (props: Props) => {
 
       {props.instruments.length > 0 &&
         props.instruments.map((instrument) => (
-          <InstrumentCard
-            key={instrument.instrument_id.instrument_id}
-            instrument={instrument}
-            favorite={props.favoriteInstrumentIds
-              .map((id) => id.instrument_id)
-              .includes(instrument.instrument_id.instrument_id)}
-          />
+          <div className={styles.serp__instrument_card_wrapper}>
+            <InstrumentCard
+              key={instrument.instrument_id.instrument_id}
+              instrument={instrument}
+              favorite={props.favoriteInstrumentIds
+                .map((id) => id.instrument_id)
+                .includes(instrument.instrument_id.instrument_id)}
+            />
+          </div>
         ))}
     </div>
   );

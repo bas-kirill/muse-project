@@ -1,3 +1,5 @@
+@use "shared/styles/vars" as vars;
+
 .filter_sidebar {
   padding: 0.2em;
   background-color: #e0e0e0;
@@ -5,6 +7,7 @@
 }
 
 .filter__wrapper {
+  flex: 1;
   margin-bottom: 0.5em;
 }
 
@@ -14,4 +17,14 @@
 
 .vertical__wrapper {
   display: flex;
+}
+
+@media (max-width: vars.$media_threshold) {
+  .filter__type_manufacturer__wrapper {
+    display: flex;
+  }
+
+  .filter_sidebar {
+    //display: none;
+  }
 }

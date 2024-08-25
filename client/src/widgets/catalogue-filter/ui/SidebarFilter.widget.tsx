@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./styles/SidebarFilter.widget.module.css";
+import styles from "./styles/SidebarFilter.widget.module.scss";
 import { Filters } from "widgets/catalogue-filter";
 import { Role } from "domain/model/role";
 import Jwt from "domain/model/jwt";
@@ -67,11 +67,13 @@ export const SidebarFilterWidget = (props: Props) => {
 
   return (
     <div className={styles.filter_sidebar}>
-      <div className={styles.filter__wrapper}>
-        <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
-      </div>
-      <div className={styles.filter__wrapper}>
-        <ManufacturerNameFilter onValueChange={setManufacturerNames} />
+      <div className={styles.filter__type_manufacturer__wrapper}>
+        <div className={styles.filter__wrapper}>
+          <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
+        </div>
+        <div className={styles.filter__wrapper}>
+          <ManufacturerNameFilter onValueChange={setManufacturerNames} />
+        </div>
       </div>
 
       <div className={styles.filter__wrapper}>
@@ -108,12 +110,14 @@ export const SidebarFilterWidget = (props: Props) => {
         </div>
       </div>
 
-      <div className={styles.filter__wrapper}>
-        <CountryFilter onValueChange={setCountries} />
-      </div>
+      <div className={styles.filter__type_manufacturer__wrapper}>
+        <div className={styles.filter__wrapper}>
+          <CountryFilter onValueChange={setCountries} />
+        </div>
 
-      <div className={styles.filter__wrapper}>
-        <MaterialFilter onValueChange={setMaterials} />
+        <div className={styles.filter__wrapper}>
+          <MaterialFilter onValueChange={setMaterials} />
+        </div>
       </div>
 
       {Jwt.extractFromCookie()?.toRole() === Role.Editor && (
