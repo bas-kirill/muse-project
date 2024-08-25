@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import styles from "./styles/ManufactureDate.filter.module.css";
 import { ManufactureDate } from "generated/model";
 
 interface Props {
@@ -24,8 +25,10 @@ export const ManufactureDateFilter = ({
   }
 
   return (
-    <div>
-      <label htmlFor={fieldName}>{labelName}</label>
+    <div className={styles.manufacture_date}>
+      <label htmlFor={fieldName} style={{ padding: "0" }}>
+        {labelName}
+      </label>
       <input
         ref={manufacturerDate}
         type="date"

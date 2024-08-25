@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./styles/Favorite.page.module.css";
 import { FavoriteLoader } from "pages/favorite";
 import { HeaderWidget } from "widgets/header";
 import { useLoaderData } from "react-router-dom";
@@ -13,18 +14,20 @@ export const FavoritePage = () => {
     <>
       <HeaderWidget />
 
-      <h1>Favorite</h1>
+      <h1 className={styles.h1}>Favorite</h1>
 
       {loader.instrumentDetails.length === 0 && (
-        <div style={{ textAlign: "center" }}>Favorite List is Empty</div>
+        <div className={styles.favorite__empty}>Favorite List is Empty</div>
       )}
 
       {loader.instrumentDetails.map((instrument) => (
-        <InstrumentCard
-          key={instrument.instrument_id.instrument_id}
-          instrument={instrument}
-          favorite={true}
-        />
+        <div className={styles.instrument__wrapper}>
+          <InstrumentCard
+            key={instrument.instrument_id.instrument_id}
+            instrument={instrument}
+            favorite={true}
+          />
+        </div>
       ))}
 
       <FooterWidget />

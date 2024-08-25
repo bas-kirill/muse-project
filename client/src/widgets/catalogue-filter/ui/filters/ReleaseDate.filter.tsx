@@ -25,7 +25,9 @@ export const ReleaseDateFilter = ({
 
   return (
     <div>
-      <label htmlFor={fieldName}>{labelName}</label>
+      <label htmlFor={fieldName} style={{ padding: "0" }}>
+        {labelName}
+      </label>
       <input
         ref={manufacturerDate}
         type="date"

@@ -1,58 +1,48 @@
-import React, { useEffect, useState } from "react";
-import styles from "./styles/InstrumentDetails.module.css";
+import React from "react";
+import styles from "./styles/InstrumentDescription.module.css";
 import { InstrumentDetail } from "generated/model";
-import { GetInstrumentPhotoApi } from "generated/api";
 
 interface Props {
   instrument: InstrumentDetail;
 }
 
-const getInstrumentPhoto = new GetInstrumentPhotoApi();
-
 export const InstrumentDescription = (props: Props) => {
-  const [photo, setPhoto] = useState<string | undefined>();
-
-  useEffect(() => {
-    const fetchPhoto = async () => {
-      const response = await getInstrumentPhoto.getInstrumentPhoto(
-        props.instrument.instrument_id.instrument_id,
-      );
-
-      setPhoto(response.data.photo);
-    };
-
-    fetchPhoto();
-  }, [props.instrument]);
+  const {
+    instrument_type: { instrument_type },
+    manufacturer_name: { manufacturer_name },
+    manufacturer_date: { manufacture_date },
+    release_date: { release_date },
+    country: { country },
+    basic_materials,
+  } = props.instrument;
 
   return (
-    <div className={styles.instrument_details}>
-      {photo !== undefined && (
-        <img src={`data:image/*; base64, ${photo}`} width={250} height={300} />
-      )}
-      <div className={styles.instrument_details__description}>
-        <h2>{props.instrument.manufacturer_name.manufacturer_name}</h2>
+    <div className={styles.wrapper}>
+      <div className={styles.instrument__description}>
+        <h1 className={styles.instrument_description__header}>
+          {manufacturer_name}
+        </h1>
+        <b className={styles.secondary}>Type</b>: <span>{instrument_type}</span>
         <br />
-        <b>Type</b>: {props.instrument.instrument_type.instrument_type}
+        <b className={styles.secondary}>Manufacturer</b>:{" "}
+        <span>{manufacturer_name}</span>
         <br />
-        <b>Manufacturer</b>:{" "}
-        {props.instrument.manufacturer_name.manufacturer_name}
+        <b className={styles.secondary}>Manufacturer date</b>:{" "}
+        <span>{manufacture_date}</span>
         <br />
-        <b>Manufacturer Date</b>:{" "}
-        {props.instrument.manufacturer_date.manufacture_date}
+        <b className={styles.secondary}>Release Date</b>:{" "}
+        <span>{release_date}</span>
         <br />
-        <b>Release Date</b>: {props.instrument.release_date.release_date}
+        <b className={styles.secondary}>Country</b>: <span>{country}</span>
         <br />
-        <b>Country</b>: {props.instrument.country.country}
-        <br />
-        <b>Basic Materials</b>:
-        <ul>
-          {props.instrument.basic_materials.map((basicMaterial) => (
-            <li key={basicMaterial.basic_material}>
-              {basicMaterial.basic_material}
-            </li>
+        <b className={styles.secondary}>Basic Materials</b>:
+        <>
+          {basic_materials.map((basic_material, index) => (
+            <span>
+              {index > 0 ? "," : ""} {basic_material.basic_material}
+            </span>
           ))}
-        </ul>
-        <br />
+        </>
       </div>
     </div>
   );

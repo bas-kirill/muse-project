@@ -38,14 +38,13 @@ export const CountryFilter = ({ onValueChange }: Props) => {
 
   return (
     <div>
-      <legend>Country:</legend>
+      <legend style={{ padding: "0" }}>Country:</legend>
       {countries.map((country) => (
         <div key={country.country}>
           <input
             type="checkbox"
             name={country.country}
             onChange={onChange}
-            className="country-filter-checkbox"
             defaultChecked={true}
           />
           <label htmlFor={country.country}>{country.country}</label>

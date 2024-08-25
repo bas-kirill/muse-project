@@ -85,7 +85,7 @@ export function HomePage() {
               <img
                 src={img.image}
                 alt={img.caption}
-                style={{ width: "100%", borderRadius: "5px" }}
+                style={{ width: "100%", borderRadius: "0.5em" }}
               />
             </div>
           ))}

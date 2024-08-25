@@ -1,15 +1,20 @@
 .catalogue__wrapper {
   display: flex;
-  flex-direction: row;
-  background-color: darkorchid;
+  flex-direction: column;
+  color: #212529;
+}
+
+.catalogue__filters__serp__navbar__wrapper {
+  display: flex;
 }
 
 .catalogue__filters__wrapper {
-  background-color: darkslateblue;
   flex: 1;
+  background-color: #e0e0e0;
 }
 
 .catalogue__serp__navbar__wrapper {
-  background-color: aqua;
   flex: 3;
+  display: flex;
+  flex-direction: column;
 }

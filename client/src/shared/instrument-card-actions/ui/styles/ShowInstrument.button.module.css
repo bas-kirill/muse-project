@@ -1,0 +1,13 @@
+.go_to_instrument__button {
+  flex: 1;
+  /*padding: 10px 0;*/
+  height: 3em;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border: 1px #cccccc solid;
+}
+
+.go_to_instrument__button:hover {
+  background-color: #007bff;
+}

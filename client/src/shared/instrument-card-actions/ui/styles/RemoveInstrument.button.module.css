@@ -1,4 +1,7 @@
 .remove_instrument__button {
-  flex-basis: 25%;
-  background-color: darkkhaki;
+  flex: 1;
+  background-color: #dc3545;
+  color: white;
+  cursor: pointer;
+  border: 1px #cccccc solid;
 }

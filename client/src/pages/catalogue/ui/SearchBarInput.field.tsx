@@ -12,7 +12,7 @@ export const SearchBarInputField = (props: Props) => {
   return (
     <input
       type="text"
-      placeholder={"Search..."}
+      placeholder={"Search by instrument name"}
       onChange={(e) => {
         props.setFilters({
           ...props.filters,

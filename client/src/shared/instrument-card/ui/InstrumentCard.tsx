@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./styles/InstrumentCard.module.css";
-import { InstrumentDescription } from "shared/instrument-card";
+import {
+  InstrumentDescription,
+  InstrumentPhoto,
+  InstrumentActions,
+} from "shared/instrument-card";
 import { InstrumentDetail } from "generated/model";
-import { InstrumentActions } from "shared/instrument-card/ui/InstrumentActions";
 
 interface Props {
   instrument: InstrumentDetail;
@@ -12,6 +15,7 @@ interface Props {
 export const InstrumentCard = (props: Props) => {
   return (
     <div className={styles.instrument_card}>
+      <InstrumentPhoto instrument={props.instrument} />
       <InstrumentDescription instrument={props.instrument} />
       <InstrumentActions
         instrument={props.instrument}

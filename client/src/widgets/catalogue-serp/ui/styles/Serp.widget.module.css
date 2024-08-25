@@ -1,0 +1,9 @@
+.serp {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.not_found {
+  font-size: 2em;
+  margin: 0.5em;
+}

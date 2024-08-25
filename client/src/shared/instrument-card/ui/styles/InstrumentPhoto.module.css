@@ -1,0 +1,8 @@
+.instrument__photo__wrapper {
+}
+
+.instrument__photo {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}

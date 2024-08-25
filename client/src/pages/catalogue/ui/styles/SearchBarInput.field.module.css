@@ -1,11 +1,11 @@
 .search_bar__input {
-  width: 100%;
-  background-color: darkslateblue;
+  /*height: 3em;*/
 
-  input[type="text"] {
-    background-color: white;
-    font-size: 24px;
-    text-align: center;
-    width: 100%;
-  }
+  /*input[type="text"] {*/
+  /*  background-color: white;*/
+
+  font-size: 2em;
+  text-align: start;
+  border: 1px #dee2e6 solid;
+  /*}*/
 }

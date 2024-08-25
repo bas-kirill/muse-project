@@ -1,6 +1,7 @@
 .instrument__add__button {
   background-color: green;
   width: 100%;
-  padding: 20px 0;
-  font-size: 18px;
+  padding: 1em 0;
+  font-size: 1em;
+  border: 1px #dee2e6 solid;
 }

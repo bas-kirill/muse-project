@@ -1,0 +1,17 @@
+.filter_sidebar {
+  padding: 0.2em;
+  background-color: #e0e0e0;
+  border: 1px #cccccc solid;
+}
+
+.filter__wrapper {
+  margin-bottom: 0.5em;
+}
+
+.filter__wrapper:last-child {
+  margin-bottom: 0;
+}
+
+.vertical__wrapper {
+  display: flex;
+}
