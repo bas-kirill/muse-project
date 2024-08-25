@@ -28,7 +28,7 @@ export const InstrumentActions = (props: Props) => {
   const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));
 
   return (
-    <div className={styles.instrument_actions__wrapper}>
+    <div className={styles.actions__wrapper}>
       {props.removeButton && jwt.current !== undefined &&
         Jwt.from(jwt.current).toRole() === Role.Editor && (
             <RemoveInstrumentButton

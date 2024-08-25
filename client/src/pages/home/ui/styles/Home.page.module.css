@@ -1,5 +1,3 @@
-@import "Home.page.queries.css";
-
 .home {
   display: flex;
   flex-direction: column;
@@ -19,21 +17,21 @@
 .search_bar__form {
   display: flex;
   margin-bottom: 1em;
+}
 
-  input[type="text"] {
-    background-color: #f0f0f0;
-    font-size: 2.5rem;
-    text-align: center;
-    flex: 4;
-    padding: 0;
-    margin: 0;
-  }
+.search_bar__form__input__text {
+  background-color: #f0f0f0;
+  font-size: 2.5rem;
+  text-align: center;
+  flex: 4;
+  padding: 0;
+  margin: 0;
+}
 
-  input[type="submit"] {
-    background-color: #ffb400;
-    font-size: 2.5rem;
-    flex: 1;
-  }
+.search_bar__form__input__submit {
+  background-color: #ffb400;
+  font-size: 2.5rem;
+  flex: 1;
 }
 
 .reason__h1 {
@@ -64,4 +62,34 @@
 
 .each_slide {
   margin: 0 15px;
+}
+
+@media (max-width: 570px) {
+  .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin-top: 1em;
+  }
+
+  .search_bar__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .reasons {
+    flex-direction: column;
+
+    div {
+      margin-bottom: 0.5em !important;
+    }
+    div:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .trends__slider {
+    margin: 0 1.5em 1.5em 1.5em !important;
+  }
 }
