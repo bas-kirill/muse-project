@@ -1,6 +1,6 @@
 package mu.muse.rest.instruments
 
-import mu.muse.domain.instrument.Manufacturer
+import mu.muse.domain.instrument.ManufacturerType
 import mu.muse.rest.api.GetManufacturersApi
 import mu.muse.rest.dto.GetManufacturersResponse
 import mu.muse.usecase.GetManufacturers
@@ -18,10 +18,10 @@ class GetManufacturersEndpoint(
     }
 }
 
-fun List<Manufacturer>.toRestResponse(): ResponseEntity<GetManufacturersResponse> {
+fun List<ManufacturerType>.toRestResponse(): ResponseEntity<GetManufacturersResponse> {
     return ResponseEntity.ok(
         GetManufacturersResponse(
-            content = this.map { mu.muse.rest.dto.Manufacturer(it.name) },
+            content = this.map { mu.muse.rest.dto.Manufacturer(it.realName) },
         ),
     )
 }

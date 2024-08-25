@@ -43,12 +43,12 @@ class InMemoryInstrumentRepository(
 infix fun Instrument.matches(criteria: InstrumentExtractor.Criteria): Boolean =
     (criteria.name == null || criteria.name.emptiness() || this.name.matches(criteria.name)) &&
         (criteria.types == null || this.type in criteria.types) &&
-        (criteria.manufacturers == null || this.manufacturer in criteria.manufacturers) &&
+        (criteria.manufacturerTypes == null || this.manufacturerType in criteria.manufacturerTypes) &&
         this.manufactureDate.inRangeInclusive(
             criteria.manufacturerDateFrom,
             criteria.manufacturerDateTo,
         ) &&
         this.releaseDate.inRangeInclusive(criteria.releaseDateFrom, criteria.releaseDateTo) &&
         (criteria.countries == null || this.country in criteria.countries) &&
-        (criteria.materials == null || criteria.materials.containsAll(this.materials)) &&
+        (criteria.materialTypes == null || criteria.materialTypes.containsAll(this.materialTypes)) &&
         (criteria.instrumentIds == null || criteria.instrumentIds.contains(this.id))

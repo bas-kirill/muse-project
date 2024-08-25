@@ -9,7 +9,7 @@ import {
   Country,
   ManufactureDate,
   ManufacturerName,
-  ReleaseDate,
+  ReleaseDate
 } from "generated/model";
 import { InstrumentTypeFilter } from "widgets/catalogue-filter/ui/filters/InstrumentType.filter";
 import { ManufacturerNameFilter } from "widgets/catalogue-filter/ui/filters/ManufacturerName.filter";
@@ -35,7 +35,7 @@ export const SidebarFilterWidget = (props: Props) => {
   const [manufactureDateTo, setManufactureDateTo] =
     useState<ManufactureDate | null>(null);
   const [releaseDateFrom, setReleaseDateFrom] = useState<ReleaseDate | null>(
-    null,
+    null
   );
   const [releaseDateTo, setReleaseDateTo] = useState<ReleaseDate | null>(null);
   const [countries, setCountries] = useState<Country[] | null>(null);
@@ -52,7 +52,7 @@ export const SidebarFilterWidget = (props: Props) => {
       releaseDateTo: releaseDateTo,
       countries: countries,
       materials: materials,
-      instrumentIds: null, // there is no such form field to search by instrument ids
+      instrumentIds: null // there is no such form field to search by instrument ids
     });
   }, [
     instrumentTypes,
@@ -62,12 +62,12 @@ export const SidebarFilterWidget = (props: Props) => {
     releaseDateFrom,
     releaseDateTo,
     countries,
-    materials,
+    materials
   ]);
 
   return (
     <div className={styles.filter_sidebar}>
-      <div className={styles.filter__type_manufacturer__wrapper}>
+      <div className={styles.media__horizontal__wrapper}>
         <div className={styles.filter__wrapper}>
           <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
         </div>
@@ -76,41 +76,39 @@ export const SidebarFilterWidget = (props: Props) => {
         </div>
       </div>
 
-      <div className={styles.filter__wrapper}>
-        <legend style={{ padding: "0" }}>Manufacture Date</legend>
+      <div className={styles.media__horizontal__wrapper}>
+        <div className={styles.filter__wrapper}>
+          <legend style={{ padding: "0" }}>Manufacture Date</legend>
 
-        <div className={styles.vertical__wrapper}>
           <ManufactureDateFilter
             onValueChange={setManufactureDateFrom}
             fieldName={"manufactureDateFrom"}
-            labelName={""}
+            labelName={"From "}
           />
 
           <ManufactureDateFilter
             onValueChange={setManufactureDateTo}
             fieldName={"manufactureDateTo"}
-            labelName={""}
+            labelName={"To  "}
           />
         </div>
-      </div>
 
-      <div className={styles.filter__wrapper}>
-        <legend style={{ padding: "0" }}>Release Date</legend>
-        <div className={styles.vertical__wrapper}>
+        <div className={styles.filter__wrapper}>
+          <legend style={{ padding: "0" }}>Release Date</legend>
           <ReleaseDateFilter
             onValueChange={setReleaseDateFrom}
             fieldName={"releaseDateFrom"}
-            labelName={""}
+            labelName={"From"}
           />
           <ReleaseDateFilter
             onValueChange={setReleaseDateTo}
             fieldName={"releaseDateTo"}
-            labelName={""}
+            labelName={"To"}
           />
         </div>
       </div>
 
-      <div className={styles.filter__type_manufacturer__wrapper}>
+      <div className={styles.media__horizontal__wrapper}>
         <div className={styles.filter__wrapper}>
           <CountryFilter onValueChange={setCountries} />
         </div>

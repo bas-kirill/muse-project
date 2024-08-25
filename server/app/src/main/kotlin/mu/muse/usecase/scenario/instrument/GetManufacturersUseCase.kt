@@ -1,10 +1,10 @@
 package mu.muse.usecase.scenario.instrument
 
-import mu.muse.domain.instrument.Manufacturer
+import mu.muse.domain.instrument.ManufacturerType
 import mu.muse.usecase.GetManufacturers
 
 class GetManufacturersUseCase : GetManufacturers {
-    override fun execute(): List<Manufacturer> {
-        return Manufacturer.entries
+    override fun execute(): List<ManufacturerType> {
+        return ManufacturerType.entries
     }
 }

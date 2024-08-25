@@ -15,13 +15,17 @@
   margin-bottom: 0;
 }
 
-.vertical__wrapper {
+.horizontal__wrapper {
   display: flex;
 }
 
 @media (max-width: vars.$media_threshold) {
-  .filter__type_manufacturer__wrapper {
+  .media__horizontal__wrapper {
     display: flex;
+    margin-bottom: 0.5em;
+  }
+  .media__horizontal__wrapper:last-child {
+    margin-bottom: 0;
   }
 
   .filter_sidebar {

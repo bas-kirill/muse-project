@@ -6,9 +6,9 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.InstrumentBase64Photo
-import mu.muse.domain.instrument.Manufacturer
+import mu.muse.domain.instrument.ManufacturerType
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.Material
+import mu.muse.domain.instrument.MaterialType
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.persistence.instrument.inmemory.matches
 import mu.muse.usecase.access.instrument.InstrumentExtractor
@@ -152,27 +152,27 @@ class PostgresInstrumentRepository(
             "instrument_id" to instrument.id.toLongValue(),
             "instrument_name" to instrument.name.toStringValue(),
             "instrument_type" to instrument.type.name,
-            "manufacturer_name" to instrument.manufacturer.name,
+            "manufacturer_name" to instrument.manufacturerType.realName,
             "manufacturer_date" to Timestamp.from(instrument.manufactureDate.toInstantValue()),
             "release_date" to Timestamp.from(instrument.releaseDate.toInstantValue()),
-            "country" to instrument.country.name,
-            "materials" to instrument.materials.map { it.name }.toTypedArray(),
+            "country" to instrument.country.realName,
+            "materials" to instrument.materialTypes.map { it.realName }.toTypedArray(),
             "image" to instrument.image.toStringValue(),
         )
         namedTemplate.update(sql, params)
     }
 }
 
-fun Array<String>.toBasicMaterials() = this.toList().map { Material.valueOf(it) }
+fun Array<String>.toBasicMaterials() = this.toList().map { MaterialType.from(it) }
 fun ResultSet.toInstrument() = Instrument(
     id = InstrumentId.from(this.getLong("instrument_id")),
     name = InstrumentName.from(this.getString("instrument_name")),
     type = Instrument.Type.valueOf(this.getString("instrument_type")),
-    manufacturer = Manufacturer.valueOf(this.getString("manufacturer_name")),
+    manufacturerType = ManufacturerType.from(this.getString("manufacturer_name")),
     manufactureDate = ManufacturerDate.from(this.getTimestamp("manufacturer_date").toInstant()),
     releaseDate = ReleaseDate.from(this.getTimestamp("release_date").toInstant()),
-    country = Country.valueOf(this.getString("country")),
-    materials = (this.getArray("materials").getArray() as Array<String>).toBasicMaterials(),
+    country = Country.from(this.getString("country")),
+    materialTypes = (this.getArray("materials").getArray() as Array<String>).toBasicMaterials(),
     image = InstrumentBase64Photo.from(this.getString("image")),
     version = Version.new(),
 )
