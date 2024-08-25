@@ -12,19 +12,16 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface BasicMaterial
  */
 export interface BasicMaterial {
-    /**
-     * 
-     * @type {string}
-     * @memberof BasicMaterial
-     */
-    'basic_material': string;
+  /**
+   *
+   * @type {string}
+   * @memberof BasicMaterial
+   */
+  basic_material: string;
 }
-
