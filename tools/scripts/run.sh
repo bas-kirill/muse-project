@@ -5,6 +5,8 @@ rootDir="$currentDir/../../"
 
 (cd "$rootDir" && exec ./tools/scripts/clean.sh)
 
+(cd "$rootDir" && ./tools/scripts/openapi/regenerateOpenApi.sh)
+
 (cd "$rootDir" && exec ./tools/scripts/server/buildJar.sh)
 (cd "$rootDir" && exec ./tools/scripts/server/buildImage.sh)
 
@@ -19,5 +21,5 @@ rootDir="$currentDir/../../"
   up -d \
   --remove-orphans)
 
-printf 'List of available ports:\n'
+echo -e "\033[0;32mList of available ports:\n\033[0m"
 (cd "$rootDir" && exec cat ./tools/docker/env/local.env)
