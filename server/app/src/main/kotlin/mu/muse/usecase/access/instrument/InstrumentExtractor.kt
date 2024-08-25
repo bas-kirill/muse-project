@@ -1,5 +1,6 @@
 package mu.muse.usecase.access.instrument
 
+import mu.muse.common.rest.ServerException
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
@@ -36,5 +37,5 @@ interface InstrumentExtractor {
 }
 
 sealed class InstrumentExtractorError {
-    data class PageNotFound(val pageNumber: Int) : RuntimeException("Page `${pageNumber}` not found")
+    data class PageNotFound(val pageNumber: Int) : ServerException("Page `${pageNumber}` not found")
 }

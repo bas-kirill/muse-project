@@ -15,10 +15,13 @@ import jakarta.validation.Valid
 /**
  * 
  * @param message Error description
+ * @param cause Exception stack trace
  */
 data class ClientError(
 
-    @get:JsonProperty("message", required = true) val message: kotlin.String
+    @get:JsonProperty("message", required = true) val message: kotlin.String,
+
+    @get:JsonProperty("cause") val cause: kotlin.String? = null
     ) {
 
 }

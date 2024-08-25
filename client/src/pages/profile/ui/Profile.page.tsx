@@ -8,6 +8,8 @@ import { useJwt } from "shared/jwt/use-jwt";
 import { LogoutApi } from "generated/api/logout-api";
 import Jwt from "domain/model/jwt";
 import { LOGIN } from "shared/config/paths";
+import { deleteCookie } from "shared/cookie/cookie";
+import { COOKIE_JWT_KEY, COOKIE_SESSIONID } from "shared/config/frontend";
 
 const logout = new LogoutApi();
 
@@ -26,6 +28,8 @@ export function ProfilePage() {
       });
 
       if (response.status === 200) {
+        deleteCookie(COOKIE_JWT_KEY);
+        deleteCookie(COOKIE_SESSIONID);
         navigate(LOGIN);
         return;
       }

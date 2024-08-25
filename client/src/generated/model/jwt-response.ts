@@ -12,16 +12,19 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
  * @interface JwtResponse
  */
 export interface JwtResponse {
-  /**
-   *
-   * @type {string}
-   * @memberof JwtResponse
-   */
-  jwt: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof JwtResponse
+     */
+    'jwt': string;
 }
+

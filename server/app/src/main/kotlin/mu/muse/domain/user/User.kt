@@ -2,6 +2,7 @@ package mu.muse.domain.user
 
 import mu.muse.common.types.AggregateRoot
 import mu.muse.common.types.Version
+import mu.muse.domain.instrument.InstrumentId
 
 class User internal constructor(
     id: UserId,
@@ -9,6 +10,7 @@ class User internal constructor(
     val password: Password,
     val role: Role,
     val fullName: FullName,
+    val favoriteIds: MutableList<InstrumentId>,
     version: Version,
 ) : AggregateRoot<UserId>(id, version) {
 
@@ -19,6 +21,7 @@ class User internal constructor(
             password: Password,
             role: Role,
             fullName: FullName,
+            favoriteIds: MutableList<InstrumentId>,
         ): User {
             return User(
                 id = id,
@@ -26,6 +29,7 @@ class User internal constructor(
                 password = password,
                 role = role,
                 fullName = fullName,
+                favoriteIds = favoriteIds,
                 version = Version.new(),
             )
         }

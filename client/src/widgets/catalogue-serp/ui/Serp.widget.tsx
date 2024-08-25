@@ -5,7 +5,6 @@ import { InstrumentCard } from "shared/instrument-card";
 
 interface Props {
   instruments: InstrumentDetail[];
-  favoriteInstrumentIds: InstrumentId[];
 }
 
 export const SerpWidget = (props: Props) => {
@@ -21,9 +20,6 @@ export const SerpWidget = (props: Props) => {
             <InstrumentCard
               key={instrument.instrument_id.instrument_id}
               instrument={instrument}
-              favorite={props.favoriteInstrumentIds
-                .map((id) => id.instrument_id)
-                .includes(instrument.instrument_id.instrument_id)}
             />
           </div>
         ))}

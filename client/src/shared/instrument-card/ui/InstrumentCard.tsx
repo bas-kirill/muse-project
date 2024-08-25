@@ -9,7 +9,6 @@ import { InstrumentDetail } from "generated/model";
 
 interface Props {
   instrument: InstrumentDetail;
-  favorite: boolean;
 }
 
 export const InstrumentCard = (props: Props) => {
@@ -19,7 +18,6 @@ export const InstrumentCard = (props: Props) => {
       <InstrumentDescription instrument={props.instrument} />
       <InstrumentActions
         instrument={props.instrument}
-        favorite={props.favorite}
         removeButton={true}
         editButton={true}
         favoriteButton={true}

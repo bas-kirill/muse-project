@@ -44,6 +44,7 @@ fun ReleaseDate.toDto() =
 fun Country.toDto() = mu.muse.rest.dto.Country(country = this.realName)
 fun List<MaterialType>.toDto() = this.map { BasicMaterial(basicMaterial = it.realName) }
 
+
 fun Instrument.toDto(): InstrumentDetail {
     return InstrumentDetail(
         instrumentId = this.id.toDto(),
