@@ -2,8 +2,6 @@ import React, { useRef } from "react";
 import "./styles/HeaderWidget.css";
 import { useNavigate } from "react-router-dom";
 import { CATALOGUE, FAVORITE, HOME, LOGIN, PROFILE } from "shared/config/paths";
-import { Jwt } from "domain/model/jwt";
-import { Role } from "domain/model/role";
 import { getCookie } from "shared/cookie/cookie";
 import { COOKIE_JWT_KEY } from "shared/config/frontend";
 
@@ -35,14 +33,13 @@ export function HeaderWidget() {
             <button onClick={(_) => navigate(LOGIN)}>Login</button>
           </>
         )}
-        {jwt.current !== undefined &&
-          Jwt.from(jwt.current).toRole() === Role.Editor && (
-            <>
-              {/* prettier-ignore */}
-              {/* eslint-disable-next-line */}
-              <button onClick={(_) => navigate(PROFILE)}>Profile</button>
-            </>
-          )}
+        {jwt.current !== undefined && (
+          <>
+            {/* prettier-ignore */}
+            {/* eslint-disable-next-line */}
+            <button onClick={(_) => navigate(PROFILE)}>Profile</button>
+          </>
+        )}
       </nav>
     </header>
   );
