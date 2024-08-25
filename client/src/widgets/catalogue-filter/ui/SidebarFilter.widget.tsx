@@ -18,12 +18,15 @@ import { ReleaseDateFilter } from "widgets/catalogue-filter/ui/filters/ReleaseDa
 import { CountryFilter } from "widgets/catalogue-filter/ui/filters/Country.filter";
 import { MaterialFilter } from "widgets/catalogue-filter/ui/filters/Material.filter";
 import { CreateInstrumentCardButton } from "widgets/catalogue-filter/ui/CreateInstrumentCard.button";
+import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 
 interface Props {
   onFilterChange: (filters: Filters) => void;
 }
 
 export const SidebarFilterWidget = (props: Props) => {
+  const {darkMode} = useDarkMode();
+
   const [instrumentTypes, setInstrumentTypes] = useState<
     InstrumentType[] | null
   >(null);
@@ -66,7 +69,10 @@ export const SidebarFilterWidget = (props: Props) => {
   ]);
 
   return (
-    <div className={styles.filter_sidebar}>
+    <div className={`
+      ${styles.filter_sidebar}
+      ${darkMode && styles.filter_sidebar__dark}
+    `}>
       <div className={styles.media__horizontal__wrapper}>
         <div className={styles.filter__wrapper}>
           <InstrumentTypeFilter onValueChange={setInstrumentTypes} />

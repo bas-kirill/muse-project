@@ -3,19 +3,21 @@ import styles from "./styles/EditInstrument.button.module.css";
 import actionBtnStyle from "./styles/Action.button.module.css";
 import { useNavigate } from "react-router-dom";
 import { InstrumentDetail } from "generated/model";
+import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 
 interface Props {
   instrument: InstrumentDetail;
 }
 
 export const EditInstrumentButton = (props: Props) => {
+  const {darkMode} = useDarkMode();
   const navigate = useNavigate();
 
   return (
     <button
       className={`
         ${actionBtnStyle.action__button}
-        ${styles.edit_instrument__button}
+        ${darkMode ? styles.btn__dark : styles.btn__light}
       `}
       /* eslint-disable */
       onClick={(_) => {

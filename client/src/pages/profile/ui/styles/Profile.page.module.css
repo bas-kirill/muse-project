@@ -5,6 +5,10 @@
   margin: 2em auto;
 }
 
+.dark_mode__button {
+  background-color: darkgray;
+}
+
 .logout__button {
   background-color: #ff0000;
 }

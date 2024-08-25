@@ -6,6 +6,11 @@
   border: 1px #cccccc solid;
 }
 
+.filter_sidebar__dark {
+  background-color: #212529;
+  color: #FFFFFF;
+}
+
 .filter__wrapper {
   flex: 1;
   margin-bottom: 0.5em;
@@ -26,9 +31,5 @@
   }
   .media__horizontal__wrapper:last-child {
     margin-bottom: 0;
-  }
-
-  .filter_sidebar {
-    //display: none;
   }
 }

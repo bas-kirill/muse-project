@@ -5,18 +5,15 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletResponse
 import mu.muse.rest.API_COUNTRIES
-import mu.muse.rest.API_FAVORITE_ADD
-import mu.muse.rest.API_FAVORITE_LIST
-import mu.muse.rest.API_FAVORITE_REMOVE
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENTS_PAGINATED
 import mu.muse.rest.API_INSTRUMENT_BY_ID
 import mu.muse.rest.API_INSTRUMENT_MATERIALS
 import mu.muse.rest.API_INSTRUMENT_PHOTO
 import mu.muse.rest.API_INSTRUMENT_TYPES
+import mu.muse.rest.API_LOGIN
 import mu.muse.rest.API_MANUFACTURERS
 import mu.muse.rest.API_REGISTRATION
-import mu.muse.rest.API_LOGIN
 import mu.muse.usecase.access.user.UserExtractor
 import mu.muse.usecase.scenario.user.BasicLoginUseCase
 import org.springframework.beans.factory.annotation.Value
@@ -86,8 +83,8 @@ class SecurityConfiguration {
         http = http.sessionManagement { session ->
             session
                 .sessionFixation { it.none() }
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .maximumSessions(1)
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .maximumSessions(250) // This session has been expired (possibly due to multiple concurrent logins being attempted as the same user).
                 .sessionRegistry(sessionRegistry)
         }
 

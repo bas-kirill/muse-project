@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles/NavigationBar.widget.module.css";
+import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 
 interface Props {
   totalPages: number;
@@ -8,8 +9,13 @@ interface Props {
 }
 
 export const NavigationBarWidget = (props: Props) => {
+  const {darkMode} = useDarkMode();
+
   return (
-    <div className={styles.navbar}>
+    <div className={`
+      ${styles.navbar}
+      ${darkMode && styles.navbar__dark}
+    `}>
       <button
         className={`
           ${styles.navbar__button} 
