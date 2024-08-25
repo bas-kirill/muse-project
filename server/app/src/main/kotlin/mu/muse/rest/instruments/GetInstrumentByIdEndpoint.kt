@@ -4,9 +4,9 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.Manufacturer
+import mu.muse.domain.instrument.ManufacturerType
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.Material
+import mu.muse.domain.instrument.MaterialType
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.rest.api.GetInstrumentByIdApi
 import mu.muse.rest.dto.BasicMaterial
@@ -35,24 +35,24 @@ class GetInstrumentByIdEndpoint(
 
 fun InstrumentId.toDto() = mu.muse.rest.dto.InstrumentId(instrumentId = this.toLongValue())
 fun InstrumentName.toDto() = mu.muse.rest.dto.InstrumentName(instrumentName = this.toStringValue())
-fun Instrument.Type.toDto() = InstrumentType(this.name)
-fun Manufacturer.toDto() = ManufacturerName(this.name)
+fun Instrument.Type.toDto() = InstrumentType(this.realName)
+fun ManufacturerType.toDto() = ManufacturerName(this.realName)
 fun ManufacturerDate.toDto() = ManufactureDate(LocalDate.ofInstant(this.toInstantValue(), ZoneId.systemDefault()))
 fun ReleaseDate.toDto() =
     mu.muse.rest.dto.ReleaseDate(LocalDate.ofInstant(this.toInstantValue(), ZoneId.systemDefault()))
 
-fun Country.toDto() = mu.muse.rest.dto.Country(country = this.name)
-fun List<Material>.toDto() = this.map { BasicMaterial(basicMaterial = it.name) }
+fun Country.toDto() = mu.muse.rest.dto.Country(country = this.realName)
+fun List<MaterialType>.toDto() = this.map { BasicMaterial(basicMaterial = it.realName) }
 
 fun Instrument.toDto(): InstrumentDetail {
     return InstrumentDetail(
         instrumentId = this.id.toDto(),
         instrumentName = this.name.toDto(),
         instrumentType = this.type.toDto(),
-        manufacturerName = this.manufacturer.toDto(),
+        manufacturerName = this.manufacturerType.toDto(),
         manufacturerDate = this.manufactureDate.toDto(),
         releaseDate = this.releaseDate.toDto(),
         country = this.country.toDto(),
-        basicMaterials = this.materials.toDto(),
+        basicMaterials = this.materialTypes.toDto(),
     )
 }
