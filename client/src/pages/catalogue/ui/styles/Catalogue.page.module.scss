@@ -1,4 +1,4 @@
-@import "./Catalogue.page.queries.module.css";
+@use "shared/styles/vars" as vars;
 
 .catalogue__wrapper {
   display: flex;
@@ -19,4 +19,10 @@
   flex: 3;
   display: flex;
   flex-direction: column;
+}
+
+@media (max-width: vars.$media_threshold) {
+  .catalogue__filters__serp__navbar__wrapper {
+    flex-direction: column;
+  }
 }
