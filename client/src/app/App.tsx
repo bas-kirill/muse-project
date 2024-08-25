@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.scss";
+import styles from "./App.module.scss";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -45,6 +46,7 @@ import {
   action as registrationAction,
 } from "pages/registration";
 import { FavoritePage, loader as favoriteLoader } from "pages/favorite";
+import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 
 const routes = createRoutesFromElements(
   <Route>
@@ -85,10 +87,14 @@ const routes = createRoutesFromElements(
 
 const router = createBrowserRouter(routes);
 
-const App = () => (
-  <div id="app">
-    <RouterProvider router={router} />
-  </div>
-);
+const App = () => {
+  const { darkMode } = useDarkMode();
+
+  return (
+    <div id="app" className={`${darkMode && styles.dark}`}>
+      <RouterProvider router={router} />
+    </div>
+  );
+};
 
 export default App;

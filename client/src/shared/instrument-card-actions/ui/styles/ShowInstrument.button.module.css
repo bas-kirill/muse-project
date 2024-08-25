@@ -1,3 +1,8 @@
-.show_instrument__button {
+.btn__light {
   background-color: #007bff;
+}
+
+.btn__dark {
+  background-color: #1976d2;
+  color: #ffffff;
 }

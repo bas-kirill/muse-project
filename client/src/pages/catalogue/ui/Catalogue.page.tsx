@@ -11,11 +11,14 @@ import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api";
 import { CatalogueLoader } from "pages/catalogue";
 import { NavigationBarWidget } from "widgets/catalogue-navbar";
 import { SearchBarInputField } from "pages/catalogue/ui/SearchBarInput.field";
+import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 
 const getInstrumentsByCriteriaPaginated =
   new GetInstrumentsByCriteriaPaginatedApi();
 
 export function CataloguePage() {
+  const { darkMode } = useDarkMode();
+
   const loader = useLoaderData() as CatalogueLoader; // https://github.com/remix-run/react-router/discussions/9792
 
   const [instruments, setInstruments] = useState<InstrumentDetail[]>(
@@ -57,11 +60,21 @@ export function CataloguePage() {
     <>
       <HeaderWidget />
 
-      <div className={styles.catalogue__wrapper}>
+      <div
+        className={`
+        ${styles.catalogue__wrapper}
+        ${darkMode ? styles.catalogue__wrapper__dark : styles.catalogue__wrapper__light}
+      `}
+      >
         <SearchBarInputField filters={filters} setFilters={setFilters} />
 
         <div className={styles.catalogue__filters__serp__navbar__wrapper}>
-          <div className={styles.catalogue__filters__wrapper}>
+          <div
+            className={`
+            ${styles.catalogue__filters__wrapper}
+            ${darkMode ? styles.catalogue__filters__wrapper__dark : styles.catalogue__filters__wrapper__light}
+          `}
+          >
             <SidebarFilterWidget onFilterChange={setFilters} />
           </div>
 

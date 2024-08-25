@@ -1,3 +1,8 @@
-.edit_instrument__button {
+.btn__light {
   background-color: #28a745;
+}
+
+.btn__dark {
+  background-color: #388e3c;
+  color: #ffffff;
 }

@@ -6,6 +6,19 @@
   border: 1px #dee2e6 solid;
 }
 
+.light {
+  background-color: #ffffff;
+}
+
+.dark {
+  background-color: #333333;
+  color: #ffd700;
+
+  &::placeholder {
+    color: #ffd700;
+  }
+}
+
 @media (max-width: vars.$media_threshold) {
   .search_bar__input {
     font-size: 1.5em;

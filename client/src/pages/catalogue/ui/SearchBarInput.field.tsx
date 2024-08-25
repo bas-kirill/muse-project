@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./styles/SearchBarInput.field.module.scss";
 import { InstrumentName } from "generated/model";
 import { Filters } from "widgets/catalogue-filter";
+import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 
 interface Props {
   filters: Filters;
@@ -9,10 +10,12 @@ interface Props {
 }
 
 export const SearchBarInputField = (props: Props) => {
+  const { darkMode } = useDarkMode();
+
   return (
     <input
       type="text"
-      placeholder={"Search by instrument name"}
+      placeholder={"Search by instrument name..."}
       onChange={(e) => {
         props.setFilters({
           ...props.filters,
@@ -21,7 +24,10 @@ export const SearchBarInputField = (props: Props) => {
           } as InstrumentName,
         });
       }}
-      className={styles.search_bar__input}
+      className={`
+        ${styles.search_bar__input}
+        ${darkMode ? styles.dark : styles.light}
+      `}
     />
   );
 };

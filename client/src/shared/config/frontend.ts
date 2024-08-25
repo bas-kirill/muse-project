@@ -4,3 +4,5 @@ export const MINIMAL_PASSWORD_LENGTH = 2;
 
 export const COOKIE_SESSIONID = "SESSIONID";
 export const COOKIE_JWT_KEY = "jwt";
+
+export const DARK_MODE = "muse_dark_mode";

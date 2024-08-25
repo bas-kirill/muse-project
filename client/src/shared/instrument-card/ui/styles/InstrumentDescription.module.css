@@ -2,8 +2,12 @@
   display: flex;
 }
 
-.instrument_description__header {
+.h1 {
   color: #000000;
+}
+
+.h1__dark {
+  color: #ffffff;
 }
 
 .instrument__description {
@@ -16,4 +20,8 @@
 
 .secondary {
   color: #6c757d;
+}
+
+.secondary__dark {
+  color: #ffffff;
 }

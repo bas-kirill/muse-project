@@ -30,7 +30,7 @@
   flex-basis: 70%;
 }
 
-.edit_instrument__button {
+.btn__light {
   flex: 1;
   cursor: pointer;
   background-color: #28a745;
@@ -38,6 +38,6 @@
   border: 1px #cccccc solid;
 }
 
-.edit_instrument__button:hover {
+.btn__light:hover {
   background-color: #007bff;
 }

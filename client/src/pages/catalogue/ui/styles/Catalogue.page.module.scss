@@ -6,13 +6,26 @@
   color: #212529;
 }
 
+.catalogue__wrapper__dark {
+  background-color: #000000;
+}
+
+.catalogue__wrapper__light {
+}
+
 .catalogue__filters__serp__navbar__wrapper {
   display: flex;
 }
 
 .catalogue__filters__wrapper {
   flex: 1;
+}
+.catalogue__filters__wrapper__light {
   background-color: #e0e0e0;
+}
+
+.catalogue__filters__wrapper__dark {
+  background-color: #212529;
 }
 
 .catalogue__serp__navbar__wrapper {

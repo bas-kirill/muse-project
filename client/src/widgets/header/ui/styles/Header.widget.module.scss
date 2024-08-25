@@ -1,0 +1,40 @@
+.nav {
+  display: flex;
+  font-weight: bold;
+}
+
+.nav__button {
+  flex: 1;
+  padding: 1em 0;
+  text-align: center;
+  color: #ffffff;
+  border: 1px #cccccc solid;
+
+  &:hover {
+  }
+}
+
+.btn__bg__dark {
+  background-color: #1a1a1a;
+  color: #ffffff;
+
+  &:hover {
+    color: #ffd700;
+  }
+
+  &:active {
+    color: #ffd700;
+  }
+}
+
+.btn__bg__light {
+  background-color: #1e90ff;
+
+  &:hover {
+    background-color: #175cc4;
+  }
+}
+
+.btn_txt {
+  color: #ffffff;
+}

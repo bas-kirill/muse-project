@@ -1,8 +1,6 @@
 .instrument_card {
-  /*width: 50%;*/
   display: flex;
   flex-direction: column;
   border: 1px #dee2e6 solid;
-  background-color: #ffffff;
   padding: 5px;
 }
