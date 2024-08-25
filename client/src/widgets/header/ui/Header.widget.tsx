@@ -35,8 +35,7 @@ export function HeaderWidget() {
             <button onClick={(_) => navigate(LOGIN)}>Login</button>
           </>
         )}
-        {jwt.current !== undefined &&
-          Jwt.from(jwt.current).toRole() === Role.Editor && (
+        {jwt.current !== undefined && (
             <>
               {/* prettier-ignore */}
               {/* eslint-disable-next-line */}
