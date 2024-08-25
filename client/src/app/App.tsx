@@ -49,11 +49,7 @@ import { FavoritePage, loader as favoriteLoader } from "pages/favorite";
 const routes = createRoutesFromElements(
   <Route>
     <Route path={HOME} element={<HomePage />} />
-    <Route
-      path={PROFILE}
-      element={<ProfilePage />}
-      loader={profileLoader}
-    />
+    <Route path={PROFILE} element={<ProfilePage />} loader={profileLoader} />
     <Route
       path={CATALOGUE}
       element={<CataloguePage />}

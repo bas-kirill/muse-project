@@ -21,9 +21,7 @@ interface Props {
 export const InstrumentActions = (props: Props) => {
   const [errorModal, setErrorModal] = useState<boolean>(false);
   const [successModal, setSuccessModal] = useState<boolean>(false);
-  const jwt = useRef<string | undefined>(
-    getCookie(COOKIE_JWT_KEY)
-  );
+  const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));
 
   return (
     <div className={styles.instrument_actions__wrapper}>

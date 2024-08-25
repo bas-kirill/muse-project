@@ -21,8 +21,8 @@ export function ProfilePage() {
       const response = await logout.logout({
         withCredentials: true,
         headers: {
-          Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`
-        }
+          Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`,
+        },
       });
 
       if (response.status === 200) {
@@ -39,7 +39,6 @@ export function ProfilePage() {
   return (
     <>
       <HeaderWidget />
-
 
       <div className={styles.profile}>
         <h1>{profile.full_name}</h1>

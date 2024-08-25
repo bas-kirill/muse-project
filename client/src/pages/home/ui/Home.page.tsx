@@ -63,7 +63,9 @@ export function HomePage() {
         </form>
       </div>
 
-      <h1 className={styles.reason__h1}>Why Choose Us for Your Musical Needs</h1>
+      <h1 className={styles.reason__h1}>
+        Why Choose Us for Your Musical Needs
+      </h1>
 
       <div className={styles.reasons}>
         <div>
