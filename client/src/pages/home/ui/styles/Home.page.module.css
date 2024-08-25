@@ -36,6 +36,11 @@
   }
 }
 
+.reason__h1 {
+  color: #002244;
+  margin: 1em 0;
+}
+
 .reasons {
   display: flex;
 
@@ -49,7 +54,11 @@
   }
 }
 
-.trends {
+.trends__h1 {
+  margin: 1em 0;
+}
+
+.trends__slider {
   margin: 0 15px 15px 15px;
 }
 
