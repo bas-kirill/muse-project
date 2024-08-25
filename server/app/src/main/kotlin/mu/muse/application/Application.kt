@@ -136,7 +136,7 @@ class Application : CommandLineRunner {
             materialTypes = listOf(MaterialType.WOOD, MaterialType.STEEL, MaterialType.IVORY, MaterialType.EBONY),
             image = InstrumentBase64Photo.fromByteArray(
                 javaClass.getResourceAsStream("/image/fortepiano.webp").use { it!!.readBytes() },
-            )
+            ),
         )
 
         sequenceOf(
