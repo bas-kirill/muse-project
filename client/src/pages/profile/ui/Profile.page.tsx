@@ -46,10 +46,12 @@ export function ProfilePage() {
     <>
       <HeaderWidget />
 
-      <div className={`
+      <div
+        className={`
         ${styles.profile}
         ${darkMode && styles.profile__dark}
-      `}>
+      `}
+      >
         <h1>{profile.full_name}</h1>
         <div>
           <b>Name</b>: <span>{profile.full_name}</span>
@@ -57,10 +59,16 @@ export function ProfilePage() {
         <div>
           <b>Role</b>: <span>{profile.role}</span>
         </div>
-        <button onClick={toggleTheme} className={`${darkMode && styles.dark_mode__button}`}>
+        <button
+          onClick={toggleTheme}
+          className={`${darkMode && styles.dark_mode__button}`}
+        >
           Dark Mode
         </button>
-        <button onClick={onLogoutHandler} className={`${darkMode && styles.logout__button}`}>
+        <button
+          onClick={onLogoutHandler}
+          className={`${darkMode && styles.logout__button}`}
+        >
           Logout
         </button>
       </div>

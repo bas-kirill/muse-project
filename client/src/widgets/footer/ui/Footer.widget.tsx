@@ -5,11 +5,16 @@ import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 export function FooterWidget() {
   const { darkMode } = useDarkMode();
 
-  return <footer className={`
+  return (
+    <footer
+      className={`
     ${styles.footer}
     ${darkMode && styles.footer__dark}
-  `}>Muse Group Frontend Academy
-  </footer>;
+  `}
+    >
+      Muse Group Frontend Academy
+    </footer>
+  );
 }
 
 export default FooterWidget;

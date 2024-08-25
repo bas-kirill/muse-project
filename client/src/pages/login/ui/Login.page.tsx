@@ -8,7 +8,7 @@ import { REGISTRATION_URL } from "shared/config/paths";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 
 export function LoginPage() {
-  const {darkMode} = useDarkMode();
+  const { darkMode } = useDarkMode();
   const actionData = useActionData() as LoginAction;
   const navigate = useNavigate();
 
@@ -20,13 +20,30 @@ export function LoginPage() {
     <>
       <HeaderWidget />
 
-      <Form method="post" className={`
+      <Form
+        method="post"
+        className={`
         ${styles.login__form}
         ${darkMode && styles.login__form__dark}
-      `}>
-        <input type="text" name="login" placeholder={"Login..."} className={styles.login__form__input__dark} />
-        <input type="password" name="password" placeholder={"Password..."} className={styles.login__form__input__dark} />
-        <input type="submit" value="Login" className={styles.login__form__input__dark} />
+      `}
+      >
+        <input
+          type="text"
+          name="login"
+          placeholder={"Login..."}
+          className={styles.login__form__input__dark}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder={"Password..."}
+          className={styles.login__form__input__dark}
+        />
+        <input
+          type="submit"
+          value="Login"
+          className={styles.login__form__input__dark}
+        />
         <input
           type="button"
           value="Registration"

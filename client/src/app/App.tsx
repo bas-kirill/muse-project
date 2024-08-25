@@ -91,10 +91,12 @@ const App = () => {
   const { darkMode } = useDarkMode();
 
   return (
-    <div className={`
+    <div
+      className={`
       ${styles.app}
       ${darkMode && styles.app__dark}
-    `}>
+    `}
+    >
       <RouterProvider router={router} />
     </div>
   );
