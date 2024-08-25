@@ -25,7 +25,7 @@ services:
       retries: 5
 
   muse-server:
-    image: muse-server:latest
+    image: muse-server:${MUSE_SERVER_TAG-latest}
     container_name: muse-server
     ports:
       - ${SERVER_PORT}:8080
@@ -43,7 +43,7 @@ services:
         condition: service_healthy
 
   muse-client:
-    image: muse-client:latest
+    image: muse-client:${MUSE_CLIENT_TAG-latest}
     container_name: muse-client
     ports:
       - ${CLIENT_PORT}:80
@@ -51,7 +51,7 @@ services:
       - muse
 
   muse-client-dev:
-    image: muse-client-dev:latest
+    image: muse-client-dev:${MUST_CLIENT_DEV_TAG-latest}
     container_name: muse-client-dev
     ports:
       - ${CLIENT_DEV_PORT}:3000

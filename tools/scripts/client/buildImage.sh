@@ -7,7 +7,7 @@ imageTag=$1
 
 if [ -z "$1" ]
   then
-    echo 'No image tag provided. Latest will be used.'
+    echo -e "\033[0;33mNo image tag provided. Latest will be used."
     imageTag=latest
 fi
 
@@ -26,4 +26,4 @@ fi
 echo [MUSE CLIENT] creating docker image "$imageFullName"...
 (docker build -f "${rootDir}/client/Dockerfile" -t "$imageFullName" "$rootDir")
 
-echo [MUSE CLIENT FINISHED] image "$imageFullName" has been built
+echo -e "\033[0;32m[MUSE CLIENT FINISHED] image '$imageFullName' has been built\033[0m"

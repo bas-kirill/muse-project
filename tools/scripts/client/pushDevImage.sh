@@ -6,18 +6,18 @@ imageTag=$2
 
 if [ -z "$1" ]
   then
-    echo "No Docker Hub username provided"
+    echo -e "\033[0;33mNo Docker Hub username provided. 'myshx' will be used."
     repository=myshx # my repository at DockerHub
 fi
 
 if [ -z "$2" ]
   then
-    echo 'No imageTag provided. Latest will be used.'
+    echo -e "\033[0;33mNo imageTag provided. Latest will be used."
     imageTag=latest
 fi
 
-imageFullName=muse-server:$imageTag
-dockerHubImageFullName=$repository/muse-server:$imageTag
+imageFullName=muse-client-dev:$imageTag
+dockerHubImageFullName=$repository/muse-client-dev:$imageTag
 
 (docker tag "$imageFullName" "$dockerHubImageFullName")
 (docker push "$dockerHubImageFullName")
