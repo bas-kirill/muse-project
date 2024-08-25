@@ -31,35 +31,50 @@ export const InstrumentDescription = (props: Props) => {
         >
           Type
         </b>
-        : <span>{instrument_type}</span>
+        :{" "}
+        <span className={`${darkMode ? styles.primary__dark : styles.primary}`}>
+          {instrument_type}
+        </span>
         <br />
         <b
           className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
         >
           Manufacturer
         </b>
-        : <span>{manufacturer_name}</span>
+        :{" "}
+        <span className={`${darkMode ? styles.primary__dark : styles.primary}`}>
+          {manufacturer_name}
+        </span>
         <br />
         <b
           className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
         >
           Manufacturer date
         </b>
-        : <span>{manufacture_date}</span>
+        :{" "}
+        <span className={`${darkMode ? styles.primary__dark : styles.primary}`}>
+          {manufacture_date}
+        </span>
         <br />
         <b
           className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
         >
           Release Date
         </b>
-        : <span>{release_date}</span>
+        :{" "}
+        <span className={`${darkMode ? styles.primary__dark : styles.primary}`}>
+          {release_date}
+        </span>
         <br />
         <b
           className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
         >
           Country
         </b>
-        : <span>{country}</span>
+        :{" "}
+        <span className={`${darkMode ? styles.primary__dark : styles.primary}`}>
+          {country}
+        </span>
         <br />
         <b
           className={`${darkMode ? styles.secondary__dark : styles.secondary}`}
@@ -69,7 +84,9 @@ export const InstrumentDescription = (props: Props) => {
         :
         <>
           {basic_materials.map((basic_material, index) => (
-            <span>
+            <span
+              className={`${darkMode ? styles.primary__dark : styles.primary}`}
+            >
               {index > 0 ? "," : ""} {basic_material.basic_material}
             </span>
           ))}
