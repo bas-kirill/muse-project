@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import formStyles from "./styles/EditInstrumentPage.module.css";
+import formStyles from "./styles/EditInstrument.page.module.css";
 import styles from "./styles/InstrumentBasicMaterial.field.module.css";
 import { BasicMaterial } from "generated/model";
 

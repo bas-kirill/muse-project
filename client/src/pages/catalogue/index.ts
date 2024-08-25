@@ -1,4 +1,4 @@
-import { CataloguePage } from "./ui/CataloguePage";
+import { CataloguePage } from "./ui/Catalogue.page";
 import { loader } from "./api/loader";
 import { CatalogueLoader } from "./api/loader";
 

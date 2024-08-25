@@ -1,7 +1,7 @@
 import { ActionFunction } from "react-router-dom";
 import Jwt from "domain/model/jwt";
 import { CreateInstrumentApi } from "generated/api/create-instrument-api";
-import { parseInstrumentDetails } from "shared";
+import { parseInstrumentDetails } from "shared/model";
 
 export interface CreateInstrumentAction {
   errors: string[] | null;

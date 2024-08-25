@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styles from "./styles/CataloguePage.module.css";
+import styles from "./styles/Catalogue.page.module.css";
 import { HeaderWidget } from "widgets/header";
 import { FooterWidget } from "widgets/footer";
 import { useLoaderData } from "react-router-dom";

@@ -1,5 +1,4 @@
-@import "HomePage.queries.css";
-@import "react-slideshow-image/dist/styles.css";
+@import "Home.page.queries.css";
 
 .home {
   display: flex;
@@ -54,6 +53,6 @@
   margin: 0 15px 15px 15px;
 }
 
-.each-slide {
+.each_slide {
   margin: 0 15px;
 }

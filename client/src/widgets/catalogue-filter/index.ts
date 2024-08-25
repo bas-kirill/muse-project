@@ -1,4 +1,4 @@
-import { CatalogueFilterWidget } from "./ui/CatalogueFilterWidget";
+import { CatalogueFilterWidget } from "./ui/CatalogueFilter.widget";
 
 import type { Filters } from "./model/filter";
 

@@ -1,4 +1,4 @@
-import { InstrumentPage } from "./ui/InstrumentPage";
+import { InstrumentPage } from "./ui/Instrument.page";
 import { loader } from "./api/loader";
 
 export { InstrumentPage, loader };

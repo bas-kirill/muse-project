@@ -1,1 +1,1 @@
-export { FooterWidget } from "./ui/FooterWidget";
+export { FooterWidget } from "./ui/Footer.widget";

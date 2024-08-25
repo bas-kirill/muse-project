@@ -1,7 +1,7 @@
-import { AddOrRemoveFavoriteButton } from "./ui/AddOrRemoveFavoriteButton";
-import { EditInstrumentButton } from "./ui/EditInstrumentButton";
-import { RemoveInstrumentButton } from "./ui/RemoveInstrumentButton";
-import { GoToInstrumentButton } from "./ui/GoToInstrumentButton";
+import { AddOrRemoveFavoriteButton } from "./ui/AddOrRemoveFavorite.button";
+import { EditInstrumentButton } from "./ui/EditInstrument.button";
+import { RemoveInstrumentButton } from "./ui/RemoveInstrument.button";
+import { GoToInstrumentButton } from "./ui/GoToInstrument.button";
 
 export {
   AddOrRemoveFavoriteButton,

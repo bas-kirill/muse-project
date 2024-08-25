@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./styles/CreateInstrumentCardButton.css";
+import "./styles/CreateInstrumentCard.button.module.css";
 import { Filters } from "widgets/catalogue-filter";
 import { Role } from "domain/model/role";
 import Jwt from "domain/model/jwt";

@@ -1,3 +1,3 @@
-import { NavigationBarWidget } from "./ui/NavigationBarWidget";
+import { NavigationBarWidget } from "./ui/NavigationBar.widget";
 
 export { NavigationBarWidget };

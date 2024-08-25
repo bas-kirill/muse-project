@@ -1,4 +1,4 @@
-import { CreateInstrumentPage } from "./ui/CreateInstrumentPage";
+import { CreateInstrumentPage } from "./ui/CreateInstrument.page";
 
 import { action } from "./api/action";
 
