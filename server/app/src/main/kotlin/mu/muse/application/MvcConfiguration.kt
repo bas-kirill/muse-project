@@ -1,8 +1,6 @@
 package mu.muse.application
 
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.databind.ObjectMapper
-import mu.muse.common.rest.GlobalErrorHandler
+import mu.muse.rest.GlobalErrorHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 

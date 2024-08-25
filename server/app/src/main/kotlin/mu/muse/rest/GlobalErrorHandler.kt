@@ -1,7 +1,9 @@
-package mu.muse.common.rest
+package mu.muse.rest
 
 import mu.muse.rest.dto.ClientError
 import mu.muse.rest.dto.ServerError
+import mu.muse.usecase.ClientException
+import mu.muse.usecase.ServerException
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity

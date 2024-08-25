@@ -1,6 +1,5 @@
 package mu.muse.usecase
 
-import mu.muse.common.rest.ServerException
 import mu.muse.common.types.BusinessError
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.user.Username

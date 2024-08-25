@@ -1,6 +1,6 @@
 package mu.muse.usecase.access.instrument
 
-import mu.muse.common.rest.ServerException
+import mu.muse.usecase.ServerException
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
