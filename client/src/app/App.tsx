@@ -1,6 +1,6 @@
 import React from "react";
-import "./App.scss";
-import styles from "./App.module.scss";
+import "./styles/App.scss";
+import styles from "./styles/App.module.scss";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -91,7 +91,10 @@ const App = () => {
   const { darkMode } = useDarkMode();
 
   return (
-    <div id="app" className={`${darkMode && styles.dark}`}>
+    <div className={`
+      ${styles.app}
+      ${darkMode && styles.app__dark}
+    `}>
       <RouterProvider router={router} />
     </div>
   );
