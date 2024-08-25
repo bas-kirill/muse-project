@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { HomePage } from "pages/home";
-import { UserProfilePage, loader as profileLoader } from "pages/profile";
+import { ProfilePage, loader as profileLoader } from "pages/profile";
 import { CataloguePage, loader as catalogueLoader } from "pages/catalogue";
 import {
   action as loginAction,
@@ -49,11 +49,7 @@ import { FavoritePage, loader as favoriteLoader } from "pages/favorite";
 const routes = createRoutesFromElements(
   <Route>
     <Route path={HOME} element={<HomePage />} />
-    <Route
-      path={PROFILE}
-      element={<UserProfilePage />}
-      loader={profileLoader}
-    />
+    <Route path={PROFILE} element={<ProfilePage />} loader={profileLoader} />
     <Route
       path={CATALOGUE}
       element={<CataloguePage />}

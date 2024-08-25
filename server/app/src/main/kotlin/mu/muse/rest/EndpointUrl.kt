@@ -1,8 +1,8 @@
 package mu.muse.rest
 
-const val AUTH_BASIC_LOGIN = "/api/auth/login"
-
 const val API = "/api"
+const val API_LOGIN = "$API/auth/login"
+const val API_LOGOUT = "$API/auth/logout"
 const val API_INSTRUMENTS = "$API/instruments"
 const val API_INSTRUMENTS_PAGINATED = "$API/instruments/paginated"
 const val API_INSTRUMENT_BY_ID = "$API/instrument/{id:\\d+}"

@@ -1,4 +1,4 @@
-import { UserProfilePage } from "./ui/UserProfile.page";
+import { ProfilePage } from "./ui/Profile.page";
 import { loader } from "./api/loader";
 
-export { UserProfilePage, loader };
+export { ProfilePage, loader };

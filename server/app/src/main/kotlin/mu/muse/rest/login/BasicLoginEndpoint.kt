@@ -3,6 +3,7 @@ package mu.muse.rest.login
 import jakarta.servlet.http.Cookie
 import mu.muse.domain.user.Password
 import mu.muse.domain.user.Username
+import mu.muse.rest.COOKIE_JWT_KEY
 import mu.muse.rest.api.BasicLoginApi
 import mu.muse.rest.dto.JwtResponse
 import mu.muse.rest.dto.UsernameAndPasswordRequestBody
@@ -27,7 +28,7 @@ class BasicLoginEndpoint(private val basicLogin: BasicLogin) : BasicLoginApi {
         val id = Username.from(usernameAndPasswordRequestBody.username)
         val password = Password.from(usernameAndPasswordRequestBody.password)
         val jwtRaw = basicLogin.execute(id, password)
-        val cookie = Cookie("jwt", jwtRaw)
+        val cookie = Cookie(COOKIE_JWT_KEY, jwtRaw)
         cookie.isHttpOnly = false // because we need to extract a role from token at client side
         cookie.maxAge = COOKIE_MAX_AGE_SEVEN_DAYS_IN_SECONDS
         cookie.path = COOKIE_PATH

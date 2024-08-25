@@ -1,0 +1,44 @@
+openapi: "3.0.0" # openApiGenerate gradle task do not support officially 3.1.0 openapi version
+
+info:
+  description: Logout Endpoint
+  version: 1.0.0
+  title: Logout Endpoint
+  contact:
+    name: Kirill B
+    email: baskirill.an@gmail.com
+servers:
+  - url: http://localhost:{port}/{basePath}
+    description: Local server (uses local data)
+    variables:
+      port:
+        default: "8080"
+        enum:
+          - "8080"
+          - "8000"
+
+tags:
+  - name: logout
+    description: Logout
+
+paths:
+  /api/auth/logout:
+    post:
+      description: Logout Endpoint
+      summary: Logout Endpoint
+      operationId: logout
+      tags:
+        - logout
+      responses:
+        "200":
+          description: Profile Details
+          content:
+            application/json:
+              schema:
+                type: object
+        default:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: "./../common/ServerError.yml#/components/schemas/ServerError"

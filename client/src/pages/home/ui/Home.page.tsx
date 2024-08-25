@@ -63,7 +63,9 @@ export function HomePage() {
         </form>
       </div>
 
-      <h1 style={{ color: "#002244" }}>Why Choose Us for Your Musical Needs</h1>
+      <h1 className={styles.reason__h1}>
+        Why Choose Us for Your Musical Needs
+      </h1>
 
       <div className={styles.reasons}>
         <div>
@@ -73,9 +75,9 @@ export function HomePage() {
         <div>Enjoy competitive prices and exclusive deals on top brands</div>
       </div>
 
-      <h1>Trending Instruments</h1>
+      <h1 className={styles.trends__h1}>Trending Instruments</h1>
 
-      <div className={styles.trends}>
+      <div className={styles.trends__slider}>
         <Slide
           autoplay={true}
           responsive={trendingInstrumentsResponsiveSettings}

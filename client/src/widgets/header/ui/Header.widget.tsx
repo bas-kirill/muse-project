@@ -2,15 +2,16 @@ import React, { useRef } from "react";
 import "./styles/HeaderWidget.css";
 import { useNavigate } from "react-router-dom";
 import { CATALOGUE, FAVORITE, HOME, LOGIN, PROFILE } from "shared/config/paths";
-import { Cookies } from "typescript-cookie";
 import { Jwt } from "domain/model/jwt";
 import { Role } from "domain/model/role";
+import { getCookie } from "shared/cookie/cookie";
+import { COOKIE_JWT_KEY } from "shared/config/frontend";
 
 export function HeaderWidget() {
-  const jwt = useRef<string | undefined>(undefined);
+  const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));
 
   if (typeof document !== "undefined") {
-    jwt.current = Cookies.get("jwt") as string | undefined;
+    jwt.current = getCookie(COOKIE_JWT_KEY);
   }
 
   const navigate = useNavigate();

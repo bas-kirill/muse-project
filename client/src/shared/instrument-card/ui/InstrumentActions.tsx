@@ -3,7 +3,6 @@ import Jwt from "domain/model/jwt";
 import { ModalWidget } from "widgets/modal";
 import styles from "./styles/InstrumentActions.module.css";
 import { Role } from "domain/model/role";
-import { Cookies } from "typescript-cookie";
 import { InstrumentDetail } from "generated/model";
 import {
   FavoriteButton,
@@ -11,6 +10,8 @@ import {
   GoToInstrumentButton,
   RemoveInstrumentButton,
 } from "shared/instrument-card-actions";
+import { COOKIE_JWT_KEY } from "shared/config/frontend";
+import { getCookie } from "shared/cookie/cookie";
 
 interface Props {
   instrument: InstrumentDetail;
@@ -20,9 +21,7 @@ interface Props {
 export const InstrumentActions = (props: Props) => {
   const [errorModal, setErrorModal] = useState<boolean>(false);
   const [successModal, setSuccessModal] = useState<boolean>(false);
-  const jwt = useRef<string | undefined>(
-    Cookies.get("jwt") as string | undefined,
-  );
+  const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));
 
   return (
     <div className={styles.instrument_actions__wrapper}>
