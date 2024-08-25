@@ -58,6 +58,9 @@ tags:
   - name: basicLogin
     description: Everything about user
     x-displayName: basicLogin
+  - name: userLogout
+    description: Logout
+    x-displayName: userLogout
   - name: getManufacturers
     description: Get Manufacturers
     x-displayName: getManufacturers
@@ -483,6 +486,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/JwtResponse'
+        default:
+          description: server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerError'
+  /api/auth/logout:
+    post:
+      description: Logout Endpoint
+      summary: Logout Endpoint
+      operationId: userLogout
+      tags:
+        - userLogout
+      responses:
+        '200':
+          description: Profile Details
+          content:
+            application/json:
+              schema:
+                type: object
         default:
           description: server error
           content:
@@ -973,6 +996,9 @@ x-tagGroups:
   - name: Basic Login
     tags:
       - basicLogin
+  - name: Logout Endpoint
+    tags:
+      - userLogout
   - name: Get Manufacturers
     tags:
       - getManufacturers

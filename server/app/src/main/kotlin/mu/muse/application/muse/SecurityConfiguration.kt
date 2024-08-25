@@ -16,7 +16,7 @@ import mu.muse.rest.API_INSTRUMENT_PHOTO
 import mu.muse.rest.API_INSTRUMENT_TYPES
 import mu.muse.rest.API_MANUFACTURERS
 import mu.muse.rest.API_REGISTRATION
-import mu.muse.rest.AUTH_BASIC_LOGIN
+import mu.muse.rest.API_LOGIN
 import mu.muse.usecase.access.user.UserExtractor
 import mu.muse.usecase.scenario.login.BasicLoginUseCase
 import org.springframework.beans.factory.annotation.Value
@@ -95,7 +95,7 @@ class SecurityConfiguration {
 
         http = http.authorizeHttpRequests { request ->
             request
-                .requestMatchers(AUTH_BASIC_LOGIN).permitAll()
+                .requestMatchers(API_LOGIN).permitAll()
                 .requestMatchers(HttpMethod.POST, API_INSTRUMENTS).permitAll()
                 .requestMatchers(HttpMethod.POST, API_INSTRUMENTS_PAGINATED).permitAll()
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_BY_ID).permitAll()
