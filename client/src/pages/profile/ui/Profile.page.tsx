@@ -16,7 +16,7 @@ const logout = new LogoutApi();
 
 export function ProfilePage() {
   useJwt();
-  const { toggleTheme } = useDarkMode();
+  const { darkMode, toggleTheme } = useDarkMode();
   const navigate = useNavigate();
   const profile = useLoaderData() as ProfileDetails;
 
@@ -46,18 +46,29 @@ export function ProfilePage() {
     <>
       <HeaderWidget />
 
-      <div className={styles.profile}>
+      <div
+        className={`
+        ${styles.profile}
+        ${darkMode && styles.profile__dark}
+      `}
+      >
         <h1>{profile.full_name}</h1>
         <div>
-          <b>Name</b>: <span>{profile?.full_name}</span>
+          <b>Name</b>: <span>{profile.full_name}</span>
         </div>
         <div>
-          <b>Role</b>: <span>{profile?.role}</span>
+          <b>Role</b>: <span>{profile.role}</span>
         </div>
-        <button onClick={toggleTheme} className={styles.dark_mode__button}>
+        <button
+          onClick={toggleTheme}
+          className={`${darkMode && styles.dark_mode__button}`}
+        >
           Dark Mode
         </button>
-        <button onClick={onLogoutHandler} className={styles.logout__button}>
+        <button
+          onClick={onLogoutHandler}
+          className={`${darkMode && styles.logout__button}`}
+        >
           Logout
         </button>
       </div>
