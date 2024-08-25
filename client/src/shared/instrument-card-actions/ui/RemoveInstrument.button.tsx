@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./styles/RemoveInstrument.button.module.css";
+import actionBtnStyle from "./styles/Action.button.module.css";
 import { InstrumentDetail } from "generated/model";
 import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 
@@ -17,8 +18,8 @@ export const RemoveInstrumentButton = (props: Props) => {
       const response = await removeFavoriteApi.removeFavorite(
         props.instrument.instrument_id,
         {
-          withCredentials: true,
-        },
+          withCredentials: true
+        }
       );
 
       if (response.status === 200) {
@@ -34,7 +35,10 @@ export const RemoveInstrumentButton = (props: Props) => {
 
   return (
     <button
-      className={styles.remove_instrument__button}
+      className={`
+        ${actionBtnStyle.action__button}
+        ${styles.remove_instrument__button}
+      `}
       onClick={handleOnDeleteInstrument}
     >
       Remove

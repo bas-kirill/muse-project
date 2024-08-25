@@ -1,0 +1,11 @@
+.action__button {
+  flex: 1;
+  height: 3em;
+  color: #ffffff;
+  cursor: pointer;
+  border: 1px #cccccc solid;
+}
+
+.action__button:hover {
+  background-color: #007bff;
+}

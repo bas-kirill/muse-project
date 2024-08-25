@@ -1,18 +1,39 @@
 import React from "react";
-import "./styles/Instrument.page.css";
+import styles from "./styles/Instrument.page.module.css";
 import { FooterWidget } from "widgets/footer";
 import { HeaderWidget } from "widgets/header";
 import { useLoaderData } from "react-router-dom";
-import { InstrumentDetail } from "generated/model";
-import { InstrumentCard } from "shared/instrument-card";
+import { InstrumentActions, InstrumentCard, InstrumentDescription, InstrumentPhoto } from "shared/instrument-card";
+import { InstrumentLoader } from "pages/instrument";
 
 export function InstrumentPage() {
-  const instrument = useLoaderData() as InstrumentDetail;
+  const loader = useLoaderData() as InstrumentLoader;
 
   return (
     <>
       <HeaderWidget />
-      <InstrumentCard instrument={instrument} favorite={false} />
+      <div className={styles.instrument__wrapper}>
+        <div className={styles.instrument__photo__description__wrapper}>
+          <div className={styles.instrument__photo__wrapper}>
+            <InstrumentPhoto instrument={loader.instrument} />
+          </div>
+
+          <div className={styles.instrument__description__wrapper}>
+            <InstrumentDescription instrument={loader.instrument} />
+          </div>
+        </div>
+        <div>
+          <InstrumentActions
+            instrument={loader.instrument}
+            favorite={loader.favorite}
+            removeButton={true}
+            editButton={true}
+            favoriteButton={true}
+            showButton={false}
+          />
+        </div>
+
+      </div>
       <FooterWidget />
     </>
   );

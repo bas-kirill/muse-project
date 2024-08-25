@@ -17,7 +17,7 @@ export const EditInstrumentPage = () => {
   return (
     <>
       <HeaderWidget />
-      <h1>{loader.instrumentForEdit.instrument_name.instrument_name}</h1>
+      <h1 className={styles.h1}>{loader.instrumentForEdit.instrument_name.instrument_name}</h1>
 
       <div className={styles.edit_instrument__wrapper}>
         <img
@@ -195,7 +195,7 @@ export const EditInstrumentPage = () => {
             />
           </div>
 
-          <input type="submit" value="Edit" />
+          <input type="submit" value="Edit" className={styles.edit_instrument__button} />
         </Form>
       </div>
       {actionData !== undefined &&

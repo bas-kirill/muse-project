@@ -14,7 +14,7 @@ export const CreateInstrumentPage = () => {
     <>
       <HeaderWidget />
 
-      <h1>Create Instrument</h1>
+      <h1 className={styles.h1}>Create Instrument</h1>
 
       <Form method="POST" className={styles.create_instrument__form}>
         <div className={styles.create_instrument__form__field}>
