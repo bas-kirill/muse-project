@@ -74,7 +74,6 @@ class SecurityConfiguration {
         userDetailsService: UserDetailsService,
         jwtFilter: JwtFilter,
         corsConfigurationSource: CorsConfigurationSource,
-        sessionRegistry: SessionRegistry,
     ): SecurityFilterChain { // @formatter:off
         var http = httpSecurity
             .csrf { cors -> cors.disable() }
@@ -84,8 +83,6 @@ class SecurityConfiguration {
             session
                 .sessionFixation { it.none() }
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .maximumSessions(250) // This session has been expired (possibly due to multiple concurrent logins being attempted as the same user).
-                .sessionRegistry(sessionRegistry)
         }
 
         http = http.userDetailsService(userDetailsService)
