@@ -6,7 +6,7 @@ import { useLoaderData } from "react-router-dom";
 import { SidebarFilterWidget, Filters } from "widgets/catalogue-filter";
 import { SerpWidget } from "widgets/catalogue-serp";
 import { CATALOGUE_DEFAULT_PAGE_SIZE } from "shared/config/frontend";
-import { InstrumentDetail, InstrumentId } from "generated/model";
+import { InstrumentDetail } from "generated/model";
 import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api";
 import { CatalogueLoader } from "pages/catalogue";
 import { NavigationBarWidget } from "widgets/catalogue-navbar";
@@ -66,9 +66,7 @@ export function CataloguePage() {
           </div>
 
           <div className={styles.catalogue__serp__navbar__wrapper}>
-            <SerpWidget
-              instruments={instruments}
-            />
+            <SerpWidget instruments={instruments} />
             <NavigationBarWidget
               totalPages={totalPages.current}
               pageNumber={pageNumber}
@@ -82,5 +80,3 @@ export function CataloguePage() {
     </>
   );
 }
-
-export default CataloguePage;

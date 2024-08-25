@@ -1,11 +1,5 @@
-import {
-  GetInstrumentsByCriteriaPaginatedApi,
-
-} from "generated/api";
-import {
-  GetInstrumentByCriteriaPageResponse,
-
-} from "generated/model";
+import { GetInstrumentsByCriteriaPaginatedApi } from "generated/api";
+import { GetInstrumentByCriteriaPageResponse } from "generated/model";
 import { Filters } from "widgets/catalogue-filter";
 import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,

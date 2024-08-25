@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Jwt from "domain/model/jwt";
 import { ModalWidget } from "widgets/modal";
 import styles from "./styles/InstrumentActions.module.css";
@@ -8,11 +8,10 @@ import {
   FavoriteButton,
   EditInstrumentButton,
   ShowInstrumentButton,
-  RemoveInstrumentButton
+  RemoveInstrumentButton,
 } from "shared/instrument-card-actions";
 import { COOKIE_JWT_KEY } from "shared/config/frontend";
 import { getCookie } from "shared/cookie/cookie";
-import { ListFavoriteApi } from "generated/api/list-favorite-api";
 
 interface Props {
   instrument: InstrumentDetail;

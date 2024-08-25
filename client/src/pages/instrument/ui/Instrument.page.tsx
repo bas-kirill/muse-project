@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import styles from "./styles/Instrument.page.module.css";
 import { FooterWidget } from "widgets/footer";
 import { HeaderWidget } from "widgets/header";
@@ -9,8 +9,6 @@ import {
   InstrumentPhoto,
 } from "shared/instrument-card";
 import { InstrumentLoader } from "pages/instrument";
-import { getCookie } from "shared/cookie/cookie";
-import { COOKIE_JWT_KEY } from "shared/config/frontend";
 
 export function InstrumentPage() {
   const loader = useLoaderData() as InstrumentLoader;

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./styles/Serp.widget.module.scss";
-import { InstrumentDetail, InstrumentId } from "generated/model";
+import { InstrumentDetail } from "generated/model";
 import { InstrumentCard } from "shared/instrument-card";
 
 interface Props {

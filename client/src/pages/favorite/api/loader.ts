@@ -10,7 +10,9 @@ export interface FavoriteLoader {
 
 const listFavorite = new ListFavoriteApi();
 
-export const loader: LoaderFunction = async (): Promise<FavoriteLoader | Response> => {
+export const loader: LoaderFunction = async (): Promise<
+  FavoriteLoader | Response
+> => {
   const jwt = Jwt.extractFromCookie();
   if (jwt === null || jwt.expired()) {
     Jwt.eraseFromCookie(); // need to rerender header
@@ -20,11 +22,11 @@ export const loader: LoaderFunction = async (): Promise<FavoriteLoader | Respons
   const response = await listFavorite.listFavorite({
     withCredentials: true,
     headers: {
-      Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`
-    }
+      Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`,
+    },
   });
 
   return {
-    instrumentDetails: response.data.content
+    instrumentDetails: response.data.content,
   };
 };

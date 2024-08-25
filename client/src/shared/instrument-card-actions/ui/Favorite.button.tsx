@@ -2,7 +2,11 @@ import React, { useEffect, useRef } from "react";
 import styles from "./styles/Favorite.button.module.css";
 import actionBtnStyle from "./styles/Action.button.module.css";
 import { useState } from "react";
-import { AddFavoriteApi, ListFavoriteApi, RemoveFavoriteApi } from "generated/api";
+import {
+  AddFavoriteApi,
+  ListFavoriteApi,
+  RemoveFavoriteApi,
+} from "generated/api";
 import { InstrumentId } from "generated/model";
 import Jwt from "domain/model/jwt";
 import { COOKIE_JWT_KEY } from "shared/config/frontend";
@@ -25,15 +29,16 @@ export const FavoriteButton = (props: Props) => {
       return;
     }
     const fetchFavorite = async () => {
-      const favoriteRequest = await
-        listFavorite.listFavorite({
-          withCredentials: true,
-          headers: {
-            Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`
-          }
-        });
+      const favoriteRequest = await listFavorite.listFavorite({
+        withCredentials: true,
+        headers: {
+          Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`,
+        },
+      });
 
-      const favoriteRawIds = favoriteRequest.data.content.map(it => it.instrument_id.instrument_id);
+      const favoriteRawIds = favoriteRequest.data.content.map(
+        (it) => it.instrument_id.instrument_id,
+      );
       const instrumentId = props.instrumentId.instrument_id;
       setFavorite(favoriteRawIds.includes(instrumentId));
     };
@@ -46,14 +51,14 @@ export const FavoriteButton = (props: Props) => {
       removeFavorite.removeFavorite(props.instrumentId, {
         withCredentials: true,
         headers: {
-          Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`
+          Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`,
         },
       });
     } else {
       addFavorite.addFavorite(props.instrumentId, {
         withCredentials: true,
         headers: {
-          Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`
+          Authorization: `Bearer ${Jwt.extractFromCookie()?.toStringValue()}`,
         },
       });
     }

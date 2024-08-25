@@ -12,19 +12,16 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface InstrumentPhoto
  */
 export interface InstrumentPhoto {
-    /**
-     * 
-     * @type {string}
-     * @memberof InstrumentPhoto
-     */
-    'photo': string;
+  /**
+   *
+   * @type {string}
+   * @memberof InstrumentPhoto
+   */
+  photo: string;
 }
-
