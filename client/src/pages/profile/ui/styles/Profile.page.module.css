@@ -1,0 +1,10 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  max-width: 640px;
+  margin: 2em auto;
+}
+
+.logout__button {
+  background-color: #FF0000;
+}

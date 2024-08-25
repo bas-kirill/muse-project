@@ -17,6 +17,7 @@ api/get-manufacturers-api.ts
 api/get-user-profile-api.ts
 api/list-favorite-api.ts
 api/remove-favorite-api.ts
+api/user-logout-api.ts
 api/user-registration-api.ts
 base.ts
 common.ts

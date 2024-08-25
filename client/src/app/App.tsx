@@ -7,7 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { HomePage } from "pages/home";
-import { UserProfilePage, loader as profileLoader } from "pages/profile";
+import { ProfilePage, loader as profileLoader } from "pages/profile";
 import { CataloguePage, loader as catalogueLoader } from "pages/catalogue";
 import {
   action as loginAction,
@@ -51,7 +51,7 @@ const routes = createRoutesFromElements(
     <Route path={HOME} element={<HomePage />} />
     <Route
       path={PROFILE}
-      element={<UserProfilePage />}
+      element={<ProfilePage />}
       loader={profileLoader}
     />
     <Route
