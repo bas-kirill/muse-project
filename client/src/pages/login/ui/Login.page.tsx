@@ -22,7 +22,8 @@ export function LoginPage() {
         <input type="text" name="login" placeholder={"Login"} />
         <input type="password" name="password" placeholder={"Password"} />
         <input type="submit" value="Login" />
-        <input type="button"
+        <input
+          type="button"
           value="Registration"
           onClick={handleRegisterRedirect}
         />
