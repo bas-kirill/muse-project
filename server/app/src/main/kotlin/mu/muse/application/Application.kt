@@ -6,9 +6,9 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.InstrumentBase64Photo
-import mu.muse.domain.instrument.Manufacturer
+import mu.muse.domain.instrument.ManufacturerType
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.Material
+import mu.muse.domain.instrument.MaterialType
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.domain.user.FullName
 import mu.muse.domain.user.Password
@@ -24,7 +24,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import java.time.Instant
 
 @Configuration
@@ -63,7 +62,10 @@ class Application : CommandLineRunner {
             fullName = FullName.from("Editor Editorov"),
         )
 
-        sequenceOf(user, editor).forEach {
+        sequenceOf(
+            user,
+            editor,
+        ).forEach {
             userPersister.save(it)
         }
 
@@ -71,11 +73,11 @@ class Application : CommandLineRunner {
             id = instrumentIdGenerator.generate(),
             name = InstrumentName.from("Fidel Telecastro"),
             type = Instrument.Type.STRINGED,
-            manufacturer = Manufacturer.FENDER,
+            manufacturerType = ManufacturerType.FENDER,
             manufactureDate = ManufacturerDate.from(Instant.parse("2024-07-01T00:00:00Z")),
             releaseDate = ReleaseDate.from(Instant.parse("2100-01-01T00:00:00Z")),
             country = Country.CYPRUS,
-            materials = listOf(Material.WOOD),
+            materialTypes = listOf(MaterialType.WOOD),
             image = InstrumentBase64Photo.fromByteArray(
                 javaClass.getResourceAsStream("/image/rock_guitar.webp").use { it!!.readBytes() },
             ),
@@ -85,11 +87,11 @@ class Application : CommandLineRunner {
             id = instrumentIdGenerator.generate(),
             name = InstrumentName.from("SaxoStar"),
             type = Instrument.Type.WIND,
-            manufacturer = Manufacturer.SIGMA,
+            manufacturerType = ManufacturerType.SIGMA,
             manufactureDate = ManufacturerDate.from(Instant.parse("2007-01-01T00:00:00Z")),
             releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
             country = Country.USA,
-            materials = listOf(Material.METALL),
+            materialTypes = listOf(MaterialType.METAL),
             image = InstrumentBase64Photo.fromByteArray(
                 javaClass.getResourceAsStream("/image/saxo.webp").use { it!!.readBytes() },
             ),
@@ -99,11 +101,11 @@ class Application : CommandLineRunner {
             id = instrumentIdGenerator.generate(),
             name = InstrumentName.from("Yamaha CLP-745B"),
             type = Instrument.Type.KEYBOARD,
-            manufacturer = Manufacturer.YAMAHA,
+            manufacturerType = ManufacturerType.YAMAHA,
             manufactureDate = ManufacturerDate.from(Instant.parse("2007-01-01T00:00:00Z")),
             releaseDate = ReleaseDate.from(Instant.parse("2008-07-01T00:00:00Z")),
             country = Country.USA,
-            materials = listOf(Material.WOOD),
+            materialTypes = listOf(MaterialType.WOOD),
             image = InstrumentBase64Photo.fromByteArray(
                 javaClass.getResourceAsStream("/image/guitar.webp").use { it!!.readBytes() },
             ),
@@ -113,17 +115,37 @@ class Application : CommandLineRunner {
             id = instrumentIdGenerator.generate(),
             name = InstrumentName.from("Grand Violin"),
             type = Instrument.Type.KEYBOARD,
-            manufacturer = Manufacturer.YAMAHA,
+            manufacturerType = ManufacturerType.YAMAHA,
             manufactureDate = ManufacturerDate.from(Instant.parse("1927-01-01T00:00:00Z")),
             releaseDate = ReleaseDate.from(Instant.parse("1955-07-01T00:00:00Z")),
             country = Country.USA,
-            materials = listOf(Material.WOOD),
+            materialTypes = listOf(MaterialType.WOOD),
             image = InstrumentBase64Photo.fromByteArray(
                 javaClass.getResourceAsStream("/image/violin.webp").use { it!!.readBytes() },
             ),
         )
 
-        sequenceOf(rockGuitar, saxophone, guitar, violin).forEach { instrument ->
+        val fortepiano = Instrument.create(
+            id = instrumentIdGenerator.generate(),
+            name = InstrumentName.from("Classic Grand Piano"),
+            type = Instrument.Type.KEYBOARD,
+            manufacturerType = ManufacturerType.STEINWAY_AND_SONS,
+            manufactureDate = ManufacturerDate.from(Instant.parse("2024-01-15T00:00:00Z")),
+            releaseDate = ReleaseDate.from(Instant.parse("2024-08-01T00:00:00Z")),
+            country = Country.GERMANY,
+            materialTypes = listOf(MaterialType.WOOD, MaterialType.STEEL, MaterialType.IVORY, MaterialType.EBONY),
+            image = InstrumentBase64Photo.fromByteArray(
+                javaClass.getResourceAsStream("/image/fortepiano.webp").use { it!!.readBytes() },
+            ),
+        )
+
+        sequenceOf(
+            rockGuitar,
+            saxophone,
+            guitar,
+            violin,
+            fortepiano,
+        ).forEach { instrument ->
             instrumentPersister.save(instrument)
         }
     }

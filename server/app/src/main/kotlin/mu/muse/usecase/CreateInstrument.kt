@@ -5,8 +5,8 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.InstrumentBase64Photo
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.Manufacturer
-import mu.muse.domain.instrument.Material
+import mu.muse.domain.instrument.ManufacturerType
+import mu.muse.domain.instrument.MaterialType
 import mu.muse.domain.instrument.ReleaseDate
 
 fun interface CreateInstrument {
@@ -15,11 +15,11 @@ fun interface CreateInstrument {
     fun execute(
         instrumentName: InstrumentName,
         instrumentType: Instrument.Type,
-        manufacturer: Manufacturer,
+        manufacturerType: ManufacturerType,
         manufactureDate: ManufacturerDate,
         releaseDate: ReleaseDate,
         country: Country,
-        materials: List<Material>,
+        materialTypes: List<MaterialType>,
         photo: InstrumentBase64Photo,
     )
 }

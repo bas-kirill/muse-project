@@ -8,6 +8,7 @@ interface Props {
 
 export const InstrumentDescription = (props: Props) => {
   const {
+    instrument_name: { instrument_name },
     instrument_type: { instrument_type },
     manufacturer_name: { manufacturer_name },
     manufacturer_date: { manufacture_date },
@@ -20,7 +21,7 @@ export const InstrumentDescription = (props: Props) => {
     <div className={styles.wrapper}>
       <div className={styles.instrument__description}>
         <h1 className={styles.instrument_description__header}>
-          {manufacturer_name}
+          {instrument_name}
         </h1>
         <b className={styles.secondary}>Type</b>: <span>{instrument_type}</span>
         <br />

@@ -1,6 +1,6 @@
 package mu.muse.rest.instruments
 
-import mu.muse.domain.instrument.Material
+import mu.muse.domain.instrument.MaterialType
 import mu.muse.rest.api.GetInstrumentBasicMaterialsApi
 import mu.muse.rest.dto.BasicMaterial
 import mu.muse.rest.dto.GetInstrumentBasicMaterialsResponse
@@ -19,7 +19,7 @@ class GetInstrumentMaterialsEndpoint(
     }
 }
 
-fun List<Material>.toRestResponse(): ResponseEntity<GetInstrumentBasicMaterialsResponse> {
+fun List<MaterialType>.toRestResponse(): ResponseEntity<GetInstrumentBasicMaterialsResponse> {
     return ResponseEntity.ok(
         GetInstrumentBasicMaterialsResponse(
             content = this.map { BasicMaterial(basicMaterial = it.name) },

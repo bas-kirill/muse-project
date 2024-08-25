@@ -6,9 +6,9 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.InstrumentBase64Photo
-import mu.muse.domain.instrument.Manufacturer
+import mu.muse.domain.instrument.ManufacturerType
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.Material
+import mu.muse.domain.instrument.MaterialType
 import mu.muse.domain.instrument.ReleaseDate
 
 fun interface EditInstrument {
@@ -19,11 +19,11 @@ fun interface EditInstrument {
         instrumentId: InstrumentId,
         instrumentName: InstrumentName,
         instrumentType: Instrument.Type,
-        manufacturerName: Manufacturer,
+        manufacturerTypeName: ManufacturerType,
         manufacturerDate: ManufacturerDate,
         releaseDate: ReleaseDate,
         country: Country,
-        materials: List<Material>,
+        materialTypes: List<MaterialType>,
         photo: InstrumentBase64Photo,
     )
 }

@@ -67,7 +67,7 @@ export const SidebarFilterWidget = (props: Props) => {
 
   return (
     <div className={styles.filter_sidebar}>
-      <div className={styles.filter__type_manufacturer__wrapper}>
+      <div className={styles.media__horizontal__wrapper}>
         <div className={styles.filter__wrapper}>
           <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
         </div>
@@ -76,41 +76,39 @@ export const SidebarFilterWidget = (props: Props) => {
         </div>
       </div>
 
-      <div className={styles.filter__wrapper}>
-        <legend style={{ padding: "0" }}>Manufacture Date</legend>
+      <div className={styles.media__horizontal__wrapper}>
+        <div className={styles.filter__wrapper}>
+          <legend style={{ padding: "0" }}>Manufacture Date</legend>
 
-        <div className={styles.vertical__wrapper}>
           <ManufactureDateFilter
             onValueChange={setManufactureDateFrom}
             fieldName={"manufactureDateFrom"}
-            labelName={""}
+            labelName={"From "}
           />
 
           <ManufactureDateFilter
             onValueChange={setManufactureDateTo}
             fieldName={"manufactureDateTo"}
-            labelName={""}
+            labelName={"To  "}
           />
         </div>
-      </div>
 
-      <div className={styles.filter__wrapper}>
-        <legend style={{ padding: "0" }}>Release Date</legend>
-        <div className={styles.vertical__wrapper}>
+        <div className={styles.filter__wrapper}>
+          <legend style={{ padding: "0" }}>Release Date</legend>
           <ReleaseDateFilter
             onValueChange={setReleaseDateFrom}
             fieldName={"releaseDateFrom"}
-            labelName={""}
+            labelName={"From"}
           />
           <ReleaseDateFilter
             onValueChange={setReleaseDateTo}
             fieldName={"releaseDateTo"}
-            labelName={""}
+            labelName={"To"}
           />
         </div>
       </div>
 
-      <div className={styles.filter__type_manufacturer__wrapper}>
+      <div className={styles.media__horizontal__wrapper}>
         <div className={styles.filter__wrapper}>
           <CountryFilter onValueChange={setCountries} />
         </div>
