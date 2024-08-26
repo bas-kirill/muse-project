@@ -58,13 +58,13 @@ dockerTag="$stage-$gitCommitSha"
 sshpass -p "$SSH_PASS" ssh -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
   -o UserKnownHostsFile=/dev/null \
   -o StrictHostKeyChecking=no \
-  -q \
   env dockerRepository="$dockerRepository" \
   env dockerTag="$dockerTag" \
   env stage="$stage" \
   'bash -s' << 'EOF'
 set -e
-#
+
+
 #export dockerRepository="$dockerRepository"
 #export stage="$stage"
 #export dockerTag="$dockerTag"
