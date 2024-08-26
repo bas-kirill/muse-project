@@ -2,14 +2,15 @@ import { LoaderFunction } from "react-router-dom";
 import { InstrumentDetail } from "generated/model";
 import { GetInstrumentByIdApi } from "generated/api/get-instrument-by-id-api";
 import { ListFavoriteApi } from "generated/api/list-favorite-api";
+import { apiConfig } from "shared/config/api";
 
 export interface InstrumentLoader {
   instrument: InstrumentDetail;
   favorite: boolean;
 }
 
-const getInstrumentById = new GetInstrumentByIdApi();
-const listFavorite = new ListFavoriteApi();
+const getInstrumentById = new GetInstrumentByIdApi(apiConfig);
+const listFavorite = new ListFavoriteApi(apiConfig);
 
 export const loader: LoaderFunction = async ({
   params,
