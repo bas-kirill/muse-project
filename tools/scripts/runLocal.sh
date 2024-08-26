@@ -5,12 +5,10 @@ rootDir="$currentDir/../../"
 
 stage=$1
 
-dockerTag="latest"
 if [ -z "$1" ]
   then
     echo -e "\033[0;33mNo stage provided. 'local' stage will be used.\033[0m"
     stage="local"
-    dockerTag="$stage-$(git rev-parse --short HEAD)"
 fi
 
 dockerRepository=$2
@@ -23,12 +21,15 @@ fi
 
 (cd "$rootDir" && exec ./tools/scripts/stop.sh "$stage")
 (cd "$rootDir" && exec ./tools/scripts/clean.sh "$stage")
+
+dockerTag="$stage-$(git rev-parse --short HEAD)"
 (cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$dockerRepository" "$dockerTag")
 
-MUSE_SERVER_IMAGE="$dockerRepository/muse-server:$dockerTag"
-MUSE_CLIENT_IMAGE="$dockerRepository/muse-client:$dockerTag"
-MUSE_CLIENT_DEV_IMAGE="$dockerRepository/muse-client-dev:$dockerTag"
-(cd "$rootDir" && exec ./tools/scripts/run.sh "$stage")
+export MUSE_SERVER_IMAGE="$dockerRepository/muse-server:$dockerTag"
+export MUSE_CLIENT_IMAGE="$dockerRepository/muse-client:$dockerTag"
+export MUSE_CLIENT_DEV_IMAGE="$dockerRepository/muse-client-dev:$dockerTag"
+(cd "$rootDir/tools/docker" && exec docker compose config)
+(cd "$rootDir" && exec ./tools/scripts/run.sh "$stage" "dev")
 
 echo -e "\033[0;32mList of available ports:\n\033[0m"
 (cd "$rootDir" && exec cat ./tools/docker/env/$stage.env)

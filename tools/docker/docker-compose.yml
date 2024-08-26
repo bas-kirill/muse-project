@@ -23,13 +23,16 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    profiles:
+      - dev
+      - prod
 
   muse-server:
     image: "${MUSE_SERVER_IMAGE:-muse-server}"
 #    platforms:
 #      - "linux/amd64"
 #      - "linux/arm64"
-    container_name: "${MUSE_SERVER_IMAGE:-muse-server}"
+    container_name: muse-server
     ports:
       - ${SERVER_PORT}:8080
       - ${SERVER_DEBUG_PORT}:5005
@@ -44,28 +47,36 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    profiles:
+      - dev
+      - prod
 
-#  muse-client:
-#    image: "${MUSE_CLIENT_IMAGE:-muse-client}"
-##    platforms:
-##      - "linux/amd64"
-##      - "linux/arm64"
-#    container_name: "${MUSE_CLIENT_IMAGE:-muse-client}"
-#    ports:
-#      - ${CLIENT_PORT}:80
-#    networks:
-#      - muse
+  muse-client:
+    image: "${MUSE_CLIENT_IMAGE:-muse-client}"
+#    platforms:
+#      - "linux/amd64"
+#      - "linux/arm64"
+    container_name: "${MUSE_CLIENT_IMAGE:-muse-client}"
+    ports:
+      - ${CLIENT_PORT}:80
+    networks:
+      - muse
+    profiles:
+      - dev
+      - prod
 
-#  muse-client-dev:
-#    image: "${MUSE_CLIENT_DEV_IMAGE:-muse-client-dev}"
-#    container_name: muse-client-dev
-#    ports:
-#      - ${CLIENT_DEV_PORT}:3000
-#    volumes:
-#      - ./../../client:/muse-client-dev
-#      - ./node-modules:/muse-client-dev/node-modules
-#    networks:
-#      - muse
+  muse-client-dev:
+    image: "${MUSE_CLIENT_DEV_IMAGE:-muse-client-dev}"
+    container_name: muse-client-dev
+    ports:
+      - ${CLIENT_DEV_PORT}:3000
+    volumes:
+      - ./../../client:/muse-client-dev
+      - ./node-modules:/muse-client-dev/node-modules
+    networks:
+      - muse
+    profiles:
+      - dev
 
 #  portainer:
 #    image: portainer/portainer-ce:linux-amd64-2.20.3-alpine
