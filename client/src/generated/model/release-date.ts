@@ -12,19 +12,16 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface ReleaseDate
  */
 export interface ReleaseDate {
-    /**
-     * 
-     * @type {string}
-     * @memberof ReleaseDate
-     */
-    'release_date': string;
+  /**
+   *
+   * @type {string}
+   * @memberof ReleaseDate
+   */
+  release_date: string;
 }
-
