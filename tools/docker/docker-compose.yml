@@ -26,9 +26,9 @@ services:
 
   muse-server:
     image: "${MUSE_SERVER_IMAGE:-muse-server}"
-    platforms:
-      - "linux/amd64"
-      - "linux/arm64"
+#    platforms:
+#      - "linux/amd64"
+#      - "linux/arm64"
     container_name: muse-server
     ports:
       - ${SERVER_PORT}:8080
@@ -47,9 +47,9 @@ services:
 
   muse-client:
     image: "${MUSE_CLIENT_IMAGE:-muse-client}"
-    platforms:
-      - "linux/amd64"
-      - "linux/arm64"
+#    platforms:
+#      - "linux/amd64"
+#      - "linux/arm64"
     container_name: muse-client
     ports:
       - ${CLIENT_PORT}:80

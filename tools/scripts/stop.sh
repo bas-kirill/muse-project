@@ -11,11 +11,11 @@ if [ -z "$1" ]
     stage="local"
 fi
 
-(cd "$rootDir" && exec docker compose \
-  -f ./tools/docker/docker-compose.yml \
-  --env-file ./tools/docker/env/$stage.env \
-  --project-name=muse-$stage \
-  up -d \
-  --remove-orphans)
 
-echo -e "\033[0;32mDocker Serviced has been started.\n\033[0m"
+(cd "$rootDir" && exec docker compose \
+   -f ./tools/docker/docker-compose.yml \
+   --env-file ./tools/docker/env/$stage.env \
+   --project-name=muse-$stage \
+   rm -f)
+
+echo -e "\033[0;32mDocker Service has been stopped.\033[0m"
