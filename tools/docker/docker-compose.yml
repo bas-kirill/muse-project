@@ -51,7 +51,7 @@ services:
       - muse
 
   muse-client-dev:
-    image: muse-client-dev:${MUST_CLIENT_DEV_TAG-latest}
+    image: muse-client-dev:${MUSE_CLIENT_DEV_TAG-latest}
     container_name: muse-client-dev
     ports:
       - ${CLIENT_DEV_PORT}:3000
