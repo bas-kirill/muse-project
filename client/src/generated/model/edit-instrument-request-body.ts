@@ -12,29 +12,31 @@
  * Do not edit the class manually.
  */
 
+
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentDetail } from "./instrument-detail";
+import type { InstrumentDetail } from './instrument-detail';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { InstrumentPhoto } from "./instrument-photo";
+import type { InstrumentPhoto } from './instrument-photo';
 
 /**
- *
+ * 
  * @export
  * @interface EditInstrumentRequestBody
  */
 export interface EditInstrumentRequestBody {
-  /**
-   *
-   * @type {InstrumentDetail}
-   * @memberof EditInstrumentRequestBody
-   */
-  instrument_detail: InstrumentDetail;
-  /**
-   *
-   * @type {InstrumentPhoto}
-   * @memberof EditInstrumentRequestBody
-   */
-  instrument_photo: InstrumentPhoto;
+    /**
+     * 
+     * @type {InstrumentDetail}
+     * @memberof EditInstrumentRequestBody
+     */
+    'instrument_detail': InstrumentDetail;
+    /**
+     * 
+     * @type {InstrumentPhoto}
+     * @memberof EditInstrumentRequestBody
+     */
+    'instrument_photo': InstrumentPhoto;
 }
+
