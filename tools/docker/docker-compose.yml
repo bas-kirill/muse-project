@@ -29,7 +29,7 @@ services:
 #    platforms:
 #      - "linux/amd64"
 #      - "linux/arm64"
-    container_name: muse-server
+    container_name: "${MUSE_SERVER_IMAGE:-muse-server}"
     ports:
       - ${SERVER_PORT}:8080
       - ${SERVER_DEBUG_PORT}:5005
@@ -45,16 +45,16 @@ services:
       postgres:
         condition: service_healthy
 
-  muse-client:
-    image: "${MUSE_CLIENT_IMAGE:-muse-client}"
-#    platforms:
-#      - "linux/amd64"
-#      - "linux/arm64"
-    container_name: muse-client
-    ports:
-      - ${CLIENT_PORT}:80
-    networks:
-      - muse
+#  muse-client:
+#    image: "${MUSE_CLIENT_IMAGE:-muse-client}"
+##    platforms:
+##      - "linux/amd64"
+##      - "linux/arm64"
+#    container_name: "${MUSE_CLIENT_IMAGE:-muse-client}"
+#    ports:
+#      - ${CLIENT_PORT}:80
+#    networks:
+#      - muse
 
 #  muse-client-dev:
 #    image: "${MUSE_CLIENT_DEV_IMAGE:-muse-client-dev}"

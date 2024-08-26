@@ -11,11 +11,10 @@ if [ -z "$1" ]
     stage="local"
 fi
 
-
 (cd "$rootDir" && exec docker compose \
    -f ./tools/docker/docker-compose.yml \
    --env-file ./tools/docker/env/$stage.env \
    --project-name=muse-$stage \
-   rm -f)
+   down -v)
 
 echo -e "\033[0;32mDocker Service has been stopped.\033[0m"
