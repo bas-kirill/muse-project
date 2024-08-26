@@ -50,16 +50,16 @@ services:
     networks:
       - muse
 
-  muse-client-dev:
-    image: "${MUSE_CLIENT_DEV_IMAGE:-muse-client-dev}"
-    container_name: muse-client-dev
-    ports:
-      - ${CLIENT_DEV_PORT}:3000
-    volumes:
-      - ./../../client:/muse-client-dev
-      - ./node-modules:/muse-client-dev/node-modules
-    networks:
-      - muse
+#  muse-client-dev:
+#    image: "${MUSE_CLIENT_DEV_IMAGE:-muse-client-dev}"
+#    container_name: muse-client-dev
+#    ports:
+#      - ${CLIENT_DEV_PORT}:3000
+#    volumes:
+#      - ./../../client:/muse-client-dev
+#      - ./node-modules:/muse-client-dev/node-modules
+#    networks:
+#      - muse
 
 #  portainer:
 #    image: portainer/portainer-ce:linux-amd64-2.20.3-alpine
