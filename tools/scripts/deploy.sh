@@ -4,6 +4,11 @@ currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../"
 gitCommitSha="$(git rev-parse --short HEAD)"
 
+if [ -z "$DOCKER_HUB_TOKEN" ]; then
+    echo "Error: The required environment variable 'DOCKER_HUB_TOKEN' is not set."
+    exit 1
+fi
+
 if [ -z "$SSH_HOST" ]; then
     echo "Error: The required environment variable 'SSH_HOST' is not set."
     exit 1
@@ -60,10 +65,16 @@ dockerTag="$stage-$gitCommitSha"
 (cd "$rootDir" && exec ./tools/scripts/pushImage.sh "$dockerRepository" "muse-client" "$dockerTag")
 
 sshpass -p "$SSH_PASS" ssh -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" << EOF
+export dockerRepository=$dockerRepository
+echo \$dockerRepository
 export stage=$stage
 echo \$stage
 export dockerTag=$dockerTag
 echo \$dockerTag
+export DOCKER_HUB_TOKEN=$DOCKER_HUB_TOKEN
+echo \$DOCKER_HUB_TOKEN
+
+docker login -u $dockerRepository -p $DOCKER_HUB_TOKEN
 
 cd /tmp
 sudo rm -rf ./muse-project
@@ -72,11 +83,7 @@ cd ./muse-project
 
 ./tools/scripts/clean.sh $stage
 
-MUSE_SERVER_TAG="$dockerTag"
-MUSE_CLIENT_TAG="$dockerTag"
-MUST_CLIENT_DEV_TAG="$dockerTag"
-
-docker compose \
+MUSE_SERVER_TAG="$dockerTag" MUSE_CLIENT_TAG="$dockerTag" MUSE_CLIENT_DEV_TAG="$dockerTag" docker compose \
   -f ./tools/docker/docker-compose.yml \
   --env-file ./tools/docker/env/$stage.env \
   --project-name=muse-$stage \
