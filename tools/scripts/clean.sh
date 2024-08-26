@@ -12,6 +12,7 @@ if [ -z "$1" ]
 fi
 
 (cd "$rootDir/server" && exec ./gradlew clean)
+(cd "")
 (cd "$rootDir" && exec docker compose \
   -f ./tools/docker/docker-compose.yml \
   --env-file ./tools/docker/env/$stage.env \
