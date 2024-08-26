@@ -66,7 +66,7 @@ export dockerTag=$dockerTag
 echo \$dockerTag
 
 cd /tmp
-rm -rf ./muse-project
+sudo rm -rf ./muse-project
 git clone https://github.com/bas-kirill/muse-project.git
 cd ./muse-project
 
@@ -84,6 +84,7 @@ docker compose \
   --remove-orphans
 
 echo -e "\033[0;32mList of available ports:\n\033[0m"
-exec cat ./tools/docker/env/$stage.env
+echo ${PWD}
+cat ./tools/docker/env/$stage.env
 EOF
 echo -e "\033[0;32mServices has been deployed to '$stage'.\033[0m"
