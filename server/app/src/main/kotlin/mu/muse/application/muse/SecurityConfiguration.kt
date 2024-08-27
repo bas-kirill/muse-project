@@ -54,9 +54,9 @@ import java.security.Key
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 @Suppress("TooManyFunctions")
 class SecurityConfiguration {
-//
-//    @Value("#{systemProperties['CLIENT_PORT']}")
-//    lateinit var clientPort: String
+
+    @Value("#{systemEnvironment['CLIENT_PORT']}")
+    lateinit var clientPort: String
 
     companion object {
         val logger: Logger = LoggerFactory.getLogger(SecurityConfiguration::class.java)
@@ -70,12 +70,18 @@ class SecurityConfiguration {
     fun jwtParser(jwtSecretKey: Key): JwtParser = Jwts.parserBuilder().setSigningKey(jwtSecretKey).build()
 
     @Bean
-    @Profile(Application.Profile.SPRING_LOCAL_PROFILE)
-    fun corsConfigurationSource(): CorsConfigurationSource {
+    fun localCorsConfigurationSource(): CorsConfigurationSource {
         logger.info("keeek: 'dev'")
         val configuration = CorsConfiguration()
+//        configuration.allowedOrigins = when {
+//            Application.Profile.SPRING_LOCAL_PROFILE -> listOf("http://localhost:3000")
+//
+//        }
+  /*      if (clientPort == Application.Profile.SPRING_LOCAL_PROFILE) {
+            configuration.allowedOrigins = listOf("http://localhost:3000")
+        }*/
+
         configuration.allowedOrigins = listOf("http://localhost:3000")
-//        configuration.allowedOrigins = listOf("*")
         configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         configuration.allowedHeaders = listOf("*")
         configuration.allowCredentials = true
