@@ -71,7 +71,6 @@ class SecurityConfiguration(
 
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
-        logger.info("keeek: '${springActiveProfile}'")
         val configuration = CorsConfiguration()
         configuration.allowedOrigins = when (springActiveProfile) {
             Application.Profile.LOCAL -> listOf("http://localhost:3000")
