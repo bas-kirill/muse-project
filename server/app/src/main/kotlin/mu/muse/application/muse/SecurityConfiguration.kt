@@ -4,6 +4,7 @@ import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletResponse
+import mu.muse.rest.ACTUATOR_HEALTH
 import mu.muse.rest.API_COUNTRIES
 import mu.muse.rest.API_INSTRUMENTS
 import mu.muse.rest.API_INSTRUMENTS_PAGINATED
@@ -99,6 +100,7 @@ class SecurityConfiguration {
                 .requestMatchers(HttpMethod.GET, API_MANUFACTURERS).permitAll()
                 .requestMatchers(HttpMethod.POST, API_REGISTRATION).permitAll()
                 .requestMatchers(HttpMethod.GET, API_INSTRUMENT_PHOTO).permitAll()
+                .requestMatchers(HttpMethod.GET, ACTUATOR_HEALTH).permitAll()
                 .anyRequest().authenticated()
         }
 

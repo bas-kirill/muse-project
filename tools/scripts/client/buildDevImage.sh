@@ -3,23 +3,22 @@ set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../../"
 
-repository=$1
+stage=$1
 
-if [ -z "$1" ]
-  then
-    echo -e "\033[0;33mNo Docker Hub username provided. 'myshx' will be used.\033[0m"
-    repository=myshx # my repository at DockerHub
+if [ -z "$1" ]; then
+  echo -e "\033[0;33mNo stage provided. 'local' stage will be used.\033[0m"
+  stage="local"
 fi
 
-imageTag=$2
+repository=$2
 
 if [ -z "$2" ]
   then
-    echo -e "\033[0;33mNo image tag provided. Latest will be used.\033[0m"
-    imageTag=latest
+    echo -e "\033[0;33m[$stage] No Docker Hub username provided. 'myshx' will be used.\033[0m"
+    repository=myshx # my repository at DockerHub
 fi
 
-imageFullName=$repository/muse-client-dev:$imageTag
+imageFullName="$repository/muse-client-dev:$stage-$(git rev-parse --short HEAD)"
 
 echo [MUSE CLIENT DEV STARTING] building "$imageFullName"...
 

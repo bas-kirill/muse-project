@@ -2,8 +2,9 @@ networks:
   muse:
     driver: bridge
 
+
 services:
-  postgres:
+  muse-postgres:
     image: postgres:16.4
     container_name: muse-postgres
     restart: always
@@ -24,14 +25,14 @@ services:
       timeout: 5s
       retries: 5
     profiles:
+      - local
       - dev
       - prod
+    labels:
+      - io.portainer.accesscontrol.public
 
   muse-server:
-    image: "${MUSE_SERVER_IMAGE:-muse-server}"
-#    platforms:
-#      - "linux/amd64"
-#      - "linux/arm64"
+    image: muse-server:latest
     container_name: muse-server
     ports:
       - ${SERVER_PORT}:8080
@@ -45,17 +46,17 @@ services:
     networks:
       - muse
     depends_on:
-      postgres:
+      muse-postgres:
         condition: service_healthy
     profiles:
+      - local
       - dev
       - prod
+    labels:
+      - io.portainer.accesscontrol.public
 
   muse-client:
-    image: "${MUSE_CLIENT_IMAGE:-muse-client}"
-#    platforms:
-#      - "linux/amd64"
-#      - "linux/arm64"
+    image: muse-client:latest
     container_name: muse-client
     ports:
       - ${CLIENT_PORT}:80
@@ -64,9 +65,11 @@ services:
     profiles:
       - dev
       - prod
+    labels:
+      - io.portainer.accesscontrol.public
 
   muse-client-dev:
-    image: "${MUSE_CLIENT_DEV_IMAGE:-muse-client-dev}"
+    image: "muse-client-dev:latest"
     container_name: muse-client-dev
     ports:
       - ${CLIENT_DEV_PORT}:3000
@@ -76,7 +79,7 @@ services:
     networks:
       - muse
     profiles:
-      - dev
+      - local
 
 #  portainer:
 #    image: portainer/portainer-ce:linux-amd64-2.20.3-alpine

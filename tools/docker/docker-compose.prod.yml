@@ -1,0 +1,13 @@
+services:
+  # specify explicitly for correct `docker down`
+  muse-postgres:
+    image: postgres:16.4
+
+  muse-server:
+    image: "${DOCKER_REPOSITORY}/muse-server:prod-${MUSE_GIT_COMMIT_HASH}"
+
+  muse-client:
+    image: "${DOCKER_REPOSITORY}/muse-client:prod-${MUSE_GIT_COMMIT_HASH}"
+
+  muse-client-dev:
+    image: "${DOCKER_REPOSITORY}/muse-client-dev:prod-${MUSE_GIT_COMMIT_HASH}"

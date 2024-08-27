@@ -3,23 +3,22 @@ set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../../"
 
-repository=$1
+stage=$1
 
-if [ -z "$1" ]
-  then
-    echo -e "\033[0;33mNo Docker Hub username provided. 'myshx' will be used.\033[0m"
-    repository=myshx # my repository at DockerHub
+if [ -z "$1" ]; then
+  stage="local"
+  echo -e "\033[0;33mNo stage provided. 'local' stage will be used.\033[0m"
 fi
 
-imageTag=$2
+repository=$2
 
 if [ -z "$2" ]
   then
-    echo -e "\033[0;33mNo image tag provided. Latest will be used.\033[0m"
-    imageTag=latest
+    echo -e "\033[0;33m[$stage] No Docker Hub username provided. 'myshx' will be used.\033[0m"
+    repository=myshx # my repository at DockerHub
 fi
 
-imageFullName=$repository/muse-client:$imageTag
+imageFullName="$repository/muse-client:$stage-$(git rev-parse --short HEAD)"
 
 echo "[MUSE CLIENT STARTING] building '$imageFullName'..."
 
@@ -33,7 +32,7 @@ fi
 
 echo [MUSE CLIENT] creating docker image "$imageFullName"...
 (DOCKER_BUILDKIT=1 docker buildx build \
- --no-cache \
+  --no-cache \
   --platform linux/arm64,linux/amd64 \
   -f "${rootDir}/client/Dockerfile" \
   -t "$imageFullName" \

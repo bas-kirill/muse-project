@@ -1,6 +1,7 @@
 package mu.muse.rest
 
 const val API = "/api"
+const val ACTUATOR="/actuator"
 const val API_LOGIN = "$API/auth/login"
 const val API_LOGOUT = "$API/auth/logout"
 const val API_INSTRUMENTS = "$API/instruments"
@@ -18,3 +19,4 @@ const val API_FAVORITE_LIST = "$API/favorite/list"
 const val API_FAVORITE_ADD = "$API/favorite/add"
 const val API_FAVORITE_REMOVE = "$API/favorite/remove"
 const val API_INSTRUMENT_PHOTO = "$API/instrument/photo/{id:\\d+}"
+const val ACTUATOR_HEALTH = "$ACTUATOR/health"
