@@ -12,4 +12,5 @@
 
     <!-- Configure logging for org.springframework package -->
     <logger name="org.springframework" level="TRACE" />
+    <logger name="org.springframework.*" level="TRACE" />
 </configuration>

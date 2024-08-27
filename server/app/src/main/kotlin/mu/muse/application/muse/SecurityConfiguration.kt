@@ -41,7 +41,9 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
+import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import java.security.Key
@@ -67,7 +69,7 @@ class SecurityConfiguration {
     @Bean
     fun jwtParser(jwtSecretKey: Key): JwtParser = Jwts.parserBuilder().setSigningKey(jwtSecretKey).build()
 
-    @Bean
+    @Bean("corsConfigurationSource")
     @Profile(Application.Profile.SPRING_LOCAL_PROFILE)
     fun localCorsConfigurer(): WebMvcConfigurer {
         logger.info("keeek: 'local'")
@@ -82,19 +84,19 @@ class SecurityConfiguration {
         }
     }
 
-    @Bean
+    @Bean("corsConfigurationSource")
     @Profile(Application.Profile.SPRING_DEV_PROFILE)
-    fun devCorsConfigurer(): WebMvcConfigurer {
+    fun corsConfigurationSource(): CorsConfigurationSource {
         logger.info("keeek: 'dev'")
-        return object : WebMvcConfigurer {
-            override fun addCorsMappings(registry: CorsRegistry) {
-                registry.addMapping("/api/**")
-                    .allowedOrigins("http://88.201.171.120:10001")
-                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                    .allowedHeaders("*")
-                    .allowCredentials(true)
-            }
-        }
+        val configuration = CorsConfiguration()
+        configuration.allowedOrigins = listOf("http://88.201.171.120:50001")
+        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        configuration.allowedHeaders = listOf("*")
+        configuration.allowCredentials = true
+
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return source
     }
 
     @Bean
@@ -102,11 +104,8 @@ class SecurityConfiguration {
         httpSecurity: HttpSecurity,
         userDetailsService: UserDetailsService,
         jwtFilter: JwtFilter,
-        corsConfigurationSource: CorsConfigurationSource,
     ): SecurityFilterChain { // @formatter:off
-        var http = httpSecurity
-            .csrf { cors -> cors.disable() }
-            .cors { cors -> cors.configurationSource(corsConfigurationSource) }
+        var http = httpSecurity.cors().and().csrf().disable()
 
         http = http.sessionManagement { session ->
             session
