@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import textStyle from "./Text.module.css";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { InstrumentType } from "generated/model/instrument-type";
+import { apiConfig } from "shared/config/api";
 
-const getInstrumentTypes = new GetInstrumentTypesApi();
+const getInstrumentTypes = new GetInstrumentTypesApi(apiConfig);
 
 interface Props {
   onValueChange: (i: InstrumentType[]) => void;

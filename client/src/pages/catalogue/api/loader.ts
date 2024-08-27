@@ -5,9 +5,10 @@ import {
   CATALOGUE_DEFAULT_PAGE_NUMBER,
   CATALOGUE_DEFAULT_PAGE_SIZE,
 } from "shared/config/frontend";
+import { apiConfig } from "shared/config/api";
 
 const getInstrumentsByCriteriaPaginated =
-  new GetInstrumentsByCriteriaPaginatedApi();
+  new GetInstrumentsByCriteriaPaginatedApi(apiConfig);
 
 export interface CatalogueLoader {
   instrumentPage: GetInstrumentByCriteriaPageResponse;

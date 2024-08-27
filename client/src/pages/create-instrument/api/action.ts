@@ -2,12 +2,13 @@ import { ActionFunction } from "react-router-dom";
 import Jwt from "domain/model/jwt";
 import { CreateInstrumentApi } from "generated/api/create-instrument-api";
 import { parseInstrumentDetails } from "shared/model";
+import { apiConfig } from "shared/config/api";
 
 export interface CreateInstrumentAction {
   errors: string[] | null;
 }
 
-const createInstrument = new CreateInstrumentApi();
+const createInstrument = new CreateInstrumentApi(apiConfig);
 
 export const action: ActionFunction = async ({
   request,

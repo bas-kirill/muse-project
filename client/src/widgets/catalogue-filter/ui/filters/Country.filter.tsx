@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { GetCountriesApi } from "generated/api/get-countries-api";
 import { Country } from "generated/model";
+import { apiConfig } from "shared/config/api";
 
 interface Props {
   onValueChange: (names: Country[]) => void;
 }
 
-const getCountries = new GetCountriesApi();
+const getCountries = new GetCountriesApi(apiConfig);
 
 export const CountryFilter = ({ onValueChange }: Props) => {
   const [countries, setCountries] = useState<Country[]>([]);

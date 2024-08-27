@@ -11,8 +11,9 @@ import { LOGIN } from "shared/config/paths";
 import { deleteCookie } from "shared/cookie/cookie";
 import { COOKIE_JWT_KEY, COOKIE_SESSIONID } from "shared/config/frontend";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { apiConfig } from "shared/config/api";
 
-const logout = new LogoutApi();
+const logout = new LogoutApi(apiConfig);
 
 export function ProfilePage() {
   useJwt();

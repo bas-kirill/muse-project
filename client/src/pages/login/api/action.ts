@@ -2,12 +2,13 @@ import { ActionFunction, redirect } from "react-router-dom";
 import { parseLoginForm } from "./../model/parse-login-form";
 import { BasicLoginApi } from "generated/api";
 import { PROFILE } from "shared/config/paths";
+import { apiConfig } from "shared/config/api";
 
 export interface LoginAction {
   errors: string[];
 }
 
-const basicLoginApi = new BasicLoginApi();
+const basicLoginApi = new BasicLoginApi(apiConfig);
 
 export const action: ActionFunction = async ({
   request,

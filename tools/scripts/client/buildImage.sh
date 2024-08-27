@@ -33,6 +33,7 @@ fi
 
 echo [MUSE CLIENT] creating docker image "$imageFullName"...
 (DOCKER_BUILDKIT=1 docker buildx build \
+ --no-cache \
   --platform linux/arm64,linux/amd64 \
   -f "${rootDir}/client/Dockerfile" \
   -t "$imageFullName" \

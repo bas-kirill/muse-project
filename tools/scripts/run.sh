@@ -5,18 +5,16 @@ rootDir="$currentDir/../../"
 
 stage=$1
 
-if [ -z "$1" ]
-  then
-    echo -e "\033[0;33mNo stage provided. 'local' stage will be used.\033[0m"
-    stage="local"
+if [ -z "$1" ]; then
+  echo -e "\033[0;33mNo stage provided. 'local' stage will be used.\033[0m"
+  stage="local"
 fi
 
 profile=$2
 
-if [ -z "$2" ]
-  then
-    echo -e "\033[0;33mNo Docker Profile provided. 'dev' stage will be used.\033[0m"
-    profile="dev"
+if [ -z "$2" ]; then
+  echo -e "\033[0;33mNo Docker Profile provided. 'dev' stage will be used.\033[0m"
+  profile="dev"
 fi
 
 (cd "$rootDir" && exec docker compose \

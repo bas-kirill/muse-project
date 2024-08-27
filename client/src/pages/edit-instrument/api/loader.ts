@@ -13,13 +13,14 @@ import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-bas
 import { GetCountriesApi } from "generated/api/get-countries-api";
 import { GetManufacturersApi } from "generated/api/get-manufacturers-api";
 import { GetInstrumentPhotoApi } from "generated/api/get-instrument-photo-api";
+import { apiConfig } from "shared/config/api";
 
-const getInstrumentById = new GetInstrumentByIdApi();
-const getInstrumentTypes = new GetInstrumentTypesApi();
-const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi();
-const getCountries = new GetCountriesApi();
-const getManufacturers = new GetManufacturersApi();
-const getInstrumentPhoto = new GetInstrumentPhotoApi();
+const getInstrumentById = new GetInstrumentByIdApi(apiConfig);
+const getInstrumentTypes = new GetInstrumentTypesApi(apiConfig);
+const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi(apiConfig);
+const getCountries = new GetCountriesApi(apiConfig);
+const getManufacturers = new GetManufacturersApi(apiConfig);
+const getInstrumentPhoto = new GetInstrumentPhotoApi(apiConfig);
 
 export interface EditInstrumentLoader {
   instrumentForEdit: InstrumentDetail;
