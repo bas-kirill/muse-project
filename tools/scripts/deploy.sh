@@ -3,6 +3,13 @@ set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../"
 
+DIFFS_COUNT=$(git diff --name-only | wc -l)
+
+# stash any unstaged changes if it's exists
+if [ "$DIFFS_COUNT" -ne 0 ]; then
+  git stash -q --keep-index
+fi
+
 function finish {
   docker context use desktop-linux
 }
@@ -49,6 +56,11 @@ fi
 (cd "$rootDir" && exec ./tools/scripts/stop.sh "$stage" "$dockerRepository")
 (cd "$rootDir" && exec ./tools/scripts/clean.sh "$stage" "$dockerRepository")
 (cd "$rootDir" && exec ./tools/scripts/run.sh "$stage")
+
+# unstash the unstashed changes if it's exists
+if [ "$DIFFS_COUNT" -ne 0 ]; then
+  git stash pop -q
+fi
 
 echo -e "\033[0;32m[$stage] List of available ports:\n\033[0m"
 (cd "$rootDir" && exec cat "./tools/docker/env/$stage.env")
