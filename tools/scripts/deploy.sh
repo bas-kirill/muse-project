@@ -22,10 +22,10 @@ if [ -z "$2" ]; then
   echo -e "\033[0;33m[$stage] No Docker Hub username provided. 'myshx' will be used.\033[0m"
   dockerRepository="myshx"
 fi
-
-# Stop local containers
-(cd "$rootDir" && exec ./tools/scripts/stop.sh "local" "$dockerRepository")
-(cd "$rootDir" && exec ./tools/scripts/clean.sh "local" "$dockerRepository")
+#
+## Stop local containers
+#(cd "$rootDir" && exec ./tools/scripts/stop.sh "local" "$dockerRepository")
+#(cd "$rootDir" && exec ./tools/scripts/clean.sh "local" "$dockerRepository")
 
 (cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$stage" "$dockerRepository")
 

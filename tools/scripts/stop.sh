@@ -41,6 +41,7 @@ export MUSE_GIT_COMMIT_HASH="$(git rev-parse --short HEAD)"
   -f ./tools/docker/docker-compose.$stage.yml \
   --env-file ./tools/docker/env/$stage.env \
   --project-name=muse-$stage \
-  down -v && echo "lol")
+  down -v \
+  --remove-orphans)
 
 echo -e "\033[0;32m[$stage] Docker Service has been stopped.\033[0m"

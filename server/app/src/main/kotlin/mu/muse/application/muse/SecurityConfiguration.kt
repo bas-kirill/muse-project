@@ -69,24 +69,25 @@ class SecurityConfiguration {
     @Bean
     fun jwtParser(jwtSecretKey: Key): JwtParser = Jwts.parserBuilder().setSigningKey(jwtSecretKey).build()
 
-    @Bean("corsConfigurationSource")
+    @Bean
     @Profile(Application.Profile.SPRING_LOCAL_PROFILE)
-    fun localCorsConfigurer(): WebMvcConfigurer {
-        logger.info("keeek: 'local'")
-        return object : WebMvcConfigurer {
-            override fun addCorsMappings(registry: CorsRegistry) {
-                registry.addMapping("/api/**")
-                    .allowedOrigins("http://localhost:3000")
-                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                    .allowedHeaders("*")
-                    .allowCredentials(true)
-            }
-        }
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        logger.info("keeek: 'dev'")
+        val configuration = CorsConfiguration()
+//        configuration.allowedOrigins = listOf("http://localhost:3000")
+        configuration.allowedOrigins = listOf("*")
+        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        configuration.allowedHeaders = listOf("*")
+        configuration.allowCredentials = true
+
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return source
     }
 
-    @Bean("corsConfigurationSource")
+    @Bean
     @Profile(Application.Profile.SPRING_DEV_PROFILE)
-    fun corsConfigurationSource(): CorsConfigurationSource {
+    fun devCorsConfigurationSource(): CorsConfigurationSource {
         logger.info("keeek: 'dev'")
         val configuration = CorsConfiguration()
         configuration.allowedOrigins = listOf("http://88.201.171.120:50001")
