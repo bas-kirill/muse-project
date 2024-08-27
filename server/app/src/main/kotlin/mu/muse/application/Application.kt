@@ -33,9 +33,8 @@ class Application : CommandLineRunner {
 
     class Profile {
         companion object {
-            const val SPRING_LOCAL_PROFILE = "local"
-            const val SPRING_DEV_PROFILE = "dev"
-            const val SPRING_PROD_PROFILE = "prod"
+            const val LOCAL = "local"
+            const val DEV = "dev"
         }
     }
 

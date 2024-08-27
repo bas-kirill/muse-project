@@ -44,8 +44,6 @@ import org.springframework.security.web.servletapi.SecurityContextHolderAwareReq
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
-import org.springframework.web.servlet.config.annotation.CorsRegistry
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import java.security.Key
 
 
@@ -53,10 +51,12 @@ import java.security.Key
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 @Suppress("TooManyFunctions")
-class SecurityConfiguration {
+class SecurityConfiguration(
+    @Value("\${spring.profiles.active}")
+    private val springActiveProfile: String,
+) {
 
-    @Value("#{systemEnvironment['CLIENT_PORT']}")
-    lateinit var clientPort: String
+
 
     companion object {
         val logger: Logger = LoggerFactory.getLogger(SecurityConfiguration::class.java)
@@ -70,33 +70,14 @@ class SecurityConfiguration {
     fun jwtParser(jwtSecretKey: Key): JwtParser = Jwts.parserBuilder().setSigningKey(jwtSecretKey).build()
 
     @Bean
-    fun localCorsConfigurationSource(): CorsConfigurationSource {
-        logger.info("keeek: 'dev'")
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        logger.info("keeek: '${springActiveProfile}'")
         val configuration = CorsConfiguration()
-//        configuration.allowedOrigins = when {
-//            Application.Profile.SPRING_LOCAL_PROFILE -> listOf("http://localhost:3000")
-//
-//        }
-  /*      if (clientPort == Application.Profile.SPRING_LOCAL_PROFILE) {
-            configuration.allowedOrigins = listOf("http://localhost:3000")
-        }*/
-
-        configuration.allowedOrigins = listOf("http://localhost:3000")
-        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
-        configuration.allowedHeaders = listOf("*")
-        configuration.allowCredentials = true
-
-        val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", configuration)
-        return source
-    }
-
-    @Bean
-    @Profile(Application.Profile.SPRING_DEV_PROFILE)
-    fun devCorsConfigurationSource(): CorsConfigurationSource {
-        logger.info("keeek: 'dev'")
-        val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("http://88.201.171.120:50001")
+        configuration.allowedOrigins = when (springActiveProfile) {
+            Application.Profile.LOCAL -> listOf("http://localhost:3000")
+            Application.Profile.DEV -> listOf("http://88.201.171.120:50001")
+            else -> throw UnknownDeployStageException(springActiveProfile)
+        }
         configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         configuration.allowedHeaders = listOf("*")
         configuration.allowCredentials = true
@@ -193,3 +174,5 @@ class SecurityConfiguration {
         return DelegatingPasswordEncoder(idForEncode, encoders);
     }
 }
+
+class UnknownDeployStageException(private val stage: String) : RuntimeException("Found unknown deploy stage '${stage}")
