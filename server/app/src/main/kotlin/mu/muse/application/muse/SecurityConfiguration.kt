@@ -74,8 +74,8 @@ class SecurityConfiguration {
     fun corsConfigurationSource(): CorsConfigurationSource {
         logger.info("keeek: 'dev'")
         val configuration = CorsConfiguration()
-//        configuration.allowedOrigins = listOf("http://localhost:3000")
-        configuration.allowedOrigins = listOf("*")
+        configuration.allowedOrigins = listOf("http://localhost:3000")
+//        configuration.allowedOrigins = listOf("*")
         configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         configuration.allowedHeaders = listOf("*")
         configuration.allowCredentials = true
