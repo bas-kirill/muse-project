@@ -4,6 +4,7 @@ import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletResponse
+import mu.muse.application.Application
 import mu.muse.rest.ACTUATOR_HEALTH
 import mu.muse.rest.API_COUNTRIES
 import mu.muse.rest.API_INSTRUMENTS
@@ -17,9 +18,12 @@ import mu.muse.rest.API_MANUFACTURERS
 import mu.muse.rest.API_REGISTRATION
 import mu.muse.usecase.access.user.UserExtractor
 import mu.muse.usecase.scenario.user.BasicLoginUseCase
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
@@ -48,6 +52,13 @@ import java.security.Key
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 @Suppress("TooManyFunctions")
 class SecurityConfiguration {
+//
+//    @Value("#{systemProperties['CLIENT_PORT']}")
+//    lateinit var clientPort: String
+
+    companion object {
+        val logger: Logger = LoggerFactory.getLogger(SecurityConfiguration::class.java)
+    }
 
     @Bean
     fun jwtSecretKey(@Value("\${security.jwt.secret-key}") jwtSecretKey: String): Key =
@@ -57,11 +68,28 @@ class SecurityConfiguration {
     fun jwtParser(jwtSecretKey: Key): JwtParser = Jwts.parserBuilder().setSigningKey(jwtSecretKey).build()
 
     @Bean
-    fun corsConfigurer(): WebMvcConfigurer {
+    @Profile(Application.Profile.SPRING_LOCAL_PROFILE)
+    fun localCorsConfigurer(): WebMvcConfigurer {
+        logger.info("keeek: 'local'")
         return object : WebMvcConfigurer {
             override fun addCorsMappings(registry: CorsRegistry) {
                 registry.addMapping("/api/**")
                     .allowedOrigins("http://localhost:3000")
+                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                    .allowedHeaders("*")
+                    .allowCredentials(true)
+            }
+        }
+    }
+
+    @Bean
+    @Profile(Application.Profile.SPRING_DEV_PROFILE)
+    fun devCorsConfigurer(): WebMvcConfigurer {
+        logger.info("keeek: 'dev'")
+        return object : WebMvcConfigurer {
+            override fun addCorsMappings(registry: CorsRegistry) {
+                registry.addMapping("/api/**")
+                    .allowedOrigins("http://88.201.171.120:10001")
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                     .allowedHeaders("*")
                     .allowCredentials(true)

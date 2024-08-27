@@ -17,7 +17,7 @@ if [ -z "$2" ]; then
   dockerRepository="myshx"
 fi
 
-docker context use default
+docker context use desktop-linux
 if [ "$stage" != "local" ]; then
   context_name=muse-$stage
   if ! docker context ls --format '{{.Name}}' | grep -q "^${context_name}$"; then
@@ -27,7 +27,7 @@ if [ "$stage" != "local" ]; then
   docker context use "$context_name"
 
   function finish {
-      docker context use default
+    docker context use desktop-linux
   }
 
   trap "finish" EXIT

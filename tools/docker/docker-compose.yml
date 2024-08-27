@@ -39,19 +39,22 @@ services:
       - ${SERVER_DEBUG_PORT}:5005
     environment:
       - MUSE_JWT_SECRET_KEY
+      - SERVER_SPRING_PROFILE
+      - CLIENT_PORT
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_DB
       - POSTGRES_DSN
+      - CLIENT_PORT
     networks:
       - muse
-    depends_on:
-      muse-postgres:
-        condition: service_healthy
     profiles:
       - local
       - dev
       - prod
+    depends_on:
+      muse-postgres:
+        condition: service_healthy
     labels:
       - io.portainer.accesscontrol.public
 
@@ -60,9 +63,12 @@ services:
     container_name: muse-client
     ports:
       - ${CLIENT_PORT}:80
+    environment:
+      - SERVER_API_URL
     networks:
       - muse
     profiles:
+      - local
       - dev
       - prod
     labels:

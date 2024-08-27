@@ -4,7 +4,7 @@ currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../"
 
 function finish {
-  docker context use default
+  docker context use desktop-linux
 }
 
 trap 'finish' EXIT
@@ -29,7 +29,7 @@ fi
 
 (cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$stage" "$dockerRepository")
 
-docker context use default
+docker context use desktop-linux
 
 if [ "$stage" != "local" ]; then
   context_name=muse-$stage
@@ -40,7 +40,7 @@ if [ "$stage" != "local" ]; then
   docker context use "$context_name"
 
   function finish {
-      docker context use default
+    docker context use desktop-linux
   }
 
   trap "finish" EXIT
