@@ -2,12 +2,13 @@ import { ActionFunction } from "react-router-dom";
 import Jwt from "domain/model/jwt";
 import { EditInstrumentApi } from "generated/api/edit-instrument-api";
 import { parseInstrumentDetails } from "shared/model";
+import { apiConfig } from "shared/config/api";
 
 export interface EditInstrumentAction {
   errors: string[];
 }
 
-const editInstrument = new EditInstrumentApi();
+const editInstrument = new EditInstrumentApi(apiConfig);
 
 export const action: ActionFunction = async ({
   request,

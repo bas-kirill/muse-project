@@ -13,10 +13,9 @@ fi
 
 dockerTag=$2
 
-if [ -z "$2" ]
-  then
-    echo -e "\033[0;33mNo Docker Tag provided. Latest will be used.\033[0m"
-    dockerTag="latest"
+if [ -z "$2" ]; then
+  echo -e "\033[0;33mNo Docker Tag provided. Latest will be used.\033[0m"
+  dockerTag="latest"
 fi
 
 (cd "$rootDir" && ./tools/scripts/openapi/regenerateOpenApi.sh)

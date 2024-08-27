@@ -12,9 +12,10 @@ import { CatalogueLoader } from "pages/catalogue";
 import { NavigationBarWidget } from "widgets/catalogue-navbar";
 import { SearchBarInputField } from "pages/catalogue/ui/SearchBarInput.field";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { apiConfig } from "shared/config/api";
 
 const getInstrumentsByCriteriaPaginated =
-  new GetInstrumentsByCriteriaPaginatedApi();
+  new GetInstrumentsByCriteriaPaginatedApi(apiConfig);
 
 export function CataloguePage() {
   const { darkMode } = useDarkMode();

@@ -9,11 +9,12 @@ import type {
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
 import { GetCountriesApi } from "generated/api";
 import { GetManufacturersApi } from "generated/api";
+import { apiConfig } from "shared/config/api";
 
-const getInstrumentTypes = new GetInstrumentTypesApi();
-const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi();
-const getCountries = new GetCountriesApi();
-const getManufacturers = new GetManufacturersApi();
+const getInstrumentTypes = new GetInstrumentTypesApi(apiConfig);
+const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi(apiConfig);
+const getCountries = new GetCountriesApi(apiConfig);
+const getManufacturers = new GetManufacturersApi(apiConfig);
 
 export interface CreateInstrumentLoader {
   instrumentTypes: InstrumentType[];

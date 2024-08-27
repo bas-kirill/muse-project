@@ -4,6 +4,7 @@ import actionBtnStyle from "./styles/Action.button.module.css";
 import { InstrumentDetail } from "generated/model";
 import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { apiConfig } from "shared/config/api";
 
 interface Props {
   instrument: InstrumentDetail;
@@ -11,7 +12,7 @@ interface Props {
   setErrorModal: (errorModal: boolean) => void;
 }
 
-const removeFavoriteApi = new RemoveFavoriteApi();
+const removeFavoriteApi = new RemoveFavoriteApi(apiConfig);
 
 export const RemoveInstrumentButton = (props: Props) => {
   const { darkMode } = useDarkMode();

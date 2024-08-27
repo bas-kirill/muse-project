@@ -2,12 +2,13 @@ import styles from "./styles/InstrumentPhoto.module.css";
 import React, { useEffect, useState } from "react";
 import { GetInstrumentPhotoApi } from "generated/api/get-instrument-photo-api";
 import { InstrumentDetail } from "generated/model";
+import { apiConfig } from "shared/config/api";
 
 interface Props {
   instrument: InstrumentDetail;
 }
 
-const getInstrumentPhoto = new GetInstrumentPhotoApi();
+const getInstrumentPhoto = new GetInstrumentPhotoApi(apiConfig);
 
 export const InstrumentPhoto = (props: Props) => {
   const [photo, setPhoto] = useState<string | undefined>();

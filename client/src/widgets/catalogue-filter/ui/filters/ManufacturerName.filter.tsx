@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { GetManufacturersApi } from "generated/api/get-manufacturers-api";
 import { Manufacturer, ManufacturerName } from "generated/model";
+import { apiConfig } from "shared/config/api";
 
 interface Props {
   onValueChange: (names: ManufacturerName[]) => void;
 }
 
-const getManufacturers = new GetManufacturersApi();
+const getManufacturers = new GetManufacturersApi(apiConfig);
 
 export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
   const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);

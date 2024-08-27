@@ -3,8 +3,9 @@ import { GetUserProfileApi } from "generated/api/get-user-profile-api";
 import { ProfileDetails } from "generated/model";
 import { LOGIN } from "shared/config/paths";
 import { redirect } from "react-router-dom";
+import { apiConfig } from "shared/config/api";
 
-const getUserProfile = new GetUserProfileApi();
+const getUserProfile = new GetUserProfileApi(apiConfig);
 
 export const loader = async (): Promise<ProfileDetails | Response> => {
   const jwt = Jwt.extractFromCookie();

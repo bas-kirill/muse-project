@@ -1,8 +1,9 @@
 import { ActionFunction } from "react-router-dom";
 import { parseForm } from "pages/registration/model/parseForm";
 import { UserRegistrationApi } from "generated/api/user-registration-api";
+import { apiConfig } from "shared/config/api";
 
-const userRegistrationApi = new UserRegistrationApi();
+const userRegistrationApi = new UserRegistrationApi(apiConfig);
 
 export interface RegistrationAction {
   errors: string[];

@@ -11,14 +11,15 @@ import { InstrumentId } from "generated/model";
 import Jwt from "domain/model/jwt";
 import { COOKIE_JWT_KEY } from "shared/config/frontend";
 import { getCookie } from "shared/cookie/cookie";
+import { apiConfig } from "shared/config/api";
 
 interface Props {
   instrumentId: InstrumentId;
 }
 
-const listFavorite = new ListFavoriteApi();
-const removeFavorite = new RemoveFavoriteApi();
-const addFavorite = new AddFavoriteApi();
+const listFavorite = new ListFavoriteApi(apiConfig);
+const removeFavorite = new RemoveFavoriteApi(apiConfig);
+const addFavorite = new AddFavoriteApi(apiConfig);
 
 export const FavoriteButton = (props: Props) => {
   const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));

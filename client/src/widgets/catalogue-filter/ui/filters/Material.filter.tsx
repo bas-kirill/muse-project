@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { GetInstrumentBasicMaterialsApi } from "generated/api";
 import { BasicMaterial } from "generated/model";
+import { apiConfig } from "shared/config/api";
 
 interface Props {
   onValueChange: (names: BasicMaterial[]) => void;
 }
 
-const getInstrumentMaterials = new GetInstrumentBasicMaterialsApi();
+const getInstrumentMaterials = new GetInstrumentBasicMaterialsApi(apiConfig);
 
 export const MaterialFilter = ({ onValueChange }: Props) => {
   const [materials, setMaterials] = useState<BasicMaterial[]>([]);
