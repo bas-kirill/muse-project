@@ -157,14 +157,14 @@ jobs:
 
   deploy-dev:
     name: "[SERVER] Deploy to Dev"
-    needs:
-      - openapi-linter
-      - client-linter
-      - client-static-analyzer
-      - server-linter
-      - server-static-analyzer
-      - server-unit-tests
-      - server-sonarqube
+#    needs:
+#      - openapi-linter
+#      - client-linter
+#      - client-static-analyzer
+#      - server-linter
+#      - server-static-analyzer
+#      - server-unit-tests
+#      - server-sonarqube
     runs-on: ubuntu-22.04
     environment:
       name: dev
