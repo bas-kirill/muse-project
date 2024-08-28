@@ -31,13 +31,6 @@ import java.time.Instant
 @Import(ApplicationConfiguration::class)
 class Application : CommandLineRunner {
 
-    class Profile {
-        companion object {
-            const val LOCAL = "local"
-            const val DEV = "dev"
-        }
-    }
-
     @Autowired
     lateinit var userIdGenerator: IdGenerator<UserId>
 

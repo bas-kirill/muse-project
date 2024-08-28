@@ -3,6 +3,12 @@ set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../"
 
+function finish {
+  docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
+}
+
+trap 'finish' EXIT
+
 stage=$1
 
 if [ -z "$1" ]; then
@@ -17,7 +23,7 @@ if [ -z "$2" ]; then
   dockerRepository="myshx"
 fi
 
-docker context use desktop-linux
+docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
 
 if [ "$stage" != "local" ]; then
   context_name=muse-$stage
@@ -26,12 +32,6 @@ if [ "$stage" != "local" ]; then
   fi
 
   docker context use "$context_name"
-
-  function finish {
-    docker context use desktop-linux
-  }
-
-  trap "finish" EXIT
 fi
 
 export DOCKER_REPOSITORY=$dockerRepository
