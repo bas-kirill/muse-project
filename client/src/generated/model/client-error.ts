@@ -12,22 +12,25 @@
  * Do not edit the class manually.
  */
 
+
+
 /**
- *
+ * 
  * @export
  * @interface ClientError
  */
 export interface ClientError {
-  /**
-   * Error description
-   * @type {string}
-   * @memberof ClientError
-   */
-  message: string;
-  /**
-   * Exception stack trace
-   * @type {string}
-   * @memberof ClientError
-   */
-  cause?: string;
+    /**
+     * Error description
+     * @type {string}
+     * @memberof ClientError
+     */
+    'message': string;
+    /**
+     * Exception stack trace
+     * @type {string}
+     * @memberof ClientError
+     */
+    'cause'?: string;
 }
+
