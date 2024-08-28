@@ -198,6 +198,12 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install Dependencies
         run: npm install --prefix client
+      - name: Setup SSH connection to deploy server
+        uses: kielabokkie/ssh-key-and-known-hosts-action@v1
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_SERVER_SSH_PRIVATE_KEY }}
+          ssh-host: kiryuxa.com
+          ssh-port: 22
       - name: Deploy at home lab
         run: echo "$(pwd)" && ./tools/scripts/deploy.sh dev
         env:
