@@ -170,6 +170,11 @@ jobs:
       name: dev
       url: http://dev.muse.kiryuxa.com
     steps:
+      - name: Set up JDK 21 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21.0"
       - name: Checkout Code
         uses: actions/checkout@v4
       - uses: actions/setup-node@v4
