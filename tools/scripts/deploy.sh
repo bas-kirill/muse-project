@@ -3,8 +3,15 @@ set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../"
 
+DIFFS_COUNT=$(git diff --name-only | wc -l)
+
+# stash any unstaged changes if it's exists
+if [ "$DIFFS_COUNT" -ne 0 ]; then
+  git stash -q --keep-index
+fi
+
 function finish {
-  docker context use default
+  docker context use desktop-linux
 }
 
 trap 'finish' EXIT
@@ -22,14 +29,14 @@ if [ -z "$2" ]; then
   echo -e "\033[0;33m[$stage] No Docker Hub username provided. 'myshx' will be used.\033[0m"
   dockerRepository="myshx"
 fi
-
-# Stop local containers
-(cd "$rootDir" && exec ./tools/scripts/stop.sh "local" "$dockerRepository")
-(cd "$rootDir" && exec ./tools/scripts/clean.sh "local" "$dockerRepository")
+#
+## Stop local containers
+#(cd "$rootDir" && exec ./tools/scripts/stop.sh "local" "$dockerRepository")
+#(cd "$rootDir" && exec ./tools/scripts/clean.sh "local" "$dockerRepository")
 
 (cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$stage" "$dockerRepository")
 
-docker context use default
+docker context use desktop-linux
 
 if [ "$stage" != "local" ]; then
   context_name=muse-$stage
@@ -40,7 +47,7 @@ if [ "$stage" != "local" ]; then
   docker context use "$context_name"
 
   function finish {
-      docker context use default
+    docker context use desktop-linux
   }
 
   trap "finish" EXIT
@@ -49,6 +56,11 @@ fi
 (cd "$rootDir" && exec ./tools/scripts/stop.sh "$stage" "$dockerRepository")
 (cd "$rootDir" && exec ./tools/scripts/clean.sh "$stage" "$dockerRepository")
 (cd "$rootDir" && exec ./tools/scripts/run.sh "$stage")
+
+# unstash the unstashed changes if it's exists
+if [ "$DIFFS_COUNT" -ne 0 ]; then
+  git stash pop -q
+fi
 
 echo -e "\033[0;32m[$stage] List of available ports:\n\033[0m"
 (cd "$rootDir" && exec cat "./tools/docker/env/$stage.env")

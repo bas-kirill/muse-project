@@ -1,5 +1,13 @@
 import { Configuration } from "generated/configuration";
 
+interface Window {
+  _env_: {
+    SERVER_API_URL: string;
+  };
+}
+
+// @ts-ignore
+const apiUrl = window._env_.SERVER_API_URL;
 export const apiConfig = new Configuration({
-  basePath: "http://88.201.171.120:10001",
+  basePath: apiUrl,
 });

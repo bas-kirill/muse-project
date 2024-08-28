@@ -39,5 +39,4 @@ echo [MUSE CLIENT] creating docker image "$imageFullName"...
   "$rootDir" \
   --push)
 
-echo -e "\033[0;32m[MUSE CLIENT FINISHED] image '$imageFullName' has been built\033[0m"
-#  --platform linux/amd64,linux/arm64 \
+echo -e "\033[0;32m[MUSE CLIENT FINISHED] image '$imageFullName' has been built.\033[0m"

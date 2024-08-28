@@ -4,6 +4,7 @@ import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import jakarta.servlet.http.HttpServletResponse
+import mu.muse.application.Application
 import mu.muse.rest.ACTUATOR_HEALTH
 import mu.muse.rest.API_COUNTRIES
 import mu.muse.rest.API_INSTRUMENTS
@@ -17,9 +18,12 @@ import mu.muse.rest.API_MANUFACTURERS
 import mu.muse.rest.API_REGISTRATION
 import mu.muse.usecase.access.user.UserExtractor
 import mu.muse.usecase.scenario.user.BasicLoginUseCase
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
@@ -37,9 +41,9 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
+import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
-import org.springframework.web.servlet.config.annotation.CorsRegistry
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import java.security.Key
 
 
@@ -47,7 +51,16 @@ import java.security.Key
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 @Suppress("TooManyFunctions")
-class SecurityConfiguration {
+class SecurityConfiguration(
+    @Value("\${spring.profiles.active}")
+    private val springActiveProfile: String,
+) {
+
+
+
+    companion object {
+        val logger: Logger = LoggerFactory.getLogger(SecurityConfiguration::class.java)
+    }
 
     @Bean
     fun jwtSecretKey(@Value("\${security.jwt.secret-key}") jwtSecretKey: String): Key =
@@ -57,16 +70,20 @@ class SecurityConfiguration {
     fun jwtParser(jwtSecretKey: Key): JwtParser = Jwts.parserBuilder().setSigningKey(jwtSecretKey).build()
 
     @Bean
-    fun corsConfigurer(): WebMvcConfigurer {
-        return object : WebMvcConfigurer {
-            override fun addCorsMappings(registry: CorsRegistry) {
-                registry.addMapping("/api/**")
-                    .allowedOrigins("http://localhost:3000")
-                    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                    .allowedHeaders("*")
-                    .allowCredentials(true)
-            }
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val configuration = CorsConfiguration()
+        configuration.allowedOrigins = when (springActiveProfile) {
+            Application.Profile.LOCAL -> listOf("http://localhost:3000")
+            Application.Profile.DEV -> listOf("http://88.201.171.120:50001")
+            else -> throw UnknownDeployStageException(springActiveProfile)
         }
+        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        configuration.allowedHeaders = listOf("*")
+        configuration.allowCredentials = true
+
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration)
+        return source
     }
 
     @Bean
@@ -74,11 +91,8 @@ class SecurityConfiguration {
         httpSecurity: HttpSecurity,
         userDetailsService: UserDetailsService,
         jwtFilter: JwtFilter,
-        corsConfigurationSource: CorsConfigurationSource,
     ): SecurityFilterChain { // @formatter:off
-        var http = httpSecurity
-            .csrf { cors -> cors.disable() }
-            .cors { cors -> cors.configurationSource(corsConfigurationSource) }
+        var http = httpSecurity.cors().and().csrf().disable()
 
         http = http.sessionManagement { session ->
             session
@@ -159,3 +173,5 @@ class SecurityConfiguration {
         return DelegatingPasswordEncoder(idForEncode, encoders);
     }
 }
+
+class UnknownDeployStageException(private val stage: String) : RuntimeException("Found unknown deploy stage '${stage}")

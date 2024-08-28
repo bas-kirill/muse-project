@@ -17,7 +17,7 @@ if [ -z "$2" ]; then
   dockerRepository="myshx"
 fi
 
-docker context use default
+docker context use desktop-linux
 
 if [ "$stage" != "local" ]; then
   context_name=muse-$stage
@@ -28,7 +28,7 @@ if [ "$stage" != "local" ]; then
   docker context use "$context_name"
 
   function finish {
-      docker context use default
+    docker context use desktop-linux
   }
 
   trap "finish" EXIT
@@ -41,6 +41,7 @@ export MUSE_GIT_COMMIT_HASH="$(git rev-parse --short HEAD)"
   -f ./tools/docker/docker-compose.$stage.yml \
   --env-file ./tools/docker/env/$stage.env \
   --project-name=muse-$stage \
-  down -v && echo "lol")
+  down -v \
+  --remove-orphans)
 
 echo -e "\033[0;32m[$stage] Docker Service has been stopped.\033[0m"

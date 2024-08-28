@@ -17,7 +17,7 @@ if [ -z "$2" ]; then
   dockerRepository="myshx"
 fi
 
-docker context use default
+docker context use desktop-linux
 
 if [ "$stage" != "local" ]; then
   context_name=muse-deploy-server
@@ -28,7 +28,7 @@ if [ "$stage" != "local" ]; then
   docker context use muse-deploy-server
 
   function finish {
-      docker context use default
+    docker context use desktop-linux
   }
 
   trap 'finish' EXIT
