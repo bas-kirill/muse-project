@@ -74,6 +74,7 @@ class SecurityConfiguration(
         configuration.allowedOrigins = when (springActiveProfile) {
             Application.Profile.LOCAL -> listOf("http://localhost:${museClientPort}")
             Application.Profile.DEV -> listOf("http://88.201.171.120:${museClientPort}")
+            Application.Profile.STAGING -> listOf("http://88.201.171.120:${museClientPort}")
             else -> throw UnknownDeployStageException(springActiveProfile)
         }
         configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")

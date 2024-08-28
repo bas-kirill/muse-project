@@ -35,6 +35,7 @@ class Application : CommandLineRunner {
         companion object {
             const val LOCAL = "local"
             const val DEV = "dev"
+            const val STAGING = "staging"
         }
     }
 
