@@ -191,6 +191,8 @@ jobs:
         run: npm i -g @redocly/cli@latest
       - name: Install Dependencies
         run: npm install --prefix client
+        env:
+          CI: false
       - name: Deploy at home lab
         run: echo "$(pwd)" && ./tools/scripts/deploy.sh dev
         env:
