@@ -5,18 +5,18 @@ rootDir="$currentDir/../../../"
 
 (cd "$rootDir" && exec ./tools/scripts/openapi/bundle.sh)
 (cd "$rootDir/client" && rm -rf ./src/generated)
-(cd "$rootDir/client" &&
-  mkdir -p ./src/generated &&
-  touch ./src/generated/index.ts &&
-  touch ./src/generated/base.ts &&
-  touch ./src/generated/common.ts &&
-  touch ./src/generated/api.ts &&
-  touch ./src/generated/configuration.ts &&
-  touch ./src/generated/git_push.sh &&
-  touch ./src/generated/.gitignore &&
-  touch ./src/generated/.npmignore &&
-  touch ./src/generated/.openapi-generator-ignore
-)
+#(cd "$rootDir/client" &&
+#  mkdir -p ./src/generated &&
+#  touch ./src/generated/index.ts &&
+#  touch ./src/generated/base.ts &&
+#  touch ./src/generated/common.ts &&
+#  touch ./src/generated/api.ts &&
+#  touch ./src/generated/configuration.ts &&
+#  touch ./src/generated/git_push.sh &&
+#  touch ./src/generated/.gitignore &&
+#  touch ./src/generated/.npmignore &&
+#  touch ./src/generated/.openapi-generator-ignore
+#)
 (cd "$rootDir" && exec docker run \
     --rm \
     -v "${PWD}/openapi:/local/openapi" \
