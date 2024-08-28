@@ -4,7 +4,7 @@ currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../"
 
 function finish {
-  docker context use default
+  docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
 }
 
 trap 'finish' EXIT
@@ -29,21 +29,13 @@ fi
 
 (cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$stage" "$dockerRepository")
 
-docker context use default
+docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
 
 if [ "$stage" != "local" ]; then
   context_name=muse-$stage
   if ! docker context ls --format '{{.Name}}' | grep -q "^${context_name}$"; then
       docker context create "${context_name}" --description "[MUSE] '$stage' Deploy Server" --docker "host=ssh://kiryuxa@88.201.171.120"
   fi
-
-  docker context use "$context_name"
-
-  function finish {
-      docker context use default
-  }
-
-  trap "finish" EXIT
 fi
 
 (cd "$rootDir" && exec ./tools/scripts/stop.sh "$stage" "$dockerRepository")
