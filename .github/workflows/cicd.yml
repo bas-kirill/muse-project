@@ -172,6 +172,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: "Install `Redocly`"
+        run: npm i -g @redocly/cli@latest
       - name: Deploy at home lab
         run: ./tools/scripts/deploy.sh dev
         env:
