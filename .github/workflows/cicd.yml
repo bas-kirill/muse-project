@@ -173,13 +173,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
       - name: Deploy at home lab
-        run: ./tools/scripts/deploy/deployDev.sh myshx dev
+        run: ./tools/scripts/deploy.sh dev
         env:
-          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
-          SSH_HOST: ${{ secrets.DEV_SSH_HOST }}
-          SSH_PORT: ${{ secrets.DEV_SSH_PORT }}
-          SSH_USER: ${{ secrets.DEV_SSH_USER }}
-          SSH_PASS: ${{ secrets.DEV_SHH_PASS }}
+          MUSE_DOCKER_DEFAULT_CONTEXT: default
+          MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
 #  deploy-staging:
 #    name: "[SERVER] Deploy to Staging"
 #    if: github.event.ref == 'refs/heads/main'
