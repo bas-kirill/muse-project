@@ -33,7 +33,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EditInstrumentRequestBody'
+              $ref: "#/components/schemas/EditInstrumentRequestBody"
         required: true
       responses:
         "200":

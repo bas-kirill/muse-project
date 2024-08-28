@@ -12,7 +12,9 @@ import { GetManufacturersApi } from "generated/api";
 import { apiConfig } from "shared/config/api";
 
 const getInstrumentTypes = new GetInstrumentTypesApi(apiConfig);
-const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi(apiConfig);
+const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi(
+  apiConfig,
+);
 const getCountries = new GetCountriesApi(apiConfig);
 const getManufacturers = new GetManufacturersApi(apiConfig);
 

@@ -3,11 +3,10 @@ set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../"
 
-function finish {
-  docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
-}
+[[ -z "${MUSE_DOCKER_DEFAULT_CONTEXT}" ]] && { echo "'MUSE_DOCKER_DEFAULT_CONTEXT' is not set. Exiting."; exit 1; }
+[[ -z "${MUSE_JWT_SECRET_KEY}" ]] && { echo "'MUSE_JWT_SECRET_KEY' is not set. Exiting."; exit 1; }
 
-trap 'finish' EXIT
+trap 'docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"' EXIT
 
 stage=$1
 

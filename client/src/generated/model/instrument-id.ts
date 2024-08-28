@@ -12,19 +12,16 @@
  * Do not edit the class manually.
  */
 
-
-
 /**
- * 
+ *
  * @export
  * @interface InstrumentId
  */
 export interface InstrumentId {
-    /**
-     * 
-     * @type {number}
-     * @memberof InstrumentId
-     */
-    'instrument_id': number;
+  /**
+   *
+   * @type {number}
+   * @memberof InstrumentId
+   */
+  instrument_id: number;
 }
-
