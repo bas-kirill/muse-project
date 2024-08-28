@@ -17,7 +17,9 @@ import { apiConfig } from "shared/config/api";
 
 const getInstrumentById = new GetInstrumentByIdApi(apiConfig);
 const getInstrumentTypes = new GetInstrumentTypesApi(apiConfig);
-const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi(apiConfig);
+const getInstrumentBasicMaterials = new GetInstrumentBasicMaterialsApi(
+  apiConfig,
+);
 const getCountries = new GetCountriesApi(apiConfig);
 const getManufacturers = new GetManufacturersApi(apiConfig);
 const getInstrumentPhoto = new GetInstrumentPhotoApi(apiConfig);

@@ -30,7 +30,7 @@ paths:
       tags:
         - deleteInstrumentById
       parameters:
-        - $ref: './../common/InstrumentId.yml#/components/parameters/instrumentId'
+        - $ref: "./../common/InstrumentId.yml#/components/parameters/instrumentId"
       responses:
         "200":
           description: Instrument Types
