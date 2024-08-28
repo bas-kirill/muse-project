@@ -5,6 +5,8 @@ rootDir="$currentDir/../../../"
 
 (cd "$rootDir" && exec ./tools/scripts/openapi/bundle.sh)
 (cd "$rootDir/client" && rm -rf ./src/generated)
+
+# https://github.com/OpenAPITools/openapi-generator/issues/12191
 (cd "$rootDir" &&
   docker run \
   --rm \
