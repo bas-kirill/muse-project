@@ -6,27 +6,13 @@ rootDir="$currentDir/../../"
 [[ -z "${MUSE_DOCKER_DEFAULT_CONTEXT}" ]] && { echo "'MUSE_DOCKER_DEFAULT_CONTEXT' is not set. Exiting."; exit 1; }
 [[ -z "${MUSE_JWT_SECRET_KEY}" ]] && { echo "'MUSE_JWT_SECRET_KEY' is not set. Exiting."; exit 1; }
 
-function finish {
-  docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
-
-  # unstash the unstashed changes if it's exists
-  if [ "$DIFFS_COUNT" -ne 0 ]; then
-    git stash pop -q
-  fi
-}
-
-trap finish EXIT
+trap 'docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"' EXIT
 
 DIFFS_COUNT=$(git diff --name-only | wc -l)
 
-# stash any unstaged changes if it's exists
 if [ "$DIFFS_COUNT" -ne 0 ]; then
-  echo "\033[0;31mGit diff not empty. Commit it before deploying. Exiting.\033[0m";
+  echo -e "\033[0;31mGit diff not empty. Commit it before deploying. Exiting.\033[0m";
   exit 1;
-fi
-
-if [ "$DIFFS_COUNT" -eq 0 ]; then
-  git stash -q --keep-index
 fi
 
 stage=$1

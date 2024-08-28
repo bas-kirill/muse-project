@@ -5,11 +5,7 @@ rootDir="$currentDir/../../"
 
 [[ -z "${MUSE_DOCKER_DEFAULT_CONTEXT}" ]] && { echo "'MUSE_DOCKER_DEFAULT_CONTEXT' is not set. Exiting."; exit 1; }
 
-function finish {
-  docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
-}
-
-trap 'finish' EXIT
+trap 'docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"' EXIT
 
 stage=$1
 
