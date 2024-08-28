@@ -51,8 +51,6 @@ import java.security.Key
 @EnableMethodSecurity(securedEnabled = true, jsr250Enabled = true)
 @Suppress("TooManyFunctions")
 class SecurityConfiguration(
-    @Value("\${spring.profiles.active}")
-    private val springActiveProfile: String,
     @Value("\${muse.client-url}")
     private val museClientUrl: String,
 ) {
@@ -166,5 +164,3 @@ class SecurityConfiguration(
         return DelegatingPasswordEncoder(idForEncode, encoders);
     }
 }
-
-class UnknownDeployStageException(private val stage: String) : RuntimeException("Found unknown deploy stage '${stage}")
