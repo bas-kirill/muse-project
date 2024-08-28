@@ -40,7 +40,7 @@ services:
     environment:
       - MUSE_JWT_SECRET_KEY
       - SERVER_SPRING_PROFILE
-      - CLIENT_PORT
+      - CLIENT_URL
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - POSTGRES_DB
