@@ -7,6 +7,8 @@ rootDir="$currentDir/../../../"
 (cd "$rootDir/client" && rm -rf ./src/generated)
 (cd "$rootDir" &&
   mkdir local &&
+  mkdir -p local/client/src/generated/model &&
+  mkdir -p /local/client/src/generated/model &&
   docker run \
   --rm \
   -v "${PWD}/openapi:/local/openapi" \
