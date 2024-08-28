@@ -20,6 +20,10 @@ fi
 (cd "$rootDir" && exec ./tools/scripts/server/buildJar.sh)
 (cd "$rootDir" && exec ./tools/scripts/server/buildImage.sh "$stage" "$dockerRepository")
 
+echo "debug one"
 (cd "$rootDir" && exec ./tools/scripts/client/build.sh "$stage")
+echo "debug two"
 (cd "$rootDir" && exec ./tools/scripts/client/buildDevImage.sh "$stage" "$dockerRepository")
+echo "debug three"
 (cd "$rootDir" && exec ./tools/scripts/client/buildImage.sh "$stage" "$dockerRepository" )
+echo "debug four"

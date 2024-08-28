@@ -189,12 +189,8 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: "Install `Redocly`"
         run: npm i -g @redocly/cli@latest
-      - name: Debug One
-        run: echo "debug one"
       - name: Install Dependencies
         run: npm install --prefix client
-      - name: Debug Two
-        run: echo "debug two"
       - name: Deploy at home lab
         run: echo "$(pwd)" && ./tools/scripts/deploy.sh dev
         env:
