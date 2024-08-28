@@ -17,5 +17,6 @@ rootDir="$currentDir/../../../"
 )
 (cd "$rootDir/server" && ./gradlew clean)
 (cd "$rootDir/server" && ./gradlew openApiGenerate)
+(cd "$rootDir" && ./tools/scripts/client/runLinter.sh)
 
 echo -e "\033[0;32mOpenAPI specs has been regenerated.\033[0m"
