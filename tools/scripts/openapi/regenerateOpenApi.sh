@@ -11,8 +11,8 @@ rootDir="$currentDir/../../../"
     -v "${PWD}/client/src/generated:/local/client/src/generated" \
     -u "$(id -u)":"$(id -g)" \
     openapitools/openapi-generator-cli:v7.8.0 generate \
-    --input-spec /local/openapi/openapi.yml \
-    --output /local/client/src/generated \
+    --input-spec local/openapi/openapi.yml \
+    --output local/client/src/generated \
     --generator-name typescript-axios \
     --additional-properties=apiPackage=api,modelPackage=model,supportsES6=true,withSeparateModelsAndApi=true \
     --verbose
