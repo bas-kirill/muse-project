@@ -9,6 +9,7 @@ rootDir="$currentDir/../../../"
     --rm \
     -v "${PWD}/openapi:/local/openapi" \
     -v "${PWD}/client/src/generated:/local/client/src/generated" \
+    -u "$(id -u)":"$(id -g)" \
     openapitools/openapi-generator-cli:v7.8.0 generate \
     --input-spec /local/openapi/openapi.yml \
     --output /local/client/src/generated \
