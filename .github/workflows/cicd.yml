@@ -189,6 +189,13 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: "Install `Redocly`"
         run: npm i -g @redocly/cli@latest
+      - name: Cache npm dependencies
+        uses: actions/cache@v2
+        with:
+          path: '~/.npm'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install Dependencies
         run: npm install --prefix client
       - name: Deploy at home lab
@@ -196,7 +203,7 @@ jobs:
         env:
           MUSE_DOCKER_DEFAULT_CONTEXT: default
           MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
-          CI: false
+          CI: false # https://stackoverflow.com/questions/34917977/disable-npm-warnings-as-errors-build-definition-tfs
 #  deploy-staging:
 #    name: "[SERVER] Deploy to Staging"
 #    if: github.event.ref == 'refs/heads/main'
