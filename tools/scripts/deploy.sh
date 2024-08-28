@@ -28,24 +28,9 @@ if [ -z "$2" ]; then
   echo -e "\033[0;33m[$stage] No Docker Hub username provided. 'myshx' will be used.\033[0m"
   dockerRepository="myshx"
 fi
-#
-## Stop local containers
-#(cd "$rootDir" && exec ./tools/scripts/stop.sh "local" "$dockerRepository")
-#(cd "$rootDir" && exec ./tools/scripts/clean.sh "local" "$dockerRepository")
 
+(cd "$rootDir" && exec ./tools/scripts/openapi/regenerateOpenApi.sh)
 (cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$stage" "$dockerRepository")
-
-docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
-
-if [ "$stage" != "local" ]; then
-  context_name=muse-$stage
-  if ! docker context ls --format '{{.Name}}' | grep -q "^${context_name}$"; then
-      docker context create "${context_name}" --description "[MUSE] '$stage' Deploy Server" --docker "host=ssh://kiryuxa@88.201.171.120"
-  fi
-
-  docker context use "$context_name"
-fi
-
 (cd "$rootDir" && exec ./tools/scripts/stop.sh "$stage" "$dockerRepository")
 (cd "$rootDir" && exec ./tools/scripts/clean.sh "$stage" "$dockerRepository")
 (cd "$rootDir" && exec ./tools/scripts/run.sh "$stage")
