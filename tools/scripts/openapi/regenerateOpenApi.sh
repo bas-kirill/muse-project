@@ -14,8 +14,10 @@ rootDir="$currentDir/../../../"
     --input-spec /local/openapi/openapi.yml \
     --output /local/client/src/generated \
     --generator-name typescript-axios \
-    --additional-properties=apiPackage=api,modelPackage=model,supportsES6=true,withSeparateModelsAndApi=true
+    --additional-properties=apiPackage=api,modelPackage=model,supportsES6=true,withSeparateModelsAndApi=true \
+    --verbose
 )
+
 (cd "$rootDir/server" && ./gradlew clean)
 (cd "$rootDir/server" && ./gradlew openApiGenerate)
 (cd "$rootDir" && ./tools/scripts/client/runLinter.sh)
