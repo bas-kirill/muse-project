@@ -16,6 +16,6 @@ rootDir="$currentDir/../../../"
     --additional-properties=apiPackage=api,modelPackage=model,supportsES6=true,withSeparateModelsAndApi=true
 )
 (cd "$rootDir/server" && ./gradlew clean)
-(cd "$rootDir/server" && exec ./gradlew openApiGenerate)
+(cd "$rootDir/server" && ./gradlew openApiGenerate)
 
 echo -e "\033[0;32mOpenAPI specs has been regenerated.\033[0m"
