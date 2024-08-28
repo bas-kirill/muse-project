@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Profile
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration
@@ -54,8 +53,8 @@ import java.security.Key
 class SecurityConfiguration(
     @Value("\${spring.profiles.active}")
     private val springActiveProfile: String,
-    @Value("\${muse.client.port}")
-    private val museClientPort: String,
+    @Value("\${muse.client-url}")
+    private val museClientUrl: String,
 ) {
     companion object {
         val logger: Logger = LoggerFactory.getLogger(SecurityConfiguration::class.java)
@@ -71,16 +70,10 @@ class SecurityConfiguration(
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
-        configuration.allowedOrigins = when (springActiveProfile) {
-            Application.Profile.LOCAL -> listOf("http://localhost:${museClientPort}")
-            Application.Profile.DEV -> listOf("http://88.201.171.120:${museClientPort}")
-            Application.Profile.STAGING -> listOf("http://88.201.171.120:${museClientPort}")
-            else -> throw UnknownDeployStageException(springActiveProfile)
-        }
+        configuration.allowedOrigins = listOf(museClientUrl)
         configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
         configuration.allowedHeaders = listOf("*")
         configuration.allowCredentials = true
-
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", configuration)
         return source
