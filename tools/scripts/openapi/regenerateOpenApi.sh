@@ -6,13 +6,9 @@ rootDir="$currentDir/../../../"
 (cd "$rootDir" && exec ./tools/scripts/openapi/bundle.sh)
 (cd "$rootDir/client" && rm -rf ./src/generated)
 (cd "$rootDir" &&
-  mkdir local &&
-  mkdir -p local/client/src/generated/model &&
-  mkdir -p /local/client/src/generated/model &&
   docker run \
   --rm \
-  -v "${PWD}/openapi:/local/openapi" \
-  -v "${PWD}/client/src/generated:/local/client/src/generated" \
+  -v "${PWD}:/local" \
   -u "$(id -u)":"$(id -g)" \
   openapitools/openapi-generator-cli:v7.8.0 generate \
   --input-spec local/openapi/openapi.yml \
@@ -21,6 +17,10 @@ rootDir="$currentDir/../../../"
   --additional-properties=apiPackage=api,modelPackage=model,supportsES6=true,withSeparateModelsAndApi=true \
   --verbose
 )
+
+#    mkdir local &&
+#    mkdir -p local/client/src/generated/model &&
+#    mkdir -p /local/client/src/generated/model &&
 
 (cd "$rootDir/server" && ./gradlew clean)
 (cd "$rootDir/server" && ./gradlew openApiGenerate)
