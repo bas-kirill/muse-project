@@ -54,10 +54,9 @@ import java.security.Key
 class SecurityConfiguration(
     @Value("\${spring.profiles.active}")
     private val springActiveProfile: String,
+    @Value("\${muse.client.port}")
+    private val museClientPort: String,
 ) {
-
-
-
     companion object {
         val logger: Logger = LoggerFactory.getLogger(SecurityConfiguration::class.java)
     }
@@ -73,8 +72,8 @@ class SecurityConfiguration(
     fun corsConfigurationSource(): CorsConfigurationSource {
         val configuration = CorsConfiguration()
         configuration.allowedOrigins = when (springActiveProfile) {
-            Application.Profile.LOCAL -> listOf("http://localhost:3000")
-            Application.Profile.DEV -> listOf("http://88.201.171.120:50001")
+            Application.Profile.LOCAL -> listOf("http://localhost:${museClientPort}")
+            Application.Profile.DEV -> listOf("http://88.201.171.120:${museClientPort}")
             else -> throw UnknownDeployStageException(springActiveProfile)
         }
         configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
