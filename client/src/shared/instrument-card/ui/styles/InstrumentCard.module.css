@@ -1,4 +1,5 @@
 .instrument_card {
+  height: 100%;
   display: flex;
   flex-direction: column;
   border: 1px #dee2e6 solid;
