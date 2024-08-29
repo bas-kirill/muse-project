@@ -4,7 +4,7 @@ currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../../"
 
 (cd "$rootDir" && exec ./tools/scripts/openapi/bundle.sh)
-(cd "$rootDir/client" && rm -rf ./src/generated)
+(cd "$rootDir" && rm -rf ./client/src/generated)
 
 # https://github.com/OpenAPITools/openapi-generator/issues/12191
 (cd "$rootDir" &&
