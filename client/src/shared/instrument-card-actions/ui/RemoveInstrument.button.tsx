@@ -2,9 +2,10 @@ import React from "react";
 import styles from "./styles/RemoveInstrument.button.module.css";
 import actionBtnStyle from "./styles/Action.button.module.css";
 import { InstrumentDetail } from "generated/model";
-import { RemoveFavoriteApi } from "generated/api/remove-favorite-api";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 import { apiConfig } from "shared/config/api";
+import Jwt from "domain/model/jwt";
+import { DeleteInstrumentByIdApi } from "generated/api/delete-instrument-by-id-api";
 
 interface Props {
   instrument: InstrumentDetail;
@@ -12,20 +13,21 @@ interface Props {
   setErrorModal: (errorModal: boolean) => void;
 }
 
-const removeFavoriteApi = new RemoveFavoriteApi(apiConfig);
+const deleteInstrumentById = new DeleteInstrumentByIdApi(apiConfig)
 
 export const RemoveInstrumentButton = (props: Props) => {
   const { darkMode } = useDarkMode();
 
   const handleOnDeleteInstrument = () => {
     const removeFavorite = async () => {
-      const response = await removeFavoriteApi.removeFavorite(
-        props.instrument.instrument_id,
+      const response = await deleteInstrumentById.deleteInstrumentById(
+        props.instrument.instrument_id.instrument_id,
         {
-          withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${Jwt.extractFromCookie()!.toStringValue()}`,
+          },
         },
-      );
-
+      )
       if (response.status === 200) {
         props.setSuccessModal(true);
         return;
