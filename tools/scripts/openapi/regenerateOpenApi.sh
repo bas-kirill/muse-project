@@ -3,6 +3,8 @@ set -e
 currentDir=$(cd -P -- "$(dirname -- "$0")" && pwd -P)
 rootDir="$currentDir/../../../"
 
+echo -e "\033[0;37m[$stage] Regenerating OpenAPI specs...\033[0m"
+
 (cd "$rootDir" && exec ./tools/scripts/openapi/bundle.sh)
 (cd "$rootDir" && rm -rf ./client/src/generated)
 

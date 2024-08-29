@@ -21,6 +21,8 @@ if [ -z "$2" ]; then
   dockerRepository="myshx"
 fi
 
+echo -e "\033[0;37m[$stage] Cleaning Docker Services...\033[0m"
+
 docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
 
 if [ "$stage" != "local" ]; then
@@ -36,9 +38,11 @@ fi
 
 export DOCKER_REPOSITORY=$dockerRepository
 export MUSE_GIT_COMMIT_HASH="$(git rev-parse --short HEAD)"
+export MUSE_STAGE="$stage"
+
 #https://github.com/docker/docs/issues/20709
 (cd "$rootDir" && docker compose \
-  -f ./tools/docker/docker-compose.$stage.yml \
+  -f ./tools/docker/docker-compose.yml \
   --env-file ./tools/docker/env/$stage.env \
   --project-name=muse-$stage \
   rm -f)
