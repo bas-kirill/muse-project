@@ -51,6 +51,7 @@ export const InstrumentTypeFilter = (props: Props) => {
             name={instrumentType.instrument_type}
             onChange={onChange}
             defaultChecked={true}
+            className={"instrument-type-filter-checkbox"}
           />
           <label htmlFor={instrumentType.instrument_type}>
             {instrumentType.instrument_type}
