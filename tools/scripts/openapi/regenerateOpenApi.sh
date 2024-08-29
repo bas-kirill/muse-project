@@ -7,6 +7,7 @@ rootDir="$currentDir/../../../"
 (cd "$rootDir" && rm -rf ./client/src/generated)
 
 # https://github.com/OpenAPITools/openapi-generator/issues/12191
+(cd "$rootDir" && docker pull openapitools/openapi-generator-cli:v7.8.0)
 (cd "$rootDir" &&
   mkdir -p local/openapi &&
   mkdir -p local/client/src/generated &&
