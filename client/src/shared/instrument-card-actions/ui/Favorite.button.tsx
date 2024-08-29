@@ -26,9 +26,6 @@ export const FavoriteButton = (props: Props) => {
   const [favorite, setFavorite] = useState<boolean>();
 
   useEffect(() => {
-    if (jwt.current === undefined) {
-      return;
-    }
     const fetchFavorite = async () => {
       const favoriteRequest = await listFavorite.listFavorite({
         withCredentials: true,
@@ -44,6 +41,10 @@ export const FavoriteButton = (props: Props) => {
       setFavorite(favoriteRawIds.includes(instrumentId));
     };
 
+    const jwt = Jwt.extractFromCookie();
+    if (jwt === null || jwt.expired()) {
+      return;
+    }
     fetchFavorite();
   }, []);
 
