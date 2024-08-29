@@ -33,7 +33,7 @@ if [ "$stage" != "local" ]; then
 fi
 
 (cd "$rootDir/server" && exec ./gradlew clean)
-
+#
 export DOCKER_REPOSITORY=$dockerRepository
 export MUSE_GIT_COMMIT_HASH="$(git rev-parse --short HEAD)"
 #https://github.com/docker/docs/issues/20709
