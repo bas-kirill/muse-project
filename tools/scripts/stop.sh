@@ -41,7 +41,7 @@ export MUSE_GIT_COMMIT_HASH="$(git rev-parse --short HEAD)"
 export MUSE_STAGE="$stage"
 
 (cd "$rootDir" && docker compose \
-  -f ./tools/docker/docker-compose.override.yml \
+  -f ./tools/docker/docker-compose.yml \
   --env-file ./tools/docker/env/$stage.env \
   --project-name=muse-$stage \
   down -v \

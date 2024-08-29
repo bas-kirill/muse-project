@@ -42,7 +42,7 @@ export MUSE_STAGE="$stage"
 
 #https://github.com/docker/docs/issues/20709
 (cd "$rootDir" && docker compose \
-  -f ./tools/docker/docker-compose.override.yml \
+  -f ./tools/docker/docker-compose.yml \
   --env-file ./tools/docker/env/$stage.env \
   --project-name=muse-$stage \
   rm -f)

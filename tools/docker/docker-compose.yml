@@ -5,7 +5,7 @@ networks:
 services:
   muse-postgres:
     image: postgres:16.4
-    container_name: muse-postgres
+    container_name: "muse-postgres-${MUSE_STAGE}"
     restart: always
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -26,13 +26,14 @@ services:
     profiles:
       - local
       - dev
+      - staging
       - prod
     labels:
       - io.portainer.accesscontrol.public
 
   muse-server:
-    image: muse-server:latest
-    container_name: muse-server
+    image: "${DOCKER_REPOSITORY}/muse-server:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
+    container_name: "muse-server-${MUSE_STAGE}"
     ports:
       - ${SERVER_PORT}:8080
       - ${SERVER_DEBUG_PORT}:5005
@@ -50,6 +51,7 @@ services:
     profiles:
       - local
       - dev
+      - staging
       - prod
     depends_on:
       muse-postgres:
@@ -58,8 +60,8 @@ services:
       - io.portainer.accesscontrol.public
 
   muse-client:
-    image: muse-client:latest
-    container_name: muse-client
+    image: "${DOCKER_REPOSITORY}/muse-client:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
+    container_name: "muse-client-${MUSE_STAGE}"
     ports:
       - ${CLIENT_PORT}:80
     environment:
@@ -69,13 +71,14 @@ services:
     profiles:
       - local
       - dev
+      - staging
       - prod
     labels:
       - io.portainer.accesscontrol.public
 
   muse-client-dev:
-    image: "muse-client-dev:latest"
-    container_name: muse-client-dev
+    image: "${DOCKER_REPOSITORY}/muse-client-dev:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
+    container_name: "muse-client-dev-${MUSE_STAGE}"
     ports:
       - ${CLIENT_DEV_PORT}:3000
     volumes:
@@ -85,7 +88,7 @@ services:
       - muse
     profiles:
       - local
-#  portainer:
+##  portainer:
 #    image: portainer/portainer-ce:linux-amd64-2.20.3-alpine
 #    container_name: portainer
 #    environment:

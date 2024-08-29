@@ -41,13 +41,17 @@ export DOCKER_REPOSITORY=$dockerRepository
 export MUSE_GIT_COMMIT_HASH="$(git rev-parse --short HEAD)"
 export MUSE_STAGE="$stage"
 
+echo "muse stage: '${MUSE_STAGE}"
+echo "DOCKER_REPOSITORY: '${DOCKER_REPOSITORY}"
+echo "MUSE_GIT_COMMIT_HASH: '${MUSE_GIT_COMMIT_HASH}"
+
 (cd "$rootDir" && docker compose \
   -f ./tools/docker/docker-compose.yml \
-  -f ./tools/docker/docker-compose.override.yml \
   --env-file ./tools/docker/env/$stage.env \
   --project-name=muse-$stage \
   --profile "$stage" \
   up -d \
   --remove-orphans)
 
-echo -e "\033[0;32m[$stage] Docker Serviced has been started.\n\033[0m"
+
+echo -e "\033[0;32m[$stage] Docker Services has been started.\n\033[0m"
