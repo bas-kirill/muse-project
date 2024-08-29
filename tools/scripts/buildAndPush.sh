@@ -18,7 +18,9 @@ if [ -z "$2" ]; then
 fi
 
 (cd "$rootDir" && exec ./tools/scripts/server/buildJar.sh)
+echo "kek 1"
 (cd "$rootDir" && exec ./tools/scripts/server/buildImage.sh "$stage" "$dockerRepository")
+echo "kek 2"
 
 echo "debug one"
 (cd "$rootDir" && exec ./tools/scripts/client/build.sh "$stage")
