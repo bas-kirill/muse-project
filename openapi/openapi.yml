@@ -666,11 +666,15 @@ components:
     InstrumentType:
       type: object
       required:
-        - instrument_type
+        - code
+        - localized_text
       properties:
-        instrument_type:
+        code:
           type: string
           example: STRINGED
+        localized_text:
+          type: string
+          example: Stringed
     ManufacturerName:
       type: object
       required:

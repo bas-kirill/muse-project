@@ -13,7 +13,7 @@ interface Props {
   setErrorModal: (errorModal: boolean) => void;
 }
 
-const deleteInstrumentById = new DeleteInstrumentByIdApi(apiConfig)
+const deleteInstrumentById = new DeleteInstrumentByIdApi(apiConfig);
 
 export const RemoveInstrumentButton = (props: Props) => {
   const { darkMode } = useDarkMode();
@@ -27,7 +27,7 @@ export const RemoveInstrumentButton = (props: Props) => {
             Authorization: `Bearer ${Jwt.extractFromCookie()!.toStringValue()}`,
           },
         },
-      )
+      );
       if (response.status === 200) {
         props.setSuccessModal(true);
         return;

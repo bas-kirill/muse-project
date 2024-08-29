@@ -27,7 +27,7 @@ export const loader: LoaderFunction = async ({
   }
   const instrument = instrumentRequest.data;
 
-  const jwt = Jwt.extractFromCookie()
+  const jwt = Jwt.extractFromCookie();
   if (jwt === null || jwt.expired()) {
     return {
       instrument: instrument,
@@ -42,7 +42,7 @@ export const loader: LoaderFunction = async ({
   });
 
   if (listFavoriteRequest.status !== 200) {
-    throw new Error(`Failed to extract favorite list}`)
+    throw new Error(`Failed to extract favorite list}`);
   }
 
   const favoriteIds = listFavoriteRequest.data.content.map(

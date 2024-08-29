@@ -14,8 +14,11 @@ components:
   schemas:
     InstrumentType:
       type: object
-      required: [instrument_type]
+      required: [code, localized_text]
       properties:
-        instrument_type:
+        code:
           type: string
-          example: "STRINGED"
+          example: STRINGED
+        localized_text:
+          type: string
+          example: Stringed

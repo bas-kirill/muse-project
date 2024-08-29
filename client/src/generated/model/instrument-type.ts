@@ -23,5 +23,11 @@ export interface InstrumentType {
    * @type {string}
    * @memberof InstrumentType
    */
-  instrument_type: string;
+  code: string;
+  /**
+   *
+   * @type {string}
+   * @memberof InstrumentType
+   */
+  localized_text: string;
 }

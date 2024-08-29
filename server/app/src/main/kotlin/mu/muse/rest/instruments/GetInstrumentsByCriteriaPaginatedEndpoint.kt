@@ -15,12 +15,18 @@ import mu.muse.rest.dto.GetInstrumentByCriteriaPageResponse
 import mu.muse.rest.dto.GetInstrumentsByCriteriaRequestBody
 import mu.muse.usecase.GetInstrumentsByCriteriaPaginated
 import mu.muse.usecase.access.instrument.InstrumentExtractor
+import org.springframework.context.MessageSource
+import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
+import java.util.Locale
 
 @RestController
 class GetInstrumentsByCriteriaPaginatedEndpoint(
     private val getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated,
+    private val messageSource: MessageSource,
 ) : GetInstrumentsByCriteriaPaginatedApi {
 
     override fun getInstrumentsByCriteriaPaginated(
@@ -29,6 +35,7 @@ class GetInstrumentsByCriteriaPaginatedEndpoint(
         request: GetInstrumentsByCriteriaRequestBody,
     ): ResponseEntity<GetInstrumentByCriteriaPageResponse> {
         val criteria = request.toInstrumentCriteria()
+
 
         val pageRequest = PageRequest(
             pageSize = pageSize,
@@ -40,8 +47,10 @@ class GetInstrumentsByCriteriaPaginatedEndpoint(
             pageRequest = pageRequest,
         )
 
+        val request = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request
+        val locale = runCatching { Locale.of(request.getHeader(HttpHeaders.ACCEPT_LANGUAGE)) }.getOrElse { Locale.US }
         return ResponseEntity.ok(
-            instrumentsPaginated.toRestResponse(),
+            instrumentsPaginated.toRestResponse(messageSource, locale),
         )
     }
 }
@@ -49,7 +58,7 @@ class GetInstrumentsByCriteriaPaginatedEndpoint(
 fun GetInstrumentsByCriteriaRequestBody.toInstrumentCriteria(): InstrumentExtractor.Criteria {
     return InstrumentExtractor.Criteria(
         name = this.instrumentName?.let { InstrumentName.from(it.instrumentName) },
-        types = this.instrumentTypes?.map { Instrument.Type.valueOf(it.instrumentType) },
+        types = this.instrumentTypes?.map { Instrument.Type.valueOf(it.code) },
         manufacturerTypes = this.manufacturerNames?.map { ManufacturerType.valueOf(it.manufacturerName) },
         manufacturerDateFrom = this.manufactureDateFrom?.let { ManufacturerDate.from(it.manufactureDate) },
         manufacturerDateTo = this.manufactureDateTo?.let { ManufacturerDate.from(it.manufactureDate) },
@@ -61,9 +70,12 @@ fun GetInstrumentsByCriteriaRequestBody.toInstrumentCriteria(): InstrumentExtrac
     )
 }
 
-fun Page<Instrument>.toRestResponse(): GetInstrumentByCriteriaPageResponse {
+fun Page<Instrument>.toRestResponse(
+    messageSource: MessageSource,
+    locale: Locale,
+): GetInstrumentByCriteriaPageResponse {
     return GetInstrumentByCriteriaPageResponse(
-        content = this.content.map { it.toDto() },
+        content = this.content.map { it.toDto(messageSource, locale) },
         contentSize = this.contentSize,
         pageSize = this.pageSize,
         pageNumber = this.pageNumber,
