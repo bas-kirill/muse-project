@@ -29,7 +29,7 @@ if docker images -q "$imageFullName" &> /dev/null; then
   echo [MUSE CLIENT DEV] remove old image "$imageFullName"...
   docker rmi -f "$imageFullName"
 fi
-
+# test deploy again
 echo [MUSE CLIENT DEV] creating docker image "$imageFullName"...
 (DOCKER_BUILDKIT=1 docker buildx build \
   -f "${rootDir}/client/Dockerfile.dev" \
