@@ -31,6 +31,8 @@ if [ -z "$2" ]; then
   dockerRepository="myshx"
 fi
 
+echo -e "\033[0;37m[$stage] Deploying Docker Services...\033[0m"
+
 if [ "$stage" != "local" ]; then
   context_name=muse-$stage
   if ! docker context ls --format '{{.Name}}' | grep -q "^${context_name}$"; then

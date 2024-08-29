@@ -23,6 +23,8 @@ if [ -z "$2" ]; then
   dockerRepository="myshx"
 fi
 
+echo -e "\033[0;37m[$stage] Stopping Docker Services...\033[0m"
+
 docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
 
 if [ "$stage" != "local" ]; then
