@@ -34,10 +34,17 @@
   background-color: #ffb400;
   font-size: 2.5rem;
   flex: 1;
+  color: #000000;
 }
+
 
 .reason__h1 {
   color: #002244;
+  margin: 1em 0;
+}
+
+.reason__h1__dark_mode {
+  color: #ffffff;
   margin: 1em 0;
 }
 
