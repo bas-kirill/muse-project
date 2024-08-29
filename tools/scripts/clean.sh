@@ -26,16 +26,10 @@ docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
 if [ "$stage" != "local" ]; then
   context_name=muse-deploy-server
   if ! docker context ls --format '{{.Name}}' | grep -q "^${context_name}$"; then
-      docker context create "${context_name}" --description "[MUSE] Deploy Server" --docker "host=ssh://kiryuxa@88.201.171.120"
+      docker context create "${context_name}" --description "[MUSE] Deploy Server" --docker "host=ssh://${SSH_USER}@${SSH_HOST}"
   fi
 
   docker context use muse-deploy-server
-
-  function finish {
-    docker context use desktop-linux
-  }
-
-  trap 'finish' EXIT
 fi
 
 (cd "$rootDir/server" && exec ./gradlew clean)

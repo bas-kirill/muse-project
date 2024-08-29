@@ -13,9 +13,9 @@ const editInstrument = new EditInstrumentApi(apiConfig);
 export const action: ActionFunction = async ({
   request,
 }): Promise<EditInstrumentAction> => {
-  return {
-    errors: [],
-  };
+  // return {
+  //   errors: [],
+  // };
 
   const {
     instrumentId,

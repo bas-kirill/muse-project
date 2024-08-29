@@ -32,7 +32,6 @@ fi
 
 echo [MUSE CLIENT DEV] creating docker image "$imageFullName"...
 (DOCKER_BUILDKIT=1 docker buildx build \
-  --platform linux/arm64,linux/amd64 \
   -f "${rootDir}/client/Dockerfile.dev" \
   -t "$imageFullName" \
   "$rootDir" \
