@@ -8,7 +8,8 @@ rootDir="$currentDir/../../../"
 
 # https://github.com/OpenAPITools/openapi-generator/issues/12191
 (cd "$rootDir" &&
-  mkdir local &&
+  mkdir -p local/openapi &&
+  mkdir -p local/client/src/generated &&
   docker run \
   --rm \
   -v "${PWD}:/local" \
