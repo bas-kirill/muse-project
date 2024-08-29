@@ -22,7 +22,7 @@ class GetInstrumentTypesEndpoint(
 fun List<Instrument.Type>.toRestResponse(): ResponseEntity<GetInstrumentTypesResponse> {
     return ResponseEntity.ok(
         GetInstrumentTypesResponse(
-            content = this.map { InstrumentType(it.name) },
+            content = this.map { InstrumentType(it.realName) },
         ),
     )
 }

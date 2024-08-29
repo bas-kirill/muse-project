@@ -41,7 +41,7 @@ export const InstrumentTypeFilter = (props: Props) => {
 
   return (
     <div>
-      <legend className={`${textStyle.primary}`} style={{ padding: "0" }}>
+      <legend style={{ padding: "0" }}>
         Type
       </legend>
       {instrumentTypes.map((instrumentType) => (
