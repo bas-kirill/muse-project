@@ -31,24 +31,24 @@ export function LoginPage() {
           type="text"
           name="login"
           placeholder={"Login..."}
-          className={styles.login__form__input__dark}
+          className={`${darkMode && styles.login__form__input__dark}`}
         />
         <input
           type="password"
           name="password"
           placeholder={"Password..."}
-          className={styles.login__form__input__dark}
+          className={`${darkMode && styles.login__form__input__dark}`}
         />
         <input
           type="submit"
           value="Login"
-          className={styles.login__form__input__dark}
+          className={`${darkMode && styles.login__form__input__dark}`}
         />
         <input
           type="button"
           value="Registration"
           onClick={handleRegisterRedirect}
-          className={styles.login__form__input__dark}
+          className={`${darkMode && styles.login__form__input__dark}`}
         />
         {actionData?.errors.length > 0 && (
           <div className={styles.login__error}>
