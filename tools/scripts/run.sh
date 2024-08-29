@@ -33,7 +33,7 @@ if [ "$stage" != "local" ]; then
   docker context use "$context_name"
 
   function finish {
-    docker context use desktop-linux
+    docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
   }
 
   trap "finish" EXIT
