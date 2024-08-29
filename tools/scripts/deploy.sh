@@ -38,10 +38,10 @@ if [ "$stage" != "local" ]; then
   docker context use "$context_name"
 fi
 
-#(cd "$rootDir" && exec ./tools/scripts/openapi/regenerateOpenApi.sh)
-#(cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$stage" "$dockerRepository")
-#(cd "$rootDir" && exec ./tools/scripts/stop.sh "$stage" "$dockerRepository")
-#(cd "$rootDir" && exec ./tools/scripts/clean.sh "$stage" "$dockerRepository")
+(cd "$rootDir" && exec ./tools/scripts/openapi/regenerateOpenApi.sh)
+(cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$stage" "$dockerRepository")
+(cd "$rootDir" && exec ./tools/scripts/stop.sh "$stage" "$dockerRepository")
+(cd "$rootDir" && exec ./tools/scripts/clean.sh "$stage" "$dockerRepository")
 (cd "$rootDir" && exec ./tools/scripts/run.sh "$stage")
 
 echo -e "\033[0;32m[$stage] List of available ports:\n\033[0m"
