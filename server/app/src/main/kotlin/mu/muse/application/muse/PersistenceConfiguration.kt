@@ -28,18 +28,19 @@ class PersistenceConfiguration {
         const val MAXIMUM_POOL_SIZE = 25
     }
 
+    @Bean
+    fun hikariConfig() = with(HikariConfig()) {
+        username = postgresUser
+        password = postgresPassword
+        driverClassName = "org.postgresql.Driver"
+        jdbcUrl = postgresDsn
+        this
+    }
 
     @Bean
-    fun dataSource(): DataSource {
-        val hikariConfig = HikariConfig()
-        hikariConfig.username = postgresUser
-        hikariConfig.password = postgresPassword
-        hikariConfig.driverClassName = "org.postgresql.Driver"
-        hikariConfig.jdbcUrl = postgresDsn
-        val hikariDatasource = HikariDataSource(hikariConfig)
-        // 25 is a good enough data pool size, it is a database in a container after all
-        hikariDatasource.maximumPoolSize = MAXIMUM_POOL_SIZE
-        return hikariDatasource
+    fun dataSource(hikariConfig: HikariConfig): DataSource = with(HikariDataSource(hikariConfig)) {
+        maximumPoolSize = MAXIMUM_POOL_SIZE
+        this
     }
 
     @Bean
