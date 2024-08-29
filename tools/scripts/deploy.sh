@@ -40,7 +40,8 @@ if [ "$stage" != "local" ]; then
   docker context use "$context_name"
 fi
 
-(cd "$rootDir" && exec ./tools/scripts/openapi/regenerateOpenApi.sh)
+# do not regenerate OpenAPI due to it is already committed to repo
+#(cd "$rootDir" && exec ./tools/scripts/openapi/regenerateOpenApi.sh)
 (cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$stage" "$dockerRepository")
 (cd "$rootDir" && exec ./tools/scripts/stop.sh "$stage" "$dockerRepository")
 (cd "$rootDir" && exec ./tools/scripts/clean.sh "$stage" "$dockerRepository")
