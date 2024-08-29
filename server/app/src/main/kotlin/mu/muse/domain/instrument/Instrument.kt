@@ -47,21 +47,10 @@ class Instrument internal constructor(
         }
     }
 
-    enum class Type(val realName: String) {
-        KEYBOARD(realName = "Keyboard"),
-        STRINGED(realName = "Stringed"),
-        WIND(realName = "Wind");
-
-        companion object {
-            fun fromRealName(realNameValueRaw: String): Type {
-                return when (realNameValueRaw) {
-                    KEYBOARD.realName -> KEYBOARD
-                    STRINGED.realName -> STRINGED
-                    WIND.realName -> WIND
-                    else -> throw IllegalArgumentException("Unknown value `${realNameValueRaw}")
-                }
-            }
-        }
+    enum class Type(val i18nCode: String) {
+        KEYBOARD(i18nCode = "instrument.type.keyboard"),
+        STRINGED(i18nCode = "instrument.type.stringed"),
+        WIND(i18nCode = "instrument.type.wind");
     }
 
 }

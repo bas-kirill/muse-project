@@ -37,12 +37,31 @@ import mu.muse.usecase.GetInstrumentsByIds
 import mu.muse.usecase.GetUser
 import mu.muse.usecase.RegisterUser
 import mu.muse.usecase.RemoveFavorite
+import org.springframework.context.MessageSource
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.support.ResourceBundleMessageSource
+import org.springframework.web.servlet.LocaleResolver
+import org.springframework.web.servlet.i18n.SessionLocaleResolver
+import java.util.Locale
 
 @Configuration
 @Suppress("TooManyFunctions")
 class RestConfiguration {
+
+    @Bean
+    fun localResolver(): LocaleResolver = with(SessionLocaleResolver()) {
+        setDefaultLocale(Locale.US)
+        this
+    }
+
+    @Bean
+    fun messageSource(): ResourceBundleMessageSource = with(ResourceBundleMessageSource()) {
+        setUseCodeAsDefaultMessage(true)
+        setBasenames("messages")
+        setDefaultEncoding("UTF-8")
+        this
+    }
 
     @Bean
     fun helloEndpoint() = HelloEndpoint()
@@ -54,25 +73,28 @@ class RestConfiguration {
     fun getProfileEndpoint(getUser: GetUser) = GetProfileEndpoint(getUser)
 
     @Bean
-    fun getInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria: GetInstrumentsByCriteria) =
-        GetInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria)
-
-    // @format:off
-    @Bean
-    fun getInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated)
-        = GetInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated)
-    // @format:on
+    fun getInstrumentsByCriteriaEndpoint(
+        getInstrumentsByCriteria: GetInstrumentsByCriteria,
+        messageSource: MessageSource
+    ) = GetInstrumentsByCriteriaEndpoint(getInstrumentsByCriteria, messageSource)
 
     @Bean
-    fun getInstrumentByIdEndpoint(getInstrumentById: GetInstrumentById) = GetInstrumentByIdEndpoint(getInstrumentById)
+    fun getInstrumentsByCriteriaPaginatedEndpoint(
+        getInstrumentsByCriteriaPaginated: GetInstrumentsByCriteriaPaginated,
+        messageSource: MessageSource,
+    ) = GetInstrumentsByCriteriaPaginatedEndpoint(getInstrumentsByCriteriaPaginated, messageSource)
+
+    @Bean
+    fun getInstrumentByIdEndpoint(getInstrumentById: GetInstrumentById, messageSource: MessageSource) =
+        GetInstrumentByIdEndpoint(getInstrumentById, messageSource)
 
     @Bean
     fun deleteInstrumentByIdEndpoint(deleteInstrumentById: DeleteInstrumentById) =
         DeleteInstrumentByIdEndpoint(deleteInstrumentById)
 
     @Bean
-    fun getInstrumentTypesEndpoint(getInstrumentTypes: GetInstrumentTypes) =
-        GetInstrumentTypesEndpoint(getInstrumentTypes)
+    fun getInstrumentTypesEndpoint(getInstrumentTypes: GetInstrumentTypes, messageSource: MessageSource) =
+        GetInstrumentTypesEndpoint(getInstrumentTypes, messageSource)
 
     @Bean
     fun getInstrumentMaterialsEndpoint(getInstrumentMaterials: GetInstrumentMaterials) =
@@ -95,7 +117,10 @@ class RestConfiguration {
     fun registrationEndpoint(registerUser: RegisterUser) = RegistrationEndpoint(registerUser)
 
     @Bean
-    fun listFavoriteEndpoint(getFavoriteByUsername: GetFavoriteByUsername) = ListFavoriteEndpoint(getFavoriteByUsername)
+    fun listFavoriteEndpoint(
+        getFavoriteByUsername: GetFavoriteByUsername,
+        messageSource: MessageSource,
+    ) = ListFavoriteEndpoint(getFavoriteByUsername, messageSource)
 
     @Bean
     fun addFavoriteEndpoint(addFavorite: AddFavorite) = AddFavoriteEndpoint(addFavorite)

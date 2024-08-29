@@ -15,27 +15,38 @@ import mu.muse.rest.dto.InstrumentType
 import mu.muse.rest.dto.ManufactureDate
 import mu.muse.rest.dto.ManufacturerName
 import mu.muse.usecase.GetInstrumentById
+import org.springframework.context.MessageSource
+import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.context.request.RequestContextHolder
+import org.springframework.web.context.request.ServletRequestAttributes
 import java.time.LocalDate
 import java.time.ZoneId
+import java.util.Locale
 
 @RestController
 class GetInstrumentByIdEndpoint(
     private val getInstrumentById: GetInstrumentById,
+    private val messageSource: MessageSource,
 ) : GetInstrumentByIdApi {
 
     override fun getInstrumentById(instrumentId: Long): ResponseEntity<InstrumentDetail> {
         val id = InstrumentId.from(instrumentId)
         val instrument = getInstrumentById.execute(id)
-        val instrumentDetail = instrument.toDto()
+        val request = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request
+        val locale = Locale.of(request.getHeader(HttpHeaders.ACCEPT_LANGUAGE))
+        val instrumentDetail = instrument.toDto(messageSource, locale)
         return ResponseEntity.ok().body(instrumentDetail)
     }
 }
 
 fun InstrumentId.toDto() = mu.muse.rest.dto.InstrumentId(instrumentId = this.toLongValue())
 fun InstrumentName.toDto() = mu.muse.rest.dto.InstrumentName(instrumentName = this.toStringValue())
-fun Instrument.Type.toDto() = InstrumentType(this.realName)
+fun Instrument.Type.toDto(messageSource: MessageSource, locale: Locale) = InstrumentType(
+    code = this.name,
+    localizedText = messageSource.getMessage(this.i18nCode, null, locale),
+)
 fun ManufacturerType.toDto() = ManufacturerName(this.realName)
 fun ManufacturerDate.toDto() = ManufactureDate(LocalDate.ofInstant(this.toInstantValue(), ZoneId.systemDefault()))
 fun ReleaseDate.toDto() =
@@ -45,11 +56,11 @@ fun Country.toDto() = mu.muse.rest.dto.Country(country = this.realName)
 fun List<MaterialType>.toDto() = this.map { BasicMaterial(basicMaterial = it.realName) }
 
 
-fun Instrument.toDto(): InstrumentDetail {
+fun Instrument.toDto(messageSource: MessageSource, locale: Locale): InstrumentDetail {
     return InstrumentDetail(
         instrumentId = this.id.toDto(),
         instrumentName = this.name.toDto(),
-        instrumentType = this.type.toDto(),
+        instrumentType = this.type.toDto(messageSource, locale),
         manufacturerName = this.manufacturerType.toDto(),
         manufacturerDate = this.manufactureDate.toDto(),
         releaseDate = this.releaseDate.toDto(),

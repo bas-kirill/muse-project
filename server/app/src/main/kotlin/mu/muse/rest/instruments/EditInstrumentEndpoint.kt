@@ -26,7 +26,7 @@ class EditInstrumentEndpoint(
     override fun editInstrument(request: EditInstrumentRequestBody): ResponseEntity<Any> {
         val instrumentId = InstrumentId.from(request.instrumentDetail.instrumentId.instrumentId)
         val instrumentName = InstrumentName.from(request.instrumentDetail.instrumentName.instrumentName)
-        val instrumentType = Instrument.Type.valueOf(request.instrumentDetail.instrumentType.instrumentType)
+        val instrumentType = Instrument.Type.valueOf(request.instrumentDetail.instrumentType.code)
         val manufacturerTypeName = ManufacturerType.valueOf(request.instrumentDetail.manufacturerName.manufacturerName)
         val manufacturerDate = ManufacturerDate.from(request.instrumentDetail.manufacturerDate.manufactureDate)
         val releaseDate = ReleaseDate.from(request.instrumentDetail.releaseDate.releaseDate)

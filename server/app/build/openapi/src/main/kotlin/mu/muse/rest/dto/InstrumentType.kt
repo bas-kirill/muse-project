@@ -13,12 +13,15 @@ import jakarta.validation.constraints.Size
 import jakarta.validation.Valid
 
 /**
- * 
- * @param instrumentType 
+ *
+ * @param code
+ * @param localizedText
  */
 data class InstrumentType(
 
-    @get:JsonProperty("instrument_type", required = true) val instrumentType: kotlin.String
+    @get:JsonProperty("code", required = true) val code: kotlin.String,
+
+    @get:JsonProperty("localized_text", required = true) val localizedText: kotlin.String
     ) {
 
 }
