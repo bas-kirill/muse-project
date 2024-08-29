@@ -12,6 +12,8 @@ import {
 } from "shared/instrument-card-actions";
 import { COOKIE_JWT_KEY } from "shared/config/frontend";
 import { getCookie } from "shared/cookie/cookie";
+import { useNavigate } from "react-router-dom";
+import { CATALOGUE } from "shared/config/paths";
 
 interface Props {
   instrument: InstrumentDetail;
@@ -24,6 +26,7 @@ interface Props {
 export const InstrumentActions = (props: Props) => {
   const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));
 
+  const navigate = useNavigate();
   const [errorModal, setErrorModal] = useState<boolean>(false);
   const [successModal, setSuccessModal] = useState<boolean>(false);
 
@@ -67,7 +70,7 @@ export const InstrumentActions = (props: Props) => {
         opened={successModal}
         closeModal={() => {
           setSuccessModal(false);
-          window.location.reload();
+          navigate(CATALOGUE);
         }}
       >
         <h1>✅Instrument deleted</h1>
