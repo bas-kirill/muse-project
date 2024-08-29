@@ -7,7 +7,7 @@ services:
     image: "${DOCKER_REPOSITORY}/muse-server:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
 
   muse-client:
-    image: "${DOCKER_REPOSITORY}/muse-client:local-${MUSE_GIT_COMMIT_HASH}"
+    image: "${DOCKER_REPOSITORY}/muse-client:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
 
   muse-client-dev:
-    image: "${DOCKER_REPOSITORY}/muse-client-dev:local-${MUSE_GIT_COMMIT_HASH}"
+    image: "${DOCKER_REPOSITORY}/muse-client-dev:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
