@@ -32,7 +32,7 @@ fi
 if [ "$stage" != "local" ]; then
   context_name=muse-$stage
   if ! docker context ls --format '{{.Name}}' | grep -q "^${context_name}$"; then
-      docker context create "${context_name}" --description "[MUSE] '$stage' Deploy Server" --docker "host=ssh://kiryuxa@88.201.171.120"
+      docker context create "${context_name}" --description "[MUSE] '$stage' Deploy Server" --docker "host=ssh://kiryuxa@kiryuxa.com"
   fi
 
   docker context use "$context_name"
