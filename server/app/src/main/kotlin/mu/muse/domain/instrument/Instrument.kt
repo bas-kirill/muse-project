@@ -53,12 +53,12 @@ class Instrument internal constructor(
         WIND(realName = "Wind");
 
         companion object {
-            fun from(valueRaw: String): Type {
-                return when (valueRaw) {
+            fun fromRealName(realNameValueRaw: String): Type {
+                return when (realNameValueRaw) {
                     KEYBOARD.realName -> KEYBOARD
                     STRINGED.realName -> STRINGED
                     WIND.realName -> WIND
-                    else -> throw IllegalArgumentException("Unknown value `${valueRaw}")
+                    else -> throw IllegalArgumentException("Unknown value `${realNameValueRaw}")
                 }
             }
         }
