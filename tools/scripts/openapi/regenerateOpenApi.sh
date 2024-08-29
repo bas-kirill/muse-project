@@ -9,14 +9,13 @@ rootDir="$currentDir/../../../"
 # https://github.com/OpenAPITools/openapi-generator/issues/12191
 (cd "$rootDir" && docker pull openapitools/openapi-generator-cli:v7.8.0)
 (cd "$rootDir" &&
-  mkdir local &&
   docker run \
   --rm \
   -v "${PWD}:/local" \
   -u "$(id -u)":"$(id -g)" \
   openapitools/openapi-generator-cli:v7.8.0 generate \
-  --input-spec /local/openapi/openapi.yml \
-  --output /local/client/src/generated \
+  --input-spec local/openapi/openapi.yml \
+  --output local/client/src/generated \
   --generator-name typescript-axios \
   --additional-properties=apiPackage=api,modelPackage=model,supportsES6=true,withSeparateModelsAndApi=true
 )
