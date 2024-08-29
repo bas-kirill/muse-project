@@ -31,12 +31,6 @@ if [ "$stage" != "local" ]; then
   fi
 
   docker context use "$context_name"
-
-  function finish {
-    docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
-  }
-
-  trap "finish" EXIT
 fi
 
 export DOCKER_REPOSITORY=$dockerRepository

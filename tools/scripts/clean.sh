@@ -30,12 +30,6 @@ if [ "$stage" != "local" ]; then
   fi
 
   docker context use muse-deploy-server
-
-  function finish {
-    docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
-  }
-
-  trap 'finish' EXIT
 fi
 
 (cd "$rootDir/server" && exec ./gradlew clean)
