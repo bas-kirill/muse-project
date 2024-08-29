@@ -29,6 +29,15 @@ if [ -z "$2" ]; then
   dockerRepository="myshx"
 fi
 
+if [ "$stage" != "local" ]; then
+  context_name=muse-$stage
+  if ! docker context ls --format '{{.Name}}' | grep -q "^${context_name}$"; then
+      docker context create "${context_name}" --description "[MUSE] '$stage' Deploy Server" --docker "host=ssh://kiryuxa@88.201.171.120"
+  fi
+
+  docker context use "$context_name"
+fi
+
 #(cd "$rootDir" && exec ./tools/scripts/openapi/regenerateOpenApi.sh)
 #(cd "$rootDir" && exec ./tools/scripts/buildAndPush.sh "$stage" "$dockerRepository")
 #(cd "$rootDir" && exec ./tools/scripts/stop.sh "$stage" "$dockerRepository")
