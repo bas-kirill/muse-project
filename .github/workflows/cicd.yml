@@ -208,6 +208,8 @@ jobs:
       - name: Deploy at home lab
         run: echo "$(pwd)" && ./tools/scripts/deploy.sh dev
         env:
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
           MUSE_DOCKER_DEFAULT_CONTEXT: default
           MUSE_JWT_SECRET_KEY: ${{ secrets.MUSE_JWT_SECRET_KEY }}
           CI: false # https://stackoverflow.com/questions/34917977/disable-npm-warnings-as-errors-build-definition-tfs

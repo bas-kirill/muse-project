@@ -5,6 +5,8 @@ rootDir="$currentDir/../../"
 
 [[ -z "${MUSE_DOCKER_DEFAULT_CONTEXT}" ]] && { echo "'MUSE_DOCKER_DEFAULT_CONTEXT' is not set. Exiting."; exit 1; }
 [[ -z "${MUSE_JWT_SECRET_KEY}" ]] && { echo "'MUSE_JWT_SECRET_KEY' is not set. Exiting."; exit 1; }
+[[ -z "${SSH_USER}" ]] && { echo "'SSH_USER' is not set. Exiting."; exit 1; }
+[[ -z "${SSH_HOST}" ]] && { echo "'SSH_HOST' is not set. Exiting."; exit 1; }
 
 trap 'docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"' EXIT
 
@@ -27,7 +29,7 @@ docker context use "${MUSE_DOCKER_DEFAULT_CONTEXT}"
 if [ "$stage" != "local" ]; then
   context_name=muse-$stage
   if ! docker context ls --format '{{.Name}}' | grep -q "^${context_name}$"; then
-      docker context create "${context_name}" --description "[MUSE $stage] Deploy Server" --docker "host=ssh://kiryuxa@88.201.171.120"
+      docker context create "${context_name}" --description "[MUSE $stage] Deploy Server" --docker "host=ssh://${SSH_USER}@${SSH_HOST}"
   fi
 
   docker context use "$context_name"
