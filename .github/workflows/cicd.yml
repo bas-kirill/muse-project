@@ -189,7 +189,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
       - name: "Install `Redocly`"
         run: npm i -g @redocly/cli@latest
-      - name: Cache npm dependencies #
+      - name: Cache npm dependencies
         uses: actions/cache@v2
         with:
           path: '~/.npm'
