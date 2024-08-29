@@ -77,7 +77,7 @@ export const SidebarFilterWidget = (props: Props) => {
     >
       <div className={styles.media__horizontal__wrapper}>
         <div className={styles.filter__wrapper}>
-          <InstrumentTypeFilter onValueChange={setInstrumentTypes} />
+          <InstrumentTypeFilter setInstrumentTypes={setInstrumentTypes} />
         </div>
         <div className={styles.filter__wrapper}>
           <ManufacturerNameFilter onValueChange={setManufacturerNames} />

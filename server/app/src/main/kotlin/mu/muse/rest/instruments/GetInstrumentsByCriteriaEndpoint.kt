@@ -2,6 +2,7 @@
 
 package mu.muse.rest.instruments
 
+import mu.muse.domain.instrument.Instrument
 import mu.muse.rest.api.GetInstrumentsByCriteriaApi
 import mu.muse.rest.dto.GetInstrumentsByCriteriaRequestBody
 import mu.muse.rest.dto.GetInstrumentsByCriteriaResponse

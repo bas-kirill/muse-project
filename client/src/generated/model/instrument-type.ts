@@ -29,5 +29,5 @@ export interface InstrumentType {
    * @type {string}
    * @memberof InstrumentType
    */
-  localized_text: string;
+  localized_text?: string;
 }

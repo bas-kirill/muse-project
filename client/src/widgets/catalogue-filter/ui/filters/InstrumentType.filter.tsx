@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import textStyle from "./Text.module.css";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { InstrumentType } from "generated/model/instrument-type";
 import { apiConfig } from "shared/config/api";
+import { InstrumentTypeCode } from "generated/model";
 
 const getInstrumentTypes = new GetInstrumentTypesApi(apiConfig);
 
 interface Props {
-  onValueChange: (i: InstrumentType[]) => void;
+  setInstrumentTypes: (i: InstrumentTypeCode[]) => void;
 }
 
 export const InstrumentTypeFilter = (props: Props) => {
@@ -27,14 +27,14 @@ export const InstrumentTypeFilter = (props: Props) => {
       ".instrument-type-filter-checkbox",
     );
 
-    props.onValueChange(
+    props.setInstrumentTypes(
       Array.from(elements)
         .filter((inputTag) => inputTag.checked)
         .map(
           (inputTag) =>
             ({
-              instrument_type: inputTag.name,
-            }) as InstrumentType,
+              value: inputTag.value,
+            }) as InstrumentTypeCode,
         ),
     );
   }
@@ -43,16 +43,16 @@ export const InstrumentTypeFilter = (props: Props) => {
     <div>
       <legend style={{ padding: "0" }}>Type</legend>
       {instrumentTypes.map((instrumentType) => (
-        <div key={instrumentType.instrument_type}>
+        <div key={instrumentType.code.value}>
           <input
             type="checkbox"
-            name={instrumentType.instrument_type}
+            name={instrumentType.code.value}
             onChange={onChange}
             defaultChecked={true}
-            className={"instrument-type-filter-checkbox"}
+            className={"instrument-type-filter-checkbox"} // required plain text class to extract values from it
           />
-          <label htmlFor={instrumentType.instrument_type}>
-            {instrumentType.instrument_type}
+          <label htmlFor={instrumentType.code.value}>
+            {instrumentType.localized_text}
           </label>
         </div>
       ))}

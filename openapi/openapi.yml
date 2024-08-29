@@ -663,15 +663,16 @@ components:
         instrument_name:
           type: string
           example: Fender Stratocaster
+    InstrumentTypeCode:
+      type: string
+      example: STRINGED
     InstrumentType:
       type: object
       required:
         - code
-        - localized_text
       properties:
         code:
-          type: string
-          example: STRINGED
+          $ref: '#/components/schemas/InstrumentTypeCode'
         localized_text:
           type: string
           example: Stringed
@@ -743,7 +744,7 @@ components:
       type: object
       required:
         - instrument_name
-        - instrument_type
+        - instrument_type_code
         - manufacturer_name
         - manufacturer_date
         - release_date
@@ -752,8 +753,8 @@ components:
       properties:
         instrument_name:
           $ref: '#/components/schemas/InstrumentName'
-        instrument_type:
-          $ref: '#/components/schemas/InstrumentType'
+        instrument_type_code:
+          $ref: '#/components/schemas/InstrumentTypeCode'
         manufacturer_name:
           $ref: '#/components/schemas/ManufacturerName'
         manufacturer_date:

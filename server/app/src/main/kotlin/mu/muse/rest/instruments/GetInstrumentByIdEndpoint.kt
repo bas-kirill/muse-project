@@ -11,7 +11,6 @@ import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.rest.api.GetInstrumentByIdApi
 import mu.muse.rest.dto.BasicMaterial
 import mu.muse.rest.dto.InstrumentDetail
-import mu.muse.rest.dto.InstrumentType
 import mu.muse.rest.dto.ManufactureDate
 import mu.muse.rest.dto.ManufacturerName
 import mu.muse.usecase.GetInstrumentById
@@ -43,7 +42,7 @@ class GetInstrumentByIdEndpoint(
 
 fun InstrumentId.toDto() = mu.muse.rest.dto.InstrumentId(instrumentId = this.toLongValue())
 fun InstrumentName.toDto() = mu.muse.rest.dto.InstrumentName(instrumentName = this.toStringValue())
-fun Instrument.Type.toDto(messageSource: MessageSource, locale: Locale) = InstrumentType(
+fun Instrument.Type.toDto(messageSource: MessageSource, locale: Locale) = mu.muse.rest.dto.InstrumentType(
     code = this.name,
     localizedText = messageSource.getMessage(this.i18nCode, null, locale),
 )
