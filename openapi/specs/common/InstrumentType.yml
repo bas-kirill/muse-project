@@ -12,13 +12,16 @@ paths: {}
 
 components:
   schemas:
+    InstrumentTypeCode:
+      type: string
+      example: STRINGED
+
     InstrumentType:
       type: object
-      required: [code, localized_text]
+      required: [code]
       properties:
         code:
-          type: string
-          example: STRINGED
+          $ref: "#/components/schemas/InstrumentTypeCode"
         localized_text:
           type: string
           example: Stringed

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { GetInstrumentBasicMaterialsApi } from "generated/api";
 import { BasicMaterial } from "generated/model";
 import { apiConfig } from "shared/config/api";
+import { I18N_INSTRUMENT_BASIC_MATERIALS } from "../../../../i18n";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onValueChange: (names: BasicMaterial[]) => void;
@@ -10,6 +12,7 @@ interface Props {
 const getInstrumentMaterials = new GetInstrumentBasicMaterialsApi(apiConfig);
 
 export const MaterialFilter = ({ onValueChange }: Props) => {
+  const {t} = useTranslation();
   const [materials, setMaterials] = useState<BasicMaterial[]>([]);
 
   useEffect(() => {
@@ -45,7 +48,7 @@ export const MaterialFilter = ({ onValueChange }: Props) => {
 
   return (
     <div>
-      <legend style={{ padding: "0" }}>Basic Materials</legend>
+      <legend style={{ padding: "0" }}>{t(I18N_INSTRUMENT_BASIC_MATERIALS)}</legend>
       {materials.map((material) => (
         <div key={material.basic_material}>
           <input

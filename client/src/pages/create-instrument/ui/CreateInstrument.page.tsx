@@ -5,8 +5,11 @@ import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useLoaderData } from "react-router-dom";
 import { CreateInstrumentLoader } from "pages/create-instrument";
 import { CreateInstrumentAction } from "pages/create-instrument/api/action";
+import { I18N_COUNTRY, I18N_MANUFACTURER_DATE, I18N_RELEASE_DATE } from "../../../i18n";
+import { useTranslation } from "react-i18next";
 
 export const CreateInstrumentPage = () => {
+  const { t, i18n } = useTranslation();
   const loader = useLoaderData() as CreateInstrumentLoader;
   const actionData = useActionData() as CreateInstrumentAction;
 
@@ -48,10 +51,10 @@ export const CreateInstrumentPage = () => {
           >
             {loader.instrumentTypes.map((instrumentType) => (
               <option
-                key={instrumentType.instrument_type}
-                value={instrumentType.instrument_type}
+                key={instrumentType.code}
+                value={instrumentType.localized_text}
               >
-                {instrumentType.instrument_type}
+                {instrumentType.localized_text}
               </option>
             ))}
           </select>
@@ -85,7 +88,7 @@ export const CreateInstrumentPage = () => {
             htmlFor="manufacturer-date"
             className={styles.create_instrument__form__field__key}
           >
-            Manufacturer date
+            {t(I18N_MANUFACTURER_DATE)}
           </label>
 
           <input
@@ -103,7 +106,7 @@ export const CreateInstrumentPage = () => {
             htmlFor="release-date"
             className={styles.create_instrument__form__field__key}
           >
-            Release date
+            {t(I18N_RELEASE_DATE)}
           </label>
 
           <input
@@ -121,7 +124,7 @@ export const CreateInstrumentPage = () => {
             htmlFor="country"
             className={styles.create_instrument__form__field__key}
           >
-            Country
+            {t(I18N_COUNTRY)}
           </label>
 
           <select

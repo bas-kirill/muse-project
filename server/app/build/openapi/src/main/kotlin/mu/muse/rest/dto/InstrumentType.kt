@@ -21,7 +21,7 @@ data class InstrumentType(
 
     @get:JsonProperty("code", required = true) val code: kotlin.String,
 
-    @get:JsonProperty("localized_text", required = true) val localizedText: kotlin.String
+    @get:JsonProperty("localized_text") val localizedText: kotlin.String? = null
     ) {
 
 }

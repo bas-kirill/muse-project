@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import textStyle from "./Text.module.css";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { InstrumentType } from "generated/model/instrument-type";
 import { apiConfig } from "shared/config/api";
+import { useTranslation } from "react-i18next";
+import { I18N_INSTRUMENT_TYPE_FILTER } from "../../../../i18n";
 
 const getInstrumentTypes = new GetInstrumentTypesApi(apiConfig);
 
 interface Props {
-  onValueChange: (i: InstrumentType[]) => void;
+  setInstrumentTypes: (i: InstrumentType[]) => void;
 }
 
 export const InstrumentTypeFilter = (props: Props) => {
+  const { t } = useTranslation();
   const [instrumentTypes, setInstrumentTypes] = useState<InstrumentType[]>([]);
 
   useEffect(() => {
@@ -27,13 +29,13 @@ export const InstrumentTypeFilter = (props: Props) => {
       ".instrument-type-filter-checkbox",
     );
 
-    props.onValueChange(
+    props.setInstrumentTypes(
       Array.from(elements)
         .filter((inputTag) => inputTag.checked)
         .map(
           (inputTag) =>
             ({
-              instrument_type: inputTag.name,
+              code: inputTag.name,
             }) as InstrumentType,
         ),
     );
@@ -41,18 +43,18 @@ export const InstrumentTypeFilter = (props: Props) => {
 
   return (
     <div>
-      <legend style={{ padding: "0" }}>Type</legend>
+      <legend style={{ padding: "0" }}>{t(I18N_INSTRUMENT_TYPE_FILTER)}</legend>
       {instrumentTypes.map((instrumentType) => (
-        <div key={instrumentType.instrument_type}>
+        <div key={instrumentType.code}>
           <input
             type="checkbox"
-            name={instrumentType.instrument_type}
+            name={instrumentType.code}
             onChange={onChange}
             defaultChecked={true}
-            className={"instrument-type-filter-checkbox"}
+            className={"instrument-type-filter-checkbox"} // required plain text class to extract values from it
           />
-          <label htmlFor={instrumentType.instrument_type}>
-            {instrumentType.instrument_type}
+          <label htmlFor={instrumentType.code}>
+            {instrumentType.localized_text}
           </label>
         </div>
       ))}
