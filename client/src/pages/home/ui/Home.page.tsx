@@ -11,24 +11,31 @@ import rock_guitar from "pages/home/ui/images/rock_guitar.webp";
 import violin from "pages/home/ui/images/violin.webp";
 import homeLogo from "pages/home/ui/images/home-logo.webp";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { useTranslation } from "react-i18next";
+import {
+  I18N_HOME_SEARCH_BAR_BUTTON,
+  I18N_HOME_SEARCH_BAR_INPUT,
+  I18N_REASONS_FIRST,
+  I18N_REASONS_H1, I18N_REASONS_SECOND, I18N_REASONS_THIRD, I18N_TRENDS_H1
+} from "../../../i18n";
 
 const images = [
   {
     image: saxophone,
-    caption: "Saxophone",
+    caption: "Saxophone"
   },
   {
     image: guitar,
-    caption: "Guitar",
+    caption: "Guitar"
   },
   {
     image: rock_guitar,
-    caption: "Rock Guitar",
+    caption: "Rock Guitar"
   },
   {
     image: violin,
-    caption: "Violin",
-  },
+    caption: "Violin"
+  }
 ];
 
 const trendingInstrumentsResponsiveSettings = [
@@ -36,19 +43,20 @@ const trendingInstrumentsResponsiveSettings = [
     breakpoint: 571,
     settings: {
       slidesToShow: 3,
-      slidesToScroll: 1,
-    },
+      slidesToScroll: 1
+    }
   },
   {
     breakpoint: 570,
     settings: {
       slidesToShow: 1,
-      slidesToScroll: 1,
-    },
-  },
+      slidesToScroll: 1
+    }
+  }
 ];
 
 export function HomePage() {
+  const { t } = useTranslation();
   const { darkMode } = useDarkMode();
 
   return (
@@ -58,7 +66,7 @@ export function HomePage() {
       <div
         className={styles.home_logo}
         style={{
-          background: `url(${homeLogo}) no-repeat center, linear-gradient(blue, cyan)`,
+          background: `url(${homeLogo}) no-repeat center, linear-gradient(blue, cyan)`
         }}
       >
         <form
@@ -66,12 +74,12 @@ export function HomePage() {
         >
           <input
             type="text"
-            placeholder="What instrument?"
+            placeholder={t(I18N_HOME_SEARCH_BAR_INPUT)}
             className={`${styles.search_bar__form__input__text}`}
           />
           <input
             type="submit"
-            value="Search"
+            value={t(I18N_HOME_SEARCH_BAR_BUTTON)}
             className={`${styles.search_bar__form__input__submit}`}
           />
         </form>
@@ -80,23 +88,21 @@ export function HomePage() {
       <h1
         className={`${darkMode ? styles.reason__h1__dark_mode : styles.reason__h1}`}
       >
-        Why Choose Us for Your Musical Needs
+        {t(I18N_REASONS_H1)}
       </h1>
 
       <div
         className={`${styles.reasons} ${darkMode && darkStyles.text_dark_mode}`}
       >
-        <div>
-          We offer a wide range of high-quality instruments for all skill levels
-        </div>
-        <div>Our expert staff provides personalized advice and service</div>
-        <div>Enjoy competitive prices and exclusive deals on top brands</div>
+        <div>{t(I18N_REASONS_FIRST)}</div>
+        <div>{t(I18N_REASONS_SECOND)}</div>
+        <div>{t(I18N_REASONS_THIRD)}</div>
       </div>
 
       <h1
         className={`${styles.trends__h1} ${darkMode && darkStyles.text_dark_mode}`}
       >
-        Trending Instruments
+        {t(I18N_TRENDS_H1)}
       </h1>
 
       <div className={styles.trends__slider}>
