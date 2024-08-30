@@ -18,9 +18,9 @@ components:
 
     InstrumentType:
       type: object
-      required: [code]
+      required: [i18n_code]
       properties:
-        code:
+        i18n_code:
           $ref: "#/components/schemas/InstrumentTypeCode"
         localized_text:
           type: string

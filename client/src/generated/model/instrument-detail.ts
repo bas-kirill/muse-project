@@ -32,7 +32,7 @@ import type { InstrumentType } from "./instrument-type";
 import type { ManufactureDate } from "./manufacture-date";
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ManufacturerName } from "./manufacturer-name";
+import type { ManufactureType } from "./manufacture-type";
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ReleaseDate } from "./release-date";
@@ -63,10 +63,10 @@ export interface InstrumentDetail {
   instrument_type: InstrumentType;
   /**
    *
-   * @type {ManufacturerName}
+   * @type {ManufactureType}
    * @memberof InstrumentDetail
    */
-  manufacturer_name: ManufacturerName;
+  manufacturer_type: ManufactureType;
   /**
    *
    * @type {ManufactureDate}

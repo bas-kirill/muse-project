@@ -47,8 +47,7 @@ model/instrument-type.ts
 model/jwt-response.ts
 model/list-favorite-response.ts
 model/manufacture-date.ts
-model/manufacturer-name.ts
-model/manufacturer.ts
+model/manufacture-type.ts
 model/profile-details.ts
 model/registration-request.ts
 model/release-date.ts

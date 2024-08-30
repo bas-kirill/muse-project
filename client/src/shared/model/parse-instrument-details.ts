@@ -5,7 +5,7 @@ import {
   InstrumentName,
   InstrumentPhoto,
   ManufactureDate,
-  ManufacturerName,
+  ManufactureType,
   ReleaseDate,
   InstrumentType,
 } from "generated/model";
@@ -25,16 +25,16 @@ export const parseInstrumentDetails = (data: FormData) => {
   }
 
   const instrumentType = {
-    code: data.get("instrument-type"),
+    i18n_code: data.get("instrument-type"),
   } as InstrumentType;
-  if (instrumentType === null || instrumentType.code === "") {
+  if (instrumentType === null || instrumentType.i18n_code === "") {
     errors.push("Type instrument type");
   }
 
   const manufacturerName = {
-    manufacturer_name: data.get("manufacturer-name"),
-  } as ManufacturerName;
-  if (manufacturerName === null || manufacturerName.manufacturer_name === "") {
+    i18n_code: data.get("manufacturer-name"),
+  } as ManufactureType;
+  if (manufacturerName === null || manufacturerName.i18n_code === "") {
     errors.push("Type manufacturer name");
   }
 
@@ -62,17 +62,17 @@ export const parseInstrumentDetails = (data: FormData) => {
   }
 
   const country = {
-    country: data.get("country"),
+    i18n_code: data.get("country"),
   } as Country;
 
-  if (country.country === null || country.country === "") {
+  if (country.i18n_code === null || country.i18n_code === "") {
     errors.push("Type country");
   }
   const materialsRaw = data.getAll("material") as string[];
   const materials: BasicMaterial[] = materialsRaw.map(
     (materialRaw) =>
       ({
-        basic_material: materialRaw,
+        i18n_code: materialRaw,
       }) as BasicMaterial,
   );
 
@@ -85,7 +85,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     instrumentId,
     instrumentName,
     instrumentType,
-    manufacturerName,
+    manufactureType: manufacturerName,
     manufactureDate,
     releaseDate,
     country,
@@ -96,7 +96,7 @@ export const parseInstrumentDetails = (data: FormData) => {
     instrumentId: InstrumentId;
     instrumentName: InstrumentName;
     instrumentType: InstrumentType;
-    manufacturerName: ManufacturerName;
+    manufactureType: ManufactureType;
     manufactureDate: ManufactureDate;
     releaseDate: ReleaseDate;
     country: Country;

@@ -8,11 +8,11 @@ import {
   BasicMaterial,
   Country,
   ManufactureDate,
-  ManufacturerName,
   ReleaseDate,
+  ManufactureType,
 } from "generated/model";
 import { InstrumentTypeFilter } from "widgets/catalogue-filter/ui/filters/InstrumentType.filter";
-import { ManufacturerNameFilter } from "widgets/catalogue-filter/ui/filters/ManufacturerName.filter";
+import { ManufacturerTypeFilter } from "widgets/catalogue-filter/ui/filters/ManufacturerTypeFilter";
 import { ManufactureDateFilter } from "widgets/catalogue-filter/ui/filters/ManufactureDate.filter";
 import { ReleaseDateFilter } from "widgets/catalogue-filter/ui/filters/ReleaseDate.filter";
 import { CountryFilter } from "widgets/catalogue-filter/ui/filters/Country.filter";
@@ -24,7 +24,7 @@ import {
   I18N_INSTRUMENT_DATE_FROM,
   I18N_INSTRUMENT_DATE_TO,
   I18N_MANUFACTURER_DATE,
-  I18N_RELEASE_DATE
+  I18N_RELEASE_DATE,
 } from "../../../i18n";
 
 interface Props {
@@ -39,7 +39,7 @@ export const SidebarFilterWidget = (props: Props) => {
     InstrumentType[] | null
   >(null);
   const [manufacturerNames, setManufacturerNames] = useState<
-    ManufacturerName[] | null
+    ManufactureType[] | null
   >(null);
   const [manufactureDateFrom, setManufactureDateFrom] =
     useState<ManufactureDate | null>(null);
@@ -56,7 +56,7 @@ export const SidebarFilterWidget = (props: Props) => {
     props.onFilterChange({
       instrumentName: null,
       instrumentTypes: instrumentTypes,
-      manufacturerNames: manufacturerNames,
+      manufacturerTypes: manufacturerNames,
       manufactureDateFrom: manufactureDateFrom,
       manufactureDateTo: manufactureDateTo,
       releaseDateFrom: releaseDateFrom,
@@ -88,7 +88,7 @@ export const SidebarFilterWidget = (props: Props) => {
           <InstrumentTypeFilter setInstrumentTypes={setInstrumentTypes} />
         </div>
         <div className={styles.filter__wrapper}>
-          <ManufacturerNameFilter onValueChange={setManufacturerNames} />
+          <ManufacturerTypeFilter onValueChange={setManufacturerNames} />
         </div>
       </div>
 

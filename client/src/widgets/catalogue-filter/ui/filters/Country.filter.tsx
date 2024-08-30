@@ -34,7 +34,7 @@ export const CountryFilter = ({ onValueChange }: Props) => {
         .map(
           (inputTag) =>
             ({
-              country: inputTag.name,
+              i18n_code: inputTag.name,
             }) as Country,
         ),
     );
@@ -44,14 +44,14 @@ export const CountryFilter = ({ onValueChange }: Props) => {
     <div>
       <legend style={{ padding: "0" }}>{t(I18N_COUNTRY)}</legend>
       {countries.map((country) => (
-        <div key={country.country}>
+        <div key={country.i18n_code}>
           <input
             type="checkbox"
-            name={country.country}
+            name={country.i18n_code}
             onChange={onChange}
             defaultChecked={true}
           />
-          <label htmlFor={country.country}>{country.country}</label>
+          <label htmlFor={country.i18n_code}>{country.localized_text}</label>
         </div>
       ))}
     </div>

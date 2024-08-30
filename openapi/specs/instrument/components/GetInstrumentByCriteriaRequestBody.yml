@@ -25,11 +25,11 @@ components:
           type: array
           items:
             $ref: "./../../common/InstrumentType.yml#/components/schemas/InstrumentType"
-        manufacturer_names:
+        manufacturer_types:
           nullable: true
           type: array
           items:
-            $ref: "./../../common/ManufacturerName.yml#/components/schemas/ManufacturerName"
+            $ref: "./../../common/ManufacturerType.yml#/components/schemas/ManufactureType"
         manufacture_date_from:
           nullable: true
           allOf:

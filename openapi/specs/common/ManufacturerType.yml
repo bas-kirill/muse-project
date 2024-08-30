@@ -12,10 +12,13 @@ paths: {}
 
 components:
   schemas:
-    ManufacturerName:
+    ManufactureType:
       type: object
-      required: [manufacturer_name]
+      required: [i18n_code]
       properties:
-        manufacturer_name:
+        i18n_code:
           type: string
-          example: "STRINGED"
+          example: "instrument.manufacture.type.fender"
+        localized_message:
+          type: string
+          example: Fender

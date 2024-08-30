@@ -4,7 +4,7 @@ import type {
   Country,
   BasicMaterial,
   InstrumentType,
-  Manufacturer,
+  ManufactureType,
 } from "generated/model";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
 import { GetCountriesApi } from "generated/api";
@@ -20,7 +20,7 @@ const getManufacturers = new GetManufacturersApi(apiConfig);
 
 export interface CreateInstrumentLoader {
   instrumentTypes: InstrumentType[];
-  manufacturers: Manufacturer[];
+  manufacturerTypes: ManufactureType[];
   materials: BasicMaterial[];
   countries: Country[];
 }
@@ -39,7 +39,7 @@ export const loader: LoaderFunction =
 
     return {
       instrumentTypes: instrumentTypesRequest.data.content,
-      manufacturers: manufacturersRequest.data.content,
+      manufacturerTypes: manufacturersRequest.data.content,
       materials: instrumentBasicMaterialsRequest.data.content,
       countries: countriesRequest.data.content,
     };

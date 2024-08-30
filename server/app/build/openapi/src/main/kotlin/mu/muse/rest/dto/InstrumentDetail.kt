@@ -8,7 +8,7 @@ import mu.muse.rest.dto.InstrumentId
 import mu.muse.rest.dto.InstrumentName
 import mu.muse.rest.dto.InstrumentType
 import mu.muse.rest.dto.ManufactureDate
-import mu.muse.rest.dto.ManufacturerName
+import mu.muse.rest.dto.ManufactureType
 import mu.muse.rest.dto.ReleaseDate
 import jakarta.validation.constraints.DecimalMax
 import jakarta.validation.constraints.DecimalMin
@@ -25,7 +25,7 @@ import jakarta.validation.Valid
  * @param instrumentId 
  * @param instrumentName 
  * @param instrumentType 
- * @param manufacturerName 
+ * @param manufacturerType 
  * @param manufacturerDate 
  * @param releaseDate 
  * @param country 
@@ -43,7 +43,7 @@ data class InstrumentDetail(
     @get:JsonProperty("instrument_type", required = true) val instrumentType: InstrumentType,
 
     @field:Valid
-    @get:JsonProperty("manufacturer_name", required = true) val manufacturerName: ManufacturerName,
+    @get:JsonProperty("manufacturer_type", required = true) val manufacturerType: ManufactureType,
 
     @field:Valid
     @get:JsonProperty("manufacturer_date", required = true) val manufacturerDate: ManufactureDate,

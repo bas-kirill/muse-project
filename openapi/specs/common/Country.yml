@@ -14,8 +14,11 @@ components:
   schemas:
     Country:
       type: object
-      required: [country]
+      required: [i18n_code]
       properties:
-        country:
+        i18n_code:
           type: string
-          example: "CYPRUS"
+          example: "country.cyprus"
+        localized_text:
+          type: string
+          example: "Cyprus"

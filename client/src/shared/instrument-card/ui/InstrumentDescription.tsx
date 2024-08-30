@@ -4,11 +4,12 @@ import { InstrumentDetail } from "generated/model";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 import { useTranslation } from "react-i18next";
 import {
-  I18N_COUNTRY, I18N_INSTRUMENT_BASIC_MATERIALS,
+  I18N_COUNTRY,
+  I18N_INSTRUMENT_BASIC_MATERIALS,
   I18N_INSTRUMENT_CARD_MANUFACTURER,
   I18N_INSTRUMENT_TYPE_FILTER,
   I18N_MANUFACTURER_DATE,
-  I18N_RELEASE_DATE
+  I18N_RELEASE_DATE,
 } from "../../../i18n";
 
 interface Props {
@@ -16,16 +17,16 @@ interface Props {
 }
 
 export const InstrumentDescription = (props: Props) => {
-  const {t } = useTranslation();
+  const { t } = useTranslation();
   const { darkMode } = useDarkMode();
 
   const {
     instrument_name: { instrument_name },
-    instrument_type: { code, localized_text },
-    manufacturer_name: { manufacturer_name },
+    instrument_type,
+    manufacturer_type,
     manufacturer_date: { manufacture_date },
     release_date: { release_date },
-    country: { country },
+    country,
     basic_materials,
   } = props.instrument;
 
@@ -42,7 +43,7 @@ export const InstrumentDescription = (props: Props) => {
         </b>
         :{" "}
         <span className={`${darkMode ? styles.primary__dark : styles.primary}`}>
-          {localized_text}
+          {instrument_type.localized_text}
         </span>
         <br />
         <b
@@ -52,7 +53,7 @@ export const InstrumentDescription = (props: Props) => {
         </b>
         :{" "}
         <span className={`${darkMode ? styles.primary__dark : styles.primary}`}>
-          {manufacturer_name}
+          {manufacturer_type.localized_message}
         </span>
         <br />
         <b
@@ -82,7 +83,7 @@ export const InstrumentDescription = (props: Props) => {
         </b>
         :{" "}
         <span className={`${darkMode ? styles.primary__dark : styles.primary}`}>
-          {country}
+          {country.localized_text}
         </span>
         <br />
         <b
@@ -96,7 +97,7 @@ export const InstrumentDescription = (props: Props) => {
             <span
               className={`${darkMode ? styles.primary__dark : styles.primary}`}
             >
-              {index > 0 ? "," : ""} {basic_material.basic_material}
+              {index > 0 ? "," : ""} {basic_material.localized_text}
             </span>
           ))}
         </>

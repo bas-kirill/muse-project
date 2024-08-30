@@ -6,9 +6,9 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.InstrumentBase64Photo
-import mu.muse.domain.instrument.ManufacturerType
+import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.MaterialType
+import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.persistence.instrument.inmemory.matches
 import mu.muse.usecase.access.instrument.InstrumentExtractor
@@ -27,11 +27,11 @@ class PostgresInstrumentRepository(
             select
               instrument_id,
               instrument_name,
-              instrument_type,
-              manufacturer_name,
+              instrument_i18n_code,
+              manufacturer_i18n_code,
               manufacturer_date,
               release_date,
-              country,
+              country_i18n_code,
               materials
             from instruments
         """.trimIndent()
@@ -43,11 +43,11 @@ class PostgresInstrumentRepository(
             select
               instrument_id,
               instrument_name,
-              instrument_type,
-              manufacturer_name,
+              instrument_i18n_code,
+              manufacturer_i18n_code,
               manufacturer_date,
               release_date,
-              country,
+              country_i18n_code,
               materials,
               image
             from instruments
@@ -66,11 +66,11 @@ class PostgresInstrumentRepository(
             select
               instrument_id,
               instrument_name,
-              instrument_type,
-              manufacturer_name,
+              instrument_i18n_code,
+              manufacturer_i18n_code,
               manufacturer_date,
               release_date,
-              country,
+              country_i18n_code,
               materials,
               image
             from instruments
@@ -87,11 +87,11 @@ class PostgresInstrumentRepository(
             select
               instrument_id,
               instrument_name,
-              instrument_type,
-              manufacturer_name,
+              instrument_i18n_code,
+              manufacturer_i18n_code,
               manufacturer_date,
               release_date,
-              country,
+              country_i18n_code,
               materials,
               image
             from instruments
@@ -118,60 +118,60 @@ class PostgresInstrumentRepository(
             insert into instruments (
                 instrument_id,
                 instrument_name,
-                instrument_type,
-                manufacturer_name,
+                instrument_i18n_code,
+                manufacturer_i18n_code,
                 manufacturer_date,
                 release_date,
-                country,
+                country_i18n_code,
                 materials,
                 image
             )
             values (
               :instrument_id,
               :instrument_name,
-              :instrument_type,
-              :manufacturer_name,
+              :instrument_i18n_code,
+              :manufacturer_i18n_code,
               :manufacturer_date,
               :release_date,
-              :country,
+              :country_i18n_code,
               :materials,
               :image
             )
             on conflict (instrument_id) do update
             set
               instrument_name = :instrument_name,
-              instrument_type = :instrument_type,
-              manufacturer_name = :manufacturer_name,
+              instrument_i18n_code = :instrument_i18n_code,
+              manufacturer_i18n_code = :manufacturer_i18n_code,
               manufacturer_date = :manufacturer_date,
               release_date = :release_date,
-              country = :country,
+              country_i18n_code = :country_i18n_code,
               materials = :materials,
               image = :image
         """.trimIndent()
         val params = mapOf(
             "instrument_id" to instrument.id.toLongValue(),
             "instrument_name" to instrument.name.toStringValue(),
-            "instrument_type" to instrument.type.name,
-            "manufacturer_name" to instrument.manufacturerType.realName,
+            "instrument_i18n_code" to instrument.type.i18nCode,
+            "manufacturer_i18n_code" to instrument.manufacturerType.i18nCode,
             "manufacturer_date" to Timestamp.from(instrument.manufactureDate.toInstantValue()),
             "release_date" to Timestamp.from(instrument.releaseDate.toInstantValue()),
-            "country" to instrument.country.realName,
-            "materials" to instrument.materialTypes.map { it.realName }.toTypedArray(),
+            "country_i18n_code" to instrument.country.i18nCode,
+            "materials" to instrument.materialTypes.map { it.i18nCode }.toTypedArray(),
             "image" to instrument.image.toStringValue(),
         )
         namedTemplate.update(sql, params)
     }
 }
 
-fun Array<String>.toBasicMaterials() = this.toList().map { MaterialType.from(it) }
+fun Array<String>.toBasicMaterials() = this.toList().map { Material.Type.fromI18nCode(it) }
 fun ResultSet.toInstrument() = Instrument(
     id = InstrumentId.from(this.getLong("instrument_id")),
     name = InstrumentName.from(this.getString("instrument_name")),
-    type = Instrument.Type.valueOf(this.getString("instrument_type")),
-    manufacturerType = ManufacturerType.from(this.getString("manufacturer_name")),
+    type = Instrument.Type.fromI18nCode(this.getString("instrument_i18n_code")),
+    manufacturerType = Manufacturer.Type.fromI18nCode(this.getString("manufacturer_i18n_code")),
     manufactureDate = ManufacturerDate.from(this.getTimestamp("manufacturer_date").toInstant()),
     releaseDate = ReleaseDate.from(this.getTimestamp("release_date").toInstant()),
-    country = Country.from(this.getString("country")),
+    country = Country.fromI18nCode(this.getString("country_i18n_code")),
     materialTypes = (this.getArray("materials").getArray() as Array<String>).toBasicMaterials(),
     image = InstrumentBase64Photo.from(this.getString("image")),
     version = Version.new(),

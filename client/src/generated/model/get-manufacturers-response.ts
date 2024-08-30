@@ -14,7 +14,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Manufacturer } from "./manufacturer";
+import type { ManufactureType } from "./manufacture-type";
 
 /**
  *
@@ -24,8 +24,8 @@ import type { Manufacturer } from "./manufacturer";
 export interface GetManufacturersResponse {
   /**
    *
-   * @type {Array<Manufacturer>}
+   * @type {Array<ManufactureType>}
    * @memberof GetManufacturersResponse
    */
-  content: Array<Manufacturer>;
+  content: Array<ManufactureType>;
 }

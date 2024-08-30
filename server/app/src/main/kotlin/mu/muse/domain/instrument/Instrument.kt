@@ -1,5 +1,6 @@
 package mu.muse.domain.instrument
 
+import mu.muse.common.ServerException
 import mu.muse.common.types.AggregateRoot
 import mu.muse.common.types.Version
 
@@ -8,11 +9,11 @@ class Instrument internal constructor(
     id: InstrumentId,
     val name: InstrumentName,
     val type: Type,
-    val manufacturerType: ManufacturerType,
+    val manufacturerType: Manufacturer.Type,
     val manufactureDate: ManufacturerDate,
     val releaseDate: ReleaseDate,
     val country: Country,
-    val materialTypes: List<MaterialType>,
+    val materialTypes: List<Material.Type>,
     val image: InstrumentBase64Photo,
     version: Version,
 ) : AggregateRoot<InstrumentId>(id, version) {
@@ -25,11 +26,11 @@ class Instrument internal constructor(
             id: InstrumentId,
             name: InstrumentName,
             type: Type,
-            manufacturerType: ManufacturerType,
+            manufacturerType: Manufacturer.Type,
             manufactureDate: ManufacturerDate,
             releaseDate: ReleaseDate,
             country: Country,
-            materialTypes: List<MaterialType>,
+            materialTypes: List<Material.Type>,
             image: InstrumentBase64Photo,
         ): Instrument {
             return Instrument(
@@ -51,6 +52,15 @@ class Instrument internal constructor(
         KEYBOARD(i18nCode = "instrument.type.keyboard"),
         STRINGED(i18nCode = "instrument.type.stringed"),
         WIND(i18nCode = "instrument.type.wind");
+
+        companion object {
+            fun fromI18nCode(i18nCodeRaw: String): Type {
+                return entries.find { it.i18nCode == i18nCodeRaw } ?: throw UnknownInstrumentI18nCodeType(i18nCodeRaw)
+            }
+        }
+
+        data class UnknownInstrumentI18nCodeType(val i18nCodeRaw: String) :
+            ServerException("Unknown i18n code `${i18nCodeRaw}`")
     }
 
 }

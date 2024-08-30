@@ -1,7 +1,7 @@
 package mu.muse.usecase
 
-import mu.muse.domain.instrument.MaterialType
+import mu.muse.domain.instrument.Material
 
 fun interface GetInstrumentMaterials {
-    fun execute(): List<MaterialType>
+    fun execute(): List<Material.Type>
 }

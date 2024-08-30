@@ -6,9 +6,9 @@ import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.ManufacturerType
+import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.MaterialType
+import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.rest.api.GetInstrumentsByCriteriaPaginatedApi
 import mu.muse.rest.dto.GetInstrumentByCriteriaPageResponse
@@ -58,14 +58,14 @@ class GetInstrumentsByCriteriaPaginatedEndpoint(
 fun GetInstrumentsByCriteriaRequestBody.toInstrumentCriteria(): InstrumentExtractor.Criteria {
     return InstrumentExtractor.Criteria(
         name = this.instrumentName?.let { InstrumentName.from(it.instrumentName) },
-        types = this.instrumentTypes?.map { Instrument.Type.valueOf(it.code) },
-        manufacturerTypes = this.manufacturerNames?.map { ManufacturerType.valueOf(it.manufacturerName) },
+        types = this.instrumentTypes?.map { Instrument.Type.fromI18nCode(it.i18nCode) },
+        manufacturerTypes = this.manufacturerTypes?.map { Manufacturer.Type.fromI18nCode(it.i18nCode) },
         manufacturerDateFrom = this.manufactureDateFrom?.let { ManufacturerDate.from(it.manufactureDate) },
         manufacturerDateTo = this.manufactureDateTo?.let { ManufacturerDate.from(it.manufactureDate) },
         releaseDateFrom = this.releaseDateFrom?.let { ReleaseDate.from(it.releaseDate) },
         releaseDateTo = this.releaseDateTo?.let { ReleaseDate.from(it.releaseDate) },
-        countries = this.countries?.map { Country.from(it.country) },
-        materialTypes = this.materials?.map { MaterialType.from(it.basicMaterial) },
+        countries = this.countries?.map { Country.fromI18nCode(it.i18nCode) },
+        materialTypes = this.materials?.map { Material.Type.fromI18nCode(it.i18nCode) },
         instrumentIds = this.instrumentIds?.map { InstrumentId.from(it.instrumentId) },
     )
 }

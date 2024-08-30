@@ -23,5 +23,11 @@ export interface BasicMaterial {
    * @type {string}
    * @memberof BasicMaterial
    */
-  basic_material: string;
+  i18n_code: string;
+  /**
+   *
+   * @type {string}
+   * @memberof BasicMaterial
+   */
+  localized_text?: string;
 }

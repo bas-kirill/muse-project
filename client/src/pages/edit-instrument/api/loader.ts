@@ -6,7 +6,7 @@ import {
   InstrumentDetail,
   InstrumentPhoto,
   type InstrumentType,
-  Manufacturer,
+  ManufactureType,
 } from "generated/model";
 import { GetInstrumentTypesApi } from "generated/api/get-instrument-types-api";
 import { GetInstrumentBasicMaterialsApi } from "generated/api/get-instrument-basic-materials-api";
@@ -27,7 +27,7 @@ const getInstrumentPhoto = new GetInstrumentPhotoApi(apiConfig);
 export interface EditInstrumentLoader {
   instrumentForEdit: InstrumentDetail;
   instrumentTypes: InstrumentType[];
-  manufacturers: Manufacturer[];
+  manufacturerTypes: ManufactureType[];
   materials: BasicMaterial[];
   countries: Country[];
   instrumentPhoto: InstrumentPhoto;
@@ -54,7 +54,7 @@ export const loader: LoaderFunction = async ({
   return {
     instrumentForEdit: instrumentDetailRequest.data,
     instrumentTypes: instrumentTypesRequest.data.content,
-    manufacturers: manufacturersRequest.data.content,
+    manufacturerTypes: manufacturersRequest.data.content,
     materials: instrumentBasicMaterialsRequest.data.content,
     countries: countriesRequest.data.content,
     instrumentPhoto: instrumentPhotoRequest.data,

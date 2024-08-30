@@ -1,20 +1,20 @@
 package mu.muse.domain.instrument
 
-enum class Country(val realName: String) {
-    CYPRUS(realName = "Cyprus"),
-    GERMANY(realName = "Germany"),
-    RUSSIA(realName = "Russia"),
-    USA(realName = "USA");
+import mu.muse.common.ServerException
+
+enum class Country(val i18nCode: String) {
+    CYPRUS(i18nCode = "country.cyprus"),
+    GERMANY(i18nCode = "country.germany"),
+    RUSSIA(i18nCode = "country.russia"),
+    USA(i18nCode = "country.usa");
 
     companion object {
-        fun from(valueRaw: String): Country {
-            return when(valueRaw) {
-                CYPRUS.realName -> CYPRUS
-                GERMANY.realName -> GERMANY
-                RUSSIA.realName -> RUSSIA
-                USA.realName -> USA
-                else -> throw IllegalArgumentException("Unknown value `${valueRaw}")
-            }
+        fun fromI18nCode(i18nCodeRaw: String): Country {
+            return entries.find { it.i18nCode == i18nCodeRaw }
+                ?: throw UnknownCountryI18nCode(i18nCodeRaw)
         }
+
+        data class UnknownCountryI18nCode(val i18nCode: String) :
+            ServerException("Unknown country i18n code `${i18nCode}`")
     }
 }

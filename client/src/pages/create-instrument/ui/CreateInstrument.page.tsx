@@ -5,7 +5,11 @@ import { FooterWidget } from "widgets/footer";
 import { Form, useActionData, useLoaderData } from "react-router-dom";
 import { CreateInstrumentLoader } from "pages/create-instrument";
 import { CreateInstrumentAction } from "pages/create-instrument/api/action";
-import { I18N_COUNTRY, I18N_MANUFACTURER_DATE, I18N_RELEASE_DATE } from "../../../i18n";
+import {
+  I18N_COUNTRY,
+  I18N_MANUFACTURER_DATE,
+  I18N_RELEASE_DATE,
+} from "../../../i18n";
 import { useTranslation } from "react-i18next";
 
 export const CreateInstrumentPage = () => {
@@ -51,7 +55,7 @@ export const CreateInstrumentPage = () => {
           >
             {loader.instrumentTypes.map((instrumentType) => (
               <option
-                key={instrumentType.code}
+                key={instrumentType.i18n_code}
                 value={instrumentType.localized_text}
               >
                 {instrumentType.localized_text}
@@ -72,12 +76,12 @@ export const CreateInstrumentPage = () => {
             className={styles.create_instrument__form__field__value}
             required
           >
-            {loader.manufacturers.map((manufacturer) => (
+            {loader.manufacturerTypes.map((manufacturer) => (
               <option
-                key={manufacturer.manufacturer}
-                value={manufacturer.manufacturer}
+                key={manufacturer.i18n_code}
+                value={manufacturer.localized_message}
               >
-                {manufacturer.manufacturer}
+                {manufacturer.localized_message}
               </option>
             ))}
           </select>
@@ -133,8 +137,8 @@ export const CreateInstrumentPage = () => {
             required
           >
             {loader.countries.map((country) => (
-              <option key={country.country} value={country.country}>
-                {country.country}
+              <option key={country.i18n_code} value={country.localized_text}>
+                {country.localized_text}
               </option>
             ))}
           </select>
@@ -154,11 +158,8 @@ export const CreateInstrumentPage = () => {
             required
           >
             {loader.materials.map((material) => (
-              <option
-                key={material.basic_material}
-                value={material.basic_material}
-              >
-                {material.basic_material}
+              <option key={material.i18n_code} value={material.localized_text}>
+                {material.localized_text}
               </option>
             ))}
           </select>

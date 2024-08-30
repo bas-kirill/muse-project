@@ -16,7 +16,7 @@ export const action: ActionFunction = async ({
   const {
     instrumentName,
     instrumentType,
-    manufacturerName,
+    manufactureType,
     manufactureDate,
     releaseDate,
     country,
@@ -36,7 +36,7 @@ export const action: ActionFunction = async ({
       instrument_detail: {
         instrument_name: instrumentName,
         instrument_type: instrumentType,
-        manufacturer_name: manufacturerName,
+        manufacturer_type: manufactureType,
         manufacturer_date: manufactureDate,
         release_date: releaseDate,
         country: country,

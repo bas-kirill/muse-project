@@ -14,11 +14,14 @@ import jakarta.validation.Valid
 
 /**
  * 
- * @param country 
+ * @param i18nCode 
+ * @param localizedText 
  */
 data class Country(
 
-    @get:JsonProperty("country", required = true) val country: kotlin.String
+    @get:JsonProperty("i18n_code", required = true) val i18nCode: kotlin.String,
+
+    @get:JsonProperty("localized_text") val localizedText: kotlin.String? = null
     ) {
 
 }

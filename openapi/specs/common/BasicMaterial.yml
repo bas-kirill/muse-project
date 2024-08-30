@@ -14,8 +14,11 @@ components:
   schemas:
     BasicMaterial:
       type: object
-      required: [basic_material]
+      required: [i18n_code]
       properties:
-        basic_material:
+        i18n_code:
           type: string
-          example: "WOOD"
+          example: "material.type.wood"
+        localized_text:
+          type: string
+          example: "Wood"

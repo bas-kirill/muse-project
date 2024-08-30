@@ -18,11 +18,11 @@ create sequence user_id_seq increment 1 start 1;
 create table instruments(
     instrument_id bigint unique not null,
     instrument_name varchar(256) not null,
-    instrument_type varchar(256) not null,
-    manufacturer_name varchar(256) not null,
+    instrument_i18n_code varchar(256) not null,
+    manufacturer_i18n_code varchar(256) not null,
     manufacturer_date timestamptz not null,
     release_date timestamptz not null,
-    country varchar(256) not null,
+    country_i18n_code varchar(256) not null,
     materials varchar(256)[] not null,
     image text not null
 );

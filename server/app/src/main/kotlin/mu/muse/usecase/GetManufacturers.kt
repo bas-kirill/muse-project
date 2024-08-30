@@ -1,7 +1,7 @@
 package mu.muse.usecase
 
-import mu.muse.domain.instrument.ManufacturerType
+import mu.muse.domain.instrument.Manufacturer
 
 fun interface GetManufacturers {
-    fun execute(): List<ManufacturerType>
+    fun execute(): List<Manufacturer.Type>
 }

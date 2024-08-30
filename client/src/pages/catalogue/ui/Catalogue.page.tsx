@@ -40,7 +40,7 @@ export function CataloguePage() {
           {
             instrument_name: filters.instrumentName,
             instrument_types: filters.instrumentTypes,
-            manufacturer_names: filters.manufacturerNames,
+            manufacturer_types: filters.manufacturerTypes,
             manufacture_date_from: filters.manufactureDateFrom,
             manufacture_date_to: filters.manufactureDateTo,
             release_date_from: filters.releaseDateFrom,
