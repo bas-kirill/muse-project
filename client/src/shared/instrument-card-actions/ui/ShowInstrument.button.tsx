@@ -5,12 +5,15 @@ import { useNavigate } from "react-router-dom";
 
 import { InstrumentDetail } from "generated/model";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { useTranslation } from "react-i18next";
+import { I18N_INSTRUMENT_CARD_SHOW_BUTTON } from "../../../i18n";
 
 interface Props {
   instrument: InstrumentDetail;
 }
 
 export const ShowInstrumentButton = (props: Props) => {
+  const { t } = useTranslation();
   const { darkMode } = useDarkMode();
   const navigate = useNavigate();
 
@@ -27,7 +30,7 @@ export const ShowInstrumentButton = (props: Props) => {
     `}
       onClick={handleOnClick}
     >
-      Show
+      {t(I18N_INSTRUMENT_CARD_SHOW_BUTTON)}
     </button>
   );
 };
