@@ -29,6 +29,9 @@ export const I18N_INSTRUMENT_DATE_FROM = "instrument.date.from";
 export const I18N_INSTRUMENT_DATE_TO = "instrument.date.to";
 
 export const I18N_INSTRUMENT_CARD_SHOW_BUTTON = "instrument.card.show.button";
+export const I18N_INSTRUMENT_CARD_REMOVE_BUTTON = "instrument.remove.button";
+export const I18N_INSTRUMENT_CARD_EDIT_BUTTON = "instrument.edit.button";
+export const I18N_INSTRUMENT_CARD_FAVORITE_BUTTON = "instrument.favorite.button";
 
 export const I18N_LOGIN_INPUT = "login.login.input";
 export const I18N_LOGIN_PASSWORD_INPUT = "login.login.password";
@@ -40,6 +43,8 @@ export const I18N_PROFILE_ROLE_SPAN = "profile.role.span";
 
 export const I18N_DARK_MODE_BUTTON = "dark-mode.button";
 export const I18N_LOGOUT_BUTTON = "logout.button";
+
+export const I18N_FAVORITE_H1 = "favorite.h1";
 
 export const I18N_FOOTER = "footer";
 
@@ -71,6 +76,9 @@ const resources = {
       [I18N_INSTRUMENT_DATE_FROM]: "From",
       [I18N_INSTRUMENT_DATE_TO]: "To",
 
+      [I18N_INSTRUMENT_CARD_REMOVE_BUTTON]: "Remove",
+      [I18N_INSTRUMENT_CARD_EDIT_BUTTON]: "Edit",
+      [I18N_INSTRUMENT_CARD_FAVORITE_BUTTON]: "Favorite",
       [I18N_INSTRUMENT_CARD_SHOW_BUTTON]: "Show",
 
       [I18N_LOGIN_INPUT]: "Login",
@@ -88,6 +96,8 @@ const resources = {
 
       [I18N_NAVBAR_PREVIOUS]: "Previous",
       [I18N_NAVBAR_NEXT]: "Next",
+
+      [I18N_FAVORITE_H1]: "Favorite",
     }
   },
   ru: {
@@ -114,6 +124,9 @@ const resources = {
       [I18N_INSTRUMENT_DATE_FROM]: "С",
       [I18N_INSTRUMENT_DATE_TO]: "По",
 
+      [I18N_INSTRUMENT_CARD_REMOVE_BUTTON]: "Удалить",
+      [I18N_INSTRUMENT_CARD_EDIT_BUTTON]: "Редактировать",
+      [I18N_INSTRUMENT_CARD_FAVORITE_BUTTON]: "Любимое",
       [I18N_INSTRUMENT_CARD_SHOW_BUTTON]: "Показать",
 
       [I18N_NAVBAR_PREVIOUS]: "Предыдущий",
@@ -129,6 +142,8 @@ const resources = {
 
       [I18N_DARK_MODE_BUTTON]: "Темная тема",
       [I18N_LOGOUT_BUTTON]: "Выйти",
+
+      [I18N_FAVORITE_H1]: "Любимое",
     }
   }
 };
