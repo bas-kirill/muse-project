@@ -8,9 +8,12 @@ import { useJwt } from "shared/jwt/use-jwt";
 import { useLoaderData } from "react-router-dom";
 import { FavoriteLoader } from "pages/favorite";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { useTranslation } from "react-i18next";
+import { I18N_FAVORITE_H1 } from "../../../i18n";
 
 export const FavoritePage = () => {
   useJwt();
+  const { t } = useTranslation();
   const { darkMode } = useDarkMode();
   const loader = useLoaderData() as FavoriteLoader;
 
@@ -19,7 +22,7 @@ export const FavoritePage = () => {
       <HeaderWidget />
 
       <h1 className={`${styles.h1} ${darkMode && styles.h1__dark}`}>
-        Favorite
+        {t(I18N_FAVORITE_H1)}
       </h1>
 
       {loader.instrumentDetails.length === 0 && (
