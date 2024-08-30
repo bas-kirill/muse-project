@@ -589,11 +589,14 @@ components:
     BasicMaterial:
       type: object
       required:
-        - basic_material
+        - i18n_code
       properties:
-        basic_material:
+        i18n_code:
           type: string
-          example: WOOD
+          example: material.type.wood
+        localized_text:
+          type: string
+          example: Wood
     ClientError:
       type: object
       required:
@@ -611,18 +614,21 @@ components:
     Country:
       type: object
       required:
-        - country
+        - i18n_code
       properties:
-        country:
+        i18n_code:
           type: string
-          example: CYPRUS
+          example: country.cyprus
+        localized_text:
+          type: string
+          example: Cyprus
     InstrumentDetail:
       type: object
       required:
         - instrument_id
         - instrument_name
         - instrument_type
-        - manufacturer_name
+        - manufacturer_type
         - manufacturer_date
         - release_date
         - country
@@ -634,8 +640,8 @@ components:
           $ref: '#/components/schemas/InstrumentName'
         instrument_type:
           $ref: '#/components/schemas/InstrumentType'
-        manufacturer_name:
-          $ref: '#/components/schemas/ManufacturerName'
+        manufacturer_type:
+          $ref: '#/components/schemas/ManufactureType'
         manufacturer_date:
           $ref: '#/components/schemas/ManufactureDate'
         release_date:
@@ -669,21 +675,24 @@ components:
     InstrumentType:
       type: object
       required:
-        - code
+        - i18n_code
       properties:
-        code:
+        i18n_code:
           $ref: '#/components/schemas/InstrumentTypeCode'
         localized_text:
           type: string
           example: Stringed
-    ManufacturerName:
+    ManufactureType:
       type: object
       required:
-        - manufacturer_name
+        - i18n_code
       properties:
-        manufacturer_name:
+        i18n_code:
           type: string
-          example: STRINGED
+          example: instrument.manufacture.type.fender
+        localized_message:
+          type: string
+          example: Fender
     ManufactureDate:
       type: object
       required:
@@ -745,7 +754,7 @@ components:
       required:
         - instrument_name
         - instrument_type
-        - manufacturer_name
+        - manufacturer_type
         - manufacturer_date
         - release_date
         - country
@@ -755,8 +764,8 @@ components:
           $ref: '#/components/schemas/InstrumentName'
         instrument_type:
           $ref: '#/components/schemas/InstrumentType'
-        manufacturer_name:
-          $ref: '#/components/schemas/ManufacturerName'
+        manufacturer_type:
+          $ref: '#/components/schemas/ManufactureType'
         manufacturer_date:
           $ref: '#/components/schemas/ManufactureDate'
         release_date:
@@ -826,11 +835,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InstrumentType'
-        manufacturer_names:
+        manufacturer_types:
           nullable: true
           type: array
           items:
-            $ref: '#/components/schemas/ManufacturerName'
+            $ref: '#/components/schemas/ManufactureType'
         manufacture_date_from:
           nullable: true
           allOf:
@@ -913,13 +922,6 @@ components:
       properties:
         jwt:
           type: string
-    Manufacturer:
-      type: object
-      required:
-        - manufacturer
-      properties:
-        manufacturer:
-          type: string
     GetManufacturersResponse:
       type: object
       required:
@@ -928,7 +930,7 @@ components:
         content:
           type: array
           items:
-            $ref: '#/components/schemas/Manufacturer'
+            $ref: '#/components/schemas/ManufactureType'
     ProfileDetails:
       type: object
       required:

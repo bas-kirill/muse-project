@@ -51,13 +51,6 @@ paths:
 
 components:
   schemas:
-    Manufacturer:
-      type: object
-      required: [manufacturer]
-      properties:
-        manufacturer:
-          type: string
-
     GetManufacturersResponse:
       type: object
       required: [content]
@@ -65,4 +58,4 @@ components:
         content:
           type: array
           items:
-            $ref: "#/components/schemas/Manufacturer"
+            $ref: "./../common/ManufacturerType.yml#/components/schemas/ManufactureType"

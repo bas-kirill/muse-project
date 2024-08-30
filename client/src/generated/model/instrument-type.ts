@@ -23,7 +23,7 @@ export interface InstrumentType {
    * @type {string}
    * @memberof InstrumentType
    */
-  code: string;
+  i18n_code: string;
   /**
    *
    * @type {string}

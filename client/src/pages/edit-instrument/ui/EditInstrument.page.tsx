@@ -7,7 +7,11 @@ import { EditInstrumentLoader } from "pages/edit-instrument/api/loader";
 import { EditInstrumentAction } from "pages/edit-instrument/api/action";
 import { InstrumentBasicMaterialField } from "./InstrumentBasicMaterial.field";
 import { useJwt } from "shared/jwt/use-jwt";
-import { I18N_COUNTRY, I18N_MANUFACTURER_DATE, I18N_RELEASE_DATE } from "../../../i18n";
+import {
+  I18N_COUNTRY,
+  I18N_MANUFACTURER_DATE,
+  I18N_RELEASE_DATE,
+} from "../../../i18n";
 import { useTranslation } from "react-i18next";
 
 export const EditInstrumentPage = () => {
@@ -77,7 +81,10 @@ export const EditInstrumentPage = () => {
               className={styles.edit_instrument__form__field__value}
             >
               {loader.instrumentTypes.map((instrumentType) => (
-                <option key={instrumentType.code} value={instrumentType.code}>
+                <option
+                  key={instrumentType.i18n_code}
+                  value={instrumentType.localized_text}
+                >
                   {instrumentType.localized_text}
                 </option>
               ))}
@@ -95,17 +102,17 @@ export const EditInstrumentPage = () => {
             <select
               name="manufacturer-name"
               defaultValue={
-                loader.instrumentForEdit.manufacturer_name.manufacturer_name
+                loader.instrumentForEdit.manufacturer_type.localized_message
               }
               required
               className={styles.edit_instrument__form__field__value}
             >
-              {loader.manufacturers.map((manufacturer) => (
+              {loader.manufacturerTypes.map((manufacturer) => (
                 <option
-                  key={manufacturer.manufacturer}
-                  value={manufacturer.manufacturer}
+                  key={manufacturer.i18n_code}
+                  value={manufacturer.localized_message}
                 >
-                  {manufacturer.manufacturer}
+                  {manufacturer.i18n_code}
                 </option>
               ))}
             </select>
@@ -161,13 +168,13 @@ export const EditInstrumentPage = () => {
 
             <select
               name="country"
-              defaultValue={loader.instrumentForEdit.country.country}
+              defaultValue={loader.instrumentForEdit.country.localized_text}
               required
               className={styles.edit_instrument__form__field__value}
             >
               {loader.countries.map((country) => (
-                <option key={country.country} value={country.country}>
-                  {country.country}
+                <option key={country.i18n_code} value={country.localized_text}>
+                  {country.localized_text}
                 </option>
               ))}
             </select>

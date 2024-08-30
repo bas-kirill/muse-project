@@ -5,9 +5,9 @@ import mu.muse.domain.instrument.Instrument
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
 import mu.muse.domain.instrument.InstrumentBase64Photo
-import mu.muse.domain.instrument.ManufacturerType
+import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
-import mu.muse.domain.instrument.MaterialType
+import mu.muse.domain.instrument.Material
 import mu.muse.domain.instrument.ReleaseDate
 import mu.muse.usecase.EditInstrument
 import mu.muse.usecase.EditInstrumentError
@@ -24,11 +24,11 @@ class EditInstrumentUseCase(
         instrumentId: InstrumentId,
         instrumentName: InstrumentName,
         instrumentType: Instrument.Type,
-        manufacturerTypeName: ManufacturerType,
+        manufacturerTypeName: Manufacturer.Type,
         manufacturerDate: ManufacturerDate,
         releaseDate: ReleaseDate,
         country: Country,
-        materialTypes: List<MaterialType>,
+        materialTypes: List<Material.Type>,
         photo: InstrumentBase64Photo,
     ) {
         // todo(unit-of-work): use unit of work pattern

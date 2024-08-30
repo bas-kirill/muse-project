@@ -97,18 +97,21 @@ class RestConfiguration {
         GetInstrumentTypesEndpoint(getInstrumentTypes, messageSource)
 
     @Bean
-    fun getInstrumentMaterialsEndpoint(getInstrumentMaterials: GetInstrumentMaterials) =
-        GetInstrumentMaterialsEndpoint(getInstrumentMaterials)
+    fun getInstrumentMaterialsEndpoint(getInstrumentMaterials: GetInstrumentMaterials, messageSource: MessageSource) =
+        GetInstrumentMaterialsEndpoint(getInstrumentMaterials, messageSource)
 
     @Bean
-    fun getCountriesEndpoint(getCountries: GetCountries) = GetCountriesEndpoint(getCountries)
+    fun getCountriesEndpoint(getCountries: GetCountries, messageSource: MessageSource) =
+        GetCountriesEndpoint(getCountries, messageSource)
 
     @Bean
     fun createInstrumentEndpoint(createInstrument: CreateInstrument) = CreateInstrumentEndpoint(createInstrument)
 
     @Bean
-    fun getInstrumentManufacturersEndpoint(getManufacturers: GetManufacturers) =
-        GetManufacturersEndpoint(getManufacturers)
+    fun getInstrumentManufacturersEndpoint(
+        getManufacturers: GetManufacturers,
+        messageSource: MessageSource
+    ) = GetManufacturersEndpoint(getManufacturers, messageSource)
 
     @Bean
     fun editInstrumentEndpoint(editInstrument: EditInstrument) = EditInstrumentEndpoint(editInstrument)

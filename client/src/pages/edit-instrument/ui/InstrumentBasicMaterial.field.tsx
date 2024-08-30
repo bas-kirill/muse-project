@@ -21,7 +21,7 @@ export const InstrumentBasicMaterialField = (props: Props) => {
       return;
     }
 
-    if (selectedBasicMaterial.current.basic_material === "") {
+    if (selectedBasicMaterial.current.i18n_code === "") {
       return;
     }
 
@@ -35,8 +35,7 @@ export const InstrumentBasicMaterialField = (props: Props) => {
   const removeMaterial = (materialForRemoval: BasicMaterial) => {
     setBasicMaterials(
       basicMaterials.filter(
-        (material) =>
-          material.basic_material !== materialForRemoval.basic_material,
+        (material) => material.i18n_code !== materialForRemoval.i18n_code,
       ),
     );
   };
@@ -51,17 +50,17 @@ export const InstrumentBasicMaterialField = (props: Props) => {
         <div className={styles.used_basic_materials}>
           {basicMaterials.map((material) => (
             <div
-              key={material.basic_material}
+              key={material.i18n_code}
               className={`
                 ${styles.edit_instrument_field_instrument_span} 
                 ${!props.usedMaterialsForInstrument.includes(material) ? styles.edit_instrument_field_instrument_span_new : ""}
               `}
             >
-              <span>{material.basic_material}</span>
+              <span>{material.localized_text}</span>
               <input
                 type="hidden"
                 name="material"
-                value={material.basic_material}
+                value={material.localized_text}
               />
               <button onClick={() => removeMaterial(material)}>-</button>
             </div>
@@ -70,11 +69,11 @@ export const InstrumentBasicMaterialField = (props: Props) => {
 
         <select
           onChange={(e) => {
-            if (selectedBasicMaterial.current?.basic_material === "") {
+            if (selectedBasicMaterial.current?.i18n_code === "") {
               return;
             }
             selectedBasicMaterial.current = {
-              basic_material: e.target.value,
+              i18n_code: e.target.value,
             } as BasicMaterial;
           }}
           required
@@ -82,11 +81,8 @@ export const InstrumentBasicMaterialField = (props: Props) => {
           <option value={""}>Select a material</option>
 
           {props.materials.map((material) => (
-            <option
-              key={material.basic_material}
-              value={material.basic_material}
-            >
-              {material.basic_material}
+            <option key={material.i18n_code} value={material.localized_text}>
+              {material.localized_text}
             </option>
           ))}
         </select>

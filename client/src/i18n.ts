@@ -3,8 +3,9 @@ import { initReactI18next } from "react-i18next";
 
 export const I18N_INSTRUMENT_TYPE_FILTER = "instrument.type.filter";
 export const I18N_INSTRUMENT_CARD_MANUFACTURER = "instrument.card.manufacturer";
-export const I18N_MANUFACTURER_DATE = "instrument.manufacturer.manufacture.date";
-export const I18N_RELEASE_DATE = "instrument.manufacturer.release.date"
+export const I18N_MANUFACTURER_DATE =
+  "instrument.manufacturer.manufacture.date";
+export const I18N_RELEASE_DATE = "instrument.manufacturer.release.date";
 export const I18N_COUNTRY = "country";
 export const I18N_INSTRUMENT_BASIC_MATERIALS = "instrument.basic.materials";
 export const I18N_INSTRUMENT_DATE_FROM = "instrument.date.from";
@@ -21,7 +22,7 @@ const resources = {
       [I18N_INSTRUMENT_BASIC_MATERIALS]: "Basic Materials",
       [I18N_INSTRUMENT_DATE_FROM]: "From",
       [I18N_INSTRUMENT_DATE_TO]: "To",
-    }
+    },
   },
   ru: {
     translation: {
@@ -33,8 +34,8 @@ const resources = {
       [I18N_INSTRUMENT_BASIC_MATERIALS]: "Основные материалы",
       [I18N_INSTRUMENT_DATE_FROM]: "С",
       [I18N_INSTRUMENT_DATE_TO]: "По",
-    }
-  }
+    },
+  },
 };
 
 i18n
@@ -43,8 +44,8 @@ i18n
     resources,
     lng: window.navigator.language,
     interpolation: {
-      escapeValue: false // react already safes from xss
-    }
+      escapeValue: false, // react already safes from xss
+    },
   });
 
 export default i18n;

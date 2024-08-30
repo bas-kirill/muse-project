@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { GetManufacturersApi } from "generated/api/get-manufacturers-api";
-import { Manufacturer, ManufacturerName } from "generated/model";
+import { ManufactureType } from "generated/model";
 import { apiConfig } from "shared/config/api";
+import { I18N_INSTRUMENT_CARD_MANUFACTURER } from "../../../../i18n";
+import { useTranslation } from "react-i18next";
 
 interface Props {
-  onValueChange: (names: ManufacturerName[]) => void;
+  onValueChange: (names: ManufactureType[]) => void;
 }
 
 const getManufacturers = new GetManufacturersApi(apiConfig);
 
-export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
-  const [manufacturers, setManufacturers] = useState<Manufacturer[]>([]);
+export const ManufacturerTypeFilter = ({ onValueChange }: Props) => {
+  const { t } = useTranslation();
+  const [manufacturers, setManufacturers] = useState<ManufactureType[]>([]);
 
   useEffect(() => {
     const fetchManufacturers = async () => {
@@ -32,25 +35,27 @@ export const ManufacturerNameFilter = ({ onValueChange }: Props) => {
         .map(
           (inputTag) =>
             ({
-              manufacturer_name: inputTag.name,
-            }) as ManufacturerName,
+              i18n_code: inputTag.name,
+            }) as ManufactureType,
         ),
     );
   }
 
   return (
     <div>
-      <legend style={{ padding: "0" }}>Manufacturer</legend>
+      <legend style={{ padding: "0" }}>
+        {t(I18N_INSTRUMENT_CARD_MANUFACTURER)}
+      </legend>
       {manufacturers.map((manufacturer) => (
-        <div key={manufacturer.manufacturer}>
+        <div key={manufacturer.i18n_code}>
           <input
             type="checkbox"
-            name={manufacturer.manufacturer}
+            name={manufacturer.i18n_code}
             onChange={onChange}
             defaultChecked={true}
           />
-          <label htmlFor={manufacturer.manufacturer} style={{ padding: "0" }}>
-            {manufacturer.manufacturer}
+          <label htmlFor={manufacturer.i18n_code} style={{ padding: "0" }}>
+            {manufacturer.localized_message}
           </label>
         </div>
       ))}

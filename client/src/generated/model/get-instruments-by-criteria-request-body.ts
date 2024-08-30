@@ -32,7 +32,7 @@ import type { InstrumentType } from "./instrument-type";
 import type { ManufactureDate } from "./manufacture-date";
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ManufacturerName } from "./manufacturer-name";
+import type { ManufactureType } from "./manufacture-type";
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ReleaseDate } from "./release-date";
@@ -57,10 +57,10 @@ export interface GetInstrumentsByCriteriaRequestBody {
   instrument_types?: Array<InstrumentType> | null;
   /**
    *
-   * @type {Array<ManufacturerName>}
+   * @type {Array<ManufactureType>}
    * @memberof GetInstrumentsByCriteriaRequestBody
    */
-  manufacturer_names?: Array<ManufacturerName> | null;
+  manufacturer_types?: Array<ManufactureType> | null;
   /**
    *
    * @type {ManufactureDate}

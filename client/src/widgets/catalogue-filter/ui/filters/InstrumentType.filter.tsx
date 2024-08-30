@@ -35,7 +35,7 @@ export const InstrumentTypeFilter = (props: Props) => {
         .map(
           (inputTag) =>
             ({
-              code: inputTag.name,
+              i18n_code: inputTag.name,
             }) as InstrumentType,
         ),
     );
@@ -45,15 +45,15 @@ export const InstrumentTypeFilter = (props: Props) => {
     <div>
       <legend style={{ padding: "0" }}>{t(I18N_INSTRUMENT_TYPE_FILTER)}</legend>
       {instrumentTypes.map((instrumentType) => (
-        <div key={instrumentType.code}>
+        <div key={instrumentType.i18n_code}>
           <input
             type="checkbox"
-            name={instrumentType.code}
+            name={instrumentType.i18n_code}
             onChange={onChange}
             defaultChecked={true}
             className={"instrument-type-filter-checkbox"} // required plain text class to extract values from it
           />
-          <label htmlFor={instrumentType.code}>
+          <label htmlFor={instrumentType.i18n_code}>
             {instrumentType.localized_text}
           </label>
         </div>

@@ -8,7 +8,7 @@ import mu.muse.rest.dto.InstrumentId
 import mu.muse.rest.dto.InstrumentName
 import mu.muse.rest.dto.InstrumentType
 import mu.muse.rest.dto.ManufactureDate
-import mu.muse.rest.dto.ManufacturerName
+import mu.muse.rest.dto.ManufactureType
 import mu.muse.rest.dto.ReleaseDate
 import jakarta.validation.constraints.DecimalMax
 import jakarta.validation.constraints.DecimalMin
@@ -24,7 +24,7 @@ import jakarta.validation.Valid
  * 
  * @param instrumentName 
  * @param instrumentTypes 
- * @param manufacturerNames 
+ * @param manufacturerTypes 
  * @param manufactureDateFrom 
  * @param manufactureDateTo 
  * @param releaseDateFrom 
@@ -42,7 +42,7 @@ data class GetInstrumentsByCriteriaRequestBody(
     @get:JsonProperty("instrument_types") val instrumentTypes: kotlin.collections.List<InstrumentType>? = null,
 
     @field:Valid
-    @get:JsonProperty("manufacturer_names") val manufacturerNames: kotlin.collections.List<ManufacturerName>? = null,
+    @get:JsonProperty("manufacturer_types") val manufacturerTypes: kotlin.collections.List<ManufactureType>? = null,
 
     @field:Valid
     @get:JsonProperty("manufacture_date_from") val manufactureDateFrom: ManufactureDate? = null,

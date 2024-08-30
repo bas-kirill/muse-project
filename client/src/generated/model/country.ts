@@ -23,5 +23,11 @@ export interface Country {
    * @type {string}
    * @memberof Country
    */
-  country: string;
+  i18n_code: string;
+  /**
+   *
+   * @type {string}
+   * @memberof Country
+   */
+  localized_text?: string;
 }

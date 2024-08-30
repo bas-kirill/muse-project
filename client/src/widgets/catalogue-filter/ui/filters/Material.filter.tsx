@@ -12,7 +12,7 @@ interface Props {
 const getInstrumentMaterials = new GetInstrumentBasicMaterialsApi(apiConfig);
 
 export const MaterialFilter = ({ onValueChange }: Props) => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const [materials, setMaterials] = useState<BasicMaterial[]>([]);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export const MaterialFilter = ({ onValueChange }: Props) => {
         .map(
           (inputTag) =>
             ({
-              basic_material: inputTag.name,
+              i18n_code: inputTag.name,
             }) as BasicMaterial,
         ),
     );
@@ -48,20 +48,20 @@ export const MaterialFilter = ({ onValueChange }: Props) => {
 
   return (
     <div>
-      <legend style={{ padding: "0" }}>{t(I18N_INSTRUMENT_BASIC_MATERIALS)}</legend>
+      <legend style={{ padding: "0" }}>
+        {t(I18N_INSTRUMENT_BASIC_MATERIALS)}
+      </legend>
       {materials.map((material) => (
-        <div key={material.basic_material}>
+        <div key={material.i18n_code}>
           <input
             type="checkbox"
-            id={material.basic_material}
-            name={material.basic_material}
+            id={material.i18n_code}
+            name={material.i18n_code}
             className="materials-filter-checkbox"
             defaultChecked={true}
             onChange={onChange}
           />
-          <label htmlFor={material.basic_material}>
-            {material.basic_material}
-          </label>
+          <label htmlFor={material.i18n_code}>{material.localized_text}</label>
         </div>
       ))}
     </div>

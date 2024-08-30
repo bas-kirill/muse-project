@@ -14,11 +14,14 @@ import jakarta.validation.Valid
 
 /**
  * 
- * @param basicMaterial 
+ * @param i18nCode 
+ * @param localizedText 
  */
 data class BasicMaterial(
 
-    @get:JsonProperty("basic_material", required = true) val basicMaterial: kotlin.String
+    @get:JsonProperty("i18n_code", required = true) val i18nCode: kotlin.String,
+
+    @get:JsonProperty("localized_text") val localizedText: kotlin.String? = null
     ) {
 
 }

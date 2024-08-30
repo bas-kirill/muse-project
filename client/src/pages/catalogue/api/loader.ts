@@ -23,7 +23,7 @@ export const loader = async (): Promise<CatalogueLoader> => {
       {
         instrument_name: null,
         instrument_types: null,
-        manufacturer_names: null,
+        manufacturer_types: null,
         manufacture_date_from: null,
         manufacture_date_to: null,
         release_date_from: null,
@@ -39,7 +39,7 @@ export const loader = async (): Promise<CatalogueLoader> => {
     defaultFilter: {
       instrumentName: null,
       instrumentTypes: null,
-      manufacturerNames: null,
+      manufacturerTypes: null,
       manufactureDateFrom: null,
       manufactureDateTo: null,
       releaseDateFrom: null,
