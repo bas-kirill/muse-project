@@ -28,6 +28,8 @@ export const I18N_INSTRUMENT_BASIC_MATERIALS = "instrument.basic.materials";
 export const I18N_INSTRUMENT_DATE_FROM = "instrument.date.from";
 export const I18N_INSTRUMENT_DATE_TO = "instrument.date.to";
 
+export const I18N_FOOTER = "footer";
+
 const resources = {
   en: {
     translation: {
@@ -51,7 +53,9 @@ const resources = {
       [I18N_COUNTRY]: "Country",
       [I18N_INSTRUMENT_BASIC_MATERIALS]: "Basic Materials",
       [I18N_INSTRUMENT_DATE_FROM]: "From",
-      [I18N_INSTRUMENT_DATE_TO]: "To"
+      [I18N_INSTRUMENT_DATE_TO]: "To",
+
+      [I18N_FOOTER]: "Muse Group Frontend Academy",
     }
   },
   ru: {
@@ -76,7 +80,7 @@ const resources = {
       [I18N_COUNTRY]: "Страна",
       [I18N_INSTRUMENT_BASIC_MATERIALS]: "Основные материалы",
       [I18N_INSTRUMENT_DATE_FROM]: "С",
-      [I18N_INSTRUMENT_DATE_TO]: "По"
+      [I18N_INSTRUMENT_DATE_TO]: "По",
     }
   }
 };
@@ -86,6 +90,7 @@ i18n
   .init({
     resources,
     lng: window.navigator.language,
+    fallbackLng: "en",
     interpolation: {
       escapeValue: false // react already safes from xss
     }
