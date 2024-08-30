@@ -28,6 +28,8 @@ export const I18N_INSTRUMENT_BASIC_MATERIALS = "instrument.basic.materials";
 export const I18N_INSTRUMENT_DATE_FROM = "instrument.date.from";
 export const I18N_INSTRUMENT_DATE_TO = "instrument.date.to";
 
+export const I18N_INSTRUMENT_CARD_SHOW_BUTTON = "instrument.card.show.button";
+
 export const I18N_LOGIN_INPUT = "login.login.input";
 export const I18N_LOGIN_PASSWORD_INPUT = "login.login.password";
 export const I18N_LOGIN_BUTTON = "login.login.button";
@@ -40,6 +42,9 @@ export const I18N_DARK_MODE_BUTTON = "dark-mode.button";
 export const I18N_LOGOUT_BUTTON = "logout.button";
 
 export const I18N_FOOTER = "footer";
+
+export const I18N_NAVBAR_PREVIOUS = "navbar.previous";
+export const I18N_NAVBAR_NEXT = "navbar.next";
 
 const resources = {
   en: {
@@ -66,6 +71,8 @@ const resources = {
       [I18N_INSTRUMENT_DATE_FROM]: "From",
       [I18N_INSTRUMENT_DATE_TO]: "To",
 
+      [I18N_INSTRUMENT_CARD_SHOW_BUTTON]: "Show",
+
       [I18N_LOGIN_INPUT]: "Login",
       [I18N_LOGIN_PASSWORD_INPUT]: "Password",
       [I18N_LOGIN_BUTTON]: "Login",
@@ -78,6 +85,9 @@ const resources = {
       [I18N_PROFILE_ROLE_SPAN]: "Role",
 
       [I18N_FOOTER]: "Muse Group Frontend Academy",
+
+      [I18N_NAVBAR_PREVIOUS]: "Previous",
+      [I18N_NAVBAR_NEXT]: "Next",
     }
   },
   ru: {
@@ -103,6 +113,11 @@ const resources = {
       [I18N_INSTRUMENT_BASIC_MATERIALS]: "Основные материалы",
       [I18N_INSTRUMENT_DATE_FROM]: "С",
       [I18N_INSTRUMENT_DATE_TO]: "По",
+
+      [I18N_INSTRUMENT_CARD_SHOW_BUTTON]: "Показать",
+
+      [I18N_NAVBAR_PREVIOUS]: "Предыдущий",
+      [I18N_NAVBAR_NEXT]: "Следующий",
 
       [I18N_LOGIN_INPUT]: "Логин",
       [I18N_LOGIN_PASSWORD_INPUT]: "Пароль",

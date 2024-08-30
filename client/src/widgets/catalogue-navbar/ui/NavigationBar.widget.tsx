@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./styles/NavigationBar.widget.module.css";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { useTranslation } from "react-i18next";
+import { I18N_NAVBAR_NEXT, I18N_NAVBAR_PREVIOUS } from "../../../i18n";
 
 interface Props {
   totalPages: number;
@@ -9,6 +11,7 @@ interface Props {
 }
 
 export const NavigationBarWidget = (props: Props) => {
+  const { t } = useTranslation();
   const { darkMode } = useDarkMode();
 
   return (
@@ -25,7 +28,7 @@ export const NavigationBarWidget = (props: Props) => {
         `}
         onClick={() => props.setPageNumber(Math.max(1, props.pageNumber - 1))}
       >
-        Previous
+        {t(I18N_NAVBAR_PREVIOUS)}
       </button>
 
       <button
@@ -37,7 +40,7 @@ export const NavigationBarWidget = (props: Props) => {
           props.setPageNumber(Math.min(props.pageNumber + 1, props.totalPages))
         }
       >
-        Next
+        {t(I18N_NAVBAR_NEXT)}
       </button>
     </div>
   );
