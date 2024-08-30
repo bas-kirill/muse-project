@@ -28,6 +28,17 @@ export const I18N_INSTRUMENT_BASIC_MATERIALS = "instrument.basic.materials";
 export const I18N_INSTRUMENT_DATE_FROM = "instrument.date.from";
 export const I18N_INSTRUMENT_DATE_TO = "instrument.date.to";
 
+export const I18N_LOGIN_INPUT = "login.login.input";
+export const I18N_LOGIN_PASSWORD_INPUT = "login.login.password";
+export const I18N_LOGIN_BUTTON = "login.login.button";
+export const I18N_REGISTRATION_BUTTON = "login.registration.button";
+
+export const I18N_PROFILE_NAME_SPAN = "profile.name.span";
+export const I18N_PROFILE_ROLE_SPAN = "profile.role.span";
+
+export const I18N_DARK_MODE_BUTTON = "dark-mode.button";
+export const I18N_LOGOUT_BUTTON = "logout.button";
+
 export const I18N_FOOTER = "footer";
 
 const resources = {
@@ -55,6 +66,17 @@ const resources = {
       [I18N_INSTRUMENT_DATE_FROM]: "From",
       [I18N_INSTRUMENT_DATE_TO]: "To",
 
+      [I18N_LOGIN_INPUT]: "Login",
+      [I18N_LOGIN_PASSWORD_INPUT]: "Password",
+      [I18N_LOGIN_BUTTON]: "Login",
+      [I18N_REGISTRATION_BUTTON]: "Registration",
+
+      [I18N_DARK_MODE_BUTTON]: "Dark Mode",
+      [I18N_LOGOUT_BUTTON]: "Logout",
+
+      [I18N_PROFILE_NAME_SPAN]: "Name",
+      [I18N_PROFILE_ROLE_SPAN]: "Role",
+
       [I18N_FOOTER]: "Muse Group Frontend Academy",
     }
   },
@@ -81,6 +103,17 @@ const resources = {
       [I18N_INSTRUMENT_BASIC_MATERIALS]: "Основные материалы",
       [I18N_INSTRUMENT_DATE_FROM]: "С",
       [I18N_INSTRUMENT_DATE_TO]: "По",
+
+      [I18N_LOGIN_INPUT]: "Логин",
+      [I18N_LOGIN_PASSWORD_INPUT]: "Пароль",
+      [I18N_LOGIN_BUTTON]: "Войти",
+      [I18N_REGISTRATION_BUTTON]: "Регистрация",
+
+      [I18N_PROFILE_NAME_SPAN]: "Имя",
+      [I18N_PROFILE_ROLE_SPAN]: "Роль",
+
+      [I18N_DARK_MODE_BUTTON]: "Темная тема",
+      [I18N_LOGOUT_BUTTON]: "Выйти",
     }
   }
 };

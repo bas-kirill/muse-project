@@ -6,8 +6,16 @@ import { Form, useActionData, useNavigate } from "react-router-dom";
 import { LoginAction } from "../api/action";
 import { REGISTRATION_URL } from "shared/config/paths";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { useTranslation } from "react-i18next";
+import {
+  I18N_LOGIN_BUTTON,
+  I18N_LOGIN_INPUT,
+  I18N_LOGIN_PASSWORD_INPUT,
+  I18N_REGISTRATION_BUTTON
+} from "../../../i18n";
 
 export function LoginPage() {
+  const { t } = useTranslation();
   const { darkMode } = useDarkMode();
   const actionData = useActionData() as LoginAction;
   const navigate = useNavigate();
@@ -30,23 +38,23 @@ export function LoginPage() {
         <input
           type="text"
           name="login"
-          placeholder={"Login..."}
+          placeholder={t(I18N_LOGIN_INPUT)}
           className={`${darkMode && styles.login__form__input__dark}`}
         />
         <input
           type="password"
           name="password"
-          placeholder={"Password..."}
+          placeholder={t(I18N_LOGIN_PASSWORD_INPUT)}
           className={`${darkMode && styles.login__form__input__dark}`}
         />
         <input
           type="submit"
-          value="Login"
+          value={t(I18N_LOGIN_BUTTON)}
           className={`${darkMode && styles.login__form__input__dark}`}
         />
         <input
           type="button"
-          value="Registration"
+          value={t(I18N_REGISTRATION_BUTTON)}
           onClick={handleRegisterRedirect}
           className={`${darkMode && styles.login__form__input__dark}`}
         />
