@@ -30,6 +30,17 @@ export const I18N_INSTRUMENT_DATE_TO = "instrument.date.to";
 
 export const I18N_INSTRUMENT_CARD_SHOW_BUTTON = "instrument.card.show.button";
 
+export const I18N_LOGIN_INPUT = "login.login.input";
+export const I18N_LOGIN_PASSWORD_INPUT = "login.login.password";
+export const I18N_LOGIN_BUTTON = "login.login.button";
+export const I18N_REGISTRATION_BUTTON = "login.registration.button";
+
+export const I18N_PROFILE_NAME_SPAN = "profile.name.span";
+export const I18N_PROFILE_ROLE_SPAN = "profile.role.span";
+
+export const I18N_DARK_MODE_BUTTON = "dark-mode.button";
+export const I18N_LOGOUT_BUTTON = "logout.button";
+
 export const I18N_FOOTER = "footer";
 
 export const I18N_NAVBAR_PREVIOUS = "navbar.previous";
@@ -61,6 +72,17 @@ const resources = {
       [I18N_INSTRUMENT_DATE_TO]: "To",
 
       [I18N_INSTRUMENT_CARD_SHOW_BUTTON]: "Show",
+
+      [I18N_LOGIN_INPUT]: "Login",
+      [I18N_LOGIN_PASSWORD_INPUT]: "Password",
+      [I18N_LOGIN_BUTTON]: "Login",
+      [I18N_REGISTRATION_BUTTON]: "Registration",
+
+      [I18N_DARK_MODE_BUTTON]: "Dark Mode",
+      [I18N_LOGOUT_BUTTON]: "Logout",
+
+      [I18N_PROFILE_NAME_SPAN]: "Name",
+      [I18N_PROFILE_ROLE_SPAN]: "Role",
 
       [I18N_FOOTER]: "Muse Group Frontend Academy",
 
@@ -96,6 +118,17 @@ const resources = {
 
       [I18N_NAVBAR_PREVIOUS]: "Предыдущий",
       [I18N_NAVBAR_NEXT]: "Следующий",
+
+      [I18N_LOGIN_INPUT]: "Логин",
+      [I18N_LOGIN_PASSWORD_INPUT]: "Пароль",
+      [I18N_LOGIN_BUTTON]: "Войти",
+      [I18N_REGISTRATION_BUTTON]: "Регистрация",
+
+      [I18N_PROFILE_NAME_SPAN]: "Имя",
+      [I18N_PROFILE_ROLE_SPAN]: "Роль",
+
+      [I18N_DARK_MODE_BUTTON]: "Темная тема",
+      [I18N_LOGOUT_BUTTON]: "Выйти",
     }
   }
 };
