@@ -1,6 +1,12 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
+export const I18N_HEADER_HOME_BUTTON = "header.home.button";
+export const I18N_HEADER_CATALOGUE_BUTTON = "header.catalogue.button";
+export const I18N_HEADER_FAVORITE_BUTTON = "header.favorite.button";
+export const I18N_HEADER_LOGIN_BUTTON = "header.login.button";
+export const I18N_HEADER_PROFILE_BUTTON = "header.profile.button";
+
 export const I18N_HOME_SEARCH_BAR_INPUT = "home.searchbar.input";
 export const I18N_HOME_SEARCH_BAR_BUTTON = "home.searchbar.button";
 
@@ -25,6 +31,12 @@ export const I18N_INSTRUMENT_DATE_TO = "instrument.date.to";
 const resources = {
   en: {
     translation: {
+      [I18N_HEADER_HOME_BUTTON]: "Home",
+      [I18N_HEADER_CATALOGUE_BUTTON]: "Catalogue",
+      [I18N_HEADER_FAVORITE_BUTTON]: "Favorite",
+      [I18N_HEADER_LOGIN_BUTTON]: "Login",
+      [I18N_HEADER_PROFILE_BUTTON]: "Profile",
+
       [I18N_HOME_SEARCH_BAR_INPUT]: "What instrument?",
       [I18N_HOME_SEARCH_BAR_BUTTON]: "Search",
       [I18N_REASONS_H1]: "Why Choose Us for Your Musical Needs",
@@ -44,6 +56,12 @@ const resources = {
   },
   ru: {
     translation: {
+      [I18N_HEADER_HOME_BUTTON]: "Домашняя страница",
+      [I18N_HEADER_CATALOGUE_BUTTON]: "Каталог",
+      [I18N_HEADER_FAVORITE_BUTTON]: "Любимое",
+      [I18N_HEADER_LOGIN_BUTTON]: "Логин",
+      [I18N_HEADER_PROFILE_BUTTON]: "Профиль",
+
       [I18N_HOME_SEARCH_BAR_INPUT]: "Какой инструмент?",
       [I18N_HOME_SEARCH_BAR_BUTTON]: "Поиск",
       [I18N_REASONS_H1]: "Почему вы выберете нас",
