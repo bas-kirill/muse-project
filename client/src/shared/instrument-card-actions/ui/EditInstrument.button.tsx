@@ -4,12 +4,15 @@ import actionBtnStyle from "./styles/Action.button.module.css";
 import { useNavigate } from "react-router-dom";
 import { InstrumentDetail } from "generated/model";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { useTranslation } from "react-i18next";
+import { I18N_INSTRUMENT_CARD_EDIT_BUTTON } from "../../../i18n";
 
 interface Props {
   instrument: InstrumentDetail;
 }
 
 export const EditInstrumentButton = (props: Props) => {
+  const { t } = useTranslation();
   const { darkMode } = useDarkMode();
   const navigate = useNavigate();
 
@@ -25,7 +28,7 @@ export const EditInstrumentButton = (props: Props) => {
         navigate(uri);
       }}
     >
-      Edit
+      {t(I18N_INSTRUMENT_CARD_EDIT_BUTTON)}
     </button>
   );
 };

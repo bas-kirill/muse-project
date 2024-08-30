@@ -6,6 +6,8 @@ import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 import { apiConfig } from "shared/config/api";
 import Jwt from "domain/model/jwt";
 import { DeleteInstrumentByIdApi } from "generated/api/delete-instrument-by-id-api";
+import { I18N_INSTRUMENT_CARD_EDIT_BUTTON, I18N_INSTRUMENT_CARD_REMOVE_BUTTON } from "../../../i18n";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   instrument: InstrumentDetail;
@@ -16,6 +18,7 @@ interface Props {
 const deleteInstrumentById = new DeleteInstrumentByIdApi(apiConfig);
 
 export const RemoveInstrumentButton = (props: Props) => {
+  const { t } = useTranslation();
   const { darkMode } = useDarkMode();
 
   const handleOnDeleteInstrument = () => {
@@ -48,7 +51,7 @@ export const RemoveInstrumentButton = (props: Props) => {
         ${darkMode && styles.btn__dark}
       `}
     >
-      Remove
+      {t(I18N_INSTRUMENT_CARD_REMOVE_BUTTON)}
     </button>
   );
 };
