@@ -23,6 +23,9 @@ import type { Country } from "./country";
 import type { InstrumentName } from "./instrument-name";
 // May contain unused imports in some cases
 // @ts-ignore
+import type { InstrumentType } from "./instrument-type";
+// May contain unused imports in some cases
+// @ts-ignore
 import type { ManufactureDate } from "./manufacture-date";
 // May contain unused imports in some cases
 // @ts-ignore
@@ -45,10 +48,10 @@ export interface InstrumentDetailWithoutId {
   instrument_name: InstrumentName;
   /**
    *
-   * @type {string}
+   * @type {InstrumentType}
    * @memberof InstrumentDetailWithoutId
    */
-  instrument_type_code: string;
+  instrument_type: InstrumentType;
   /**
    *
    * @type {ManufacturerName}

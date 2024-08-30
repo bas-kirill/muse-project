@@ -25,9 +25,9 @@ export const parseInstrumentDetails = (data: FormData) => {
   }
 
   const instrumentType = {
-    instrument_type: data.get("instrument-type"),
+    code: data.get("instrument-type"),
   } as InstrumentType;
-  if (instrumentType === null || instrumentType.instrument_type === "") {
+  if (instrumentType === null || instrumentType.code === "") {
     errors.push("Type instrument type");
   }
 

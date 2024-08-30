@@ -7,10 +7,13 @@ import { EditInstrumentLoader } from "pages/edit-instrument/api/loader";
 import { EditInstrumentAction } from "pages/edit-instrument/api/action";
 import { InstrumentBasicMaterialField } from "./InstrumentBasicMaterial.field";
 import { useJwt } from "shared/jwt/use-jwt";
+import { I18N_COUNTRY, I18N_MANUFACTURER_DATE, I18N_RELEASE_DATE } from "../../../i18n";
+import { useTranslation } from "react-i18next";
 
 export const EditInstrumentPage = () => {
   useJwt();
 
+  const { t, i18n } = useTranslation();
   const loader = useLoaderData() as EditInstrumentLoader;
   const actionData = useActionData() as EditInstrumentAction;
 
@@ -68,17 +71,14 @@ export const EditInstrumentPage = () => {
             <select
               name="instrument-type"
               defaultValue={
-                loader.instrumentForEdit.instrument_type.instrument_type
+                loader.instrumentForEdit.instrument_type.localized_text
               }
               required
               className={styles.edit_instrument__form__field__value}
             >
               {loader.instrumentTypes.map((instrumentType) => (
-                <option
-                  key={instrumentType.instrument_type}
-                  value={instrumentType.instrument_type}
-                >
-                  {instrumentType.instrument_type}
+                <option key={instrumentType.code} value={instrumentType.code}>
+                  {instrumentType.localized_text}
                 </option>
               ))}
             </select>
@@ -116,7 +116,7 @@ export const EditInstrumentPage = () => {
               htmlFor="manufacturer-date"
               className={styles.edit_instrument__form__field__key}
             >
-              Manufacturer date
+              {t(I18N_MANUFACTURER_DATE)}
             </label>
 
             <input
@@ -137,7 +137,7 @@ export const EditInstrumentPage = () => {
               htmlFor="release-date"
               className={styles.edit_instrument__form__field__key}
             >
-              Release date
+              {t(I18N_RELEASE_DATE)}
             </label>
 
             <input
@@ -156,7 +156,7 @@ export const EditInstrumentPage = () => {
               htmlFor="country"
               className={styles.edit_instrument__form__field__key}
             >
-              Country
+              {t(I18N_COUNTRY)}
             </label>
 
             <select

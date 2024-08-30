@@ -744,7 +744,7 @@ components:
       type: object
       required:
         - instrument_name
-        - instrument_type_code
+        - instrument_type
         - manufacturer_name
         - manufacturer_date
         - release_date
@@ -753,8 +753,8 @@ components:
       properties:
         instrument_name:
           $ref: '#/components/schemas/InstrumentName'
-        instrument_type_code:
-          $ref: '#/components/schemas/InstrumentTypeCode'
+        instrument_type:
+          $ref: '#/components/schemas/InstrumentType'
         manufacturer_name:
           $ref: '#/components/schemas/ManufacturerName'
         manufacturer_date:

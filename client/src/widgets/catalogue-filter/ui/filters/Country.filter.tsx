@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { GetCountriesApi } from "generated/api/get-countries-api";
 import { Country } from "generated/model";
 import { apiConfig } from "shared/config/api";
+import { I18N_COUNTRY } from "../../../../i18n";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onValueChange: (names: Country[]) => void;
@@ -10,6 +12,7 @@ interface Props {
 const getCountries = new GetCountriesApi(apiConfig);
 
 export const CountryFilter = ({ onValueChange }: Props) => {
+  const { t } = useTranslation();
   const [countries, setCountries] = useState<Country[]>([]);
 
   useEffect(() => {
@@ -39,7 +42,7 @@ export const CountryFilter = ({ onValueChange }: Props) => {
 
   return (
     <div>
-      <legend style={{ padding: "0" }}>Country</legend>
+      <legend style={{ padding: "0" }}>{t(I18N_COUNTRY)}</legend>
       {countries.map((country) => (
         <div key={country.country}>
           <input

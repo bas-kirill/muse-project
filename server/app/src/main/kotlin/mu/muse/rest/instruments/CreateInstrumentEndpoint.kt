@@ -24,7 +24,7 @@ class CreateInstrumentEndpoint(
     @RolesAllowed(Role.EDITOR)
     override fun createInstrument(request: CreateInstrumentRequestBody): ResponseEntity<Any> {
         val instrumentName = InstrumentName.from(request.instrumentDetail.instrumentName.instrumentName)
-        val instrumentType = Instrument.Type.valueOf(request.instrumentDetail.instrumentTypeCode)
+        val instrumentType = Instrument.Type.valueOf(request.instrumentDetail.instrumentType.code)
         val manufacturerType = ManufacturerType.from(request.instrumentDetail.manufacturerName.manufacturerName)
         val manufactureDate = ManufacturerDate.from(request.instrumentDetail.manufacturerDate.manufactureDate)
         val releaseDate = ReleaseDate.from(request.instrumentDetail.releaseDate.releaseDate)

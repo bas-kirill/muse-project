@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import mu.muse.rest.dto.BasicMaterial
 import mu.muse.rest.dto.Country
 import mu.muse.rest.dto.InstrumentName
+import mu.muse.rest.dto.InstrumentType
 import mu.muse.rest.dto.ManufactureDate
 import mu.muse.rest.dto.ManufacturerName
 import mu.muse.rest.dto.ReleaseDate
@@ -21,7 +22,7 @@ import jakarta.validation.Valid
 /**
  * 
  * @param instrumentName 
- * @param instrumentTypeCode 
+ * @param instrumentType 
  * @param manufacturerName 
  * @param manufacturerDate 
  * @param releaseDate 
@@ -33,7 +34,8 @@ data class InstrumentDetailWithoutId(
     @field:Valid
     @get:JsonProperty("instrument_name", required = true) val instrumentName: InstrumentName,
 
-    @get:JsonProperty("instrument_type_code", required = true) val instrumentTypeCode: kotlin.String,
+    @field:Valid
+    @get:JsonProperty("instrument_type", required = true) val instrumentType: InstrumentType,
 
     @field:Valid
     @get:JsonProperty("manufacturer_name", required = true) val manufacturerName: ManufacturerName,

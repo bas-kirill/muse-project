@@ -19,6 +19,13 @@ import { CountryFilter } from "widgets/catalogue-filter/ui/filters/Country.filte
 import { MaterialFilter } from "widgets/catalogue-filter/ui/filters/Material.filter";
 import { CreateInstrumentCardButton } from "widgets/catalogue-filter/ui/CreateInstrumentCard.button";
 import { useDarkMode } from "shared/dark-mode/use-dark-mode";
+import { useTranslation } from "react-i18next";
+import {
+  I18N_INSTRUMENT_DATE_FROM,
+  I18N_INSTRUMENT_DATE_TO,
+  I18N_MANUFACTURER_DATE,
+  I18N_RELEASE_DATE
+} from "../../../i18n";
 
 interface Props {
   onFilterChange: (filters: Filters) => void;
@@ -26,6 +33,7 @@ interface Props {
 
 export const SidebarFilterWidget = (props: Props) => {
   const { darkMode } = useDarkMode();
+  const { t } = useTranslation();
 
   const [instrumentTypes, setInstrumentTypes] = useState<
     InstrumentType[] | null
@@ -86,32 +94,32 @@ export const SidebarFilterWidget = (props: Props) => {
 
       <div className={styles.media__horizontal__wrapper}>
         <div className={styles.filter__wrapper}>
-          <legend style={{ padding: "0" }}>Manufacture Date</legend>
+          <legend style={{ padding: "0" }}>{t(I18N_MANUFACTURER_DATE)}</legend>
 
           <ManufactureDateFilter
             onValueChange={setManufactureDateFrom}
             fieldName={"manufactureDateFrom"}
-            labelName={"From "}
+            labelName={t(I18N_INSTRUMENT_DATE_FROM)}
           />
 
           <ManufactureDateFilter
             onValueChange={setManufactureDateTo}
             fieldName={"manufactureDateTo"}
-            labelName={"To  "}
+            labelName={t(I18N_INSTRUMENT_DATE_TO)}
           />
         </div>
 
         <div className={styles.filter__wrapper}>
-          <legend style={{ padding: "0" }}>Release Date</legend>
+          <legend style={{ padding: "0" }}>{t(I18N_RELEASE_DATE)}</legend>
           <ReleaseDateFilter
             onValueChange={setReleaseDateFrom}
             fieldName={"releaseDateFrom"}
-            labelName={"From"}
+            labelName={t(I18N_INSTRUMENT_DATE_FROM)}
           />
           <ReleaseDateFilter
             onValueChange={setReleaseDateTo}
             fieldName={"releaseDateTo"}
-            labelName={"To"}
+            labelName={t(I18N_INSTRUMENT_DATE_TO)}
           />
         </div>
       </div>
