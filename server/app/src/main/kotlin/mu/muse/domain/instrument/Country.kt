@@ -9,7 +9,10 @@ enum class Country(val i18nCode: String) {
     USA(i18nCode = "country.usa");
 
     companion object {
-        fun fromI18nCode(i18nCodeRaw: String): Country {
+        fun fromI18nCode(i18nCodeRaw: String?): Country {
+            require(!i18nCodeRaw.isNullOrEmpty()) {
+                "Country i18n code cannot be null or empty: `${i18nCodeRaw}`"
+            }
             return entries.find { it.i18nCode == i18nCodeRaw }
                 ?: throw UnknownCountryI18nCode(i18nCodeRaw)
         }

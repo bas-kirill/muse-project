@@ -1,11 +1,13 @@
 package mu.muse.persistence.instrument.jooq
 
+import mu.muse.codegen.jooq.tables.records.InstrumentsRecord
+import mu.muse.codegen.jooq.tables.references.INSTRUMENTS
 import mu.muse.common.types.Version
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
+import mu.muse.domain.instrument.InstrumentBase64Photo
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.instrument.InstrumentName
-import mu.muse.domain.instrument.InstrumentBase64Photo
 import mu.muse.domain.instrument.Manufacturer
 import mu.muse.domain.instrument.ManufacturerDate
 import mu.muse.domain.instrument.Material
@@ -15,166 +17,110 @@ import mu.muse.usecase.access.instrument.InstrumentExtractor
 import mu.muse.usecase.access.instrument.InstrumentPersister
 import mu.muse.usecase.access.instrument.InstrumentRemover
 import org.jooq.DSLContext
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
-import java.sql.ResultSet
-import java.sql.Timestamp
+import org.jooq.impl.DSL.selectCount
+import java.time.OffsetDateTime
 
 class JooqPostgresInstrumentRepository(
     private val dslContext: DSLContext,
 ) : InstrumentExtractor, InstrumentRemover, InstrumentPersister {
 
     override fun findAll(): List<Instrument> {
-
-        val sql = """
-            select
-              instrument_id,
-              instrument_name,
-              instrument_i18n_code,
-              manufacturer_i18n_code,
-              manufacturer_date,
-              release_date,
-              country_i18n_code,
-              materials
-            from instruments
-        """.trimIndent()
-        return namedTemplate.query(sql) { rs, _ -> rs.toInstrument() }
+        val instrumentRecords = dslContext
+            .selectFrom(INSTRUMENTS)
+            .fetchInto(InstrumentsRecord::class.java)
+        return instrumentRecords.map { it.toInstrument() }
     }
 
     override fun findById(id: InstrumentId): Instrument? {
-        val sql = """
-            select
-              instrument_id,
-              instrument_name,
-              instrument_i18n_code,
-              manufacturer_i18n_code,
-              manufacturer_date,
-              release_date,
-              country_i18n_code,
-              materials,
-              image
-            from instruments
-            where instrument_id = :instrument_id
-        """.trimIndent()
-        val params = mapOf("instrument_id" to id.toLongValue())
-        return namedTemplate.queryForObject(sql, params) { rs, _ -> rs.toInstrument() }
+        val instrumentRecordResult = runCatching {
+            dslContext
+                .selectFrom(INSTRUMENTS)
+                .fetchSingle()
+        }
+
+        val instrumentRecordRaw = instrumentRecordResult.getOrNull() ?: return null
+        return instrumentRecordRaw.toInstrument()
     }
 
     override fun findByIds(ids: List<InstrumentId>): List<Instrument> {
         if (ids.isEmpty()) {
             return emptyList()
         }
-
-        val sql = """
-            select
-              instrument_id,
-              instrument_name,
-              instrument_i18n_code,
-              manufacturer_i18n_code,
-              manufacturer_date,
-              release_date,
-              country_i18n_code,
-              materials,
-              image
-            from instruments
-            where instrument_id in (:instrument_ids)
-        """.trimIndent()
-
-        val params = mapOf("instrument_ids" to ids.map { it.toLongValue() })
-        return namedTemplate.query(sql, params) { rs, _ -> rs.toInstrument() }
+        val instrumentRecords = dslContext
+            .selectFrom(INSTRUMENTS)
+            .where(INSTRUMENTS.INSTRUMENT_ID.`in`(ids.map { it.toLongValue() }))
+            .fetchInto(InstrumentsRecord::class.java)
+        return instrumentRecords.map { it.toInstrument() }
     }
 
 
     override fun findByCriteria(criteria: InstrumentExtractor.Criteria): List<Instrument> {
-        val sql = """
-            select
-              instrument_id,
-              instrument_name,
-              instrument_i18n_code,
-              manufacturer_i18n_code,
-              manufacturer_date,
-              release_date,
-              country_i18n_code,
-              materials,
-              image
-            from instruments
-        """.trimIndent()
-        val instruments = namedTemplate.query(sql) { rs, _ -> rs.toInstrument() }
+        val instrumentRecords = dslContext
+            .selectFrom(INSTRUMENTS)
+            .fetchInto(InstrumentsRecord::class.java)
+        val instruments = instrumentRecords.map { it.toInstrument() }
         return instruments.filter { it matches criteria }
     }
 
     override fun totalElements(): Long {
-        val sql = "select count(*) from instruments"
-        return namedTemplate.queryForObject(sql, mapOf<String, Any>(), Long::class.java)!!
+        return dslContext.fetchValue(selectCount().from(INSTRUMENTS)).toLong()
     }
 
     override fun removeInstrument(id: InstrumentId) {
-        val sql = "delete from instruments where instrument_id = :instrument_id"
-        val params = mapOf(
-            "instrument_id" to id.toLongValue(),
-        )
-        namedTemplate.update(sql, params)
+        dslContext
+            .deleteFrom(INSTRUMENTS)
+            .where(INSTRUMENTS.INSTRUMENT_ID.eq(id.toLongValue()))
+            .execute()
     }
 
     override fun save(instrument: Instrument) {
-        val sql = """
-            insert into instruments (
-                instrument_id,
-                instrument_name,
-                instrument_i18n_code,
-                manufacturer_i18n_code,
-                manufacturer_date,
-                release_date,
-                country_i18n_code,
-                materials,
-                image
-            )
-            values (
-              :instrument_id,
-              :instrument_name,
-              :instrument_i18n_code,
-              :manufacturer_i18n_code,
-              :manufacturer_date,
-              :release_date,
-              :country_i18n_code,
-              :materials,
-              :image
-            )
-            on conflict (instrument_id) do update
-            set
-              instrument_name = :instrument_name,
-              instrument_i18n_code = :instrument_i18n_code,
-              manufacturer_i18n_code = :manufacturer_i18n_code,
-              manufacturer_date = :manufacturer_date,
-              release_date = :release_date,
-              country_i18n_code = :country_i18n_code,
-              materials = :materials,
-              image = :image
-        """.trimIndent()
-        val params = mapOf(
-            "instrument_id" to instrument.id.toLongValue(),
-            "instrument_name" to instrument.name.toStringValue(),
-            "instrument_i18n_code" to instrument.type.i18nCode,
-            "manufacturer_i18n_code" to instrument.manufacturerType.i18nCode,
-            "manufacturer_date" to Timestamp.from(instrument.manufactureDate.toInstantValue()),
-            "release_date" to Timestamp.from(instrument.releaseDate.toInstantValue()),
-            "country_i18n_code" to instrument.country.i18nCode,
-            "materials" to instrument.materialTypes.map { it.i18nCode }.toTypedArray(),
-            "image" to instrument.image.toStringValue(),
+        dslContext.insertInto(
+            INSTRUMENTS,
+            INSTRUMENTS.INSTRUMENT_ID,
+            INSTRUMENTS.INSTRUMENT_NAME,
+            INSTRUMENTS.INSTRUMENT_I18N_CODE,
+            INSTRUMENTS.MANUFACTURER_I18N_CODE,
+            INSTRUMENTS.MANUFACTURER_DATE,
+            INSTRUMENTS.RELEASE_DATE,
+            INSTRUMENTS.COUNTRY_I18N_CODE,
+            INSTRUMENTS.MATERIALS,
+            INSTRUMENTS.IMAGE,
         )
-        namedTemplate.update(sql, params)
+            .values(
+                instrument.id.toLongValue(),
+                instrument.name.toStringValue(),
+                instrument.type.i18nCode,
+                instrument.manufacturerType.i18nCode,
+                OffsetDateTime.from(instrument.manufactureDate.toInstantValue()),
+                OffsetDateTime.from(instrument.releaseDate.toInstantValue()),
+                instrument.country.i18nCode,
+                instrument.materialTypes.map { it.i18nCode }.toTypedArray(),
+                instrument.image.toStringValue(),
+            )
+            .onConflict(INSTRUMENTS.INSTRUMENT_ID)
+            .doUpdate()
+            .set(INSTRUMENTS.INSTRUMENT_NAME, instrument.name.toStringValue())
+            .set(INSTRUMENTS.INSTRUMENT_I18N_CODE, instrument.type.i18nCode)
+            .set(INSTRUMENTS.MANUFACTURER_I18N_CODE, instrument.manufacturerType.i18nCode)
+            .set(INSTRUMENTS.MANUFACTURER_DATE, OffsetDateTime.from(instrument.manufactureDate.toInstantValue()))
+            .set(INSTRUMENTS.RELEASE_DATE, OffsetDateTime.from(instrument.releaseDate.toInstantValue()))
+            .set(INSTRUMENTS.COUNTRY_I18N_CODE, instrument.country.i18nCode)
+            .set(INSTRUMENTS.MATERIALS, instrument.materialTypes.map { it.i18nCode }.toTypedArray())
+            .set(INSTRUMENTS.IMAGE, instrument.image.toStringValue())
     }
 }
 
-fun Array<String>.toBasicMaterials() = this.toList().map { Material.Type.fromI18nCode(it) }
-fun ResultSet.toInstrument() = Instrument(
-    id = InstrumentId.from(this.getLong("instrument_id")),
-    name = InstrumentName.from(this.getString("instrument_name")),
-    type = Instrument.Type.fromI18nCode(this.getString("instrument_i18n_code")),
-    manufacturerType = Manufacturer.Type.fromI18nCode(this.getString("manufacturer_i18n_code")),
-    manufactureDate = ManufacturerDate.from(this.getTimestamp("manufacturer_date").toInstant()),
-    releaseDate = ReleaseDate.from(this.getTimestamp("release_date").toInstant()),
-    country = Country.fromI18nCode(this.getString("country_i18n_code")),
-    materialTypes = (this.getArray("materials").getArray() as Array<String>).toBasicMaterials(),
-    image = InstrumentBase64Photo.from(this.getString("image")),
+
+fun Array<String?>.toBasicMaterials() = this.toList().map { Material.Type.fromI18nCode(it) }
+fun InstrumentsRecord.toInstrument() = Instrument(
+    id = InstrumentId.from(this.instrumentId),
+    name = InstrumentName.from(this.instrumentName),
+    type = Instrument.Type.fromI18nCode(this.instrumentI18nCode),
+    manufacturerType = Manufacturer.Type.fromI18nCode(this.manufacturerI18nCode),
+    manufactureDate = ManufacturerDate.from(this.manufacturerDate!!.toInstant()),
+    releaseDate = ReleaseDate.from(this.releaseDate!!.toInstant()),
+    country = Country.fromI18nCode(this.countryI18nCode),
+    materialTypes = this.materials!!.toBasicMaterials(),
+    image = InstrumentBase64Photo.from(this.image),
     version = Version.new(),
 )

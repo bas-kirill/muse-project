@@ -2,16 +2,14 @@ package mu.muse.application.muse
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import mu.muse.persistence.instrument.jdbc.JdbcPostgresInstrumentIdGenerator
-import mu.muse.persistence.instrument.jdbc.PostgresInstrumentRepository
-import mu.muse.persistence.user.jdbc.JdbcPostgresUserIdGenerator
+import mu.muse.persistence.instrument.jooq.JooqPostgresInstrumentIdGenerator
+import mu.muse.persistence.instrument.jooq.JooqPostgresInstrumentRepository
+import mu.muse.persistence.user.jooq.JooqPostgresUserIdGenerator
 import mu.muse.persistence.user.jooq.JooqPostgresUserRepository
 import org.jooq.DSLContext
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
-import javax.sql.DataSource
 
 @Configuration
 class PersistenceConfiguration {
@@ -39,23 +37,21 @@ class PersistenceConfiguration {
     }
 
     @Bean
-    fun dataSource(hikariConfig: HikariConfig): DataSource = with(HikariDataSource(hikariConfig)) {
+    fun dataSource(hikariConfig: HikariConfig) = with(HikariDataSource(hikariConfig)) {
         maximumPoolSize = MAXIMUM_POOL_SIZE
         this
     }
 
-
     @Bean
-    fun userIdGenerator(dslContext: DSLContext) = JdbcPostgresUserIdGenerator(dslContext)
+    fun userIdGenerator(dslContext: DSLContext) = JooqPostgresUserIdGenerator(dslContext)
 
     @Bean
     fun userRepository(dslContext: DSLContext) = JooqPostgresUserRepository(dslContext)
 
     @Bean
-    fun instrumentIdGenerator(namedTemplate: NamedParameterJdbcTemplate) = JdbcPostgresInstrumentIdGenerator(namedTemplate)
+    fun instrumentIdGenerator(dslContext: DSLContext) = JooqPostgresInstrumentIdGenerator(dslContext)
 
     @Bean
-    fun instrumentRepository(namedTemplate: NamedParameterJdbcTemplate) = PostgresInstrumentRepository(namedTemplate)
-
+    fun instrumentRepository(dslContext: DSLContext) = JooqPostgresInstrumentRepository(dslContext)
 
 }

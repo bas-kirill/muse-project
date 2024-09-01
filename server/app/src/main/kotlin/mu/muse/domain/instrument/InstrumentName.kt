@@ -15,8 +15,9 @@ data class InstrumentName internal constructor(private val value: String) {
     }
 
     companion object {
-        fun from(value: String): InstrumentName {
-            return InstrumentName(value)
+        fun from(valueRaw: String?): InstrumentName {
+            require(!valueRaw.isNullOrEmpty()) { "Instrument name cannot be null or empty: `${valueRaw}`" }
+            return InstrumentName(valueRaw)
         }
     }
 }

@@ -14,11 +14,11 @@ import mu.muse.usecase.access.user.UserPersister
 import org.jooq.DSLContext
 
 class JooqPostgresUserRepository(
-    private val ctx: DSLContext,
+    private val dslContext: DSLContext,
 ) : UserExtractor, UserPersister {
     override fun findByUsername(username: Username): User? {
         val userRecordResult = runCatching {
-            ctx.selectFrom(USERS)
+            dslContext.selectFrom(USERS)
                 .where(USERS.USERNAME.eq(username.toStringValue()))
                 .fetchSingle()
         }
@@ -27,12 +27,12 @@ class JooqPostgresUserRepository(
     }
 
     override fun findAll(): Collection<User> {
-        val users = ctx.selectFrom(USERS).fetchInto(UsersRecord::class.java)
+        val users = dslContext.selectFrom(USERS).fetchInto(UsersRecord::class.java)
         return users.map { it.toUser() }
     }
 
     override fun save(user: User) {
-        ctx.insertInto(
+        dslContext.insertInto(
             USERS,
             USERS.USER_ID,
             USERS.USERNAME,

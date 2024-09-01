@@ -54,7 +54,10 @@ class Instrument internal constructor(
         WIND(i18nCode = "instrument.type.wind");
 
         companion object {
-            fun fromI18nCode(i18nCodeRaw: String): Type {
+            fun fromI18nCode(i18nCodeRaw: String?): Type {
+                require(!i18nCodeRaw.isNullOrEmpty()) {
+                    "Instrument i18n code cannot be null or empty: `${i18nCodeRaw}`"
+                }
                 return entries.find { it.i18nCode == i18nCodeRaw } ?: throw UnknownInstrumentI18nCodeType(i18nCodeRaw)
             }
         }

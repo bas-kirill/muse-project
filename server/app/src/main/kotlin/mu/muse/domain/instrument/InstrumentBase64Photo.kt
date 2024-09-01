@@ -14,9 +14,9 @@ data class InstrumentBase64Photo internal constructor(private val value: String)
             return InstrumentBase64Photo(String(Base64.getEncoder().encode(value)))
         }
 
-        fun from(value: String): InstrumentBase64Photo {
-            require(value.isNotEmpty())
-            return InstrumentBase64Photo(value)
+        fun from(valueRaw: String?): InstrumentBase64Photo {
+            require(!valueRaw.isNullOrEmpty())
+            return InstrumentBase64Photo(valueRaw)
         }
     }
 }
