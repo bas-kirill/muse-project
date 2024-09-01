@@ -1,4 +1,4 @@
-package mu.muse.persistence.instrument.postgres
+package mu.muse.persistence.instrument.jdbc
 
 import mu.muse.common.types.Version
 import mu.muse.domain.instrument.Country

@@ -8,9 +8,10 @@ data class FullName(private val value: String) {
     fun toStringValue() = value
 
     companion object {
-        fun from(fullName: String): FullName {
-            require(fullName.isNotEmpty())
-            return FullName(fullName)
+        fun from(value: String?): FullName {
+            require(!value.isNullOrBlank()) { "Full name `${value}` cannot be null or empty" }
+            require(value.isNotEmpty())
+            return FullName(value)
         }
     }
 }

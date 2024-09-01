@@ -2,10 +2,11 @@ package mu.muse.application.muse
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import mu.muse.persistence.instrument.postgres.PostgresInstrumentIdGenerator
-import mu.muse.persistence.instrument.postgres.PostgresInstrumentRepository
-import mu.muse.persistence.user.postgres.PostgresUserIdGenerator
-import mu.muse.persistence.user.postgres.PostgresUserRepository
+import mu.muse.persistence.instrument.jdbc.JdbcPostgresInstrumentIdGenerator
+import mu.muse.persistence.instrument.jdbc.PostgresInstrumentRepository
+import mu.muse.persistence.user.jdbc.JdbcPostgresUserIdGenerator
+import mu.muse.persistence.user.jooq.JooqPostgresUserRepository
+import org.jooq.DSLContext
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -43,17 +44,15 @@ class PersistenceConfiguration {
         this
     }
 
-    @Bean
-    fun namedTemplate(dataSource: DataSource) = NamedParameterJdbcTemplate(dataSource)
 
     @Bean
-    fun userIdGenerator(namedTemplate: NamedParameterJdbcTemplate) = PostgresUserIdGenerator(namedTemplate)
+    fun userIdGenerator(dslContext: DSLContext) = JdbcPostgresUserIdGenerator(dslContext)
 
     @Bean
-    fun userRepository(namedTemplate: NamedParameterJdbcTemplate) = PostgresUserRepository(namedTemplate)
+    fun userRepository(dslContext: DSLContext) = JooqPostgresUserRepository(dslContext)
 
     @Bean
-    fun instrumentIdGenerator(namedTemplate: NamedParameterJdbcTemplate) = PostgresInstrumentIdGenerator(namedTemplate)
+    fun instrumentIdGenerator(namedTemplate: NamedParameterJdbcTemplate) = JdbcPostgresInstrumentIdGenerator(namedTemplate)
 
     @Bean
     fun instrumentRepository(namedTemplate: NamedParameterJdbcTemplate) = PostgresInstrumentRepository(namedTemplate)
