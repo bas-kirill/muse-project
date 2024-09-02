@@ -11,7 +11,7 @@ import {
   I18N_LOGIN_BUTTON,
   I18N_LOGIN_INPUT,
   I18N_LOGIN_PASSWORD_INPUT,
-  I18N_REGISTRATION_BUTTON
+  I18N_REGISTRATION_BUTTON,
 } from "../../../i18n";
 
 export function LoginPage() {

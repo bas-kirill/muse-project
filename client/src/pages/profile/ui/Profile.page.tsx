@@ -16,7 +16,7 @@ import {
   I18N_DARK_MODE_BUTTON,
   I18N_LOGOUT_BUTTON,
   I18N_PROFILE_NAME_SPAN,
-  I18N_PROFILE_ROLE_SPAN
+  I18N_PROFILE_ROLE_SPAN,
 } from "../../../i18n";
 import { useTranslation } from "react-i18next";
 

@@ -1,4 +1,5 @@
 import io.gitlab.arturbosch.detekt.Detekt
+import org.jooq.meta.jaxb.Property
 
 val rootProjectDir = "$projectDir/../.."
 
@@ -13,7 +14,10 @@ plugins {
     id("org.sonarqube") version "5.0.0.4638"
     id("org.openapi.generator") version "7.8.0"
     id("info.solidsoft.pitest") version "1.15.0"
+    id("nu.studer.jooq") version "6.0.1"
 }
+
+val schemaVersion by extra { "1" }
 
 group = "mu.muse"
 version = "1.0.0-SNAPSHOT"
@@ -38,6 +42,7 @@ springBoot {
 }
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -61,6 +66,8 @@ dependencies {
     implementation("jakarta.validation:jakarta.validation-api:3.1.0")  // `useSpringBoot3` param requires it
     implementation("org.postgresql:postgresql")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+    implementation("org.jooq:jooq:3.19.11")
+    jooqGenerator("org.jooq:jooq-meta-extensions:3.19.11")
 }
 
 tasks.named<Test>("test") {
@@ -68,7 +75,7 @@ tasks.named<Test>("test") {
 }
 
 configure<org.jlleitschuh.gradle.ktlint.KtlintExtension> {
-    debug.set(true)
+    debug = true
     verbose.set(true)
     ignoreFailures.set(false)
 
@@ -144,4 +151,45 @@ pitest {
     junit5PluginVersion = "1.3.0"
     targetClasses = setOf("mu.muse.*")
     timestampedReports = false
+}
+
+jooq {
+    version.set("3.19.11")
+    configurations {
+        create("main") {
+            jooqConfiguration.apply {
+                logging = org.jooq.meta.jaxb.Logging.WARN
+                generator.apply {
+                    name = "org.jooq.codegen.KotlinGenerator"
+                    database.apply {
+                        name = "org.jooq.meta.extensions.ddl.DDLDatabase"
+                        properties.apply {
+                            add(Property().apply {
+                                key = "scripts"
+                                value = "./src/main/resources/db/schema.sql"
+                            })
+                            add(Property().apply {
+                                key = "defaultNameCase"
+                                value = "lower"
+                            })
+                        }
+                    }
+
+                    generate.apply {
+                        isPojos = true
+                        isPojosAsKotlinDataClasses = true
+                        isImmutablePojos = true
+                        isImmutableInterfaces = true
+                        isGeneratedAnnotation = true
+                        isGeneratedAnnotationDate = true
+                        isInterfaces = true
+                    }
+
+                    target.apply {
+                        packageName = "mu.muse.codegen.jooq"
+                    }
+                }
+            }
+        }
+    }
 }

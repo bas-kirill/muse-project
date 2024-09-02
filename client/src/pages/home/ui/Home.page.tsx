@@ -16,26 +16,29 @@ import {
   I18N_HOME_SEARCH_BAR_BUTTON,
   I18N_HOME_SEARCH_BAR_INPUT,
   I18N_REASONS_FIRST,
-  I18N_REASONS_H1, I18N_REASONS_SECOND, I18N_REASONS_THIRD, I18N_TRENDS_H1
+  I18N_REASONS_H1,
+  I18N_REASONS_SECOND,
+  I18N_REASONS_THIRD,
+  I18N_TRENDS_H1,
 } from "../../../i18n";
 
 const images = [
   {
     image: saxophone,
-    caption: "Saxophone"
+    caption: "Saxophone",
   },
   {
     image: guitar,
-    caption: "Guitar"
+    caption: "Guitar",
   },
   {
     image: rock_guitar,
-    caption: "Rock Guitar"
+    caption: "Rock Guitar",
   },
   {
     image: violin,
-    caption: "Violin"
-  }
+    caption: "Violin",
+  },
 ];
 
 const trendingInstrumentsResponsiveSettings = [
@@ -43,16 +46,16 @@ const trendingInstrumentsResponsiveSettings = [
     breakpoint: 571,
     settings: {
       slidesToShow: 3,
-      slidesToScroll: 1
-    }
+      slidesToScroll: 1,
+    },
   },
   {
     breakpoint: 570,
     settings: {
       slidesToShow: 1,
-      slidesToScroll: 1
-    }
-  }
+      slidesToScroll: 1,
+    },
+  },
 ];
 
 export function HomePage() {
@@ -66,7 +69,7 @@ export function HomePage() {
       <div
         className={styles.home_logo}
         style={{
-          background: `url(${homeLogo}) no-repeat center, linear-gradient(blue, cyan)`
+          background: `url(${homeLogo}) no-repeat center, linear-gradient(blue, cyan)`,
         }}
       >
         <form

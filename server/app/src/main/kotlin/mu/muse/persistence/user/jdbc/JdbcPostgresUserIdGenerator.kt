@@ -1,10 +1,10 @@
-package mu.muse.persistence.user.postgres
+package mu.muse.persistence.user.jdbc
 
 import mu.muse.domain.IdGenerator
 import mu.muse.domain.user.UserId
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 
-class PostgresUserIdGenerator(
+class JdbcPostgresUserIdGenerator(
     private val namedTemplate: NamedParameterJdbcTemplate,
 ) : IdGenerator<UserId> {
 

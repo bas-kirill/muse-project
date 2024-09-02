@@ -11,7 +11,10 @@ class Manufacturer {
         STEINWAY_AND_SONS(i18nCode = "manufacturer.type.steinway_and_sons");
 
         companion object {
-            fun fromI18nCode(i18nCodeRaw: String): Type {
+            fun fromI18nCode(i18nCodeRaw: String?): Type {
+                require(!i18nCodeRaw.isNullOrEmpty()) {
+                    "Manufacturer i18n code cannot be null or empty: `${i18nCodeRaw}`"
+                }
                 return entries.find { it.i18nCode == i18nCodeRaw } ?: throw UnknownManufacturerType(i18nCodeRaw)
             }
         }

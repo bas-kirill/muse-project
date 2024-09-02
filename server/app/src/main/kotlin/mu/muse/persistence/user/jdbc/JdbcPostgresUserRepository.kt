@@ -1,4 +1,4 @@
-package mu.muse.persistence.user.postgres
+package mu.muse.persistence.user.jdbc
 
 import mu.muse.common.types.Version
 import mu.muse.domain.instrument.InstrumentId
@@ -15,15 +15,16 @@ import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import java.sql.ResultSet
 
-class PostgresUserRepository(
+class JdbcPostgresUserRepository(
     private val namedTemplate: NamedParameterJdbcTemplate,
 ) : UserExtractor, UserPersister {
     companion object {
-        val logger = LoggerFactory.getLogger(PostgresUserRepository::class.java)
+        val logger = LoggerFactory.getLogger(JdbcPostgresUserRepository::class.java)
     }
 
     @Suppress("SwallowedException")
     override fun findByUsername(username: Username): User? {
+
         val sql = """
             select
               user_id, username, password, role, full_name, favorite_ids

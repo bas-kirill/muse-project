@@ -12,9 +12,11 @@ class Material {
         EBONY(i18nCode = "material.type.ebony");
 
         companion object {
-            fun fromI18nCode(i18nCodeRaw: String): Type {
-                return entries.find { it.i18nCode == i18nCodeRaw } ?:
-                    throw UnknownMaterialTypeI18nCode(i18nCodeRaw)
+            fun fromI18nCode(i18nCodeRaw: String?): Type {
+                require(!i18nCodeRaw.isNullOrEmpty()) {
+                    "Material i18n ocde cannot be null or empty: `${i18nCodeRaw}`"
+                }
+                return entries.find { it.i18nCode == i18nCodeRaw } ?: throw UnknownMaterialTypeI18nCode(i18nCodeRaw)
             }
         }
 

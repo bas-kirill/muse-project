@@ -1,10 +1,10 @@
-package mu.muse.persistence.instrument.postgres
+package mu.muse.persistence.instrument.jdbc
 
 import mu.muse.domain.IdGenerator
 import mu.muse.domain.instrument.InstrumentId
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 
-class PostgresInstrumentIdGenerator(
+class JdbcPostgresInstrumentIdGenerator(
     private val namedParameter: NamedParameterJdbcTemplate,
 ) : IdGenerator<InstrumentId> {
 

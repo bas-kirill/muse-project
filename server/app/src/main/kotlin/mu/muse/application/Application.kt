@@ -18,6 +18,7 @@ import mu.muse.domain.user.UserId
 import mu.muse.domain.user.Username
 import mu.muse.usecase.access.instrument.InstrumentPersister
 import mu.muse.usecase.access.user.UserPersister
+import org.jooq.DSLContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration

@@ -8,7 +8,8 @@ data class InstrumentId internal constructor(private val value: Long) {
     fun toLongValue() = value
 
     companion object {
-        fun from(valueLongRaw: Long): InstrumentId {
+        fun from(valueLongRaw: Long?): InstrumentId {
+            require(valueLongRaw != null) { "Instrument ID cannot be empty: `${valueLongRaw}`" }
             require(valueLongRaw >= 0 && valueLongRaw <= Long.MAX_VALUE)
             return InstrumentId(valueLongRaw)
         }

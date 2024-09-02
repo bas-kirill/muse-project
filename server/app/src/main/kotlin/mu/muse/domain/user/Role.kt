@@ -7,7 +7,8 @@ import mu.muse.common.annotations.ValueObject
 data class Role internal constructor(private val value: String) {
 
     companion object {
-        fun from(value: String): Role {
+        fun from(value: String?): Role {
+            require(!value.isNullOrBlank()) { "Role `${value}` cannot be null or empty" }
             return when (value) {
                 USER -> Role(USER)
                 EDITOR -> Role(EDITOR)
