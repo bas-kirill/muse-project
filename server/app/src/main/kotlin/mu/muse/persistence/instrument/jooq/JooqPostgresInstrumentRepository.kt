@@ -1,7 +1,7 @@
 package mu.muse.persistence.instrument.jooq
 
-import mu.muse.codegen.jooq.tables.records.InstrumentsRecord
-import mu.muse.codegen.jooq.tables.references.INSTRUMENTS
+import mu.muse.codegen.jooq.public.tables.Instruments.Companion.INSTRUMENTS
+import mu.muse.codegen.jooq.public.tables.pojos.Instruments
 import mu.muse.common.types.Version
 import mu.muse.domain.instrument.Country
 import mu.muse.domain.instrument.Instrument
@@ -19,6 +19,7 @@ import mu.muse.usecase.access.instrument.InstrumentRemover
 import org.jooq.DSLContext
 import org.jooq.impl.DSL.selectCount
 import java.time.OffsetDateTime
+import java.time.ZoneOffset
 
 class JooqPostgresInstrumentRepository(
     private val dslContext: DSLContext,
@@ -27,7 +28,7 @@ class JooqPostgresInstrumentRepository(
     override fun findAll(): List<Instrument> {
         val instrumentRecords = dslContext
             .selectFrom(INSTRUMENTS)
-            .fetchInto(InstrumentsRecord::class.java)
+            .fetchInto(Instruments::class.java)
         return instrumentRecords.map { it.toInstrument() }
     }
 
@@ -35,7 +36,7 @@ class JooqPostgresInstrumentRepository(
         val instrumentRecordResult = runCatching {
             dslContext
                 .selectFrom(INSTRUMENTS)
-                .fetchSingle()
+                .fetchSingleInto(Instruments::class.java)
         }
 
         val instrumentRecordRaw = instrumentRecordResult.getOrNull() ?: return null
@@ -49,7 +50,7 @@ class JooqPostgresInstrumentRepository(
         val instrumentRecords = dslContext
             .selectFrom(INSTRUMENTS)
             .where(INSTRUMENTS.INSTRUMENT_ID.`in`(ids.map { it.toLongValue() }))
-            .fetchInto(InstrumentsRecord::class.java)
+            .fetchInto(Instruments::class.java)
         return instrumentRecords.map { it.toInstrument() }
     }
 
@@ -57,7 +58,7 @@ class JooqPostgresInstrumentRepository(
     override fun findByCriteria(criteria: InstrumentExtractor.Criteria): List<Instrument> {
         val instrumentRecords = dslContext
             .selectFrom(INSTRUMENTS)
-            .fetchInto(InstrumentsRecord::class.java)
+            .fetchInto(Instruments::class.java)
         val instruments = instrumentRecords.map { it.toInstrument() }
         return instruments.filter { it matches criteria }
     }
@@ -91,8 +92,8 @@ class JooqPostgresInstrumentRepository(
                 instrument.name.toStringValue(),
                 instrument.type.i18nCode,
                 instrument.manufacturerType.i18nCode,
-                OffsetDateTime.from(instrument.manufactureDate.toInstantValue()),
-                OffsetDateTime.from(instrument.releaseDate.toInstantValue()),
+                OffsetDateTime.ofInstant(instrument.manufactureDate.toInstantValue(), ZoneOffset.UTC),
+                OffsetDateTime.ofInstant(instrument.releaseDate.toInstantValue(), ZoneOffset.UTC),
                 instrument.country.i18nCode,
                 instrument.materialTypes.map { it.i18nCode }.toTypedArray(),
                 instrument.image.toStringValue(),
@@ -102,17 +103,18 @@ class JooqPostgresInstrumentRepository(
             .set(INSTRUMENTS.INSTRUMENT_NAME, instrument.name.toStringValue())
             .set(INSTRUMENTS.INSTRUMENT_I18N_CODE, instrument.type.i18nCode)
             .set(INSTRUMENTS.MANUFACTURER_I18N_CODE, instrument.manufacturerType.i18nCode)
-            .set(INSTRUMENTS.MANUFACTURER_DATE, OffsetDateTime.from(instrument.manufactureDate.toInstantValue()))
-            .set(INSTRUMENTS.RELEASE_DATE, OffsetDateTime.from(instrument.releaseDate.toInstantValue()))
+            .set(INSTRUMENTS.MANUFACTURER_DATE, OffsetDateTime.ofInstant(instrument.manufactureDate.toInstantValue(), ZoneOffset.UTC))
+            .set(INSTRUMENTS.RELEASE_DATE, OffsetDateTime.ofInstant(instrument.releaseDate.toInstantValue(), ZoneOffset.UTC))
             .set(INSTRUMENTS.COUNTRY_I18N_CODE, instrument.country.i18nCode)
             .set(INSTRUMENTS.MATERIALS, instrument.materialTypes.map { it.i18nCode }.toTypedArray())
             .set(INSTRUMENTS.IMAGE, instrument.image.toStringValue())
+            .execute()
     }
 }
 
 
 fun Array<String?>.toBasicMaterials() = this.toList().map { Material.Type.fromI18nCode(it) }
-fun InstrumentsRecord.toInstrument() = Instrument(
+fun Instruments.toInstrument() = Instrument(
     id = InstrumentId.from(this.instrumentId),
     name = InstrumentName.from(this.instrumentName),
     type = Instrument.Type.fromI18nCode(this.instrumentI18nCode),

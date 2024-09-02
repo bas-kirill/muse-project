@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles/Favorite.button.module.css";
 import actionBtnStyle from "./styles/Action.button.module.css";
-import { useState } from "react";
 import {
   AddFavoriteApi,
   ListFavoriteApi,
@@ -9,11 +8,12 @@ import {
 } from "generated/api";
 import { InstrumentId } from "generated/model";
 import Jwt from "domain/model/jwt";
-import { COOKIE_JWT_KEY } from "shared/config/frontend";
-import { getCookie } from "shared/cookie/cookie";
 import { apiConfig } from "shared/config/api";
 import { useTranslation } from "react-i18next";
-import { I18N_HEADER_FAVORITE_BUTTON, I18N_INSTRUMENT_CARD_REMOVE_BUTTON } from "../../../i18n";
+import {
+  I18N_HEADER_FAVORITE_BUTTON,
+
+} from "../../../i18n";
 
 interface Props {
   instrumentId: InstrumentId;
@@ -25,7 +25,6 @@ const addFavorite = new AddFavoriteApi(apiConfig);
 
 export const FavoriteButton = (props: Props) => {
   const { t } = useTranslation();
-  const jwt = useRef<string | undefined>(getCookie(COOKIE_JWT_KEY));
   const [favorite, setFavorite] = useState<boolean>();
 
   useEffect(() => {

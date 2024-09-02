@@ -1,7 +1,7 @@
 package mu.muse.persistence.user.jooq
 
-import mu.muse.codegen.jooq.tables.records.UsersRecord
-import mu.muse.codegen.jooq.tables.references.USERS
+import mu.muse.codegen.jooq.public.tables.Users.Companion.USERS
+import mu.muse.codegen.jooq.public.tables.pojos.Users
 import mu.muse.domain.instrument.InstrumentId
 import mu.muse.domain.user.FullName
 import mu.muse.domain.user.Password
@@ -20,14 +20,14 @@ class JooqPostgresUserRepository(
         val userRecordResult = runCatching {
             dslContext.selectFrom(USERS)
                 .where(USERS.USERNAME.eq(username.toStringValue()))
-                .fetchSingle()
+                .fetchSingleInto(Users::class.java)
         }
         val userRecordRaw = userRecordResult.getOrNull() ?: return null
         return userRecordRaw.toUser()
     }
 
     override fun findAll(): Collection<User> {
-        val users = dslContext.selectFrom(USERS).fetchInto(UsersRecord::class.java)
+        val users = dslContext.selectFrom(USERS).fetchInto(Users::class.java)
         return users.map { it.toUser() }
     }
 
@@ -39,15 +39,18 @@ class JooqPostgresUserRepository(
             USERS.PASSWORD,
             USERS.ROLE,
             USERS.FULL_NAME,
-            USERS.FAVORITE_IDS
-        ).values(
-            user.id.toLongValue(),
-            user.username.toStringValue(),
-            user.password.toPlainStringValue(),
-            user.role.toStringValue(),
-            user.fullName.toStringValue(),
-            user.favoriteIds.map { it.toLongValue() }.toTypedArray(),
-        ).onConflictDoNothing()
+            USERS.FAVORITE_IDS,
+        )
+            .values(
+                user.id.toLongValue(),
+                user.username.toStringValue(),
+                user.password.toPlainStringValue(),
+                user.role.toStringValue(),
+                user.fullName.toStringValue(),
+                user.favoriteIds.map { it.toLongValue() }.toTypedArray(),
+            )
+            .onConflictDoNothing()
+            .execute()
     }
 }
 
@@ -56,7 +59,7 @@ fun Array<Long?>?.toFavoriteIds(): MutableList<InstrumentId> {
     return this.map { InstrumentId.from(it) }.toMutableList()
 }
 
-fun UsersRecord.toUser(): User = User.create(
+fun Users.toUser(): User = User.create(
     id = UserId.from(this.userId),
     username = Username.from(this.username),
     password = Password.from(this.password),

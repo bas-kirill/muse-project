@@ -1,10 +1,11 @@
-drop table if exists users;
-drop sequence if exists user_id_seq;
+drop table if exists public.users;
+drop sequence if exists public.user_id_seq;
 
-drop table if exists instruments;
-drop sequence if exists instrument_id_seq;
+drop table if exists public.instruments;
+drop sequence if exists public.instrument_id_seq;
 
-create table users(
+create sequence public.user_id_seq increment 1 start 1;
+create table public.users(
     user_id bigint unique not null,
     username varchar(256) not null unique,
     password varchar(256) not null,
@@ -13,9 +14,8 @@ create table users(
     favorite_ids bigint[] not null
 );
 
-create sequence user_id_seq increment 1 start 1;
-
-create table instruments(
+create sequence public.instrument_id_seq increment 1 start 1;
+create table public.instruments(
     instrument_id bigint unique not null,
     instrument_name varchar(256) not null,
     instrument_i18n_code varchar(256) not null,
@@ -26,5 +26,3 @@ create table instruments(
     materials varchar(256)[] not null,
     image text not null
 );
-
-create sequence instrument_id_seq increment 1 start 1;

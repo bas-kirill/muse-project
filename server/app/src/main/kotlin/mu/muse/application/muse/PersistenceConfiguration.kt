@@ -7,9 +7,12 @@ import mu.muse.persistence.instrument.jooq.JooqPostgresInstrumentRepository
 import mu.muse.persistence.user.jooq.JooqPostgresUserIdGenerator
 import mu.muse.persistence.user.jooq.JooqPostgresUserRepository
 import org.jooq.DSLContext
+import org.jooq.SQLDialect
+import org.jooq.impl.DSL
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import javax.sql.DataSource
 
 @Configuration
 class PersistenceConfiguration {
@@ -37,10 +40,14 @@ class PersistenceConfiguration {
     }
 
     @Bean
-    fun dataSource(hikariConfig: HikariConfig) = with(HikariDataSource(hikariConfig)) {
-        maximumPoolSize = MAXIMUM_POOL_SIZE
-        this
-    }
+    fun dataSource(hikariConfig: HikariConfig): DataSource =
+        with(HikariDataSource(hikariConfig)) {
+            maximumPoolSize = MAXIMUM_POOL_SIZE
+            this
+        }
+
+    @Bean
+    fun dslContext(dataSource: DataSource): DSLContext = DSL.using(dataSource, SQLDialect.POSTGRES)
 
     @Bean
     fun userIdGenerator(dslContext: DSLContext) = JooqPostgresUserIdGenerator(dslContext)

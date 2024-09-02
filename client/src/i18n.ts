@@ -31,7 +31,8 @@ export const I18N_INSTRUMENT_DATE_TO = "instrument.date.to";
 export const I18N_INSTRUMENT_CARD_SHOW_BUTTON = "instrument.card.show.button";
 export const I18N_INSTRUMENT_CARD_REMOVE_BUTTON = "instrument.remove.button";
 export const I18N_INSTRUMENT_CARD_EDIT_BUTTON = "instrument.edit.button";
-export const I18N_INSTRUMENT_CARD_FAVORITE_BUTTON = "instrument.favorite.button";
+export const I18N_INSTRUMENT_CARD_FAVORITE_BUTTON =
+  "instrument.favorite.button";
 
 export const I18N_LOGIN_INPUT = "login.login.input";
 export const I18N_LOGIN_PASSWORD_INPUT = "login.login.password";
@@ -63,9 +64,12 @@ const resources = {
       [I18N_HOME_SEARCH_BAR_INPUT]: "What instrument?",
       [I18N_HOME_SEARCH_BAR_BUTTON]: "Search",
       [I18N_REASONS_H1]: "Why Choose Us for Your Musical Needs",
-      [I18N_REASONS_FIRST]: "We offer a wide range of high-quality instruments for all skill levels",
-      [I18N_REASONS_SECOND]: "Our expert staff provides personalized advice and service",
-      [I18N_REASONS_THIRD]: "Enjoy competitive prices and exclusive deals on top brands",
+      [I18N_REASONS_FIRST]:
+        "We offer a wide range of high-quality instruments for all skill levels",
+      [I18N_REASONS_SECOND]:
+        "Our expert staff provides personalized advice and service",
+      [I18N_REASONS_THIRD]:
+        "Enjoy competitive prices and exclusive deals on top brands",
       [I18N_TRENDS_H1]: "Trending Instruments",
       [I18N_INSTRUMENT_TYPE_FILTER]: "Type",
       [I18N_INSTRUMENT_CARD_MANUFACTURER]: "Manufacturer",
@@ -98,7 +102,7 @@ const resources = {
       [I18N_NAVBAR_NEXT]: "Next",
 
       [I18N_FAVORITE_H1]: "Favorite",
-    }
+    },
   },
   ru: {
     translation: {
@@ -111,9 +115,12 @@ const resources = {
       [I18N_HOME_SEARCH_BAR_INPUT]: "Какой инструмент?",
       [I18N_HOME_SEARCH_BAR_BUTTON]: "Поиск",
       [I18N_REASONS_H1]: "Почему вы выберете нас",
-      [I18N_REASONS_FIRST]: "Мы предлагаем широкий ассортимент высококачественных инструментов для всех уровней квалификации",
-      [I18N_REASONS_SECOND]: "Наш квалифицированный персонал предоставляет индивидуальные консультации и обслуживание",
-      [I18N_REASONS_THIRD]: "Наслаждайтесь конкурентоспособными ценами и эксклюзивными предложениями от ведущих брендов",
+      [I18N_REASONS_FIRST]:
+        "Мы предлагаем широкий ассортимент высококачественных инструментов для всех уровней квалификации",
+      [I18N_REASONS_SECOND]:
+        "Наш квалифицированный персонал предоставляет индивидуальные консультации и обслуживание",
+      [I18N_REASONS_THIRD]:
+        "Наслаждайтесь конкурентоспособными ценами и эксклюзивными предложениями от ведущих брендов",
       [I18N_TRENDS_H1]: "Тренды",
       [I18N_INSTRUMENT_TYPE_FILTER]: "Тип",
       [I18N_INSTRUMENT_CARD_MANUFACTURER]: "Производитель",
@@ -144,8 +151,8 @@ const resources = {
       [I18N_LOGOUT_BUTTON]: "Выйти",
 
       [I18N_FAVORITE_H1]: "Любимое",
-    }
-  }
+    },
+  },
 };
 
 i18n
@@ -155,8 +162,8 @@ i18n
     lng: window.navigator.language,
     fallbackLng: "en",
     interpolation: {
-      escapeValue: false // react already safes from xss
-    }
+      escapeValue: false, // react already safes from xss
+    },
   });
 
 export default i18n;

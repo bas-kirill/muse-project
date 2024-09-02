@@ -22,11 +22,6 @@ echo -e "\033[0;37m[$stage] Regenerating OpenAPI specs...\033[0m"
   --additional-properties=apiPackage=api,modelPackage=model,supportsES6=true,withSeparateModelsAndApi=true
 )
 
-#    mkdir local &&
-#    mkdir -p local/client/src/generated/model &&
-#    mkdir -p /local/client/src/generated/model &&
-
-(cd "$rootDir/server" && ./gradlew clean)
 (cd "$rootDir/server" && ./gradlew openApiGenerate)
 (cd "$rootDir" && ./tools/scripts/client/runLinter.sh)
 

@@ -1,8 +1,4 @@
 import io.gitlab.arturbosch.detekt.Detekt
-import org.jooq.meta.jaxb.MatcherRule
-import org.jooq.meta.jaxb.MatcherTransformType
-import org.jooq.meta.jaxb.Matchers
-import org.jooq.meta.jaxb.MatchersTableType
 import org.jooq.meta.jaxb.Property
 
 val rootProjectDir = "$projectDir/../.."
@@ -70,10 +66,8 @@ dependencies {
     implementation("jakarta.validation:jakarta.validation-api:3.1.0")  // `useSpringBoot3` param requires it
     implementation("org.postgresql:postgresql")
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-//    implementation("javax.annotation:jsr305:1.0")
-    jooqGenerator("org.postgresql:postgresql")
+    implementation("org.jooq:jooq:3.19.11")
     jooqGenerator("org.jooq:jooq-meta-extensions:3.19.11")
-    jooqGenerator("org.jooq:jooq-codegen:3.19.11")
 }
 
 tasks.named<Test>("test") {
@@ -172,7 +166,7 @@ jooq {
                         properties.apply {
                             add(Property().apply {
                                 key = "scripts"
-                                value = "src/main/resources/db/schema.sql"
+                                value = "./src/main/resources/db/schema.sql"
                             })
                             add(Property().apply {
                                 key = "defaultNameCase"

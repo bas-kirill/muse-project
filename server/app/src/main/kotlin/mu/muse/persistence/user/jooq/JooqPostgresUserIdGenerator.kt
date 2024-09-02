@@ -1,6 +1,6 @@
 package mu.muse.persistence.user.jooq
 
-import mu.muse.codegen.jooq.sequences.USER_ID_SEQ
+import mu.muse.codegen.jooq.public.sequences.USER_ID_SEQ
 import mu.muse.domain.IdGenerator
 import mu.muse.domain.user.UserId
 import org.jooq.DSLContext
