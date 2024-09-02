@@ -6,9 +6,7 @@ import { useDarkMode } from "shared/dark-mode/use-dark-mode";
 import { apiConfig } from "shared/config/api";
 import Jwt from "domain/model/jwt";
 import { DeleteInstrumentByIdApi } from "generated/api/delete-instrument-by-id-api";
-import {
-  I18N_INSTRUMENT_CARD_REMOVE_BUTTON,
-} from "../../../i18n";
+import { I18N_INSTRUMENT_CARD_REMOVE_BUTTON } from "../../../i18n";
 import { useTranslation } from "react-i18next";
 
 interface Props {

@@ -10,10 +10,7 @@ import { InstrumentId } from "generated/model";
 import Jwt from "domain/model/jwt";
 import { apiConfig } from "shared/config/api";
 import { useTranslation } from "react-i18next";
-import {
-  I18N_HEADER_FAVORITE_BUTTON,
-
-} from "../../../i18n";
+import { I18N_HEADER_FAVORITE_BUTTON } from "../../../i18n";
 
 interface Props {
   instrumentId: InstrumentId;
