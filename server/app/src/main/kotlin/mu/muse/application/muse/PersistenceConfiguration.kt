@@ -2,6 +2,7 @@ package mu.muse.application.muse
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.opentelemetry.api.trace.Tracer
 import mu.muse.persistence.instrument.jooq.JooqPostgresInstrumentIdGenerator
 import mu.muse.persistence.instrument.jooq.JooqPostgresInstrumentRepository
 import mu.muse.persistence.user.jooq.JooqPostgresUserIdGenerator
@@ -9,6 +10,7 @@ import mu.muse.persistence.user.jooq.JooqPostgresUserRepository
 import org.jooq.DSLContext
 import org.jooq.SQLDialect
 import org.jooq.impl.DSL
+import org.jooq.impl.DefaultConfiguration
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -47,7 +49,16 @@ class PersistenceConfiguration {
         }
 
     @Bean
-    fun dslContext(dataSource: DataSource): DSLContext = DSL.using(dataSource, SQLDialect.POSTGRES)
+    fun jooqConfiguration(dataSource: DataSource, otelTracer: Tracer) =
+        with(DefaultConfiguration()) {
+            set(dataSource)
+            set(SQLDialect.POSTGRES)
+            set(JaegerDbSpanCreator(otelTracer))
+            this
+        }
+
+    @Bean
+    fun dslContext(jooqConfiguration: org.jooq.Configuration) = DSL.using(jooqConfiguration)
 
     @Bean
     fun userIdGenerator(dslContext: DSLContext) = JooqPostgresUserIdGenerator(dslContext)

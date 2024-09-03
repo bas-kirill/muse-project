@@ -109,6 +109,7 @@ sourceSets {
     main {
         kotlin {
             srcDir(layout.buildDirectory.dir("openapi/src/main").get().toString())
+            srcDir(layout.buildDirectory.dir("generated-src/jooq/main").get().toString())
         }
     }
 }

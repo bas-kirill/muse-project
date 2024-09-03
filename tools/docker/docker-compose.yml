@@ -96,6 +96,8 @@ services:
     ports:
       - "${OPEN_TELEMETERY_COLLECTOR_PORT}:4317"
       - "${JAEGER_UI_PORT}:16686"
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
     networks:
       - muse
     profiles:
