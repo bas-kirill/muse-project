@@ -60,38 +60,39 @@ services:
     labels:
       - io.portainer.accesscontrol.public
 
-#  muse-client:
-#    image: "${DOCKER_REPOSITORY}/muse-client:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
-#    container_name: "muse-client-${MUSE_STAGE}"
-#    ports:
-#      - ${CLIENT_PORT}:80
-#    environment:
-#      - SERVER_API_URL
-#    networks:
-#      - muse
-#    profiles:
-#      - local
-#      - dev
-#      - staging
-#      - prod
-#    labels:
-#      - io.portainer.accesscontrol.public
-#
-#  muse-client-dev:
-#    image: "${DOCKER_REPOSITORY}/muse-client-dev:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
-#    container_name: "muse-client-dev-${MUSE_STAGE}"
-#    ports:
-#      - ${CLIENT_DEV_PORT}:3000
-#    volumes:
-#      - ./../../client:/muse-client-dev
-#      - ./node-modules:/muse-client-dev/node-modules
-#    networks:
-#      - muse
-#    profiles:
-#      - local
+  muse-client:
+    image: "${DOCKER_REPOSITORY}/muse-client:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
+    container_name: "muse-client-${MUSE_STAGE}"
+    ports:
+      - ${CLIENT_PORT}:80
+    environment:
+      - SERVER_API_URL
+    networks:
+      - muse
+    profiles:
+      - local
+      - dev
+      - staging
+      - prod
+    labels:
+      - io.portainer.accesscontrol.public
+
+  muse-client-dev:
+    image: "${DOCKER_REPOSITORY}/muse-client-dev:${MUSE_STAGE}-${MUSE_GIT_COMMIT_HASH}"
+    container_name: "muse-client-dev-${MUSE_STAGE}"
+    ports:
+      - ${CLIENT_DEV_PORT}:3000
+    volumes:
+      - ./../../client:/muse-client-dev
+      - ./node-modules:/muse-client-dev/node-modules
+    networks:
+      - muse
+    profiles:
+      - local
 
   muse-jaeger:
     image: jaegertracing/all-in-one:1.60
+    container_name: "muse-jaeger"
     ports:
       - "${OPEN_TELEMETERY_COLLECTOR_PORT}:4317"
       - "${JAEGER_UI_PORT}:16686"
