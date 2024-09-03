@@ -88,6 +88,20 @@ services:
       - muse
     profiles:
       - local
+
+    muse-jaeger:
+      image: jaegertracing/all-in-one:1.60
+      ports:
+        - "${OPEN_TELEMETERY_COLLECTOR_PORT}:4317"
+        - "${JAEGER_UI_PORT}:16686"
+      networks:
+        - muse
+      profiles:
+        - local
+        - dev
+        - staging
+        - prod
+
 ##  portainer:
 #    image: portainer/portainer-ce:linux-amd64-2.20.3-alpine
 #    container_name: portainer

@@ -68,6 +68,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.jooq:jooq:3.19.11")
     jooqGenerator("org.jooq:jooq-meta-extensions:3.19.11")
+    implementation("io.micrometer:micrometer-tracing-bridge-otel")
+    implementation("io.opentelemetry:opentelemetry-exporter-otlp")
 }
 
 tasks.named<Test>("test") {
