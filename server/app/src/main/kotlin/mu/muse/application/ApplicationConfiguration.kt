@@ -3,6 +3,7 @@ package mu.muse.application
 import mu.muse.application.muse.PersistenceConfiguration
 import mu.muse.application.muse.RestConfiguration
 import mu.muse.application.muse.SecurityConfiguration
+import mu.muse.application.muse.TracingConfiguration
 import mu.muse.application.muse.UseCaseConfiguration
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
@@ -14,5 +15,6 @@ import org.springframework.context.annotation.Import
     RestConfiguration::class,
     SecurityConfiguration::class,
     MvcConfiguration::class,
+    TracingConfiguration::class,
 )
 class ApplicationConfiguration
